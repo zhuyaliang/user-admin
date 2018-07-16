@@ -1,0 +1,272 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the user-admin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: user-admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-05 18:31+0800\n"
+"PO-Revision-Date: 2018-05-28 09:53+0800\n"
+"Last-Translator: yetist <yetist@gmail.com>\n"
+"Language-Team: chinese\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.7\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: src/main.c:15
+msgid "User Manage"
+msgstr "用户管理"
+
+#: src/user-base.c:183 src/user-admin.c:415
+msgid "Account Type"
+msgstr "用户类型"
+
+#. 设置用户类型下拉框
+#: src/user-base.c:187 src/user-admin.c:418
+msgid "Standard"
+msgstr "标准"
+
+#: src/user-base.c:187 src/user-admin.c:418
+msgid "Administrators"
+msgstr "管理员"
+
+#: src/user-base.c:195 src/user-admin.c:428
+msgid "Language"
+msgstr "语言"
+
+#: src/user-base.c:198 src/user-admin.c:431
+msgid "Chinese"
+msgstr "中文"
+
+#: src/user-base.c:198 src/user-admin.c:431
+msgid "English"
+msgstr "英语"
+
+#: src/user-base.c:206 src/user-password.c:120 src/user-password.c:376
+#: src/user-admin.c:549 src/user-admin.c:565
+msgid "Password"
+msgstr "密码"
+
+#: src/user-base.c:216
+msgid "Automatic logon"
+msgstr "自动登录"
+
+#: src/user-base.c:227
+msgid "Login time"
+msgstr "登录时间"
+
+#: src/user-info.c:23 src/user-share.c:418
+msgid "Account is disable"
+msgstr "账户被禁用"
+
+#. 新建两个单选按钮
+#. 新建两个单选按钮
+#. 用户个数
+#: src/user-info.c:35 src/user-password.c:124 src/user-admin.c:318
+#: src/user-admin.c:470 src/user-admin.c:555 src/user-share.c:417
+msgid "Set up next time"
+msgstr "下次登录时设置"
+
+#: src/user-info.c:103 src/user-info.c:331
+msgid "Get User Info"
+msgstr "获得用户信息"
+
+#: src/user-info.c:103
+msgid "user == NULL Exit!!!"
+msgstr "用户为空 推出！！！"
+
+#: src/user-info.c:222
+msgid "Unknown"
+msgstr "未知"
+
+#: src/user-info.c:331
+msgid "user count is 0"
+msgstr "用户个数为0"
+
+#: src/user-password.c:55
+msgid "Inconsistent password"
+msgstr "两次输入的密码不一致"
+
+#: src/user-password.c:104
+msgid "Add a password"
+msgstr "添加密码"
+
+#: src/user-password.c:129
+msgid "Now set up"
+msgstr "现在设置"
+
+#: src/user-password.c:134
+msgid "User Password"
+msgstr "用户密码"
+
+#. 确认按钮
+#: src/user-password.c:163 src/user-password.c:179 src/user-password.c:422
+#: src/user-admin.c:593 src/user-admin.c:609
+msgid "Confirm"
+msgstr "确认"
+
+#. 取消按钮
+#: src/user-password.c:187 src/user-password.c:429 src/user-admin.c:615
+msgid "Cancel"
+msgstr "取消"
+
+#: src/user-password.c:274
+msgid "Please enter the correct original password"
+msgstr "请输入正确的原始密码"
+
+#: src/user-password.c:359
+msgid "Change password"
+msgstr "更改密码"
+
+#: src/user-password.c:381
+msgid "Old Password"
+msgstr "旧密码"
+
+#: src/user-password.c:392
+msgid "New Password"
+msgstr "新密码"
+
+#. gnCurrentUserIndex 代表当前用户标号
+#: src/user-admin.c:55 src/user-admin.c:67 src/user-list.c:184
+msgid "Remove User"
+msgstr "移除用户"
+
+#: src/user-admin.c:56
+msgid "Whether to remove the user's home directory"
+msgstr "是否移除用户家目录"
+
+#: src/user-admin.c:67
+msgid "Remove user failure and try again"
+msgstr "移除失败，请再次尝试"
+
+#: src/user-admin.c:99
+msgid ""
+"The user name can contain only the alphabet(a-z/A-Z) number (0-9), and "
+"cannot be a pure number(_-)"
+msgstr "用户名只能是字母(a-z/A-Z)数字(0-9)和下划线(-_)"
+
+#: src/user-admin.c:100 src/user-admin.c:383
+msgid "This will be used to name your home folder and can't be changed"
+msgstr "这将用于命名您的家目录，不能更改"
+
+#: src/user-admin.c:218
+msgid "Creating User"
+msgstr "创建用户"
+
+#: src/user-admin.c:218
+msgid "Creating a user failed"
+msgstr "创建用户失败"
+
+#: src/user-admin.c:264
+msgid "Two inconsistencies in cipher input"
+msgstr "两次密码输入的不一致"
+
+#: src/user-admin.c:390
+msgid "Real Name"
+msgstr "真实名字"
+
+#: src/user-admin.c:399
+msgid "User Name"
+msgstr "用户名字"
+
+#: src/user-admin.c:560
+msgid "Now set the password"
+msgstr "现在社设置密码"
+
+#: src/user-admin.c:644 src/user-list.c:183
+msgid "Add User"
+msgstr "添加用户"
+
+#: src/user-face.c:188
+msgid "Avatar list"
+msgstr "头像列表"
+
+#: src/user-face.c:188
+msgid "There is no address to store photos"
+msgstr "头像照片不存在"
+
+#: src/user-list.c:76
+msgid "User List"
+msgstr "用户列表"
+
+#: src/user-share.c:74
+msgid "Message"
+msgstr "消息"
+
+#: src/user-share.c:275
+msgid "The new password needs to be different from the old one"
+msgstr "新密码不能与旧密码相同"
+
+#: src/user-share.c:277
+msgid "Try changing some letters and numbers"
+msgstr "加入一些数字和字母"
+
+#: src/user-share.c:279 src/user-share.c:287
+msgid "Try changing the password a bit more"
+msgstr "密码长度不够"
+
+#: src/user-share.c:281
+msgid "A password without your user name would be stronger"
+msgstr "密码中不要包含用户名"
+
+#: src/user-share.c:283
+msgid "Try to avoid using your name in the password"
+msgstr "密码中不要包含你的名字"
+
+#: src/user-share.c:285
+msgid "Try to avoid some of the words included in the password"
+msgstr "密码中不要包含单词"
+
+#: src/user-share.c:289
+msgid "Try to avoid common words"
+msgstr "尽量避免常用词"
+
+#: src/user-share.c:291
+msgid "Try to avoid reordering existing words"
+msgstr "尽量避免对现有单词进行重新排序"
+
+#: src/user-share.c:293
+msgid "Try to use more numbers"
+msgstr "尝试加入数字"
+
+#: src/user-share.c:295
+msgid "Try to use more uppercase letters"
+msgstr "尝试加入大写字母"
+
+#: src/user-share.c:297
+msgid "Try to use more lowercase letters"
+msgstr "尝试加入小写字母"
+
+#: src/user-share.c:299
+msgid "Try to use more special characters, like punctuation"
+msgstr "尝试加入特殊字符"
+
+#: src/user-share.c:301
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "尝试使用字母、数字和标点符号的混合"
+
+#: src/user-share.c:303
+msgid "Try to avoid repeating the same character"
+msgstr "尽量避免重复相同的字符"
+
+#: src/user-share.c:305
+msgid ""
+"Try to avoid repeating the same type of character: you need     to mix up "
+"letters, numbers and punctuation."
+msgstr "尽量避免重复相同类型的字符"
+
+#: src/user-share.c:307
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "尽量避免像1234或ABCD这样的序列"
+
+#: src/user-share.c:309
+msgid ""
+"Password needs to be longer. Try to add more letters, numbe    rs and "
+"punctuation"
+msgstr "密码需要更长，添加更多的字母、数字和标点符号"

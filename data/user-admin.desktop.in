@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=User admin
+Comment=Manage user
+Categories=GNOME;GTK;Settings;System;Utility;
+Keywords=Configuration;Utility;
+Exec=user-admin
+Icon=stock_person
+Terminal=false
+Type=Application

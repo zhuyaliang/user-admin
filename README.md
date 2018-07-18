@@ -1,8 +1,8 @@
-# 说明
+# Explain
 
-重写一个界面类似 gnome-system-tools 及 gnome-control-center 中的用户管理工具，显示在控制中心中。
+Rewrite an interface similar to user management tools in gnome-system-tools and gnome-control-center, displayed in the control center.
 
-## 界面参考
+## Interface reference
 
 https://askubuntu.com/questions/66718/how-to-manage-users-and-groups
 
@@ -10,17 +10,18 @@ http://ubuntuhandbook.org/index.php/2014/05/install-users-groups-management-tool
 
 http://linuxbsdos.com/2012/04/03/creating-and-managing-user-accounts-in-a-gnome-3-or-ubuntu-desktop/
 
-## 代码参考
+## Code reference
 
 http://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/
 https://github.com/GNOME/gnome-control-center/
 
-现在有 accountservice dbus 服务，提供了很多用户管理相关的功能，代码可以对接dbus进行实现。
+Now there are accountservice DBUS services, which provide many user management related functions, and code can be implemented in DBUS.
 
-## 编译
+## Compile
 
 ```
 meson build -Dprefix=/usr
 ninja -C build
 sudo ninja -C build install
+
 ```

@@ -74,7 +74,6 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         {    
             gtk_list_store_remove (GTK_LIST_STORE (ua->Model), &iter);//在列表中移除用户
             RemoveUserData(ua,Index);                                //清除用户信息
-            printf("gnCurrentUserIndex = %d\r\n",gnCurrentUserIndex);
             UpdateInterface(gnCurrentUserIndex,ua);                  //
             ua->UserCount--;                                        //用户总个数-1
         }
@@ -97,22 +96,27 @@ static gboolean CheckUserNameUsed (const gchar *UserName)
 static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
 {
     gboolean empty;
+    gboolean home_use;
     gboolean in_use;
     gboolean valid;
     const gchar *c;
+    char HomeName[32] = { 0 };
 
     if (UserName == NULL || UserName[0] == '\0') 
     {
         empty = TRUE;
         in_use = FALSE;
+        home_use = FALSE;
     } 
     else 
     {
         empty = FALSE;
         in_use = CheckUserNameUsed (UserName);
+        sprintf(HomeName,"/home/%s",UserName);
+        home_use = access(HomeName,F_OK ) == 0;
     }
     valid = TRUE;
-    if (!in_use && !empty ) 
+    if (!in_use && !empty && !home_use) 
     {
         for (c = UserName; *c; c++) 
         {
@@ -125,14 +129,17 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
         }
     }
 
-    valid = !empty && !in_use && valid;
-
-    if (!empty && (in_use || !valid)) 
+    valid = !empty && !in_use && !home_use && valid;
+    if (!empty && (in_use || home_use || !valid))
     {
         if (in_use) 
         {
             *Message = g_strdup (_("Repeat of user name.Please try another"));
         }
+        else if(home_use)
+        {
+            *Message = g_strdup (_("Repeat of user home name.Please try another"));
+        }        
         else if (UserName[0] == '-') 
         {
             *Message = g_strdup (_("The username cannot start with a - ."));
@@ -169,7 +176,11 @@ static gboolean CheckName(gpointer data)
     gboolean Valid;
     char *Message = NULL;
     const char *s;
+    const char *p;
 
+    p = gtk_entry_get_text(GTK_ENTRY(ua->RealNameEntry));
+    if(strlen(p) <= 0)
+        return TRUE;
     s = gtk_entry_get_text(GTK_ENTRY(ua->UserNameEntry));
     Valid = UserNameValidCheck(s,&Message);
     SetLableFontType(ua->LabelNameNote,"red",10,Message);

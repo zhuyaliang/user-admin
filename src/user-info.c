@@ -78,7 +78,6 @@ static gchar * GetLoginTimeText (ActUser *user)
     {
         text = g_strdup ("—");
     }
-    printf("text = %s\r\n",text); 
     return text;
 }
 
@@ -254,7 +253,6 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {
         memcpy(ua->ul[index].HomeName,HomeName,strlen(HomeName));
     }       
-    printf("ul[index].HomeName = %s\r\n",ua->ul[index].HomeName);
     /*用户头像*/
 
     memset(ua->ul[index].UserIcon,'\0',sizeof(ua->ul[index].UserIcon));
@@ -267,7 +265,6 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {
         memcpy(ua->ul[index].UserIcon,IconFile,strlen(IconFile));
     }        
-    printf("ul[index].UserIcon = %s\r\n",ua->ul[index].UserIcon);
 
     /*用户密码显示*/
     memset(ua->ul[index].PassText,'\0',sizeof(ua->ul[index].PassText));

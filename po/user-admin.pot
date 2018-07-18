@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-05 18:31+0800\n"
+"POT-Creation-Date: 2018-07-18 14:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,249 +21,271 @@ msgstr ""
 msgid "User Manage"
 msgstr ""
 
-#: src/user-base.c:183 src/user-admin.c:415
+#: src/user-base.c:163 src/user-admin.c:484
 msgid "Account Type"
 msgstr ""
 
 #. 设置用户类型下拉框
-#: src/user-base.c:187 src/user-admin.c:418
+#: src/user-base.c:167 src/user-admin.c:487
 msgid "Standard"
 msgstr ""
 
-#: src/user-base.c:187 src/user-admin.c:418
+#: src/user-base.c:167 src/user-admin.c:487
 msgid "Administrators"
 msgstr ""
 
-#: src/user-base.c:195 src/user-admin.c:428
+#: src/user-base.c:175 src/user-admin.c:497
 msgid "Language"
 msgstr ""
 
-#: src/user-base.c:198 src/user-admin.c:431
+#: src/user-base.c:178 src/user-admin.c:500
 msgid "Chinese"
 msgstr ""
 
-#: src/user-base.c:198 src/user-admin.c:431
+#: src/user-base.c:178 src/user-admin.c:500
 msgid "English"
 msgstr ""
 
-#: src/user-base.c:206 src/user-password.c:120 src/user-password.c:376
-#: src/user-admin.c:549 src/user-admin.c:565
+#: src/user-base.c:186 src/user-password.c:173 src/user-password.c:427
+#: src/user-admin.c:618 src/user-admin.c:633
 msgid "Password"
 msgstr ""
 
-#: src/user-base.c:216
+#: src/user-base.c:196
 msgid "Automatic logon"
 msgstr ""
 
-#: src/user-base.c:227
+#: src/user-base.c:207
 msgid "Login time"
 msgstr ""
 
-#: src/user-info.c:23 src/user-share.c:418
+#: src/user-info.c:23 src/user-password.c:18
 msgid "Account is disable"
 msgstr ""
 
 #. 新建两个单选按钮
-#. 新建两个单选按钮
-#. 用户个数
-#: src/user-info.c:35 src/user-password.c:124 src/user-admin.c:318
-#: src/user-admin.c:470 src/user-admin.c:555 src/user-share.c:417
+#: src/user-info.c:35 src/user-password.c:17 src/user-password.c:177
+#: src/user-admin.c:384 src/user-admin.c:539 src/user-admin.c:623
 msgid "Set up next time"
 msgstr ""
 
-#: src/user-info.c:103 src/user-info.c:331
+#: src/user-info.c:102 src/user-info.c:319
 msgid "Get User Info"
 msgstr ""
 
-#: src/user-info.c:103
+#: src/user-info.c:102
 msgid "user == NULL Exit!!!"
 msgstr ""
 
-#: src/user-info.c:222
+#: src/user-info.c:221
 msgid "Unknown"
 msgstr ""
 
-#: src/user-info.c:331
+#: src/user-info.c:319
 msgid "user count is 0"
 msgstr ""
 
-#: src/user-password.c:55
+#: src/user-password.c:108
 msgid "Inconsistent password"
 msgstr ""
 
-#: src/user-password.c:104
+#: src/user-password.c:157
 msgid "Add a password"
 msgstr ""
 
-#: src/user-password.c:129
+#: src/user-password.c:182
 msgid "Now set up"
 msgstr ""
 
-#: src/user-password.c:134
+#: src/user-password.c:187
 msgid "User Password"
 msgstr ""
 
 #. 确认按钮
-#: src/user-password.c:163 src/user-password.c:179 src/user-password.c:422
-#: src/user-admin.c:593 src/user-admin.c:609
+#: src/user-password.c:216 src/user-password.c:232 src/user-password.c:473
+#: src/user-admin.c:661 src/user-admin.c:677
 msgid "Confirm"
 msgstr ""
 
 #. 取消按钮
-#: src/user-password.c:187 src/user-password.c:429 src/user-admin.c:615
+#: src/user-password.c:240 src/user-password.c:480 src/user-admin.c:683
 msgid "Cancel"
 msgstr ""
 
-#: src/user-password.c:274
+#: src/user-password.c:327
 msgid "Please enter the correct original password"
 msgstr ""
 
-#: src/user-password.c:359
+#: src/user-password.c:410
 msgid "Change password"
 msgstr ""
 
-#: src/user-password.c:381
+#: src/user-password.c:432
 msgid "Old Password"
 msgstr ""
 
-#: src/user-password.c:392
+#: src/user-password.c:443
 msgid "New Password"
 msgstr ""
 
 #. gnCurrentUserIndex 代表当前用户标号
-#: src/user-admin.c:55 src/user-admin.c:67 src/user-list.c:184
+#: src/user-admin.c:57 src/user-admin.c:69 src/user-list.c:171
 msgid "Remove User"
 msgstr ""
 
-#: src/user-admin.c:56
+#: src/user-admin.c:58
 msgid "Whether to remove the user's home directory"
 msgstr ""
 
-#: src/user-admin.c:67
+#: src/user-admin.c:69
 msgid "Remove user failure and try again"
 msgstr ""
 
-#: src/user-admin.c:99
+#: src/user-admin.c:137
+msgid "Repeat of user name.Please try another"
+msgstr ""
+
+#: src/user-admin.c:141
+msgid "Repeat of user home name.Please try another"
+msgstr ""
+
+#: src/user-admin.c:145
+msgid "The username cannot start with a - ."
+msgstr ""
+
+#: src/user-admin.c:149
 msgid ""
-"The user name can contain only the alphabet(a-z/A-Z) number (0-9), and "
-"cannot be a pure number(_-)"
+"The username should only consist of upper and lower case \r\n"
+"letters from a-z,digits and the following characters: . - _"
 msgstr ""
 
-#: src/user-admin.c:100 src/user-admin.c:383
-msgid "This will be used to name your home folder and can't be changed"
+#: src/user-admin.c:154
+msgid "This will be used to name your home folder and cant be changed."
 msgstr ""
 
-#: src/user-admin.c:218
+#: src/user-admin.c:283
 msgid "Creating User"
 msgstr ""
 
-#: src/user-admin.c:218
+#: src/user-admin.c:283
 msgid "Creating a user failed"
 msgstr ""
 
-#: src/user-admin.c:264
+#: src/user-admin.c:327
 msgid "Two inconsistencies in cipher input"
 msgstr ""
 
-#: src/user-admin.c:390
+#: src/user-admin.c:452
+msgid "This will be used to name your home folder and can't be changed"
+msgstr ""
+
+#: src/user-admin.c:459
 msgid "Real Name"
 msgstr ""
 
-#: src/user-admin.c:399
+#: src/user-admin.c:468
 msgid "User Name"
 msgstr ""
 
-#: src/user-admin.c:560
+#: src/user-admin.c:628
 msgid "Now set the password"
 msgstr ""
 
-#: src/user-admin.c:644 src/user-list.c:183
+#: src/user-admin.c:712 src/user-list.c:170
 msgid "Add User"
 msgstr ""
 
-#: src/user-face.c:188
+#: src/user-face.c:187
 msgid "Avatar list"
 msgstr ""
 
-#: src/user-face.c:188
+#: src/user-face.c:187
 msgid "There is no address to store photos"
 msgstr ""
 
-#: src/user-list.c:76
+#: src/user-face.c:255
+msgid "Change Name"
+msgstr ""
+
+#: src/user-face.c:255
+msgid "Please enter a valid character"
+msgstr ""
+
+#: src/user-list.c:79
 msgid "User List"
 msgstr ""
 
-#: src/user-share.c:74
+#: src/user-share.c:75
 msgid "Message"
 msgstr ""
 
-#: src/user-share.c:275
+#: src/user-share.c:274
 msgid "The new password needs to be different from the old one"
 msgstr ""
 
-#: src/user-share.c:277
+#: src/user-share.c:276
 msgid "Try changing some letters and numbers"
 msgstr ""
 
-#: src/user-share.c:279 src/user-share.c:287
+#: src/user-share.c:278 src/user-share.c:286
 msgid "Try changing the password a bit more"
 msgstr ""
 
-#: src/user-share.c:281
+#: src/user-share.c:280
 msgid "A password without your user name would be stronger"
 msgstr ""
 
-#: src/user-share.c:283
+#: src/user-share.c:282
 msgid "Try to avoid using your name in the password"
 msgstr ""
 
-#: src/user-share.c:285
+#: src/user-share.c:284
 msgid "Try to avoid some of the words included in the password"
 msgstr ""
 
-#: src/user-share.c:289
+#: src/user-share.c:288
 msgid "Try to avoid common words"
 msgstr ""
 
-#: src/user-share.c:291
+#: src/user-share.c:290
 msgid "Try to avoid reordering existing words"
 msgstr ""
 
-#: src/user-share.c:293
+#: src/user-share.c:292
 msgid "Try to use more numbers"
 msgstr ""
 
-#: src/user-share.c:295
+#: src/user-share.c:294
 msgid "Try to use more uppercase letters"
 msgstr ""
 
-#: src/user-share.c:297
+#: src/user-share.c:296
 msgid "Try to use more lowercase letters"
 msgstr ""
 
-#: src/user-share.c:299
+#: src/user-share.c:298
 msgid "Try to use more special characters, like punctuation"
 msgstr ""
 
-#: src/user-share.c:301
+#: src/user-share.c:300
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
 
-#: src/user-share.c:303
+#: src/user-share.c:302
 msgid "Try to avoid repeating the same character"
 msgstr ""
 
-#: src/user-share.c:305
+#: src/user-share.c:304
 msgid ""
 "Try to avoid repeating the same type of character: you need     to mix up "
 "letters, numbers and punctuation."
 msgstr ""
 
-#: src/user-share.c:307
+#: src/user-share.c:306
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr ""
 
-#: src/user-share.c:309
+#: src/user-share.c:308
 msgid ""
 "Password needs to be longer. Try to add more letters, numbe    rs and "
 "punctuation"

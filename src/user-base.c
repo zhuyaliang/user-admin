@@ -200,7 +200,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ua->SwitchAutoLogin = SwitchLogin;
     gtk_switch_set_state (GTK_SWITCH(SwitchLogin),ua->ul[0].LoginType);
     gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
-    g_signal_connect(G_OBJECT(SwitchLogin),"state-set",G_CALLBACK(SwitchState),NULL);
+    g_signal_connect(G_OBJECT(SwitchLogin),"state-set",G_CALLBACK(SwitchState),ua);
     
     /*最近登录时间*/
     LabelTime = gtk_label_new(NULL);

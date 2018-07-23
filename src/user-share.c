@@ -485,18 +485,24 @@ void OffNote(GtkWidget *label,UserAdmin *ua)
 *
 * 作者:  zhuyaliang  09/05/2018
 ******************************************************************************/
-GtkWidget *SetComboLanguageType(const char *s1,const char *s2)
+GtkWidget *SetComboLanguageType(void)
 {
     GtkListStore    *Store;
     GtkTreeIter     Iter;
     GtkCellRenderer *Renderer;
     GtkWidget *ComboUser;
+    char *lang;
+    guint i, len;
 
     Store = gtk_list_store_new(1,G_TYPE_STRING);
-    gtk_list_store_append(Store,&Iter);
-    gtk_list_store_set(Store,&Iter,0,s1,-1);
-    gtk_list_store_append(Store,&Iter);
-    gtk_list_store_set(Store,&Iter,0,s2,-1);
+
+    len = g_strv_length (all_languages);
+    for (i =0; i < len; i++) {
+	    lang = mate_get_language_from_locale (all_languages[i], NULL);
+	    gtk_list_store_append (Store, &Iter);
+	    gtk_list_store_set (Store, &Iter, 0, lang, -1);
+	    g_free(lang);
+    }
 
     ComboUser = gtk_combo_box_new_with_model(GTK_TREE_MODEL(Store));
     g_object_unref(G_OBJECT(Store));

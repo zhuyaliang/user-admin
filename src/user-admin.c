@@ -272,9 +272,9 @@ static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
 static int WriteUserInfo(int index,UserAdmin *ua)
 {
 	ActUserManager *Manager;
-    GError *error;
+    GError *error = NULL;
     ActUser *user;
-    error = NULL;
+    gint lang_index;
 
     Manager = act_user_manager_get_default ();
     user = act_user_manager_create_user(Manager,
@@ -292,10 +292,9 @@ static int WriteUserInfo(int index,UserAdmin *ua)
     {        
         act_user_set_account_type(user,ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
     }    
-    if(ua->ul[index].LangType == ENGLIST)
-        act_user_set_language(user,"en_US.UTF-8");
-    else
-        act_user_set_language(user,"zh_CN.UTF-8");
+
+    lang_index = ua->ul[index].LangType;
+    act_user_set_language(user, all_languages[lang_index]);
     
     if(ua->ul[index].PasswordType == NEWPASS)
     {
@@ -392,7 +391,7 @@ static void InitNewUser(UserAdmin *ua)
     memset(ua->ul[NewUserIndex].UserIcon,'\0',sizeof(ua->ul[NewUserIndex].UserIcon));
     memcpy(ua->ul[NewUserIndex].UserIcon,DEFAULT,strlen(DEFAULT));
     ua->ul[NewUserIndex].UserType = STANDARD;
-    ua->ul[NewUserIndex].LangType = CHINSE;
+    ua->ul[NewUserIndex].LangType = 0;
     ua->ul[NewUserIndex].PasswordType = NEWPASS;
     memset(ua->ul[NewUserIndex].PassText,'\0',sizeof(ua->ul[NewUserIndex].PassText));
     memcpy(ua->ul[NewUserIndex].PassText,s,strlen(s));
@@ -501,8 +500,8 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     SetLableFontType(LabelLanguageType,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelLanguageType , 0 , 4 , 1 , 1);        
 
-    NewLanguage = SetComboLanguageType(_("Chinese"),_("English"));
-    gtk_combo_box_set_active(GTK_COMBO_BOX(NewLanguage),CHINSE);
+    NewLanguage = SetComboLanguageType();
+    gtk_combo_box_set_active(GTK_COMBO_BOX(NewLanguage), 0);
     ua->NewUserLangType = NewLanguage;
     g_signal_connect(G_OBJECT(NewLanguage),
                     "changed",

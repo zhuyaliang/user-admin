@@ -134,15 +134,19 @@ static const gchar *GetIconPath(ActUser *user)
 static int GetUserLang(ActUser *user)
 {
     const gchar *Lang = NULL;
+    guint i, len;
+
     Lang = act_user_get_language(user);
-    if(strcmp(Lang,"zh_CN.UTF-8")== 0)
-        return CHINSE;
-    else if(strcmp(Lang,"en_US.UTF-8") == 0)
-        return ENGLIST;
 
+    len = g_strv_length (all_languages);
+
+    for (i =0; i < len; i++) {
+	    if (g_ascii_strcasecmp(Lang, all_languages[i]) == 0)
+		    return i;
+    }
     return -1;
+}
 
-}        
 static int GetUserType(ActUser *user)
 {
     ActUserAccountType UserType;

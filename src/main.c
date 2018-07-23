@@ -6,6 +6,13 @@
 #include "user-face.h"
 #include "user-list.h"
 
+static gboolean on_window_quit (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+{
+	g_strfreev(all_languages);
+	gtk_main_quit();
+	return TRUE;
+}
+
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
@@ -14,9 +21,11 @@ static void InitMainWindow(UserAdmin *ua)
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
     gtk_window_set_title(GTK_WINDOW(Window), _("Mate User Manage"));
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
+    g_signal_connect(G_OBJECT(Window), "delete-event", G_CALLBACK(on_window_quit), NULL);
 
     ua->MainWindow = Window;
-}  
+}
+
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Hbox;
@@ -54,6 +63,7 @@ int main(int argc, char **argv)
     
     gtk_init(&argc, &argv);
     
+    all_languages = mate_get_all_locales ();
     InitMainWindow(&ua);
 
     WindowLogin = ua.MainWindow;

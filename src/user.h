@@ -10,8 +10,8 @@
 #include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <gnome-desktop-3.0/libgnome-desktop/gnome-languages.h>
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-languages.h>
 
 #include <accountsservice-1.0/act/act-user-manager.h>
 #include <accountsservice-1.0/act/act-user.h>
@@ -22,9 +22,6 @@
 #define  NUMMAX    20
 #define  PICMAX    20    
 #define  NONE      3
-#define  ENGLIST   1
-#define  CHINSE    0
-
 
 #define  OLDPASS   0
 #define  NEWPASS   1
@@ -100,5 +97,6 @@ static const char StandardCharacter[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL
 int gnCnt;                //计数
 int gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget *WindowLogin;          //首页窗口
+char **all_languages;
 
 #endif

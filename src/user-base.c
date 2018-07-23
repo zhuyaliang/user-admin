@@ -175,7 +175,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     SetLableFontType(LabelLanguage,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(table) , LabelLanguage , 0 , 1 , 1 , 1);
 
-    ComboLanguage = SetComboLanguageType(_("Chinese"),_("English"));
+    ComboLanguage = SetComboLanguageType();
     ua->ComUserLanguage = ComboLanguage;
     gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),ua->ul[0].LangType);
     gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);

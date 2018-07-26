@@ -13,3 +13,6 @@ i18n.merge_file(
 install_subdir('face',
   install_dir : join_paths(get_option('prefix'), 'share/user-admin'),
 )
+install_subdir('',
+  install_dir : join_paths(get_option('prefix'), 'share/user-admin'),
+)

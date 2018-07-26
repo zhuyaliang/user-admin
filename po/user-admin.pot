@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-18 14:56+0800\n"
+"POT-Creation-Date: 2018-07-26 11:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,36 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/main.c:15
-msgid "User Manage"
+msgid "Mate User Manage"
 msgstr ""
 
-#: src/user-base.c:163 src/user-admin.c:484
+#: src/user-base.c:163 src/user-admin.c:488
 msgid "Account Type"
 msgstr ""
 
 #. 设置用户类型下拉框
-#: src/user-base.c:167 src/user-admin.c:487
+#: src/user-base.c:167 src/user-admin.c:491
 msgid "Standard"
 msgstr ""
 
-#: src/user-base.c:167 src/user-admin.c:487
+#: src/user-base.c:167 src/user-admin.c:491
 msgid "Administrators"
 msgstr ""
 
-#: src/user-base.c:175 src/user-admin.c:497
+#: src/user-base.c:175 src/user-admin.c:501
 msgid "Language"
 msgstr ""
 
-#: src/user-base.c:178 src/user-admin.c:500
+#: src/user-base.c:178 src/user-admin.c:504
 msgid "Chinese"
 msgstr ""
 
-#: src/user-base.c:178 src/user-admin.c:500
+#: src/user-base.c:178 src/user-admin.c:504
 msgid "English"
 msgstr ""
 
 #: src/user-base.c:186 src/user-password.c:173 src/user-password.c:427
-#: src/user-admin.c:618 src/user-admin.c:633
+#: src/user-admin.c:622 src/user-admin.c:637
 msgid "Password"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 
 #. 新建两个单选按钮
 #: src/user-info.c:35 src/user-password.c:17 src/user-password.c:177
-#: src/user-admin.c:384 src/user-admin.c:539 src/user-admin.c:623
+#: src/user-admin.c:388 src/user-admin.c:543 src/user-admin.c:627
 msgid "Set up next time"
 msgstr ""
 
@@ -103,12 +103,12 @@ msgstr ""
 
 #. 确认按钮
 #: src/user-password.c:216 src/user-password.c:232 src/user-password.c:473
-#: src/user-admin.c:661 src/user-admin.c:677
+#: src/user-admin.c:665 src/user-admin.c:681
 msgid "Confirm"
 msgstr ""
 
 #. 取消按钮
-#: src/user-password.c:240 src/user-password.c:480 src/user-admin.c:683
+#: src/user-password.c:240 src/user-password.c:480 src/user-admin.c:687
 msgid "Cancel"
 msgstr ""
 
@@ -163,35 +163,35 @@ msgstr ""
 msgid "This will be used to name your home folder and cant be changed."
 msgstr ""
 
-#: src/user-admin.c:283
+#: src/user-admin.c:287
 msgid "Creating User"
 msgstr ""
 
-#: src/user-admin.c:283
+#: src/user-admin.c:287
 msgid "Creating a user failed"
 msgstr ""
 
-#: src/user-admin.c:327
+#: src/user-admin.c:331
 msgid "Two inconsistencies in cipher input"
 msgstr ""
 
-#: src/user-admin.c:452
+#: src/user-admin.c:456
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 
-#: src/user-admin.c:459
+#: src/user-admin.c:463
 msgid "Real Name"
 msgstr ""
 
-#: src/user-admin.c:468
+#: src/user-admin.c:472
 msgid "User Name"
 msgstr ""
 
-#: src/user-admin.c:628
+#: src/user-admin.c:632
 msgid "Now set the password"
 msgstr ""
 
-#: src/user-admin.c:712 src/user-list.c:170
+#: src/user-admin.c:716 src/user-list.c:170
 msgid "Add User"
 msgstr ""
 

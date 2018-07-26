@@ -89,7 +89,7 @@ gtk_req_version = '>= 3.0.0'
 gtk_deps = dependency('gtk+-3.0', version: gtk_req_version)
 pwquality_deps = dependency('pwquality')
 act_deps = dependency('accountsservice')
-gd_deps = dependency('gnome-desktop-3.0')
+#gd_deps = dependency('gnome-desktop-3.0')
 crypt_deps = cc.find_library('crypt', required: true)
 
 # Configure data

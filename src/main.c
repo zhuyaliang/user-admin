@@ -12,7 +12,7 @@ static void InitMainWindow(UserAdmin *ua)
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Window), _("User Manage"));
+    gtk_window_set_title(GTK_WINDOW(Window), _("Mate User Manage"));
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
 
     ua->MainWindow = Window;

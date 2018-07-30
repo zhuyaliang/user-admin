@@ -21,7 +21,7 @@ void UserListAppend(GtkWidget *list,
 GdkPixbuf *SetUserFaceSize(const char  *PicName, int Size);
 void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua);
 void OffNote(GtkWidget *label,UserAdmin *ua);
-GtkWidget *SetComboLanguageType(const char *s1,const char *s2);
+GtkWidget *SetComboLanguageType(void);
 GtkWidget *SetComboUserType(const char *s1,const char *s2);
 void UpdateInterface(int Cnt,UserAdmin *ua);
 gboolean CheckPassword(gpointer data);

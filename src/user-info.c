@@ -3,16 +3,16 @@
 #include "user-share.h"
 
 /******************************************************************************
-* 函数:              GetPasswordModeText      
+* Function:              GetPasswordModeText      
 *        
-* 说明:  获取用户密码设置类型信息。为设置、设置两类。
+* Explain: Obtain the form of cryptographic display
 *        
-* 输入:  @user    用户
-*       
+* Input: @Type  user password type;Already set dispaly ●●●●●●
+*               or not set dispaly Set up next time 
 *        
-* 返回:  
+* Output:   
 *        
-* 作者:  zhuyaliang  15/05/2018
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/ 
 static const gchar * GetPasswordModeText (ActUser *user,int *Type)
 {
@@ -46,18 +46,6 @@ static const gchar * GetPasswordModeText (ActUser *user,int *Type)
 
         return text;
 }
-/******************************************************************************
-* 函数:             GetLoginTimeText      
-*        
-* 说明:  获取用户登录时间
-*        
-* 输入:  @user    用户
-*       
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/ 
 static gchar * GetLoginTimeText (ActUser *user)
 {
     gchar *text;
@@ -81,19 +69,6 @@ static gchar * GetLoginTimeText (ActUser *user)
     return text;
 }
 
-/******************************************************************************
-* 函数:              GetRealName    
-*        
-* 说明: 获取用户名字，display name
-*        
-* 输入:  @user    用户
-*        @index  		
-*       
-*        
-* 返回:  用户名
-*        
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/ 
 static const gchar *GetRealName (ActUser *user)
 {
     const gchar *name = NULL;
@@ -154,8 +129,8 @@ static int GetUserType(ActUser *user)
     UserType = act_user_get_account_type (user);
     if(UserType == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR)
         return ADMIN;
-    return STANDARD;
 
+    return STANDARD;
 }        
 static int GetUserAutoLogin(ActUser *user)
 {
@@ -165,19 +140,6 @@ static int GetUserAutoLogin(ActUser *user)
 
     return Auto;
 }        
-/******************************************************************************
-* 函数:              SortUsers       
-*        
-* 说明:  用户排序
-*        
-* 输入:  @a   用户名
-*        @b   用户名		
-*       
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/ 
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {
     ActUser *ua, *ub;
@@ -206,18 +168,17 @@ static gint SortUsers (gconstpointer a, gconstpointer b)
     return result;
 }
 /******************************************************************************
-* 函数:              UserAdded       
+* Function:              UserAdded      
 *        
-* 说明:  将所有用户信息写入用户结构体内
+* Explain: Save user information
 *        
-* 输入:  @user    用户
-*        @index   用户号		
-*       
+* Input:  @index  user label      
 *        
-* 返回:  
 *        
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/ 
+* Output:  
+*        
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
 static void UserAdded(ActUser *user,int index,UserAdmin *ua)
 {
     const char *UserName;
@@ -231,7 +192,7 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     int LangType;
     int Auto;
 
-    /*用户名字*/
+    /*user real name Can be modified*/
     RealName = GetRealName (user);
     memset(ua->ul[index].RealName,'\0',sizeof(ua->ul[index].RealName));
     if(RealName == NULL)
@@ -242,13 +203,14 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {        
         memcpy(ua->ul[index].RealName,RealName,strlen(RealName));
     }
-
+    /*user name Cannot be modified*/
     UserName = GetUserName(user);
     memset(ua->ul[index].UserName,'\0',sizeof(ua->ul[index].UserName));
     memcpy(ua->ul[index].UserName,UserName,strlen(UserName));
-    
-    memset(ua->ul[index].HomeName,'\0',sizeof(ua->ul[index].HomeName));
+   
+    /*Home directory name*/ 
     HomeName = GetHomeName(user);
+    memset(ua->ul[index].HomeName,'\0',sizeof(ua->ul[index].HomeName));
     if(HomeName == NULL)
     {
         memcpy(ua->ul[index].HomeName,Unknown,strlen(Unknown));
@@ -257,10 +219,9 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {
         memcpy(ua->ul[index].HomeName,HomeName,strlen(HomeName));
     }       
-    /*用户头像*/
-
-    memset(ua->ul[index].UserIcon,'\0',sizeof(ua->ul[index].UserIcon));
+    /*user login icon*/
     IconFile = GetIconPath(user);
+    memset(ua->ul[index].UserIcon,'\0',sizeof(ua->ul[index].UserIcon));
     if(IconFile == NULL)
     {       
         memcpy(ua->ul[index].UserIcon,DEFAULT,strlen(DEFAULT));
@@ -270,42 +231,43 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
         memcpy(ua->ul[index].UserIcon,IconFile,strlen(IconFile));
     }        
 
-    /*用户密码显示*/
-    memset(ua->ul[index].PassText,'\0',sizeof(ua->ul[index].PassText));
+    /*user password*/
     PassText = GetPasswordModeText(user,&ua->ul[index].PasswordType);
+    memset(ua->ul[index].PassText,'\0',sizeof(ua->ul[index].PassText));
     memcpy(ua->ul[index].PassText,PassText,strlen(PassText));
 
-    /*用户语言类型*/
+    /*get user language type*/
     LangType = GetUserLang(user);
     ua->ul[index].LangType = LangType;
     
-    /*用户类型，管理员、普通*/
-
+    /*get user type Administrator or standard user*/
     UserType = GetUserType(user);
     ua->ul[index].UserType = UserType;
 
-    /*是否自动登录*/
+    /*auto login*/
     Auto = GetUserAutoLogin(user);
     ua->ul[index].LoginType = Auto;         
    
-    /*登录时间*/
+    /*login time*/
     memset(ua->ul[index].UserTime,'\0',sizeof(ua->ul[index].UserTime));
     TimeLogin = GetLoginTimeText(user); 
     memcpy(ua->ul[index].UserTime,TimeLogin,strlen(TimeLogin));
 }    
 
 /******************************************************************************
-* 函数:              GetUserInfo        
+* Function:              GetUserInfo      
 *        
-* 说明:  获取所有用户信息，包括用户名字、头像、用户类型、语言、密码、自动登录、时间
+* Explain: Using accountsservice-0.6.49 services to get user information. 
+*          Information includes: name, icon, user type, language...
 *        
-* 输入:  ul 用户信息结构体 		
-*       
+* Input:         
 *        
-* 返回: 用户个数 
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Output:  Success       :0
+*          failure       :-1
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 int GetUserInfo(UserAdmin *ua)
 {
     GSList *list, *l;
@@ -314,15 +276,18 @@ int GetUserInfo(UserAdmin *ua)
     int i = 0;
     int UserCnt;
     
-    Manager = act_user_manager_get_default ();//获取所以用户列表
+    /* get all user list */
+    Manager = act_user_manager_get_default ();
     list = act_user_manager_list_users (Manager);
-    UserCnt = g_slist_length (list);            //用户总个数
+    /*user number*/
+    UserCnt = g_slist_length (list);     
     if(UserCnt <= 0)
     {
         g_slist_free (list);
         MessageReport(_("Get User Info"),_("user count is 0"),ERROR);
         return -1;
     }        
+    /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);
     
     for (l = list; l; l = l->next,i++)

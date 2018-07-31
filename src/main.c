@@ -13,7 +13,6 @@ static gboolean on_window_quit (GtkWidget *widget, GdkEvent *event, gpointer use
 	gtk_main_quit();
 	return TRUE;
 }
-
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
@@ -42,12 +41,14 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     Hbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox2,TRUE,TRUE,10); 
     gtk_widget_set_size_request (Hbox2, 200,-1);
-    /*显示用户列表*/   
+
+    /*Display user list on the left side*/   
     DisplayUserList(Hbox2,ua);
 
     Hbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox1,TRUE,TRUE,10); 
-   /* 显示用户头像与用户名 */
+   
+    /* Display the user's head image and name */
     DisplayUserSetFace(Hbox1,ua);
     
     /* 显示用户其他界面 */    
@@ -75,6 +76,20 @@ static int RecordPid(void)
 
     return 0;
 }        
+/******************************************************************************
+* Function:              ProcessRuning      
+*        
+* Explain: Check whether the process has been started,If the process is not started, 
+*          record the current process ID =====>"/tmp/user-admin.pid"
+*        
+* Input:         
+*        
+*        
+* Output:  start        :TRUE
+*          not start    :FALSE
+*        
+* Author:  zhuyaliang  31/07/2018
+******************************************************************************/
 static gboolean ProcessRuning(void)
 {
     int fd = 0;
@@ -130,12 +145,19 @@ int main(int argc, char **argv)
     
     gtk_init(&argc, &argv);
     
+    /* Create the main window */
     InitMainWindow(&ua);
+
+    /* Check whether the process has been started */
     if(ProcessRuning() == TRUE)
         exit(0);        
+
+    /* Get local support language */ 
     all_languages = mate_get_all_locales ();
 
     WindowLogin = ua.MainWindow;
+
+    /* Get local user info */
     ua.UserCount = GetUserInfo(&ua);
 
     fixed = gtk_fixed_new();
@@ -143,7 +165,8 @@ int main(int argc, char **argv)
     
     Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_fixed_put(GTK_FIXED(fixed),Vbox, 0, 0);
-    
+   
+    /* Create an interface */ 
     CreateInterface(Vbox,&ua);
 
     gtk_widget_show_all(ua.MainWindow);

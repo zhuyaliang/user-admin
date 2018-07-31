@@ -103,20 +103,20 @@ void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const cha
 
 }        
 /******************************************************************************
-* 函数:             UserListAppend
+* Function:             UserListAppend
 *
-* 说明:  向列表中添加用户信息
+* Explain:  Add information
 *
-* 输入:
-*        @list        列表
-*        @UserIcon    头像
-*        @UserName    名字
-*        @Color       字体颜色
-*        @Index       用户标号
+* Input:
+*        @list        list
+*        @UserIcon    icon path
+*        @UserName    real name
+*        @Color       color
+*        @Index       user lable
 *        Iter
-* 返回:
+* Output:
 *
-* 作者:  zhuyaliang  09/05/2018
+* AUTHOR:  zhuyaliang  09/05/2018
 ******************************************************************************/
 void UserListAppend(GtkWidget *list,
                     const gchar *UserIcon,
@@ -170,29 +170,32 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 
     return pixbuf;
 }
+
 /******************************************************************************
-* 函数:              UpdateInterface
-*
-* 说明:  更新显示界面
-*
-* 输入:
-*        @Cnt  需要更新的用户标号
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              UpdateInterface 
+*        
+* Explain: Switching user information
+*        
+* Input:  @Cnt  user index.       
+*        
+* Output:  
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 void UpdateInterface(int Cnt,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
     
-    //切换用户时有些选项会变动，会引起信号响应，需要设置标志位，Chang = 1时或略信号响应处理
+    /*Some options change when switching users, 
+      causing a signal response, requiring flags, 
+      and ignoring signal processing when Chang = 1*/
     Change = 1;           
     pb = gdk_pixbuf_new_from_file(ua->ul[Cnt].UserIcon,NULL);
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
-    
+   
+    /*Switching icon*/ 
     gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),
                          image);
 

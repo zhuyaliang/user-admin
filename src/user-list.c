@@ -3,16 +3,15 @@
 #include "user-share.h"
 
 /******************************************************************************
-* 函数:              on_changed
-*
-* 说明:  选择用户信号相应函数
-*
-* 输入:
-*
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              on_changed     
+*        
+* Explain: Switching users to display user information
+*        
+* Input:         
+*        
+* Output:  
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static void  on_changed(GtkWidget *widget,  gpointer data)
 {
@@ -22,28 +21,17 @@ static void  on_changed(GtkWidget *widget,  gpointer data)
 
     if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &ua->Model, &iter))
     {
-//        gtk_tree_model_get(ua->Model, &iter, LIST_TEXT, &value, -1);
         /*Get the user line number*/
         gtk_tree_model_get (ua->Model, &iter,
                             INT_COLUMN, &count,
                             -1);
         gnCurrentUserIndex = count;
+
+        /*update display*/
         UpdateInterface(count,ua);
     }
 }
 
-/******************************************************************************
-* 函数:              ListModelCreate        
-*        
-* 说明:  创建用户列表用户列表
-*        
-* 输入:  		
-*        
-*        
-* 返回:  列表
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
 static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
 {   
 
@@ -59,17 +47,17 @@ static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
 }
 
 /******************************************************************************
-* 函数:              ListViewInit       
+* Function:              ListViewInit 
 *        
-* 说明:  初始化用户列表
+* Explain:  Initialization list.@renderer_icon user icon;
+*                               @renderer_text user real name; 
+*                               include color and front;
+* Input:         
 *        
-* 输入:  		
-*        列表
+* Output:  
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void ListViewInit(GtkWidget *list)
 {
     GtkCellRenderer *renderer_icon,*renderer_text;
@@ -79,31 +67,44 @@ static void ListViewInit(GtkWidget *list)
     gtk_tree_view_column_set_title(column,_("User List"));
     
     renderer_icon = gtk_cell_renderer_pixbuf_new();   //user icon
-    renderer_text = gtk_cell_renderer_text_new();     //user name text
+    renderer_text = gtk_cell_renderer_text_new();     //user real name text
 
     gtk_tree_view_column_pack_start (column, renderer_icon, FALSE);
-    gtk_tree_view_column_set_attributes (column, renderer_icon,"pixbuf", COL_USER_FACE,NULL);
+    gtk_tree_view_column_set_attributes (column, 
+                                         renderer_icon,
+                                         "pixbuf", 
+                                         COL_USER_FACE,
+                                         NULL);
 
     gtk_tree_view_column_pack_start(column,renderer_text,FALSE);
-    gtk_tree_view_column_add_attribute(column,renderer_text,"text",LIST_TEXT);
-    gtk_tree_view_column_add_attribute(column,renderer_text,"foreground",LIST_COLOR);
-    gtk_tree_view_column_add_attribute(column,renderer_text,"weight",LIST_FRONT);
+    gtk_tree_view_column_add_attribute(column,
+                                       renderer_text,
+                                       "text",
+                                       LIST_TEXT);
+
+    gtk_tree_view_column_add_attribute(column,
+                                       renderer_text,
+                                       "foreground",
+                                       LIST_COLOR);
+
+    gtk_tree_view_column_add_attribute(column,
+                                       renderer_text,
+                                       "weight",
+                                       LIST_FRONT);
     gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 }
 
 /******************************************************************************
-* 函数:              DisplayUserList        
+* Function:              DisplayUserList      
 *        
-* 说明:  在左侧显示所有用户的名字头像。显示用户列表
+* Explain: Display user list on the left side,icon and name 
 *        
-* 输入:  		
-*        @Hbox     左侧布局盒
-*        @UserCnt  用户个数
+* Input:         
 *        
-* 返回:  
+* Output:  
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
 {
     GtkWidget *table;

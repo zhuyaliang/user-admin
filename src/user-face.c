@@ -317,17 +317,16 @@ static void ModifyName (GtkEntry *entry,gpointer  data)
     }        
 }
 /******************************************************************************
-* 函数:              DisplayUserSetFace        
+* Function:              DisplayUserSetFace  
 *        
-* 说明: 显示用户头像与用户名
+* Explain: Display the user's head image and name
 *        
-* 输入:  		
-*        左侧布局盒
+* Input:         
 *        
-* 返回:  
+* Output: 
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
 {
     GtkWidget *image;

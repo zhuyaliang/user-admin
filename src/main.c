@@ -1,10 +1,11 @@
-
 #include "user-info.h"
 #include "user.h"
 #include "user-base.h"
 #include "user-share.h"
 #include "user-face.h"
 #include "user-list.h"
+
+#define  LOCKFILE    "/tmp/user-admin.pid"
 
 static gboolean on_window_quit (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
@@ -21,7 +22,10 @@ static void InitMainWindow(UserAdmin *ua)
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
     gtk_window_set_title(GTK_WINDOW(Window), _("Mate User Manage"));
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
-    g_signal_connect(G_OBJECT(Window), "delete-event", G_CALLBACK(on_window_quit), NULL);
+    g_signal_connect(G_OBJECT(Window), 
+                    "delete-event",
+                    G_CALLBACK(on_window_quit),
+                    NULL);
 
     ua->MainWindow = Window;
 }
@@ -52,6 +56,69 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     AddRemoveUser(Vbox,ua);
 
 }
+static int RecordPid(void)
+{
+    int pid = 0;
+    int fd;
+    char WriteBuf[30] = { 0 };
+
+    fd = open(LOCKFILE,O_WRONLY|O_CREAT,0777);
+    if(fd < 0)
+    {
+         MessageReport(_("open file"),_("Create pid file failed"),ERROR);
+         return -1;      
+    }        
+    pid = getpid();
+    sprintf(WriteBuf,"%d",pid);
+    write(fd,WriteBuf,strlen(WriteBuf));
+    close(fd);
+
+    return 0;
+}        
+static gboolean ProcessRuning(void)
+{
+    int fd = 0;
+    int pid = 0;
+    gboolean Run = FALSE;
+    char ReadBuf[30] = { 0 };
+
+    if(access(LOCKFILE,F_OK)==0)
+    {
+        fd = open(LOCKFILE,O_RDONLY);
+        if(fd < 0)
+        {
+             MessageReport(_("open file"),_("open pid file failed"),ERROR);
+             return TRUE;
+        }        
+        if(read(fd,ReadBuf,sizeof(ReadBuf)) <= 0)
+        {
+             MessageReport(_("read file"),_("read pid file failed"),ERROR);
+             close(fd);
+             return TRUE;
+        }        
+        pid = atoi(ReadBuf);
+        if(kill(pid,0) == 0)
+        {        
+            Run = TRUE;
+        }
+        else
+        {    
+            remove(LOCKFILE);
+            if(RecordPid() < 0)
+                Run = TRUE;
+        }    
+                
+    }
+    else
+    {
+        if(RecordPid() < 0)
+            Run = TRUE;
+    }        
+
+    close(fd);
+    return Run;
+
+}        
 int main(int argc, char **argv)
 {
     GtkWidget *fixed;
@@ -63,8 +130,10 @@ int main(int argc, char **argv)
     
     gtk_init(&argc, &argv);
     
-    all_languages = mate_get_all_locales ();
     InitMainWindow(&ua);
+    if(ProcessRuning() == TRUE)
+        exit(0);        
+    all_languages = mate_get_all_locales ();
 
     WindowLogin = ua.MainWindow;
     ua.UserCount = GetUserInfo(&ua);

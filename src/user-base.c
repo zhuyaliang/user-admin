@@ -93,10 +93,7 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
     {        
         account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget));
         ua->ul[gnCurrentUserIndex].LangType = account_type;
-        if(account_type == 1)
-            act_user_set_language(ua->ul[gnCurrentUserIndex].User,"en_US.UTF-8");
-        else
-            act_user_set_language(ua->ul[gnCurrentUserIndex].User,"zh_CN.UTF-8");
+        act_user_set_language(ua->ul[gnCurrentUserIndex].User,all_languages[account_type]);
     }     
 }
 /******************************************************************************

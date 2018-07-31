@@ -2,6 +2,8 @@
 #define __USER_H__
 
 #include <gtk/gtk.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,7 +13,7 @@
 #include <time.h>
 #include <sys/time.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-languages.h>
+#include <mate-desktop-2.0/libmate-desktop/mate-languages.h>
 
 #include <accountsservice-1.0/act/act-user-manager.h>
 #include <accountsservice-1.0/act/act-user.h>
@@ -91,6 +93,8 @@ typedef struct
     int               UserCount;    //Valid user number
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer
+    int               MouseId;
+    int               KeyId;
     char              TmpPass[24];
 }UserAdmin;
 static const char StandardCharacter[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"};

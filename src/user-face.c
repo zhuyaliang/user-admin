@@ -48,6 +48,23 @@ static void UpdataFace(int nCount,UserAdmin *ua)
     memcpy(ua->ul[gnCurrentUserIndex].UserIcon,BasePath,strlen(BasePath));
 
 }
+static void Unbind(gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *) data;
+    gtk_widget_destroy(ua->IconWindow);
+    if(ua->MouseId != 0)
+    {    
+        g_signal_handler_disconnect(ua->MainWindow,ua->MouseId);
+    ua->MouseId = 0;
+    }
+    if(ua->KeyId != 0)
+    {        
+        g_signal_handler_disconnect(ua->MainWindow,ua->KeyId);
+        ua->KeyId = 0;
+    }    
+    ua->IconWindow = NULL; 
+
+}        
 /******************************************************************************
 * 函数:              face_widget_activated
 *
@@ -71,10 +88,34 @@ static void face_widget_activated (GtkFlowBox *flowbox,
     Count = gtk_flow_box_child_get_index(child);
     /* 更新头像 */
     UpdataFace(Count,ua);
-    gtk_widget_destroy(ua->IconWindow);
-
+    Unbind(ua);
 }
 
+/******************************************************************************
+* 函数:              NotifyEvents       
+*        
+* 说明:  用户点击空白处关闭头像选择窗口
+*        
+* 输入:  		
+*       
+*        
+* 返回:  
+*        
+* 作者:  zhuyaliang  09/05/2018
+******************************************************************************/ 
+static gboolean NotifyEvents(GtkWidget *widget,
+                             GdkEventButton *event, 
+                             gpointer data)
+{
+
+    UserAdmin *ua = (UserAdmin *) data;
+
+    if(ua->IconWindow  != NULL )
+    {
+        Unbind(ua);
+    }        
+    return TRUE;
+}        
 /******************************************************************************
 * 函数:              GetFaceFile
 *
@@ -143,7 +184,7 @@ static int GetDirFace(GtkWidget *flowbox)
     closedir(dp);
     return 0;
 }
-
+static int WindowOpenFlag;
 /******************************************************************************
 * 函数:              GetFaceLsit
 *
@@ -162,8 +203,12 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     GtkWidget *window;
     GtkWidget *scrolled;
     GtkWidget *flowbox;
+    int MouseId;
+    int KeyId;
     int nRet;
-    
+  
+    if(WindowOpenFlag == 1)
+        Unbind(ua);        
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_decorated(GTK_WINDOW(window),FALSE);  //设置无边框
     gtk_window_set_default_size (GTK_WINDOW (window), 450, 270);
@@ -191,6 +236,22 @@ static void GetFaceList(GtkWidget *button, gpointer data)
                                 face_widget_activated,
                                 ua);
 
+    gtk_widget_add_events(ua->MainWindow,
+                          GDK_BUTTON_PRESS_MASK |
+                          GDK_KEY_PRESS_MASK);
+
+    MouseId = g_signal_connect(G_OBJECT(ua->MainWindow),
+                    "button-press-event", 
+                    G_CALLBACK(NotifyEvents), 
+                    ua);
+
+    ua->MouseId = MouseId;
+    KeyId = g_signal_connect(G_OBJECT(ua->MainWindow),
+                    "key-press-event", 
+                    G_CALLBACK(NotifyEvents), 
+                    ua);
+    ua->KeyId = KeyId;
+    WindowOpenFlag = 1;
     g_signal_connect (flowbox, "child-activated",
                       G_CALLBACK (face_widget_activated),
                       ua);
@@ -275,7 +336,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *table;
     GtkWidget *fixed;
     GtkWidget *ButtonFace;
-    
+     
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed,TRUE,TRUE,0);  
    
@@ -291,7 +352,10 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     gtk_button_set_image(GTK_BUTTON(ButtonFace),image);
     ua->ButtonFace = ButtonFace;
     gtk_grid_attach(GTK_GRID(table) , ButtonFace , 0 , 0 , 8 , 8);
-    g_signal_connect(G_OBJECT(ButtonFace), "clicked", G_CALLBACK(GetFaceList),ua);
+    g_signal_connect(G_OBJECT(ButtonFace), 
+                    "clicked",
+                     G_CALLBACK(GetFaceList),
+                     ua);
 
     /*设置用户名*/
     EntryName = gtk_entry_new();

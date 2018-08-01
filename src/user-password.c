@@ -10,7 +10,17 @@
 
 static void CloseNewPassWindow(GtkWidget *widget,gpointer data);
 
-/* 下次登录时设置按钮 */
+/******************************************************************************
+* Function:              NextSetPass 
+*        
+* Explain: Set the password at the next login
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
 static void NextSetPass (GtkRadioButton *button,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -42,6 +52,17 @@ static void NextSetPass (GtkRadioButton *button,gpointer data)
     ua->ul[gnCurrentUserIndex].PasswordType = NEWPASS;
 }        
 
+/******************************************************************************
+* Function:              NowSetPass 
+*        
+* Explain: Now set the password,Create a timer to check the password
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
 static void NowSetPass (GtkRadioButton *button,gpointer data)
 {
     int CheckPassTimeId;
@@ -62,34 +83,21 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
     ua->ul[gnCurrentUserIndex].PasswordType = OLDPASS;
 
 }        
-/******************************************************************************
-* 函数:              ClosePassWindow
-*
-* 说明:    取消按钮响应函数
-*
-* 输入:
-*        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/
 static void ClosePassWindow(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     gtk_widget_destroy(GTK_WIDGET(ua->PassWindow));
 }
 /******************************************************************************
-* 函数:             SetNewPass
-*
-* 说明:   确定按钮响应函数
-*
-* 输入:
+* Function:              SetNewPass 
 *        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
+* Explain: Confirm the change of the password
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 static void SetNewPass(GtkWidget *widget,gpointer data)
 {
@@ -119,16 +127,15 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
 }
 
 /******************************************************************************
-* 函数:              CreateNewPass
-*
-* 说明:    用户第一次设置密码时的函数
-*
-* 输入:
+* Function:              CreateNewPass 
 *        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
+* Explain: Set the password for the first time
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 void CreateNewPass(UserAdmin *ua)
 {
@@ -173,7 +180,7 @@ void CreateNewPass(UserAdmin *ua)
     LabelTitle = gtk_label_new(_("Password"));
     gtk_grid_attach(GTK_GRID(Table) , LabelTitle , 0 , 0 , 1 , 1);
 
-    //新建两个单选按钮
+    //Select button
     RadioButton1 = gtk_radio_button_new_with_label(NULL,_("Set up next time"));
     RadioGroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(RadioButton1));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton1 , 0 , 1 , 5 , 1);
@@ -257,7 +264,6 @@ static void get_salt(char *salt,char *passwd)
 {
     int i,j;
 
-    //取出salt,i记录密码字符下标,j记录$出现次数
     for(i=0,j=0;passwd[i] && j != 3;++i)
     {
         if(passwd[i] == '$')
@@ -267,17 +273,16 @@ static void get_salt(char *salt,char *passwd)
     strncpy(salt,passwd,i-1);
 }
 /******************************************************************************
-* 函数:              CheckInputOldPass
-*
-* 说明:    就密码验证相应函数
-*
-* 输入:
-*        @name 用户名
-*        @Password  密码
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
+* Function:            CheckInputOldPass
+*        
+* Explain: Check the correctness of the old password entered
+*          
+* Input:   @Name user name 
+*          @PassWord  old password       
+*        
+* Output:  -1 Password error
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 static int CheckInputOldPass(const char *Name,const char *PassWord)
 {
@@ -293,19 +298,19 @@ static int CheckInputOldPass(const char *Name,const char *PassWord)
     else
          return -1; 
 
-
 }        
 /******************************************************************************
-* 函数:              ConfirmFun
-*
-* 说明:    确认按钮响应函数
-*
-* 输入:
+* Function:            ConfirmFun
 *        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
+* Explain: Click confirmation to change the password
+*          step 1 Confirm the old password for the input
+*          step 2 Calculating the strength of the new cipher
+*          
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 static void ConfirmFun(GtkWidget *widget,gpointer data)
 {
@@ -346,23 +351,23 @@ static void ConfirmFun(GtkWidget *widget,gpointer data)
 	}
 	gtk_widget_set_sensitive(ua->ButtonConfirm, TRUE);
 }
-/******************************************************************************
-* 函数:              CloseOlsPassWindow
-*
-* 说明:    点击窗口上的X时的响应函数
-*
-* 输入:
-*        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
-******************************************************************************/
 static void CloseOldPassWindow(  GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     gtk_widget_set_sensitive(ua->MainWindow,TRUE);
 }
+
+/******************************************************************************
+* Function:            ChangeOldPass
+*        
+* Explain: Change the old password 
+*          
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
 static void CloseNewPassWindow(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -375,16 +380,15 @@ static void CloseNewPassWindow(GtkWidget *widget,gpointer data)
     gtk_widget_set_sensitive(ua->MainWindow,TRUE);
 }        
 /******************************************************************************
-* 函数:              ChangeOldPass
-*
-* 说明:    更改已经存在的旧密码
-*
-* 输入:
+* Function:            ChangeOldPass
 *        
-*
-* 返回:
-*
-* 作者:  zhuyaliang  15/05/2018
+* Explain: Change the old password 
+*          
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 void ChangeOldPass(UserAdmin *ua)
 {
@@ -405,7 +409,7 @@ void ChangeOldPass(UserAdmin *ua)
     GtkWidget *ButtonConfirm;
     GtkWidget *ButtonCancel;
 
-    //新建一个窗口
+    //create window
     WindowChangePass = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(WindowChangePass),_("Change password"));
     gtk_window_set_position(GTK_WINDOW(WindowChangePass),GTK_WIN_POS_CENTER);
@@ -427,7 +431,7 @@ void ChangeOldPass(UserAdmin *ua)
     LabelTitle = gtk_label_new(_("Password"));  
     gtk_grid_attach(GTK_GRID(Table) , LabelTitle , 0 , 0 , 1 , 1);
 
-    /*输入就密码*/
+    /*input old password*/
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Old Password"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);
@@ -438,7 +442,7 @@ void ChangeOldPass(UserAdmin *ua)
     gtk_entry_set_visibility(GTK_ENTRY(OldPassEntry),FALSE);
     gtk_grid_attach(GTK_GRID(Table) , OldPassEntry , 1 , 3 , 4 , 1);
 
-    /*输入新密码*/
+    /*input new password*/
    	LabelConfirm = gtk_label_new (NULL);
     SetLableFontType(LabelConfirm,"gray",11,_("New Password"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0 , 4 , 1 , 1);
@@ -450,7 +454,7 @@ void ChangeOldPass(UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) , NewPassEntry , 1 , 4 , 4 , 1);
 
 
-    /*新密码强度*/
+    /*Display cipher strength*/
     LevelBar = gtk_level_bar_new ();
     gtk_level_bar_set_min_value(GTK_LEVEL_BAR(LevelBar),0.0);
     gtk_level_bar_set_max_value(GTK_LEVEL_BAR(LevelBar),5.0);
@@ -458,7 +462,7 @@ void ChangeOldPass(UserAdmin *ua)
     ua->LevelBar = LevelBar;
  	gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 5 , 4 , 1);
 
-    /*提醒*/
+    /*Problem reminding*/
     LabelPassNote = gtk_label_new (NULL);
     ua->LabelPassNote = LabelPassNote;
     gtk_grid_attach(GTK_GRID(Table) ,LabelPassNote , 0 , 6 , 4 , 1);
@@ -469,14 +473,14 @@ void ChangeOldPass(UserAdmin *ua)
     Hseparator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_grid_attach(GTK_GRID(Table) , Hseparator , 0 , 8 , 5 , 1);
     
-    /*确认按钮*/
+    /*confirm button*/
     ButtonConfirm = gtk_button_new_with_label(_("Confirm"));
     ua->ButtonConfirm = ButtonConfirm;
 
   	g_signal_connect (ButtonConfirm, "clicked",G_CALLBACK (ConfirmFun),ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
 
-    /*取消按钮*/
+    /*cancel button*/
     ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
     g_signal_connect (ButtonCancel, 
                      "clicked",

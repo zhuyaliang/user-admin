@@ -9,16 +9,15 @@
 #include "user-share.h"
 static char gcPicBuf[PICMAX][50];   //照片
 /******************************************************************************
-* 函数:              UpdataFace
-*
-* 说明:  更新用户头像
-*
-* 输入:
-*        选择头像的下标号
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              UpdataFace 
+*        
+* Explain: Update the user's head image
+*        
+* Input:   @nCount :Photo ordinal number
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static void UpdataFace(int nCount,UserAdmin *ua)
 {
@@ -28,12 +27,12 @@ static void UpdataFace(int nCount,UserAdmin *ua)
     GdkPixbuf *pb, *pb2;
     char BasePath[100] = { 0 };
     sprintf(BasePath, FACEDIR"/%s", gcPicBuf[nCount]);
-    /*设置button上的图片*/
+    /*Update the home page picture*/
     pb = gdk_pixbuf_new_from_file(BasePath,NULL);
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
     gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),image);
-    /*设置列表用户头像尺寸*/
+    /*Update the left list picture*/
     face = SetUserFaceSize (BasePath, 50);
 
     gtk_list_store_set(ua->ListSTore,&ua->ul[gnCurrentUserIndex].Iter,
@@ -44,14 +43,28 @@ static void UpdataFace(int nCount,UserAdmin *ua)
     memset(ua->ul[gnCurrentUserIndex].UserIcon,
           '\0',
           strlen(ua->ul[gnCurrentUserIndex].UserIcon));
-
+    /**/
     memcpy(ua->ul[gnCurrentUserIndex].UserIcon,BasePath,strlen(BasePath));
 
 }
+/******************************************************************************
+* Function:              Unbind 
+*        
+* Explain: Close the window and dissolve the signal
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void Unbind(gpointer data)
 {
     UserAdmin *ua = (UserAdmin *) data;
+
     gtk_widget_destroy(ua->IconWindow);
+
+    /*mouse click event*/
     if(ua->MouseId != 0)
     {    
         g_signal_handler_disconnect(ua->MainWindow,ua->MouseId);
@@ -66,16 +79,15 @@ static void Unbind(gpointer data)
 
 }        
 /******************************************************************************
-* 函数:              face_widget_activated
-*
-* 说明:  选择用户头像相应函数
-*
-* 输入:
-*
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              face_widget_activated 
+*        
+* Explain: Click the picture signal event
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static void face_widget_activated (GtkFlowBox *flowbox,
                                    GtkFlowBoxChild *child,
@@ -84,25 +96,24 @@ static void face_widget_activated (GtkFlowBox *flowbox,
     UserAdmin *ua = (UserAdmin *) data;
     int Count;
 
-   /* 获得选择的照片的下标号*/
+   /* The lower mark of the selected photo*/
     Count = gtk_flow_box_child_get_index(child);
-    /* 更新头像 */
+    /* updata user image */
     UpdataFace(Count,ua);
     Unbind(ua);
 }
 
 /******************************************************************************
-* 函数:              NotifyEvents       
+* Function:              NotifyEvents 
 *        
-* 说明:  用户点击空白处关闭头像选择窗口
+* Explain: When users do not operate, click the blank to close the window
 *        
-* 输入:  		
-*       
+* Input:         
 *        
-* 返回:  
+* Output: 
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static gboolean NotifyEvents(GtkWidget *widget,
                              GdkEventButton *event, 
                              gpointer data)
@@ -117,16 +128,15 @@ static gboolean NotifyEvents(GtkWidget *widget,
     return TRUE;
 }        
 /******************************************************************************
-* 函数:              GetFaceFile
-*
-* 说明:  获得照片并将照片缩小
-*
-* 输入:
-*        照片路径
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              GetFaceFile 
+*        
+* Explain: Zoom the picture to the right size
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static GtkWidget *GetFaceFile (const char *FileName)
 {
@@ -145,16 +155,15 @@ static GtkWidget *GetFaceFile (const char *FileName)
 }
 
 /******************************************************************************
-* 函数:              GetDirFace
-*
-* 说明:  得到目录下所有可用的照片
-*
-* 输入:
-*        排列盒
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              GetFaceList 
+*        
+* Explain: Get all the available pictures
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static int GetDirFace(GtkWidget *flowbox)
 {
@@ -174,11 +183,10 @@ static int GetDirFace(GtkWidget *flowbox)
             if(strcmp(".",entry->d_name) == 0 ||strcmp("..",entry->d_name) == 0)
             continue;
         }
-        /*将照片名字保存到数组*/
+        /*Save the name of the photo to the array*/
         memcpy(gcPicBuf[cnt],entry->d_name,strlen(entry->d_name));
         if(cnt++ > PICMAX)
             return 0;
-        /*将照片添加到盒子中*/
         gtk_container_add (GTK_CONTAINER (flowbox), GetFaceFile(entry->d_name));
     }
     closedir(dp);
@@ -186,16 +194,15 @@ static int GetDirFace(GtkWidget *flowbox)
 }
 static int WindowOpenFlag;
 /******************************************************************************
-* 函数:              GetFaceLsit
-*
-* 说明:  列出所有可用的头像图片
-*
-* 输入:
-*        左侧布局盒
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              GetFaceList 
+*        
+* Explain: Get user head image,This window can only open one at the same time.
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 static void GetFaceList(GtkWidget *button, gpointer data)
 {
@@ -207,10 +214,11 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     int KeyId;
     int nRet;
   
+    /*WindowOpenFlag Whether to open a window sign*/
     if(WindowOpenFlag == 1)
         Unbind(ua);        
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_decorated(GTK_WINDOW(window),FALSE);  //设置无边框
+    gtk_window_set_decorated(GTK_WINDOW(window),FALSE);  //Setting a frameless frame
     gtk_window_set_default_size (GTK_WINDOW (window), 450, 270);
     gtk_widget_realize(window);
     gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_MOUSE);
@@ -225,7 +233,7 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     gtk_flow_box_set_activate_on_single_click(GTK_FLOW_BOX (flowbox),TRUE);
     gtk_container_add (GTK_CONTAINER (scrolled), flowbox);
     gtk_container_add (GTK_CONTAINER (window), scrolled);
-    /*得到目录下的所以照片*/
+    /* Get all the available pictures */
     nRet = GetDirFace(flowbox);
     if(nRet < 0)
     {
@@ -260,9 +268,21 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     gtk_widget_show (window);
 
 }
+/******************************************************************************
+* Function:              RealNameValidCheck 
+*        
+* Explain: Check the validity of the input name
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static gboolean RealNameValidCheck (const gchar *name)
 {
         gboolean is_empty = TRUE;
+
         const gchar *c;
         for (c = name; *c; c++) 
         {
@@ -282,17 +302,16 @@ static gboolean RealNameValidCheck (const gchar *name)
 }
 
 /******************************************************************************
-* 函数:              ModifyName        
+* Function:              ModifyName 
 *        
-* 说明:  修改用户名，回车进入次函数
+* Explain: Modify the user's real name,Use the Entry key to end
 *        
-* 输入:  		
-*       
+* Input:         
 *        
-* 返回:  
+* Output: 
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void ModifyName (GtkEntry *entry,gpointer  data)
 {
     UserAdmin *ua = (UserAdmin *) data;
@@ -356,7 +375,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
                      G_CALLBACK(GetFaceList),
                      ua);
 
-    /*设置用户名*/
+    /*set real name*/
     EntryName = gtk_entry_new();
     gtk_entry_set_max_length(GTK_ENTRY(EntryName),48);
     gtk_entry_set_text(GTK_ENTRY(EntryName),ua->ul[0].UserName);

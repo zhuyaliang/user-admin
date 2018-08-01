@@ -155,6 +155,17 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
 
     g_signal_connect(selection, "changed", G_CALLBACK(on_changed), ua);
 }
+/******************************************************************************
+* Function:              AddRemoveUser 
+*        
+* Explain: Adding new users or remove users 
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *ButtonRemove;
@@ -173,8 +184,14 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 
     gtk_grid_attach(GTK_GRID(table) , ButtonRemove , 0 , 1 , 1 , 1);
     gtk_grid_attach(GTK_GRID(table) , ButtonAdd , 4 , 1 , 1 , 1);
-    g_signal_connect (ButtonRemove, "clicked",G_CALLBACK (RemoveUser),ua);
-    g_signal_connect (ButtonAdd, "clicked",G_CALLBACK (AddUser),ua);
+    g_signal_connect (ButtonRemove, 
+                      "clicked",
+                      G_CALLBACK (RemoveUser),
+                      ua);
+    g_signal_connect (ButtonAdd, 
+                      "clicked",
+                      G_CALLBACK (AddUser),
+                      ua);
     
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(table), 10);

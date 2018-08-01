@@ -11,18 +11,16 @@
 
 
 /******************************************************************************
-* 函数:             MessageReport
-*
-* 说明:  显示信息对话框，用来显示用户操作后失败提醒
-*
-* 输入:
-*        @Title          消息标题
-*        @Msg            消息
-*        @nType          消息类型
-* 返回: 
-*       用户操作状态
-*
-* 作者:  zhuyaliang  25/05/2018
+* Function:            MessageReport
+*        
+* Explain: Prompt information dialog
+*          
+* Input:  @Title           Message title
+*         @Msg             Message content           
+*         @nType           Message type
+* Output: 
+*        
+* Author:  zhuyaliang  25/05/2018
 ******************************************************************************/
 int MessageReport(const char *Title,const char *Msg,int nType)
 {
@@ -78,27 +76,26 @@ int MessageReport(const char *Title,const char *Msg,int nType)
     return nRet;
 }
 
-
 /******************************************************************************
-* 函数:             SetLableFontType
-*
-* 说明:  设置Lable的显示样式，包括颜色字体
-*
-* 输入:
-*        @GtkWidget      需要设置的lable控件
-*        @Color          控件颜色
-*        @FontSize       文字字体
-*        @Word           显示内容
-* 返回:
-*
-* 作者:  zhuyaliang  25/05/2018
+* Function:            SetLableFontType
+*        
+* Explain: Tips the style of the text
+*          
+* Input:  @GtkWidget       lable
+*         @Color           
+*         @FontSize
+*         @Word            text
+* Output: 
+*        
+* Author:  zhuyaliang  25/05/2018
 ******************************************************************************/
 void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word)        
 {
     char LableTypeBuf[200] = { 0 };
     
-    sprintf(LableTypeBuf,"<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
-                             Color,FontSzie,Word);
+    sprintf(LableTypeBuf,
+           "<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
+            Color,FontSzie,Word);
     gtk_label_set_markup(GTK_LABEL(Lable),LableTypeBuf);
 
 }        
@@ -237,18 +234,6 @@ static pwquality_settings_t * get_pwq (void)
     return settings;
 }
 
-/******************************************************************************
-* 函数:              OpenNote
-*
-* 说明:  打开提示
-*
-* 输入:
-*        @note   提示信息
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/
 static int pw_min_length (void)
 {
 	int value = 0;
@@ -258,18 +243,6 @@ static int pw_min_length (void)
     }
     return value;
 }
-/******************************************************************************
-* 函数:              OpenNote
-*
-* 说明:  打开提示
-*
-* 输入:
-*        @note   提示信息
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/
 static const gchar *pw_error_hint (gint error)
 {
         switch (error) {
@@ -316,18 +289,19 @@ static const gchar *pw_error_hint (gint error)
         }
 }
 
-
 /******************************************************************************
-* 函数:              GetPassStrength
-*
-* 说明:  获得设置密码的密码强度
-*
-* 输入:
+* Function:            GetPassStrength
 *        
+* Explain: Get the strength of the new password
+*          
+* Input:   @password        new password
+*          @old_password    old  
+*          @username        name
+*          @message         Return password message
 *
-* 返回:  新密码强度等级
-*
-* 作者:  zhuyaliang  09/05/2018
+* Output: strength
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 int GetPassStrength (const char  *password,
                      const char  *old_password,
@@ -382,16 +356,15 @@ int GetPassStrength (const char  *password,
 }
 
 /******************************************************************************
-* 函数:              CheckPassword
-*
-* 说明:  定时器循环检测设置密码是否合理响应函数800ms进入一次
-*
-* 输入:
-*        @note   提示信息
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              CheckPassword 
+*        
+* Explain: 800 millimeter test whether the one input password is legal
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 gboolean CheckPassword(gpointer data)
 {
@@ -414,16 +387,15 @@ gboolean CheckPassword(gpointer data)
 
 }
 /******************************************************************************
-* 函数:              AutoGenera
-*
-* 说明:  自动生成密码
-*
-* 输入:
-*        @note   提示信息
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              AutoGenera 
+*        
+* Explain: Automatic production of new ciphers
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 void AutoGenera (GtkEntry            *entry,
                  GtkEntryIconPosition icon_pos,
@@ -441,16 +413,15 @@ void AutoGenera (GtkEntry            *entry,
 }
 
 /******************************************************************************
-* 函数:              OpenNote
-*
-* 说明:  打开提示,锁控件
-*
-* 输入:
-*        @note   提示信息
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:            OpenNote
+*        
+* Explain: The reason why the strength of the cipher is not enough
+*          
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
 void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua)
 {
@@ -458,17 +429,6 @@ void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua)
     gtk_widget_set_sensitive(ua->ButtonConfirm, FALSE);
 }  
      
-/******************************************************************************
-* 函数:              OffNote
-*
-* 说明:  关闭提示，解锁确认按钮
-*
-* 输入:
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/
 void OffNote(GtkWidget *label,UserAdmin *ua)
 {
     gtk_label_set_markup(GTK_LABEL(label),NULL);
@@ -476,17 +436,15 @@ void OffNote(GtkWidget *label,UserAdmin *ua)
 }   
 
 /******************************************************************************
-* 函数:              SetComboLanguageType
-*
-* 说明: 创建语言下拉框
-*
-* 输入:
-*        @s1 语言类型
-*        @s2
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:            SetComboLanguageType 
+*        
+* Explain: Obtaining local support language
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 GtkWidget *SetComboLanguageType(void)
 {
@@ -516,17 +474,15 @@ GtkWidget *SetComboLanguageType(void)
     return ComboUser;
 }
 /******************************************************************************
-* 函数:              SetComboType
-*
-* 说明: 创建用户类型下拉框
-*
-* 输入:
-*        @s1 用户类型
-*        @s2
-*
-* 返回:
-*
-* 作者:  zhuyaliang  09/05/2018
+* Function:              SetComboUserType 
+*        
+* Explain: create drop-down select boxes,Standard and Administrators
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
 GtkWidget *SetComboUserType(const char *s1,const char *s2)
 {

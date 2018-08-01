@@ -5,19 +5,9 @@
 #include <sys/types.h>
 
 GtkWidget *WindowAddUser;
+/* password and name valid */
 static int UnlockFlag;
-/******************************************************************************
-* 函数:           RemoveUserData       
-*        
-* 说明:  清楚记录用户信息的结构体内容
-*        
-* 输入:  @UserIdex  被清除用户标号
-*        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+
 static void RemoveUserData(UserAdmin *ua,int UserIndex)
 {
     memset(ua->ul[UserIndex].UserName,'\0',strlen(ua->ul[UserIndex].UserName));            
@@ -28,17 +18,16 @@ static void RemoveUserData(UserAdmin *ua,int UserIndex)
     memset(ua->ul[UserIndex].UserTime,'\0',strlen(ua->ul[UserIndex].UserTime));
 }
 /******************************************************************************
-* 函数:           RemoveUser       
+* Function:              RemoveUser 
 *        
-* 说明: 点击移除用户按键响应函数
+* Explain: delete user
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void RemoveUser(GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -64,18 +53,23 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         while(!act_user_manager_delete_user(Manager,ua->ul[Index].User,RemoveType,&error))
         {
             error = NULL;
-            if(RemoveCount > 5)  //有时候此函数不能一次成功需要多次调用
+            /*This function will go wrong and need to be called many times*/
+            if(RemoveCount > 5)  
             {   
-                MessageReport(_("Remove User"),_("Remove user failure and try again"),ERROR); 
+                MessageReport(_("Remove User"),
+                              _("Remove user failure and try again"),
+                              ERROR); 
                 break;
             }    
         }
         if(RemoveCount < 5)    //5次操作内成功移除用户
         {    
-            gtk_list_store_remove (GTK_LIST_STORE (ua->Model), &iter);//在列表中移除用户
-            RemoveUserData(ua,Index);                                //清除用户信息
-            UpdateInterface(gnCurrentUserIndex,ua);                  //
-            ua->UserCount--;                                        //用户总个数-1
+            /*Delete the left list user*/
+            gtk_list_store_remove (GTK_LIST_STORE (ua->Model), &iter);
+            /*Scavenging user information*/
+            RemoveUserData(ua,Index);                                
+            UpdateInterface(gnCurrentUserIndex,ua);                  
+            ua->UserCount--;                                        
         }
     }
 
@@ -93,6 +87,19 @@ static gboolean CheckUserNameUsed (const gchar *UserName)
 
         return pwent != NULL;
 }
+
+/******************************************************************************
+* Function:              UserNameValidCheck 
+*        
+* Explain: check the validity of a username.include Is it empty
+*          Whether or not to use and character check
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
 {
     gboolean empty;
@@ -159,17 +166,16 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
         
         
 /******************************************************************************
-* 函数:           CheckName       
+* Function:             CheckName 
 *        
-* 说明: 定时器响应函数800ms进入一次，检查用户输入的用户名是否合法
+* Explain: 800 milliseconds to check the validity of a username
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static gboolean CheckName(gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -192,18 +198,6 @@ static gboolean CheckName(gpointer data)
     return TRUE;
 }
 
-/******************************************************************************
-* 函数:           NewUserSelectType       
-*        
-* 说明:  新用户选择用户类型响应函数
-*        
-* 输入:         
-*        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
 static void NewUserSelectType(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -225,18 +219,6 @@ static void NewUserSelectType(GtkWidget *widget,gpointer data)
     ua->ul[NewUserIndex].UserType = account_type;
     g_free(text);
 }
-/******************************************************************************
-* 函数:           NewUserSelectLanguage      
-*        
-* 说明:  新用户选择用户语言响应函数
-*        
-* 输入:         
-*        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
 static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -257,18 +239,16 @@ static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
     g_free(text);
 }
 /******************************************************************************
-* 函数:           WriteUserInfo      
+* Function:             WriteUserInfo 
 *        
-* 说明:  新用户将信息写入系统
+* Explain: create new user 
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  成功   0
-*        失败   -1
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static int WriteUserInfo(int index,UserAdmin *ua)
 {
 	ActUserManager *Manager;
@@ -309,17 +289,18 @@ static int WriteUserInfo(int index,UserAdmin *ua)
 
 }        
 /******************************************************************************
-* 函数:           CreateNewUser      
+* Function:             CreateNewUser
 *        
-* 说明:  新用户创建点击确认按钮响应函数
+* Explain: Create new users
+*          step 1 Check the password for the two input
+*          step 2 Add the user to the list 
+*          step 3 create user
+* Input:         
 *        
-* 输入:         
+* Output: 
 *        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void CreateNewUser(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -364,23 +345,26 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
     }    
 
 } 
-/******************************************************************************
-* 函数:           CloseWindow     
-*        
-* 说明:  点击添加用户界面取消按钮响应函数
-*        
-* 输入:         
-*        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
 static void CloseWindow(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
 	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 }
+/******************************************************************************
+* Function:              InitNewUser 
+*        
+* Explain: Initializing new user information.
+*          icon      --->default.jpg
+*          user type --->standard
+*          user lang --->Current use of language
+*          user pass --->Set up next time
+*          user auto --->no
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void InitNewUser(UserAdmin *ua)
 {
     int NewUserIndex;
@@ -388,6 +372,8 @@ static void InitNewUser(UserAdmin *ua)
 
     NewUserIndex = ua->UserCount;
 
+    memset(ua->ul[NewUserIndex].UserName,'\0',sizeof(ua->ul[NewUserIndex].UserName));
+    memset(ua->ul[NewUserIndex].RealName,'\0',sizeof(ua->ul[NewUserIndex].RealName));
     memset(ua->ul[NewUserIndex].UserIcon,'\0',sizeof(ua->ul[NewUserIndex].UserIcon));
     memcpy(ua->ul[NewUserIndex].UserIcon,DEFAULT,strlen(DEFAULT));
     ua->ul[NewUserIndex].UserType = STANDARD;
@@ -401,18 +387,6 @@ static void InitNewUser(UserAdmin *ua)
     ua->CheckPassTimeId = 0;
 
 }        
-/******************************************************************************
-* 函数:           RemoveTime      
-*        
-* 说明: 关闭窗口响应函数，移除定时器
-*        
-* 输入:         
-*        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
 static void RemoveTime(GtkWidget *widget,gpointer data)
 {
 	UserAdmin *ua = (UserAdmin *)data;
@@ -428,17 +402,16 @@ static void RemoveTime(GtkWidget *widget,gpointer data)
     gtk_widget_set_sensitive(ua->MainWindow, TRUE);	
 }       
 /******************************************************************************
-* 函数:           GetNewUserInfo       
+* Function:             GetNewUserInfo 
 *        
-* 说明: 添加用户，用户输入信息界面
+* Explain: New user name and type and language
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Table;
@@ -513,6 +486,17 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 
 }
+/******************************************************************************
+* Function:              TimeFun
+*        
+* Explain: Whether the timer is legitimate to check the password
+*        
+* Input:   Password valid    UnlockFlag = 0
+*          Password invalid  UnlockFlag = 1
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static gboolean TimeFun(gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -536,6 +520,17 @@ static gboolean TimeFun(gpointer data)
 
 }
 
+/******************************************************************************
+* Function:             LoginSetPass
+*        
+* Explain: Set up next time
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void LoginSetPass(GtkRadioButton *button,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -561,6 +556,17 @@ static void LoginSetPass(GtkRadioButton *button,gpointer data)
     UnlockFlag = 0;
 
 }
+/******************************************************************************
+* Function:            NowSetNewUserPass 
+*        
+* Explain: Now set the password,Whether the timer is legitimate to check the password
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void NowSetNewUserPass(GtkRadioButton *button,gpointer data)
 {
     int CheckPassTimeId;
@@ -585,17 +591,16 @@ static void NowSetNewUserPass(GtkRadioButton *button,gpointer data)
 
 }        
 /******************************************************************************
-* 函数:           GetNewUserPass       
+* Function:              GetNewUserPass 
 *        
-* 说明: 添加用户，用户设置密码界面
+* Explain: Set new user password
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Table;
@@ -630,7 +635,10 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     
     RadioButton2 = gtk_radio_button_new_with_label(RadioGroup,_("Now set the password"));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton2 , 0 , 2 , 5 , 1);
-    g_signal_connect(RadioButton2,"released",G_CALLBACK(NowSetNewUserPass),ua); 
+    g_signal_connect(RadioButton2,
+                    "released",
+                    G_CALLBACK(NowSetNewUserPass),
+                    ua); 
    
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Password"));
@@ -680,7 +688,10 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     ButtonConfirm = gtk_button_new_with_label(_("Confirm"));
     ua->ButtonConfirm = ButtonConfirm;
     gtk_widget_set_sensitive(ButtonConfirm,FALSE);
-    g_signal_connect (ButtonConfirm, "clicked",G_CALLBACK (CreateNewUser),ua);
+    g_signal_connect (ButtonConfirm,
+                      "clicked",
+                      G_CALLBACK 
+                      (CreateNewUser),ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
     
     ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
@@ -691,17 +702,16 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 }        
 /******************************************************************************
-* 函数:           AddUser       
+* Function:              AddUser 
 *        
-* 说明: 点击添加用户按键响应函数
+* Explain: add new user
 *        
-* 输入:         
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void AddUser(GtkWidget *widget, gpointer data)
 {
     GtkWidget *Vbox;

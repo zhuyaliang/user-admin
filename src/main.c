@@ -51,9 +51,10 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     /* Display the user's head image and name */
     DisplayUserSetFace(Hbox1,ua);
     
-    /* 显示用户其他界面 */    
+    /*user type and user password and user langusge and auto login and login time */    
     DisplayUserSetOther(Hbox1,ua);  
 
+    /*Adding new users or remove users*/
     AddRemoveUser(Vbox,ua);
 
 }

@@ -3,17 +3,16 @@
 #include "user-share.h"
 
 /******************************************************************************
-* 函数:           SwitchState       
+* Function:            SwitchState 
 *        
-* 说明: 点击切换登录状态时响应函数
+* Explain: Select auto login,Only one user can choose to log in automatically.
 *        
-* 输入:  		
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
 {
 
@@ -49,17 +48,16 @@ static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
     }
 }    
 /******************************************************************************
-* 函数:            ChangePass       
+* Function:             ChangePass 
 *        
-* 说明: 点击密码时响应函数，有两种情况，1 就密码修改2设置新密码
+* Explain: Modifying the cipher signal.The two state .Change the password 
+*          .Set set the new password.
+* Input:         
 *        
-* 输入:  		
+* Output: 
 *        
-*        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
 static void ChangePass(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -73,17 +71,16 @@ static void ChangePass(GtkWidget *widget,gpointer data)
 
 }
 /******************************************************************************
-* 函数:              ComboSelectLanguage       
+* Function:              ComboSelectLanguage 
 *        
-* 说明: 点击选择用户语言类型下拉框时响应函数
+* Explain: Switch language signal
 *        
-* 输入:  		
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -97,17 +94,16 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
     }     
 }
 /******************************************************************************
-* 函数:              ComboSelectUserType       
+* Function:             ComboSelectUserType 
 *        
-* 说明: 点击选择用户类型下拉框时响应函数
+* Explain: Select user type signal
 *        
-* 输入:  		
+* Input:         
 *        
+* Output: 
 *        
-* 返回:  
-*        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 static void ComboSelectUserType(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
@@ -123,17 +119,17 @@ static void ComboSelectUserType(GtkWidget *widget,gpointer data)
     }    
 }
 /******************************************************************************
-* 函数:              DisplayUserSetOther       
+* Function:              DisplayUserSetOther 
 *        
-* 说明: 显示用户帐号类型、语言、密码、自动登录、时间
+* Explain: Displays user type and user language and user password, 
+*          and automatic login and logon time.
 *        
-* 输入:  		
-*        左侧布局盒
+* Input:         
 *        
-* 返回:  
+* Output: 
 *        
-* 作者:  zhuyaliang  09/05/2018
-******************************************************************************/ 
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
 {
     GtkWidget *table;
@@ -155,19 +151,22 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);
     gtk_fixed_put(GTK_FIXED(fixed), table, 0, 0);
 
-    /*账户类型*/
+    /*user type*/
     LabelUserType = gtk_label_new(NULL);
     SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
     gtk_grid_attach(GTK_GRID(table) , LabelUserType , 0 , 0 , 1 , 1);
 
-    /*设置用户类型下拉框*/
+    /*drop-down select boxes*/
     ComboUser = SetComboUserType(_("Standard"),_("Administrators"));
     ua->ComUserType = ComboUser; 
     gtk_combo_box_set_active(GTK_COMBO_BOX(ComboUser),ua->ul[0].UserType);
     gtk_grid_attach(GTK_GRID(table) , ComboUser , 1 , 0 , 2 , 1);
-    g_signal_connect(G_OBJECT(ComboUser),"changed",G_CALLBACK(ComboSelectUserType),ua);
+    g_signal_connect(G_OBJECT(ComboUser),
+                    "changed",
+                    G_CALLBACK(ComboSelectUserType),
+                    ua);
 
-   /*语言*/ 
+   /*select langusge*/ 
     LabelLanguage = gtk_label_new(NULL);
     SetLableFontType(LabelLanguage,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(table) , LabelLanguage , 0 , 1 , 1 , 1);
@@ -176,9 +175,12 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ua->ComUserLanguage = ComboLanguage;
     gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),ua->ul[0].LangType);
     gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);
-    g_signal_connect(G_OBJECT(ComboLanguage),"changed",G_CALLBACK(ComboSelectLanguage),ua);
+    g_signal_connect(G_OBJECT(ComboLanguage),
+                    "changed",
+                    G_CALLBACK(ComboSelectLanguage),
+                    ua);
     
-    /*密码*/
+    /*set password*/
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Password"));
     gtk_grid_attach(GTK_GRID(table) , LabelPass , 0 , 2 , 1 , 1);
@@ -188,7 +190,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     g_signal_connect (ButtonPass, "clicked",G_CALLBACK (ChangePass),ua);
     gtk_grid_attach(GTK_GRID(table) , ButtonPass , 1 , 2 , 2 , 1);
    
-    /*登录*/
+    /*auto login*/
     LabelAutoLogin = gtk_label_new(NULL);
     SetLableFontType(LabelAutoLogin,"gray",11,_("Automatic logon"));
     gtk_grid_attach(GTK_GRID(table) , LabelAutoLogin , 0 , 3 , 1 , 1);
@@ -197,9 +199,12 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ua->SwitchAutoLogin = SwitchLogin;
     gtk_switch_set_state (GTK_SWITCH(SwitchLogin),ua->ul[0].LoginType);
     gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
-    g_signal_connect(G_OBJECT(SwitchLogin),"state-set",G_CALLBACK(SwitchState),ua);
+    g_signal_connect(G_OBJECT(SwitchLogin),
+                    "state-set",
+                    G_CALLBACK(SwitchState),
+                    ua);
     
-    /*最近登录时间*/
+    /*login time*/
     LabelTime = gtk_label_new(NULL);
     SetLableFontType(LabelTime,"gray",11,_("Login time"));
     gtk_grid_attach(GTK_GRID(table) , LabelTime, 0 , 4 , 1 , 1);

@@ -9,7 +9,11 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <pwd.h>
+#define _XOPEN_SOURCE
 #include <unistd.h>
+#define _GNU_SOURCE      
+#include <crypt.h>
+
 #include <time.h>
 #include <sys/time.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API

@@ -63,13 +63,13 @@ static int RecordPid(void)
     int pid = 0;
     int fd;
     char WriteBuf[30] = { 0 };
-
     fd = open(LOCKFILE,O_WRONLY|O_CREAT,0777);
     if(fd < 0)
     {
          MessageReport(_("open file"),_("Create pid file failed"),ERROR);
          return -1;      
-    }        
+    }       
+    chmod(LOCKFILE,0777); 
     pid = getpid();
     sprintf(WriteBuf,"%d",pid);
     write(fd,WriteBuf,strlen(WriteBuf));
@@ -119,7 +119,12 @@ static gboolean ProcessRuning(void)
         }
         else
         {    
-            remove(LOCKFILE);
+            if(remove(LOCKFILE) < 0)
+            {
+                MessageReport(_("remove file"),
+                _("Please delete the /tmp/user-admin.pid file manually"),ERROR);
+                return TRUE;
+            }        
             if(RecordPid() < 0)
                 Run = TRUE;
         }    
@@ -134,6 +139,18 @@ static gboolean ProcessRuning(void)
     close(fd);
     return Run;
 
+}        
+static int LangSort (const void *a,const void *b)
+{
+    char *c = (char *)a;
+    char *d = (char *)b;
+    int i = 0;
+
+    while(c[i] == d[i] && c[i] && d[i])
+    {
+        i++;
+    } 
+    return c[i] - d[i];    
 }        
 int main(int argc, char **argv)
 {
@@ -155,6 +172,11 @@ int main(int argc, char **argv)
 
     /* Get local support language */ 
     all_languages = mate_get_all_locales ();
+
+    qsort(all_languages,
+          g_strv_length (all_languages),
+          sizeof(all_languages[0]),
+          LangSort);
 
     WindowLogin = ua.MainWindow;
 

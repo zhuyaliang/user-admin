@@ -274,7 +274,7 @@ static int WriteUserInfo(int index,UserAdmin *ua)
     }    
 
     lang_index = ua->ul[index].LangType;
-    act_user_set_language(user, all_languages[lang_index]);
+    act_user_set_language(user, LocaleLang[lang_index]);
     
     if(ua->ul[index].PasswordType == NEWPASS)
     {

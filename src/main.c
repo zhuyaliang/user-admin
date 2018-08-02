@@ -63,7 +63,7 @@ static int RecordPid(void)
     int pid = 0;
     int fd;
     char WriteBuf[30] = { 0 };
-    fd = open(LOCKFILE,O_WRONLY|O_CREAT,0777);
+    fd = open(LOCKFILE,O_WRONLY|O_CREAT|O_TRUNC,0777);
     if(fd < 0)
     {
          MessageReport(_("open file"),_("Create pid file failed"),ERROR);
@@ -98,7 +98,7 @@ static gboolean ProcessRuning(void)
     gboolean Run = FALSE;
     char ReadBuf[30] = { 0 };
 
-    if(access(LOCKFILE,F_OK)==0)
+    if(access(LOCKFILE,F_OK) == 0)
     {
         fd = open(LOCKFILE,O_RDONLY);
         if(fd < 0)
@@ -109,48 +109,50 @@ static gboolean ProcessRuning(void)
         if(read(fd,ReadBuf,sizeof(ReadBuf)) <= 0)
         {
              MessageReport(_("read file"),_("read pid file failed"),ERROR);
-             close(fd);
-             return TRUE;
+             goto ERROREXIT;
         }        
         pid = atoi(ReadBuf);
         if(kill(pid,0) == 0)
         {        
-            Run = TRUE;
+             goto ERROREXIT;
         }
-        else
-        {    
-            if(remove(LOCKFILE) < 0)
-            {
-                MessageReport(_("remove file"),
-                _("Please delete the /tmp/user-admin.pid file manually"),ERROR);
-                return TRUE;
-            }        
-            if(RecordPid() < 0)
-                Run = TRUE;
-        }    
-                
     }
-    else
-    {
-        if(RecordPid() < 0)
-            Run = TRUE;
-    }        
-
-    close(fd);
+    
+    if(RecordPid() < 0)
+        Run = TRUE;
+    
     return Run;
+ERROREXIT:
+    close(fd);
+    return TRUE;
 
 }        
 static int LangSort (const void *a,const void *b)
 {
+    int i = 0;
     char *c = (char *)a;
     char *d = (char *)b;
-    int i = 0;
-
+    
     while(c[i] == d[i] && c[i] && d[i])
     {
         i++;
     } 
     return c[i] - d[i];    
+}       
+
+static void GetLocaleLang (void)
+{
+    guint i,len;
+    
+    all_languages = mate_get_all_locales ();
+    len = g_strv_length (all_languages); 
+    
+    for(i = 0; i < len; i++)
+        memcpy(LocaleLang[i],all_languages[i],strlen(all_languages[i]));
+    qsort(LocaleLang,
+          len,
+          sizeof(LocaleLang[0]),
+          LangSort);
 }        
 int main(int argc, char **argv)
 {
@@ -170,16 +172,9 @@ int main(int argc, char **argv)
     if(ProcessRuning() == TRUE)
         exit(0);        
 
-    /* Get local support language */ 
-    all_languages = mate_get_all_locales ();
-
-    qsort(all_languages,
-          g_strv_length (all_languages),
-          sizeof(all_languages[0]),
-          LangSort);
-
     WindowLogin = ua.MainWindow;
-
+    /* Get local support language */ 
+    GetLocaleLang();
     /* Get local user info */
     ua.UserCount = GetUserInfo(&ua);
 

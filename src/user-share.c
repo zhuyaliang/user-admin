@@ -459,7 +459,7 @@ GtkWidget *SetComboLanguageType(void)
 
     len = g_strv_length (all_languages);
     for (i =0; i < len; i++) {
-	    lang = mate_get_language_from_locale (all_languages[i], NULL);
+	    lang = mate_get_language_from_locale (LocaleLang[i], NULL);
 	    gtk_list_store_append (Store, &Iter);
 	    gtk_list_store_set (Store, &Iter, 0, lang, -1);
 	    g_free(lang);

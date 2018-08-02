@@ -112,11 +112,11 @@ static int GetUserLang(ActUser *user)
     guint i, len;
 
     Lang = act_user_get_language(user);
-
+    printf("lang  =====>>> is %s\r\n",Lang);
     len = g_strv_length (all_languages);
 
     for (i =0; i < len; i++) {
-	    if (g_ascii_strcasecmp(Lang, all_languages[i]) == 0)
+	    if (g_ascii_strcasecmp(Lang, LocaleLang[i]) == 0)
 		    return i;
     }
     return -1;
@@ -203,6 +203,7 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {        
         memcpy(ua->ul[index].RealName,RealName,strlen(RealName));
     }
+    printf("user name is =====>>>%s\r\n",RealName);
     /*user name Cannot be modified*/
     UserName = GetUserName(user);
     memset(ua->ul[index].UserName,'\0',sizeof(ua->ul[index].UserName));

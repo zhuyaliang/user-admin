@@ -24,7 +24,7 @@
 #include <libintl.h> // gettext 库支持  
 #include <locale.h> // 本地化locale的翻译支持  
 
-#define  DEFAULT    "/usr/share/pixmaps/isoft-faces/Default.jpg"
+#define  DEFAULT    "/usr/share/user-admin/face/Default.png"
 #define  NUMMAX    20
 #define  PICMAX    20    
 #define  NONE      3
@@ -106,5 +106,5 @@ int gnCnt;                //计数
 int gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget *WindowLogin;          //首页窗口
 char **all_languages;
-
+char LocaleLang[128][20];
 #endif

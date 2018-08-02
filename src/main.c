@@ -142,17 +142,35 @@ static int LangSort (const void *a,const void *b)
 
 static void GetLocaleLang (void)
 {
-    guint i,len;
-    
+    guint i,j,len;
+    char *lang;
+    char Table1[128][20];
+
     all_languages = mate_get_all_locales ();
     len = g_strv_length (all_languages); 
-    
+
     for(i = 0; i < len; i++)
-        memcpy(LocaleLang[i],all_languages[i],strlen(all_languages[i]));
+    {        
+        lang = mate_get_language_from_locale (all_languages[i], NULL);    
+        memcpy(Table1[i],lang,strlen(lang));
+        memcpy(LocaleLang[i],lang,strlen(lang));
+    }
     qsort(LocaleLang,
           len,
           sizeof(LocaleLang[0]),
           LangSort);
+
+    for(i = 0; i < len; i++)
+    {       
+        for(j = 0; j < len;j++)
+        {        
+            if(strcmp(LocaleLang[i],Table1[j]) == 0)
+            {        
+                memset(LocaleLang[i],'\0',strlen(LocaleLang[i]));        
+                memcpy(LocaleLang[i],all_languages[j],strlen(all_languages[j]));
+            }
+        }
+    }    
 }        
 int main(int argc, char **argv)
 {

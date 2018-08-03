@@ -13,6 +13,7 @@ static void RemoveUserData(UserAdmin *ua,int UserIndex)
     memset(ua->ul[UserIndex].UserName,'\0',strlen(ua->ul[UserIndex].UserName));            
     memset(ua->ul[UserIndex].RealName,'\0',strlen(ua->ul[UserIndex].RealName));            
     memset(ua->ul[UserIndex].HomeName,'\0',strlen(ua->ul[UserIndex].HomeName));            
+    memset(ua->ul[UserIndex].LangName,'\0',strlen(ua->ul[UserIndex].LangName));            
     memset(ua->ul[UserIndex].UserIcon,'\0',strlen(ua->ul[UserIndex].UserIcon)); 
     memset(ua->ul[UserIndex].PassText,'\0',strlen(ua->ul[UserIndex].PassText));
     memset(ua->ul[UserIndex].UserTime,'\0',strlen(ua->ul[UserIndex].UserTime));
@@ -225,17 +226,20 @@ static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
     char *text;
     GtkTreeIter   iter;
     GtkTreeModel *model;
-    gint account_type;
     int NewUserIndex;
+    char *LangName;
 
     if( gtk_combo_box_get_active_iter(GTK_COMBO_BOX(widget), &iter ) )
     {
         model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
         gtk_tree_model_get( model, &iter, 0, &text, -1 );
     }
-    account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget));
     NewUserIndex = ua->UserCount;
-    ua->ul[NewUserIndex].LangType = account_type;
+    LangName = g_hash_table_lookup(LocaleHash,text);
+    memset(ua->ul[NewUserIndex].LangName,
+                '\0',
+          strlen(ua->ul[NewUserIndex].LangName));
+    memcpy(ua->ul[NewUserIndex].LangName,LangName,strlen(LangName));
     g_free(text);
 }
 /******************************************************************************
@@ -254,12 +258,11 @@ static int WriteUserInfo(int index,UserAdmin *ua)
 	ActUserManager *Manager;
     GError *error = NULL;
     ActUser *user;
-    gint lang_index;
 
     Manager = act_user_manager_get_default ();
     user = act_user_manager_create_user(Manager,
                                        ua->ul[index].UserName,
-                                       ua->ul[index].UserName,
+                                       ua->ul[index].RealName,
                                        ACT_USER_ACCOUNT_TYPE_STANDARD,
                                        &error);
     if(user == NULL)
@@ -272,9 +275,7 @@ static int WriteUserInfo(int index,UserAdmin *ua)
     {        
         act_user_set_account_type(user,ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
     }    
-
-    lang_index = ua->ul[index].LangType;
-    act_user_set_language(user, LocaleLang[lang_index]);
+    act_user_set_language(user,ua->ul[index].LangName);
     
     if(ua->ul[index].PasswordType == NEWPASS)
     {
@@ -350,6 +351,17 @@ static void CloseWindow(GtkWidget *widget,gpointer data)
     UserAdmin *ua = (UserAdmin *)data;
 	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 }
+
+static const char * GetNewUserLang(UserAdmin *ua)
+{
+    if(act_user_get_uid (ua->ul[0].User) != getuid())
+    {
+        return "en_US.utf8";
+    }
+    
+    return ua->ul[0].LangName;
+                
+}        
 /******************************************************************************
 * Function:              InitNewUser 
 *        
@@ -369,6 +381,7 @@ static void InitNewUser(UserAdmin *ua)
 {
     int NewUserIndex;
     const char *s = _("Set up next time");
+    const char *LangName;
 
     NewUserIndex = ua->UserCount;
 
@@ -377,7 +390,9 @@ static void InitNewUser(UserAdmin *ua)
     memset(ua->ul[NewUserIndex].UserIcon,'\0',sizeof(ua->ul[NewUserIndex].UserIcon));
     memcpy(ua->ul[NewUserIndex].UserIcon,DEFAULT,strlen(DEFAULT));
     ua->ul[NewUserIndex].UserType = STANDARD;
-    ua->ul[NewUserIndex].LangType = 0;
+    LangName = GetNewUserLang(ua);    
+    memset(ua->ul[NewUserIndex].LangName,'\0',sizeof(ua->ul[NewUserIndex].LangName));
+    memcpy(ua->ul[NewUserIndex].LangName,LangName,strlen(LangName));
     ua->ul[NewUserIndex].PasswordType = NEWPASS;
     memset(ua->ul[NewUserIndex].PassText,'\0',sizeof(ua->ul[NewUserIndex].PassText));
     memcpy(ua->ul[NewUserIndex].PassText,s,strlen(s));
@@ -425,6 +440,8 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *NewUserType;
     GtkWidget *NewLanguage;
     int       TimeId;
+    int       index;
+    char      *LangName;
  const char *FixedNote = _("This will be used to name your home folder and can't be changed");   
 
     Table = gtk_grid_new();
@@ -468,13 +485,14 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
                      G_CALLBACK(NewUserSelectType),
                      ua);
     gtk_grid_attach(GTK_GRID(Table) ,NewUserType , 1 , 3 , 3 , 1);        
-   
     LabelLanguageType = gtk_label_new(NULL);
     SetLableFontType(LabelLanguageType,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelLanguageType , 0 , 4 , 1 , 1);        
 
     NewLanguage = SetComboLanguageType();
-    gtk_combo_box_set_active(GTK_COMBO_BOX(NewLanguage), 0);
+    LangName = GetNewUserLang(ua);
+    index = GetCurrentLangIndex(LangName);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(NewLanguage), index);
     ua->NewUserLangType = NewLanguage;
     g_signal_connect(G_OBJECT(NewLanguage),
                     "changed",

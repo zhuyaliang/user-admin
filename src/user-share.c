@@ -10,6 +10,20 @@
 #include "user-share.h"
 
 
+int GetCurrentLangIndex(const char *_Lang)        
+{
+    GSList *l;
+    int i = 0;
+    char *Lang;
+    Lang = mate_get_language_from_locale (_Lang, NULL);
+    printf("lang = %s\r\n",Lang);
+    for (l = LangList; l; l = l->next,i++)
+    {
+        if (g_ascii_strcasecmp(Lang, l->data) == 0)
+            return i;
+    }
+    return -1; 
+}        
 /******************************************************************************
 * Function:            MessageReport
 *        
@@ -183,6 +197,7 @@ void UpdateInterface(int Cnt,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
+    int index;
     
     /*Some options change when switching users, 
       causing a signal response, requiring flags, 
@@ -201,9 +216,9 @@ void UpdateInterface(int Cnt,UserAdmin *ua)
 
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
                              ua->ul[Cnt].UserType);
-
+    index =  GetCurrentLangIndex(ua->ul[Cnt].LangName);
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserLanguage),
-                             ua->ul[Cnt].LangType);
+                             index);
 
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
                          ua->ul[Cnt].PassText);
@@ -452,18 +467,15 @@ GtkWidget *SetComboLanguageType(void)
     GtkTreeIter     Iter;
     GtkCellRenderer *Renderer;
     GtkWidget *ComboUser;
-    char *lang;
-    guint i, len;
+    GSList *l;
 
     Store = gtk_list_store_new(1,G_TYPE_STRING);
-
-    len = g_strv_length (all_languages);
-    for (i =0; i < len; i++) {
-	    lang = mate_get_language_from_locale (LocaleLang[i], NULL);
+   
+    for (l = LangList; l; l = l->next)
+    {
 	    gtk_list_store_append (Store, &Iter);
-	    gtk_list_store_set (Store, &Iter, 0, lang, -1);
-	    g_free(lang);
-    }
+	    gtk_list_store_set (Store, &Iter, 0, l->data, -1);
+    } 
 
     ComboUser = gtk_combo_box_new_with_model(GTK_TREE_MODEL(Store));
     g_object_unref(G_OBJECT(Store));

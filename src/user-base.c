@@ -84,13 +84,26 @@ static void ChangePass(GtkWidget *widget,gpointer data)
 static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    gint account_type;
-   
+    char *text;
+    GtkTreeIter   iter; 
+    GtkTreeModel *model;
+    char *LangName;
+
     if(Change == 0) 
-    {        
-        account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget));
-        ua->ul[gnCurrentUserIndex].LangType = account_type;
-        act_user_set_language(ua->ul[gnCurrentUserIndex].User,LocaleLang[account_type]);
+    {       
+        if( gtk_combo_box_get_active_iter(GTK_COMBO_BOX(widget), &iter ) )
+        {
+            model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
+            gtk_tree_model_get( model, &iter, 0, &text, -1 );
+        }
+        printf("text = %s\r\n",text); 
+        LangName = g_hash_table_lookup(LocaleHash,text);
+        memset(ua->ul[gnCurrentUserIndex].LangName,
+              '\0',
+               strlen(ua->ul[gnCurrentUserIndex].LangName));
+        memcpy(ua->ul[gnCurrentUserIndex].LangName,LangName,strlen(LangName));
+        act_user_set_language(ua->ul[gnCurrentUserIndex].User,LangName);
+        g_free(text);
     }     
 }
 /******************************************************************************
@@ -144,6 +157,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *LabelTime;
     GtkWidget *ButtonTime;
     GtkWidget *ComboUser;
+    int index;
 
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed ,TRUE, TRUE, 0);
@@ -173,7 +187,10 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
 
     ComboLanguage = SetComboLanguageType();
     ua->ComUserLanguage = ComboLanguage;
-    gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),ua->ul[0].LangType);
+    index = GetCurrentLangIndex(ua->ul[0].LangName);
+    if(index < 0)
+        MessageReport(_("Get user lang"),_("get user lang fali"),ERROR);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),index);
     gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);
     g_signal_connect(G_OBJECT(ComboLanguage),
                     "changed",

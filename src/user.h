@@ -56,7 +56,7 @@ typedef  struct
     char        HomeName[48];   //user home directory
     char        UserIcon[128];  //user icon path
     char        UserType;       //user type admin or standard
-    char        LangType;       //language type temporary support for English and Chinese
+    char        LangName[48];       //language type temporary support for English and Chinese
     int         PasswordType;   //passwod type 
     char        PassText[48];   //user login password
     gboolean    LoginType;      //user automatic logon
@@ -106,5 +106,6 @@ int gnCnt;                //计数
 int gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget *WindowLogin;          //首页窗口
 char **all_languages;
-char LocaleLang[128][20];
+GHashTable *LocaleHash;
+GSList     *LangList;
 #endif

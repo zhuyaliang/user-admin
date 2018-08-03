@@ -106,20 +106,13 @@ static const gchar *GetIconPath(ActUser *user)
     return NULL;
 
 }        
-static int GetUserLang(ActUser *user)
+static const char *GetUserLang(ActUser *user)
 {
     const gchar *Lang = NULL;
-    guint i, len;
 
     Lang = act_user_get_language(user);
-    printf("lang  =====>>> is %s\r\n",Lang);
-    len = g_strv_length (all_languages);
-
-    for (i =0; i < len; i++) {
-	    if (g_ascii_strcasecmp(Lang, LocaleLang[i]) == 0)
-		    return i;
-    }
-    return -1;
+    printf("user lang is ================>%s\r\n",mate_get_language_from_locale (Lang, NULL));
+    return Lang;
 }
 
 static int GetUserType(ActUser *user)
@@ -186,14 +179,15 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     const char *Unknown = _("Unknown");
     const char *HomeName;
     const char *IconFile;
+    const char *LangName;
     const char *PassText;
     const char *TimeLogin;
     int UserType;
-    int LangType;
     int Auto;
 
     /*user real name Can be modified*/
     RealName = GetRealName (user);
+    printf("user name is ====================>>> %s\r\n",RealName);
     memset(ua->ul[index].RealName,'\0',sizeof(ua->ul[index].RealName));
     if(RealName == NULL)
     {
@@ -203,7 +197,6 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     {        
         memcpy(ua->ul[index].RealName,RealName,strlen(RealName));
     }
-    printf("user name is =====>>>%s\r\n",RealName);
     /*user name Cannot be modified*/
     UserName = GetUserName(user);
     memset(ua->ul[index].UserName,'\0',sizeof(ua->ul[index].UserName));
@@ -238,8 +231,9 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     memcpy(ua->ul[index].PassText,PassText,strlen(PassText));
 
     /*get user language type*/
-    LangType = GetUserLang(user);
-    ua->ul[index].LangType = LangType;
+    LangName = GetUserLang(user);
+    memset(ua->ul[index].LangName,'\0',sizeof(ua->ul[index].LangName));
+    memcpy(ua->ul[index].LangName,LangName,strlen(LangName));
     
     /*get user type Administrator or standard user*/
     UserType = GetUserType(user);

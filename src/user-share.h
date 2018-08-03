@@ -10,6 +10,7 @@
 #define QUESTION   4
 
 int Change;
+ int GetCurrentLangIndex(const char *Lang);
 int MessageReport(const char *Title,const char *Msg,int nType);
 void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word);
 void UserListAppend(GtkWidget *list,

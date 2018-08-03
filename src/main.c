@@ -127,50 +127,35 @@ ERROREXIT:
     return TRUE;
 
 }        
+
 static int LangSort (const void *a,const void *b)
 {
-    int i = 0;
-    char *c = (char *)a;
-    char *d = (char *)b;
-    
-    while(c[i] == d[i] && c[i] && d[i])
-    {
-        i++;
-    } 
-    return c[i] - d[i];    
-}       
+    gchar *name1, *name2;
+    gint result;
+
+    name1 = g_utf8_collate_key (a, -1);
+    name2 = g_utf8_collate_key (b, -1);
+    result = strcmp (name1, name2);
+    g_free (name1);
+    g_free (name2);
+
+    return result;
+}
 
 static void GetLocaleLang (void)
 {
-    guint i,j,len;
+    guint i,len;
     char *lang;
-    char Table1[128][20];
 
     all_languages = mate_get_all_locales ();
+    LocaleHash = g_hash_table_new(g_str_hash, g_str_equal);
     len = g_strv_length (all_languages); 
-
     for(i = 0; i < len; i++)
     {        
         lang = mate_get_language_from_locale (all_languages[i], NULL);    
-        memcpy(Table1[i],lang,strlen(lang));
-        memcpy(LocaleLang[i],lang,strlen(lang));
+        g_hash_table_insert(LocaleHash,lang,all_languages[i]);
+        LangList = g_slist_insert_sorted(LangList, lang,LangSort);
     }
-    qsort(LocaleLang,
-          len,
-          sizeof(LocaleLang[0]),
-          LangSort);
-
-    for(i = 0; i < len; i++)
-    {       
-        for(j = 0; j < len;j++)
-        {        
-            if(strcmp(LocaleLang[i],Table1[j]) == 0)
-            {        
-                memset(LocaleLang[i],'\0',strlen(LocaleLang[i]));        
-                memcpy(LocaleLang[i],all_languages[j],strlen(all_languages[j]));
-            }
-        }
-    }    
 }        
 int main(int argc, char **argv)
 {

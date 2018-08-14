@@ -18,6 +18,7 @@
 #include <sys/time.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
 #include <mate-desktop-2.0/libmate-desktop/mate-languages.h>
+#include <mate-desktop-2.0/libmate-desktop/mate-desktop-thumbnail.h>
 
 #include <accountsservice-1.0/act/act-user-manager.h>
 #include <accountsservice-1.0/act/act-user.h>

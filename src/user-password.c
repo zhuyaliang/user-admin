@@ -288,9 +288,10 @@ static int CheckInputOldPass(const char *Name,const char *PassWord)
 {
     struct spwd *sp;
     char salt[512]={0};
+    printf("name = %s password = %s\r\n",Name,PassWord);
     if((sp=getspnam(Name)) == NULL)
             return -1;
-
+    printf("name = %s password = %s\r\n",Name,PassWord);
     get_salt(salt,sp->sp_pwdp);
     //进行密码验证
     if(strcmp(sp->sp_pwdp,crypt(PassWord,salt)) == 0)

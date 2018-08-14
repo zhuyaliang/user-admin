@@ -19,19 +19,27 @@ static char gcPicBuf[PICMAX][50];   //照片
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void UpdataFace(int nCount,UserAdmin *ua)
+static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *face;
 
     GdkPixbuf *pb, *pb2;
     char BasePath[100] = { 0 };
-    sprintf(BasePath, FACEDIR"/%s", gcPicBuf[nCount]);
+    if(nCount >= 0)
+    {    
+        sprintf(BasePath, FACEDIR"/%s", gcPicBuf[nCount]);
+    }
+    else
+    {
+        memcpy(BasePath,LocalFileName,strlen(LocalFileName)); 
+    }    
     /*Update the home page picture*/
     pb = gdk_pixbuf_new_from_file(BasePath,NULL);
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
     gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),image);
+    
     /*Update the left list picture*/
     face = SetUserFaceSize (BasePath, 50);
 
@@ -61,8 +69,8 @@ static void UpdataFace(int nCount,UserAdmin *ua)
 static void Unbind(gpointer data)
 {
     UserAdmin *ua = (UserAdmin *) data;
-
-    gtk_widget_destroy(ua->IconWindow);
+    if(ua->IconWindow != NULL)
+        gtk_widget_destroy(ua->IconWindow);
 
     /*mouse click event*/
     if(ua->MouseId != 0)
@@ -99,7 +107,7 @@ static void face_widget_activated (GtkFlowBox *flowbox,
    /* The lower mark of the selected photo*/
     Count = gtk_flow_box_child_get_index(child);
     /* updata user image */
-    UpdataFace(Count,ua);
+    UpdataFace(Count,NULL,ua);
     Unbind(ua);
 }
 
@@ -194,6 +202,154 @@ static int GetDirFace(GtkWidget *flowbox)
 }
 static int WindowOpenFlag;
 /******************************************************************************
+* Function:              ThumbnailPreview
+*        
+* Explain: Local picture thumbnails
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  14/08/2018
+******************************************************************************/
+static void ThumbnailPreview (GtkFileChooser  *chooser,gpointer data)
+{
+    char *uri;
+    GdkPixbuf *pixbuf = NULL;
+    char *mime_type = NULL;
+    GFile *file;
+    GFileInfo *file_info;
+    GtkWidget *preview;
+    MateDesktopThumbnailFactory *thumbnail;
+
+    uri = gtk_file_chooser_get_uri (chooser);
+    thumbnail = mate_desktop_thumbnail_factory_new (MATE_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+    if (uri) 
+    {
+        preview = gtk_file_chooser_get_preview_widget (chooser);
+        file = g_file_new_for_uri (uri);
+        file_info = g_file_query_info (file,
+                                       "standard::*",
+                                       G_FILE_QUERY_INFO_NONE,
+                                       NULL, NULL);
+        g_object_unref (file);
+        if (file_info != NULL &&
+            g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY) 
+        {
+            mime_type = g_strdup (g_file_info_get_content_type (file_info));
+            g_object_unref (file_info);
+        }
+
+        if (mime_type) 
+        {
+            pixbuf = mate_desktop_thumbnail_factory_generate_thumbnail (thumbnail,
+                                                                        uri,
+                                                                        mime_type);
+            g_free (mime_type);
+        }
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
+                                           GTK_RESPONSE_ACCEPT,
+                                           (pixbuf != NULL));
+
+        if (pixbuf != NULL) 
+        {
+            gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
+            g_object_unref (pixbuf);
+        }
+        else 
+        {
+            gtk_image_set_from_icon_name (GTK_IMAGE (preview),
+                                         "dialog-question",
+                                          GTK_ICON_SIZE_DIALOG);
+        }
+
+        g_free (uri);
+    }
+
+    gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+}   
+/******************************************************************************
+* Function:              PictureChooser
+*        
+* Explain: Local picture select
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  14/08/2018
+******************************************************************************/
+static void PictureChooser(GtkDialog *chooser,
+                           gint response,
+                           gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *) data;
+    char *FileName;
+    GError *error = NULL;
+    GdkPixbuf *pixbuf;
+
+    if (response != GTK_RESPONSE_ACCEPT) {
+            gtk_widget_destroy (GTK_WIDGET (chooser));
+            return;
+    }
+
+    FileName = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+
+    pixbuf = gdk_pixbuf_new_from_file (FileName, &error);
+    if (pixbuf == NULL) 
+    {
+        MessageReport(_("Load Local Picture"),
+                       error->message,
+                       WARING);
+        g_error_free (error);
+    }
+    UpdataFace(-1,FileName,ua);
+    g_free (FileName);
+    g_object_unref (pixbuf);
+    gtk_widget_destroy (GTK_WIDGET (chooser));
+    Unbind(ua);
+}
+
+static void LoadLocalPicture(GtkWidget *button, gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *) data;
+    GtkWidget *chooser;
+    const char *folder;
+    GtkWidget *preview;
+    GtkFileFilter *filter;
+
+    chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
+                                           GTK_WINDOW(ua->IconWindow),
+                                           GTK_FILE_CHOOSER_ACTION_OPEN,
+                                           _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                           _("_Open"), GTK_RESPONSE_ACCEPT,
+                                           NULL);
+    
+    gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
+
+    preview = gtk_image_new ();
+    gtk_widget_set_size_request (preview, 128, -1);
+    gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser), preview);
+    gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser), FALSE);
+    gtk_widget_show (preview);
+    g_signal_connect_after (chooser, "selection-changed",
+                            G_CALLBACK (ThumbnailPreview), NULL);
+
+    folder = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+    if (folder)
+        gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+                                                 folder);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_add_pixbuf_formats (filter);
+    gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    g_signal_connect (chooser, "response",
+                      G_CALLBACK (PictureChooser), ua);
+
+    gtk_window_present (GTK_WINDOW (chooser));
+}    
+/******************************************************************************
 * Function:              GetFaceList 
 *        
 * Explain: Get user head image,This window can only open one at the same time.
@@ -208,8 +364,12 @@ static void GetFaceList(GtkWidget *button, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *) data;
     GtkWidget *window;
-    GtkWidget *scrolled;
-    GtkWidget *flowbox;
+    GtkWidget *Vbox;
+    GtkWidget *Frame;
+    GtkWidget *Scrolled;
+    GtkWidget *Flowbox;
+    GtkWidget *LocalButton;
+
     int MouseId;
     int KeyId;
     int nRet;
@@ -219,28 +379,54 @@ static void GetFaceList(GtkWidget *button, gpointer data)
         Unbind(ua);        
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_decorated(GTK_WINDOW(window),FALSE);  //Setting a frameless frame
-    gtk_window_set_default_size (GTK_WINDOW (window), 450, 270);
+    gtk_window_set_default_size (GTK_WINDOW (window), 450, 300);
     gtk_widget_realize(window);
     gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_MOUSE);
-    scrolled = gtk_scrolled_window_new (NULL, NULL);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     gtk_container_set_border_width(GTK_CONTAINER(window),20);
+    
+    Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,8);
+    gtk_widget_set_size_request(Vbox,300,-1);
+    gtk_container_add(GTK_CONTAINER(window),Vbox);
 
-    flowbox =  gtk_flow_box_new();
-    gtk_widget_set_valign (flowbox, GTK_ALIGN_START);
-    gtk_flow_box_set_max_children_per_line (GTK_FLOW_BOX (flowbox), 30);
-    gtk_flow_box_set_selection_mode (GTK_FLOW_BOX (flowbox), GTK_SELECTION_NONE);
-    gtk_flow_box_set_activate_on_single_click(GTK_FLOW_BOX (flowbox),TRUE);
-    gtk_container_add (GTK_CONTAINER (scrolled), flowbox);
-    gtk_container_add (GTK_CONTAINER (window), scrolled);
+    Frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(Frame),GTK_SHADOW_IN);
+    gtk_box_pack_start(GTK_BOX(Vbox),Frame,TRUE,TRUE,0);
+    
+    Scrolled = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
+                                    GTK_POLICY_NEVER, 
+                                    GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
+                                         GTK_SHADOW_IN);
+    gtk_container_add(GTK_CONTAINER(Frame),Scrolled);
+
+    Flowbox =  gtk_flow_box_new();
+    gtk_widget_set_valign (Flowbox, GTK_ALIGN_START);
+    gtk_flow_box_set_max_children_per_line (GTK_FLOW_BOX (Flowbox), 30);
+    gtk_flow_box_set_selection_mode (GTK_FLOW_BOX (Flowbox), GTK_SELECTION_NONE);
+    gtk_flow_box_set_activate_on_single_click(GTK_FLOW_BOX (Flowbox),TRUE);
+    gtk_container_add (GTK_CONTAINER (Scrolled), Flowbox);
+    
+    LocalButton = gtk_button_new_with_label(_("Local Picture"));
+    gtk_widget_set_halign (LocalButton, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign (LocalButton, GTK_ALIGN_CENTER);
+    gtk_box_pack_start (GTK_BOX (Vbox), LocalButton, FALSE, FALSE, 0);
+
+    g_signal_connect(LocalButton,
+                     "clicked",
+                     G_CALLBACK(LoadLocalPicture),
+                     ua);
+
     /* Get all the available pictures */
-    nRet = GetDirFace(flowbox);
+    nRet = GetDirFace(Flowbox);
     if(nRet < 0)
     {
-        MessageReport(_("Avatar list"),_("There is no address to store photos"),WARING);
+        MessageReport(_("Avatar list"),
+                      _("There is no address to store photos"),
+                      WARING);
     }   
     ua->IconWindow = window;
-    gtk_flow_box_selected_foreach (GTK_FLOW_BOX (flowbox),
+    gtk_flow_box_selected_foreach (GTK_FLOW_BOX (Flowbox),
                                 face_widget_activated,
                                 ua);
 
@@ -260,12 +446,11 @@ static void GetFaceList(GtkWidget *button, gpointer data)
                     ua);
     ua->KeyId = KeyId;
     WindowOpenFlag = 1;
-    g_signal_connect (flowbox, "child-activated",
+    g_signal_connect (Flowbox, "child-activated",
                       G_CALLBACK (face_widget_activated),
                       ua);
-    gtk_widget_show_all (scrolled);
 
-    gtk_widget_show (window);
+    gtk_widget_show_all (window);
 
 }
 /******************************************************************************

@@ -95,6 +95,8 @@ typedef struct
     GtkWidget        *LabelNameNote;
     GtkWidget        *NewUserType;
     GtkWidget        *NewUserLangType;
+    GtkWidget        *RadioButton1;
+    GtkWidget        *RadioButton2;
     int               UserCount;    //Valid user number
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer

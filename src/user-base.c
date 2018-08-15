@@ -61,12 +61,9 @@ static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
 static void ChangePass(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-	//const char *s = gtk_button_get_label(GTK_BUTTON(widget));
     gtk_widget_set_sensitive(ua->MainWindow,FALSE);
 
-    if(ua->ul[gnCurrentUserIndex].PasswordType == OLDPASS)
-		ChangeOldPass(ua);      //old passwoed change
-	else
+//		ChangeOldPass(ua);      //old passwoed change
 		CreateNewPass(ua);      //There is no password for the user
 
 }
@@ -96,7 +93,6 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
             model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
             gtk_tree_model_get( model, &iter, 0, &text, -1 );
         }
-        printf("text = %s\r\n",text); 
         LangName = g_hash_table_lookup(LocaleHash,text);
         memset(ua->ul[gnCurrentUserIndex].LangName,
               '\0',

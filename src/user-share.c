@@ -16,7 +16,6 @@ int GetCurrentLangIndex(const char *_Lang)
     int i = 0;
     char *Lang;
     Lang = mate_get_language_from_locale (_Lang, NULL);
-    printf("lang = %s\r\n",Lang);
     for (l = LangList; l; l = l->next,i++)
     {
         if (g_ascii_strcasecmp(Lang, l->data) == 0)
@@ -296,7 +295,7 @@ static const gchar *pw_error_hint (gint error)
         case PWQ_ERROR_MAX_SEQUENCE:
                 return _("Try to avoid sequences like 1234 or abcd");
         case PWQ_ERROR_MIN_LENGTH:
-                return _("Password needs to be longer. Try to add more letters, numbe    rs and punctuation");
+                return _("Password length needs more than 8 bits. Add more letters,\n umbers and punctuation");
         case PWQ_ERROR_EMPTY_PASSWORD:
                 return ("     ");
         default:

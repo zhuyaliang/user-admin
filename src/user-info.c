@@ -111,7 +111,6 @@ static const char *GetUserLang(ActUser *user)
     const gchar *Lang = NULL;
 
     Lang = act_user_get_language(user);
-    printf("user lang is ================>%s\r\n",mate_get_language_from_locale (Lang, NULL));
     return Lang;
 }
 
@@ -187,7 +186,6 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
 
     /*user real name Can be modified*/
     RealName = GetRealName (user);
-    printf("user name is ====================>>> %s\r\n",RealName);
     memset(ua->ul[index].RealName,'\0',sizeof(ua->ul[index].RealName));
     if(RealName == NULL)
     {

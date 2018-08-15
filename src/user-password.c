@@ -110,10 +110,10 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
     {        
 	    np =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
 	    cp =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
-
 	    if(strcmp(np,cp) != 0)
 	    {
 		    OpenNote(ua->LabelSpace,_("Inconsistent password"),ua);
+            return;
 	    }
 	    else
 	    {   
@@ -125,7 +125,19 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
     gtk_widget_destroy(ua->PassWindow);
     UpdateInterface(gnCurrentUserIndex,ua);
 }
-
+static void SetButtonMode(UserAdmin *ua)
+{
+    if(ua->ul[gnCurrentUserIndex].PasswordType == OLDPASS)
+    {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ua->RadioButton2), TRUE);
+        NowSetPass(GTK_RADIO_BUTTON(ua->RadioButton2),ua);
+    }
+    else
+    {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ua->RadioButton1), TRUE);
+        NextSetPass(GTK_RADIO_BUTTON(ua->RadioButton1),ua);
+    }    
+}    
 /******************************************************************************
 * Function:              CreateNewPass 
 *        
@@ -181,15 +193,18 @@ void CreateNewPass(UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) , LabelTitle , 0 , 0 , 1 , 1);
 
     //Select button
+    ua->CheckPassTimeId = 0;
     RadioButton1 = gtk_radio_button_new_with_label(NULL,_("Set up next time"));
     RadioGroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(RadioButton1));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton1 , 0 , 1 , 5 , 1);
     g_signal_connect(RadioButton1,"released",G_CALLBACK(NextSetPass),ua);
-
+    ua->RadioButton1 = RadioButton1;
+   
     RadioButton2 = gtk_radio_button_new_with_label(RadioGroup,_("Now set up"));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton2 , 0 , 2 , 5 , 1);
     g_signal_connect(RadioButton2,"released",G_CALLBACK(NowSetPass),ua);
-
+    ua->RadioButton2 = RadioButton2;
+    
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("User Password"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);
@@ -251,113 +266,13 @@ void CreateNewPass(UserAdmin *ua)
                      ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
 
+    SetButtonMode(ua);
+
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 
-    gtk_widget_set_sensitive(NewPassEntry, FALSE);
-    gtk_widget_set_sensitive(CheckPassEntry, FALSE);
-    gtk_widget_set_sensitive(LevelBar, FALSE);
-
     gtk_widget_show_all(WindowChangePass);
 }
-static void get_salt(char *salt,char *passwd)
-{
-    int i,j;
-
-    for(i=0,j=0;passwd[i] && j != 3;++i)
-    {
-        if(passwd[i] == '$')
-            ++j;
-    }
-
-    strncpy(salt,passwd,i-1);
-}
-/******************************************************************************
-* Function:            CheckInputOldPass
-*        
-* Explain: Check the correctness of the old password entered
-*          
-* Input:   @Name user name 
-*          @PassWord  old password       
-*        
-* Output:  -1 Password error
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
-static int CheckInputOldPass(const char *Name,const char *PassWord)
-{
-    struct spwd *sp;
-    char salt[512]={0};
-    printf("name = %s password = %s\r\n",Name,PassWord);
-    if((sp=getspnam(Name)) == NULL)
-            return -1;
-    printf("name = %s password = %s\r\n",Name,PassWord);
-    get_salt(salt,sp->sp_pwdp);
-    //进行密码验证
-    if(strcmp(sp->sp_pwdp,crypt(PassWord,salt)) == 0)
-         return  0;
-    else
-         return -1; 
-
-}        
-/******************************************************************************
-* Function:            ConfirmFun
-*        
-* Explain: Click confirmation to change the password
-*          step 1 Confirm the old password for the input
-*          step 2 Calculating the strength of the new cipher
-*          
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
-static void ConfirmFun(GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-	const char *OldPass;
-	const char *NewPass;
-    int nRet;
-	int Level = 0;
-    const char *Message;
-
-	OldPass =  gtk_entry_get_text(GTK_ENTRY(ua->OldPassEntry));
-	NewPass =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
-    
-    nRet = CheckInputOldPass(ua->ul[gnCurrentUserIndex].UserName,OldPass);
-
-    if(nRet < 0)
-	{
-		OpenNote(ua->LabelPassNote,
-               _("Please enter the correct original password"),
-                ua);
-	}
-	else
-	{
-		Level = GetPassStrength (NewPass, OldPass,NULL,&Message);
-    	gtk_level_bar_set_value (GTK_LEVEL_BAR (ua->LevelBar), Level);
-  		if(Message == NULL && Level > 1)
-  		{
-  		 	act_user_set_password_mode (ua->ul[gnCurrentUserIndex].User, 
-                                        ACT_USER_PASSWORD_MODE_REGULAR);
-            act_user_set_password (ua->ul[gnCurrentUserIndex].User,NewPass , "");
-            gtk_widget_destroy(GTK_WIDGET(ua->PassWindow));
-  		}
-  		else
-  		{
-  			OpenNote(ua->LabelPassNote,Message,ua);
-  		}
-
-	}
-	gtk_widget_set_sensitive(ua->ButtonConfirm, TRUE);
-}
-static void CloseOldPassWindow(  GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-    gtk_widget_set_sensitive(ua->MainWindow,TRUE);
-}
-
 /******************************************************************************
 * Function:            ChangeOldPass
 *        
@@ -380,118 +295,3 @@ static void CloseNewPassWindow(GtkWidget *widget,gpointer data)
     }
     gtk_widget_set_sensitive(ua->MainWindow,TRUE);
 }        
-/******************************************************************************
-* Function:            ChangeOldPass
-*        
-* Explain: Change the old password 
-*          
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
-void ChangeOldPass(UserAdmin *ua)
-{
-	GtkWidget *WindowChangePass;
-    GtkWidget *Vbox;
-    GtkWidget *Table;
-
-    GtkWidget *LabelTitle;
-    GtkWidget *LabelPass;
-    GtkWidget *NewPassEntry;
-    GtkWidget *OldPassEntry;
-    GtkWidget *LevelBar;
-    GtkWidget *LabelPassNote;
-    GtkWidget *LabelConfirm;
-
-    GtkWidget *Hseparator;
-    GtkWidget *LabelSapce;
-    GtkWidget *ButtonConfirm;
-    GtkWidget *ButtonCancel;
-
-    //create window
-    WindowChangePass = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(WindowChangePass),_("Change password"));
-    gtk_window_set_position(GTK_WINDOW(WindowChangePass),GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(WindowChangePass),400,200);
-    gtk_container_set_border_width(GTK_CONTAINER(WindowChangePass),20);
-    ua->PassWindow = WindowChangePass;
-    g_signal_connect(WindowChangePass,
-                    "destroy",
-                    G_CALLBACK(CloseOldPassWindow),
-                    ua);
-
-    Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
-    gtk_container_add(GTK_CONTAINER(WindowChangePass),Vbox);
-
-    Table = gtk_grid_new();
-    gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 0);
-    gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
-    
-    LabelTitle = gtk_label_new(_("Password"));  
-    gtk_grid_attach(GTK_GRID(Table) , LabelTitle , 0 , 0 , 1 , 1);
-
-    /*input old password*/
-    LabelPass = gtk_label_new(NULL);
-    SetLableFontType(LabelPass,"gray",11,_("Old Password"));
-    gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);
-
-    OldPassEntry = gtk_entry_new();
-    ua->OldPassEntry = OldPassEntry;
-    gtk_entry_set_max_length(GTK_ENTRY(OldPassEntry),20);
-    gtk_entry_set_visibility(GTK_ENTRY(OldPassEntry),FALSE);
-    gtk_grid_attach(GTK_GRID(Table) , OldPassEntry , 1 , 3 , 4 , 1);
-
-    /*input new password*/
-   	LabelConfirm = gtk_label_new (NULL);
-    SetLableFontType(LabelConfirm,"gray",11,_("New Password"));
-    gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0 , 4 , 1 , 1);
-
-    NewPassEntry = gtk_entry_new();
-    ua->NewPassEntry = NewPassEntry;
-    gtk_entry_set_max_length(GTK_ENTRY(NewPassEntry),20);
-    gtk_entry_set_visibility(GTK_ENTRY(NewPassEntry),FALSE);
-    gtk_grid_attach(GTK_GRID(Table) , NewPassEntry , 1 , 4 , 4 , 1);
-
-
-    /*Display cipher strength*/
-    LevelBar = gtk_level_bar_new ();
-    gtk_level_bar_set_min_value(GTK_LEVEL_BAR(LevelBar),0.0);
-    gtk_level_bar_set_max_value(GTK_LEVEL_BAR(LevelBar),5.0);
-    gtk_level_bar_set_mode(GTK_LEVEL_BAR(LevelBar),GTK_LEVEL_BAR_MODE_DISCRETE);
-    ua->LevelBar = LevelBar;
- 	gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 5 , 4 , 1);
-
-    /*Problem reminding*/
-    LabelPassNote = gtk_label_new (NULL);
-    ua->LabelPassNote = LabelPassNote;
-    gtk_grid_attach(GTK_GRID(Table) ,LabelPassNote , 0 , 6 , 4 , 1);
-
-    /*Space*/
-    LabelSapce = gtk_label_new("");
-    gtk_grid_attach(GTK_GRID(Table) , LabelSapce , 0 , 7 , 4 , 1);
-    Hseparator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
-    gtk_grid_attach(GTK_GRID(Table) , Hseparator , 0 , 8 , 5 , 1);
-    
-    /*confirm button*/
-    ButtonConfirm = gtk_button_new_with_label(_("Confirm"));
-    ua->ButtonConfirm = ButtonConfirm;
-
-  	g_signal_connect (ButtonConfirm, "clicked",G_CALLBACK (ConfirmFun),ua);
-    gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
-
-    /*cancel button*/
-    ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
-    g_signal_connect (ButtonCancel, 
-                     "clicked",
-                      G_CALLBACK (ClosePassWindow),
-                      ua);
-    gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
-
-    gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
-    gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
-
-    gtk_widget_show_all(WindowChangePass);
-}
-

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 18:02+0800\n"
-"PO-Revision-Date: 2018-08-14 18:05+0800\n"
+"POT-Creation-Date: 2018-08-15 18:00+0800\n"
+"PO-Revision-Date: 2018-08-15 18:02+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -19,65 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/main.c:22
+#: src/main.c:24
 msgid "Mate User Manage"
 msgstr "Mate 用户管理"
 
-#: src/main.c:69 src/main.c:106
+#: src/main.c:71 src/main.c:108
 msgid "open file"
 msgstr "打开文件"
 
-#: src/main.c:69
+#: src/main.c:71
 msgid "Create pid file failed"
-msgstr "创建pid 文件失败"
+msgstr "创建pid文件失败"
 
-#: src/main.c:106
+#: src/main.c:108
 msgid "open pid file failed"
 msgstr "打开pid文件失败"
 
-#: src/main.c:111
+#: src/main.c:113
 msgid "read file"
-msgstr "读文件"
+msgstr "读pid文件"
 
-#: src/main.c:111
+#: src/main.c:113
 msgid "read pid file failed"
-msgstr "读取pid文件失败"
+msgstr "读pid文件失败"
 
-#: src/user-base.c:170 src/user-admin.c:477
+#: src/user-base.c:166 src/user-admin.c:477
 msgid "Account Type"
 msgstr "用户类型"
 
 #. drop-down select boxes
-#: src/user-base.c:174 src/user-admin.c:480
+#: src/user-base.c:170 src/user-admin.c:480
 msgid "Standard"
 msgstr "标准"
 
-#: src/user-base.c:174 src/user-admin.c:480
+#: src/user-base.c:170 src/user-admin.c:480
 msgid "Administrators"
 msgstr "管理员"
 
-#: src/user-base.c:185 src/user-admin.c:489
+#: src/user-base.c:181 src/user-admin.c:489
 msgid "Language"
 msgstr "语言"
 
-#: src/user-base.c:192
+#: src/user-base.c:188
 msgid "Get user lang"
 msgstr "获得用户语言"
 
-#: src/user-base.c:192
+#: src/user-base.c:188
 msgid "get user lang fali"
 msgstr "获得用户语言失败"
 
-#: src/user-base.c:202 src/user-password.c:180 src/user-password.c:432
-#: src/user-admin.c:644 src/user-admin.c:662
+#: src/user-base.c:198 src/user-password.c:192 src/user-admin.c:644
+#: src/user-admin.c:662
 msgid "Password"
 msgstr "密码"
 
-#: src/user-base.c:212
+#: src/user-base.c:208
 msgid "Automatic logon"
 msgstr "自动登录"
 
-#: src/user-base.c:226
+#: src/user-base.c:222
 msgid "Login time"
 msgstr "登录时间"
 
@@ -85,9 +85,8 @@ msgstr "登录时间"
 msgid "Account is disable"
 msgstr "账户被禁用"
 
-#. Select button
 #. 新建两个单选按钮
-#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:184
+#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:197
 #: src/user-admin.c:383 src/user-admin.c:555 src/user-admin.c:649
 msgid "Set up next time"
 msgstr "下次登录时设置"
@@ -108,48 +107,30 @@ msgstr "未知"
 msgid "user count is 0"
 msgstr "用户个数为0"
 
-#: src/user-password.c:116
+#: src/user-password.c:115
 msgid "Inconsistent password"
 msgstr "两次输入的密码不一致"
 
-#: src/user-password.c:164
+#: src/user-password.c:176
 msgid "Add a password"
 msgstr "添加密码"
 
-#: src/user-password.c:189
+#: src/user-password.c:203
 msgid "Now set up"
 msgstr "现在设置"
 
-#: src/user-password.c:194
+#: src/user-password.c:209
 msgid "User Password"
 msgstr "用户密码"
 
-#. confirm button
-#: src/user-password.c:223 src/user-password.c:239 src/user-password.c:478
-#: src/user-admin.c:690 src/user-admin.c:706
+#: src/user-password.c:238 src/user-password.c:254 src/user-admin.c:690
+#: src/user-admin.c:706
 msgid "Confirm"
 msgstr "确认"
 
-#. cancel button
-#: src/user-password.c:247 src/user-password.c:485 src/user-admin.c:715
+#: src/user-password.c:262 src/user-admin.c:715
 msgid "Cancel"
 msgstr "取消"
-
-#: src/user-password.c:333
-msgid "Please enter the correct original password"
-msgstr "请输入正确的原始密码"
-
-#: src/user-password.c:415
-msgid "Change password"
-msgstr "更改密码"
-
-#: src/user-password.c:437
-msgid "Old Password"
-msgstr "旧密码"
-
-#: src/user-password.c:448
-msgid "New Password"
-msgstr "新密码"
 
 #. gnCurrentUserIndex 代表当前用户标号
 #: src/user-admin.c:47 src/user-admin.c:60 src/user-list.c:183
@@ -224,7 +205,7 @@ msgstr "加载本地图片"
 
 #: src/user-face.c:321
 msgid "Browse for more pictures"
-msgstr "浏览更多图片"
+msgstr "查看更多照片"
 
 #: src/user-face.c:324
 msgid "_Cancel"
@@ -330,15 +311,27 @@ msgstr "尽量避免像1234或ABCD这样的序列"
 
 #: src/user-share.c:299
 msgid ""
-"Password needs to be longer. Try to add more letters, numbe    rs and "
-"punctuation"
-msgstr "密码需要更长，添加更多的字母、数字和标点符号"
+"Password length needs more than 8 bits. Add more letters,\n"
+" umbers and punctuation"
+msgstr "密码超过8位，添加更多的字母、数字和标点符号"
 
 #~ msgid "Chinese"
 #~ msgstr "中文"
 
 #~ msgid "English"
 #~ msgstr "英语"
+
+#~ msgid "Please enter the correct original password"
+#~ msgstr "请输入正确的原始密码"
+
+#~ msgid "Change password"
+#~ msgstr "更改密码"
+
+#~ msgid "Old Password"
+#~ msgstr "旧密码"
+
+#~ msgid "New Password"
+#~ msgstr "新密码"
 
 #~ msgid ""
 #~ "The user name can contain only the alphabet(a-z/A-Z) number (0-9), and "

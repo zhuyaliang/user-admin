@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 18:02+0800\n"
+"POT-Creation-Date: 2018-08-15 18:00+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,65 +17,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.c:22
+#: src/main.c:24
 msgid "Mate User Manage"
 msgstr ""
 
-#: src/main.c:69 src/main.c:106
+#: src/main.c:71 src/main.c:108
 msgid "open file"
 msgstr ""
 
-#: src/main.c:69
+#: src/main.c:71
 msgid "Create pid file failed"
 msgstr ""
 
-#: src/main.c:106
+#: src/main.c:108
 msgid "open pid file failed"
 msgstr ""
 
-#: src/main.c:111
+#: src/main.c:113
 msgid "read file"
 msgstr ""
 
-#: src/main.c:111
+#: src/main.c:113
 msgid "read pid file failed"
 msgstr ""
 
-#: src/user-base.c:170 src/user-admin.c:477
+#: src/user-base.c:166 src/user-admin.c:477
 msgid "Account Type"
 msgstr ""
 
 #. drop-down select boxes
-#: src/user-base.c:174 src/user-admin.c:480
+#: src/user-base.c:170 src/user-admin.c:480
 msgid "Standard"
 msgstr ""
 
-#: src/user-base.c:174 src/user-admin.c:480
+#: src/user-base.c:170 src/user-admin.c:480
 msgid "Administrators"
 msgstr ""
 
-#: src/user-base.c:185 src/user-admin.c:489
+#: src/user-base.c:181 src/user-admin.c:489
 msgid "Language"
 msgstr ""
 
-#: src/user-base.c:192
+#: src/user-base.c:188
 msgid "Get user lang"
 msgstr ""
 
-#: src/user-base.c:192
+#: src/user-base.c:188
 msgid "get user lang fali"
 msgstr ""
 
-#: src/user-base.c:202 src/user-password.c:180 src/user-password.c:432
-#: src/user-admin.c:644 src/user-admin.c:662
+#: src/user-base.c:198 src/user-password.c:192 src/user-admin.c:644
+#: src/user-admin.c:662
 msgid "Password"
 msgstr ""
 
-#: src/user-base.c:212
+#: src/user-base.c:208
 msgid "Automatic logon"
 msgstr ""
 
-#: src/user-base.c:226
+#: src/user-base.c:222
 msgid "Login time"
 msgstr ""
 
@@ -83,9 +83,8 @@ msgstr ""
 msgid "Account is disable"
 msgstr ""
 
-#. Select button
 #. 新建两个单选按钮
-#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:184
+#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:197
 #: src/user-admin.c:383 src/user-admin.c:555 src/user-admin.c:649
 msgid "Set up next time"
 msgstr ""
@@ -106,47 +105,29 @@ msgstr ""
 msgid "user count is 0"
 msgstr ""
 
-#: src/user-password.c:116
+#: src/user-password.c:115
 msgid "Inconsistent password"
 msgstr ""
 
-#: src/user-password.c:164
+#: src/user-password.c:176
 msgid "Add a password"
 msgstr ""
 
-#: src/user-password.c:189
+#: src/user-password.c:203
 msgid "Now set up"
 msgstr ""
 
-#: src/user-password.c:194
+#: src/user-password.c:209
 msgid "User Password"
 msgstr ""
 
-#. confirm button
-#: src/user-password.c:223 src/user-password.c:239 src/user-password.c:478
-#: src/user-admin.c:690 src/user-admin.c:706
+#: src/user-password.c:238 src/user-password.c:254 src/user-admin.c:690
+#: src/user-admin.c:706
 msgid "Confirm"
 msgstr ""
 
-#. cancel button
-#: src/user-password.c:247 src/user-password.c:485 src/user-admin.c:715
+#: src/user-password.c:262 src/user-admin.c:715
 msgid "Cancel"
-msgstr ""
-
-#: src/user-password.c:333
-msgid "Please enter the correct original password"
-msgstr ""
-
-#: src/user-password.c:415
-msgid "Change password"
-msgstr ""
-
-#: src/user-password.c:437
-msgid "Old Password"
-msgstr ""
-
-#: src/user-password.c:448
-msgid "New Password"
 msgstr ""
 
 #. gnCurrentUserIndex 代表当前用户标号
@@ -328,6 +309,6 @@ msgstr ""
 
 #: src/user-share.c:299
 msgid ""
-"Password needs to be longer. Try to add more letters, numbe    rs and "
-"punctuation"
+"Password length needs more than 8 bits. Add more letters,\n"
+" umbers and punctuation"
 msgstr ""

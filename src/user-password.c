@@ -122,6 +122,12 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
                                         ACT_USER_PASSWORD_MODE_REGULAR);
 	    }
     }
+    else
+    {
+        act_user_set_password_mode(ua->ul[gnCurrentUserIndex].User,
+                                   ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+    }    
+
     gtk_widget_destroy(ua->PassWindow);
     UpdateInterface(gnCurrentUserIndex,ua);
 }

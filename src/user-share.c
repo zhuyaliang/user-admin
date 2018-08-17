@@ -238,7 +238,7 @@ static pwquality_settings_t * get_pwq (void)
    	{
     	char *err = NULL;
         settings = pwquality_default_settings ();
-        pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
+        pwquality_set_int_value (settings, 7 , 4);
         if (pwquality_read_config (settings, NULL, (gpointer)&err) < 0)
        	{
         	return NULL;

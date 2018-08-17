@@ -183,12 +183,10 @@ static gboolean CheckName(gpointer data)
     gboolean Valid;
     char *Message = NULL;
     const char *s;
-    const char *p;
-
-    p = gtk_entry_get_text(GTK_ENTRY(ua->RealNameEntry));
-    if(strlen(p) <= 0)
-        return TRUE;
+    
     s = gtk_entry_get_text(GTK_ENTRY(ua->UserNameEntry));
+    if(strlen(s) <= 0 )
+        return TRUE;
     Valid = UserNameValidCheck(s,&Message);
     SetLableFontType(ua->LabelNameNote,"red",10,Message);
     
@@ -448,30 +446,31 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 0);
     gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
 
-    LabelRealName = gtk_label_new(NULL);
-    SetLableFontType(LabelRealName,"gray",11,_("Real Name"));
-    gtk_grid_attach(GTK_GRID(Table) , LabelRealName , 0 , 0 , 1 , 1);
-
-    RealNameEntry = gtk_entry_new();
-    ua->RealNameEntry = RealNameEntry;
-    gtk_entry_set_max_length(GTK_ENTRY(RealNameEntry),24);
-    gtk_grid_attach(GTK_GRID(Table) , RealNameEntry , 1 , 0 , 3 , 1);
-
     LabelUserName = gtk_label_new(NULL);
     SetLableFontType(LabelUserName,"gray",11,_("User Name"));
-    gtk_grid_attach(GTK_GRID(Table) , LabelUserName , 0 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(Table) , LabelUserName , 0 , 0 , 1 , 1);
 
     UserNameEntry = gtk_entry_new();
     ua->UserNameEntry = UserNameEntry;
  	TimeId = g_timeout_add(800,(GSourceFunc)CheckName,ua);
     ua->CheckNameTimeId = TimeId;
     gtk_entry_set_max_length(GTK_ENTRY(UserNameEntry),24);
-    gtk_grid_attach(GTK_GRID(Table) ,UserNameEntry , 1 , 1 , 3 , 1);
+    gtk_grid_attach(GTK_GRID(Table) ,UserNameEntry , 1 , 0 , 3 , 1);
 
     LabelNameNote = gtk_label_new (NULL);
     SetLableFontType(LabelNameNote,"gray",10,FixedNote);
     ua->LabelNameNote = LabelNameNote;
-    gtk_grid_attach(GTK_GRID(Table) ,LabelNameNote , 0 , 2, 4 , 1);
+    gtk_grid_attach(GTK_GRID(Table) ,LabelNameNote , 0 , 1, 4 , 1);
+
+    LabelRealName = gtk_label_new(NULL);
+    SetLableFontType(LabelRealName,"gray",11,_("Login Name"));
+    gtk_grid_attach(GTK_GRID(Table) , LabelRealName , 0 , 2 , 1 , 1);
+
+    RealNameEntry = gtk_entry_new();
+    ua->RealNameEntry = RealNameEntry;
+    gtk_entry_set_max_length(GTK_ENTRY(RealNameEntry),24);
+    gtk_grid_attach(GTK_GRID(Table) , RealNameEntry , 1 , 2 , 3 , 1);
+
     	  
     LabelUserType = gtk_label_new(NULL);
     SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
@@ -639,7 +638,7 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *ButtonCancel;
     
     Table = gtk_grid_new();
-    gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 20);
     gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
     LabelTitle = gtk_label_new(_("Password"));
     gtk_grid_attach(GTK_GRID(Table) , LabelTitle , 0 , 0 , 1 , 1);

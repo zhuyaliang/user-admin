@@ -217,6 +217,7 @@ void CreateNewPass(UserAdmin *ua)
 
     NewPassEntry = gtk_entry_new();
     ua->NewPassEntry = NewPassEntry;
+    gtk_entry_set_visibility(GTK_ENTRY(NewPassEntry),FALSE);
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewPassEntry), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");

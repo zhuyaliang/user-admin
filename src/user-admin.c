@@ -385,7 +385,7 @@ static void InitNewUser(UserAdmin *ua)
     int NewUserIndex;
     const char *s = _("Set up next time");
     const char *LangName;
-
+    char *text;
     NewUserIndex = ua->UserCount;
 
     memset(ua->ul[NewUserIndex].UserName,'\0',sizeof(ua->ul[NewUserIndex].UserName));
@@ -400,6 +400,9 @@ static void InitNewUser(UserAdmin *ua)
     memset(ua->ul[NewUserIndex].PassText,'\0',sizeof(ua->ul[NewUserIndex].PassText));
     memcpy(ua->ul[NewUserIndex].PassText,s,strlen(s));
     ua->ul[NewUserIndex].LoginType = FALSE;
+    text = g_strdup ("—");
+    memset(ua->ul[NewUserIndex].UserTime,'\0',sizeof(ua->ul[NewUserIndex].UserTime));
+    memcpy(ua->ul[NewUserIndex].UserTime,text,strlen(text));
 
     ua->CheckNameTimeId = 0;
     ua->CheckPassTimeId = 0;
@@ -668,6 +671,8 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
 
     NewEntryPass = gtk_entry_new();
     ua->NewPassEntry = NewEntryPass;
+    gtk_entry_set_visibility(GTK_ENTRY(NewEntryPass),FALSE);
+
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewEntryPass), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");

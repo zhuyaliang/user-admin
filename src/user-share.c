@@ -240,7 +240,7 @@ static pwquality_settings_t * get_pwq (void)
    	{
     	char *err = NULL;
         settings = pwquality_default_settings ();
-        pwquality_set_int_value (settings, 7 , 4);
+        pwquality_set_int_value (settings, PWQ_ERROR_MIN_LENGTH , 8);
         if (pwquality_read_config (settings, NULL, (gpointer)&err) < 0)
        	{
         	return NULL;
@@ -253,7 +253,7 @@ static pwquality_settings_t * get_pwq (void)
 static int pw_min_length (void)
 {
 	int value = 0;
-	if (pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH, &value) < 0)
+	if (pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH , &value) < 0)
 	{
     	return -1;
     }

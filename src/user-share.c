@@ -76,6 +76,8 @@ int MessageReport(const char *Title,const char *Msg,int nType)
                                             GTK_MESSAGE_QUESTION,
                                             GTK_BUTTONS_YES_NO,
                                             "%s",Title);
+            gtk_dialog_add_button (GTK_DIALOG (dialog),_("_Return"),
+                                   GTK_RESPONSE_ACCEPT);
             break;
         }
         default :

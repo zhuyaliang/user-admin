@@ -51,6 +51,11 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         {
              RemoveType = FALSE;
         }
+        else if(nRet == GTK_RESPONSE_DELETE_EVENT ||
+                nRet ==  GTK_RESPONSE_ACCEPT)
+        {
+             return;
+        }
         while(!act_user_manager_delete_user(Manager,ua->ul[Index].User,RemoveType,&error))
         {
             error = NULL;
@@ -439,7 +444,7 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *NewLanguage;
     int       TimeId;
     int       index;
-    char      *LangName;
+    const char      *LangName;
  const char *FixedNote = _("This will be used to name your home folder and can't be changed");   
 
     Table = gtk_grid_new();

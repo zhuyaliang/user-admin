@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-17 09:43+0800\n"
-"PO-Revision-Date: 2018-08-17 09:44+0800\n"
+"POT-Creation-Date: 2018-08-17 13:23+0800\n"
+"PO-Revision-Date: 2018-08-17 13:24+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -43,20 +43,20 @@ msgstr "读pid文件"
 msgid "read pid file failed"
 msgstr "读pid文件失败"
 
-#: src/user-base.c:165 src/user-admin.c:476
+#: src/user-base.c:165 src/user-admin.c:482
 msgid "Account Type"
 msgstr "用户类型"
 
 #. drop-down select boxes
-#: src/user-base.c:169 src/user-admin.c:479
+#: src/user-base.c:169 src/user-admin.c:485
 msgid "Standard"
 msgstr "普通"
 
-#: src/user-base.c:169 src/user-admin.c:479
+#: src/user-base.c:169 src/user-admin.c:485
 msgid "Administrators"
 msgstr "管理员"
 
-#: src/user-base.c:180 src/user-admin.c:488
+#: src/user-base.c:180 src/user-admin.c:494
 msgid "Language"
 msgstr "语言"
 
@@ -68,8 +68,8 @@ msgstr "获得用户语言"
 msgid "get user lang fali"
 msgstr "获得用户语言失败"
 
-#: src/user-base.c:197 src/user-password.c:197 src/user-admin.c:643
-#: src/user-admin.c:661
+#: src/user-base.c:197 src/user-password.c:197 src/user-admin.c:649
+#: src/user-admin.c:667
 msgid "Password"
 msgstr "密码"
 
@@ -87,7 +87,7 @@ msgstr "账户被禁用"
 
 #. 新建两个单选按钮
 #: src/user-info.c:35 src/user-password.c:27 src/user-password.c:202
-#: src/user-admin.c:381 src/user-admin.c:554 src/user-admin.c:648
+#: src/user-admin.c:387 src/user-admin.c:560 src/user-admin.c:654
 msgid "Set up next time"
 msgstr "下次登录时设置"
 
@@ -123,17 +123,17 @@ msgstr "现在设置"
 msgid "User Password"
 msgstr "用户密码"
 
-#: src/user-password.c:243 src/user-password.c:259 src/user-admin.c:689
-#: src/user-admin.c:705
+#: src/user-password.c:243 src/user-password.c:259 src/user-admin.c:695
+#: src/user-admin.c:711
 msgid "Confirm"
 msgstr "确认"
 
-#: src/user-password.c:267 src/user-admin.c:714
+#: src/user-password.c:267 src/user-admin.c:720
 msgid "Cancel"
 msgstr "取消"
 
 #. gnCurrentUserIndex 代表当前用户标号
-#: src/user-admin.c:47 src/user-admin.c:60 src/user-list.c:183
+#: src/user-admin.c:47 src/user-admin.c:66 src/user-list.c:183
 msgid "Remove User"
 msgstr "移除用户"
 
@@ -141,61 +141,61 @@ msgstr "移除用户"
 msgid "Whether to remove the user's home directory"
 msgstr "是否移除用户家目录"
 
-#: src/user-admin.c:61
+#: src/user-admin.c:67
 msgid "Remove user failure and try again"
 msgstr "移除失败，请再次尝试"
 
-#: src/user-admin.c:145
+#: src/user-admin.c:151
 msgid "Repeat of user name.Please try another"
 msgstr "用户名重复。请再试一次"
 
-#: src/user-admin.c:149
+#: src/user-admin.c:155
 msgid "Repeat of user home name.Please try another"
 msgstr "家目录名字重复。请再试一次"
 
-#: src/user-admin.c:153
+#: src/user-admin.c:159
 msgid "The username cannot start with a - ."
 msgstr "用户名不能以'-'开头"
 
-#: src/user-admin.c:157
+#: src/user-admin.c:163
 msgid ""
 "The username should only consist of upper and lower case \r\n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr "用户名只能有字母数字下划线组成"
 
-#: src/user-admin.c:162
+#: src/user-admin.c:168
 msgid "This will be used to name your home folder and cant be changed."
 msgstr "这将用于命名您的家目录，不能更改"
 
-#: src/user-admin.c:268
+#: src/user-admin.c:274
 msgid "Creating User"
 msgstr "创建用户"
 
-#: src/user-admin.c:268
+#: src/user-admin.c:274
 msgid "Creating a user failed"
 msgstr "创建用户失败"
 
-#: src/user-admin.c:310
+#: src/user-admin.c:316
 msgid "Two inconsistencies in cipher input"
 msgstr "两次密码输入的不一致"
 
-#: src/user-admin.c:443
+#: src/user-admin.c:449
 msgid "This will be used to name your home folder and can't be changed"
 msgstr "这将用于命名您的家目录，不能更改"
 
-#: src/user-admin.c:450
+#: src/user-admin.c:456
 msgid "User Name"
 msgstr "用户名字"
 
-#: src/user-admin.c:466
+#: src/user-admin.c:472
 msgid "Login Name"
 msgstr "登录名字"
 
-#: src/user-admin.c:653
+#: src/user-admin.c:659
 msgid "Now set the password"
 msgstr "现在社设置密码"
 
-#: src/user-admin.c:742 src/user-list.c:182
+#: src/user-admin.c:748 src/user-list.c:182
 msgid "Add User"
 msgstr "添加用户"
 
@@ -239,77 +239,81 @@ msgstr "请输入正确的字符"
 msgid "User List"
 msgstr "用户列表"
 
-#: src/user-share.c:86
+#: src/user-share.c:80
+msgid "Return"
+msgstr "返回"
+
+#: src/user-share.c:91
 msgid "Message"
 msgstr "消息"
 
-#: src/user-share.c:264
+#: src/user-share.c:270
 msgid "The new password needs to be different from the old one"
 msgstr "新密码不能与旧密码相同"
 
-#: src/user-share.c:266
+#: src/user-share.c:272
 msgid "Try changing some letters and numbers"
 msgstr "加入一些数字和字母"
 
-#: src/user-share.c:268 src/user-share.c:276
+#: src/user-share.c:274 src/user-share.c:282
 msgid "Try changing the password a bit more"
 msgstr "密码长度不够"
 
-#: src/user-share.c:270
+#: src/user-share.c:276
 msgid "A password without your user name would be stronger"
 msgstr "密码中不要包含用户名"
 
-#: src/user-share.c:272
+#: src/user-share.c:278
 msgid "Try to avoid using your name in the password"
 msgstr "密码中不要包含你的名字"
 
-#: src/user-share.c:274
+#: src/user-share.c:280
 msgid "Try to avoid some of the words included in the password"
 msgstr "密码中不要包含单词"
 
-#: src/user-share.c:278
+#: src/user-share.c:284
 msgid "Try to avoid common words"
 msgstr "尽量避免常用词"
 
-#: src/user-share.c:280
+#: src/user-share.c:286
 msgid "Try to avoid reordering existing words"
 msgstr "尽量避免对现有单词进行重新排序"
 
-#: src/user-share.c:282
+#: src/user-share.c:288
 msgid "Try to use more numbers"
 msgstr "尝试加入数字"
 
-#: src/user-share.c:284
+#: src/user-share.c:290
 msgid "Try to use more uppercase letters"
 msgstr "尝试加入大写字母"
 
-#: src/user-share.c:286
+#: src/user-share.c:292
 msgid "Try to use more lowercase letters"
 msgstr "尝试加入小写字母"
 
-#: src/user-share.c:288
+#: src/user-share.c:294
 msgid "Try to use more special characters, like punctuation"
 msgstr "尝试加入特殊字符"
 
-#: src/user-share.c:290
+#: src/user-share.c:296
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr "尝试使用字母、数字和标点符号的混合"
 
-#: src/user-share.c:292
+#: src/user-share.c:298
 msgid "Try to avoid repeating the same character"
 msgstr "尽量避免重复相同的字符"
 
-#: src/user-share.c:294
+#: src/user-share.c:300
 msgid ""
 "Try to avoid repeating the same type of character: you need     to mix up "
 "letters, numbers and punctuation."
 msgstr "尽量避免重复相同类型的字符"
 
-#: src/user-share.c:296
+#: src/user-share.c:302
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "尽量避免像1234或ABCD这样的序列"
 
-#: src/user-share.c:298
+#: src/user-share.c:304
 msgid ""
 "Password length needs more than 8 bits. Add more letters,\n"
 " umbers and punctuation"

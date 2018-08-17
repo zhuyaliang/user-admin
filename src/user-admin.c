@@ -724,7 +724,11 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
     g_signal_connect (ButtonCancel, "clicked",G_CALLBACK (CloseWindow),ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
-    
+         
+    gtk_widget_set_sensitive(NewEntryPass, FALSE);  //lock widget
+    gtk_widget_set_sensitive(CheckPass, FALSE);
+    gtk_widget_set_sensitive(LevelBar, FALSE);   
+
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 }        

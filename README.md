@@ -26,14 +26,10 @@ sudo ninja -C build install
 
 ## Runing
 
-Homepage:
-https://github.com/zhuyaliang/images/blob/master/000.png
+![Homepage:](https://github.com/zhuyaliang/images/blob/master/000.png)
 
-Choose images
-https://github.com/zhuyaliang/images/blob/master/001.png
+![Choose images:](https://github.com/zhuyaliang/images/blob/master/001.png)
 
-Add user
-
-https://github.com/zhuyaliang/images/blob/master/002.png
+![Add user:](https://github.com/zhuyaliang/images/blob/master/002.png)
 
 ```

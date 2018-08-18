@@ -1,3 +1,5 @@
+
+![Homepage:](https://github.com/zhuyaliang/user-admin/blob/master/data/face/Default.png)
 # Explain
 
 Rewrite an interface similar to user management tools in gnome-system-tools and gnome-control-center, displayed in the control center.
@@ -25,5 +27,4 @@ ninja -C build
 sudo ninja -C build install
 
 
-![Homepage:](https://github.com/zhuyaliang/user-admin/blob/master/data/face/Default.png)
 

@@ -15,6 +15,11 @@ int GetCurrentLangIndex(const char *_Lang)
     GSList *l;
     int i = 0;
     char *Lang;
+
+    if(strlen(_Lang) <= 0)
+    {
+        return -1;
+    }
     Lang = mate_get_language_from_locale (_Lang, NULL);
     for (l = LangList; l; l = l->next,i++)
     {

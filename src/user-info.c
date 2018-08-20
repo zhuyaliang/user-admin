@@ -183,6 +183,7 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     const char *TimeLogin;
     int UserType;
     int Auto;
+    char Msg[120] = { 0 };
 
     /*user real name Can be modified*/
     RealName = GetRealName (user);
@@ -230,9 +231,13 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
 
     /*get user language type*/
     LangName = GetUserLang(user);
+    if(strlen(LangName) <= 0)
+    {
+        sprintf(Msg,"%s %s",ua->ul[index].UserName,_("Get languages faild"));
+        MessageReport(_("Get user languages"),Msg,ERROR); 
+    }
     memset(ua->ul[index].LangName,'\0',sizeof(ua->ul[index].LangName));
     memcpy(ua->ul[index].LangName,LangName,strlen(LangName));
-    
     /*get user type Administrator or standard user*/
     UserType = GetUserType(user);
     ua->ul[index].UserType = UserType;

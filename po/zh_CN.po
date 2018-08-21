@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-20 17:34+0800\n"
-"PO-Revision-Date: 2018-08-20 17:35+0800\n"
+"POT-Creation-Date: 2018-08-21 10:48+0800\n"
+"PO-Revision-Date: 2018-08-21 10:49+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -19,27 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/main.c:24
+#: src/main.c:26
+msgid "Get Icon Fail"
+msgstr "获取图标失败"
+
+#: src/main.c:39
 msgid "Mate User Manage"
 msgstr "Mate 用户管理"
 
-#: src/main.c:71 src/main.c:108
+#: src/main.c:92 src/main.c:129
 msgid "open file"
 msgstr "打开文件"
 
-#: src/main.c:71
+#: src/main.c:92
 msgid "Create pid file failed"
 msgstr "创建pid文件失败"
 
-#: src/main.c:108
+#: src/main.c:129
 msgid "open pid file failed"
 msgstr "打开pid文件失败"
 
-#: src/main.c:113
+#: src/main.c:134
 msgid "read file"
 msgstr "读pid文件"
 
-#: src/main.c:113
+#: src/main.c:134
 msgid "read pid file failed"
 msgstr "读pid文件失败"
 
@@ -83,7 +87,7 @@ msgstr "账户被禁用"
 msgid "Set up next time"
 msgstr "下次登录时设置"
 
-#: src/user-info.c:77 src/user-info.c:292
+#: src/user-info.c:77 src/user-info.c:285
 msgid "Get User Info"
 msgstr "获得用户信息"
 
@@ -91,19 +95,19 @@ msgstr "获得用户信息"
 msgid "user == NULL Exit!!!"
 msgstr "用户为空 退出！！！"
 
-#: src/user-info.c:182
+#: src/user-info.c:178
 msgid "Unknown"
 msgstr "未知"
 
-#: src/user-info.c:240
+#: src/user-info.c:236
 msgid "Get languages faild"
 msgstr "获取用户语言失败"
 
-#: src/user-info.c:241
+#: src/user-info.c:237
 msgid "Get user languages"
 msgstr "获取用户语言"
 
-#: src/user-info.c:292
+#: src/user-info.c:285
 msgid "user count is 0"
 msgstr "用户个数为0"
 

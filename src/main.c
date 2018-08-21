@@ -15,9 +15,24 @@ static gboolean on_window_quit (GtkWidget *widget, GdkEvent *event, gpointer use
 	gtk_main_quit();
 	return TRUE;
 }
+static GdkPixbuf * GetAppIcon(void)
+{
+    GdkPixbuf *Pixbuf;
+    GError    *Error = NULL;
+
+    Pixbuf = gdk_pixbuf_new_from_file("/usr/share/user-admin/icon/user-admin.png",&Error);
+    if(!Pixbuf)
+    {
+        MessageReport(_("Get Icon Fail"),Error->message,ERROR);
+        g_error_free(Error);
+    }   
+    
+    return Pixbuf;
+}    
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
+    GdkPixbuf *AppIcon;
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
@@ -27,7 +42,13 @@ static void InitMainWindow(UserAdmin *ua)
                     "delete-event",
                     G_CALLBACK(on_window_quit),
                     NULL);
-
+    
+    AppIcon = GetAppIcon();
+    if(AppIcon)
+    {
+        gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
+        g_object_unref(AppIcon);
+    }    
     ua->MainWindow = Window;
 }
 

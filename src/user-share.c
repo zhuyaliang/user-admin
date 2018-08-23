@@ -28,6 +28,7 @@ int GetCurrentLangIndex(const char *_Lang)
     }
     return -1; 
 }        
+
 /******************************************************************************
 * Function:            MessageReport
 *        
@@ -89,10 +90,13 @@ int MessageReport(const char *Title,const char *Msg,int nType)
             break;
 
     }
-    gtk_message_dialog_format_secondary_markup(GTK_MESSAGE_DIALOG(dialog),TYPEMSG,Msg);
+    gtk_message_dialog_format_secondary_markup(GTK_MESSAGE_DIALOG(dialog),
+                                               TYPEMSG,
+                                               Msg);
     gtk_window_set_title(GTK_WINDOW(dialog),_("Message"));
     nRet =  gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
+
     return nRet;
 }
 
@@ -427,6 +431,7 @@ void AutoGenera (GtkEntry            *entry,
     char *NewPassWord;
     UserAdmin *ua = (UserAdmin *)data;
 
+    gtk_entry_set_visibility(GTK_ENTRY(entry),TRUE);
    	pwquality_generate (get_pwq (), 0, &NewPassWord);
     gtk_entry_set_text(GTK_ENTRY(ua->NewPassEntry),NewPassWord);
     gtk_entry_set_text(GTK_ENTRY(ua->CheckPassEntry),NewPassWord);

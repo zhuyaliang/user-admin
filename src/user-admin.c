@@ -56,6 +56,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         {
              return;
         }
+
         while(!act_user_manager_delete_user(Manager,ua->ul[Index].User,RemoveType,&error))
         {
             error = NULL;
@@ -386,6 +387,7 @@ static void InitNewUser(UserAdmin *ua)
     const char *s = _("Set up next time");
     const char *LangName;
     char *text;
+
     NewUserIndex = ua->UserCount;
 
     memset(ua->ul[NewUserIndex].UserName,'\0',sizeof(ua->ul[NewUserIndex].UserName));
@@ -403,7 +405,6 @@ static void InitNewUser(UserAdmin *ua)
     text = g_strdup ("—");
     memset(ua->ul[NewUserIndex].UserTime,'\0',sizeof(ua->ul[NewUserIndex].UserTime));
     memcpy(ua->ul[NewUserIndex].UserTime,text,strlen(text));
-
     ua->CheckNameTimeId = 0;
     ua->CheckPassTimeId = 0;
 
@@ -670,9 +671,8 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);     
 
     NewEntryPass = gtk_entry_new();
-    ua->NewPassEntry = NewEntryPass;
     gtk_entry_set_visibility(GTK_ENTRY(NewEntryPass),FALSE);
-
+    ua->NewPassEntry = NewEntryPass;
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewEntryPass), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");

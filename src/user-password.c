@@ -217,7 +217,6 @@ void CreateNewPass(UserAdmin *ua)
 
     NewPassEntry = gtk_entry_new();
     ua->NewPassEntry = NewPassEntry;
-    gtk_entry_set_visibility(GTK_ENTRY(NewPassEntry),FALSE);
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewPassEntry), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");
@@ -246,6 +245,7 @@ void CreateNewPass(UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0 , 6 , 1 , 1);
 
     CheckPassEntry = gtk_entry_new();
+    gtk_entry_set_visibility(GTK_ENTRY(NewPassEntry),FALSE);
     ua->CheckPassEntry = CheckPassEntry;
     gtk_entry_set_max_length(GTK_ENTRY(CheckPassEntry),20);
     gtk_entry_set_visibility(GTK_ENTRY(CheckPassEntry),FALSE);

@@ -63,7 +63,6 @@ static void ChangePass(GtkWidget *widget,gpointer data)
     UserAdmin *ua = (UserAdmin *)data;
     gtk_widget_set_sensitive(ua->MainWindow,FALSE);
 
-//		ChangeOldPass(ua);      //old passwoed change
 		CreateNewPass(ua);      //There is no password for the user
 
 }

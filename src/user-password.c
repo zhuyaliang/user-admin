@@ -220,6 +220,9 @@ void CreateNewPass(UserAdmin *ua)
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewPassEntry), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");
+    gtk_entry_set_icon_tooltip_text (GTK_ENTRY(NewPassEntry),
+                                     GTK_ENTRY_ICON_SECONDARY,
+                                    _("generation password"));
     gtk_entry_set_max_length(GTK_ENTRY(NewPassEntry),20);
     gtk_grid_attach(GTK_GRID(Table) , NewPassEntry , 1 , 3 , 4 , 1);
     g_signal_connect (G_OBJECT(NewPassEntry), 

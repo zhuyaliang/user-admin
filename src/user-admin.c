@@ -531,6 +531,10 @@ static gboolean TimeFun(gpointer data)
     const char *Message;
 
     s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
+    if(strlen(s) == 0)
+    {
+        gtk_entry_set_visibility(GTK_ENTRY(ua->NewPassEntry),FALSE);
+    }
     Level = GetPassStrength (s, NULL,NULL,&Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (ua->LevelBar), Level);
 
@@ -681,7 +685,10 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     g_signal_connect (G_OBJECT(NewEntryPass), 
                      "icon-press", 
                       G_CALLBACK(AutoGenera), ua);
-	
+   
+    gtk_entry_set_icon_tooltip_text (GTK_ENTRY(NewEntryPass),
+                                     GTK_ENTRY_ICON_SECONDARY,
+                                    _("generation password"));	
 	
     LevelBar = gtk_level_bar_new ();
     ua->LevelBar = LevelBar;

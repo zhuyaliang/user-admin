@@ -399,13 +399,17 @@ gboolean CheckPassword(gpointer data)
     const char *Message;
 
 	s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
+    if(strlen(s) == 0)
+    {
+        gtk_entry_set_visibility(GTK_ENTRY(ua->NewPassEntry),FALSE);
+    }
     Level = GetPassStrength (s, NULL,NULL,&Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (ua->LevelBar), Level);
 
   	if(Message == NULL && Level > 1)
   	{
-  		 OffNote(ua->LabelPassNote,ua);
-  		 return TRUE;
+  		OffNote(ua->LabelPassNote,ua);
+  		return TRUE;
   	}
     OpenNote(ua->LabelPassNote,Message,ua);
     return TRUE;

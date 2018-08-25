@@ -7,14 +7,6 @@
 
 #define  LOCKFILE    "/tmp/user-admin.pid"
 
-static gboolean on_window_quit (GtkWidget *widget, GdkEvent *event, gpointer user_data)
-{
-	g_strfreev(all_languages);
-    g_hash_table_destroy(LocaleHash);
-    g_slist_free (LangList);
-	gtk_main_quit();
-	return TRUE;
-}
 static GdkPixbuf * GetAppIcon(void)
 {
     GdkPixbuf *Pixbuf;

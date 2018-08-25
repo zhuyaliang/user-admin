@@ -170,6 +170,7 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *ButtonRemove;
     GtkWidget *ButtonAdd;
+    GtkWidget *ButtonClose;
     GtkWidget *LableSpace;
     GtkWidget *table;
     
@@ -181,9 +182,11 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , LableSpace , 0 , 0 , 4 , 1);
     ButtonAdd    =  gtk_button_new_with_label(_("Add User"));
     ButtonRemove =  gtk_button_new_with_label(_("Remove User"));
+    ButtonClose  =  gtk_button_new_with_label(_("Close Quit"));
 
     gtk_grid_attach(GTK_GRID(table) , ButtonRemove , 0 , 1 , 1 , 1);
-    gtk_grid_attach(GTK_GRID(table) , ButtonAdd , 4 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , ButtonAdd ,    1 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , ButtonClose ,  4 , 1 , 1 , 1);
     g_signal_connect (ButtonRemove, 
                       "clicked",
                       G_CALLBACK (RemoveUser),
@@ -191,6 +194,10 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     g_signal_connect (ButtonAdd, 
                       "clicked",
                       G_CALLBACK (AddUser),
+                      ua);
+    g_signal_connect (ButtonClose, 
+                      "clicked",
+                      G_CALLBACK (on_window_quit),
                       ua);
     
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);

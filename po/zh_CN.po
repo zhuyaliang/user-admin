@@ -7,73 +7,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-21 10:48+0800\n"
-"PO-Revision-Date: 2018-08-21 10:49+0800\n"
+"POT-Creation-Date: 2018-08-25 23:39+0800\n"
+"PO-Revision-Date: 2018-08-25 23:59+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/main.c:26
+#: src/main.c:18
 msgid "Get Icon Fail"
 msgstr "获取图标失败"
 
-#: src/main.c:39
+#: src/main.c:31
 msgid "Mate User Manage"
 msgstr "Mate 用户管理"
 
-#: src/main.c:92 src/main.c:129
+#: src/main.c:84 src/main.c:121
 msgid "open file"
 msgstr "打开文件"
 
-#: src/main.c:92
+#: src/main.c:84
 msgid "Create pid file failed"
 msgstr "创建pid文件失败"
 
-#: src/main.c:129
+#: src/main.c:121
 msgid "open pid file failed"
 msgstr "打开pid文件失败"
 
-#: src/main.c:134
+#: src/main.c:126
 msgid "read file"
 msgstr "读pid文件"
 
-#: src/main.c:134
+#: src/main.c:126
 msgid "read pid file failed"
 msgstr "读pid文件失败"
 
-#: src/user-base.c:166 src/user-admin.c:485
+#: src/user-base.c:165 src/user-admin.c:485
 msgid "Account Type"
 msgstr "用户类型"
 
 #. drop-down select boxes
-#: src/user-base.c:170 src/user-admin.c:488
+#: src/user-base.c:169 src/user-admin.c:488
 msgid "Standard"
 msgstr "普通"
 
-#: src/user-base.c:170 src/user-admin.c:488
+#: src/user-base.c:169 src/user-admin.c:488
 msgid "Administrators"
 msgstr "管理员"
 
-#: src/user-base.c:181 src/user-admin.c:497
+#: src/user-base.c:180 src/user-admin.c:497
 msgid "Language"
 msgstr "语言"
 
-#: src/user-base.c:196 src/user-password.c:197 src/user-admin.c:652
-#: src/user-admin.c:670
+#: src/user-base.c:187
+#, fuzzy
+msgid "Get user lang"
+msgstr "获取用户语言"
+
+#: src/user-base.c:187
+msgid "get user lang fali"
+msgstr "获得用户语言失败"
+
+#: src/user-base.c:197 src/user-password.c:198 src/user-admin.c:656
+#: src/user-admin.c:674
 msgid "Password"
 msgstr "密码"
 
-#: src/user-base.c:206
+#: src/user-base.c:207
 msgid "Automatic logon"
 msgstr "自动登录"
 
-#: src/user-base.c:220
+#: src/user-base.c:221
 msgid "Login time"
 msgstr "登录时间"
 
@@ -82,8 +91,8 @@ msgid "Account is disable"
 msgstr "账户被禁用"
 
 #. 新建两个单选按钮
-#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:202
-#: src/user-admin.c:387 src/user-admin.c:563 src/user-admin.c:657
+#: src/user-info.c:35 src/user-password.c:27 src/user-password.c:203
+#: src/user-admin.c:387 src/user-admin.c:567 src/user-admin.c:661
 msgid "Set up next time"
 msgstr "下次登录时设置"
 
@@ -115,29 +124,33 @@ msgstr "用户个数为0"
 msgid "Inconsistent password"
 msgstr "两次输入的密码不一致"
 
-#: src/user-password.c:181
+#: src/user-password.c:182
 msgid "Add a password"
 msgstr "添加密码"
 
-#: src/user-password.c:208
+#: src/user-password.c:209
 msgid "Now set up"
 msgstr "现在设置"
 
-#: src/user-password.c:214
+#: src/user-password.c:215
 msgid "User Password"
 msgstr "用户密码"
 
-#: src/user-password.c:244 src/user-password.c:260 src/user-admin.c:699
-#: src/user-admin.c:715
+#: src/user-password.c:225 src/user-admin.c:691
+msgid "generation password"
+msgstr "生成密码"
+
+#: src/user-password.c:247 src/user-password.c:264 src/user-admin.c:706
+#: src/user-admin.c:722
 msgid "Confirm"
 msgstr "确认"
 
-#: src/user-password.c:268 src/user-admin.c:724
+#: src/user-password.c:272 src/user-admin.c:731
 msgid "Cancel"
 msgstr "取消"
 
 #. gnCurrentUserIndex 代表当前用户标号
-#: src/user-admin.c:47 src/user-admin.c:66 src/user-list.c:183
+#: src/user-admin.c:47 src/user-admin.c:66 src/user-list.c:184
 msgid "Remove User"
 msgstr "移除用户"
 
@@ -195,11 +208,11 @@ msgstr "用户名字"
 msgid "Login Name"
 msgstr "登录名字"
 
-#: src/user-admin.c:662
+#: src/user-admin.c:666
 msgid "Now set the password"
 msgstr "现在社设置密码"
 
-#: src/user-admin.c:756 src/user-list.c:182
+#: src/user-admin.c:763 src/user-list.c:183
 msgid "Add User"
 msgstr "添加用户"
 
@@ -243,88 +256,90 @@ msgstr "请输入正确的字符"
 msgid "User List"
 msgstr "用户列表"
 
-#: src/user-share.c:85
-msgid "Return"
+#: src/user-list.c:185
+msgid "Close Quit"
+msgstr "关闭退出"
+
+#: src/user-share.c:94
+#, fuzzy
+msgid "_Return"
 msgstr "返回"
 
-#: src/user-share.c:96
+#: src/user-share.c:105
 msgid "Message"
 msgstr "消息"
 
-#: src/user-share.c:275
+#: src/user-share.c:284
 msgid "The new password needs to be different from the old one"
 msgstr "新密码不能与旧密码相同"
 
-#: src/user-share.c:277
+#: src/user-share.c:286
 msgid "Try changing some letters and numbers"
 msgstr "加入一些数字和字母"
 
-#: src/user-share.c:279 src/user-share.c:287
+#: src/user-share.c:288 src/user-share.c:296
 msgid "Try changing the password a bit more"
 msgstr "密码长度不够"
 
-#: src/user-share.c:281
+#: src/user-share.c:290
 msgid "A password without your user name would be stronger"
 msgstr "密码中不要包含用户名"
 
-#: src/user-share.c:283
+#: src/user-share.c:292
 msgid "Try to avoid using your name in the password"
 msgstr "密码中不要包含你的名字"
 
-#: src/user-share.c:285
+#: src/user-share.c:294
 msgid "Try to avoid some of the words included in the password"
 msgstr "密码中不要包含单词"
 
-#: src/user-share.c:289
+#: src/user-share.c:298
 msgid "Try to avoid common words"
 msgstr "尽量避免常用词"
 
-#: src/user-share.c:291
+#: src/user-share.c:300
 msgid "Try to avoid reordering existing words"
 msgstr "尽量避免对现有单词进行重新排序"
 
-#: src/user-share.c:293
+#: src/user-share.c:302
 msgid "Try to use more numbers"
 msgstr "尝试加入数字"
 
-#: src/user-share.c:295
+#: src/user-share.c:304
 msgid "Try to use more uppercase letters"
 msgstr "尝试加入大写字母"
 
-#: src/user-share.c:297
+#: src/user-share.c:306
 msgid "Try to use more lowercase letters"
 msgstr "尝试加入小写字母"
 
-#: src/user-share.c:299
+#: src/user-share.c:308
 msgid "Try to use more special characters, like punctuation"
 msgstr "尝试加入特殊字符"
 
-#: src/user-share.c:301
+#: src/user-share.c:310
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr "尝试使用字母、数字和标点符号的混合"
 
-#: src/user-share.c:303
+#: src/user-share.c:312
 msgid "Try to avoid repeating the same character"
 msgstr "尽量避免重复相同的字符"
 
-#: src/user-share.c:305
+#: src/user-share.c:314
 msgid ""
 "Try to avoid repeating the same type of character: you need     to mix up "
 "letters, numbers and punctuation."
 msgstr "尽量避免重复相同类型的字符"
 
-#: src/user-share.c:307
+#: src/user-share.c:316
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "尽量避免像1234或ABCD这样的序列"
 
-#: src/user-share.c:309
+#: src/user-share.c:318
 msgid ""
 "Password length needs more than 8 bits. Add more letters,\n"
 " umbers and punctuation"
 msgstr "密码超过8位，添加更多的字母、数字和标点符号"
-
-#~ msgid "get user lang fali"
-#~ msgstr "获得用户语言失败"
 
 #~ msgid "Real Name"
 #~ msgstr "真实名字"
@@ -337,9 +352,6 @@ msgstr "密码超过8位，添加更多的字母、数字和标点符号"
 
 #~ msgid "Please enter the correct original password"
 #~ msgstr "请输入正确的原始密码"
-
-#~ msgid "Change password"
-#~ msgstr "更改密码"
 
 #~ msgid "Old Password"
 #~ msgstr "旧密码"

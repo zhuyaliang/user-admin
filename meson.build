@@ -1,4 +1,4 @@
-project('user-admin', 'c',
+project('mate-user-admin', 'c',
   version : '1.0.0',
   license : 'LGPLv2.1+',
   meson_version : '>=0.40.1',
@@ -105,7 +105,7 @@ conf.set_quoted('BINDIR', join_paths(get_option('prefix'), get_option('bindir'))
 conf.set_quoted('SYSCONFDIR', join_paths(get_option('prefix'), get_option('sysconfdir')))
 conf.set_quoted('LOCALSTATEDIR', join_paths(get_option('prefix'), get_option('localstatedir')))
 conf.set_quoted('LIBEXECDIR', join_paths(get_option('prefix'), get_option('libexecdir')))
-conf.set_quoted('FACEDIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name(), 'face'))
+conf.set_quoted('FACEDIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name(), 'data/face'))
 
 configure_file(
   output : 'config.h',

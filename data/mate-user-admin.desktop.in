@@ -4,6 +4,6 @@ Comment=Manage user
 Categories=GNOME;GTK;Settings;System;Utility;
 Keywords=Configuration;Utility;
 Exec=user-admin
-Icon="/usr/share/mate-user-admin/data/icon/user-admin.png"
+Icon=user-admin
 Terminal=false
 Type=Application

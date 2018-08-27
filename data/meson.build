@@ -10,12 +10,9 @@ i18n.merge_file(
   type: 'desktop',
 )
 
-#install_subdir('face',
-#  install_dir : join_paths(get_option('prefix'), 'share/mate-user-admin'),
-#)
-#install_subdir('icon',
-#  install_dir : join_paths(get_option('prefix'), 'share/mate-user-admin'),
-#)
+install_subdir('face',
+  install_dir : join_paths(get_option('prefix'), 'share/mate-user-admin'),
+)
 install_subdir('hicolor',
   install_dir : join_paths(get_option('prefix'), 'share/icons'),
 )

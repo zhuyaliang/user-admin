@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=User admin
-Comment=Manage user
+Name=MATE User Manager
+Comment=Manage User
 Categories=GNOME;GTK;Settings;System;Utility;
 Keywords=Configuration;Utility;
 Exec=user-admin

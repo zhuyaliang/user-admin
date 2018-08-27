@@ -36,7 +36,7 @@
 #define  STANDARD  0
 #define  ADMIN     1
 #define _(STRING)  gettext(STRING) //为了减少代码量和输入量，用别名_(STRING)替换gettext(STRONG)  
-#define PACKAGE    "user-admin" // 定义软件包的名字为hello  
+#define PACKAGE    "mate-user-admin" // 定义软件包的名字为hello  
 #define LOCALEDIR  "/usr/share/locale/" //定义系统语言环境的目录，该目录下存放各种国际化的语言，不同系统可能有差异。
 
 enum

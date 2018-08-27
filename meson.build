@@ -1,4 +1,4 @@
-project('mate-user-admin', 'c',
+project('user-admin', 'c',
   version : '1.0.0',
   license : 'LGPLv2.1+',
   meson_version : '>=0.40.1',

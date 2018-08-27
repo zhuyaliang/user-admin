@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=MATE User Manager
+Name[zh_CN]=用户管理
 Comment=Manage User
+Comment[zh_CN]=用户管理
 Categories=GNOME;GTK;Settings;System;Utility;
 Keywords=Configuration;Utility;
 Exec=user-admin

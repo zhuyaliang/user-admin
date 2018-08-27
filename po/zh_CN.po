@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: user-admin\n"
+"Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-25 23:39+0800\n"
 "PO-Revision-Date: 2018-08-25 23:59+0800\n"

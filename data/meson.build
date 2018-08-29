@@ -1,3 +1,7 @@
+subdir('face')
+subdir('icon')
+subdir('hicolor')
+
 i18n = import('i18n')
 
 i18n.merge_file(
@@ -10,12 +14,3 @@ i18n.merge_file(
   type: 'desktop',
 )
 
-install_subdir('face',
-  install_dir : join_paths(get_option('prefix'), 'share/mate-user-admin'),
-)
-install_subdir('hicolor',
-  install_dir : join_paths(get_option('prefix'), 'share/icons'),
-)
-install_subdir('icon',
-  install_dir : join_paths(get_option('prefix'), 'share/mate-user-admin'),
-)

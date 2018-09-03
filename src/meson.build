@@ -25,7 +25,7 @@ account_user_src = gnome.gdbus_codegen(
   namespace : 'Admin'
   )
 
-executable('user-admin',
+executable('mate-user-admin',
   sources : sources,
   dependencies : [gtk_deps, pwquality_deps, act_deps, crypt_deps, md_deps],
   include_directories: top_srcdir,

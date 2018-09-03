@@ -1,3 +1,20 @@
+/*   mate-user-admin 
+* 	Copyright (C) 2018  zhuyaliang https://github.com/zhuyaliang/
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #include "user-info.h"
 #include "user.h"
 #include "user-base.h"
@@ -77,6 +94,7 @@ static int RecordPid(void)
 {
     int pid = 0;
     int fd;
+	int Length = 0; 
     char WriteBuf[30] = { 0 };
     fd = open(LOCKFILE,O_WRONLY|O_CREAT|O_TRUNC,0777);
     if(fd < 0)
@@ -87,7 +105,12 @@ static int RecordPid(void)
     chmod(LOCKFILE,0777); 
     pid = getpid();
     sprintf(WriteBuf,"%d",pid);
-    write(fd,WriteBuf,strlen(WriteBuf));
+    Length = write(fd,WriteBuf,strlen(WriteBuf));
+	if(Length <= 0 )
+	{
+         MessageReport(_("write file"),_("write pid file failed"),ERROR);
+         return -1;      
+	}			
     close(fd);
 
     return 0;
@@ -195,7 +218,10 @@ int main(int argc, char **argv)
     GetLocaleLang();
     /* Get local user info */
     ua.UserCount = GetUserInfo(&ua);
-
+	if(ua.UserCount >= NUMMAX)
+	{
+		ua.UserCount = 19;
+	}			
     fixed = gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(ua.MainWindow), fixed); 
     

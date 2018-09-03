@@ -7,13 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <gtk/gtk.h>
 #include <pwd.h>
-#define _XOPEN_SOURCE
-#include <unistd.h>
-#define _GNU_SOURCE      
-#include <crypt.h>
-
 #include <time.h>
 #include <sys/time.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
@@ -35,9 +29,9 @@
 
 #define  STANDARD  0
 #define  ADMIN     1
-#define _(STRING)  gettext(STRING) //为了减少代码量和输入量，用别名_(STRING)替换gettext(STRONG)  
-#define PACKAGE    "mate-user-admin" // 定义软件包的名字为hello  
-#define LOCALEDIR  "/usr/share/locale/" //定义系统语言环境的目录，该目录下存放各种国际化的语言，不同系统可能有差异。
+#define _(STRING)  gettext(STRING)   
+#define PACKAGE    "mate-user-admin"   
+#define LOCALEDIR  "/usr/share/locale/" 
 
 enum
 {
@@ -104,7 +98,6 @@ typedef struct
     int               KeyId;
     char              TmpPass[24];
 }UserAdmin;
-static const char StandardCharacter[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"};
 int gnCnt;                //计数
 int gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget *WindowLogin;          //首页窗口

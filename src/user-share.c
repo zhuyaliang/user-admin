@@ -311,11 +311,11 @@ static const gchar *pw_error_hint (gint error)
         case PWQ_ERROR_MAX_CONSECUTIVE:
                 return _("Try to avoid repeating the same character");
         case PWQ_ERROR_MAX_CLASS_REPEAT:
-                return _("Try to avoid repeating the same type of character: you need     to mix up letters, numbers and punctuation.");
+                return _("Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation.");
         case PWQ_ERROR_MAX_SEQUENCE:
                 return _("Try to avoid sequences like 1234 or abcd");
         case PWQ_ERROR_MIN_LENGTH:
-                return _("Password length needs more than 8 bits. Add more letters,\n umbers and punctuation");
+                return _("Password length needs more than 8 bits. Add more letters, numbers and punctuation");
         case PWQ_ERROR_EMPTY_PASSWORD:
                 return ("     ");
         default:

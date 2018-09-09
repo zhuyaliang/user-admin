@@ -165,7 +165,7 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
     }
     else 
     {
-        *Message = g_strdup (_("This will be used to name your home folder and cant be changed."));
+        *Message = g_strdup (_("This will be used to name your home folder and can't be changed."));
     }
 
     return valid;

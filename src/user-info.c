@@ -250,7 +250,7 @@ static void UserAdded(ActUser *user,int index,UserAdmin *ua)
     LangName = GetUserLang(user);
     if(strlen(LangName) <= 0)
     {
-        sprintf(Msg,"%s %s",ua->ul[index].UserName,_("Get languages faild"));
+        sprintf(Msg,"%s %s",ua->ul[index].UserName,_("Get languages failed"));
         MessageReport(_("Get user languages"),Msg,ERROR); 
     }
     memset(ua->ul[index].LangName,'\0',sizeof(ua->ul[index].LangName));

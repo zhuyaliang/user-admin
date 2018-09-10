@@ -177,7 +177,7 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
         }
         else 
         {
-            *Message = g_strdup (_("The username should only consist of upper and lower case \r\nletters from a-z,digits and the following characters: . - _"));
+            *Message = g_strdup (_("The username should only consist of upper and lower case \nletters from a-z,digits and the following characters: . - _"));
         }
     }
     else 

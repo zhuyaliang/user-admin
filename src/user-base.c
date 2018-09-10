@@ -201,7 +201,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ua->ComUserLanguage = ComboLanguage;
     index = GetCurrentLangIndex(ua->ul[0].LangName);
     if(index < 0)
-        MessageReport(_("Get user language"),_("get user language failed"),ERROR);
+        MessageReport(_("Get user lang"),_("get user lang fali"),ERROR);
     gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),index);
     gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);
     g_signal_connect(G_OBJECT(ComboLanguage),

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 10:33+0800\n"
+"POT-Creation-Date: 2018-09-10 15:38+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,27 +101,23 @@ msgstr ""
 msgid "Set up next time"
 msgstr ""
 
-#: src/user-info.c:94 src/user-info.c:302
-msgid "Get User Info"
-msgstr ""
-
-#: src/user-info.c:94
-msgid "user == NULL Exit!!!"
-msgstr ""
-
-#: src/user-info.c:195
+#: src/user-info.c:190
 msgid "Unknown"
 msgstr ""
 
-#: src/user-info.c:253
+#: src/user-info.c:248
 msgid "Get languages failed"
 msgstr ""
 
-#: src/user-info.c:254
+#: src/user-info.c:249
 msgid "Get user languages"
 msgstr ""
 
-#: src/user-info.c:302
+#: src/user-info.c:297
+msgid "Get User Info"
+msgstr ""
+
+#: src/user-info.c:297
 msgid "user count is 0"
 msgstr ""
 

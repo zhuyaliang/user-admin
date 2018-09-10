@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 10:30+0800\n"
-"PO-Revision-Date: 2018-09-10 10:41+0800\n"
+"POT-Creation-Date: 2018-09-10 15:38+0800\n"
+"PO-Revision-Date: 2018-09-10 15:39+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -37,7 +37,7 @@ msgstr "创建pid文件失败"
 
 #: src/main.c:111
 msgid "write file"
-msgstr "写文件"
+msgstr "写pid文件"
 
 #: src/main.c:111
 msgid "write pid file failed"
@@ -74,11 +74,11 @@ msgstr "语言"
 
 #: src/user-base.c:204
 msgid "Get user language"
-msgstr "获取用户语言  "
+msgstr "获取用户语言"
 
 #: src/user-base.c:204
 msgid "get user language failed"
-msgstr "获得用户语言失败 "
+msgstr "获得用户语言失败"
 
 #: src/user-base.c:214 src/user-password.c:215 src/user-admin.c:681
 #: src/user-admin.c:699
@@ -103,27 +103,23 @@ msgstr "账户被禁用"
 msgid "Set up next time"
 msgstr "下次登录时设置"
 
-#: src/user-info.c:94 src/user-info.c:302
-msgid "Get User Info"
-msgstr "获得用户信息"
-
-#: src/user-info.c:94
-msgid "user == NULL Exit!!!"
-msgstr "用户为空 退出！！！"
-
-#: src/user-info.c:195
+#: src/user-info.c:190
 msgid "Unknown"
 msgstr "未知"
 
-#: src/user-info.c:253
+#: src/user-info.c:248
 msgid "Get languages failed"
-msgstr "获取用户语言失败 "
+msgstr "获取用户语言失败"
 
-#: src/user-info.c:254
+#: src/user-info.c:249
 msgid "Get user languages"
 msgstr "获取用户语言"
 
-#: src/user-info.c:302
+#: src/user-info.c:297
+msgid "Get User Info"
+msgstr "获得用户信息"
+
+#: src/user-info.c:297
 msgid "user count is 0"
 msgstr "用户个数为0"
 
@@ -182,14 +178,16 @@ msgid "The username cannot start with a - ."
 msgstr "用户名不能以'-'开头"
 
 #: src/user-admin.c:180
+#, fuzzy
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
-msgstr "用户名只能有字母数字下划线组成 "
+msgstr "用户名只能有字母数字下划线组成"
 
 #: src/user-admin.c:185
+#, fuzzy
 msgid "This will be used to name your home folder and can't be changed."
-msgstr "这将用于命名您的家目录，不能更改 "
+msgstr "这将用于命名您的家目录，不能更改"
 
 #: src/user-admin.c:291
 msgid "Creating User"
@@ -209,7 +207,7 @@ msgstr "添加用户"
 
 #: src/user-admin.c:340
 msgid "The number of users exceeds the scope of management."
-msgstr "用户个数超出了管理能力"
+msgstr ""
 
 #: src/user-admin.c:477
 msgid "This will be used to name your home folder and can't be changed"
@@ -272,8 +270,9 @@ msgid "Close Quit"
 msgstr "关闭退出"
 
 #: src/user-share.c:111
+#, fuzzy
 msgid "_Return"
-msgstr "返回 "
+msgstr "返回"
 
 #: src/user-share.c:122
 msgid "Message"
@@ -336,20 +335,25 @@ msgid "Try to avoid repeating the same character"
 msgstr "尽量避免重复相同的字符"
 
 #: src/user-share.c:331
+#, fuzzy
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
-msgstr "尽量避免重复相同类型的字符 "
+msgstr "尽量避免重复相同类型的字符"
 
 #: src/user-share.c:333
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "尽量避免像1234或ABCD这样的序列"
 
 #: src/user-share.c:335
+#, fuzzy
 msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
-msgstr "密码超过8位，添加更多的字母、数字和标点符号 "
+msgstr "密码超过8位，添加更多的字母、数字和标点符号"
+
+#~ msgid "user == NULL Exit!!!"
+#~ msgstr "用户为空 退出！！！"
 
 #, fuzzy
 #~ msgid "Get user lang"

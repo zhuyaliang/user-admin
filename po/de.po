@@ -1,0 +1,356 @@
+# German translations for mate-user-admin package.
+# Copyright (C) 2018 THE mate-user-admin'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mate-user-admin package.
+# Wolfgang Ulbrich <mate@raveit.de>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mate-user-admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-10 10:33+0800\n"
+"PO-Revision-Date: 2018-09-10 08:59+0200\n"
+"Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/main.c:35
+msgid "Get Icon Fail"
+msgstr "Symbolfehler erhalten"
+
+#: src/main.c:48
+msgid "Mate User Manage"
+msgstr "Mate Benutzer Verwaltung"
+
+#: src/main.c:102 src/main.c:144
+msgid "open file"
+msgstr "öffne Datei"
+
+#: src/main.c:102
+msgid "Create pid file failed"
+msgstr "Erzeugung der pid Datei schlug fehl"
+
+#: src/main.c:111
+msgid "write file"
+msgstr "schreibe Datei"
+
+#: src/main.c:111
+msgid "write pid file failed"
+msgstr "Schreiben der pid Datei schlug fehl"
+
+#: src/main.c:144
+msgid "open pid file failed"
+msgstr "öffnen von pid Datei schlug fehl"
+
+#: src/main.c:149
+msgid "read file"
+msgstr "lese Datei"
+
+#: src/main.c:149
+msgid "read pid file failed"
+msgstr "lesen der pid Datei schlug fehl"
+
+#: src/user-base.c:182 src/user-admin.c:510
+msgid "Account Type"
+msgstr "Konto Typ"
+
+#. drop-down select boxes
+#: src/user-base.c:186 src/user-admin.c:513
+msgid "Standard"
+msgstr "Standard"
+
+#: src/user-base.c:186 src/user-admin.c:513
+msgid "Administrators"
+msgstr "Administratoren"
+
+#: src/user-base.c:197 src/user-admin.c:522
+msgid "Language"
+msgstr "Sprache"
+
+#: src/user-base.c:204
+msgid "Get user language"
+msgstr "Benutzersprache erhalten"
+
+#: src/user-base.c:204
+msgid "get user language failed"
+msgstr "Benutzersprache erhalten schlug fehl"
+
+#: src/user-base.c:214 src/user-password.c:215 src/user-admin.c:681
+#: src/user-admin.c:699
+msgid "Password"
+msgstr "Passwort"
+
+#: src/user-base.c:224
+msgid "Automatic logon"
+msgstr "Automatisches Einloggen"
+
+#: src/user-base.c:238
+msgid "Login time"
+msgstr "Anmeldezeit"
+
+#: src/user-info.c:40 src/user-password.c:45
+msgid "Account is disable"
+msgstr "Konto ist deaktiviert"
+
+#. 新建两个单选按钮
+#: src/user-info.c:52 src/user-password.c:44 src/user-password.c:220
+#: src/user-admin.c:412 src/user-admin.c:592 src/user-admin.c:686
+msgid "Set up next time"
+msgstr "Beim nächsten Mal einrichten"
+
+#: src/user-info.c:94 src/user-info.c:302
+msgid "Get User Info"
+msgstr "Holen Sie sich Benutzerinformationen"
+
+#: src/user-info.c:94
+msgid "user == NULL Exit!!!"
+msgstr ""
+
+#: src/user-info.c:195
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: src/user-info.c:253
+msgid "Get languages failed"
+msgstr "Zuordnen der Sprache fehlgeschlagen"
+
+#: src/user-info.c:254
+msgid "Get user languages"
+msgstr "Wähle Benutzer Sprachen"
+
+#: src/user-info.c:302
+msgid "user count is 0"
+msgstr "Benutzeranzahl ist 0"
+
+#: src/user-password.c:132
+msgid "Inconsistent password"
+msgstr "Inkonsistentes Passwort"
+
+#: src/user-password.c:199
+msgid "Add a password"
+msgstr "Fügen Sie ein Passwort hinzu"
+
+#: src/user-password.c:226
+msgid "Now set up"
+msgstr "Jetzt einrichten"
+
+#: src/user-password.c:232
+msgid "User Password"
+msgstr "Benutzer Passwort"
+
+#: src/user-password.c:242 src/user-admin.c:716
+msgid "generation password"
+msgstr "Passwort erzeugen"
+
+#: src/user-password.c:264 src/user-password.c:281 src/user-admin.c:731
+#: src/user-admin.c:747
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: src/user-password.c:289 src/user-admin.c:756
+msgid "Cancel"
+msgstr "Abbruch"
+
+#. gnCurrentUserIndex 代表当前用户标号
+#: src/user-admin.c:64 src/user-admin.c:83 src/user-list.c:201
+msgid "Remove User"
+msgstr "Benutzer entfernen"
+
+#: src/user-admin.c:65
+msgid "Whether to remove the user's home directory"
+msgstr "Gibt an, ob das Basisverzeichnis des Benutzers entfernt werden soll"
+
+#: src/user-admin.c:84
+msgid "Remove user failure and try again"
+msgstr "Entfernen Sie den fehlerhaften Benutzer und versuchen Sie es erneut"
+
+#: src/user-admin.c:168
+msgid "Repeat of user name.Please try another"
+msgstr "Benutzer schon vorhanden, versuchen Sie bitte einen anderen"
+
+#: src/user-admin.c:172
+msgid "Repeat of user home name.Please try another"
+msgstr "Basisverzeichnis schon vorhanden, versuchen Sie bitte einen anderen"
+
+#: src/user-admin.c:176
+msgid "The username cannot start with a - ."
+msgstr "Der Benutzername kann nicht mit einem - beginnen"
+
+#: src/user-admin.c:180
+msgid ""
+"The username should only consist of upper and lower case \n"
+"letters from a-z,digits and the following characters: . - _"
+msgstr ""
+"Der Benutzername sollte nur aus Groß- und Kleinbuchstaben, \n"
+"Buchstaben von a-z, Ziffern und die folgenden Zeichen bestehen: . - _"
+
+#: src/user-admin.c:185
+msgid "This will be used to name your home folder and can't be changed."
+msgstr "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht geändert werden"
+
+#: src/user-admin.c:291
+msgid "Creating User"
+msgstr "Benutzer erstellen"
+
+#: src/user-admin.c:291
+msgid "Creating a user failed"
+msgstr "Erstellen eines Benutzers fehlgeschlagen"
+
+#: src/user-admin.c:333
+msgid "Two inconsistencies in cipher input"
+msgstr "Zwei Inkonsistenzen bei der Chiffre-Eingabe"
+
+#: src/user-admin.c:339 src/user-admin.c:788 src/user-list.c:200
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
+
+#: src/user-admin.c:340
+msgid "The number of users exceeds the scope of management."
+msgstr "Die Anzahl der Benutzer übersteigt den Umfang der Verwaltung"
+
+#: src/user-admin.c:477
+msgid "This will be used to name your home folder and can't be changed"
+msgstr "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht geändert werden"
+
+#: src/user-admin.c:484
+msgid "User Name"
+msgstr "Benutzername"
+
+#: src/user-admin.c:500
+msgid "Login Name"
+msgstr "Login Name"
+
+#: src/user-admin.c:691
+msgid "Now set the password"
+msgstr "Das Passwort jetzt einrichten"
+
+#: src/user-face.c:318
+msgid "Load Local Picture"
+msgstr "Lade lokales Bild"
+
+#: src/user-face.c:338
+msgid "Browse for more pictures"
+msgstr "Suche nach mehr Bildern"
+
+#: src/user-face.c:341
+msgid "_Cancel"
+msgstr "_Abbruch"
+
+#: src/user-face.c:342
+msgid "_Open"
+msgstr "_Öffnen"
+
+#: src/user-face.c:427
+msgid "Local Picture"
+msgstr "Lokales Bild"
+
+#: src/user-face.c:441
+msgid "Avatar list"
+msgstr "Avatar Liste"
+
+#: src/user-face.c:442
+msgid "There is no address to store photos"
+msgstr "Kein Verzeichnis vohanden um Bilder zu speichern"
+
+#: src/user-face.c:537
+msgid "Change Name"
+msgstr "Wechsle den Namen"
+
+#: src/user-face.c:537
+msgid "Please enter a valid character"
+msgstr "Bitte geben Sie ein gültiges Zeichen ein"
+
+#: src/user-list.c:84
+msgid "User List"
+msgstr "Benutzerliste"
+
+#: src/user-list.c:202
+msgid "Close Quit"
+msgstr "Beenden"
+
+#: src/user-share.c:111
+msgid "_Return"
+msgstr "_Bestätige"
+
+#: src/user-share.c:122
+msgid "Message"
+msgstr "Nachricht"
+
+#: src/user-share.c:301
+msgid "The new password needs to be different from the old one"
+msgstr "Das neue Passwort muß vom alten verschieden sein"
+
+#: src/user-share.c:303
+msgid "Try changing some letters and numbers"
+msgstr "Versuche einige Buchstaben und Zahlen zu verändern"
+
+#: src/user-share.c:305 src/user-share.c:313
+msgid "Try changing the password a bit more"
+msgstr "Versuche das Passwort ein wenig mehr zu verändern"
+
+#: src/user-share.c:307
+msgid "A password without your user name would be stronger"
+msgstr "Ein Passwort was den Benutzernamen nicht beinhaltet ist stärker"
+
+#: src/user-share.c:309
+msgid "Try to avoid using your name in the password"
+msgstr "Vermeiden Sie ihren Namen im Passwort zu verwenden"
+
+#: src/user-share.c:311
+msgid "Try to avoid some of the words included in the password"
+msgstr "Versuchen Sie einige Worte im Passwort zu vermeiden"
+
+#: src/user-share.c:315
+msgid "Try to avoid common words"
+msgstr "Vermeiden Sie allgemeine Worte im Passwort"
+
+#: src/user-share.c:317
+msgid "Try to avoid reordering existing words"
+msgstr "Vermeiden Sie die Neuanordnung von existierenden Wörtern"
+
+#: src/user-share.c:319
+msgid "Try to use more numbers"
+msgstr "Versuchen Sie mehr Zahlen zu verwenden"
+
+#: src/user-share.c:321
+msgid "Try to use more uppercase letters"
+msgstr "Versuchen Sie mehr Großbuchstaben zu verwenden"
+
+#: src/user-share.c:323
+msgid "Try to use more lowercase letters"
+msgstr "Versuchen Sie mehr Kleinbuchstaben zu verwenden"
+
+#: src/user-share.c:325
+msgid "Try to use more special characters, like punctuation"
+msgstr "Versuchen Sie mehr Sonderzeichen wie Interpunktion zu verwenden"
+
+#: src/user-share.c:327
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Versuchen Sie eine Mischung aus Buchstaben, Zahlen und Satzzeichen zu verwenden"
+
+#: src/user-share.c:329
+msgid "Try to avoid repeating the same character"
+msgstr "Versuchen Sie widerholende gleiche Zeichen zu vermeiden"
+
+#: src/user-share.c:331
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Versuchen Sie die Wiederholung von Zeichen zu vermeiden: Sie müssen "
+"Buchstaben, Nummern and Interpunktion vermischen."
+
+#: src/user-share.c:333
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Versuchen Sie Sequenzen wie 1234 oder abcd zu vermeiden"
+
+#: src/user-share.c:335
+msgid ""
+"Password length needs more than 8 bits. Add more letters, numbers and "
+"punctuation"
+msgstr ""
+"Die Passwortlänge benötigt mehr als 8 Bit. Fügen Sie weitere Buchstaben"
+" Nummern und Interpunktion hinzu"

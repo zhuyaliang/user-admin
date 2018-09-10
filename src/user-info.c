@@ -89,11 +89,6 @@ static gchar * GetLoginTimeText (ActUser *user)
 static const gchar *GetRealName (ActUser *user)
 {
     const gchar *name = NULL;
-    if(user == NULL)
-    {
-        MessageReport(_("Get User Info"),_("user == NULL Exit!!!"),ERROR);
-        exit(0);
-    }        
     name = act_user_get_real_name (user);
 
     return name;

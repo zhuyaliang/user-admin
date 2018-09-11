@@ -1,6 +1,6 @@
 project('mate-user-admin', 'c',
-  version : '1.0.0',
-  license : 'LGPLv2.1+',
+  version : '1.1.0',
+  license : 'GPLv3',
   meson_version : '>=0.40.1',
   default_options : [ 'warning_level=1', 'buildtype=debugoptimized', 'c_std=gnu11'],
   )

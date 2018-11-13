@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 10:33+0800\n"
+"POT-Creation-Date: 2018-11-13 13:28+0800\n"
 "PO-Revision-Date: 2018-09-10 08:59+0200\n"
 "Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
 "Language-Team: German\n"
@@ -101,27 +101,23 @@ msgstr "Konto ist deaktiviert"
 msgid "Set up next time"
 msgstr "Beim nächsten Mal einrichten"
 
-#: src/user-info.c:94 src/user-info.c:302
-msgid "Get User Info"
-msgstr "Holen Sie sich Benutzerinformationen"
-
-#: src/user-info.c:94
-msgid "user == NULL Exit!!!"
-msgstr ""
-
-#: src/user-info.c:195
+#: src/user-info.c:190
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: src/user-info.c:253
+#: src/user-info.c:249
 msgid "Get languages failed"
 msgstr "Zuordnen der Sprache fehlgeschlagen"
 
-#: src/user-info.c:254
+#: src/user-info.c:250
 msgid "Get user languages"
 msgstr "Wähle Benutzer Sprachen"
 
-#: src/user-info.c:302
+#: src/user-info.c:298
+msgid "Get User Info"
+msgstr "Holen Sie sich Benutzerinformationen"
+
+#: src/user-info.c:298
 msgid "user count is 0"
 msgstr "Benutzeranzahl ist 0"
 
@@ -189,7 +185,9 @@ msgstr ""
 
 #: src/user-admin.c:185
 msgid "This will be used to name your home folder and can't be changed."
-msgstr "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht geändert werden"
+msgstr ""
+"Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
+"geändert werden"
 
 #: src/user-admin.c:291
 msgid "Creating User"
@@ -213,7 +211,9 @@ msgstr "Die Anzahl der Benutzer übersteigt den Umfang der Verwaltung"
 
 #: src/user-admin.c:477
 msgid "This will be used to name your home folder and can't be changed"
-msgstr "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht geändert werden"
+msgstr ""
+"Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
+"geändert werden"
 
 #: src/user-admin.c:484
 msgid "User Name"
@@ -227,39 +227,52 @@ msgstr "Login Name"
 msgid "Now set the password"
 msgstr "Das Passwort jetzt einrichten"
 
-#: src/user-face.c:318
-msgid "Load Local Picture"
-msgstr "Lade lokales Bild"
+#: src/user-face.c:304 src/user-face.c:315
+#, fuzzy
+msgid "Create Crop File"
+msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-face.c:338
-msgid "Browse for more pictures"
-msgstr "Suche nach mehr Bildern"
+#: src/user-face.c:305
+msgid "failed to create temporary file for image data"
+msgstr ""
 
-#: src/user-face.c:341
+#: src/user-face.c:373 src/user-face.c:456
 msgid "_Cancel"
 msgstr "_Abbruch"
 
-#: src/user-face.c:342
+#: src/user-face.c:375
+msgid "Select"
+msgstr ""
+
+#: src/user-face.c:430
+msgid "Load Local Picture"
+msgstr "Lade lokales Bild"
+
+#: src/user-face.c:453
+msgid "Browse for more pictures"
+msgstr "Suche nach mehr Bildern"
+
+#: src/user-face.c:457
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: src/user-face.c:427
+#: src/user-face.c:542
 msgid "Local Picture"
 msgstr "Lokales Bild"
 
-#: src/user-face.c:441
+#: src/user-face.c:556
 msgid "Avatar list"
 msgstr "Avatar Liste"
 
-#: src/user-face.c:442
+#: src/user-face.c:557
 msgid "There is no address to store photos"
 msgstr "Kein Verzeichnis vohanden um Bilder zu speichern"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Change Name"
 msgstr "Wechsle den Namen"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Please enter a valid character"
 msgstr "Bitte geben Sie ein gültiges Zeichen ein"
 
@@ -329,7 +342,9 @@ msgstr "Versuchen Sie mehr Sonderzeichen wie Interpunktion zu verwenden"
 
 #: src/user-share.c:327
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr "Versuchen Sie eine Mischung aus Buchstaben, Zahlen und Satzzeichen zu verwenden"
+msgstr ""
+"Versuchen Sie eine Mischung aus Buchstaben, Zahlen und Satzzeichen zu "
+"verwenden"
 
 #: src/user-share.c:329
 msgid "Try to avoid repeating the same character"
@@ -352,5 +367,5 @@ msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
 msgstr ""
-"Die Passwortlänge benötigt mehr als 8 Bit. Fügen Sie weitere Buchstaben"
-" Nummern und Interpunktion hinzu"
+"Die Passwortlänge benötigt mehr als 8 Bit. Fügen Sie weitere Buchstaben "
+"Nummern und Interpunktion hinzu"

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 15:38+0800\n"
+"POT-Creation-Date: 2018-11-13 13:28+0800\n"
 "PO-Revision-Date: 2018-10-30 18:03+0100\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2\n"
-"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: ca\n"
 
 #: src/main.c:35
 msgid "Get Icon Fail"
@@ -106,19 +106,19 @@ msgstr "Configura-la la pròxima vegada"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: src/user-info.c:248
+#: src/user-info.c:249
 msgid "Get languages failed"
 msgstr "Ha fallat l'obtenció dels idiomes"
 
-#: src/user-info.c:249
+#: src/user-info.c:250
 msgid "Get user languages"
 msgstr "Obtenció dels idiomes d'usuari"
 
-#: src/user-info.c:297
+#: src/user-info.c:298
 msgid "Get User Info"
 msgstr "Obtén la informació de l'usuari"
 
-#: src/user-info.c:297
+#: src/user-info.c:298
 msgid "user count is 0"
 msgstr "el nombre d'usuaris és 0"
 
@@ -182,14 +182,13 @@ msgid ""
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
 "El nom d'usuari només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - "
-"_"
+"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
 
 #: src/user-admin.c:185
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
-"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no "
-"es pot canviar."
+"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
+"canviar."
 
 #: src/user-admin.c:291
 msgid "Creating User"
@@ -214,8 +213,8 @@ msgstr "El nombre d'usuaris supera l'abast de la gestió."
 #: src/user-admin.c:477
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
-"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no "
-"es pot canviar"
+"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
+"canviar"
 
 #: src/user-admin.c:484
 msgid "User Name"
@@ -229,39 +228,52 @@ msgstr "Nom d'usuari"
 msgid "Now set the password"
 msgstr "Ara establiu la contrasenya"
 
-#: src/user-face.c:318
-msgid "Load Local Picture"
-msgstr "Carrega la imatge local"
+#: src/user-face.c:304 src/user-face.c:315
+#, fuzzy
+msgid "Create Crop File"
+msgstr "Ha fallat la creació del fitxer del pid"
 
-#: src/user-face.c:338
-msgid "Browse for more pictures"
-msgstr "Navega per més imatges"
+#: src/user-face.c:305
+msgid "failed to create temporary file for image data"
+msgstr ""
 
-#: src/user-face.c:341
+#: src/user-face.c:373 src/user-face.c:456
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: src/user-face.c:342
+#: src/user-face.c:375
+msgid "Select"
+msgstr ""
+
+#: src/user-face.c:430
+msgid "Load Local Picture"
+msgstr "Carrega la imatge local"
+
+#: src/user-face.c:453
+msgid "Browse for more pictures"
+msgstr "Navega per més imatges"
+
+#: src/user-face.c:457
 msgid "_Open"
 msgstr "_Obre"
 
-#: src/user-face.c:427
+#: src/user-face.c:542
 msgid "Local Picture"
 msgstr "Imatge local"
 
-#: src/user-face.c:441
+#: src/user-face.c:556
 msgid "Avatar list"
 msgstr "Llista d'avatars"
 
-#: src/user-face.c:442
+#: src/user-face.c:557
 msgid "There is no address to store photos"
 msgstr "No hi ha cap adreça per emmagatzemar les imatges"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Change Name"
 msgstr "Canvia el nom"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Please enter a valid character"
 msgstr "Introduïu un caràcter vàlid"
 
@@ -303,8 +315,7 @@ msgstr "Intenteu evitar l'ús del vostre nom a la contrasenya"
 
 #: src/user-share.c:311
 msgid "Try to avoid some of the words included in the password"
-msgstr ""
-"Intenteu evitar algunes de les paraules incloses a la contrasenya"
+msgstr "Intenteu evitar algunes de les paraules incloses a la contrasenya"
 
 #: src/user-share.c:315
 msgid "Try to avoid common words"
@@ -329,14 +340,12 @@ msgstr "Intenteu utilitzar més lletres en minúscules"
 #: src/user-share.c:325
 msgid "Try to use more special characters, like punctuation"
 msgstr ""
-"Intenteu utilitzar més caràcters especials, com ara signes de "
-"puntuació"
+"Intenteu utilitzar més caràcters especials, com ara signes de puntuació"
 
 #: src/user-share.c:327
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
-"Intenteu utilitzar una barreja de lletres, números i signes de "
-"puntuació"
+"Intenteu utilitzar una barreja de lletres, números i signes de puntuació"
 
 #: src/user-share.c:329
 msgid "Try to avoid repeating the same character"
@@ -347,8 +356,8 @@ msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
-"Intenteu evitar la repetició del mateix tipus de caràcter: heu de "
-"barrejar lletres, números i signes puntuació."
+"Intenteu evitar la repetició del mateix tipus de caràcter: heu de barrejar "
+"lletres, números i signes puntuació."
 
 #: src/user-share.c:333
 msgid "Try to avoid sequences like 1234 or abcd"
@@ -359,5 +368,5 @@ msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
 msgstr ""
-"La longitud de la contrasenya necessita més de 8 caràcters. Afegiu "
-"més lletres, números i signes de puntuació"
+"La longitud de la contrasenya necessita més de 8 caràcters. Afegiu més "
+"lletres, números i signes de puntuació"

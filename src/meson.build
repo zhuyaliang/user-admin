@@ -9,6 +9,7 @@ sources = [
 'user-list.c',
 'user-password.c',
 'user-share.c',
+'user-crop.c',
 ]
 
 account_src = gnome.gdbus_codegen(

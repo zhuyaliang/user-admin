@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 15:38+0800\n"
+"POT-Creation-Date: 2018-11-13 13:28+0800\n"
 "PO-Revision-Date: 2018-09-10 15:39+0800\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
@@ -107,19 +107,19 @@ msgstr "下次登录时设置"
 msgid "Unknown"
 msgstr "未知"
 
-#: src/user-info.c:248
+#: src/user-info.c:249
 msgid "Get languages failed"
 msgstr "获取用户语言失败"
 
-#: src/user-info.c:249
+#: src/user-info.c:250
 msgid "Get user languages"
 msgstr "获取用户语言"
 
-#: src/user-info.c:297
+#: src/user-info.c:298
 msgid "Get User Info"
 msgstr "获得用户信息"
 
-#: src/user-info.c:297
+#: src/user-info.c:298
 msgid "user count is 0"
 msgstr "用户个数为0"
 
@@ -178,14 +178,12 @@ msgid "The username cannot start with a - ."
 msgstr "用户名不能以'-'开头"
 
 #: src/user-admin.c:180
-#, fuzzy
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr "用户名只能有字母数字下划线组成"
 
 #: src/user-admin.c:185
-#, fuzzy
 msgid "This will be used to name your home folder and can't be changed."
 msgstr "这将用于命名您的家目录，不能更改"
 
@@ -207,7 +205,7 @@ msgstr "添加用户"
 
 #: src/user-admin.c:340
 msgid "The number of users exceeds the scope of management."
-msgstr ""
+msgstr "用户数量超出管理范围"
 
 #: src/user-admin.c:477
 msgid "This will be used to name your home folder and can't be changed"
@@ -225,39 +223,51 @@ msgstr "登录名字"
 msgid "Now set the password"
 msgstr "现在社设置密码"
 
-#: src/user-face.c:318
-msgid "Load Local Picture"
-msgstr "加载本地图片"
+#: src/user-face.c:304 src/user-face.c:315
+msgid "Create Crop File"
+msgstr "创建图像文件"
 
-#: src/user-face.c:338
-msgid "Browse for more pictures"
-msgstr "查看更多照片"
+#: src/user-face.c:305
+msgid "failed to create temporary file for image data"
+msgstr "为图像数据创建临时文件失败"
 
-#: src/user-face.c:341
+#: src/user-face.c:373 src/user-face.c:456
 msgid "_Cancel"
 msgstr "取消 "
 
-#: src/user-face.c:342
+#: src/user-face.c:375
+msgid "Select"
+msgstr "选择"
+
+#: src/user-face.c:430
+msgid "Load Local Picture"
+msgstr "加载本地图片"
+
+#: src/user-face.c:453
+msgid "Browse for more pictures"
+msgstr "查看更多照片"
+
+#: src/user-face.c:457
 msgid "_Open"
 msgstr "打开"
 
-#: src/user-face.c:427
+#: src/user-face.c:542
 msgid "Local Picture"
 msgstr "本地图片"
 
-#: src/user-face.c:441
+#: src/user-face.c:556
 msgid "Avatar list"
 msgstr "头像列表"
 
-#: src/user-face.c:442
+#: src/user-face.c:557
 msgid "There is no address to store photos"
 msgstr "头像照片不存在"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Change Name"
 msgstr "更改名字"
 
-#: src/user-face.c:537
+#: src/user-face.c:652
 msgid "Please enter a valid character"
 msgstr "请输入正确的字符"
 
@@ -270,7 +280,6 @@ msgid "Close Quit"
 msgstr "关闭退出"
 
 #: src/user-share.c:111
-#, fuzzy
 msgid "_Return"
 msgstr "返回"
 
@@ -335,7 +344,6 @@ msgid "Try to avoid repeating the same character"
 msgstr "尽量避免重复相同的字符"
 
 #: src/user-share.c:331
-#, fuzzy
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
@@ -346,7 +354,6 @@ msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "尽量避免像1234或ABCD这样的序列"
 
 #: src/user-share.c:335
-#, fuzzy
 msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"

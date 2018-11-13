@@ -21,9 +21,13 @@
 #include <sys/statfs.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <gio/gio.h>
+#include <gio/gunixoutputstream.h>
+#include <glib/gstdio.h>
 #include "user.h"
 #include "user-face.h"
 #include "user-share.h"
+#include "user-crop.h"
 static char gcPicBuf[PICMAX][50];   //照片
 /******************************************************************************
 * Function:              UpdataFace 
@@ -284,7 +288,115 @@ static void ThumbnailPreview (GtkFileChooser  *chooser,gpointer data)
     }
 
     gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
-}   
+}  
+static void SaveFaceFile(UserAdmin *ua,GdkPixbuf *pb)
+{
+    gchar *FilePath;
+    gint fd;
+    GOutputStream *stream;
+    GError *error =NULL;
+
+    FilePath = g_build_filename (g_get_tmp_dir (), "mate-user-admin-icon-XXXXXX", NULL);
+    fd = g_mkstemp (FilePath);
+
+    if (fd == -1) 
+    {
+        MessageReport(_("Create Crop File"),
+                      _("failed to create temporary file for image data"),
+                       ERROR);
+        g_free (FilePath);
+        return;
+    }
+
+    stream = g_unix_output_stream_new (fd, TRUE);
+
+    if (!gdk_pixbuf_save_to_stream (pb, stream, "png", NULL, &error, NULL)) 
+    {
+        MessageReport(_("Create Crop File"),
+                      error->message,
+                      ERROR);
+        g_error_free (error);
+        g_object_unref (stream);
+        return;
+    }
+
+    g_object_unref (stream);
+    UpdataFace(-1,FilePath,ua);
+
+     /* if we ever make the dbus call async, the g_remove call needs
+      * to wait for its completion
+      */
+     g_remove (FilePath);
+     g_free (FilePath);
+}    
+static void CropDialogResponse (GtkWidget *dialog,
+                                gint      response_id,
+                                UserAdmin *ua)
+{
+    GdkPixbuf *pb, *pb2;
+
+    if (response_id != GTK_RESPONSE_ACCEPT) {
+            ua->CropArea = NULL;
+            gtk_widget_destroy (dialog);
+            return;
+    }
+    pb = user_crop_area_get_picture (USER_CROP_AREA (ua->CropArea));
+    pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
+
+    SaveFaceFile (ua, pb2);
+
+    g_object_unref (pb2);
+    g_object_unref (pb);
+
+    ua->CropArea = NULL;
+    gtk_widget_destroy (dialog);
+
+}
+/******************************************************************************
+* Function:              FaceDialogCrop
+*        
+* Explain: Tailoring local photos
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  13/11/2018
+******************************************************************************/
+static void FaceDialogCrop (UserAdmin *ua,GdkPixbuf *pixbuf)
+{
+        GtkWidget *dialog;
+
+        dialog = gtk_dialog_new_with_buttons ("",
+                                              GTK_WINDOW (gtk_widget_get_toplevel (ua->IconWindow)),
+                                              GTK_DIALOG_USE_HEADER_BAR,
+                                              _("_Cancel"),
+                                              GTK_RESPONSE_CANCEL,
+                                              _("Select"),
+                                              GTK_RESPONSE_ACCEPT,
+                                              NULL);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+
+        gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
+
+        g_signal_connect (G_OBJECT (dialog), "response",
+                          G_CALLBACK (CropDialogResponse), ua);
+
+        ua->CropArea           = user_crop_area_new (); 
+        user_crop_area_set_min_size (USER_CROP_AREA (ua->CropArea), 50, 50);
+        user_crop_area_set_constrain_aspect (USER_CROP_AREA (ua->CropArea), TRUE);
+        user_crop_area_set_picture (USER_CROP_AREA (ua->CropArea), pixbuf);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+                            ua->CropArea,
+                            TRUE, TRUE, 8);
+
+        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
+
+        gtk_widget_show_all (dialog);
+}
+
+
+
 /******************************************************************************
 * Function:              PictureChooser
 *        
@@ -303,7 +415,7 @@ static void PictureChooser(GtkDialog *chooser,
     UserAdmin *ua = (UserAdmin *) data;
     char *FileName;
     GError *error = NULL;
-    GdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf,*cutpixbuf;
 
     if (response != GTK_RESPONSE_ACCEPT) {
             gtk_widget_destroy (GTK_WIDGET (chooser));
@@ -320,10 +432,13 @@ static void PictureChooser(GtkDialog *chooser,
                        WARING);
         g_error_free (error);
     }
-    UpdataFace(-1,FileName,ua);
+
     g_free (FileName);
+    cutpixbuf = gdk_pixbuf_apply_embedded_orientation (pixbuf);
     g_object_unref (pixbuf);
     gtk_widget_destroy (GTK_WIDGET (chooser));
+    FaceDialogCrop(ua, cutpixbuf);
+    g_object_unref (cutpixbuf);
     Unbind(ua);
 }
 

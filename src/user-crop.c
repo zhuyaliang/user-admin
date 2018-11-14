@@ -718,8 +718,8 @@ user_crop_area_init (UserCropArea *area)
         area->image.width = 0;
         area->image.height = 0;
         area->active_region = OUTSIDE;
-        area->base_width = 48;
-        area->base_height = 48;
+        area->base_width = 50;
+        area->base_height = 50;
         area->aspect = 1;
 
         user_crop_area_set_size_request (area);

@@ -367,7 +367,7 @@ static void FaceDialogCrop (UserAdmin *ua,GdkPixbuf *pixbuf)
 {
         GtkWidget *dialog;
         dialog = gtk_dialog_new_with_buttons ("",
-                                              GTK_WINDOW (gtk_widget_get_toplevel (ua->IconWindow)),
+                                              GTK_WINDOW (gtk_widget_get_toplevel (ua->MainWindow)),
                                               GTK_DIALOG_USE_HEADER_BAR,
                                               _("_Cancel"),
                                               GTK_RESPONSE_CANCEL,
@@ -375,7 +375,7 @@ static void FaceDialogCrop (UserAdmin *ua,GdkPixbuf *pixbuf)
                                               GTK_RESPONSE_ACCEPT,
                                               NULL);
 
-     //   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 

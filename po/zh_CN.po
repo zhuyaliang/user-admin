@@ -24,7 +24,7 @@ msgid "Get Icon Fail"
 msgstr "获取图标失败"
 
 #: src/main.c:48
-msgid "Mate User Manage"
+msgid "Users Management"
 msgstr "Mate 用户管理"
 
 #: src/main.c:102 src/main.c:144
@@ -276,7 +276,7 @@ msgid "User List"
 msgstr "用户列表"
 
 #: src/user-list.c:202
-msgid "Close Quit"
+msgid "Close"
 msgstr "关闭退出"
 
 #: src/user-share.c:111

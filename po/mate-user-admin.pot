@@ -22,7 +22,7 @@ msgid "Get Icon Fail"
 msgstr ""
 
 #: src/main.c:48
-msgid "Mate User Manage"
+msgid "Users Management"
 msgstr ""
 
 #: src/main.c:102 src/main.c:144
@@ -274,7 +274,7 @@ msgid "User List"
 msgstr ""
 
 #: src/user-list.c:202
-msgid "Close Quit"
+msgid "Close"
 msgstr ""
 
 #: src/user-share.c:111

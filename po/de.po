@@ -22,7 +22,7 @@ msgid "Get Icon Fail"
 msgstr "Symbolfehler erhalten"
 
 #: src/main.c:48
-msgid "Mate User Manage"
+msgid "Users Management"
 msgstr "Mate Benutzer Verwaltung"
 
 #: src/main.c:102 src/main.c:144
@@ -281,7 +281,7 @@ msgid "User List"
 msgstr "Benutzerliste"
 
 #: src/user-list.c:202
-msgid "Close Quit"
+msgid "Close"
 msgstr "Beenden"
 
 #: src/user-share.c:111

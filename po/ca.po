@@ -23,7 +23,7 @@ msgid "Get Icon Fail"
 msgstr "Ha fallat l'obtenció de la icona"
 
 #: src/main.c:48
-msgid "Mate User Manage"
+msgid "Users Management"
 msgstr "Gestió d'usuaris de MATE"
 
 #: src/main.c:102 src/main.c:144
@@ -282,7 +282,7 @@ msgid "User List"
 msgstr "Llista d'usuaris"
 
 #: src/user-list.c:202
-msgid "Close Quit"
+msgid "Close"
 msgstr "Tanca i surt"
 
 #: src/user-share.c:111

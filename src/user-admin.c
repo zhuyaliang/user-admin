@@ -35,6 +35,36 @@ static void RemoveUserData(UserAdmin *ua,int UserIndex)
     memset(ua->ul[UserIndex].PassText,'\0',strlen(ua->ul[UserIndex].PassText));
     memset(ua->ul[UserIndex].UserTime,'\0',strlen(ua->ul[UserIndex].UserTime));
 }
+
+static uid_t GetLoginUserUid(void)
+{
+    int fd;
+    char LoginUid[10] = { 0 };
+
+    fd = open("/proc/self/loginuid",O_RDONLY);
+    if(fd < 0)
+    {
+        return -1;
+    }
+
+    if(read(fd,LoginUid,10) < 0)
+    {
+        close(fd);
+        return -1;
+    }
+
+    close(fd);
+    return atoi(LoginUid);
+}
+
+static gboolean CheckLoginUser(uid_t uid)
+{
+    if(uid == GetLoginUserUid())
+    {
+        return TRUE;
+    }    
+    return FALSE;
+}    
 /******************************************************************************
 * Function:              RemoveUser 
 *        
@@ -61,6 +91,14 @@ void RemoveUser(GtkWidget *widget, gpointer data)
     if (gtk_tree_selection_get_selected(ua->UserSelect, &ua->Model, &iter))
     {
         Index = gnCurrentUserIndex;  // gnCurrentUserIndex 代表当前用户标号
+        if(CheckLoginUser(act_user_get_uid(ua->ul[Index].User)) == TRUE)
+        {
+            MessageReport(_("Remove User"),
+                          _("You cannot delete your own account."),
+                          ERROR); 
+            return;
+        
+        }    
         nRet = MessageReport(_("Remove User"),
                       _("Whether to remove the user's home directory"),
                       QUESTION);
@@ -73,7 +111,11 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         {
              return;
         }
-
+         /* remove autologin */
+        if (act_user_get_automatic_login (ua->ul[Index].User)) 
+        {
+            act_user_set_automatic_login (ua->ul[Index].User, FALSE);
+        }
         while(!act_user_manager_delete_user(Manager,ua->ul[Index].User,RemoveType,&error))
         {
             error = NULL;

@@ -259,7 +259,7 @@ void UpdateInterface(int Cnt,UserAdmin *ua)
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
                          ua->ul[Cnt].PassText);
     
-    gtk_switch_set_active(GTK_SWITCH(ua->SwitchAutoLogin),
+    gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
                           ua->ul[Cnt].LoginType);
 
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),

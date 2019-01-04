@@ -69,15 +69,16 @@ static gboolean CheckLoginUser(uid_t uid)
 ******************************************************************************/
 void RemoveUser(GtkWidget *widget, gpointer data)
 {
-    UserAdmin *ua = (UserAdmin *)data;
-    GtkTreeIter iter;
-    int nRet;
-    int RemoveCount = 0;
-    gboolean RemoveType = TRUE;
-	ActUserManager *Manager;
-    UserInfo *user;
-    GError *error = NULL;
-    Manager = act_user_manager_get_default ();
+    UserAdmin      *ua = (UserAdmin *)data;
+    GtkTreeIter     iter;
+    int             nRet;
+    int             RemoveCount = 0;
+    gboolean        RemoveType = TRUE;
+    ActUserManager *Manager;
+    UserInfo       *user;
+    GError         *error = NULL;
+    Manager =       act_user_manager_get_default ();
+
     user = GetIndexUser(ua,gnCurrentUserIndex);
     if (gtk_tree_selection_get_selected(ua->UserSelect, &ua->Model, &iter))
     {
@@ -85,13 +86,13 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         {
             MessageReport(_("Remove User"),
                           _("You cannot delete your own account."),
-                          ERROR); 
+                           ERROR); 
             return;
         
         }    
         nRet = MessageReport(_("Remove User"),
-                      _("Whether to remove the user's home directory"),
-                      QUESTION);
+                             _("Whether to remove the user's home directory"),
+                              QUESTION);
         if(nRet == GTK_RESPONSE_NO)
         {
              RemoveType = FALSE;
@@ -114,7 +115,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
             {   
                 MessageReport(_("Remove User"),
                               _("Remove user failure and try again"),
-                              ERROR); 
+                               ERROR); 
                 break;
             }    
         }
@@ -138,15 +139,16 @@ void RemoveUser(GtkWidget *widget, gpointer data)
 
 static gboolean CheckUserNameUsed (const gchar *UserName)
 {
-        struct passwd *pwent;
+    struct passwd *pwent;
+    
+    if (UserName == NULL || UserName[0] == '\0') 
+    {
+        return FALSE;
+    }
 
-        if (UserName == NULL || UserName[0] == '\0') {
-                return FALSE;
-        }
+    pwent = getpwnam (UserName);
 
-        pwent = getpwnam (UserName);
-
-        return pwent != NULL;
+    return pwent != NULL;
 }
 
 /******************************************************************************
@@ -275,7 +277,7 @@ static ActUser *WriteUserInfo(const gchar *UserName,
                               int          PasswordType,
                               const gchar *TmpPass)
 {
-	ActUserManager *Manager;
+    ActUserManager *Manager;
     GError *error = NULL;
     ActUser *user;
 
@@ -312,15 +314,15 @@ static ActUser *WriteUserInfo(const gchar *UserName,
 }       
 static const gchar *GetNewUserPassword(GtkWidget *EntryPass1,GtkWidget *EntryPass2)
 {
-	const char *p1 = NULL;
-	const char *p2 = NULL;
+    const char *p1 = NULL;
+    const char *p2 = NULL;
 
     p1 =  gtk_entry_get_text(GTK_ENTRY(EntryPass1));   
-	p2 =  gtk_entry_get_text(GTK_ENTRY(EntryPass2));
+    p2 =  gtk_entry_get_text(GTK_ENTRY(EntryPass2));
         
     if(strcmp(p1,p2) != 0 )
-	{
-	    return NULL;
+    {
+        return NULL;
     }
     return p2;
 }    
@@ -364,8 +366,8 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     UserInfo *user;
-	const char *rn;
-	const char *un;
+    const char *rn;
+    const char *un;
     const char *NewUserlang;
     const char *Password;
     UserInfo *newuser;
@@ -374,8 +376,8 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
     int password_type = NEWPASS;
     const char *NoteMessage = _("Two inconsistencies in cipher input");
 
-	rn = gtk_entry_get_text(GTK_ENTRY(ua->RealNameEntry));
-	un = gtk_entry_get_text(GTK_ENTRY(ua->UserNameEntry));
+    rn = gtk_entry_get_text(GTK_ENTRY(ua->RealNameEntry));
+    un = gtk_entry_get_text(GTK_ENTRY(ua->UserNameEntry));
     account_type = GetNewUserType(ua->NewUserType);
     NewUserlang = GetNewUserLang(ua->NewUserLangType);
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ua->RadioButton2)) == TRUE)
@@ -403,7 +405,7 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
         newuser->UserName = g_strdup(un);
         newuser->ActUser  = ActUser;
         newuser->Iter     = ua->NewUserIter;
-	    UserListAppend(ua->UserList,
+        UserListAppend(ua->UserList,
                        DEFAULT,
                        rn,
                       "black",
@@ -412,24 +414,24 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
         ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(newuser));
         user = GetIndexUser(ua,gnCurrentUserIndex);
         UpdateInterface(user->ActUser,ua);
-	    ua->UserCount +=1;//用户个数加1
+        ua->UserCount +=1;//用户个数加1
     }    
-	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
+    gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 } 
 static void CloseWindow(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
+    gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 }
 
 static void RemoveTime(GtkWidget *widget,gpointer data)
 {
-	UserAdmin *ua = (UserAdmin *)data;
+    UserAdmin *ua = (UserAdmin *)data;
 
     if(ua->CheckPassTimeId > 0)
-		g_source_remove(ua->CheckPassTimeId);
+        g_source_remove(ua->CheckPassTimeId);
     if(ua->CheckNameTimeId > 0)
-   	    g_source_remove(ua->CheckNameTimeId);
+        g_source_remove(ua->CheckNameTimeId);
 
     ua->CheckPassTimeId = 0;
     ua->CheckNameTimeId = 0;
@@ -483,7 +485,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
 
     UserNameEntry = gtk_entry_new();
     ua->UserNameEntry = UserNameEntry;
- 	TimeId = g_timeout_add(800,(GSourceFunc)CheckName,ua);
+    TimeId = g_timeout_add(800,(GSourceFunc)CheckName,ua);
     ua->CheckNameTimeId = TimeId;
     gtk_entry_set_max_length(GTK_ENTRY(UserNameEntry),24);
     gtk_grid_attach(GTK_GRID(Table) ,UserNameEntry , 1 , 0 , 3 , 1);
@@ -501,8 +503,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     ua->RealNameEntry = RealNameEntry;
     gtk_entry_set_max_length(GTK_ENTRY(RealNameEntry),24);
     gtk_grid_attach(GTK_GRID(Table) , RealNameEntry , 1 , 2 , 3 , 1);
-
-    	  
+	  
     LabelUserType = gtk_label_new(NULL);
     SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
@@ -541,9 +542,9 @@ static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
 ******************************************************************************/
 static gboolean TimeFun(gpointer data)
 {
-    UserAdmin *ua = (UserAdmin *)data;
+    UserAdmin  *ua = (UserAdmin *)data;
     const char *s;
-    int Level;
+    int         Level;
     const char *Message;
 
     s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
@@ -563,7 +564,6 @@ static gboolean TimeFun(gpointer data)
     SetLableFontType(ua->LabelPassNote,"gray",10,Message);
     UnlockFlag = 1;
     return TRUE;
-
 }
 
 /******************************************************************************
@@ -680,7 +680,7 @@ static void SetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     ua->NewPassEntry = NewEntryPass;
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(NewEntryPass), 
                                       GTK_ENTRY_ICON_SECONDARY,
-                                      "system-run");
+                                     "system-run");
     gtk_entry_set_max_length(GTK_ENTRY(NewEntryPass),24);
     gtk_grid_attach(GTK_GRID(Table) , NewEntryPass , 1 , 3 , 4 , 1);
     g_signal_connect (G_OBJECT(NewEntryPass), 
@@ -697,7 +697,7 @@ static void SetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     gtk_level_bar_set_min_value(GTK_LEVEL_BAR(LevelBar),0.0);
     gtk_level_bar_set_max_value(GTK_LEVEL_BAR(LevelBar),5.0);
     gtk_level_bar_set_mode(GTK_LEVEL_BAR(LevelBar),GTK_LEVEL_BAR_MODE_DISCRETE);
- 	gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 4 , 4 , 1);
+    gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 4 , 4 , 1);
 	
 	
     LabelPassNote = gtk_label_new (NULL);

@@ -187,8 +187,8 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , ComboUser , 1 , 0 , 2 , 1);
     g_signal_connect(G_OBJECT(ComboUser),
                     "changed",
-                    G_CALLBACK(ComboSelectUserType),
-                    ua);
+                     G_CALLBACK(ComboSelectUserType),
+                     ua);
 
    /*select langusge*/ 
     LabelLanguage = gtk_label_new(NULL);
@@ -204,8 +204,8 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);
     g_signal_connect(G_OBJECT(ComboLanguage),
                     "changed",
-                    G_CALLBACK(ComboSelectLanguage),
-                    ua);
+                     G_CALLBACK(ComboSelectLanguage),
+                     ua);
     
     /*set password*/
     LabelPass = gtk_label_new(NULL);
@@ -229,8 +229,8 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
     g_signal_connect(G_OBJECT(SwitchLogin),
                     "state-set",
-                    G_CALLBACK(SwitchState),
-                    ua);
+                     G_CALLBACK(SwitchState),
+                     ua);
     
     /*login time*/
     LabelTime = gtk_label_new(NULL);

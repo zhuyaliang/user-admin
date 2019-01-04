@@ -83,7 +83,7 @@ static void  on_changed(GtkWidget *widget,  gpointer data)
                                 INT_COLUMN, &count,
                                 -1);
             gnCurrentUserIndex = count;
-            user = GetIndexUser(ua,count);
+            user = GetIndexUser(ua->UsersList,count);
             if(user == NULL)
             {
                 g_error("No such user !!!\r\n");

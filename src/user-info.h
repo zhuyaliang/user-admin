@@ -43,19 +43,22 @@ typedef struct UserInfoClass
     GObjectClass parent_class;
 } UserInfoClass;
 
-GType          user_info_get_type                (void) G_GNUC_CONST;
-UserInfo *     user_new                     (void);
-int GetUserInfo(UserAdmin *ua);
-const gchar *GetPasswordModeText (ActUser *user,int *Type);
-const gchar *GetLoginTimeText (ActUser *user);
-const gchar *GetRealName (ActUser *user);
-const gchar *GetUserName(ActUser *user);
-const gchar *GetHomeName(ActUser *user);
-const gchar *GetUserIcon(ActUser *user);
-const gchar *GetUserLang(ActUser *user);
-UserInfo * GetIndexUser(UserAdmin *ua,guint index);
-gint  GetUserType(ActUser *user);
-gint  GetUserAutoLogin(ActUser *user);
+GType         user_info_get_type       (void) G_GNUC_CONST;
+UserInfo     *user_new                 (void);
+int           GetUserInfo              (UserAdmin *ua);
+const gchar  *GetPasswordModeText      (ActUser   *user,
+                                        int       *Type);
+const gchar  *GetLoginTimeText         (ActUser   *user);
+const gchar  *GetRealName              (ActUser   *user);
+const gchar  *GetUserName              (ActUser   *user);
+guint         GetUserUid               (ActUser   *user);
+const gchar  *GetHomeName              (ActUser   *user);
+const gchar  *GetUserIcon              (ActUser   *user);
+const gchar  *GetUserLang              (ActUser   *user);
+UserInfo     *GetIndexUser             (GSList    *UsersList,
+                                        guint      index);
+gint          GetUserType              (ActUser   *user);
+gint          GetUserAutoLogin         (ActUser   *user);
 G_END_DECLS
 
 #endif

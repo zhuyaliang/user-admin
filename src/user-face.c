@@ -64,7 +64,7 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     
     /*Update the left list picture*/
     face = SetUserFaceSize (BasePath, 50);
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     gtk_list_store_set(ua->ListSTore,&user->Iter,
                        COL_USER_FACE, face,
                        LIST_COLOR,"black",
@@ -634,7 +634,7 @@ static void ModifyName (GtkEntry *entry,gpointer  data)
     const gchar *NewName;
     UserInfo *user;
     NewName = gtk_entry_get_text (entry);
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     if(RealNameValidCheck(NewName))
     {        
         gtk_list_store_set(ua->ListSTore,&user->Iter,
@@ -676,7 +676,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     table = gtk_grid_new();
     gtk_fixed_put(GTK_FIXED(fixed),table, 0, 0);
    
-    user = GetIndexUser(ua,0);
+    user = GetIndexUser(ua->UsersList,0);
     /*set user icon 96 *96 */
     pb = gdk_pixbuf_new_from_file(GetUserIcon(user->ActUser),&error);
     if(pb == NULL)

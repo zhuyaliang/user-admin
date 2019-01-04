@@ -79,7 +79,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
     GError         *error = NULL;
     Manager =       act_user_manager_get_default ();
 
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     if (gtk_tree_selection_get_selected(ua->UserSelect, &ua->Model, &iter))
     {
         if(CheckLoginUser(act_user_get_uid(user->ActUser)) == TRUE)
@@ -125,7 +125,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
             g_object_unref(user);
             RefreshUserList(ua->UserList,ua->UsersList);
             /*Scavenging user information*/
-            user = GetIndexUser(ua,gnCurrentUserIndex);
+            user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
             if(user == NULL)
             {
                 g_error(_("No such user!!!\r\n"));
@@ -412,7 +412,7 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
                        ua->UserCount,
                       &ua->NewUserIter);
         ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(newuser));
-        user = GetIndexUser(ua,gnCurrentUserIndex);
+        user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         UpdateInterface(user->ActUser,ua);
         ua->UserCount +=1;//用户个数加1
     }    
@@ -508,7 +508,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
      
-    user = GetIndexUser(ua,0);
+    user = GetIndexUser(ua->UsersList,0);
     NewUserType = SetComboUserType(_("Standard"),_("Administrators"));
     gtk_combo_box_set_active(GTK_COMBO_BOX(NewUserType),STANDARD);
     ua->NewUserType = NewUserType; 

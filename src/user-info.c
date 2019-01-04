@@ -120,6 +120,11 @@ const gchar *GetRealName (ActUser *user)
         name = act_user_get_user_name (user);
     return name;
 }
+guint GetUserUid(ActUser *user)
+{
+    return act_user_get_uid(user);
+}    
+
 const gchar *GetUserName(ActUser *user)
 {
     const gchar *name =NULL; 
@@ -168,13 +173,13 @@ gint GetUserAutoLogin(ActUser *user)
 
     return Auto;
 }       
-UserInfo * GetIndexUser(UserAdmin *ua,guint index)
+UserInfo * GetIndexUser(GSList *UsersList,guint index)
 {
-    if(g_slist_length(ua->UsersList) <= index)
+    if(g_slist_length(UsersList) <= index)
     {
         return NULL;
     }
-    return g_slist_nth_data(ua->UsersList,index); 
+    return g_slist_nth_data(UsersList,index); 
 }    
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {

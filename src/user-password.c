@@ -54,7 +54,7 @@ static void NextSetPass (GtkRadioButton *button,gpointer data)
         g_source_remove(ua->CheckPassTimeId);
         ua->CheckPassTimeId = 0;
     }
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
     
 }        
@@ -81,7 +81,7 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
 
     CheckPassTimeId = g_timeout_add(800,(GSourceFunc)CheckPassword,ua);
     ua->CheckPassTimeId = CheckPassTimeId;
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_REGULAR); 
 }        
 static void ClosePassWindow(GtkWidget *widget,gpointer data)
@@ -108,7 +108,7 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
     int passtype;
     UserInfo *user;
 
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     GetPasswordModeText(user->ActUser,&passtype);
     /*choose now set password*/
     if(passtype == OLDPASS)
@@ -134,7 +134,7 @@ static void SetButtonMode(UserAdmin *ua)
     int passtype;
     UserInfo *user;
     
-    user = GetIndexUser(ua,gnCurrentUserIndex);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     GetPasswordModeText(user->ActUser,&passtype);
     if(passtype == OLDPASS)
     {

@@ -1,0 +1,336 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+ABOVE	user-crop.c	/^    ABOVE$/;"	e	enum:__anon512a40760203	file:
+ADMIN	user.h	/^#define  ADMIN /;"	d
+ActUser	user-info.h	/^    ActUser     *ActUser;$/;"	m	struct:UserInfo	typeref:typename:ActUser *
+AddNewUser	user-admin.c	/^void AddNewUser(GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void
+AddRemoveUser	user-list.c	/^void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)$/;"	f	typeref:typename:void
+AddSelectUsersColumns	user-group.c	/^static void AddSelectUsersColumns (GroupsManage *gm)$/;"	f	typeref:typename:void	file:
+AddSwitchGroupColumns	user-group.c	/^static void AddSwitchGroupColumns (GroupsManage *gm)$/;"	f	typeref:typename:void	file:
+AddUserWindow	user.h	/^    GtkWidget        *AddUserWindow;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+AutoGenera	user-share.c	/^void AutoGenera (GtkEntry            *entry,$/;"	f	typeref:typename:void
+BELOW	user-crop.c	/^    BELOW,$/;"	e	enum:__anon512a40760203	file:
+BETWEEN	user-crop.c	/^    BETWEEN,$/;"	e	enum:__anon512a40760203	file:
+BOTTOM	user-crop.c	/^    BOTTOM,$/;"	e	enum:__anon512a40760103	file:
+BOTTOM_LEFT	user-crop.c	/^    BOTTOM_LEFT,$/;"	e	enum:__anon512a40760103	file:
+BOTTOM_RIGHT	user-crop.c	/^    BOTTOM_RIGHT,$/;"	e	enum:__anon512a40760103	file:
+ButtonConfirm	user.h	/^    GtkWidget        *ButtonConfirm;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ButtonFace	user.h	/^    GtkWidget        *ButtonFace;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ButtonPass	user.h	/^    GtkWidget        *ButtonPass;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ButtonUserGroup	user.h	/^    GtkWidget        *ButtonUserGroup;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ButtonUserTime	user.h	/^    GtkWidget        *ButtonUserTime;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+COLUMN_FIXED	user-group.c	/^  COLUMN_FIXED,$/;"	e	enum:__anonaa5f126f0203	file:
+COLUMN_GROUPI	user-group.c	/^  COLUMN_GROUPI,$/;"	e	enum:__anonaa5f126f0403	file:
+COLUMN_GROUPID	user-group.c	/^  COLUMN_GROUPID,$/;"	e	enum:__anonaa5f126f0203	file:
+COLUMN_GROUPN	user-group.c	/^  COLUMN_GROUPN,$/;"	e	enum:__anonaa5f126f0403	file:
+COLUMN_GROUPNAME	user-group.c	/^  COLUMN_GROUPNAME,$/;"	e	enum:__anonaa5f126f0203	file:
+COLUMN_ICON	user-group.c	/^  COLUMN_ICON,$/;"	e	enum:__anonaa5f126f0403	file:
+COLUMN_SELECT	user-group.c	/^  COLUMN_SELECT,$/;"	e	enum:__anonaa5f126f0303	file:
+COLUMN_USERID	user-group.c	/^  COLUMN_USERID,$/;"	e	enum:__anonaa5f126f0303	file:
+COLUMN_USERNAME	user-group.c	/^  COLUMN_USERNAME,$/;"	e	enum:__anonaa5f126f0303	file:
+COL_USER_FACE	user.h	/^    COL_USER_FACE= 0,$/;"	e	enum:__anon2124e5da0103
+Change	user-share.h	/^int Change;$/;"	v	typeref:typename:int
+ChangePass	user-base.c	/^static void ChangePass(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+CheckLoginUser	user-admin.c	/^static gboolean CheckLoginUser(uid_t uid)$/;"	f	typeref:typename:gboolean	file:
+CheckName	user-admin.c	/^static gboolean CheckName(gpointer data)$/;"	f	typeref:typename:gboolean	file:
+CheckNameTimeId	user.h	/^    int               CheckNameTimeId; \/\/Check the Realname format timer$/;"	m	struct:__anon2124e5da0308	typeref:typename:int
+CheckPassEntry	user.h	/^    GtkWidget        *CheckPassEntry;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+CheckPassTimeId	user.h	/^    int               CheckPassTimeId;\/\/Check the password format timer$/;"	m	struct:__anon2124e5da0308	typeref:typename:int
+CheckPassword	user-share.c	/^gboolean CheckPassword(gpointer data)$/;"	f	typeref:typename:gboolean
+CheckUserNameUsed	user-admin.c	/^static gboolean CheckUserNameUsed (const gchar *UserName)$/;"	f	typeref:typename:gboolean	file:
+CloseGroupWindow	user-group.c	/^static void CloseGroupWindow (GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void	file:
+CloseNewPassWindow	user-password.c	/^static void CloseNewPassWindow(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+ClosePassWindow	user-password.c	/^static void ClosePassWindow(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+CloseWindow	user-admin.c	/^static void CloseWindow(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+ComUserLanguage	user.h	/^    GtkWidget        *ComUserLanguage;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ComUserType	user.h	/^    GtkWidget        *ComUserType;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ComboSelectLanguage	user-base.c	/^static void ComboSelectLanguage(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+ComboSelectUserType	user-base.c	/^static void ComboSelectUserType(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+CreateAddUsersModel	user-group.c	/^static GtkTreeModel * CreateAddUsersModel (GSList *List)$/;"	f	typeref:typename:GtkTreeModel *	file:
+CreateInterface	main.c	/^static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+CreateManageWindow	user-group.c	/^static GtkWidget *CreateManageWindow(void)$/;"	f	typeref:typename:GtkWidget *	file:
+CreateNewGroup	user-group.c	/^static void CreateNewGroup(GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void	file:
+CreateNewPass	user-password.c	/^void CreateNewPass(UserAdmin *ua)$/;"	f	typeref:typename:void
+CreateNewUser	user-admin.c	/^static void CreateNewUser(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+CreateSwicthModel	user-group.c	/^static GtkTreeModel * CreateSwicthModel (GSList *List,const gchar *name)$/;"	f	typeref:typename:GtkTreeModel *	file:
+CropArea	user.h	/^    GtkWidget        *CropArea;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+CropDialogResponse	user-face.c	/^static void CropDialogResponse (GtkWidget *dialog,$/;"	f	typeref:typename:void	file:
+DEFAULT	user.h	/^#define  DEFAULT /;"	d
+DisplayUserList	user-list.c	/^void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)$/;"	f	typeref:typename:void
+DisplayUserSetFace	user-face.c	/^void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)$/;"	f	typeref:typename:void
+DisplayUserSetOther	user-base.c	/^void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)$/;"	f	typeref:typename:void
+ERROR	user-share.h	/^#define ERROR /;"	d
+EntryGroupName	user.h	/^    GtkWidget        *EntryGroupName;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GtkWidget *
+EntryName	user.h	/^    GtkWidget        *EntryName;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+FaceDialogCrop	user-face.c	/^static void FaceDialogCrop (UserAdmin *ua,GdkPixbuf *pixbuf)$/;"	f	typeref:typename:void	file:
+G_DEFINE_TYPE	user-group.c	/^G_DEFINE_TYPE (UserGroup, user_group, G_TYPE_OBJECT)$/;"	f	file:
+G_DEFINE_TYPE	user-info.c	/^G_DEFINE_TYPE (UserInfo, user_info, G_TYPE_OBJECT)$/;"	f	file:
+GetAppIcon	main.c	/^static GdkPixbuf * GetAppIcon(void)$/;"	f	typeref:typename:GdkPixbuf *	file:
+GetCurrentLangIndex	user-share.c	/^int GetCurrentLangIndex(const char *_Lang)        $/;"	f	typeref:typename:int
+GetDirFace	user-face.c	/^static int GetDirFace(GtkWidget *flowbox)$/;"	f	typeref:typename:int	file:
+GetFaceFile	user-face.c	/^static GtkWidget *GetFaceFile (const char *FileName)$/;"	f	typeref:typename:GtkWidget *	file:
+GetFaceList	user-face.c	/^static void GetFaceList(GtkWidget *button, gpointer data)$/;"	f	typeref:typename:void	file:
+GetGridWidget	user-group.c	/^static GtkWidget *GetGridWidget (void)$/;"	f	typeref:typename:GtkWidget *	file:
+GetGroupGid	user-group.c	/^static int GetGroupGid(GasGroup *gas)$/;"	f	typeref:typename:int	file:
+GetGroupInfo	user-group.c	/^static GSList *GetGroupInfo(void)$/;"	f	typeref:typename:GSList *	file:
+GetGroupName	user-group.c	/^static const gchar *GetGroupName(GasGroup *gas)$/;"	f	typeref:typename:const gchar *	file:
+GetGroupNum	user-group.c	/^static int GetGroupNum(GSList *List)$/;"	f	typeref:typename:int	file:
+GetGroupObject	user-group.c	/^static UserGroup *GetGroupObject (GSList *List,guint gid)$/;"	f	typeref:typename:UserGroup *	file:
+GetHomeName	user-info.c	/^const gchar *GetHomeName(ActUser *user)$/;"	f	typeref:typename:const gchar *
+GetIndexUser	user-info.c	/^UserInfo * GetIndexUser(GSList *UsersList,guint index)$/;"	f	typeref:typename:UserInfo *
+GetLocaleLang	main.c	/^static void GetLocaleLang (void)$/;"	f	typeref:typename:void	file:
+GetLoginTimeText	user-info.c	/^const gchar * GetLoginTimeText (ActUser *user)$/;"	f	typeref:typename:const gchar *
+GetLoginUserLang	user-admin.c	/^static gchar *GetLoginUserLang(ActUser *ActUser)$/;"	f	typeref:typename:gchar *	file:
+GetLoginUserUid	user-admin.c	/^static uid_t GetLoginUserUid(void)$/;"	f	typeref:typename:uid_t	file:
+GetNewUserLang	user-admin.c	/^static const gchar *GetNewUserLang(GtkWidget *Combox)$/;"	f	typeref:typename:const gchar *	file:
+GetNewUserPassword	user-admin.c	/^static const gchar *GetNewUserPassword(GtkWidget *EntryPass1,GtkWidget *EntryPass2)$/;"	f	typeref:typename:const gchar *	file:
+GetNewUserType	user-admin.c	/^static int GetNewUserType(GtkWidget *Switch)$/;"	f	typeref:typename:int	file:
+GetPassStrength	user-share.c	/^int GetPassStrength (const char  *password,$/;"	f	typeref:typename:int
+GetPasswordModeText	user-info.c	/^const gchar * GetPasswordModeText (ActUser *user,int *Type)$/;"	f	typeref:typename:const gchar *
+GetRealName	user-info.c	/^const gchar *GetRealName (ActUser *user)$/;"	f	typeref:typename:const gchar *
+GetScrolledWidget	user-group.c	/^static GtkWidget *GetScrolledWidget (void)$/;"	f	typeref:typename:GtkWidget *	file:
+GetUserAutoLogin	user-info.c	/^gint GetUserAutoLogin(ActUser *user)$/;"	f	typeref:typename:gint
+GetUserIcon	user-info.c	/^const gchar *GetUserIcon(ActUser *user)$/;"	f	typeref:typename:const gchar *
+GetUserInfo	user-info.c	/^int GetUserInfo(UserAdmin *ua)$/;"	f	typeref:typename:int
+GetUserIsGroup	user-group.c	/^static gboolean GetUserIsGroup(GasGroup *gas,const gchar *user)$/;"	f	typeref:typename:gboolean	file:
+GetUserLang	user-info.c	/^const char *GetUserLang(ActUser *user)$/;"	f	typeref:typename:const char *
+GetUserName	user-info.c	/^const gchar *GetUserName(ActUser *user)$/;"	f	typeref:typename:const gchar *
+GetUserType	user-info.c	/^gint GetUserType(ActUser *user)$/;"	f	typeref:typename:gint
+GetUserUid	user-info.c	/^guint GetUserUid(ActUser *user)$/;"	f	typeref:typename:guint
+GroupId	user-group.h	/^    gid_t         GroupId;$/;"	m	struct:UserGroup	typeref:typename:gid_t
+GroupInit	user-group.c	/^static UserGroup * GroupInit (GasGroup *gas)$/;"	f	typeref:typename:UserGroup *	file:
+GroupName	user-group.h	/^    gchar        *GroupName;$/;"	m	struct:UserGroup	typeref:typename:gchar *
+GroupNum	user.h	/^    int               GroupNum;$/;"	m	struct:__anon2124e5da0208	typeref:typename:int
+GroupsList	user.h	/^    GSList           *GroupsList;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GSList *
+GroupsManage	user.h	/^}GroupsManage;$/;"	t	typeref:struct:__anon2124e5da0208
+GroupsWindow	user.h	/^    GtkWidget        *GroupsWindow;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GtkWidget *
+INFOR	user-share.h	/^#define INFOR /;"	d
+INSIDE	user-crop.c	/^    INSIDE,$/;"	e	enum:__anon512a40760103	file:
+INT_COLUMN	user.h	/^    INT_COLUMN,$/;"	e	enum:__anon2124e5da0103
+IS_GROUP	user-group.h	/^#define IS_GROUP(/;"	d
+IS_USERINFO	user-info.h	/^#define IS_USERINFO(/;"	d
+IconWindow	user.h	/^    GtkWidget        *IconWindow;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+InitMainWindow	main.c	/^static void InitMainWindow(UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+Iter	user-info.h	/^    GtkTreeIter  Iter;           \/\/user list iter$/;"	m	struct:UserInfo	typeref:typename:GtkTreeIter
+KeyId	user.h	/^    int               KeyId;$/;"	m	struct:__anon2124e5da0308	typeref:typename:int
+LEFT	user-crop.c	/^    LEFT,$/;"	e	enum:__anon512a40760103	file:
+LIST_COLOR	user.h	/^    LIST_COLOR,$/;"	e	enum:__anon2124e5da0103
+LIST_FRONT	user.h	/^    LIST_FRONT,$/;"	e	enum:__anon2124e5da0103
+LIST_TEXT	user.h	/^    LIST_TEXT ,$/;"	e	enum:__anon2124e5da0103
+LOCALEDIR	user.h	/^#define LOCALEDIR /;"	d
+LOCKFILE	main.c	/^#define  LOCKFILE /;"	d	file:
+LOWER	user-crop.c	/^    LOWER,$/;"	e	enum:__anon512a40760203	file:
+LabelNameNote	user.h	/^    GtkWidget        *LabelNameNote;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+LabelPassNote	user.h	/^    GtkWidget        *LabelPassNote;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+LabelSpace	user.h	/^    GtkWidget        *LabelSpace;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+LangList	user.h	/^GSList     *LangList;$/;"	v	typeref:typename:GSList *
+LangSort	main.c	/^static int LangSort (const void *a,const void *b)$/;"	f	typeref:typename:int	file:
+LevelBar	user.h	/^    GtkWidget        *LevelBar;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+ListModelCreate	user-list.c	/^static GtkTreeModel  *ListModelCreate(UserAdmin *ua)$/;"	f	typeref:typename:GtkTreeModel *	file:
+ListSTore	user.h	/^    GtkListStore     *ListSTore;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkListStore *
+ListViewInit	user-list.c	/^static void ListViewInit(GtkWidget *list)$/;"	f	typeref:typename:void	file:
+LoadCreateGroup	user-group.c	/^static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)$/;"	f	typeref:typename:GtkWidget *	file:
+LoadLocalPicture	user-face.c	/^static void LoadLocalPicture(GtkWidget *button, gpointer data)$/;"	f	typeref:typename:void	file:
+LoadRemoveGroup	user-group.c	/^static GtkWidget *LoadRemoveGroup(GroupsManage *gm)$/;"	f	typeref:typename:GtkWidget *	file:
+LoadSwitchGroup	user-group.c	/^static GtkWidget *LoadSwitchGroup(GroupsManage *gm)$/;"	f	typeref:typename:GtkWidget *	file:
+LocaleHash	user.h	/^GHashTable *LocaleHash;$/;"	v	typeref:typename:GHashTable *
+Location	user-crop.c	/^} Location;$/;"	t	typeref:enum:__anon512a40760103	file:
+LoginSetPass	user-admin.c	/^static void LoginSetPass(GtkRadioButton *button,gpointer data)$/;"	f	typeref:typename:void	file:
+MATE_DESKTOP_USE_UNSTABLE_API	user.h	/^#define MATE_DESKTOP_USE_UNSTABLE_API$/;"	d
+MainWindow	user.h	/^    GtkWidget        *MainWindow;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+MessageReport	user-share.c	/^int MessageReport(const char *Title,const char *Msg,int nType)$/;"	f	typeref:typename:int
+Model	user.h	/^    GtkTreeModel     *Model;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkTreeModel *
+ModifyName	user-face.c	/^static void ModifyName (GtkEntry *entry,gpointer  data)$/;"	f	typeref:typename:void	file:
+MouseId	user.h	/^    int               MouseId;$/;"	m	struct:__anon2124e5da0308	typeref:typename:int
+NEWPASS	user.h	/^#define  NEWPASS /;"	d
+NONE	user.h	/^#define  NONE /;"	d
+NUMMAX	user.h	/^#define  NUMMAX /;"	d
+NUM_COLUMNS	user-group.c	/^  NUM_COLUMNS$/;"	e	enum:__anonaa5f126f0203	file:
+NUM_L	user-group.c	/^  NUM_L$/;"	e	enum:__anonaa5f126f0403	file:
+NUM_USER	user-group.c	/^  NUM_USER$/;"	e	enum:__anonaa5f126f0303	file:
+N_COLUMNS	user.h	/^    N_COLUMNS$/;"	e	enum:__anon2124e5da0103
+NewGroupSelectUsers	user-group.c	/^static void NewGroupSelectUsers (GtkCellRendererToggle *cell,$/;"	f	typeref:typename:void	file:
+NewGroupUsers	user.h	/^    GSList           *NewGroupUsers;          $/;"	m	struct:__anon2124e5da0208	typeref:typename:GSList *
+NewPassEntry	user.h	/^    GtkWidget        *NewPassEntry;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+NewUserIter	user.h	/^    GtkTreeIter       NewUserIter;           \/\/user list iter$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkTreeIter
+NewUserLangType	user.h	/^    GtkWidget        *NewUserLangType;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+NewUserType	user.h	/^    GtkWidget        *NewUserType;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+NextSetPass	user-password.c	/^static void NextSetPass (GtkRadioButton *button,gpointer data)$/;"	f	typeref:typename:void	file:
+NotifyEvents	user-face.c	/^static gboolean NotifyEvents(GtkWidget *widget,$/;"	f	typeref:typename:gboolean	file:
+NowSetNewUserPass	user-admin.c	/^static void NowSetNewUserPass(GtkRadioButton *button,gpointer data)$/;"	f	typeref:typename:void	file:
+NowSetPass	user-password.c	/^static void NowSetPass (GtkRadioButton *button,gpointer data)$/;"	f	typeref:typename:void	file:
+OLDPASS	user.h	/^#define  OLDPASS /;"	d
+OUTSIDE	user-crop.c	/^    OUTSIDE,$/;"	e	enum:__anon512a40760103	file:
+OffNote	user-share.c	/^void OffNote(GtkWidget *label,UserAdmin *ua)$/;"	f	typeref:typename:void
+OldPassEntry	user.h	/^    GtkWidget        *OldPassEntry;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+OpenNote	user-share.c	/^void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua)$/;"	f	typeref:typename:void
+PACKAGE	user.h	/^#define PACKAGE /;"	d
+PICMAX	user.h	/^#define  PICMAX /;"	d
+PROP_0	user-group.c	/^    PROP_0,$/;"	e	enum:__anonaa5f126f0103	file:
+PROP_GID	user-group.c	/^    PROP_GID,$/;"	e	enum:__anonaa5f126f0103	file:
+PROP_GROUP_NAME	user-group.c	/^    PROP_GROUP_NAME,$/;"	e	enum:__anonaa5f126f0103	file:
+PROP_LOCAL_GROUP	user-group.c	/^    PROP_LOCAL_GROUP,$/;"	e	enum:__anonaa5f126f0103	file:
+PassWindow	user.h	/^    GtkWidget        *PassWindow;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+PasswordType	user-info.h	/^    int          PasswordType;   \/\/passwod type$/;"	m	struct:UserInfo	typeref:typename:int
+PictureChooser	user-face.c	/^static void PictureChooser(GtkDialog *chooser,$/;"	f	typeref:typename:void	file:
+ProcessRuning	main.c	/^static gboolean ProcessRuning(void)$/;"	f	typeref:typename:gboolean	file:
+QUESTION	user-share.h	/^#define QUESTION /;"	d
+QuitApp	user-list.c	/^static void QuitApp(GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void	file:
+QuitGroupWindow	user-group.c	/^static gboolean QuitGroupWindow (GtkWidget *widget,$/;"	f	typeref:typename:gboolean	file:
+RIGHT	user-crop.c	/^    RIGHT$/;"	e	enum:__anon512a40760103	file:
+RadioButton1	user.h	/^    GtkWidget        *RadioButton1;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+RadioButton2	user.h	/^    GtkWidget        *RadioButton2;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+Range	user-crop.c	/^} Range;$/;"	t	typeref:enum:__anon512a40760203	file:
+RealNameEntry	user.h	/^    GtkWidget        *RealNameEntry;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+RealNameValidCheck	user-face.c	/^static gboolean RealNameValidCheck (const gchar *name)$/;"	f	typeref:typename:gboolean	file:
+RecordPid	main.c	/^static int RecordPid(void)$/;"	f	typeref:typename:int	file:
+RefreshUserList	user-list.c	/^void RefreshUserList(GtkWidget *UserList,GSList *List)$/;"	f	typeref:typename:void
+RemoveTime	user-admin.c	/^static void RemoveTime(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+RemoveUser	user-admin.c	/^void RemoveUser(GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void
+STANDARD	user.h	/^#define  STANDARD /;"	d
+SaveFaceFile	user-face.c	/^static void SaveFaceFile(UserAdmin *ua,GdkPixbuf *pb)$/;"	f	typeref:typename:void	file:
+SelectUser	user-list.c	/^static gboolean SelectUser = TRUE;$/;"	v	typeref:typename:gboolean	file:
+SetButtonMode	user-password.c	/^static void SetButtonMode(UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+SetComboLanguageType	user-share.c	/^GtkWidget *SetComboLanguageType(void)$/;"	f	typeref:typename:GtkWidget *
+SetComboUserType	user-share.c	/^GtkWidget *SetComboUserType(const char *s1,const char *s2)$/;"	f	typeref:typename:GtkWidget *
+SetLableFontType	user-share.c	/^void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word)        $/;"	f	typeref:typename:void
+SetNewPass	user-password.c	/^static void SetNewPass(GtkWidget *widget,gpointer data)$/;"	f	typeref:typename:void	file:
+SetNewUserInfo	user-admin.c	/^static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+SetNewUserPass	user-admin.c	/^static void SetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+SetUserFaceSize	user-share.c	/^GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)$/;"	f	typeref:typename:GdkPixbuf *
+SortUsers	user-info.c	/^static gint SortUsers (gconstpointer a, gconstpointer b)$/;"	f	typeref:typename:gint	file:
+StartManageGroups	user-group.c	/^static void StartManageGroups (GroupsManage *gm,GSList *UsersList)$/;"	f	typeref:typename:void	file:
+SwitchAutoLogin	user.h	/^    GtkWidget        *SwitchAutoLogin;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+SwitchState	user-base.c	/^static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)$/;"	f	typeref:typename:void	file:
+TOP	user-crop.c	/^    TOP,$/;"	e	enum:__anon512a40760103	file:
+TOP_LEFT	user-crop.c	/^    TOP_LEFT,$/;"	e	enum:__anon512a40760103	file:
+TOP_RIGHT	user-crop.c	/^    TOP_RIGHT,$/;"	e	enum:__anon512a40760103	file:
+TYPEMSG	user-share.h	/^#define TYPEMSG /;"	d
+ThumbnailPreview	user-face.c	/^static void ThumbnailPreview (GtkFileChooser  *chooser,gpointer data)$/;"	f	typeref:typename:void	file:
+TimeFun	user-admin.c	/^static gboolean TimeFun(gpointer data)$/;"	f	typeref:typename:gboolean	file:
+TmpPass	user.h	/^    char              TmpPass[24];$/;"	m	struct:__anon2124e5da0308	typeref:typename:char[24]
+TreeCreate	user.h	/^    GtkWidget        *TreeCreate;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GtkWidget *
+TreeRemove	user.h	/^    GtkWidget        *TreeRemove;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GtkWidget *
+TreeSwitch	user.h	/^    GtkWidget        *TreeSwitch;$/;"	m	struct:__anon2124e5da0208	typeref:typename:GtkWidget *
+UPPER	user-crop.c	/^    UPPER,$/;"	e	enum:__anon512a40760203	file:
+USERGROUP	user-group.h	/^#define USERGROUP(/;"	d
+USERINFO	user-info.h	/^#define USERINFO(/;"	d
+USER_TYPE_CROP_AREA	user-crop.h	/^#define USER_TYPE_CROP_AREA /;"	d
+USER_TYPE_GROUP	user-group.h	/^#define USER_TYPE_GROUP /;"	d
+USER_TYPE_INFO	user-info.h	/^#define USER_TYPE_INFO /;"	d
+Unbind	user-face.c	/^static void Unbind(gpointer data)$/;"	f	typeref:typename:void	file:
+UnlockFlag	user-admin.c	/^static int UnlockFlag;$/;"	v	typeref:typename:int	file:
+UpdataFace	user-face.c	/^static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)$/;"	f	typeref:typename:void	file:
+UpdateInterface	user-share.c	/^void UpdateInterface(ActUser *ActUser,UserAdmin *ua)$/;"	f	typeref:typename:void
+UserAdded	user-info.c	/^static UserInfo *UserAdded(ActUser *ActUser)$/;"	f	typeref:typename:UserInfo *	file:
+UserAdmin	user.h	/^}UserAdmin;$/;"	t	typeref:struct:__anon2124e5da0308
+UserCount	user.h	/^    int               UserCount;    \/\/Valid user number$/;"	m	struct:__anon2124e5da0308	typeref:typename:int
+UserGroup	user-group.h	/^typedef struct UserGroup $/;"	s
+UserGroup	user-group.h	/^}UserGroup;$/;"	t	typeref:struct:UserGroup
+UserGroupClass	user-group.h	/^typedef struct UserGroupClass$/;"	s
+UserGroupClass	user-group.h	/^} UserGroupClass;$/;"	t	typeref:struct:UserGroupClass
+UserGroupsManage	user-group.c	/^void UserGroupsManage (GtkWidget *widget, gpointer data)$/;"	f	typeref:typename:void
+UserInfo	user-info.h	/^typedef struct UserInfo $/;"	s
+UserInfo	user-info.h	/^}UserInfo;$/;"	t	typeref:struct:UserInfo
+UserInfoClass	user-info.h	/^typedef struct UserInfoClass$/;"	s
+UserInfoClass	user-info.h	/^} UserInfoClass;$/;"	t	typeref:struct:UserInfoClass
+UserList	user.h	/^    GtkWidget        *UserList;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+UserListAppend	user-share.c	/^void UserListAppend(GtkWidget *list,$/;"	f	typeref:typename:void
+UserName	user-info.h	/^    gchar       *UserName;$/;"	m	struct:UserInfo	typeref:typename:gchar *
+UserNameEntry	user.h	/^    GtkWidget        *UserNameEntry;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkWidget *
+UserNameValidCheck	user-admin.c	/^static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)$/;"	f	typeref:typename:gboolean	file:
+UserSelect	user.h	/^    GtkTreeSelection *UserSelect;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GtkTreeSelection *
+UserSelectGroup	user-group.c	/^static void UserSelectGroup (GtkCellRendererToggle *cell,$/;"	f	typeref:typename:void	file:
+UsersList	user.h	/^    GSList           *UsersList;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GSList *
+WARING	user-share.h	/^#define WARING /;"	d
+WindowAddUser	user-admin.c	/^GtkWidget *WindowAddUser;$/;"	v	typeref:typename:GtkWidget *
+WindowLogin	user.h	/^GtkWidget *WindowLogin;          \/\/首页窗口$/;"	v	typeref:typename:GtkWidget *
+WindowOpenFlag	user-face.c	/^static int WindowOpenFlag;$/;"	v	typeref:typename:int	file:
+WriteUserInfo	user-admin.c	/^static ActUser *WriteUserInfo(const gchar *UserName,$/;"	f	typeref:typename:ActUser *	file:
+_	user.h	/^#define _(/;"	d
+_UserCropArea	user-crop.c	/^struct _UserCropArea $/;"	s	file:
+_XOPEN_SOURCE	user-password.c	/^#define _XOPEN_SOURCE$/;"	d	file:
+__USER_ADMIN_H__	user-admin.h	/^#define __USER_ADMIN_H__$/;"	d
+__USER_BASE_H__	user-base.h	/^#define __USER_BASE_H__$/;"	d
+__USER_CROP_H__	user-crop.h	/^#define __USER_CROP_H__$/;"	d
+__USER_FACE_H__	user-face.h	/^#define __USER_FACE_H__$/;"	d
+__USER_GROUP__	user-group.h	/^#define __USER_GROUP__$/;"	d
+__USER_H__	user.h	/^#define __USER_H__$/;"	d
+__USER_INFO_H__	user-info.h	/^#define __USER_INFO_H__$/;"	d
+__USER_LIST_H__	user-list.h	/^#define __USER_LIST_H__$/;"	d
+__USER_PASSWORD_H__	user-password.h	/^#define __USER_PASSWORD_H__$/;"	d
+__USER_SHARE_H__	user-share.h	/^#define __USER_SHARE_H__$/;"	d
+__anon2124e5da0103	user.h	/^{$/;"	g
+__anon2124e5da0208	user.h	/^{$/;"	s
+__anon2124e5da0308	user.h	/^{$/;"	s
+__anon512a40760103	user-crop.c	/^{$/;"	g	file:
+__anon512a40760203	user-crop.c	/^{$/;"	g	file:
+__anonaa5f126f0103	user-group.c	/^{$/;"	g	file:
+__anonaa5f126f0203	user-group.c	/^{$/;"	g	file:
+__anonaa5f126f0303	user-group.c	/^{$/;"	g	file:
+__anonaa5f126f0403	user-group.c	/^{$/;"	g	file:
+active_region	user-crop.c	/^    gint active_region;$/;"	m	struct:_UserCropArea	typeref:typename:gint	file:
+all_languages	user.h	/^char **all_languages;$/;"	v	typeref:typename:char **
+aspect	user-crop.c	/^    gdouble aspect;$/;"	m	struct:_UserCropArea	typeref:typename:gdouble	file:
+base_height	user-crop.c	/^    gint base_height;$/;"	m	struct:_UserCropArea	typeref:typename:gint	file:
+base_width	user-crop.c	/^    gint base_width;$/;"	m	struct:_UserCropArea	typeref:typename:gint	file:
+browse_pixbuf	user-crop.c	/^    GdkPixbuf *browse_pixbuf;$/;"	m	struct:_UserCropArea	typeref:typename:GdkPixbuf *	file:
+color_shifted	user-crop.c	/^    GdkPixbuf *color_shifted;$/;"	m	struct:_UserCropArea	typeref:typename:GdkPixbuf *	file:
+crop	user-crop.c	/^    GdkRectangle crop;$/;"	m	struct:_UserCropArea	typeref:typename:GdkRectangle	file:
+crop_to_widget	user-crop.c	/^static void crop_to_widget (UserCropArea *area,GdkRectangle  *crop)$/;"	f	typeref:typename:void	file:
+current_cursor	user-crop.c	/^    GdkCursorType current_cursor;$/;"	m	struct:_UserCropArea	typeref:typename:GdkCursorType	file:
+eval_radial_line	user-crop.c	/^eval_radial_line (gdouble center_x, gdouble center_y,$/;"	f	typeref:typename:int	file:
+face_widget_activated	user-face.c	/^static void face_widget_activated (GtkFlowBox *flowbox,$/;"	f	typeref:typename:void	file:
+find_location	user-crop.c	/^static Location find_location (GdkRectangle *rect,$/;"	f	typeref:typename:Location	file:
+find_range	user-crop.c	/^static Range find_range (gint x,$/;"	f	typeref:typename:Range	file:
+gas	user-group.h	/^    GasGroup     *gas;$/;"	m	struct:UserGroup	typeref:typename:GasGroup *
+gcPicBuf	user-face.c	/^static char gcPicBuf[PICMAX][50];   \/\/照片$/;"	v	typeref:typename:char[][50]	file:
+get_pwq	user-share.c	/^static pwquality_settings_t * get_pwq (void)$/;"	f	typeref:typename:pwquality_settings_t *	file:
+gm	user.h	/^    GroupsManage      gm;$/;"	m	struct:__anon2124e5da0308	typeref:typename:GroupsManage
+gnCnt	user.h	/^int gnCnt;                \/\/计数$/;"	v	typeref:typename:int
+gnCurrentUserIndex	user.h	/^int gnCurrentUserIndex;   \/\/代表当前用户标号$/;"	v	typeref:typename:int
+group_new	user-group.c	/^UserGroup * group_new (const char *GroupName,gid_t gid)$/;"	f	typeref:typename:UserGroup *
+image	user-crop.c	/^    GdkRectangle image;$/;"	m	struct:_UserCropArea	typeref:typename:GdkRectangle	file:
+last_press_x	user-crop.c	/^    gint last_press_x;$/;"	m	struct:_UserCropArea	typeref:typename:gint	file:
+last_press_y	user-crop.c	/^    gint last_press_y;$/;"	m	struct:_UserCropArea	typeref:typename:gint	file:
+main	main.c	/^int main(int argc, char **argv)$/;"	f	typeref:typename:int
+on_changed	user-list.c	/^static void  on_changed(GtkWidget *widget,  gpointer data)$/;"	f	typeref:typename:void	file:
+on_window_quit	main.c	/^static gboolean on_window_quit (GtkWidget *widget, $/;"	f	typeref:typename:gboolean	file:
+parent	user-group.h	/^	GObject       parent;$/;"	m	struct:UserGroup	typeref:typename:GObject
+parent	user-info.h	/^    GObject      parent;$/;"	m	struct:UserInfo	typeref:typename:GObject
+parent_class	user-group.h	/^	GObjectClass parent_class;$/;"	m	struct:UserGroupClass	typeref:typename:GObjectClass
+parent_class	user-info.h	/^    GObjectClass parent_class;$/;"	m	struct:UserInfoClass	typeref:typename:GObjectClass
+parent_instance	user-crop.c	/^    GtkDrawingArea parent_instance;$/;"	m	struct:_UserCropArea	typeref:typename:GtkDrawingArea	file:
+pixbuf	user-crop.c	/^    GdkPixbuf *pixbuf;$/;"	m	struct:_UserCropArea	typeref:typename:GdkPixbuf *	file:
+pw_error_hint	user-share.c	/^static const gchar *pw_error_hint (gint error)$/;"	f	typeref:typename:const gchar *	file:
+pw_min_length	user-share.c	/^static int pw_min_length (void)$/;"	f	typeref:typename:int	file:
+scale	user-crop.c	/^    gdouble scale;$/;"	m	struct:_UserCropArea	typeref:typename:gdouble	file:
+shift_color_byte	user-crop.c	/^static inline guchar shift_color_byte (guchar b,$/;"	f	typeref:typename:guchar	file:
+shift_colors	user-crop.c	/^static void shift_colors (GdkPixbuf *pixbuf,$/;"	f	typeref:typename:void	file:
+store	user-list.c	/^static GtkListStore *store;$/;"	v	typeref:typename:GtkListStore *	file:
+update_cursor	user-crop.c	/^static void update_cursor (UserCropArea *area,$/;"	f	typeref:typename:void	file:
+update_pixbufs	user-crop.c	/^static void update_pixbufs (UserCropArea *area)$/;"	f	typeref:typename:void	file:
+user_crop_area_button_press_event	user-crop.c	/^static gboolean user_crop_area_button_press_event (GtkWidget      *widget,$/;"	f	typeref:typename:gboolean	file:
+user_crop_area_button_release_event	user-crop.c	/^static gboolean user_crop_area_button_release_event (GtkWidget      *widget,$/;"	f	typeref:typename:gboolean	file:
+user_crop_area_class_init	user-crop.c	/^user_crop_area_class_init (UserCropAreaClass *klass)$/;"	f	typeref:typename:void	file:
+user_crop_area_draw	user-crop.c	/^static gboolean user_crop_area_draw (GtkWidget *widget,cairo_t   *cr)$/;"	f	typeref:typename:gboolean	file:
+user_crop_area_finalize	user-crop.c	/^static void user_crop_area_finalize (GObject *object)$/;"	f	typeref:typename:void	file:
+user_crop_area_get_picture	user-crop.c	/^GdkPixbuf *user_crop_area_get_picture (UserCropArea *area)$/;"	f	typeref:typename:GdkPixbuf *
+user_crop_area_init	user-crop.c	/^user_crop_area_init (UserCropArea *area)$/;"	f	typeref:typename:void	file:
+user_crop_area_motion_notify_event	user-crop.c	/^static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,$/;"	f	typeref:typename:gboolean	file:
+user_crop_area_new	user-crop.c	/^GtkWidget * user_crop_area_new (void)$/;"	f	typeref:typename:GtkWidget *
+user_crop_area_set_constrain_aspect	user-crop.c	/^void user_crop_area_set_constrain_aspect (UserCropArea *area,$/;"	f	typeref:typename:void
+user_crop_area_set_min_size	user-crop.c	/^void user_crop_area_set_min_size (UserCropArea *area,$/;"	f	typeref:typename:void
+user_crop_area_set_picture	user-crop.c	/^void user_crop_area_set_picture (UserCropArea *area,GdkPixbuf  *pixbuf)$/;"	f	typeref:typename:void
+user_crop_area_set_size_request	user-crop.c	/^static void user_crop_area_set_size_request (UserCropArea *area)$/;"	f	typeref:typename:void	file:
+user_group_class_init	user-group.c	/^static void user_group_class_init (UserGroupClass *class)$/;"	f	typeref:typename:void	file:
+user_group_init	user-group.c	/^static void user_group_init (UserGroup *group)$/;"	f	typeref:typename:void	file:
+user_info_class_init	user-info.c	/^static void user_info_class_init (UserInfoClass *class)$/;"	f	typeref:typename:void	file:
+user_info_init	user-info.c	/^static void user_info_init (UserInfo *user)$/;"	f	typeref:typename:void	file:
+user_new	user-info.c	/^UserInfo * user_new (void)$/;"	f	typeref:typename:UserInfo *
+username	user.h	/^    const gchar      *username;$/;"	m	struct:__anon2124e5da0208	typeref:typename:const gchar *

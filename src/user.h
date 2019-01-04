@@ -58,9 +58,22 @@ enum
     LIST_FRONT,
     N_COLUMNS
 };
+typedef struct
+{
+    GSList           *GroupsList;
+    GtkWidget        *GroupsWindow;
+    GtkWidget        *TreeSwitch;
+    GtkWidget        *TreeCreate;
+    GtkWidget        *TreeRemove;
+    GtkWidget        *EntryGroupName;
+    int               GroupNum;
+    const gchar      *username;
+    GSList           *NewGroupUsers;          
+}GroupsManage;
 typedef struct 
 {
     GSList           *UsersList;
+    GroupsManage      gm;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PassWindow;
@@ -76,6 +89,7 @@ typedef struct
     GtkWidget        *ButtonPass;
     GtkWidget        *SwitchAutoLogin;
     GtkWidget        *ButtonUserTime;
+    GtkWidget        *ButtonUserGroup;
     GtkWidget        *NewPassEntry;
     GtkWidget        *OldPassEntry;
     GtkWidget        *LabelPassNote;

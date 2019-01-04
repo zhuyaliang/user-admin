@@ -10,6 +10,7 @@ sources = [
 'user-password.c',
 'user-share.c',
 'user-crop.c',
+'user-group.c',
 ]
 
 account_src = gnome.gdbus_codegen(
@@ -28,7 +29,7 @@ account_user_src = gnome.gdbus_codegen(
 
 executable('mate-user-admin',
   sources : sources,
-  dependencies : [gtk_deps, pwquality_deps, act_deps, crypt_deps, md_deps],
+  dependencies : [gtk_deps, pwquality_deps, act_deps, gas_deps, crypt_deps, md_deps],
   include_directories: top_srcdir,
   install : true,
   install_dir : get_option('bindir')

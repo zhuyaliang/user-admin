@@ -19,6 +19,7 @@
 #include "user-password.h"
 #include "user-share.h"
 #include "user-info.h"
+#include "user-group.h"
 
 /******************************************************************************
 * Function:            SwitchState 
@@ -41,7 +42,7 @@ static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
     
     if(Change == 0)
     {        
-        user = GetIndexUser(ua,gnCurrentUserIndex);
+        user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         um =  act_user_manager_get_default ();
         if(state == TRUE)
         {
@@ -107,7 +108,7 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
             model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
             gtk_tree_model_get( model, &iter, 0, &text, -1 );
         }
-        user = GetIndexUser(ua,gnCurrentUserIndex);
+        user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         LangName = g_hash_table_lookup(LocaleHash,text);
         act_user_set_language(user->ActUser,LangName);
         g_free(text);
@@ -135,7 +136,7 @@ static void ComboSelectUserType(GtkWidget *widget,gpointer data)
         account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) ? 
                                                   ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR:
                                                   ACT_USER_ACCOUNT_TYPE_STANDARD;
-        user = GetIndexUser(ua,gnCurrentUserIndex);
+        user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         act_user_set_account_type(user->ActUser,account_type);
     }    
 }
@@ -165,10 +166,12 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *LabelTime;
     GtkWidget *ButtonTime;
     GtkWidget *ComboUser;
+    GtkWidget *LabelGroup;
+    GtkWidget *ButtonGroup;
     UserInfo  *user;
     int index;
 
-    user = GetIndexUser(ua,0);
+    user = GetIndexUser(ua->UsersList,0);
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed ,TRUE, TRUE, 0);
     table = gtk_grid_new();
@@ -214,7 +217,10 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ButtonPass = gtk_button_new_with_label(GetPasswordModeText(user->ActUser,
                                            &user->PasswordType));
     ua->ButtonPass = ButtonPass;
-    g_signal_connect (ButtonPass, "clicked",G_CALLBACK (ChangePass),ua);
+    g_signal_connect (ButtonPass, 
+                     "clicked",
+                      G_CALLBACK (ChangePass),
+                      ua);
     gtk_grid_attach(GTK_GRID(table) , ButtonPass , 1 , 2 , 2 , 1);
    
     /*auto login*/
@@ -240,7 +246,19 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ButtonTime = gtk_button_new_with_label (GetLoginTimeText(user->ActUser));
     ua->ButtonUserTime = ButtonTime;
     gtk_grid_attach(GTK_GRID(table) , ButtonTime, 1 , 4 , 2 , 1);
+    /*Group Manage*/
+    LabelGroup = gtk_label_new(NULL);
+    SetLableFontType(LabelGroup,"gray",11,_("Group Manage"));
+    gtk_grid_attach(GTK_GRID(table) , LabelGroup, 0 , 5 , 1 , 1);
   
+    ButtonGroup = gtk_button_new_with_label (_("Setting Groups"));
+    ua->ButtonUserGroup = ButtonGroup;
+    gtk_grid_attach(GTK_GRID(table) , ButtonGroup, 1 , 5 , 2 , 1);
+    g_signal_connect (ButtonGroup, 
+                     "clicked",
+                      G_CALLBACK (UserGroupsManage),
+                      ua);
+
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(table), 10);
 }

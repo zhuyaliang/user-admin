@@ -27,6 +27,7 @@ enum
     PROP_LOCAL_GROUP,
 };
 G_DEFINE_TYPE (UserGroup, user_group, G_TYPE_OBJECT)
+
 static void group_finalize (GObject *object)
 {
     UserGroup *group;
@@ -98,7 +99,9 @@ enum
   COLUMN_GROUPI,
   NUM_L
 };
-
+static void addlistdata(GtkListStore *store,
+                        UserGroup    *group,
+                        const gchar  *name);
 static gboolean CheckGroupNameUsed (const gchar *name)
 {
     struct group *grent;
@@ -168,6 +171,7 @@ static gboolean QuitGroupWindow (GtkWidget *widget,
     if(gm->NewGroupUsers != NULL)
         g_slist_free(gm->NewGroupUsers);   
     gtk_widget_destroy(gm->GroupsWindow);
+	gtk_widget_show(WindowLogin);
     return TRUE;
 }    
 
@@ -179,23 +183,63 @@ static void CloseGroupWindow (GtkWidget *widget, gpointer data)
     if(gm->NewGroupUsers != NULL)
         g_slist_free(gm->NewGroupUsers);   
     gtk_widget_destroy(gm->GroupsWindow);
+	gtk_widget_show(WindowLogin);
 }    
+static void AddUserToGroup(GSList *list,GasGroup *group)
+{
+	GSList *node;
+	const char *name;
 
+	if(g_slist_length(list) <= 0)
+	{
+		return;
+	}		
+
+	for(node = list; node; node = node->next)
+	{
+		name = node->data;
+		gas_group_add_user_group(group,name);	
+	}		
+}		
 static void CreateNewGroup(GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
-    gboolean Valid;
-    char *Message = NULL;
-    const char *s;
+    gboolean      Valid;
+    char         *Message = NULL;
+    const char   *s;
+	GasGroup     *gas;
+	UserGroup    *group;
+	GError       *error = NULL;
+	int           ret;	
+	GasGroupManager *manage;
     
     s = gtk_entry_get_text(GTK_ENTRY(gm->EntryGroupName));
-    Valid = CheckGroupName(s,&Message);   
+    Valid = CheckGroupName(s,&Message);  
     if(Valid == FALSE)
     {
         MessageReport(_("Create New Group"),Message,ERROR);
         return;
-    }    
-
+    }
+	manage = gas_group_manager_get_default();
+	gas    = gas_group_manager_create_group(manage,s,&error);
+	if(gas == NULL)
+	{
+		MessageReport(_("Create New Group Faild"),error->message,ERROR);
+		if(error != NULL)
+		{
+			g_error_free(error);
+			return;
+		}			
+	}
+	AddUserToGroup(gm->NewGroupUsers,gas);
+	group = GroupInit(gas);
+	gm->GroupsList = g_slist_append(gm->GroupsList,g_object_ref(group));
+	ret = MessageReport(_("Create User Group"),_("Create User Group Successfully,Do you want to continue creating"),QUESTION);
+	if(ret == GTK_RESPONSE_NO)
+	{
+		CloseGroupWindow(NULL,gm);
+	}		
+	addlistdata (gm->SwitchStore,group,gm->username);
 }    
 static int GetGroupNum(GSList *List)
 {
@@ -303,19 +347,31 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     /* clean up */
     gtk_tree_path_free (path);
 }
+static void addlistdata(GtkListStore *store,
+				        UserGroup    *group,
+						const gchar  *name)
+{
+    GtkTreeIter   iter;
+	gtk_list_store_append (store, &iter);
+    gtk_list_store_set (store, &iter,
+                        COLUMN_FIXED,     GetUserIsGroup(group->gas,name),
+                        COLUMN_GROUPNAME, GetGroupName(group->gas),
+                        COLUMN_GROUPID,   GetGroupGid(group->gas),
+                        -1);
+
+}		
 static GtkTreeModel * CreateSwicthModel (GSList *List,const gchar *name)
 {
+ 	GtkListStore *SwitchStore = NULL;
     gint          i = 0;
-    GtkListStore *store;
-    GtkTreeIter   iter;
     int           GroupNum = 0;
     UserGroup    *group;
 
     GroupNum = GetGroupNum(List);
-    store = gtk_list_store_new (NUM_COLUMNS,
-                                G_TYPE_BOOLEAN,
-                                G_TYPE_STRING,
-                                G_TYPE_UINT);
+    SwitchStore = gtk_list_store_new (NUM_COLUMNS,
+                                      G_TYPE_BOOLEAN,
+                                      G_TYPE_STRING,
+                                      G_TYPE_UINT);
 
     
     for (i = 0; i < GroupNum ; i++)
@@ -326,15 +382,9 @@ static GtkTreeModel * CreateSwicthModel (GSList *List,const gchar *name)
             g_error("No such the Group!!!\r\n");
             break;
         }    
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter,
-                            COLUMN_FIXED,     GetUserIsGroup(group->gas,name),
-                            COLUMN_GROUPNAME, GetGroupName(group->gas),
-                            COLUMN_GROUPID,   GetGroupGid(group->gas),
-                            -1);
+		addlistdata(SwitchStore,group,name);
     }
-
-    return GTK_TREE_MODEL (store);
+    return GTK_TREE_MODEL (SwitchStore);
 }
 
 static GtkTreeModel * CreateAddUsersModel (GSList *List)
@@ -564,6 +614,7 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
     model    = CreateSwicthModel(gm->GroupsList,gm->username);
+	gm->SwitchStore = GTK_LIST_STORE(model);	
     treeview = gtk_tree_view_new_with_model (model);
     gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview),
                                      COLUMN_GROUPID);
@@ -640,7 +691,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
 
     ButtonConfirm    =  gtk_button_new_with_label(("Confirm"));
     gtk_grid_attach(GTK_GRID(table) , ButtonConfirm , 1 , 3 , 1 , 1);
-    g_signal_connect (ButtonClose, 
+    g_signal_connect (ButtonConfirm, 
                      "clicked",
                       G_CALLBACK (CreateNewGroup),
                       gm);
@@ -727,10 +778,12 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
 void UserGroupsManage (GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    ua->gm.GroupsList = NULL;
+	gtk_widget_hide(WindowLogin);
+   	ua->gm.GroupsList = NULL;
     ua->gm.GroupsList = GetGroupInfo();
     if(ua->gm.GroupsList == NULL)
     {
+		gtk_widget_show(WindowLogin);
         return;
     }  
     ua->gm.GroupNum = g_slist_length(ua->gm.GroupsList);  

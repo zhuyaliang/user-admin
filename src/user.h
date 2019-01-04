@@ -65,7 +65,9 @@ typedef struct
     GtkWidget        *TreeSwitch;
     GtkWidget        *TreeCreate;
     GtkWidget        *TreeRemove;
-    GtkWidget        *EntryGroupName;
+    GtkListStore     *SwitchStore;
+    GtkListStore     *RemoveStore;
+	GtkWidget        *EntryGroupName;
     int               GroupNum;
     const gchar      *username;
     GSList           *NewGroupUsers;          

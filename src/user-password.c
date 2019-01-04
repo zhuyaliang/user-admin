@@ -24,6 +24,7 @@
 #include <pwquality.h>
 #include "user-password.h"
 #include "user-share.h"
+#include "user-info.h"
 
 static void CloseNewPassWindow(GtkWidget *widget,gpointer data);
 
@@ -41,12 +42,7 @@ static void CloseNewPassWindow(GtkWidget *widget,gpointer data);
 static void NextSetPass (GtkRadioButton *button,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    const char *Pass = _("Set up next time");
-    const char *Pass1 = _("Account is disable");
-    
-    memset(ua->ul[gnCurrentUserIndex].PassText,
-          '\0',
-          strlen(ua->ul[gnCurrentUserIndex].PassText));
+    UserInfo *user;
 
     gtk_widget_set_sensitive(ua->NewPassEntry, FALSE);  //lock widget
     gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);
@@ -58,15 +54,9 @@ static void NextSetPass (GtkRadioButton *button,gpointer data)
         g_source_remove(ua->CheckPassTimeId);
         ua->CheckPassTimeId = 0;
     }
-    if (act_user_get_locked (ua->ul[gnCurrentUserIndex].User))
-    {
-        memcpy(ua->ul[gnCurrentUserIndex].PassText,Pass1,strlen(Pass1));
-    }
-    else
-    {
-        memcpy(ua->ul[gnCurrentUserIndex].PassText,Pass,strlen(Pass));
-    }
-    ua->ul[gnCurrentUserIndex].PasswordType = NEWPASS;
+    user = GetIndexUser(ua,gnCurrentUserIndex);
+    act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+    
 }        
 
 /******************************************************************************
@@ -83,22 +73,16 @@ static void NextSetPass (GtkRadioButton *button,gpointer data)
 static void NowSetPass (GtkRadioButton *button,gpointer data)
 {
     int CheckPassTimeId;
-    const char *Pass = "●●●●●●";
     UserAdmin *ua = (UserAdmin *)data;
-
-    memset(ua->ul[gnCurrentUserIndex].PassText,
-          '\0',
-          strlen(ua->ul[gnCurrentUserIndex].PassText));
-    
+    UserInfo *user;
     gtk_widget_set_sensitive(ua->CheckPassEntry, TRUE);  //Unlocking Widget
     gtk_widget_set_sensitive(ua->NewPassEntry, TRUE);
     gtk_widget_set_sensitive(ua->LevelBar, TRUE);
 
     CheckPassTimeId = g_timeout_add(800,(GSourceFunc)CheckPassword,ua);
-    memcpy(ua->ul[gnCurrentUserIndex].PassText,Pass,strlen(Pass));
     ua->CheckPassTimeId = CheckPassTimeId;
-    ua->ul[gnCurrentUserIndex].PasswordType = OLDPASS;
-
+    user = GetIndexUser(ua,gnCurrentUserIndex);
+    act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_REGULAR); 
 }        
 static void ClosePassWindow(GtkWidget *widget,gpointer data)
 {
@@ -121,9 +105,13 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
 	const char *np;
 	const char *cp;
     UserAdmin *ua = (UserAdmin *)data;
+    int passtype;
+    UserInfo *user;
 
+    user = GetIndexUser(ua,gnCurrentUserIndex);
+    GetPasswordModeText(user->ActUser,&passtype);
     /*choose now set password*/
-    if(ua->ul[gnCurrentUserIndex].PasswordType == OLDPASS)
+    if(passtype == OLDPASS)
     {        
 	    np =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
 	    cp =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
@@ -134,23 +122,21 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
 	    }
 	    else
 	    {   
-            act_user_set_password (ua->ul[gnCurrentUserIndex].User,cp, "");
-            act_user_set_password_mode (ua->ul[gnCurrentUserIndex].User,
-                                        ACT_USER_PASSWORD_MODE_REGULAR);
+            act_user_set_password (user->ActUser,cp, "");
 	    }
     }
-    else
-    {
-        act_user_set_password_mode(ua->ul[gnCurrentUserIndex].User,
-                                   ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
-    }    
 
     gtk_widget_destroy(ua->PassWindow);
-    UpdateInterface(gnCurrentUserIndex,ua);
+    UpdateInterface(user->ActUser,ua);
 }
 static void SetButtonMode(UserAdmin *ua)
 {
-    if(ua->ul[gnCurrentUserIndex].PasswordType == OLDPASS)
+    int passtype;
+    UserInfo *user;
+    
+    user = GetIndexUser(ua,gnCurrentUserIndex);
+    GetPasswordModeText(user->ActUser,&passtype);
+    if(passtype == OLDPASS)
     {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ua->RadioButton2), TRUE);
         NowSetPass(GTK_RADIO_BUTTON(ua->RadioButton2),ua);
@@ -203,8 +189,8 @@ void CreateNewPass(UserAdmin *ua)
     ua->PassWindow = WindowChangePass;
     g_signal_connect(WindowChangePass,
                     "destroy",
-                    G_CALLBACK(CloseNewPassWindow),
-                    ua);
+                     G_CALLBACK(CloseNewPassWindow),
+                     ua);
 
     Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(WindowChangePass),Vbox);
@@ -220,12 +206,18 @@ void CreateNewPass(UserAdmin *ua)
     RadioButton1 = gtk_radio_button_new_with_label(NULL,_("Set up next time"));
     RadioGroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(RadioButton1));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton1 , 0 , 1 , 5 , 1);
-    g_signal_connect(RadioButton1,"released",G_CALLBACK(NextSetPass),ua);
+    g_signal_connect(RadioButton1,
+                    "released",
+                     G_CALLBACK(NextSetPass),
+                     ua);
     ua->RadioButton1 = RadioButton1;
    
     RadioButton2 = gtk_radio_button_new_with_label(RadioGroup,_("Now set up"));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton2 , 0 , 2 , 5 , 1);
-    g_signal_connect(RadioButton2,"released",G_CALLBACK(NowSetPass),ua);
+    g_signal_connect(RadioButton2,
+                    "released",
+                     G_CALLBACK(NowSetPass),
+                     ua);
     ua->RadioButton2 = RadioButton2;
     
     LabelPass = gtk_label_new(NULL);

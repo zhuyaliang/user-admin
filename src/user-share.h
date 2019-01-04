@@ -27,9 +27,7 @@
 #define QUESTION   4
 
 int Change;
-gboolean on_window_quit (GtkWidget *widget,
-                         GdkEvent *event,
-                         gpointer user_data);
+GHashTable * CreateGroupsHashTable (void);
 int GetCurrentLangIndex(const char *Lang);
 int MessageReport(const char *Title,const char *Msg,int nType);
 void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word);
@@ -44,7 +42,7 @@ void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua);
 void OffNote(GtkWidget *label,UserAdmin *ua);
 GtkWidget *SetComboLanguageType(void);
 GtkWidget *SetComboUserType(const char *s1,const char *s2);
-void UpdateInterface(int Cnt,UserAdmin *ua);
+void UpdateInterface(ActUser *ActUser,UserAdmin *ua);
 gboolean CheckPassword(gpointer data);
 void SelectSetPassMode(GtkRadioButton *button,gpointer  user_data);
 void AutoGenera (GtkEntry            *entry,

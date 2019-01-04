@@ -27,6 +27,7 @@
 #include "user.h"
 #include "user-face.h"
 #include "user-share.h"
+#include "user-info.h"
 #include "user-crop.h"
 static char gcPicBuf[PICMAX][50];   //照片
 /******************************************************************************
@@ -44,7 +45,7 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *face;
-
+    UserInfo  *user;
     GdkPixbuf *pb, *pb2;
     char BasePath[100] = { 0 };
     if(nCount >= 0)
@@ -63,17 +64,12 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     
     /*Update the left list picture*/
     face = SetUserFaceSize (BasePath, 50);
-
-    gtk_list_store_set(ua->ListSTore,&ua->ul[gnCurrentUserIndex].Iter,
-                      COL_USER_FACE, face,
-                      LIST_COLOR,"black",
-                      LIST_FRONT,1985,-1);
-    act_user_set_icon_file (ua->ul[gnCurrentUserIndex].User,BasePath);
-    memset(ua->ul[gnCurrentUserIndex].UserIcon,
-          '\0',
-          strlen(ua->ul[gnCurrentUserIndex].UserIcon));
-    /**/
-    memcpy(ua->ul[gnCurrentUserIndex].UserIcon,BasePath,strlen(BasePath));
+    user = GetIndexUser(ua,gnCurrentUserIndex);
+    gtk_list_store_set(ua->ListSTore,&user->Iter,
+                       COL_USER_FACE, face,
+                       LIST_COLOR,"black",
+                       LIST_FRONT,1985,-1);
+    act_user_set_icon_file (user->ActUser,BasePath);
 
 }
 /******************************************************************************
@@ -633,19 +629,16 @@ static void ModifyName (GtkEntry *entry,gpointer  data)
 {
     UserAdmin *ua = (UserAdmin *) data;
     const gchar *NewName;
-
+    UserInfo *user;
     NewName = gtk_entry_get_text (entry);
+    user = GetIndexUser(ua,gnCurrentUserIndex);
     if(RealNameValidCheck(NewName))
     {        
-        gtk_list_store_set(ua->ListSTore,&ua->ul[gnCurrentUserIndex].Iter,
+        gtk_list_store_set(ua->ListSTore,&user->Iter,
                           LIST_TEXT, NewName,
                           LIST_COLOR,"black",
                           LIST_FRONT,1985,-1);
-        memset(ua->ul[gnCurrentUserIndex].RealName,
-              '\0',
-            strlen(ua->ul[gnCurrentUserIndex].RealName));
-        memcpy(ua->ul[gnCurrentUserIndex].RealName,NewName,strlen(NewName));
-        act_user_set_real_name (ua->ul[gnCurrentUserIndex].User,NewName);
+        act_user_set_real_name (user->ActUser,NewName);
     }
     else
     {
@@ -671,6 +664,8 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *table;
     GtkWidget *fixed;
     GtkWidget *ButtonFace;
+    GError    *error = NULL;
+    UserInfo  *user;
      
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed,TRUE,TRUE,0);  
@@ -678,8 +673,13 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     table = gtk_grid_new();
     gtk_fixed_put(GTK_FIXED(fixed),table, 0, 0);
    
+    user = GetIndexUser(ua,0);
     /*set user icon 96 *96 */
-    pb = gdk_pixbuf_new_from_file(ua->ul[0].UserIcon,NULL);
+    pb = gdk_pixbuf_new_from_file(GetUserIcon(user->ActUser),&error);
+    if(pb == NULL)
+    {
+        g_print("get icon Fial %s\r\n",error->message);
+    }    
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
 
@@ -695,7 +695,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     /*set real name*/
     EntryName = gtk_entry_new();
     gtk_entry_set_max_length(GTK_ENTRY(EntryName),48);
-    gtk_entry_set_text(GTK_ENTRY(EntryName),ua->ul[0].UserName);
+    gtk_entry_set_text(GTK_ENTRY(EntryName),GetUserName(user->ActUser));
     ua->EntryName = EntryName;
     gtk_grid_attach(GTK_GRID(table) ,EntryName , 8 , 4 , 1 , 1);
     g_signal_connect (EntryName, "activate",G_CALLBACK (ModifyName),ua);

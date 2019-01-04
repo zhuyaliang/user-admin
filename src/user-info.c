@@ -19,6 +19,32 @@
 #include "user.h"
 #include "user-share.h"
 
+G_DEFINE_TYPE (UserInfo, user_info, G_TYPE_OBJECT)
+static void user_finalize (GObject *object)
+{
+    UserInfo *user;
+
+    user = USERINFO (object);
+    g_free (user->UserName);
+}
+static void user_info_class_init (UserInfoClass *class)
+{
+    GObjectClass *gobject_class;
+    gobject_class = G_OBJECT_CLASS (class);
+    gobject_class->finalize = user_finalize;
+}
+static void user_info_init (UserInfo *user)
+{
+    user->ActUser = NULL;
+}
+UserInfo * user_new (void)
+{
+    UserInfo *user;
+
+    user = g_object_new (USER_TYPE_INFO, NULL);
+    return user;
+}
+
 /******************************************************************************
 * Function:              GetPasswordModeText      
 *        
@@ -31,7 +57,7 @@
 *        
 * Author:  zhuyaliang  15/05/2018
 ******************************************************************************/ 
-static const gchar * GetPasswordModeText (ActUser *user,int *Type)
+const gchar * GetPasswordModeText (ActUser *user,int *Type)
 {
     const gchar *text;
 
@@ -63,7 +89,7 @@ static const gchar * GetPasswordModeText (ActUser *user,int *Type)
 
         return text;
 }
-static gchar * GetLoginTimeText (ActUser *user)
+const gchar * GetLoginTimeText (ActUser *user)
 {
     gchar *text;
     GDateTime *date_time;
@@ -86,22 +112,22 @@ static gchar * GetLoginTimeText (ActUser *user)
     return text;
 }
 
-static const gchar *GetRealName (ActUser *user)
+const gchar *GetRealName (ActUser *user)
 {
     const gchar *name = NULL;
     name = act_user_get_real_name (user);
-
+    if(name == NULL)
+        name = act_user_get_user_name (user);
     return name;
 }
-static const gchar *GetUserName(ActUser *user)
+const gchar *GetUserName(ActUser *user)
 {
     const gchar *name =NULL; 
     name = act_user_get_user_name (user);
-    
     return name;
 
 }        
-static const gchar *GetHomeName(ActUser *user)
+const gchar *GetHomeName(ActUser *user)
 {
     const gchar *name = NULL;
     name = act_user_get_home_dir (user);
@@ -109,24 +135,22 @@ static const gchar *GetHomeName(ActUser *user)
     return name;
 
 }        
-static const gchar *GetIconPath(ActUser *user)
+const gchar *GetUserIcon(ActUser *user)
 {
-    const gchar *Path = NULL;
-    Path = act_user_get_icon_file (user);
-    if(access(Path,F_OK)== 0)
-        return Path;
-    return NULL;
-
+    const gchar *Icon = NULL;
+    Icon = act_user_get_icon_file (user);
+    if(access(Icon,F_OK)== 0)
+        return Icon;
+    return DEFAULT;
 }        
-static const char *GetUserLang(ActUser *user)
+const char *GetUserLang(ActUser *user)
 {
     const gchar *Lang = NULL;
 
     Lang = act_user_get_language(user);
     return Lang;
 }
-
-static int GetUserType(ActUser *user)
+gint GetUserType(ActUser *user)
 {
     ActUserAccountType UserType;
 
@@ -136,14 +160,22 @@ static int GetUserType(ActUser *user)
 
     return STANDARD;
 }        
-static int GetUserAutoLogin(ActUser *user)
+gint GetUserAutoLogin(ActUser *user)
 {
     int Auto;
 
     Auto = act_user_get_automatic_login(user);
 
     return Auto;
-}        
+}       
+UserInfo * GetIndexUser(UserAdmin *ua,guint index)
+{
+    if(g_slist_length(ua->UsersList) <= index)
+    {
+        return NULL;
+    }
+    return g_slist_nth_data(ua->UsersList,index); 
+}    
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {
     ActUser *ua, *ub;
@@ -183,85 +215,19 @@ static gint SortUsers (gconstpointer a, gconstpointer b)
 *        
 * Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
-static void UserAdded(ActUser *user,int index,UserAdmin *ua)
+static UserInfo *UserAdded(ActUser *ActUser)
 {
-    const char *UserName;
-    const char *RealName;
-    const char *Unknown = _("Unknown");
-    const char *HomeName;
-    const char *IconFile;
-    const char *LangName;
-    const char *PassText;
-    const char *TimeLogin;
-    int UserType;
-    int Auto;
-    char Msg[120] = { 0 };
+    UserInfo *user;
 
-    /*user real name Can be modified*/
-    RealName = GetRealName (user);
-    memset(ua->ul[index].RealName,'\0',sizeof(ua->ul[index].RealName));
-    if(RealName == NULL)
-    {
-        memcpy(ua->ul[index].RealName,Unknown,strlen(Unknown));
-    }
-    else
-    {        
-        memcpy(ua->ul[index].RealName,RealName,strlen(RealName));
-    }
+    user = user_new();
+    user->ActUser = ActUser;
+
     /*user name Cannot be modified*/
-    UserName = GetUserName(user);
-    memset(ua->ul[index].UserName,'\0',sizeof(ua->ul[index].UserName));
-    memcpy(ua->ul[index].UserName,UserName,strlen(UserName));
-   
-    /*Home directory name*/ 
-    HomeName = GetHomeName(user);
-    memset(ua->ul[index].HomeName,'\0',sizeof(ua->ul[index].HomeName));
-    if(HomeName == NULL)
-    {
-        memcpy(ua->ul[index].HomeName,Unknown,strlen(Unknown));
-    }        
-    else
-    {
-        memcpy(ua->ul[index].HomeName,HomeName,strlen(HomeName));
-    }       
-    /*user login icon*/
-    IconFile = GetIconPath(user);
-    memset(ua->ul[index].UserIcon,'\0',sizeof(ua->ul[index].UserIcon));
-    if(IconFile == NULL)
-    {       
-        memcpy(ua->ul[index].UserIcon,DEFAULT,strlen(DEFAULT));
-    }
-    else 
-    {
-        memcpy(ua->ul[index].UserIcon,IconFile,strlen(IconFile));
-    }        
-
-    /*user password*/
-    PassText = GetPasswordModeText(user,&ua->ul[index].PasswordType);
-    memset(ua->ul[index].PassText,'\0',sizeof(ua->ul[index].PassText));
-    memcpy(ua->ul[index].PassText,PassText,strlen(PassText));
-
-    /*get user language type*/
-    LangName = GetUserLang(user);
-    if(strlen(LangName) <= 0)
-    {
-        sprintf(Msg,"%s %s",ua->ul[index].UserName,_("Get languages failed"));
-        MessageReport(_("Get user languages"),Msg,ERROR); 
-    }
-    memset(ua->ul[index].LangName,'\0',sizeof(ua->ul[index].LangName));
-    memcpy(ua->ul[index].LangName,LangName,strlen(LangName));
-    /*get user type Administrator or standard user*/
-    UserType = GetUserType(user);
-    ua->ul[index].UserType = UserType;
-
-    /*auto login*/
-    Auto = GetUserAutoLogin(user);
-    ua->ul[index].LoginType = Auto;         
-   
-    /*login time*/
-    memset(ua->ul[index].UserTime,'\0',sizeof(ua->ul[index].UserTime));
-    TimeLogin = GetLoginTimeText(user); 
-    memcpy(ua->ul[index].UserTime,TimeLogin,strlen(TimeLogin));
+    user->UserName  =  g_strdup(GetUserName(ActUser));
+    if(user->UserName == NULL)
+        return NULL;
+    
+    return user;
 }    
 
 /******************************************************************************
@@ -282,9 +248,8 @@ int GetUserInfo(UserAdmin *ua)
 {
     GSList *list, *l;
     ActUserManager *Manager;
-    ActUser *user;
-    int i = 0;
-    int UserCnt;
+    int UserCnt = 0;
+    UserInfo *user;
     
     /* get all user list */
     Manager = act_user_manager_get_default ();
@@ -299,15 +264,15 @@ int GetUserInfo(UserAdmin *ua)
     }        
     /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);
-    
-    for (l = list; l; l = l->next,i++)
+    ua->UsersList = NULL;
+    for (l = list; l; l = l->next)
     {
-        user = l->data;
-        ua->ul[i].User = user;
-        UserAdded (user,i,ua);
+        user = UserAdded (l->data);
+        if(user != NULL)
+        {
+            ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(user));
+        }    
     }
     g_slist_free (list);
-
     return UserCnt; 
 }        
-

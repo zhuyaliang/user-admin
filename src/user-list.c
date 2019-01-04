@@ -18,7 +18,34 @@
 #include "user-list.h"
 #include "user-admin.h"
 #include "user-share.h"
+#include "user-info.h"
 
+static GtkListStore *store;
+static gboolean SelectUser = TRUE;
+void RefreshUserList(GtkWidget *UserList,GSList *List)
+{
+    UserInfo *user;
+    GSList *l;
+    int i = 0;
+    SelectUser = FALSE;
+    if(store != NULL)
+    {
+        gtk_list_store_clear(store);
+    }    
+    for (l = List ; l; l = l->next)
+    {
+        user = (UserInfo *)l->data;
+        UserListAppend(UserList,
+                       GetUserIcon(user->ActUser),                     
+                       GetRealName(user->ActUser),
+                       "black",
+                       i,
+                       &user->Iter);
+        i++;
+    }
+    gnCurrentUserIndex = 0;
+    SelectUser = TRUE;
+}    
 /******************************************************************************
 * Function:              on_changed     
 *        
@@ -34,25 +61,30 @@ static void  on_changed(GtkWidget *widget,  gpointer data)
 {
     UserAdmin *ua = (UserAdmin *) data;
     GtkTreeIter iter;
+    UserInfo *user;
     gint count = 0;
-
-    if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &ua->Model, &iter))
-    {
-        /*Get the user line number*/
-        gtk_tree_model_get (ua->Model, &iter,
-                            INT_COLUMN, &count,
-                            -1);
-        gnCurrentUserIndex = count;
-
-        /*update display*/
-        UpdateInterface(count,ua);
-    }
+    if(SelectUser == TRUE)
+    {    
+        if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &ua->Model, &iter))
+        {
+            /*Get the user line number*/
+            gtk_tree_model_get (ua->Model, &iter,
+                                INT_COLUMN, &count,
+                                -1);
+            gnCurrentUserIndex = count;
+            user = GetIndexUser(ua,count);
+            if(user == NULL)
+            {
+                g_error("No such user !!!\r\n");
+            }    
+            /*update display*/
+            UpdateInterface(user->ActUser,ua);
+        }
+    }    
 }
 
 static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
 {   
-
-    GtkListStore *store;
     store = gtk_list_store_new(N_COLUMNS,
                                GDK_TYPE_PIXBUF,
                                G_TYPE_INT,
@@ -129,7 +161,6 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *UserList;
     GtkWidget *Scrolled;
     GtkTreeModel *model;
-    int i;
     
     Scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_box_pack_start(GTK_BOX(Hbox),Scrolled, TRUE, TRUE,0);
@@ -150,16 +181,8 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
     ua->UserList = UserList;
 
     /* Add the user to the lis */
-    for( i = 0; i < ua->UserCount; i ++)
-    {
-        UserListAppend(UserList,
-                       ua->ul[i].UserIcon,
-                       ua->ul[i].RealName,
-                       "black",
-                       i,
-                       &ua->ul[i].Iter);
-    } 
-    
+
+    RefreshUserList(ua->UserList,ua->UsersList);
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(UserList));
     gtk_tree_selection_set_mode(selection,GTK_SELECTION_SINGLE);
     model=gtk_tree_view_get_model(GTK_TREE_VIEW(UserList));
@@ -172,6 +195,15 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
 
     g_signal_connect(selection, "changed", G_CALLBACK(on_changed), ua);
 }
+static void QuitApp(GtkWidget *widget, gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *)data;
+    g_slist_free_full(ua->UsersList,g_object_unref); 
+    g_strfreev(all_languages);
+    g_hash_table_destroy(LocaleHash);
+    g_slist_free (LangList);
+    gtk_main_quit();
+}    
 /******************************************************************************
 * Function:              AddRemoveUser 
 *        
@@ -190,7 +222,6 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *ButtonClose;
     GtkWidget *LableSpace;
     GtkWidget *table;
-    
     table = gtk_grid_new();
     gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);
     gtk_box_pack_start(GTK_BOX(Vbox),table, TRUE, TRUE,0);
@@ -199,7 +230,7 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , LableSpace , 0 , 0 , 4 , 1);
     ButtonAdd    =  gtk_button_new_with_label(_("Add User"));
     ButtonRemove =  gtk_button_new_with_label(_("Remove User"));
-    ButtonClose  =  gtk_button_new_with_label(_("Close Quit"));
+    ButtonClose  =  gtk_button_new_with_label(_("Close"));
 
     gtk_grid_attach(GTK_GRID(table) , ButtonRemove , 0 , 1 , 1 , 1);
     gtk_grid_attach(GTK_GRID(table) , ButtonAdd ,    1 , 1 , 1 , 1);
@@ -210,11 +241,11 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
                       ua);
     g_signal_connect (ButtonAdd, 
                       "clicked",
-                      G_CALLBACK (AddUser),
+                      G_CALLBACK (AddNewUser),
                       ua);
     g_signal_connect (ButtonClose, 
                       "clicked",
-                      G_CALLBACK (on_window_quit),
+                      G_CALLBACK (QuitApp),
                       ua);
     
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);

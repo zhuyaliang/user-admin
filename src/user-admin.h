@@ -21,6 +21,6 @@
 #include <gtk/gtk.h>
 
 void RemoveUser(GtkWidget *widget, gpointer data);
-void AddUser(GtkWidget *widget, gpointer data);
+void AddNewUser(GtkWidget *widget, gpointer data);
 
 #endif

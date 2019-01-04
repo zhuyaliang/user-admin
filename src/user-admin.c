@@ -18,23 +18,14 @@
 #include "user.h"
 #include "user-share.h"
 #include "user-admin.h"
+#include "user-info.h"
+#include "user-list.h"
 #include <pwd.h>
 #include <sys/types.h>
 
 GtkWidget *WindowAddUser;
 /* password and name valid */
 static int UnlockFlag;
-
-static void RemoveUserData(UserAdmin *ua,int UserIndex)
-{
-    memset(ua->ul[UserIndex].UserName,'\0',strlen(ua->ul[UserIndex].UserName));            
-    memset(ua->ul[UserIndex].RealName,'\0',strlen(ua->ul[UserIndex].RealName));            
-    memset(ua->ul[UserIndex].HomeName,'\0',strlen(ua->ul[UserIndex].HomeName));            
-    memset(ua->ul[UserIndex].LangName,'\0',strlen(ua->ul[UserIndex].LangName));            
-    memset(ua->ul[UserIndex].UserIcon,'\0',strlen(ua->ul[UserIndex].UserIcon)); 
-    memset(ua->ul[UserIndex].PassText,'\0',strlen(ua->ul[UserIndex].PassText));
-    memset(ua->ul[UserIndex].UserTime,'\0',strlen(ua->ul[UserIndex].UserTime));
-}
 
 static uid_t GetLoginUserUid(void)
 {
@@ -80,18 +71,17 @@ void RemoveUser(GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     GtkTreeIter iter;
-    int Index;
     int nRet;
     int RemoveCount = 0;
     gboolean RemoveType = TRUE;
 	ActUserManager *Manager;
+    UserInfo *user;
     GError *error = NULL;
-    
     Manager = act_user_manager_get_default ();
+    user = GetIndexUser(ua,gnCurrentUserIndex);
     if (gtk_tree_selection_get_selected(ua->UserSelect, &ua->Model, &iter))
     {
-        Index = gnCurrentUserIndex;  // gnCurrentUserIndex 代表当前用户标号
-        if(CheckLoginUser(act_user_get_uid(ua->ul[Index].User)) == TRUE)
+        if(CheckLoginUser(act_user_get_uid(user->ActUser)) == TRUE)
         {
             MessageReport(_("Remove User"),
                           _("You cannot delete your own account."),
@@ -112,11 +102,11 @@ void RemoveUser(GtkWidget *widget, gpointer data)
              return;
         }
          /* remove autologin */
-        if (act_user_get_automatic_login (ua->ul[Index].User)) 
+        if (act_user_get_automatic_login (user->ActUser)) 
         {
-            act_user_set_automatic_login (ua->ul[Index].User, FALSE);
+            act_user_set_automatic_login (user->ActUser, FALSE);
         }
-        while(!act_user_manager_delete_user(Manager,ua->ul[Index].User,RemoveType,&error))
+        while(!act_user_manager_delete_user(Manager,user->ActUser,RemoveType,&error))
         {
             error = NULL;
             /*This function will go wrong and need to be called many times*/
@@ -130,11 +120,16 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         }
         if(RemoveCount < 5)    //5次操作内成功移除用户
         {    
-            /*Delete the left list user*/
-            gtk_list_store_remove (GTK_LIST_STORE (ua->Model), &iter);
+            ua->UsersList = g_slist_remove(ua->UsersList,user);
+            g_object_unref(user);
+            RefreshUserList(ua->UserList,ua->UsersList);
             /*Scavenging user information*/
-            RemoveUserData(ua,Index);                                
-            UpdateInterface(gnCurrentUserIndex,ua);                  
+            user = GetIndexUser(ua,gnCurrentUserIndex);
+            if(user == NULL)
+            {
+                g_error(_("No such user!!!\r\n"));
+            }    
+            UpdateInterface(user->ActUser,ua);                  
             ua->UserCount--;                                        
         }
     }
@@ -262,49 +257,6 @@ static gboolean CheckName(gpointer data)
     return TRUE;
 }
 
-static void NewUserSelectType(GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
- 	char *text;
-    GtkTreeIter   iter;
-    GtkTreeModel *model;
-    gint account_type;
-    int NewUserIndex;
-
-    if( gtk_combo_box_get_active_iter(GTK_COMBO_BOX(widget), &iter ) )
-    {
-        model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
-        gtk_tree_model_get( model, &iter, 0, &text, -1 );
-    }
-    account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) ?
-                                              ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : 
-                                              ACT_USER_ACCOUNT_TYPE_STANDARD;
-    NewUserIndex = ua->UserCount;
-    ua->ul[NewUserIndex].UserType = account_type;
-    g_free(text);
-}
-static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-    char *text;
-    GtkTreeIter   iter;
-    GtkTreeModel *model;
-    int NewUserIndex;
-    char *LangName;
-
-    if( gtk_combo_box_get_active_iter(GTK_COMBO_BOX(widget), &iter ) )
-    {
-        model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
-        gtk_tree_model_get( model, &iter, 0, &text, -1 );
-    }
-    NewUserIndex = ua->UserCount;
-    LangName = g_hash_table_lookup(LocaleHash,text);
-    memset(ua->ul[NewUserIndex].LangName,
-                '\0',
-          strlen(ua->ul[NewUserIndex].LangName));
-    memcpy(ua->ul[NewUserIndex].LangName,LangName,strlen(LangName));
-    g_free(text);
-}
 /******************************************************************************
 * Function:             WriteUserInfo 
 *        
@@ -316,7 +268,12 @@ static void NewUserSelectLanguage(GtkWidget *widget,gpointer data)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static int WriteUserInfo(int index,UserAdmin *ua)
+static ActUser *WriteUserInfo(const gchar *UserName,
+                              const gchar *RealName,
+                              int          UserType,
+                              const gchar *LangName,
+                              int          PasswordType,
+                              const gchar *TmpPass)
 {
 	ActUserManager *Manager;
     GError *error = NULL;
@@ -324,34 +281,72 @@ static int WriteUserInfo(int index,UserAdmin *ua)
 
     Manager = act_user_manager_get_default ();
     user = act_user_manager_create_user(Manager,
-                                       ua->ul[index].UserName,
-                                       ua->ul[index].RealName,
-                                       ACT_USER_ACCOUNT_TYPE_STANDARD,
+                                        UserName,
+                                        RealName,
+                                        ACT_USER_ACCOUNT_TYPE_STANDARD,
                                        &error);
     if(user == NULL)
     {
+        g_error("error Create NewUser Error %s\r\n",error->message);
+        g_error_free(error); 
         MessageReport(_("Creating User"),_("Creating a user failed"),ERROR);
-        return -1;
+        return NULL;
     }        
-    ua->ul[index].User = user;
-    if(ua->ul[index].UserType == ADMIN)
+    if(UserType == ADMIN)
     {        
         act_user_set_account_type(user,ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
     }    
-    act_user_set_language(user,ua->ul[index].LangName);
+    act_user_set_language(user,LangName);
     
-    if(ua->ul[index].PasswordType == NEWPASS)
+    if(PasswordType == NEWPASS)
     {
         act_user_set_password_mode (user,ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
     }
     else
     {
         act_user_set_password_mode (user, ACT_USER_PASSWORD_MODE_REGULAR);
-        act_user_set_password (user,ua->TmpPass, "");
+        act_user_set_password (user,TmpPass, "");
     }
-    return 0;
+    return user;
 
-}        
+}       
+static const gchar *GetNewUserPassword(GtkWidget *EntryPass1,GtkWidget *EntryPass2)
+{
+	const char *p1 = NULL;
+	const char *p2 = NULL;
+
+    p1 =  gtk_entry_get_text(GTK_ENTRY(EntryPass1));   
+	p2 =  gtk_entry_get_text(GTK_ENTRY(EntryPass2));
+        
+    if(strcmp(p1,p2) != 0 )
+	{
+	    return NULL;
+    }
+    return p2;
+}    
+static int GetNewUserType(GtkWidget *Switch)
+{
+    return gtk_combo_box_get_active (GTK_COMBO_BOX(Switch)) ?
+                                     ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : 
+                                     ACT_USER_ACCOUNT_TYPE_STANDARD;
+}  
+static const gchar *GetNewUserLang(GtkWidget *Combox)
+{
+    char *text;
+    GtkTreeIter   iter;
+    GtkTreeModel *model;
+    const char *LangName;
+
+    if(gtk_combo_box_get_active_iter(GTK_COMBO_BOX(Combox), &iter ))
+    {
+        model = gtk_combo_box_get_model(GTK_COMBO_BOX(Combox));
+        gtk_tree_model_get( model, &iter, 0, &text, -1 );
+        LangName = g_hash_table_lookup(LocaleHash,text);
+        g_free(text);
+        return LangName;
+    }
+    return NULL;
+}    
 /******************************************************************************
 * Function:             CreateNewUser
 *        
@@ -368,54 +363,58 @@ static int WriteUserInfo(int index,UserAdmin *ua)
 static void CreateNewUser(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
+    UserInfo *user;
 	const char *rn;
 	const char *un;
-	const char *p;
-	const char *s1;
+    const char *NewUserlang;
+    const char *Password;
+    UserInfo *newuser;
+    ActUser *ActUser;
+    int account_type;
+    int password_type = NEWPASS;
     const char *NoteMessage = _("Two inconsistencies in cipher input");
-    int NewUserIndex;
 
-    NewUserIndex = ua->UserCount;
-	if(NewUserIndex >= NUMMAX)
-	{
-		MessageReport(_("Add User"),
-                      _("The number of users exceeds the scope of management."),
-                      ERROR);
-		return;
-
-	}			
-    if(ua->ul[NewUserIndex].PasswordType == OLDPASS)
-    {        
-	    s1 = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));   
-	    p =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
-        
-        memset(ua->TmpPass,'\0',sizeof(ua->TmpPass));
-        memcpy(ua->TmpPass,p,strlen(p));
-	    if(strcmp(s1,p) != 0 )
-	    {
-            SetLableFontType(ua->LabelSpace,"red",10,NoteMessage);
-            return;
-	    }
-    }    
 	rn = gtk_entry_get_text(GTK_ENTRY(ua->RealNameEntry));
 	un = gtk_entry_get_text(GTK_ENTRY(ua->UserNameEntry));
-	memcpy(ua->ul[NewUserIndex].UserName,un,strlen(un));
-	memcpy(ua->ul[NewUserIndex].RealName,rn,strlen(rn));
-	UserListAppend(ua->UserList,
-                   ua->ul[NewUserIndex].UserIcon,
-                   ua->ul[NewUserIndex].RealName,
-                  "black",
-                   NewUserIndex,
-                  &ua->ul[NewUserIndex].Iter);
-    UnlockFlag = 0;
-	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
-
-    if(WriteUserInfo(NewUserIndex,ua) >= 0)
-    {    
-        UpdateInterface(NewUserIndex,ua);
-	    ua->UserCount +=1;//用户个数加1
+    account_type = GetNewUserType(ua->NewUserType);
+    NewUserlang = GetNewUserLang(ua->NewUserLangType);
+    if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ua->RadioButton2)) == TRUE)
+    {        
+        Password = GetNewUserPassword(ua->NewPassEntry,ua->CheckPassEntry);
+        if(Password == NULL)
+        {    
+            SetLableFontType(ua->LabelSpace,"red",10,NoteMessage);
+            return;
+        }    
+        password_type = OLDPASS;
     }    
 
+    UnlockFlag = 0;
+    ActUser = WriteUserInfo(un,
+                            rn,
+                            account_type,
+                            NewUserlang,
+                            password_type,
+                            Password);
+    if(ActUser != NULL)
+    {   
+
+        newuser = user_new();
+        newuser->UserName = g_strdup(un);
+        newuser->ActUser  = ActUser;
+        newuser->Iter     = ua->NewUserIter;
+	    UserListAppend(ua->UserList,
+                       DEFAULT,
+                       rn,
+                      "black",
+                       ua->UserCount,
+                      &ua->NewUserIter);
+        ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(newuser));
+        user = GetIndexUser(ua,gnCurrentUserIndex);
+        UpdateInterface(user->ActUser,ua);
+	    ua->UserCount +=1;//用户个数加1
+    }    
+	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 } 
 static void CloseWindow(GtkWidget *widget,gpointer data)
 {
@@ -423,59 +422,6 @@ static void CloseWindow(GtkWidget *widget,gpointer data)
 	gtk_widget_destroy(GTK_WIDGET(ua->AddUserWindow));
 }
 
-static const char * GetNewUserLang(UserAdmin *ua)
-{
-    if(act_user_get_uid (ua->ul[0].User) != getuid())
-    {
-        return "en_US.utf8";
-    }
-    
-    return ua->ul[0].LangName;
-                
-}        
-/******************************************************************************
-* Function:              InitNewUser 
-*        
-* Explain: Initializing new user information.
-*          icon      --->default.jpg
-*          user type --->standard
-*          user lang --->Current use of language
-*          user pass --->Set up next time
-*          user auto --->no
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-static void InitNewUser(UserAdmin *ua)
-{
-    int NewUserIndex;
-    const char *s = _("Set up next time");
-    const char *LangName;
-    char *text;
-
-    NewUserIndex = ua->UserCount;
-
-    memset(ua->ul[NewUserIndex].UserName,'\0',sizeof(ua->ul[NewUserIndex].UserName));
-    memset(ua->ul[NewUserIndex].RealName,'\0',sizeof(ua->ul[NewUserIndex].RealName));
-    memset(ua->ul[NewUserIndex].UserIcon,'\0',sizeof(ua->ul[NewUserIndex].UserIcon));
-    memcpy(ua->ul[NewUserIndex].UserIcon,DEFAULT,strlen(DEFAULT));
-    ua->ul[NewUserIndex].UserType = STANDARD;
-    LangName = GetNewUserLang(ua);    
-    memset(ua->ul[NewUserIndex].LangName,'\0',sizeof(ua->ul[NewUserIndex].LangName));
-    memcpy(ua->ul[NewUserIndex].LangName,LangName,strlen(LangName));
-    ua->ul[NewUserIndex].PasswordType = NEWPASS;
-    memset(ua->ul[NewUserIndex].PassText,'\0',sizeof(ua->ul[NewUserIndex].PassText));
-    memcpy(ua->ul[NewUserIndex].PassText,s,strlen(s));
-    ua->ul[NewUserIndex].LoginType = FALSE;
-    text = g_strdup ("—");
-    memset(ua->ul[NewUserIndex].UserTime,'\0',sizeof(ua->ul[NewUserIndex].UserTime));
-    memcpy(ua->ul[NewUserIndex].UserTime,text,strlen(text));
-    ua->CheckNameTimeId = 0;
-    ua->CheckPassTimeId = 0;
-
-}        
 static void RemoveTime(GtkWidget *widget,gpointer data)
 {
 	UserAdmin *ua = (UserAdmin *)data;
@@ -490,8 +436,16 @@ static void RemoveTime(GtkWidget *widget,gpointer data)
     UnlockFlag = 0;
     gtk_widget_set_sensitive(ua->MainWindow, TRUE);	
 }       
+static gchar *GetLoginUserLang(ActUser *ActUser)
+{
+    if(getuid() == act_user_get_uid(ActUser))
+    {
+        return act_user_get_language(ActUser);
+    }    
+    return "en_US.utf8";
+}    
 /******************************************************************************
-* Function:             GetNewUserInfo 
+* Function:             SetNewUserInfo 
 *        
 * Explain: New user name and type and language
 *        
@@ -501,7 +455,7 @@ static void RemoveTime(GtkWidget *widget,gpointer data)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
+static void SetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Table;
     GtkWidget *LabelUserName;
@@ -513,10 +467,11 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *UserNameEntry;
     GtkWidget *NewUserType;
     GtkWidget *NewLanguage;
-    int       TimeId;
-    int       index;
-    const char      *LangName;
- const char *FixedNote = _("This will be used to name your home folder and can't be changed");   
+    const gchar *LoginUserLang;
+    int        TimeId;
+    int        index;
+    UserInfo  *user;
+    const char *FixedNote = _("This will be used to name your home folder and can't be changed");   
 
     Table = gtk_grid_new();
     gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 0);
@@ -551,28 +506,22 @@ static void GetNewUserInfo(GtkWidget *Vbox,UserAdmin *ua)
     LabelUserType = gtk_label_new(NULL);
     SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
-    
+     
+    user = GetIndexUser(ua,0);
     NewUserType = SetComboUserType(_("Standard"),_("Administrators"));
     gtk_combo_box_set_active(GTK_COMBO_BOX(NewUserType),STANDARD);
     ua->NewUserType = NewUserType; 
-    g_signal_connect(G_OBJECT(NewUserType),
-                    "changed",
-                     G_CALLBACK(NewUserSelectType),
-                     ua);
+   
     gtk_grid_attach(GTK_GRID(Table) ,NewUserType , 1 , 3 , 3 , 1);        
     LabelLanguageType = gtk_label_new(NULL);
     SetLableFontType(LabelLanguageType,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(Table) ,LabelLanguageType , 0 , 4 , 1 , 1);        
 
     NewLanguage = SetComboLanguageType();
-    LangName = GetNewUserLang(ua);
-    index = GetCurrentLangIndex(LangName);
+    LoginUserLang = GetLoginUserLang(user->ActUser);
+    index = GetCurrentLangIndex(LoginUserLang);
     gtk_combo_box_set_active(GTK_COMBO_BOX(NewLanguage), index);
     ua->NewUserLangType = NewLanguage;
-    g_signal_connect(G_OBJECT(NewLanguage),
-                    "changed",
-                     G_CALLBACK(NewUserSelectLanguage),
-                     ua);
     gtk_grid_attach(GTK_GRID(Table) ,NewLanguage , 1 , 4 , 3 , 1);        
 
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
@@ -631,13 +580,6 @@ static gboolean TimeFun(gpointer data)
 static void LoginSetPass(GtkRadioButton *button,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    const char *Pass = _("Set up next time");
-    int NewUserIndex;
- 
-    NewUserIndex = ua->UserCount;
-    memset(ua->ul[NewUserIndex].PassText,
-          '\0',
-          sizeof(ua->ul[NewUserIndex].PassText));
  
     gtk_widget_set_sensitive(ua->NewPassEntry, FALSE);  //lock widget
     gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);
@@ -648,10 +590,7 @@ static void LoginSetPass(GtkRadioButton *button,gpointer data)
         g_source_remove(ua->CheckPassTimeId);
         ua->CheckPassTimeId = 0;
     }
-    memcpy(ua->ul[NewUserIndex].PassText,Pass,strlen(Pass));
-    ua->ul[NewUserIndex].PasswordType = NEWPASS;
     UnlockFlag = 0;
-
 }
 /******************************************************************************
 * Function:            NowSetNewUserPass 
@@ -667,24 +606,15 @@ static void LoginSetPass(GtkRadioButton *button,gpointer data)
 static void NowSetNewUserPass(GtkRadioButton *button,gpointer data)
 {
     int CheckPassTimeId;
-    const char *Pass = "●●●●●●";
     UserAdmin *ua = (UserAdmin *)data;
-    int NewUserIndex;
  
     UnlockFlag = 1;
-    NewUserIndex = ua->UserCount;
-    memset(ua->ul[NewUserIndex].PassText,
-          '\0',
-          sizeof(ua->ul[NewUserIndex].PassText));
-
     gtk_widget_set_sensitive(ua->CheckPassEntry, TRUE);  //Unlocking Widget
     gtk_widget_set_sensitive(ua->NewPassEntry, TRUE);
     gtk_widget_set_sensitive(ua->LevelBar, TRUE);
 
     CheckPassTimeId = g_timeout_add(800,(GSourceFunc)TimeFun,ua);
-    memcpy(ua->ul[NewUserIndex].PassText,Pass,strlen(Pass));
     ua->CheckPassTimeId = CheckPassTimeId;
-    ua->ul[NewUserIndex].PasswordType = OLDPASS;
 
 }        
 /******************************************************************************
@@ -698,7 +628,7 @@ static void NowSetNewUserPass(GtkRadioButton *button,gpointer data)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
+static void SetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Table;
     GtkWidget *LabelTitle;
@@ -728,14 +658,18 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     RadioButton1 = gtk_radio_button_new_with_label(NULL,_("Set up next time"));
     RadioGroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(RadioButton1));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton1 , 0 , 1 , 5 , 1);
-    g_signal_connect(RadioButton1,"released",G_CALLBACK(LoginSetPass),ua); 
+    g_signal_connect(RadioButton1,
+                    "released",
+                     G_CALLBACK(LoginSetPass),
+                     ua); 
     
     RadioButton2 = gtk_radio_button_new_with_label(RadioGroup,_("Now set the password"));
     gtk_grid_attach(GTK_GRID(Table) , RadioButton2 , 0 , 2 , 5 , 1);
+    ua->RadioButton2 = RadioButton2;
     g_signal_connect(RadioButton2,
                     "released",
-                    G_CALLBACK(NowSetNewUserPass),
-                    ua); 
+                     G_CALLBACK(NowSetNewUserPass),
+                     ua); 
    
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Password"));
@@ -751,7 +685,8 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) , NewEntryPass , 1 , 3 , 4 , 1);
     g_signal_connect (G_OBJECT(NewEntryPass), 
                      "icon-press", 
-                      G_CALLBACK(AutoGenera), ua);
+                      G_CALLBACK(AutoGenera), 
+                      ua);
    
     gtk_entry_set_icon_tooltip_text (GTK_ENTRY(NewEntryPass),
                                      GTK_ENTRY_ICON_SECONDARY,
@@ -790,13 +725,16 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     ua->ButtonConfirm = ButtonConfirm;
     gtk_widget_set_sensitive(ButtonConfirm,FALSE);
     g_signal_connect (ButtonConfirm,
-                      "clicked",
-                      G_CALLBACK 
-                      (CreateNewUser),ua);
+                     "clicked",
+                      G_CALLBACK(CreateNewUser),
+                      ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
     
     ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
-    g_signal_connect (ButtonCancel, "clicked",G_CALLBACK (CloseWindow),ua);
+    g_signal_connect (ButtonCancel, 
+                     "clicked",
+                      G_CALLBACK (CloseWindow),
+                      ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
          
     gtk_widget_set_sensitive(NewEntryPass, FALSE);  //lock widget
@@ -807,7 +745,7 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 }        
 /******************************************************************************
-* Function:              AddUser 
+* Function:              AddNewUser 
 *        
 * Explain: add new user
 *        
@@ -817,7 +755,7 @@ static void GetNewUserPass(GtkWidget *Vbox,UserAdmin *ua)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void AddUser(GtkWidget *widget, gpointer data)
+void AddNewUser(GtkWidget *widget, gpointer data)
 {
     GtkWidget *Vbox;
     GtkWidget *Vbox1;
@@ -834,8 +772,8 @@ void AddUser(GtkWidget *widget, gpointer data)
     ua->AddUserWindow = WindowAddUser;
     g_signal_connect(WindowAddUser,
                     "destroy",
-                    G_CALLBACK(RemoveTime),
-                    ua);
+                     G_CALLBACK(RemoveTime),
+                     ua);
 	
     Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(WindowAddUser),Vbox);
@@ -845,13 +783,10 @@ void AddUser(GtkWidget *widget, gpointer data)
     Vbox2 =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_pack_start(GTK_BOX(Vbox), Vbox2,TRUE, TRUE, 0);
     
-    InitNewUser(ua);
-
-    GetNewUserInfo(Vbox1,ua); 
-   
-    GetNewUserPass(Vbox2,ua);
+    ua->CheckNameTimeId = 0;
+    ua->CheckPassTimeId = 0;
+    SetNewUserInfo(Vbox1,ua); 
+    SetNewUserPass(Vbox2,ua);
 
     gtk_widget_show_all(WindowAddUser);
 }        
-
-

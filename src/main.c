@@ -24,6 +24,19 @@
 
 #define  LOCKFILE    "/tmp/user-admin.pid"
 
+static gboolean on_window_quit (GtkWidget *widget, 
+                         GdkEvent *event, 
+                         gpointer user_data)
+{
+    UserAdmin *ua = (UserAdmin *)user_data;
+    
+    g_slist_free_full (ua->UsersList,g_object_unref);
+    g_strfreev(all_languages);
+    g_hash_table_destroy(LocaleHash);
+    g_slist_free (LangList);
+    gtk_main_quit();
+    return TRUE;
+}
 static GdkPixbuf * GetAppIcon(void)
 {
     GdkPixbuf *Pixbuf;
@@ -50,7 +63,7 @@ static void InitMainWindow(UserAdmin *ua)
     g_signal_connect(G_OBJECT(Window), 
                     "delete-event",
                     G_CALLBACK(on_window_quit),
-                    NULL);
+                    ua);
     
     AppIcon = GetAppIcon();
     if(AppIcon)
@@ -218,9 +231,9 @@ int main(int argc, char **argv)
     GetLocaleLang();
     /* Get local user info */
     ua.UserCount = GetUserInfo(&ua);
-	if(ua.UserCount >= NUMMAX)
+	if(ua.UserCount < 0)
 	{
-		ua.UserCount = 19;
+		exit(0);
 	}			
     fixed = gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(ua.MainWindow), fixed); 

@@ -33,9 +33,8 @@
 
 #include <accountsservice-1.0/act/act-user-manager.h>
 #include <accountsservice-1.0/act/act-user.h>
-#include <libintl.h> // gettext 库支持  
-#include <locale.h> // 本地化locale的翻译支持  
-
+#include <libintl.h>   
+#include <locale.h>   
 #define  DEFAULT    "/usr/share/mate-user-admin/face/Default.png"
 #define  NUMMAX    20
 #define  PICMAX    20    
@@ -59,26 +58,9 @@ enum
     LIST_FRONT,
     N_COLUMNS
 };
-/*用户属性结构体*/
-
-typedef  struct
-{
-    char        UserName[48];   //user name
-    char        RealName[48];   //real name
-    char        HomeName[48];   //user home directory
-    char        UserIcon[128];  //user icon path
-    char        UserType;       //user type admin or standard
-    char        LangName[48];       //language type temporary support for English and Chinese
-    int         PasswordType;   //passwod type 
-    char        PassText[48];   //user login password
-    gboolean    LoginType;      //user automatic logon
-    char        UserTime[48];   //user login time
-    GtkTreeIter Iter;           //user list iter
-    ActUser     *User;         
-}UserInfoList;    
 typedef struct 
 {
-    UserInfoList     ul[NUMMAX];
+    GSList           *UsersList;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PassWindow;
@@ -109,6 +91,7 @@ typedef struct
     GtkWidget        *RadioButton1;
     GtkWidget        *RadioButton2;
     GtkWidget        *CropArea;
+    GtkTreeIter       NewUserIter;           //user list iter
     int               UserCount;    //Valid user number
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer

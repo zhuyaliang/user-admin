@@ -18,6 +18,7 @@
 #include "user-base.h"
 #include "user-password.h"
 #include "user-share.h"
+#include "user-info.h"
 
 /******************************************************************************
 * Function:            SwitchState 
@@ -32,35 +33,32 @@
 ******************************************************************************/
 static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
 {
-
     GSList *list;
     GSList *l;
-    int i =0 ;
     UserAdmin *ua = (UserAdmin *)data;
+    ActUserManager *um;
+    UserInfo *user;
     
     if(Change == 0)
     {        
-        ActUser *user = ua->ul[gnCurrentUserIndex].User;
-        ActUserManager *um =  act_user_manager_get_default ();
+        user = GetIndexUser(ua,gnCurrentUserIndex);
+        um =  act_user_manager_get_default ();
         if(state == TRUE)
         {
             list = act_user_manager_list_users (um);
-            for (l = list; l != NULL; l = l->next,i++)
+            for (l = list; l != NULL; l = l->next)
             {
                 ActUser *u = l->data;
-                ua->ul[i].LoginType = FALSE;
-                if (act_user_get_uid (u) != act_user_get_uid (user)) 
+                if (act_user_get_uid (u) != act_user_get_uid (user->ActUser)) 
                 {
-                    act_user_set_automatic_login (user, FALSE);
+                    act_user_set_automatic_login (u, FALSE);
                 }
             }
             g_slist_free (list);
-            act_user_set_automatic_login(user,TRUE);
+            act_user_set_automatic_login(user->ActUser,TRUE);
         }
         else
-            act_user_set_automatic_login(user,FALSE);
-        
-        ua->ul[gnCurrentUserIndex].LoginType = state; 
+            act_user_set_automatic_login(user->ActUser,FALSE);
 
     }
 }    
@@ -79,8 +77,7 @@ static void ChangePass(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     gtk_widget_set_sensitive(ua->MainWindow,FALSE);
-
-		CreateNewPass(ua);      //There is no password for the user
+    CreateNewPass(ua);      //There is no password for the user
 
 }
 /******************************************************************************
@@ -100,6 +97,7 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
     char *text;
     GtkTreeIter   iter; 
     GtkTreeModel *model;
+    UserInfo *user;
     char *LangName;
 
     if(Change == 0) 
@@ -109,12 +107,9 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
             model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
             gtk_tree_model_get( model, &iter, 0, &text, -1 );
         }
+        user = GetIndexUser(ua,gnCurrentUserIndex);
         LangName = g_hash_table_lookup(LocaleHash,text);
-        memset(ua->ul[gnCurrentUserIndex].LangName,
-              '\0',
-               strlen(ua->ul[gnCurrentUserIndex].LangName));
-        memcpy(ua->ul[gnCurrentUserIndex].LangName,LangName,strlen(LangName));
-        act_user_set_language(ua->ul[gnCurrentUserIndex].User,LangName);
+        act_user_set_language(user->ActUser,LangName);
         g_free(text);
     }     
 }
@@ -132,6 +127,7 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
 static void ComboSelectUserType(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
+    UserInfo *user;
     gint account_type;
 
     if( Change ==0 )
@@ -139,8 +135,8 @@ static void ComboSelectUserType(GtkWidget *widget,gpointer data)
         account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) ? 
                                                   ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR:
                                                   ACT_USER_ACCOUNT_TYPE_STANDARD;
-        ua->ul[gnCurrentUserIndex].UserType = account_type;
-        act_user_set_account_type(ua->ul[gnCurrentUserIndex].User,account_type);
+        user = GetIndexUser(ua,gnCurrentUserIndex);
+        act_user_set_account_type(user->ActUser,account_type);
     }    
 }
 /******************************************************************************
@@ -169,8 +165,10 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *LabelTime;
     GtkWidget *ButtonTime;
     GtkWidget *ComboUser;
+    UserInfo  *user;
     int index;
 
+    user = GetIndexUser(ua,0);
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed ,TRUE, TRUE, 0);
     table = gtk_grid_new();
@@ -185,7 +183,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     /*drop-down select boxes*/
     ComboUser = SetComboUserType(_("Standard"),_("Administrators"));
     ua->ComUserType = ComboUser; 
-    gtk_combo_box_set_active(GTK_COMBO_BOX(ComboUser),ua->ul[0].UserType);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(ComboUser),GetUserType(user->ActUser));
     gtk_grid_attach(GTK_GRID(table) , ComboUser , 1 , 0 , 2 , 1);
     g_signal_connect(G_OBJECT(ComboUser),
                     "changed",
@@ -199,7 +197,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
 
     ComboLanguage = SetComboLanguageType();
     ua->ComUserLanguage = ComboLanguage;
-    index = GetCurrentLangIndex(ua->ul[0].LangName);
+    index = GetCurrentLangIndex(GetUserLang(user->ActUser));
     if(index < 0)
         MessageReport(_("Get user language"),_("get user language failed"),ERROR);
     gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),index);
@@ -213,8 +211,8 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Password"));
     gtk_grid_attach(GTK_GRID(table) , LabelPass , 0 , 2 , 1 , 1);
-    
-    ButtonPass = gtk_button_new_with_label(ua->ul[0].PassText);
+    ButtonPass = gtk_button_new_with_label(GetPasswordModeText(user->ActUser,
+                                           &user->PasswordType));
     ua->ButtonPass = ButtonPass;
     g_signal_connect (ButtonPass, "clicked",G_CALLBACK (ChangePass),ua);
     gtk_grid_attach(GTK_GRID(table) , ButtonPass , 1 , 2 , 2 , 1);
@@ -226,7 +224,8 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     
     SwitchLogin = gtk_switch_new();
     ua->SwitchAutoLogin = SwitchLogin;
-    gtk_switch_set_state (GTK_SWITCH(SwitchLogin),ua->ul[0].LoginType);
+    gtk_switch_set_state (GTK_SWITCH(SwitchLogin),
+                          GetUserType(user->ActUser));
     gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
     g_signal_connect(G_OBJECT(SwitchLogin),
                     "state-set",
@@ -238,7 +237,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     SetLableFontType(LabelTime,"gray",11,_("Login time"));
     gtk_grid_attach(GTK_GRID(table) , LabelTime, 0 , 4 , 1 , 1);
   
-    ButtonTime = gtk_button_new_with_label (ua->ul[0].UserTime);
+    ButtonTime = gtk_button_new_with_label (GetLoginTimeText(user->ActUser));
     ua->ButtonUserTime = ButtonTime;
     gtk_grid_attach(GTK_GRID(table) , ButtonTime, 1 , 4 , 2 , 1);
   

@@ -19,6 +19,43 @@
 #define __USER_INFO_H__
 
 #include "user.h"
+G_BEGIN_DECLS
 
+#define USER_TYPE_INFO       (user_info_get_type ())
+#define USERINFO(object)     (G_TYPE_CHECK_INSTANCE_CAST ((object), \
+                                                           USER_TYPE_INFO,\
+                                                           UserInfo))
+
+#define IS_USERINFO(object)  (G_TYPE_CHECK_INSTANCE_TYPE ((object),\
+                                                           USER_TYPE_INFO))
+
+
+typedef struct UserInfo 
+{
+    GObject      parent;
+    ActUser     *ActUser;
+    gchar       *UserName;
+    int          PasswordType;   //passwod type
+    GtkTreeIter  Iter;           //user list iter
+}UserInfo;
+typedef struct UserInfoClass
+{
+    GObjectClass parent_class;
+} UserInfoClass;
+
+GType          user_info_get_type                (void) G_GNUC_CONST;
+UserInfo *     user_new                     (void);
 int GetUserInfo(UserAdmin *ua);
+const gchar *GetPasswordModeText (ActUser *user,int *Type);
+const gchar *GetLoginTimeText (ActUser *user);
+const gchar *GetRealName (ActUser *user);
+const gchar *GetUserName(ActUser *user);
+const gchar *GetHomeName(ActUser *user);
+const gchar *GetUserIcon(ActUser *user);
+const gchar *GetUserLang(ActUser *user);
+UserInfo * GetIndexUser(UserAdmin *ua,guint index);
+gint  GetUserType(ActUser *user);
+gint  GetUserAutoLogin(ActUser *user);
+G_END_DECLS
+
 #endif

@@ -25,17 +25,9 @@
 #include <shadow.h>
 #include <pwquality.h>
 #include "user-share.h"
+#include "user-info.h"
 
-gboolean on_window_quit (GtkWidget *widget, 
-                         GdkEvent *event, 
-                         gpointer user_data)
-{
-        g_strfreev(all_languages);
-        g_hash_table_destroy(LocaleHash);
-        g_slist_free (LangList);
-        gtk_main_quit();
-        return TRUE;
-}
+
 int GetCurrentLangIndex(const char *_Lang)        
 {
     GSList *l;
@@ -229,41 +221,42 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void UpdateInterface(int Cnt,UserAdmin *ua)
+void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
     int index;
+    int passtype;
     
     /*Some options change when switching users, 
       causing a signal response, requiring flags, 
       and ignoring signal processing when Chang = 1*/
     Change = 1;           
-    pb = gdk_pixbuf_new_from_file(ua->ul[Cnt].UserIcon,NULL);
+
+    pb = gdk_pixbuf_new_from_file(GetUserIcon(ActUser),NULL);
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
-   
     /*Switching icon*/ 
     gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),
                          image);
 
     gtk_entry_set_text(GTK_ENTRY(ua->EntryName),
-                       ua->ul[Cnt].RealName); 
+                       GetRealName(ActUser)); 
 
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
-                             ua->ul[Cnt].UserType);
-    index =  GetCurrentLangIndex(ua->ul[Cnt].LangName);
+                             GetUserType(ActUser));
+    index =  GetCurrentLangIndex(GetUserLang(ActUser));
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserLanguage),
                              index);
 
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
-                         ua->ul[Cnt].PassText);
+                         GetPasswordModeText(ActUser,&passtype));
     
     gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
-                          ua->ul[Cnt].LoginType);
+                         GetUserAutoLogin(ActUser));
 
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
-                          ua->ul[Cnt].UserTime);
+                          GetLoginTimeText(ActUser));
     Change = 0;
 
 } 

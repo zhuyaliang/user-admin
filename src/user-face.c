@@ -198,7 +198,7 @@ static int GetDirFace(GtkWidget *flowbox)
     int cnt = 0;
 
     if((dp = opendir(FACEDIR)) == NULL)
-	    return -2;
+        return -2;
 
     while((entry = readdir(dp)) != NULL)
     {
@@ -246,7 +246,7 @@ static void ThumbnailPreview (GtkFileChooser  *chooser,gpointer data)
         preview = gtk_file_chooser_get_preview_widget (chooser);
         file = g_file_new_for_uri (uri);
         file_info = g_file_query_info (file,
-                                       "standard::*",
+                                      "standard::*",
                                        G_FILE_QUERY_INFO_NONE,
                                        NULL, NULL);
         g_object_unref (file);
@@ -309,8 +309,8 @@ static void SaveFaceFile(UserAdmin *ua,GdkPixbuf *pb)
     if (!gdk_pixbuf_save_to_stream (pb, stream, "png", NULL, &error, NULL)) 
     {
         MessageReport(_("Create Crop File"),
-                      error->message,
-                      ERROR);
+                         error->message,
+                         ERROR);
         g_error_free (error);
         g_object_unref (stream);
         return;
@@ -331,10 +331,11 @@ static void CropDialogResponse (GtkWidget *dialog,
 {
     GdkPixbuf *pb, *pb2;
 
-    if (response_id != GTK_RESPONSE_ACCEPT) {
-            ua->CropArea = NULL;
-            gtk_widget_destroy (dialog);
-            return;
+    if (response_id != GTK_RESPONSE_ACCEPT) 
+    {
+        ua->CropArea = NULL;
+        gtk_widget_destroy (dialog);
+        return;
     }
     pb = user_crop_area_get_picture (USER_CROP_AREA (ua->CropArea));
     pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
@@ -361,34 +362,34 @@ static void CropDialogResponse (GtkWidget *dialog,
 ******************************************************************************/
 static void FaceDialogCrop (UserAdmin *ua,GdkPixbuf *pixbuf)
 {
-        GtkWidget *dialog;
-        dialog = gtk_dialog_new_with_buttons ("",
-                                              GTK_WINDOW (gtk_widget_get_toplevel (ua->MainWindow)),
-                                              GTK_DIALOG_USE_HEADER_BAR,
-                                              _("_Cancel"),
-                                              GTK_RESPONSE_CANCEL,
-                                              _("Select"),
-                                              GTK_RESPONSE_ACCEPT,
-                                              NULL);
+    GtkWidget *dialog;
+    dialog = gtk_dialog_new_with_buttons ("",
+                                          GTK_WINDOW (gtk_widget_get_toplevel (ua->MainWindow)),
+                                          GTK_DIALOG_USE_HEADER_BAR,
+                                          _("_Cancel"),
+                                          GTK_RESPONSE_CANCEL,
+                                          _("Select"),
+                                          GTK_RESPONSE_ACCEPT,
+                                          NULL);
 
-        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+    gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
-        gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
-        g_signal_connect (G_OBJECT (dialog), "response",
-                          G_CALLBACK (CropDialogResponse), ua);
+    g_signal_connect (G_OBJECT (dialog), "response",
+                      G_CALLBACK (CropDialogResponse), ua);
 
-        ua->CropArea           = user_crop_area_new (); 
-        user_crop_area_set_min_size (USER_CROP_AREA (ua->CropArea), 50, 50);
-        user_crop_area_set_constrain_aspect (USER_CROP_AREA (ua->CropArea), TRUE);
-        user_crop_area_set_picture (USER_CROP_AREA (ua->CropArea), pixbuf);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-                            ua->CropArea,
-                            TRUE, TRUE, 8);
+    ua->CropArea           = user_crop_area_new (); 
+    user_crop_area_set_min_size (USER_CROP_AREA (ua->CropArea), 50, 50);
+    user_crop_area_set_constrain_aspect (USER_CROP_AREA (ua->CropArea), TRUE);
+    user_crop_area_set_picture (USER_CROP_AREA (ua->CropArea), pixbuf);
+    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+                        ua->CropArea,
+                        TRUE, TRUE, 8);
 
-        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
+    gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
 
-        gtk_widget_show_all (dialog);
+    gtk_widget_show_all (dialog);
 }
 
 
@@ -413,9 +414,10 @@ static void PictureChooser(GtkDialog *chooser,
     GError *error = NULL;
     GdkPixbuf *pixbuf,*cutpixbuf;
 
-    if (response != GTK_RESPONSE_ACCEPT) {
-            gtk_widget_destroy (GTK_WIDGET (chooser));
-            return;
+    if (response != GTK_RESPONSE_ACCEPT) 
+    {
+        gtk_widget_destroy (GTK_WIDGET (chooser));
+        return;
     }
 
     FileName = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
@@ -472,8 +474,10 @@ static void LoadLocalPicture(GtkWidget *button, gpointer data)
     gtk_file_filter_add_pixbuf_formats (filter);
     gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
-    g_signal_connect (chooser, "response",
-                      G_CALLBACK (PictureChooser), ua);
+    g_signal_connect (chooser, 
+                     "response",
+                      G_CALLBACK (PictureChooser), 
+                      ua);
 
     gtk_window_present (GTK_WINDOW (chooser));
 }    
@@ -541,7 +545,7 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     gtk_box_pack_start (GTK_BOX (Vbox), LocalButton, FALSE, FALSE, 0);
 
     g_signal_connect(LocalButton,
-                     "clicked",
+                    "clicked",
                      G_CALLBACK(LoadLocalPicture),
                      ua);
 
@@ -555,26 +559,27 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     }   
     ua->IconWindow = window;
     gtk_flow_box_selected_foreach (GTK_FLOW_BOX (Flowbox),
-                                face_widget_activated,
-                                ua);
+                                   face_widget_activated,
+                                   ua);
 
     gtk_widget_add_events(ua->MainWindow,
                           GDK_BUTTON_PRESS_MASK |
                           GDK_KEY_PRESS_MASK);
 
     MouseId = g_signal_connect(G_OBJECT(ua->MainWindow),
-                    "button-press-event", 
-                    G_CALLBACK(NotifyEvents), 
-                    ua);
+                              "button-press-event", 
+                               G_CALLBACK(NotifyEvents), 
+                               ua);
 
     ua->MouseId = MouseId;
     KeyId = g_signal_connect(G_OBJECT(ua->MainWindow),
-                    "key-press-event", 
-                    G_CALLBACK(NotifyEvents), 
-                    ua);
+                            "key-press-event", 
+                             G_CALLBACK(NotifyEvents), 
+                             ua);
     ua->KeyId = KeyId;
     WindowOpenFlag = 1;
-    g_signal_connect (Flowbox, "child-activated",
+    g_signal_connect (Flowbox, 
+                     "child-activated",
                       G_CALLBACK (face_widget_activated),
                       ua);
 
@@ -594,24 +599,22 @@ static void GetFaceList(GtkWidget *button, gpointer data)
 ******************************************************************************/
 static gboolean RealNameValidCheck (const gchar *name)
 {
-        gboolean is_empty = TRUE;
-
-        const gchar *c;
-        for (c = name; *c; c++) 
+    gboolean is_empty = TRUE;
+    const gchar *c;
+    for (c = name; *c; c++) 
+    {
+        gunichar unichar;
+        unichar = g_utf8_get_char_validated (c, -1);
+        if (unichar == (gunichar) -1 || unichar == (gunichar) -2)
+            break; 
+        if (!g_unichar_isspace (unichar)) 
         {
-                gunichar unichar;
-                
-                unichar = g_utf8_get_char_validated (c, -1);
-                if (unichar == (gunichar) -1 || unichar == (gunichar) -2)
-                        break; 
-                if (!g_unichar_isspace (unichar)) 
-                {
-                        is_empty = FALSE;
-                        break;
-                }       
-        }
+            is_empty = FALSE;
+            break;
+        }       
+    }
 
-        return !is_empty;
+    return !is_empty;
 }
 
 /******************************************************************************

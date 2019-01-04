@@ -22,6 +22,17 @@
 
 static GtkListStore *store;
 static gboolean SelectUser = TRUE;
+/******************************************************************************
+* Function:              RefreshUserList 
+*        
+* Explain: Refresh User List Call after adding or deleting user 
+*        
+* Input:  @UserList User List on the left       
+*         @List     Store a list of user classes
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 void RefreshUserList(GtkWidget *UserList,GSList *List)
 {
     UserInfo *user;
@@ -168,7 +179,7 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
                                     GTK_POLICY_NEVER,
                                     GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
-                                        GTK_SHADOW_IN);
+                                         GTK_SHADOW_IN);
     
     table = gtk_grid_new();
     gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);

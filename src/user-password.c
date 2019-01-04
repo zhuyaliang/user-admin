@@ -102,8 +102,8 @@ static void ClosePassWindow(GtkWidget *widget,gpointer data)
 ******************************************************************************/
 static void SetNewPass(GtkWidget *widget,gpointer data)
 {
-	const char *np;
-	const char *cp;
+    const char *np;
+    const char *cp;
     UserAdmin *ua = (UserAdmin *)data;
     int passtype;
     UserInfo *user;
@@ -113,17 +113,17 @@ static void SetNewPass(GtkWidget *widget,gpointer data)
     /*choose now set password*/
     if(passtype == OLDPASS)
     {        
-	    np =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
-	    cp =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
-	    if(strcmp(np,cp) != 0)
-	    {
-		    OpenNote(ua->LabelSpace,_("Inconsistent password"),ua);
+        np =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
+        cp =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
+        if(strcmp(np,cp) != 0)
+        {
+            OpenNote(ua->LabelSpace,_("Inconsistent password"),ua);
             return;
-	    }
-	    else
-	    {   
+        }
+        else
+        {   
             act_user_set_password (user->ActUser,cp, "");
-	    }
+        }
     }
 
     gtk_widget_destroy(ua->PassWindow);
@@ -160,7 +160,7 @@ static void SetButtonMode(UserAdmin *ua)
 ******************************************************************************/
 void CreateNewPass(UserAdmin *ua)
 {
-	GtkWidget *WindowChangePass;
+    GtkWidget *WindowChangePass;
     GtkWidget *Vbox;
     GtkWidget *Table;
     GtkWidget *LabelTitle;
@@ -245,7 +245,7 @@ void CreateNewPass(UserAdmin *ua)
     gtk_level_bar_set_min_value(GTK_LEVEL_BAR(LevelBar),0.0);
     gtk_level_bar_set_max_value(GTK_LEVEL_BAR(LevelBar),5.0);
     gtk_level_bar_set_mode(GTK_LEVEL_BAR(LevelBar),GTK_LEVEL_BAR_MODE_DISCRETE);
- 	gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 4 , 4 , 1);
+    gtk_grid_attach(GTK_GRID(Table) ,LevelBar , 1 , 4 , 4 , 1);
 
 
     LabelPassNote = gtk_label_new (NULL);
@@ -272,17 +272,17 @@ void CreateNewPass(UserAdmin *ua)
 
     ButtonConfirm = gtk_button_new_with_label(_("Confirm"));
     ua->ButtonConfirm = ButtonConfirm;
-   	g_signal_connect (ButtonConfirm, 
-                      "clicked",
+    g_signal_connect (ButtonConfirm, 
+                     "clicked",
                       G_CALLBACK (SetNewPass),
                       ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
 
     ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
-  	g_signal_connect (ButtonCancel, 
+    g_signal_connect (ButtonCancel, 
                      "clicked",
-                     G_CALLBACK (ClosePassWindow),
-                     ua);
+                      G_CALLBACK (ClosePassWindow),
+                      ua);
     gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
 
     SetButtonMode(ua);

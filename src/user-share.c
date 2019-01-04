@@ -28,6 +28,17 @@
 #include "user-info.h"
 
 
+/******************************************************************************
+* Function:              GetCurrentLangIndex 
+*        
+* Explain: Get the current user's language
+*        
+* Input:  Zh_CN type       
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
 int GetCurrentLangIndex(const char *_Lang)        
 {
     GSList *l;
@@ -265,7 +276,7 @@ static pwquality_settings_t * get_pwq (void)
     static pwquality_settings_t *settings;
 
     if (settings == NULL)
-   	{
+    {
     	char *err = NULL;
         settings = pwquality_default_settings ();
         pwquality_set_int_value (settings, PWQ_SETTING_MIN_LENGTH , 8);
@@ -280,57 +291,57 @@ static pwquality_settings_t * get_pwq (void)
 
 static int pw_min_length (void)
 {
-	int value = 0;
-	if (pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH , &value) < 0)
-	{
-    	return -1;
+    int value = 0;
+    if (pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH , &value) < 0)
+    {
+        return -1;
     }
     return value;
 }
 static const gchar *pw_error_hint (gint error)
 {
-        switch (error) {
-        case PWQ_ERROR_SAME_PASSWORD:
-                return _("The new password needs to be different from the old one");
-        case PWQ_ERROR_CASE_CHANGES_ONLY:
-                return _("Try changing some letters and numbers");
-        case PWQ_ERROR_TOO_SIMILAR:
-                return _("Try changing the password a bit more");
-        case PWQ_ERROR_USER_CHECK:
-                return _("A password without your user name would be stronger");
-        case PWQ_ERROR_GECOS_CHECK:
-                return _("Try to avoid using your name in the password");
-        case PWQ_ERROR_BAD_WORDS:
-                return _("Try to avoid some of the words included in the password");
-        case PWQ_ERROR_ROTATED:
-                return _("Try changing the password a bit more");
-        case PWQ_ERROR_CRACKLIB_CHECK:
-                return _("Try to avoid common words");
-        case PWQ_ERROR_PALINDROME:
-                return _("Try to avoid reordering existing words");
-        case PWQ_ERROR_MIN_DIGITS:
-                return _("Try to use more numbers");
-        case PWQ_ERROR_MIN_UPPERS:
-                return _("Try to use more uppercase letters");
-        case PWQ_ERROR_MIN_LOWERS:
-                return _("Try to use more lowercase letters");
-        case PWQ_ERROR_MIN_OTHERS:
-                return _("Try to use more special characters, like punctuation");
-        case PWQ_ERROR_MIN_CLASSES:
-                return _("Try to use a mixture of letters, numbers and punctuation");
-        case PWQ_ERROR_MAX_CONSECUTIVE:
-                return _("Try to avoid repeating the same character");
-        case PWQ_ERROR_MAX_CLASS_REPEAT:
-                return _("Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation.");
-        case PWQ_ERROR_MAX_SEQUENCE:
-                return _("Try to avoid sequences like 1234 or abcd");
-        case PWQ_ERROR_MIN_LENGTH:
-                return _("Password length needs more than 8 bits. Add more letters, numbers and punctuation");
-        case PWQ_ERROR_EMPTY_PASSWORD:
-                return ("     ");
-        default:
-                return NULL;
-        }
+    switch (error) {
+    case PWQ_ERROR_SAME_PASSWORD:
+        return _("The new password needs to be different from the old one");
+    case PWQ_ERROR_CASE_CHANGES_ONLY:
+        return _("Try changing some letters and numbers");
+    case PWQ_ERROR_TOO_SIMILAR:
+        return _("Try changing the password a bit more");
+    case PWQ_ERROR_USER_CHECK:
+        return _("A password without your user name would be stronger");
+    case PWQ_ERROR_GECOS_CHECK:
+        return _("Try to avoid using your name in the password");
+    case PWQ_ERROR_BAD_WORDS:
+        return _("Try to avoid some of the words included in the password");
+    case PWQ_ERROR_ROTATED:
+        return _("Try changing the password a bit more");
+    case PWQ_ERROR_CRACKLIB_CHECK:
+        return _("Try to avoid common words");
+    case PWQ_ERROR_PALINDROME:
+        return _("Try to avoid reordering existing words");
+    case PWQ_ERROR_MIN_DIGITS:
+        return _("Try to use more numbers");
+    case PWQ_ERROR_MIN_UPPERS:
+        return _("Try to use more uppercase letters");
+    case PWQ_ERROR_MIN_LOWERS:
+        return _("Try to use more lowercase letters");
+    case PWQ_ERROR_MIN_OTHERS:
+        return _("Try to use more special characters, like punctuation");
+    case PWQ_ERROR_MIN_CLASSES:
+        return _("Try to use a mixture of letters, numbers and punctuation");
+    case PWQ_ERROR_MAX_CONSECUTIVE:
+        return _("Try to avoid repeating the same character");
+    case PWQ_ERROR_MAX_CLASS_REPEAT:
+        return _("Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation.");
+    case PWQ_ERROR_MAX_SEQUENCE:
+        return _("Try to avoid sequences like 1234 or abcd");
+    case PWQ_ERROR_MIN_LENGTH:
+        return _("Password length needs more than 8 bits. Add more letters, numbers and punctuation");
+    case PWQ_ERROR_EMPTY_PASSWORD:
+        return ("     ");
+    default:
+        return NULL;
+    }
 }
 
 /******************************************************************************
@@ -352,7 +363,7 @@ int GetPassStrength (const char  *password,
                      const char  *username,
                      const char **message)
 {
-	int rv, level, length = 0;
+    int rv, level, length = 0;
     double strength = 0.0;
     void *auxerror;
 
@@ -367,23 +378,23 @@ int GetPassStrength (const char  *password,
     strength = 0.01 * rv;
 
     if (rv < 0)
-   	{
+    {
     	level = (length > 0) ? 1 : 0;
     }
     else if (strength < 0.50)
-   	{
+    {
         level = 2;
     }
     else if (strength < 0.75)
-   	{
+    {
         level = 3;
     }
     else if (strength < 0.90)
-   	{
+    {
         level = 4;
     }
     else
-   	{
+    {
         level = 5;
     }
 
@@ -412,12 +423,12 @@ int GetPassStrength (const char  *password,
 ******************************************************************************/
 gboolean CheckPassword(gpointer data)
 {
-	UserAdmin *ua = (UserAdmin *)data;
+    UserAdmin *ua = (UserAdmin *)data;
     const char *s;
-	int Level;
+    int Level;
     const char *Message;
 
-	s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
+    s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
     if(strlen(s) == 0)
     {
         gtk_entry_set_visibility(GTK_ENTRY(ua->NewPassEntry),FALSE);
@@ -425,11 +436,11 @@ gboolean CheckPassword(gpointer data)
     Level = GetPassStrength (s, NULL,NULL,&Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (ua->LevelBar), Level);
 
-  	if(Message == NULL && Level > 1)
-  	{
-  		OffNote(ua->LabelPassNote,ua);
-  		return TRUE;
-  	}
+    if(Message == NULL && Level > 1)
+    {
+        OffNote(ua->LabelPassNote,ua);
+        return TRUE;
+    }
     OpenNote(ua->LabelPassNote,Message,ua);
     return TRUE;
 
@@ -455,7 +466,7 @@ void AutoGenera (GtkEntry            *entry,
     UserAdmin *ua = (UserAdmin *)data;
 
     gtk_entry_set_visibility(GTK_ENTRY(entry),TRUE);
-   	pwquality_generate (get_pwq (), 0, &NewPassWord);
+    pwquality_generate (get_pwq (), 0, &NewPassWord);
     gtk_entry_set_text(GTK_ENTRY(ua->NewPassEntry),NewPassWord);
     gtk_entry_set_text(GTK_ENTRY(ua->CheckPassEntry),NewPassWord);
 
@@ -507,8 +518,8 @@ GtkWidget *SetComboLanguageType(void)
    
     for (l = LangList; l; l = l->next)
     {
-	    gtk_list_store_append (Store, &Iter);
-	    gtk_list_store_set (Store, &Iter, 0, l->data, -1);
+        gtk_list_store_append (Store, &Iter);
+        gtk_list_store_set (Store, &Iter, 0, l->data, -1);
     } 
 
     ComboUser = gtk_combo_box_new_with_model(GTK_TREE_MODEL(Store));

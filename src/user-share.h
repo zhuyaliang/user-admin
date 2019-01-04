@@ -27,34 +27,54 @@
 #define QUESTION   4
 
 int Change;
-GHashTable * CreateGroupsHashTable (void);
-int GetCurrentLangIndex(const char *Lang);
-int MessageReport(const char *Title,const char *Msg,int nType);
-void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word);
-void UserListAppend(GtkWidget *list,
-                    const gchar *UserIcon,
-                    const gchar *UserName,
-                    const gchar *Color,
-                    int Index,
-                    GtkTreeIter *iter);
-GdkPixbuf *SetUserFaceSize(const char  *PicName, int Size);
-void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua);
-void OffNote(GtkWidget *label,UserAdmin *ua);
-GtkWidget *SetComboLanguageType(void);
-GtkWidget *SetComboUserType(const char *s1,const char *s2);
-void UpdateInterface(ActUser *ActUser,UserAdmin *ua);
-gboolean CheckPassword(gpointer data);
-void SelectSetPassMode(GtkRadioButton *button,gpointer  user_data);
-void AutoGenera (GtkEntry            *entry,
-               GtkEntryIconPosition icon_pos,
-               GdkEvent            *event,
-               gpointer             user_data);
+GHashTable  *CreateGroupsHashTable (void);
+int          GetCurrentLangIndex   (const char  *Lang);
+int          MessageReport         (const char  *Title,
+                                    const char  *Msg,
+                                    int          nType);
 
-int GetPassStrength (const char  *password,
-                   const char  *old_password,
-                   const char  *username,
-                   const char **message);
+void         SetLableFontType      (GtkWidget   *Lable ,
+                                    const char  *Color,
+                                    int          FontSzie,
+                                    const char  *Word);
 
+void         UserListAppend        (GtkWidget   *list,
+                                    const gchar *UserIcon,
+                                    const gchar *UserName,
+                                    const gchar *Color,
+                                    int          Index,
+                                    GtkTreeIter *iter);
 
+GdkPixbuf  *SetUserFaceSize        (const char  *PicName, 
+                                    int          Size);
+
+void        OpenNote               (GtkWidget   *label,
+                                    const char  *note,
+                                    UserAdmin   *ua);
+
+void        OffNote                (GtkWidget   *label,
+                                    UserAdmin   *ua);
+
+GtkWidget  *SetComboLanguageType   (void);
+
+GtkWidget  *SetComboUserType       (const char  *s1,
+                                    const char  *s2);
+
+void        UpdateInterface        (ActUser     *ActUser,
+                                    UserAdmin   *ua);
+
+gboolean    CheckPassword          (gpointer     data);
+void        SelectSetPassMode      (GtkRadioButton *button,
+                                    gpointer     user_data);
+
+void        AutoGenera             (GtkEntry            *entry,
+                                    GtkEntryIconPosition icon_pos,
+                                    GdkEvent            *event,
+                                    gpointer             user_data);
+
+int         GetPassStrength        (const char  *password,
+                                    const char  *old_password,
+                                    const char  *username,
+                                    const char **message);
 
 #endif

@@ -209,7 +209,6 @@ static void AddUserToGroup(GSList *list,GasGroup *group)
 	for(node = list; node; node = node->next)
 	{
 		name = node->data;
-		printf("name = %s\r\n",name);
 		gas_group_add_user_group(group,name);	
 	}		
 }		
@@ -730,9 +729,7 @@ static GSList *GetGroupInfo(void)
                         ERROR);
         return  NULL;
     }
-	printf("length = %u\r\n",g_slist_length(list));
     list = gas_group_manager_list_groups (GroupManager);
-	printf("length = %u\r\n",g_slist_length(list));
     count = g_slist_length(list);
     if(count <= 0 )
     {

@@ -638,9 +638,9 @@ static void ModifyName (GtkEntry *entry,gpointer  data)
     if(RealNameValidCheck(NewName))
     {        
         gtk_list_store_set(ua->ListSTore,&user->Iter,
-                          LIST_TEXT, NewName,
-                          LIST_COLOR,"black",
-                          LIST_FRONT,1985,-1);
+                           LIST_TEXT, NewName,
+                           LIST_COLOR,"black",
+                           LIST_FRONT,1985,-1);
         act_user_set_real_name (user->ActUser,NewName);
     }
     else
@@ -698,7 +698,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     /*set real name*/
     EntryName = gtk_entry_new();
     gtk_entry_set_max_length(GTK_ENTRY(EntryName),48);
-    gtk_entry_set_text(GTK_ENTRY(EntryName),GetUserName(user->ActUser));
+    gtk_entry_set_text(GTK_ENTRY(EntryName),GetRealName(user->ActUser));
     ua->EntryName = EntryName;
     gtk_grid_attach(GTK_GRID(table) ,EntryName , 8 , 4 , 1 , 1);
     g_signal_connect (EntryName, "activate",G_CALLBACK (ModifyName),ua);

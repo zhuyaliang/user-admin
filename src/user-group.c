@@ -209,19 +209,45 @@ static void AddUserToGroup(GSList *list,GasGroup *group)
 	for(node = list; node; node = node->next)
 	{
 		name = node->data;
+        g_usleep(2000);
 		gas_group_add_user_group(group,name);	
 	}		
-}		
+}	
+static gboolean restartlist  (GtkTreeModel *model,
+                              GtkTreePath  *path,
+                              GtkTreeIter  *iter,
+                              gpointer      data)
+{    
+    gtk_list_store_set (GTK_LIST_STORE (model), 
+                        iter, 
+                        COLUMN_FIXED, 
+                        FALSE, 
+                        -1);
+    return FALSE;
+}
+static void clearconfigdata(GroupsManage *gm)
+{
+	GtkTreeModel *model;
+        
+    gtk_entry_set_text(GTK_ENTRY(gm->EntryGroupName),""); 
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(gm->TreeCreate));
+	gtk_tree_model_foreach (model,
+						    restartlist,
+							NULL);
+    if(gm->NewGroupUsers != NULL)
+    {
+        g_slist_free(gm->NewGroupUsers);
+    }    
+}    
 static void CreateNewGroup(GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
     gboolean      Valid;
     char         *Message = NULL;
     const char   *s;
-	GasGroup     *gas;
+	GasGroup     *gas = NULL;
 	UserGroup    *group;
 	GError       *error = NULL;
-	int           ret;	
 	GasGroupManager *manage;
     
     s = gtk_entry_get_text(GTK_ENTRY(gm->EntryGroupName));
@@ -242,14 +268,14 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
 			return;
 		}			
 	}
+    
 	AddUserToGroup(gm->NewGroupUsers,gas);
 	group = GroupInit(gas);
-	gm->GroupsList = g_slist_append(gm->GroupsList,g_object_ref(group));
-	ret = MessageReport(_("Create User Group"),_("Create User Group Successfully,Do you want to continue creating"),QUESTION);
-	if(ret == GTK_RESPONSE_NO)
-	{
-		CloseGroupWindow(NULL,gm);
-	}		
+	gm->GroupsList = g_slist_prepend(gm->GroupsList,g_object_ref(group));
+	MessageReport(_("Create User Group"),
+                  _("Create User Group Successfully"),
+                   INFOR);
+    clearconfigdata(gm);
 	addswitchlistdata (gm->SwitchStore,group,gm->username);
 	addremovelistdata (gm->RemoveStore,group);
 }   
@@ -461,8 +487,8 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     gtk_tree_path_free (path);
 }
 static void addswitchlistdata(GtkListStore *store,
-				        UserGroup    *group,
-						const gchar  *name)
+				              UserGroup    *group,
+						      const gchar  *name)
 {
     GtkTreeIter   iter;
 	gtk_list_store_append (store, &iter);
@@ -538,8 +564,10 @@ static GtkTreeModel * CreateRemoveModel (GSList *List)
         {
             g_error("No such the Group!!!\r\n");
             break;
-        }    
-		addremovelistdata(RemoveStore,group);
+        }   
+        if(!gas_group_is_primary_group(group->gas) &&
+            gas_group_get_gid(group->gas) >= 1000)
+		    addremovelistdata(RemoveStore,group);
     }
     return GTK_TREE_MODEL (RemoveStore);
 }
@@ -589,7 +617,7 @@ static void AddSwitchGroupColumns (GroupsManage *gm)
                       G_CALLBACK (UserSelectGroup), 
                       gm);
 
-    column = gtk_tree_view_column_new_with_attributes ("Select",
+    column = gtk_tree_view_column_new_with_attributes (_("Select"),
                                                         renderer,
                                                        "active", COLUMN_FIXED,
                                                         NULL);
@@ -597,10 +625,11 @@ static void AddSwitchGroupColumns (GroupsManage *gm)
     gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column),
                                      GTK_TREE_VIEW_COLUMN_FIXED);
     gtk_tree_view_column_set_fixed_width (GTK_TREE_VIEW_COLUMN (column), 50);
+    gtk_tree_view_column_set_sort_column_id (column, COLUMN_FIXED);
     gtk_tree_view_append_column (treeview, column);
 
     renderer = gtk_cell_renderer_text_new (); 
-    column = gtk_tree_view_column_new_with_attributes ("Group Name",
+    column = gtk_tree_view_column_new_with_attributes (_("Group Name"),
                                                         renderer,
                                                        "text",
                                                         COLUMN_GROUPNAME,
@@ -609,7 +638,7 @@ static void AddSwitchGroupColumns (GroupsManage *gm)
     gtk_tree_view_append_column (treeview, column);
 
     renderer = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes ("Group ID",
+    column = gtk_tree_view_column_new_with_attributes (_("Group ID"),
                                                         renderer,
                                                        "text",
                                                         COLUMN_GROUPID,
@@ -630,7 +659,7 @@ static void AddSelectUsersColumns (GroupsManage *gm)
                       G_CALLBACK (NewGroupSelectUsers), 
                       gm);
 
-    column = gtk_tree_view_column_new_with_attributes ("Select",
+    column = gtk_tree_view_column_new_with_attributes (_("Select"),
                                                         renderer,
                                                        "active", COLUMN_SELECT,
                                                         NULL);
@@ -641,7 +670,7 @@ static void AddSelectUsersColumns (GroupsManage *gm)
     gtk_tree_view_append_column (treeview, column);
 
     renderer = gtk_cell_renderer_text_new (); 
-    column = gtk_tree_view_column_new_with_attributes ("User Name",
+    column = gtk_tree_view_column_new_with_attributes (_("User Name"),
                                                         renderer,
                                                        "text",
                                                         COLUMN_USERNAME,
@@ -650,7 +679,7 @@ static void AddSelectUsersColumns (GroupsManage *gm)
     gtk_tree_view_append_column (treeview, column);
 
     renderer = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes ("User ID",
+    column = gtk_tree_view_column_new_with_attributes (_("User ID"),
                                                         renderer,
                                                        "text",
                                                         COLUMN_USERID,
@@ -749,15 +778,18 @@ static GSList *GetGroupInfo(void)
     g_slist_free (list);
     return GroupsList;
 }
-static GtkWidget *CreateManageWindow(void)
+static GtkWidget *CreateManageWindow(const gchar *username)
 {
     GtkWidget *Window;
+    gchar *title;
 
+    title = g_strdup_printf(_("Groups Manage  (Current user %s)"),username);
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Window), ("Groups Manage"));
+    gtk_window_set_title(GTK_WINDOW(Window), title);
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
     
+    g_free(title);
     return Window;
 } 
 static GtkWidget *GetGridWidget (void)
@@ -820,7 +852,7 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
-    ButtonClose    =  gtk_button_new_with_label(("Close"));
+    ButtonClose    =  gtk_button_new_with_label(_("Close"));
     gtk_grid_attach(GTK_GRID(table) , ButtonClose , 1 , 1 , 1 , 1); 
     g_signal_connect (ButtonClose, 
                      "clicked",
@@ -851,7 +883,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
     
     GroupNameLabel = gtk_label_new(NULL);
-    SetLableFontType(GroupNameLabel,"gray",10,("Group Name"));
+    SetLableFontType(GroupNameLabel,"gray",10,_("New Group Name"));
     gtk_grid_attach(GTK_GRID(table) ,GroupNameLabel ,0,0,1 ,1);
 
     gm->EntryGroupName = gtk_entry_new();
@@ -862,8 +894,8 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
     TipsLabel = gtk_label_new(NULL);
-    SetLableFontType(TipsLabel,"black",12,("Add Users To Group"));
-    gtk_grid_attach(GTK_GRID(table) , TipsLabel ,0 ,1,1 ,1);
+    SetLableFontType(TipsLabel,"black",12,_("Users to be added to the new group"));
+    gtk_grid_attach(GTK_GRID(table) , TipsLabel ,0 ,1,2 ,1);
 
     model = CreateAddUsersModel(List);
     treeview = gtk_tree_view_new_with_model (model);
@@ -876,14 +908,14 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     AddSelectUsersColumns (gm);
     gtk_grid_attach(GTK_GRID(table) ,vbox1 ,0 ,2,2 ,1);
 
-    ButtonClose    =  gtk_button_new_with_label(("Close"));
+    ButtonClose    =  gtk_button_new_with_label(_("Close"));
     gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 3, 1 , 1);
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
                       gm);
 
-    ButtonConfirm    =  gtk_button_new_with_label(("Confirm"));
+    ButtonConfirm    =  gtk_button_new_with_label(_("Confirm"));
     gtk_grid_attach(GTK_GRID(table) , ButtonConfirm , 1 , 3 , 1 , 1);
     g_signal_connect (ButtonConfirm, 
                      "clicked",
@@ -951,26 +983,20 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
     GtkWidget *SwitchNoteName;
     GtkWidget *CreateNoteName;
     GtkWidget *RemoveNoteName;
-    const gchar *CurrentUserName;
-    UserInfo  *user;
     
-    user = GetIndexUser(UsersList,gnCurrentUserIndex);
-    CurrentUserName = GetUserName(user->ActUser);
-    gm->username = g_strdup(CurrentUserName);
-
     NoteBook = gtk_notebook_new();
     gtk_container_add(GTK_CONTAINER(gm->GroupsWindow), NoteBook);
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK (NoteBook), GTK_POS_TOP);
 
-    SwitchNoteName = gtk_label_new(("Switch Groups"));
+    SwitchNoteName = gtk_label_new(_("Switch Groups"));
     SwitchBox = LoadSwitchGroup(gm);
     gtk_notebook_append_page(GTK_NOTEBOOK (NoteBook),SwitchBox,SwitchNoteName);
 
-    CreateNoteName = gtk_label_new(("Create Groups"));
+    CreateNoteName = gtk_label_new(_("Create Groups"));
     CreateBox = LoadCreateGroup(gm,UsersList);
     gtk_notebook_append_page(GTK_NOTEBOOK (NoteBook),CreateBox,CreateNoteName);
 
-    RemoveNoteName = gtk_label_new(("Remove Groups"));
+    RemoveNoteName = gtk_label_new(_("Remove Groups"));
     RemoveBox = LoadRemoveGroup(gm);
     gtk_notebook_append_page(GTK_NOTEBOOK (NoteBook),RemoveBox,RemoveNoteName);
 
@@ -989,7 +1015,14 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
 ******************************************************************************/
 void UserGroupsManage (GtkWidget *widget, gpointer data)
 {
-    UserAdmin *ua = (UserAdmin *)data;
+    UserAdmin   *ua = (UserAdmin *)data;
+    const gchar *CurrentUserName;
+    UserInfo    *user;
+
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    CurrentUserName = GetUserName(user->ActUser);
+    ua->gm.username = g_strdup(CurrentUserName);
+
 	gtk_widget_hide(WindowLogin);
    	ua->gm.GroupsList = NULL;
     ua->gm.GroupsList = GetGroupInfo();
@@ -999,7 +1032,7 @@ void UserGroupsManage (GtkWidget *widget, gpointer data)
         return;
     }  
     ua->gm.GroupNum = g_slist_length(ua->gm.GroupsList);  
-    ua->gm.GroupsWindow = CreateManageWindow();
+    ua->gm.GroupsWindow = CreateManageWindow(CurrentUserName);
     StartManageGroups(&ua->gm,ua->UsersList);
     g_signal_connect(G_OBJECT(ua->gm.GroupsWindow), 
                     "delete-event",

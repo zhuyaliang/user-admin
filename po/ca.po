@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-13 13:28+0800\n"
+"POT-Creation-Date: 2019-01-10 11:07+0000\n"
 "PO-Revision-Date: 2018-10-30 18:03+0100\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: \n"
@@ -18,165 +18,168 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/main.c:35
+#: src/main.c:48
 msgid "Get Icon Fail"
 msgstr "Ha fallat l'obtenció de la icona"
 
-#: src/main.c:48
+#: src/main.c:61
 msgid "Mate User Manage"
 msgstr "Gestió d'usuaris de MATE"
 
-#: src/main.c:102 src/main.c:144
+#: src/main.c:115 src/main.c:157
 msgid "open file"
 msgstr "obriment de fitxer"
 
-#: src/main.c:102
+#: src/main.c:115
 msgid "Create pid file failed"
 msgstr "Ha fallat la creació del fitxer del pid"
 
-#: src/main.c:111
+#: src/main.c:124
 msgid "write file"
 msgstr "escriptura de fitxer"
 
-#: src/main.c:111
+#: src/main.c:124
 msgid "write pid file failed"
 msgstr "ha fallat l'escriptura del fitxer del pid"
 
-#: src/main.c:144
+#: src/main.c:157
 msgid "open pid file failed"
 msgstr "ha fallat l'obriment del fitxer del pid"
 
-#: src/main.c:149
+#: src/main.c:162
 msgid "read file"
 msgstr "lectura de fitxer"
 
-#: src/main.c:149
+#: src/main.c:162
 msgid "read pid file failed"
 msgstr "ha fallat la lectura del fitxer del pid"
 
-#: src/user-base.c:182 src/user-admin.c:510
+#: src/user-base.c:183 src/user-admin.c:508
 msgid "Account Type"
 msgstr "Tipus de compte"
 
 #. drop-down select boxes
-#: src/user-base.c:186 src/user-admin.c:513
+#: src/user-base.c:187 src/user-admin.c:512
 msgid "Standard"
 msgstr "Estàndard"
 
-#: src/user-base.c:186 src/user-admin.c:513
+#: src/user-base.c:187 src/user-admin.c:512
 msgid "Administrators"
 msgstr "Administradors"
 
-#: src/user-base.c:197 src/user-admin.c:522
+#: src/user-base.c:198 src/user-admin.c:518
 msgid "Language"
 msgstr "Idioma"
 
-#: src/user-base.c:204
+#: src/user-base.c:205
 msgid "Get user language"
 msgstr "Obtenció de l'idioma de l'usuari"
 
-#: src/user-base.c:204
+#: src/user-base.c:205
 msgid "get user language failed"
 msgstr "ha fallat l'obtenció de l'idioma de l'usuari"
 
-#: src/user-base.c:214 src/user-password.c:215 src/user-admin.c:681
-#: src/user-admin.c:699
+#: src/user-base.c:215 src/user-password.c:201 src/user-admin.c:653
+#: src/user-admin.c:675
 msgid "Password"
 msgstr "Contrasenya"
 
-#: src/user-base.c:224
+#: src/user-base.c:228
 msgid "Automatic logon"
 msgstr "Inici de sessió automàtic"
 
-#: src/user-base.c:238
+#: src/user-base.c:243
 msgid "Login time"
 msgstr "Hora d'inici de sessió"
 
-#: src/user-info.c:40 src/user-password.c:45
+#: src/user-base.c:251
+msgid "Group Manage"
+msgstr ""
+
+#: src/user-base.c:254
+msgid "Setting Groups"
+msgstr ""
+
+#: src/user-info.c:66
 msgid "Account is disable"
 msgstr "El compte està inhabilitat"
 
 #. 新建两个单选按钮
-#: src/user-info.c:52 src/user-password.c:44 src/user-password.c:220
-#: src/user-admin.c:412 src/user-admin.c:592 src/user-admin.c:686
+#: src/user-info.c:78 src/user-password.c:206 src/user-admin.c:658
 msgid "Set up next time"
 msgstr "Configura-la la pròxima vegada"
 
-#: src/user-info.c:190
-msgid "Unknown"
-msgstr "Desconegut"
-
-#: src/user-info.c:249
-msgid "Get languages failed"
-msgstr "Ha fallat l'obtenció dels idiomes"
-
-#: src/user-info.c:250
-msgid "Get user languages"
-msgstr "Obtenció dels idiomes d'usuari"
-
-#: src/user-info.c:298
+#: src/user-info.c:267
 msgid "Get User Info"
 msgstr "Obtén la informació de l'usuari"
 
-#: src/user-info.c:298
+#: src/user-info.c:267
 msgid "user count is 0"
 msgstr "el nombre d'usuaris és 0"
 
-#: src/user-password.c:132
+#: src/user-password.c:120
 msgid "Inconsistent password"
 msgstr "Contrasenya inconsistent"
 
-#: src/user-password.c:199
+#: src/user-password.c:185
 msgid "Add a password"
 msgstr "Afegeix una contrasenya"
 
-#: src/user-password.c:226
+#: src/user-password.c:215
 msgid "Now set up"
 msgstr "Configura-la ara"
 
-#: src/user-password.c:232
+#: src/user-password.c:224
 msgid "User Password"
 msgstr "Contrasenya de l'usuari"
 
-#: src/user-password.c:242 src/user-admin.c:716
+#: src/user-password.c:234 src/user-admin.c:693
 msgid "generation password"
 msgstr "generació de la contrasenya"
 
-#: src/user-password.c:264 src/user-password.c:281 src/user-admin.c:731
-#: src/user-admin.c:747
+#: src/user-password.c:256 src/user-password.c:273 src/user-admin.c:708
+#: src/user-admin.c:724 src/user-group.c:962
 msgid "Confirm"
 msgstr "Confirma"
 
-#: src/user-password.c:289 src/user-admin.c:756
+#: src/user-password.c:281 src/user-admin.c:733
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#. gnCurrentUserIndex 代表当前用户标号
-#: src/user-admin.c:64 src/user-admin.c:83 src/user-list.c:201
+#: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
+#: src/user-list.c:243
 msgid "Remove User"
 msgstr "Suprimeix l'usuari"
 
-#: src/user-admin.c:65
+#: src/user-admin.c:88
+msgid "You cannot delete your own account."
+msgstr ""
+
+#: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
 msgstr "Si s'ha de suprimir el directori personal de l'usuari"
 
-#: src/user-admin.c:84
+#: src/user-admin.c:117
 msgid "Remove user failure and try again"
 msgstr ""
 
-#: src/user-admin.c:168
+#: src/user-admin.c:131
+msgid "No such user!!!"
+msgstr ""
+
+#: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
 msgstr "Repetició de nom d'usuari. Intenteu-ho amb un altre"
 
-#: src/user-admin.c:172
+#: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
 msgstr "Repetició de nom de carpeta d'usuari. Intenteu-ho amb un altre"
 
-#: src/user-admin.c:176
+#: src/user-admin.c:215
 msgid "The username cannot start with a - ."
 msgstr "El nom d'usuari no pot començar amb un - ."
 
-#: src/user-admin.c:180
+#: src/user-admin.c:219
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -184,76 +187,72 @@ msgstr ""
 "El nom d'usuari només hauria de contenir lletres en majúscules\n"
 "i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
 
-#: src/user-admin.c:185
+#: src/user-admin.c:224
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
 "canviar."
 
-#: src/user-admin.c:291
+#: src/user-admin.c:294
 msgid "Creating User"
 msgstr "Creació de l'usuari"
 
-#: src/user-admin.c:291
+#: src/user-admin.c:294
 msgid "Creating a user failed"
 msgstr "Ha fallat la creació d'un usuari"
 
-#: src/user-admin.c:333
+#: src/user-admin.c:377
 msgid "Two inconsistencies in cipher input"
 msgstr "Hi ha dues incoherències en l'entrada de xifratge"
 
-#: src/user-admin.c:339 src/user-admin.c:788 src/user-list.c:200
-msgid "Add User"
-msgstr "Afegeix un usuari"
-
-#: src/user-admin.c:340
-msgid "The number of users exceeds the scope of management."
-msgstr "El nombre d'usuaris supera l'abast de la gestió."
-
-#: src/user-admin.c:477
+#: src/user-admin.c:476
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
 "canviar"
 
-#: src/user-admin.c:484
+#: src/user-admin.c:483 src/user-group.c:685
 msgid "User Name"
 msgstr "Nom de l'usuari"
 
-#: src/user-admin.c:500
+#: src/user-admin.c:499
 msgid "Login Name"
 msgstr "Nom d'usuari"
 
-#: src/user-admin.c:691
+#: src/user-admin.c:666
 msgid "Now set the password"
 msgstr "Ara establiu la contrasenya"
 
-#: src/user-face.c:304 src/user-face.c:315
+#: src/user-admin.c:768 src/user-list.c:242
+msgid "Add User"
+msgstr "Afegeix un usuari"
+
+#: src/user-face.c:300 src/user-face.c:311
 #, fuzzy
 msgid "Create Crop File"
 msgstr "Ha fallat la creació del fitxer del pid"
 
-#: src/user-face.c:305
+#: src/user-face.c:301
 msgid "failed to create temporary file for image data"
 msgstr ""
 
-#: src/user-face.c:373 src/user-face.c:456
+#: src/user-face.c:369 src/user-face.c:454
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: src/user-face.c:375
+#: src/user-face.c:371 src/user-group.c:632 src/user-group.c:674
 msgid "Select"
 msgstr ""
 
-#: src/user-face.c:430
+#: src/user-face.c:428
 msgid "Load Local Picture"
 msgstr "Carrega la imatge local"
 
-#: src/user-face.c:453
+#: src/user-face.c:451
 msgid "Browse for more pictures"
 msgstr "Navega per més imatges"
 
-#: src/user-face.c:457
+#: src/user-face.c:455
 msgid "_Open"
 msgstr "_Obre"
 
@@ -269,89 +268,90 @@ msgstr "Llista d'avatars"
 msgid "There is no address to store photos"
 msgstr "No hi ha cap adreça per emmagatzemar les imatges"
 
-#: src/user-face.c:652
+#: src/user-face.c:648
 msgid "Change Name"
 msgstr "Canvia el nom"
 
-#: src/user-face.c:652
+#: src/user-face.c:648
 msgid "Please enter a valid character"
 msgstr "Introduïu un caràcter vàlid"
 
-#: src/user-list.c:84
+#: src/user-list.c:127
 msgid "User List"
 msgstr "Llista d'usuaris"
 
-#: src/user-list.c:202
-msgid "Close Quit"
+#: src/user-list.c:244 src/user-group.c:900 src/user-group.c:955
+#, fuzzy
+msgid "Close"
 msgstr "Tanca i surt"
 
-#: src/user-share.c:111
+#: src/user-share.c:114
 msgid "_Return"
 msgstr "_Retorn"
 
-#: src/user-share.c:122
+#: src/user-share.c:125
 msgid "Message"
 msgstr "Missatge"
 
-#: src/user-share.c:301
+#: src/user-share.c:305
 msgid "The new password needs to be different from the old one"
 msgstr "La contrasenya nova ha de ser diferent de l'anterior"
 
-#: src/user-share.c:303
+#: src/user-share.c:307
 msgid "Try changing some letters and numbers"
 msgstr "Intenteu canviar algunes lletres i números"
 
-#: src/user-share.c:305 src/user-share.c:313
+#: src/user-share.c:309 src/user-share.c:317
 msgid "Try changing the password a bit more"
 msgstr "Intenteu canviar una mica més la contrasenya"
 
-#: src/user-share.c:307
+#: src/user-share.c:311
 msgid "A password without your user name would be stronger"
 msgstr "Una contrasenya sense el vostre nom d'usuari seria més forta"
 
-#: src/user-share.c:309
+#: src/user-share.c:313
 msgid "Try to avoid using your name in the password"
 msgstr "Intenteu evitar l'ús del vostre nom a la contrasenya"
 
-#: src/user-share.c:311
+#: src/user-share.c:315
 msgid "Try to avoid some of the words included in the password"
 msgstr "Intenteu evitar algunes de les paraules incloses a la contrasenya"
 
-#: src/user-share.c:315
+#: src/user-share.c:319
 msgid "Try to avoid common words"
 msgstr "Intenteu evitar paraules comunes"
 
-#: src/user-share.c:317
+#: src/user-share.c:321
 msgid "Try to avoid reordering existing words"
 msgstr "Intenteu evitar la reordenació de paraules existents"
 
-#: src/user-share.c:319
+#: src/user-share.c:323
 msgid "Try to use more numbers"
 msgstr "Intenteu utilitzar més números"
 
-#: src/user-share.c:321
+#: src/user-share.c:325
 msgid "Try to use more uppercase letters"
 msgstr "Intenteu utilitzar més lletres en majúscules"
 
-#: src/user-share.c:323
+#: src/user-share.c:327
 msgid "Try to use more lowercase letters"
 msgstr "Intenteu utilitzar més lletres en minúscules"
 
-#: src/user-share.c:325
+#: src/user-share.c:329
 msgid "Try to use more special characters, like punctuation"
 msgstr ""
 "Intenteu utilitzar més caràcters especials, com ara signes de puntuació"
 
-#: src/user-share.c:327
+#: src/user-share.c:331
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
 "Intenteu utilitzar una barreja de lletres, números i signes de puntuació"
 
-#: src/user-share.c:329
+#: src/user-share.c:333
 msgid "Try to avoid repeating the same character"
 msgstr "Intenteu evitar la repetició del mateix caràcter"
 
-#: src/user-share.c:331
+#: src/user-share.c:335
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
@@ -359,14 +359,156 @@ msgstr ""
 "Intenteu evitar la repetició del mateix tipus de caràcter: heu de barrejar "
 "lletres, números i signes puntuació."
 
-#: src/user-share.c:333
+#: src/user-share.c:337
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Intenteu evitar les seqüències com ara 1234 o abcd"
 
-#: src/user-share.c:335
+#: src/user-share.c:339
 msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
 msgstr ""
 "La longitud de la contrasenya necessita més de 8 caràcters. Afegiu més "
 "lletres, números i signes de puntuació"
+
+#: src/user-group.c:164
+#, fuzzy
+msgid "Repeat of group name.Please try another"
+msgstr "Repetició de nom d'usuari. Intenteu-ho amb un altre"
+
+#: src/user-group.c:168
+#, fuzzy
+msgid "The groupname cannot start with a - ."
+msgstr "El nom d'usuari no pot començar amb un - ."
+
+#: src/user-group.c:172
+msgid "The first character of the group name needs use letter"
+msgstr ""
+
+#: src/user-group.c:176
+#, fuzzy
+msgid ""
+"The groupname should only consist of upper and lower case \n"
+"letters from a-z,digits and the following characters: . - _"
+msgstr ""
+"El nom d'usuari només hauria de contenir lletres en majúscules\n"
+"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+
+#: src/user-group.c:269
+#, fuzzy
+msgid "Create New Group"
+msgstr "Ha fallat la creació del fitxer del pid"
+
+#: src/user-group.c:276
+#, fuzzy
+msgid "Create New Group Faild"
+msgstr "Ha fallat la creació del fitxer del pid"
+
+#: src/user-group.c:287
+#, fuzzy
+msgid "Create User Group"
+msgstr "Creació de l'usuari"
+
+#: src/user-group.c:288
+msgid "Create User Group Successfully"
+msgstr ""
+
+#: src/user-group.c:352 src/user-group.c:360 src/user-group.c:377
+#, fuzzy
+msgid "Remove Group"
+msgstr "Suprimeix l'usuari"
+
+#: src/user-group.c:353
+msgid "Cannot remove root group"
+msgstr ""
+
+#: src/user-group.c:361
+#, fuzzy
+msgid "Whether to remove the selected group"
+msgstr "Si s'ha de suprimir el directori personal de l'usuari"
+
+#: src/user-group.c:644
+#, fuzzy
+msgid "Group Name"
+msgstr "Nom de l'usuari"
+
+#: src/user-group.c:653
+msgid "Group ID"
+msgstr ""
+
+#: src/user-group.c:694
+#, fuzzy
+msgid "User ID"
+msgstr "Nom de l'usuari"
+
+#: src/user-group.c:761
+msgid "Initialization group management"
+msgstr ""
+
+#: src/user-group.c:762
+msgid ""
+"Initialization failed, please see Group \n"
+" Management Service Interface function"
+msgstr ""
+
+#: src/user-group.c:768
+msgid "Failed to contact the group service"
+msgstr ""
+
+#: src/user-group.c:769
+msgid ""
+"Please make sure that the group-service is installed and enabled.\n"
+" url: https://github.com/zhuyaliang/group-service"
+msgstr ""
+
+#: src/user-group.c:777
+msgid "Get the number of groups"
+msgstr ""
+
+#: src/user-group.c:778
+msgid "The number of groups is 0."
+msgstr ""
+
+#: src/user-group.c:817
+#, c-format
+msgid "Current user %s"
+msgstr ""
+
+#: src/user-group.c:824
+msgid "Groups Manage"
+msgstr ""
+
+#: src/user-group.c:930
+#, fuzzy
+msgid "New Group Name"
+msgstr "Nom de l'usuari"
+
+#: src/user-group.c:941
+msgid "Please select the user to add to the new group"
+msgstr ""
+
+#: src/user-group.c:1036
+msgid "Switch Groups"
+msgstr ""
+
+#: src/user-group.c:1040
+#, fuzzy
+msgid "Create Groups"
+msgstr "Ha fallat la creació del fitxer del pid"
+
+#: src/user-group.c:1044
+#, fuzzy
+msgid "Remove Groups"
+msgstr "Suprimeix l'usuari"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconegut"
+
+#~ msgid "Get languages failed"
+#~ msgstr "Ha fallat l'obtenció dels idiomes"
+
+#~ msgid "Get user languages"
+#~ msgstr "Obtenció dels idiomes d'usuari"
+
+#~ msgid "The number of users exceeds the scope of management."
+#~ msgstr "El nombre d'usuaris supera l'abast de la gestió."

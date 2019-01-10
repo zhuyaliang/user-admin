@@ -938,7 +938,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
     TipsLabel = gtk_label_new(NULL);
-    SetLableFontType(TipsLabel,"black",12,_("Users to be added to the new group"));
+    SetLableFontType(TipsLabel,"black",12,_("Please select the user to add to the new group"));
     gtk_grid_attach(GTK_GRID(table) , TipsLabel ,0 ,1,2 ,1);
 
     model = CreateAddUsersModel(List);

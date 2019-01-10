@@ -128,7 +128,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
             user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
             if(user == NULL)
             {
-                g_error(_("No such user!!!\r\n"));
+                g_error(_("No such user!!!"));
             }    
             UpdateInterface(user->ActUser,ua);                  
             ua->UserCount--;                                        

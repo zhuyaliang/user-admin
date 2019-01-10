@@ -7,247 +7,246 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-13 13:28+0800\n"
-"PO-Revision-Date: 2018-09-10 15:39+0800\n"
+"POT-Creation-Date: 2019-01-10 11:07+0000\n"
+"PO-Revision-Date: 2019-01-10 11:14+0000\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/main.c:35
+#: src/main.c:48
 msgid "Get Icon Fail"
 msgstr "获取图标失败"
 
-#: src/main.c:48
+#: src/main.c:61
 msgid "Mate User Manage"
 msgstr "Mate 用户管理"
 
-#: src/main.c:102 src/main.c:144
+#: src/main.c:115 src/main.c:157
 msgid "open file"
 msgstr "打开文件"
 
-#: src/main.c:102
+#: src/main.c:115
 msgid "Create pid file failed"
 msgstr "创建pid文件失败"
 
-#: src/main.c:111
+#: src/main.c:124
 msgid "write file"
 msgstr "写pid文件"
 
-#: src/main.c:111
+#: src/main.c:124
 msgid "write pid file failed"
 msgstr "写入pid文件失败"
 
-#: src/main.c:144
+#: src/main.c:157
 msgid "open pid file failed"
 msgstr "打开pid文件失败"
 
-#: src/main.c:149
+#: src/main.c:162
 msgid "read file"
 msgstr "读pid文件"
 
-#: src/main.c:149
+#: src/main.c:162
 msgid "read pid file failed"
 msgstr "读pid文件失败"
 
-#: src/user-base.c:182 src/user-admin.c:510
+#: src/user-base.c:183 src/user-admin.c:508
 msgid "Account Type"
 msgstr "用户类型"
 
 #. drop-down select boxes
-#: src/user-base.c:186 src/user-admin.c:513
+#: src/user-base.c:187 src/user-admin.c:512
 msgid "Standard"
 msgstr "普通"
 
-#: src/user-base.c:186 src/user-admin.c:513
+#: src/user-base.c:187 src/user-admin.c:512
 msgid "Administrators"
 msgstr "管理员"
 
-#: src/user-base.c:197 src/user-admin.c:522
+#: src/user-base.c:198 src/user-admin.c:518
 msgid "Language"
 msgstr "语言"
 
-#: src/user-base.c:204
+#: src/user-base.c:205
 msgid "Get user language"
 msgstr "获取用户语言"
 
-#: src/user-base.c:204
+#: src/user-base.c:205
 msgid "get user language failed"
 msgstr "获得用户语言失败"
 
-#: src/user-base.c:214 src/user-password.c:215 src/user-admin.c:681
-#: src/user-admin.c:699
+#: src/user-base.c:215 src/user-password.c:201 src/user-admin.c:653
+#: src/user-admin.c:675
 msgid "Password"
 msgstr "密码"
 
-#: src/user-base.c:224
+#: src/user-base.c:228
 msgid "Automatic logon"
 msgstr "自动登录"
 
-#: src/user-base.c:238
+#: src/user-base.c:243
 msgid "Login time"
 msgstr "登录时间"
 
-#: src/user-info.c:40 src/user-password.c:45
+#: src/user-base.c:251
+msgid "Group Manage"
+msgstr ""
+
+#: src/user-base.c:254
+msgid "Setting Groups"
+msgstr ""
+
+#: src/user-info.c:66
 msgid "Account is disable"
 msgstr "账户被禁用"
 
 #. 新建两个单选按钮
-#: src/user-info.c:52 src/user-password.c:44 src/user-password.c:220
-#: src/user-admin.c:412 src/user-admin.c:592 src/user-admin.c:686
+#: src/user-info.c:78 src/user-password.c:206 src/user-admin.c:658
 msgid "Set up next time"
 msgstr "下次登录时设置"
 
-#: src/user-info.c:190
-msgid "Unknown"
-msgstr "未知"
-
-#: src/user-info.c:249
-msgid "Get languages failed"
-msgstr "获取用户语言失败"
-
-#: src/user-info.c:250
-msgid "Get user languages"
-msgstr "获取用户语言"
-
-#: src/user-info.c:298
+#: src/user-info.c:267
 msgid "Get User Info"
 msgstr "获得用户信息"
 
-#: src/user-info.c:298
+#: src/user-info.c:267
 msgid "user count is 0"
 msgstr "用户个数为0"
 
-#: src/user-password.c:132
+#: src/user-password.c:120
 msgid "Inconsistent password"
 msgstr "两次输入的密码不一致"
 
-#: src/user-password.c:199
+#: src/user-password.c:185
 msgid "Add a password"
 msgstr "添加密码"
 
-#: src/user-password.c:226
+#: src/user-password.c:215
 msgid "Now set up"
 msgstr "现在设置"
 
-#: src/user-password.c:232
+#: src/user-password.c:224
 msgid "User Password"
 msgstr "用户密码"
 
-#: src/user-password.c:242 src/user-admin.c:716
+#: src/user-password.c:234 src/user-admin.c:693
 msgid "generation password"
 msgstr "生成密码"
 
-#: src/user-password.c:264 src/user-password.c:281 src/user-admin.c:731
-#: src/user-admin.c:747
+#: src/user-password.c:256 src/user-password.c:273 src/user-admin.c:708
+#: src/user-admin.c:724 src/user-group.c:962
 msgid "Confirm"
 msgstr "确认"
 
-#: src/user-password.c:289 src/user-admin.c:756
+#: src/user-password.c:281 src/user-admin.c:733
 msgid "Cancel"
 msgstr "取消"
 
-#. gnCurrentUserIndex 代表当前用户标号
-#: src/user-admin.c:64 src/user-admin.c:83 src/user-list.c:201
+#: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
+#: src/user-list.c:243
 msgid "Remove User"
 msgstr "移除用户"
 
-#: src/user-admin.c:65
+#: src/user-admin.c:88
+msgid "You cannot delete your own account."
+msgstr ""
+
+#: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
 msgstr "是否移除用户家目录"
 
-#: src/user-admin.c:84
+#: src/user-admin.c:117
 msgid "Remove user failure and try again"
 msgstr "移除失败，请再次尝试"
 
-#: src/user-admin.c:168
+#: src/user-admin.c:131
+msgid "No such user!!!"
+msgstr ""
+
+#: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
 msgstr "用户名重复。请再试一次"
 
-#: src/user-admin.c:172
+#: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
 msgstr "家目录名字重复。请再试一次"
 
-#: src/user-admin.c:176
+#: src/user-admin.c:215
 msgid "The username cannot start with a - ."
-msgstr "用户名不能以'-'开头"
+msgstr "用户名不能以'-'开头."
 
-#: src/user-admin.c:180
+#: src/user-admin.c:219
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
-msgstr "用户名只能有字母数字下划线组成"
+msgstr "用户名只能有字母数字下划线组成_"
 
-#: src/user-admin.c:185
+#: src/user-admin.c:224
 msgid "This will be used to name your home folder and can't be changed."
-msgstr "这将用于命名您的家目录，不能更改"
+msgstr "这将用于命名您的家目录，不能更改."
 
-#: src/user-admin.c:291
+#: src/user-admin.c:294
 msgid "Creating User"
 msgstr "创建用户"
 
-#: src/user-admin.c:291
+#: src/user-admin.c:294
 msgid "Creating a user failed"
 msgstr "创建用户失败"
 
-#: src/user-admin.c:333
+#: src/user-admin.c:377
 msgid "Two inconsistencies in cipher input"
 msgstr "两次密码输入的不一致"
 
-#: src/user-admin.c:339 src/user-admin.c:788 src/user-list.c:200
-msgid "Add User"
-msgstr "添加用户"
-
-#: src/user-admin.c:340
-msgid "The number of users exceeds the scope of management."
-msgstr "用户数量超出管理范围"
-
-#: src/user-admin.c:477
+#: src/user-admin.c:476
 msgid "This will be used to name your home folder and can't be changed"
 msgstr "这将用于命名您的家目录，不能更改"
 
-#: src/user-admin.c:484
+#: src/user-admin.c:483 src/user-group.c:685
 msgid "User Name"
 msgstr "用户名字"
 
-#: src/user-admin.c:500
+#: src/user-admin.c:499
 msgid "Login Name"
 msgstr "登录名字"
 
-#: src/user-admin.c:691
+#: src/user-admin.c:666
 msgid "Now set the password"
 msgstr "现在社设置密码"
 
-#: src/user-face.c:304 src/user-face.c:315
+#: src/user-admin.c:768 src/user-list.c:242
+msgid "Add User"
+msgstr "添加用户"
+
+#: src/user-face.c:300 src/user-face.c:311
 msgid "Create Crop File"
 msgstr "创建图像文件"
 
-#: src/user-face.c:305
+#: src/user-face.c:301
 msgid "failed to create temporary file for image data"
 msgstr "为图像数据创建临时文件失败"
 
-#: src/user-face.c:373 src/user-face.c:456
+#: src/user-face.c:369 src/user-face.c:454
 msgid "_Cancel"
-msgstr "取消 "
+msgstr "取消"
 
-#: src/user-face.c:375
+#: src/user-face.c:371 src/user-group.c:632 src/user-group.c:674
 msgid "Select"
 msgstr "选择"
 
-#: src/user-face.c:430
+#: src/user-face.c:428
 msgid "Load Local Picture"
 msgstr "加载本地图片"
 
-#: src/user-face.c:453
+#: src/user-face.c:451
 msgid "Browse for more pictures"
 msgstr "查看更多照片"
 
-#: src/user-face.c:457
+#: src/user-face.c:455
 msgid "_Open"
 msgstr "打开"
 
@@ -263,98 +262,218 @@ msgstr "头像列表"
 msgid "There is no address to store photos"
 msgstr "头像照片不存在"
 
-#: src/user-face.c:652
+#: src/user-face.c:648
 msgid "Change Name"
 msgstr "更改名字"
 
-#: src/user-face.c:652
+#: src/user-face.c:648
 msgid "Please enter a valid character"
 msgstr "请输入正确的字符"
 
-#: src/user-list.c:84
+#: src/user-list.c:127
 msgid "User List"
 msgstr "用户列表"
 
-#: src/user-list.c:202
-msgid "Close Quit"
+#: src/user-list.c:244 src/user-group.c:900 src/user-group.c:955
+#, fuzzy
+msgid "Close"
 msgstr "关闭退出"
 
-#: src/user-share.c:111
+#: src/user-share.c:114
 msgid "_Return"
 msgstr "返回"
 
-#: src/user-share.c:122
+#: src/user-share.c:125
 msgid "Message"
 msgstr "消息"
 
-#: src/user-share.c:301
+#: src/user-share.c:305
 msgid "The new password needs to be different from the old one"
 msgstr "新密码不能与旧密码相同"
 
-#: src/user-share.c:303
+#: src/user-share.c:307
 msgid "Try changing some letters and numbers"
 msgstr "加入一些数字和字母"
 
-#: src/user-share.c:305 src/user-share.c:313
+#: src/user-share.c:309 src/user-share.c:317
 msgid "Try changing the password a bit more"
 msgstr "密码长度不够"
 
-#: src/user-share.c:307
+#: src/user-share.c:311
 msgid "A password without your user name would be stronger"
 msgstr "密码中不要包含用户名"
 
-#: src/user-share.c:309
+#: src/user-share.c:313
 msgid "Try to avoid using your name in the password"
 msgstr "密码中不要包含你的名字"
 
-#: src/user-share.c:311
+#: src/user-share.c:315
 msgid "Try to avoid some of the words included in the password"
 msgstr "密码中不要包含单词"
 
-#: src/user-share.c:315
+#: src/user-share.c:319
 msgid "Try to avoid common words"
 msgstr "尽量避免常用词"
 
-#: src/user-share.c:317
+#: src/user-share.c:321
 msgid "Try to avoid reordering existing words"
 msgstr "尽量避免对现有单词进行重新排序"
 
-#: src/user-share.c:319
+#: src/user-share.c:323
 msgid "Try to use more numbers"
 msgstr "尝试加入数字"
 
-#: src/user-share.c:321
+#: src/user-share.c:325
 msgid "Try to use more uppercase letters"
 msgstr "尝试加入大写字母"
 
-#: src/user-share.c:323
+#: src/user-share.c:327
 msgid "Try to use more lowercase letters"
 msgstr "尝试加入小写字母"
 
-#: src/user-share.c:325
+#: src/user-share.c:329
 msgid "Try to use more special characters, like punctuation"
 msgstr "尝试加入特殊字符"
 
-#: src/user-share.c:327
+#: src/user-share.c:331
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr "尝试使用字母、数字和标点符号的混合"
 
-#: src/user-share.c:329
+#: src/user-share.c:333
 msgid "Try to avoid repeating the same character"
 msgstr "尽量避免重复相同的字符"
 
-#: src/user-share.c:331
+#: src/user-share.c:335
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
-msgstr "尽量避免重复相同类型的字符"
+msgstr "尽量避免重复相同类型的字符."
 
-#: src/user-share.c:333
+#: src/user-share.c:337
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "尽量避免像1234或ABCD这样的序列"
 
-#: src/user-share.c:335
+#: src/user-share.c:339
 msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
 msgstr "密码超过8位，添加更多的字母、数字和标点符号"
+
+#: src/user-group.c:164
+msgid "Repeat of group name.Please try another"
+msgstr "组名重复。请再试一次"
+
+#: src/user-group.c:168
+msgid "The groupname cannot start with a - ."
+msgstr "组名不能以'-'开头."
+
+#: src/user-group.c:172
+msgid "The first character of the group name needs use letter"
+msgstr "组名的第一个字符需要使用字母"
+
+#: src/user-group.c:176
+msgid ""
+"The groupname should only consist of upper and lower case \n"
+"letters from a-z,digits and the following characters: . - _"
+msgstr "组名只能有字母数字下划线组成_"
+
+#: src/user-group.c:269
+msgid "Create New Group"
+msgstr "创建新组"
+
+#: src/user-group.c:276
+msgid "Create New Group Faild"
+msgstr "创建新组失败"
+
+#: src/user-group.c:287
+msgid "Create User Group"
+msgstr "创建用户组"
+
+#: src/user-group.c:288
+msgid "Create User Group Successfully"
+msgstr "创建新组成功"
+
+#: src/user-group.c:352 src/user-group.c:360 src/user-group.c:377
+msgid "Remove Group"
+msgstr "移除组"
+
+#: src/user-group.c:353
+msgid "Cannot remove root group"
+msgstr "不能移除root组"
+
+#: src/user-group.c:361
+msgid "Whether to remove the selected group"
+msgstr "是否移除选择的组"
+
+#: src/user-group.c:644
+msgid "Group Name"
+msgstr "组名字"
+
+#: src/user-group.c:653
+msgid "Group ID"
+msgstr "组 gid"
+
+#: src/user-group.c:694
+msgid "User ID"
+msgstr "用户uid"
+
+#: src/user-group.c:761
+msgid "Initialization group management"
+msgstr "初始化组管理"
+
+#: src/user-group.c:762
+msgid ""
+"Initialization failed, please see Group \n"
+" Management Service Interface function"
+msgstr ""
+"初始化失败，请参见组\n"
+"管理服务接口功能"
+
+#: src/user-group.c:768
+msgid "Failed to contact the group service"
+msgstr "联系组服务失败"
+
+#: src/user-group.c:769
+msgid ""
+"Please make sure that the group-service is installed and enabled.\n"
+" url: https://github.com/zhuyaliang/group-service"
+msgstr ""
+"请确保已安装并启用组服务。\n"
+"网址：https://github.com/zhuyaliang/group-servi"
+
+#: src/user-group.c:777
+msgid "Get the number of groups"
+msgstr "获取组个数"
+
+#: src/user-group.c:778
+msgid "The number of groups is 0."
+msgstr "组个数为零。"
+
+#: src/user-group.c:817
+#, c-format
+msgid "Current user %s"
+msgstr "当前用户 %s"
+
+#: src/user-group.c:824
+msgid "Groups Manage"
+msgstr "组管理"
+
+#: src/user-group.c:930
+msgid "New Group Name"
+msgstr "新组名字"
+
+#: src/user-group.c:941
+msgid "Please select the user to add to the new group"
+msgstr "请选择要添加到新组的用户"
+
+#: src/user-group.c:1036
+msgid "Switch Groups"
+msgstr "切换组"
+
+#: src/user-group.c:1040
+msgid "Create Groups"
+msgstr "创建组"
+
+#: src/user-group.c:1044
+msgid "Remove Groups"
+msgstr "移除组"

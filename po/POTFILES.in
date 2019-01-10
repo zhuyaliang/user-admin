@@ -1,4 +1,3 @@
-src/main.c
 src/main.c	     
 src/user-base.c  
 src/user-info.c  
@@ -7,3 +6,5 @@ src/user-admin.c
 src/user-face.c  
 src/user-list.c  
 src/user-share.c
+src/user-group.c
+src/user-crop.c

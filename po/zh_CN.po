@@ -358,36 +358,3 @@ msgid ""
 "Password length needs more than 8 bits. Add more letters, numbers and "
 "punctuation"
 msgstr "密码超过8位，添加更多的字母、数字和标点符号"
-
-#~ msgid "user == NULL Exit!!!"
-#~ msgstr "用户为空 退出！！！"
-
-#, fuzzy
-#~ msgid "Get user lang"
-#~ msgstr "获取用户语言"
-
-#~ msgid "This will be used to name your home folder and cant be changed."
-#~ msgstr "这将用于命名您的家目录，不能更改"
-
-#~ msgid "Real Name"
-#~ msgstr "真实名字"
-
-#~ msgid "Chinese"
-#~ msgstr "中文"
-
-#~ msgid "English"
-#~ msgstr "英语"
-
-#~ msgid "Please enter the correct original password"
-#~ msgstr "请输入正确的原始密码"
-
-#~ msgid "Old Password"
-#~ msgstr "旧密码"
-
-#~ msgid "New Password"
-#~ msgstr "新密码"
-
-#~ msgid ""
-#~ "The user name can contain only the alphabet(a-z/A-Z) number (0-9), and "
-#~ "cannot be a pure number(_-)"
-#~ msgstr "用户名只能是字母(a-z/A-Z)数字(0-9)和下划线(-_)"

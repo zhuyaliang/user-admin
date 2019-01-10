@@ -18,7 +18,9 @@
 #include <pwd.h>
 #include <sys/types.h>
 #include <grp.h>
+#include <polkit/polkit.h>
 
+#define  USER_GROUP_PERMISSION  "org.group.admin.group-administration"
 enum
 {
     PROP_0,
@@ -124,6 +126,7 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
 {
     gboolean empty;
     gboolean in_use;
+    gboolean character;
     gboolean valid;
     const gchar *c;
 
@@ -131,14 +134,16 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
     {
         empty = TRUE;
         in_use = FALSE;
+        character = FALSE;
     } 
     else 
     {
-        empty = FALSE;
-        in_use = CheckGroupNameUsed (name);
+        empty     = FALSE;
+        character = !g_ascii_isalpha(name[0]);
+        in_use    = CheckGroupNameUsed (name);
     }
     valid = TRUE;
-    if (!in_use && !empty) 
+    if (!in_use && !empty && !character) 
     {
         for (c = name; *c; c++) 
         {
@@ -151,8 +156,8 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
         }
     }
 
-    valid = !empty && !in_use && valid;
-    if (!empty && (in_use || !valid))
+    valid = !empty && !in_use && !character &&valid;
+    if (!empty && (in_use || character || !valid))
     {
         if (in_use) 
         {
@@ -162,6 +167,10 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
         {
             *Message = g_strdup (_("The groupname cannot start with a - ."));
         }
+        else if(character)
+        {
+            *Message = g_strdup (_("The first character of the group name needs use letter"));
+        }    
         else 
         {
             *Message = g_strdup (_("The groupname should only consist of upper and lower case \nletters from a-z,digits and the following characters: . - _"));
@@ -178,7 +187,8 @@ static gboolean QuitGroupWindow (GtkWidget *widget,
 {
     GroupsManage *gm = (GroupsManage *)data;
     g_free(gm->username);
-    g_slist_free_full (gm->GroupsList,g_object_unref);
+    if(gm->GroupsList != NULL)
+        g_slist_free_full (gm->GroupsList,g_object_unref);
     if(gm->NewGroupUsers != NULL)
         g_slist_free(gm->NewGroupUsers);   
     gtk_widget_destroy(gm->GroupsWindow);
@@ -190,6 +200,7 @@ static void CloseGroupWindow (GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
     g_free(gm->username);
+    gm->Permission = NULL;
     g_slist_free_full (gm->GroupsList,g_object_unref);
     if(gm->NewGroupUsers != NULL)
         g_slist_free(gm->NewGroupUsers);   
@@ -209,7 +220,7 @@ static void AddUserToGroup(GSList *list,GasGroup *group)
 	for(node = list; node; node = node->next)
 	{
 		name = node->data;
-        g_usleep(2000);
+       // g_usleep(2000);
 		gas_group_add_user_group(group,name);	
 	}		
 }	
@@ -237,6 +248,7 @@ static void clearconfigdata(GroupsManage *gm)
     if(gm->NewGroupUsers != NULL)
     {
         g_slist_free(gm->NewGroupUsers);
+        gm->NewGroupUsers = NULL;
     }    
 }    
 static void CreateNewGroup(GtkWidget *widget, gpointer data)
@@ -271,7 +283,7 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
     
 	AddUserToGroup(gm->NewGroupUsers,gas);
 	group = GroupInit(gas);
-	gm->GroupsList = g_slist_prepend(gm->GroupsList,g_object_ref(group));
+	gm->GroupsList = g_slist_append(gm->GroupsList,g_object_ref(group));
 	MessageReport(_("Create User Group"),
                   _("Create User Group Successfully"),
                    INFOR);
@@ -778,19 +790,53 @@ static GSList *GetGroupInfo(void)
     g_slist_free (list);
     return GroupsList;
 }
-static GtkWidget *CreateManageWindow(const gchar *username)
+static void UpdateState(GroupsManage *gm)
 {
-    GtkWidget *Window;
-    gchar *title;
+    gboolean Authorized;
 
-    title = g_strdup_printf(_("Groups Manage  (Current user %s)"),username);
+    Authorized = g_permission_get_allowed (G_PERMISSION (gm->Permission));
+    gtk_widget_set_sensitive(gm->TreeSwitch,Authorized);
+    gtk_widget_set_sensitive(gm->ButtonConfirm,Authorized);
+    gtk_widget_set_sensitive(gm->ButtonRemove,Authorized);
+}    
+static void on_permission_changed (GPermission *permission,
+                                   GParamSpec  *pspec,
+                                   gpointer     data)
+{
+    GroupsManage *gm = (GroupsManage *)data;
+    
+    UpdateState(gm);
+}    
+static void CreateManageWindow(GroupsManage *gm)
+{
+    GtkWidget   *Window;
+    GtkWidget   *header;
+    gchar       *title;
+    GError      *error = NULL;
+
+    title = g_strdup_printf(_("Current user %s"),gm->username);
+    
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Window), title);
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
+    header = gtk_header_bar_new ();
+    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Groups Manage"));
+    gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_subtitle(GTK_HEADER_BAR (header),title);
     
+    gm->Permission = polkit_permission_new_sync (USER_GROUP_PERMISSION, NULL, NULL, &error);
+    gm->ButtonLock = gtk_lock_button_new(gm->Permission);
+    gtk_lock_button_set_permission(GTK_LOCK_BUTTON (gm->ButtonLock),gm->Permission);
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), gm->ButtonLock);
+    gtk_window_set_titlebar (GTK_WINDOW (Window), header);
+    gtk_widget_grab_focus(gm->ButtonLock);    
+    g_signal_connect(gm->Permission, 
+                    "notify",
+                     G_CALLBACK (on_permission_changed), 
+                     gm);
+    gm->GroupsWindow = Window;
     g_free(title);
-    return Window;
 } 
 static GtkWidget *GetGridWidget (void)
 {
@@ -825,7 +871,6 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     GtkWidget *treeview;
     GtkWidget *table;
     GtkWidget *ButtonClose;
-
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
  
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -858,7 +903,6 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
                       gm);
- 
     return vbox;
 }
 
@@ -921,7 +965,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
                      "clicked",
                       G_CALLBACK (CreateNewGroup),
                       gm);
-    
+    gm->ButtonConfirm = ButtonConfirm; 
     return vbox;
 }
 static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
@@ -971,6 +1015,7 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
                      "clicked",
                       G_CALLBACK (RemoveGroup),
                       gm);
+    gm->ButtonRemove = ButtonRemove;
     return vbox;
 }
 
@@ -1022,9 +1067,9 @@ void UserGroupsManage (GtkWidget *widget, gpointer data)
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     CurrentUserName = GetUserName(user->ActUser);
     ua->gm.username = g_strdup(CurrentUserName);
-
 	gtk_widget_hide(WindowLogin);
    	ua->gm.GroupsList = NULL;
+   	ua->gm.NewGroupUsers = NULL;
     ua->gm.GroupsList = GetGroupInfo();
     if(ua->gm.GroupsList == NULL)
     {
@@ -1032,8 +1077,9 @@ void UserGroupsManage (GtkWidget *widget, gpointer data)
         return;
     }  
     ua->gm.GroupNum = g_slist_length(ua->gm.GroupsList);  
-    ua->gm.GroupsWindow = CreateManageWindow(CurrentUserName);
+    CreateManageWindow(&ua->gm);
     StartManageGroups(&ua->gm,ua->UsersList);
+    UpdateState(&ua->gm);    
     g_signal_connect(G_OBJECT(ua->gm.GroupsWindow), 
                     "delete-event",
                      G_CALLBACK(QuitGroupWindow),

@@ -62,12 +62,16 @@ typedef struct
 {
     GSList           *GroupsList;
     GtkWidget        *GroupsWindow;
+    GtkWidget        *ButtonConfirm;
+    GtkWidget        *ButtonRemove;
     GtkWidget        *TreeSwitch;
     GtkWidget        *TreeCreate;
     GtkWidget        *TreeRemove;
     GtkListStore     *SwitchStore;
     GtkListStore     *RemoveStore;
 	GtkWidget        *EntryGroupName;
+	GtkWidget        *ButtonLock;
+    GPermission      *Permission;
     int               GroupNum;
     const gchar      *username;
     GSList           *NewGroupUsers;          

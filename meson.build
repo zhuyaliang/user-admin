@@ -14,6 +14,7 @@ add_project_arguments([
 # get suported warning flags
 test_args = [
   '-fstack-protector-strong',
+  '-g',
   '-Waggregate-return',
   '-Warray-bounds',
   '-Wcast-align',
@@ -91,6 +92,7 @@ pwquality_deps = dependency('pwquality')
 act_deps = dependency('accountsservice')
 gas_deps = dependency('group-service')
 md_deps = dependency('mate-desktop-2.0')
+polkit_deps = dependency('polkit-gobject-1')
 crypt_deps = cc.find_library('crypt', required: true)
 
 # Configure data

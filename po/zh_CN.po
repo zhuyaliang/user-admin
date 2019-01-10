@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-10 11:07+0000\n"
-"PO-Revision-Date: 2019-01-10 11:14+0000\n"
+"POT-Creation-Date: 2019-01-10 14:35+0000\n"
+"PO-Revision-Date: 2019-01-10 14:36+0000\n"
 "Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -95,11 +95,11 @@ msgstr "登录时间"
 
 #: src/user-base.c:251
 msgid "Group Manage"
-msgstr ""
+msgstr "组管理"
 
 #: src/user-base.c:254
 msgid "Setting Groups"
-msgstr ""
+msgstr "设置组"
 
 #: src/user-info.c:66
 msgid "Account is disable"
@@ -139,7 +139,7 @@ msgid "generation password"
 msgstr "生成密码"
 
 #: src/user-password.c:256 src/user-password.c:273 src/user-admin.c:708
-#: src/user-admin.c:724 src/user-group.c:962
+#: src/user-admin.c:724 src/user-group.c:981
 msgid "Confirm"
 msgstr "确认"
 
@@ -154,7 +154,7 @@ msgstr "移除用户"
 
 #: src/user-admin.c:88
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "您不能删除自己的帐户。"
 
 #: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
@@ -166,7 +166,7 @@ msgstr "移除失败，请再次尝试"
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
-msgstr ""
+msgstr "没有这个用户!!!"
 
 #: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
@@ -274,10 +274,9 @@ msgstr "请输入正确的字符"
 msgid "User List"
 msgstr "用户列表"
 
-#: src/user-list.c:244 src/user-group.c:900 src/user-group.c:955
-#, fuzzy
+#: src/user-list.c:244 src/user-group.c:919 src/user-group.c:974
 msgid "Close"
-msgstr "关闭退出"
+msgstr "关闭"
 
 #: src/user-share.c:114
 msgid "_Return"
@@ -393,29 +392,33 @@ msgstr "创建用户组"
 msgid "Create User Group Successfully"
 msgstr "创建新组成功"
 
-#: src/user-group.c:352 src/user-group.c:360 src/user-group.c:377
+#: src/user-group.c:353 src/user-group.c:361 src/user-group.c:378
 msgid "Remove Group"
 msgstr "移除组"
 
-#: src/user-group.c:353
+#: src/user-group.c:354
 msgid "Cannot remove root group"
 msgstr "不能移除root组"
 
-#: src/user-group.c:361
+#: src/user-group.c:362
 msgid "Whether to remove the selected group"
 msgstr "是否移除选择的组"
 
-#: src/user-group.c:644
+#: src/user-group.c:644 src/user-group.c:720
 msgid "Group Name"
 msgstr "组名字"
 
-#: src/user-group.c:653
+#: src/user-group.c:653 src/user-group.c:729
 msgid "Group ID"
 msgstr "组 gid"
 
 #: src/user-group.c:694
 msgid "User ID"
 msgstr "用户uid"
+
+#: src/user-group.c:711
+msgid "Remove"
+msgstr "移除"
 
 #: src/user-group.c:761
 msgid "Initialization group management"
@@ -449,31 +452,35 @@ msgstr "获取组个数"
 msgid "The number of groups is 0."
 msgstr "组个数为零。"
 
-#: src/user-group.c:817
+#: src/user-group.c:798 src/user-group.c:800 src/user-group.c:802
+msgid "Please click the unlock sign in the upper left corner"
+msgstr "请点击左上角的解锁标志"
+
+#: src/user-group.c:836
 #, c-format
 msgid "Current user %s"
 msgstr "当前用户 %s"
 
-#: src/user-group.c:824
+#: src/user-group.c:843
 msgid "Groups Manage"
 msgstr "组管理"
 
-#: src/user-group.c:930
+#: src/user-group.c:949
 msgid "New Group Name"
 msgstr "新组名字"
 
-#: src/user-group.c:941
+#: src/user-group.c:960
 msgid "Please select the user to add to the new group"
 msgstr "请选择要添加到新组的用户"
 
-#: src/user-group.c:1036
+#: src/user-group.c:1055
 msgid "Switch Groups"
 msgstr "切换组"
 
-#: src/user-group.c:1040
+#: src/user-group.c:1059
 msgid "Create Groups"
 msgstr "创建组"
 
-#: src/user-group.c:1044
+#: src/user-group.c:1063
 msgid "Remove Groups"
 msgstr "移除组"

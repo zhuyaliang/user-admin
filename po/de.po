@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-10 11:07+0000\n"
+"POT-Creation-Date: 2019-01-10 14:35+0000\n"
 "PO-Revision-Date: 2018-09-10 08:59+0200\n"
 "Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
 "Language-Team: German\n"
@@ -137,7 +137,7 @@ msgid "generation password"
 msgstr "Passwort erzeugen"
 
 #: src/user-password.c:256 src/user-password.c:273 src/user-admin.c:708
-#: src/user-admin.c:724 src/user-group.c:962
+#: src/user-admin.c:724 src/user-group.c:981
 msgid "Confirm"
 msgstr "Bestätigen"
 
@@ -279,7 +279,7 @@ msgstr "Bitte geben Sie ein gültiges Zeichen ein"
 msgid "User List"
 msgstr "Benutzerliste"
 
-#: src/user-list.c:244 src/user-group.c:900 src/user-group.c:955
+#: src/user-list.c:244 src/user-group.c:919 src/user-group.c:974
 #, fuzzy
 msgid "Close"
 msgstr "Beenden"
@@ -412,26 +412,26 @@ msgstr "Benutzer erstellen"
 msgid "Create User Group Successfully"
 msgstr ""
 
-#: src/user-group.c:352 src/user-group.c:360 src/user-group.c:377
+#: src/user-group.c:353 src/user-group.c:361 src/user-group.c:378
 #, fuzzy
 msgid "Remove Group"
 msgstr "Benutzer entfernen"
 
-#: src/user-group.c:353
+#: src/user-group.c:354
 msgid "Cannot remove root group"
 msgstr ""
 
-#: src/user-group.c:361
+#: src/user-group.c:362
 #, fuzzy
 msgid "Whether to remove the selected group"
 msgstr "Gibt an, ob das Basisverzeichnis des Benutzers entfernt werden soll"
 
-#: src/user-group.c:644
+#: src/user-group.c:644 src/user-group.c:720
 #, fuzzy
 msgid "Group Name"
 msgstr "Benutzername"
 
-#: src/user-group.c:653
+#: src/user-group.c:653 src/user-group.c:729
 msgid "Group ID"
 msgstr ""
 
@@ -439,6 +439,11 @@ msgstr ""
 #, fuzzy
 msgid "User ID"
 msgstr "Benutzername"
+
+#: src/user-group.c:711
+#, fuzzy
+msgid "Remove"
+msgstr "Benutzer entfernen"
 
 #: src/user-group.c:761
 msgid "Initialization group management"
@@ -468,34 +473,38 @@ msgstr ""
 msgid "The number of groups is 0."
 msgstr ""
 
-#: src/user-group.c:817
+#: src/user-group.c:798 src/user-group.c:800 src/user-group.c:802
+msgid "Please click the unlock sign in the upper left corner"
+msgstr ""
+
+#: src/user-group.c:836
 #, c-format
 msgid "Current user %s"
 msgstr ""
 
-#: src/user-group.c:824
+#: src/user-group.c:843
 msgid "Groups Manage"
 msgstr ""
 
-#: src/user-group.c:930
+#: src/user-group.c:949
 #, fuzzy
 msgid "New Group Name"
 msgstr "Benutzername"
 
-#: src/user-group.c:941
+#: src/user-group.c:960
 msgid "Please select the user to add to the new group"
 msgstr ""
 
-#: src/user-group.c:1036
+#: src/user-group.c:1055
 msgid "Switch Groups"
 msgstr ""
 
-#: src/user-group.c:1040
+#: src/user-group.c:1059
 #, fuzzy
 msgid "Create Groups"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-group.c:1044
+#: src/user-group.c:1063
 #, fuzzy
 msgid "Remove Groups"
 msgstr "Benutzer entfernen"

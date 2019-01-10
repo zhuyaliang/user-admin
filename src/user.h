@@ -62,6 +62,9 @@ typedef struct
 {
     GSList           *GroupsList;
     GtkWidget        *GroupsWindow;
+    GtkWidget        *SwitchBox;
+    GtkWidget        *CreateBox;
+    GtkWidget        *RemoveBox;
     GtkWidget        *ButtonConfirm;
     GtkWidget        *ButtonRemove;
     GtkWidget        *TreeSwitch;

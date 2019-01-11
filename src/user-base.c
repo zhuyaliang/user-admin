@@ -32,13 +32,13 @@
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void SwitchState(GtkSwitch *widget,gboolean   state,gpointer  data)
+static void SwitchState(GtkSwitch *widget,gboolean state,gpointer data)
 {
-    GSList *list;
-    GSList *l;
+    GSList    *list;
+    GSList    *l;
     UserAdmin *ua = (UserAdmin *)data;
+    UserInfo  *user;
     ActUserManager *um;
-    UserInfo *user;
     
     if(Change == 0)
     {        
@@ -94,12 +94,12 @@ static void ChangePass(GtkWidget *widget,gpointer data)
 ******************************************************************************/
 static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
 {
-    UserAdmin *ua = (UserAdmin *)data;
-    char *text;
+    UserAdmin    *ua = (UserAdmin *)data;
+    char         *text;
     GtkTreeIter   iter; 
     GtkTreeModel *model;
-    UserInfo *user;
-    char *LangName;
+    UserInfo     *user;
+    char         *LangName;
 
     if(Change == 0) 
     {       
@@ -128,8 +128,8 @@ static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
 static void ComboSelectUserType(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    UserInfo *user;
-    gint account_type;
+    UserInfo  *user;
+    gint       account_type;
 
     if( Change ==0 )
     {
@@ -169,7 +169,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *LabelGroup;
     GtkWidget *ButtonGroup;
     UserInfo  *user;
-    int index;
+    int        index;
 
     user = GetIndexUser(ua->UsersList,0);
     fixed = gtk_fixed_new();

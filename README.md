@@ -2,6 +2,8 @@
 ![Homepage:](https://github.com/zhuyaliang/images/blob/master/000.png)
 ![Choose Images:](https://github.com/zhuyaliang/images/blob/master/001.png)
 ![Add User:](https://github.com/zhuyaliang/images/blob/master/002.png)
+![Group set:](https://github.com/zhuyaliang/images/blob/master/006.png)
+![Group add:](https://github.com/zhuyaliang/images/blob/master/007.png)
 # Explain
 
 Rewrite an interface similar to user management tools in gnome-system-tools and gnome-control-center, displayed in the control center.

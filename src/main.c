@@ -25,8 +25,8 @@
 #define  LOCKFILE    "/tmp/user-admin.pid"
 
 static gboolean on_window_quit (GtkWidget *widget, 
-                         GdkEvent *event, 
-                         gpointer user_data)
+                                GdkEvent  *event, 
+                                gpointer   user_data)
 {
     UserAdmin *ua = (UserAdmin *)user_data;
     
@@ -62,8 +62,8 @@ static void InitMainWindow(UserAdmin *ua)
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
     g_signal_connect(G_OBJECT(Window), 
                     "delete-event",
-                    G_CALLBACK(on_window_quit),
-                    ua);
+                     G_CALLBACK(on_window_quit),
+                     ua);
     
     AppIcon = GetAppIcon();
     if(AppIcon)

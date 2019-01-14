@@ -79,10 +79,33 @@ typedef struct
     const gchar      *username;
     GSList           *NewGroupUsers;          
 }GroupsManage;
+
+typedef struct
+{
+    GtkWidget        *AddUserDialog;
+    GtkWidget        *ButtonCancel;
+    GtkWidget        *ButtonConfirm;
+    GtkWidget        *RealNameEntry;
+    GtkWidget        *UserNameEntry;
+    GtkWidget        *LabelNameNote;
+    GtkWidget        *NewUserType;
+    GtkWidget        *NewUserLangType;
+    GtkWidget        *RadioButton1;
+    GtkWidget        *RadioButton2;
+    GtkWidget        *NewPassEntry;
+    GtkWidget        *LevelBar;
+    GtkWidget        *LabelPassNote;
+    GtkWidget        *CheckPassEntry;
+    GtkWidget        *LabelSpace;
+    int               CheckPassTimeId;//Check the password format timer
+    int               CheckNameTimeId; //Check the Realname format timer
+    GtkTreeIter       NewUserIter;           //user list iter
+}CreateUser;
 typedef struct 
 {
     GSList           *UsersList;
     GroupsManage      gm;
+    CreateUser        newuser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PassWindow;
@@ -106,26 +129,20 @@ typedef struct
     GtkWidget        *ButtonConfirm;
     GtkWidget        *CheckPassEntry;
     GtkWidget        *LabelSpace;
-    GtkWidget        *RealNameEntry;
-    GtkWidget        *UserNameEntry;
-    GtkWidget        *LabelNameNote;
-    GtkWidget        *NewUserType;
-    GtkWidget        *NewUserLangType;
     GtkWidget        *RadioButton1;
     GtkWidget        *RadioButton2;
     GtkWidget        *CropArea;
-    GtkTreeIter       NewUserIter;           //user list iter
-    int               UserCount;    //Valid user number
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer
+    int               UserCount;             //Valid user number
     int               MouseId;
     int               KeyId;
     char              TmpPass[24];
 }UserAdmin;
-int gnCnt;                //计数
-int gnCurrentUserIndex;   //代表当前用户标号
-GtkWidget *WindowLogin;          //首页窗口
-char **all_languages;
+int         gnCnt;                //计数
+int         gnCurrentUserIndex;   //代表当前用户标号
+GtkWidget  *WindowLogin;          //首页窗口
+char      **all_languages;
 GHashTable *LocaleHash;
 GSList     *LangList;
 #endif

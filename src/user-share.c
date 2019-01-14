@@ -463,12 +463,11 @@ void AutoGenera (GtkEntry            *entry,
 {
 
     char *NewPassWord;
-    UserAdmin *ua = (UserAdmin *)data;
 
     gtk_entry_set_visibility(GTK_ENTRY(entry),TRUE);
     pwquality_generate (get_pwq (), 0, &NewPassWord);
-    gtk_entry_set_text(GTK_ENTRY(ua->NewPassEntry),NewPassWord);
-    gtk_entry_set_text(GTK_ENTRY(ua->CheckPassEntry),NewPassWord);
+    gtk_entry_set_text(GTK_ENTRY(entry),NewPassWord);
+    gtk_entry_set_text(GTK_ENTRY(data),NewPassWord);
 
 }
 

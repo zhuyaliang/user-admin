@@ -247,15 +247,15 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , ButtonAdd ,    1 , 1 , 1 , 1);
     gtk_grid_attach(GTK_GRID(table) , ButtonClose ,  4 , 1 , 1 , 1);
     g_signal_connect (ButtonRemove, 
-                      "clicked",
+                     "clicked",
                       G_CALLBACK (RemoveUser),
                       ua);
     g_signal_connect (ButtonAdd, 
-                      "clicked",
+                     "clicked",
                       G_CALLBACK (AddNewUser),
                       ua);
     g_signal_connect (ButtonClose, 
-                      "clicked",
+                     "clicked",
                       G_CALLBACK (QuitApp),
                       ua);
     

@@ -234,10 +234,6 @@ void CreateNewPass(UserAdmin *ua)
                                     _("generation password"));
     gtk_entry_set_max_length(GTK_ENTRY(NewPassEntry),20);
     gtk_grid_attach(GTK_GRID(Table) , NewPassEntry , 1 , 3 , 4 , 1);
-    g_signal_connect (G_OBJECT(NewPassEntry), 
-                     "icon-press", 
-                      G_CALLBACK(AutoGenera), 
-                      ua);
 
 
     LevelBar = gtk_level_bar_new ();
@@ -262,6 +258,10 @@ void CreateNewPass(UserAdmin *ua)
     gtk_entry_set_max_length(GTK_ENTRY(CheckPassEntry),20);
     gtk_entry_set_visibility(GTK_ENTRY(CheckPassEntry),FALSE);
     gtk_grid_attach(GTK_GRID(Table) , CheckPassEntry , 1 , 6 , 4 , 1);
+    g_signal_connect (G_OBJECT(NewPassEntry), 
+                     "icon-press", 
+                      G_CALLBACK(AutoGenera), 
+                      CheckPassEntry);
 
     LabelSpace = gtk_label_new(NULL);
     ua->LabelSpace = LabelSpace;

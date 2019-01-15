@@ -108,8 +108,7 @@ typedef struct
     CreateUser        newuser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
-    GtkWidget        *PassWindow;
-    GtkWidget        *AddUserWindow;
+    GtkWidget        *PasswordDialog;
     GtkTreeModel     *Model;
     GtkTreeSelection *UserSelect;
     GtkWidget        *UserList;
@@ -123,11 +122,10 @@ typedef struct
     GtkWidget        *ButtonUserTime;
     GtkWidget        *ButtonUserGroup;
     GtkWidget        *NewPassEntry;
-    GtkWidget        *OldPassEntry;
+    GtkWidget        *CheckPassEntry;
     GtkWidget        *LabelPassNote;
     GtkWidget        *LevelBar;
     GtkWidget        *ButtonConfirm;
-    GtkWidget        *CheckPassEntry;
     GtkWidget        *LabelSpace;
     GtkWidget        *RadioButton1;
     GtkWidget        *RadioButton2;

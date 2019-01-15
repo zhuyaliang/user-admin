@@ -26,8 +26,6 @@
 #include "user-share.h"
 #include "user-info.h"
 
-static void CloseNewPassWindow(GtkWidget *widget,gpointer data);
-
 /******************************************************************************
 * Function:              NextSetPass 
 *        
@@ -75,20 +73,16 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
     int CheckPassTimeId;
     UserAdmin *ua = (UserAdmin *)data;
     UserInfo *user;
-    gtk_widget_set_sensitive(ua->CheckPassEntry, TRUE);  //Unlocking Widget
+    gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);  //Unlocking Widget
     gtk_widget_set_sensitive(ua->NewPassEntry, TRUE);
     gtk_widget_set_sensitive(ua->LevelBar, TRUE);
+    gtk_widget_set_sensitive(ua->ButtonConfirm, FALSE);
 
     CheckPassTimeId = g_timeout_add(800,(GSourceFunc)CheckPassword,ua);
     ua->CheckPassTimeId = CheckPassTimeId;
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_REGULAR); 
 }        
-static void ClosePassWindow(GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-    gtk_widget_destroy(GTK_WIDGET(ua->PassWindow));
-}
 /******************************************************************************
 * Function:              SetNewPass 
 *        
@@ -100,33 +94,20 @@ static void ClosePassWindow(GtkWidget *widget,gpointer data)
 *        
 * Author:  zhuyaliang  15/05/2018
 ******************************************************************************/
-static void SetNewPass(GtkWidget *widget,gpointer data)
+static void SetNewPass(UserAdmin *ua)
 {
-    const char *np;
-    const char *cp;
-    UserAdmin *ua = (UserAdmin *)data;
-    int passtype;
-    UserInfo *user;
+    int         passtype;
+    UserInfo   *user;
+    const char *password;
 
+    password =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     GetPasswordModeText(user->ActUser,&passtype);
     /*choose now set password*/
     if(passtype == OLDPASS)
     {        
-        np =  gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
-        cp =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
-        if(strcmp(np,cp) != 0)
-        {
-            OpenNote(ua->LabelSpace,_("Inconsistent password"),ua);
-            return;
-        }
-        else
-        {   
-            act_user_set_password (user->ActUser,cp, "");
-        }
+        act_user_set_password (user->ActUser,password, "");
     }
-
-    gtk_widget_destroy(ua->PassWindow);
     UpdateInterface(user->ActUser,ua);
 }
 static void SetButtonMode(UserAdmin *ua)
@@ -146,7 +127,54 @@ static void SetButtonMode(UserAdmin *ua)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ua->RadioButton1), TRUE);
         NextSetPass(GTK_RADIO_BUTTON(ua->RadioButton1),ua);
     }    
-}    
+}   
+static GtkWidget*
+dialog_add_button_with_icon_name (GtkDialog   *dialog,
+                                  const gchar *button_text,
+                                  const gchar *icon_name,
+                                  gint         response_id)
+{
+	GtkWidget *button;
+
+	button = gtk_button_new_with_mnemonic (button_text);
+	gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
+
+	gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
+	gtk_style_context_add_class (gtk_widget_get_style_context (button), "text-button");
+	gtk_widget_set_can_default (button, TRUE);
+	gtk_widget_show (button);
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
+
+	return button;
+}
+static void CloseNewPassWindow(UserAdmin *ua)
+{
+    gtk_widget_destroy(GTK_WIDGET(ua->PasswordDialog));
+    if(ua->CheckPassTimeId > 0)
+    {
+        g_source_remove(ua->CheckPassTimeId);
+        ua->CheckPassTimeId = 0;
+    }
+}        
+static void
+passwod_dialog_response (GtkDialog *dialog,
+			             int        response_id,
+			             UserAdmin *ua)
+{
+
+	switch (response_id) 
+    {
+	case GTK_RESPONSE_CLOSE:
+        CloseNewPassWindow(ua);
+		break;
+	case GTK_RESPONSE_OK:
+        SetNewPass(ua);
+        CloseNewPassWindow(ua);
+		break;
+	default:
+		break;
+	}
+}
 /******************************************************************************
 * Function:              CreateNewPass 
 *        
@@ -160,7 +188,7 @@ static void SetButtonMode(UserAdmin *ua)
 ******************************************************************************/
 void CreateNewPass(UserAdmin *ua)
 {
-    GtkWidget *WindowChangePass;
+    GtkWidget *PasswordDialog;
     GtkWidget *Vbox;
     GtkWidget *Table;
     GtkWidget *LabelTitle;
@@ -177,24 +205,33 @@ void CreateNewPass(UserAdmin *ua)
 
     GtkWidget *Hseparator;
     GtkWidget *LabelSpace;
-    GtkWidget *ButtonConfirm;
-    GtkWidget *ButtonCancel;
 
-    //新建一个窗口
-    WindowChangePass = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(WindowChangePass),_("Add a password"));
-    gtk_window_set_position(GTK_WINDOW(WindowChangePass),GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(WindowChangePass),400,250);
-    gtk_container_set_border_width(GTK_CONTAINER(WindowChangePass),20);
-    ua->PassWindow = WindowChangePass;
-    g_signal_connect(WindowChangePass,
-                    "destroy",
-                     G_CALLBACK(CloseNewPassWindow),
-                     ua);
+    //create chnaged passwod dialog
 
+    PasswordDialog = gtk_dialog_new_with_buttons (_("Set Password"),
+                                                   GTK_WINDOW (WindowLogin),
+                                                   GTK_DIALOG_MODAL| GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   NULL,
+                                                   NULL);
+    gtk_container_set_border_width(GTK_CONTAINER(PasswordDialog),20);
+    gtk_window_set_deletable(GTK_WINDOW (PasswordDialog), FALSE);
+    gtk_window_set_default_size (GTK_WINDOW (PasswordDialog), 450, 200);
+    dialog_add_button_with_icon_name ( GTK_DIALOG (PasswordDialog), 
+                                                    _("Close"), 
+                                      "window-close", 
+                                                     GTK_RESPONSE_CLOSE);
+
+    ua->ButtonConfirm = dialog_add_button_with_icon_name (GTK_DIALOG (PasswordDialog), 
+                                                     _("Confirm"), 
+                                                      "emblem-default", 
+                                                      GTK_RESPONSE_OK);
     Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
-    gtk_container_add(GTK_CONTAINER(WindowChangePass),Vbox);
-
+    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (PasswordDialog))),
+                        Vbox,
+                        TRUE,
+                        TRUE,
+                        8);
+    ua->PasswordDialog = PasswordDialog;
     Table = gtk_grid_new();
     gtk_box_pack_start(GTK_BOX(Vbox), Table,TRUE, TRUE, 0);
     gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
@@ -270,47 +307,13 @@ void CreateNewPass(UserAdmin *ua)
     Hseparator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_grid_attach(GTK_GRID(Table) , Hseparator , 0 , 8 , 5 , 1);
 
-    ButtonConfirm = gtk_button_new_with_label(_("Confirm"));
-    ua->ButtonConfirm = ButtonConfirm;
-    g_signal_connect (ButtonConfirm, 
-                     "clicked",
-                      G_CALLBACK (SetNewPass),
-                      ua);
-    gtk_grid_attach(GTK_GRID(Table) , ButtonConfirm , 0 , 9 , 1 , 1);
-
-    ButtonCancel =  gtk_button_new_with_label(_("Cancel"));
-    g_signal_connect (ButtonCancel, 
-                     "clicked",
-                      G_CALLBACK (ClosePassWindow),
-                      ua);
-    gtk_grid_attach(GTK_GRID(Table) , ButtonCancel , 4 , 9 , 1 , 1);
-
     SetButtonMode(ua);
 
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
-
-    gtk_widget_show_all(WindowChangePass);
+    g_signal_connect (G_OBJECT (PasswordDialog),
+			         "response",
+			          G_CALLBACK (passwod_dialog_response),
+			          ua);
+    gtk_widget_show_all(PasswordDialog);
 }
-/******************************************************************************
-* Function:            ChangeOldPass
-*        
-* Explain: Change the old password 
-*          
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
-static void CloseNewPassWindow(GtkWidget *widget,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-    //清除检查密码是否合理的定时器
-    if(ua->CheckPassTimeId > 0)
-    {
-        g_source_remove(ua->CheckPassTimeId);
-        ua->CheckPassTimeId = 0;
-    }
-    gtk_widget_set_sensitive(ua->MainWindow,TRUE);
-}        

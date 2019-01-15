@@ -409,7 +409,39 @@ int GetPassStrength (const char  *password,
     }    
 	return level;
 }
+/******************************************************************************
+* Function:              DiffPassword 
+*        
+* Explain: Check if the passwords entered twice are the same
+*        
+* Input:  Input entry 
+*        
+* Output: same      TRUE
+*         different FALSE
+*        
+* Author:  zhuyaliang  15/05/2018
+******************************************************************************/
+static gboolean DiffPassword(GtkWidget *NewPassEntry,
+                             GtkWidget *CheckPassEntry)
+{
+    const char *np;
+    const char *cp;
+    
+    np =  gtk_entry_get_text(GTK_ENTRY(NewPassEntry));
+    cp =  gtk_entry_get_text(GTK_ENTRY(CheckPassEntry));
+    if(strcmp(np,cp) != 0)
+    {
+        gtk_entry_set_icon_from_icon_name(GTK_ENTRY(CheckPassEntry),
+                                          GTK_ENTRY_ICON_SECONDARY,
+                                          NULL);
+        return FALSE;
+    }
 
+    gtk_entry_set_icon_from_icon_name(GTK_ENTRY(CheckPassEntry),
+                                      GTK_ENTRY_ICON_SECONDARY,
+                                     "emblem-ok-symbolic");
+    return TRUE;
+}    
 /******************************************************************************
 * Function:              CheckPassword 
 *        
@@ -427,20 +459,42 @@ gboolean CheckPassword(gpointer data)
     const char *s;
     int Level;
     const char *Message;
-
+    const gchar *NoteMessage = _("The passwords entered twice are different");
+          
     s = gtk_entry_get_text(GTK_ENTRY(ua->NewPassEntry));
     if(strlen(s) == 0)
     {
-        gtk_entry_set_visibility(GTK_ENTRY(ua->NewPassEntry),FALSE);
+        return TRUE;
     }
     Level = GetPassStrength (s, NULL,NULL,&Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (ua->LevelBar), Level);
-
+    
+    /*The new password meets the requirements*/
     if(Message == NULL && Level > 1)
     {
-        OffNote(ua->LabelPassNote,ua);
+        gtk_entry_set_icon_from_icon_name(GTK_ENTRY(ua->NewPassEntry),
+                                          GTK_ENTRY_ICON_SECONDARY,
+                                         "emblem-ok-symbolic");
+        gtk_label_set_markup(GTK_LABEL(ua->LabelPassNote),NULL);
+        gtk_widget_set_sensitive(ua->CheckPassEntry, TRUE);  //Unlocking check password
+        /*Check whether to enter a check password*/
+        if(strlen(gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry))) <= 0)
+        {
+            return TRUE;
+        }    
+        /*Check if the passwords entered twice are the same*/
+        if(!DiffPassword(ua->NewPassEntry,ua->CheckPassEntry)) 
+        {
+            OpenNote(ua->LabelPassNote,NoteMessage,ua);
+            return TRUE;
+        }   
+        OffNote(ua->LabelPassNote,ua);       
         return TRUE;
     }
+    gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);  //locking Widget
+    gtk_entry_set_icon_from_icon_name(GTK_ENTRY(ua->NewPassEntry),
+                                      GTK_ENTRY_ICON_SECONDARY,
+                                     "system-run");
     OpenNote(ua->LabelPassNote,Message,ua);
     return TRUE;
 

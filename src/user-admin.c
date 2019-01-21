@@ -238,6 +238,7 @@ static gboolean CheckName(gpointer data)
 {
     CreateUser *newuser = (CreateUser *)data;
     gboolean    Valid;
+    int         input = 0;
     char       *Message = NULL;
     const char *s;
     const char *r;
@@ -255,8 +256,18 @@ static gboolean CheckName(gpointer data)
                                          "emblem-ok-symbolic");
     
     }    
+    else
+    {
+        input = 1;
+        gtk_entry_set_icon_from_icon_name(GTK_ENTRY(newuser->RealNameEntry),
+                                          GTK_ENTRY_ICON_SECONDARY,
+                                          NULL);
+    }
     if(strlen(s) <= 0 )
+    {
+        gtk_widget_set_sensitive(newuser->ButtonConfirm, FALSE);
         return TRUE;
+    }
     Valid = UserNameValidCheck(s,&Message);
     if(Message != NULL)
         SetLableFontType(newuser->LabelNameNote,"red",10,Message);
@@ -268,7 +279,7 @@ static gboolean CheckName(gpointer data)
         
         SetLableFontType(newuser->LabelNameNote,"gray",10,FixedNote);
     }
-    if(UnlockFlag == 0 && Valid)
+    if(UnlockFlag == 0 && Valid && input == 0)
         gtk_widget_set_sensitive(newuser->ButtonConfirm, TRUE);
     else
         gtk_widget_set_sensitive(newuser->ButtonConfirm, FALSE);     
@@ -419,15 +430,15 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
         user = user_new();
         user->UserName = g_strdup(un);
         user->ActUser  = ActUser;
-        user->Iter     = ua->newuser.NewUserIter;
         UserListAppend(ua->UserList,
                        DEFAULT,
                        rn,
                       "black",
                        ua->UserCount,
                       &ua->newuser.NewUserIter);
-        ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(user));
-        currentuser = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+        user->Iter     = ua->newuser.NewUserIter;
+        ua->UsersList  = g_slist_append(ua->UsersList,g_object_ref(user));
+        currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         UpdateInterface(currentuser->ActUser,ua);
         ua->UserCount +=1;//用户个数加1
     }    

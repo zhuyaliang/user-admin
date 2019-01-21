@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-10 14:35+0000\n"
+"POT-Creation-Date: 2019-01-21 16:20+0000\n"
 "PO-Revision-Date: 2018-09-10 08:59+0200\n"
 "Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
 "Language-Team: German\n"
@@ -53,49 +53,49 @@ msgstr "lese Datei"
 msgid "read pid file failed"
 msgstr "lesen der pid Datei schlug fehl"
 
-#: src/user-base.c:183 src/user-admin.c:508
+#: src/user-base.c:182 src/user-admin.c:517
 msgid "Account Type"
 msgstr "Konto Typ"
 
 #. drop-down select boxes
-#: src/user-base.c:187 src/user-admin.c:512
+#: src/user-base.c:186 src/user-admin.c:520
 msgid "Standard"
 msgstr "Standard"
 
-#: src/user-base.c:187 src/user-admin.c:512
+#: src/user-base.c:186 src/user-admin.c:520
 msgid "Administrators"
 msgstr "Administratoren"
 
-#: src/user-base.c:198 src/user-admin.c:518
+#: src/user-base.c:197 src/user-admin.c:525
 msgid "Language"
 msgstr "Sprache"
 
-#: src/user-base.c:205
+#: src/user-base.c:204
 msgid "Get user language"
 msgstr "Benutzersprache erhalten"
 
-#: src/user-base.c:205
+#: src/user-base.c:204
 msgid "get user language failed"
 msgstr "Benutzersprache erhalten schlug fehl"
 
-#: src/user-base.c:215 src/user-password.c:201 src/user-admin.c:653
-#: src/user-admin.c:675
+#: src/user-base.c:214 src/user-password.c:238 src/user-admin.c:675
+#: src/user-admin.c:696
 msgid "Password"
 msgstr "Passwort"
 
-#: src/user-base.c:228
+#: src/user-base.c:227
 msgid "Automatic logon"
 msgstr "Automatisches Einloggen"
 
-#: src/user-base.c:243
+#: src/user-base.c:242
 msgid "Login time"
 msgstr "Anmeldezeit"
 
-#: src/user-base.c:251
+#: src/user-base.c:255
 msgid "Group Manage"
 msgstr ""
 
-#: src/user-base.c:254
+#: src/user-base.c:258
 msgid "Setting Groups"
 msgstr ""
 
@@ -104,7 +104,7 @@ msgid "Account is disable"
 msgstr "Konto ist deaktiviert"
 
 #. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:206 src/user-admin.c:658
+#: src/user-info.c:78 src/user-password.c:243 src/user-admin.c:680
 msgid "Set up next time"
 msgstr "Beim nächsten Mal einrichten"
 
@@ -116,34 +116,34 @@ msgstr "Holen Sie sich Benutzerinformationen"
 msgid "user count is 0"
 msgstr "Benutzeranzahl ist 0"
 
-#: src/user-password.c:120
-msgid "Inconsistent password"
-msgstr "Inkonsistentes Passwort"
-
-#: src/user-password.c:185
-msgid "Add a password"
-msgstr "Fügen Sie ein Passwort hinzu"
-
-#: src/user-password.c:215
-msgid "Now set up"
-msgstr "Jetzt einrichten"
-
-#: src/user-password.c:224
-msgid "User Password"
+#. create chnaged passwod dialog
+#: src/user-password.c:211
+#, fuzzy
+msgid "Set Password"
 msgstr "Benutzer Passwort"
 
-#: src/user-password.c:234 src/user-admin.c:693
-msgid "generation password"
-msgstr "Passwort erzeugen"
+#: src/user-password.c:220 src/user-list.c:244 src/user-group.c:913
+#: src/user-group.c:968 src/user-group.c:1018
+#, fuzzy
+msgid "Close"
+msgstr "Beenden"
 
-#: src/user-password.c:256 src/user-password.c:273 src/user-admin.c:708
-#: src/user-admin.c:724 src/user-group.c:981
+#: src/user-password.c:225 src/user-password.c:289 src/user-admin.c:721
+#: src/user-admin.c:777 src/user-group.c:975
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#: src/user-password.c:281 src/user-admin.c:733
-msgid "Cancel"
-msgstr "Abbruch"
+#: src/user-password.c:252
+msgid "Now set up"
+msgstr "Jetzt einrichten"
+
+#: src/user-password.c:261
+msgid "User Password"
+msgstr "Benutzer Passwort"
+
+#: src/user-password.c:271 src/user-admin.c:709
+msgid "generation password"
+msgstr "Passwort erzeugen"
 
 #: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
 #: src/user-list.c:243
@@ -186,45 +186,41 @@ msgstr ""
 "Der Benutzername sollte nur aus Groß- und Kleinbuchstaben, \n"
 "Buchstaben von a-z, Ziffern und die folgenden Zeichen bestehen: . - _"
 
-#: src/user-admin.c:224
-msgid "This will be used to name your home folder and can't be changed."
-msgstr ""
-"Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
-"geändert werden"
-
-#: src/user-admin.c:294
-msgid "Creating User"
-msgstr "Benutzer erstellen"
-
-#: src/user-admin.c:294
-msgid "Creating a user failed"
-msgstr "Erstellen eines Benutzers fehlgeschlagen"
-
-#: src/user-admin.c:377
-msgid "Two inconsistencies in cipher input"
-msgstr "Zwei Inkonsistenzen bei der Chiffre-Eingabe"
-
-#: src/user-admin.c:476
+#: src/user-admin.c:245 src/user-admin.c:489
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
 "geändert werden"
 
-#: src/user-admin.c:483 src/user-group.c:685
+#: src/user-admin.c:321
+msgid "Creating User"
+msgstr "Benutzer erstellen"
+
+#: src/user-admin.c:321
+msgid "Creating a user failed"
+msgstr "Erstellen eines Benutzers fehlgeschlagen"
+
+#: src/user-admin.c:496 src/user-group.c:685
 msgid "User Name"
 msgstr "Benutzername"
 
-#: src/user-admin.c:499
+#: src/user-admin.c:509
 msgid "Login Name"
 msgstr "Login Name"
 
-#: src/user-admin.c:666
+#: src/user-admin.c:541 src/user-share.c:462
+#, fuzzy
+msgid "The passwords entered twice are different"
+msgstr "Das neue Passwort muß vom alten verschieden sein"
+
+#: src/user-admin.c:688
 msgid "Now set the password"
 msgstr "Das Passwort jetzt einrichten"
 
-#: src/user-admin.c:768 src/user-list.c:242
-msgid "Add User"
-msgstr "Benutzer hinzufügen"
+#: src/user-admin.c:775
+#, fuzzy
+msgid "Create New User"
+msgstr "Erzeugung der pid Datei schlug fehl"
 
 #: src/user-face.c:300 src/user-face.c:311
 #, fuzzy
@@ -279,10 +275,9 @@ msgstr "Bitte geben Sie ein gültiges Zeichen ein"
 msgid "User List"
 msgstr "Benutzerliste"
 
-#: src/user-list.c:244 src/user-group.c:919 src/user-group.c:974
-#, fuzzy
-msgid "Close"
-msgstr "Beenden"
+#: src/user-list.c:242
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
 
 #: src/user-share.c:114
 msgid "_Return"
@@ -440,7 +435,7 @@ msgstr ""
 msgid "User ID"
 msgstr "Benutzername"
 
-#: src/user-group.c:711
+#: src/user-group.c:711 src/user-group.c:1025
 #, fuzzy
 msgid "Remove"
 msgstr "Benutzer entfernen"
@@ -473,41 +468,95 @@ msgstr ""
 msgid "The number of groups is 0."
 msgstr ""
 
-#: src/user-group.c:798 src/user-group.c:800 src/user-group.c:802
+#: src/user-group.c:798
 msgid "Please click the unlock sign in the upper left corner"
 msgstr ""
 
-#: src/user-group.c:836
+#: src/user-group.c:830
 #, c-format
 msgid "Current user %s"
 msgstr ""
 
-#: src/user-group.c:843
+#: src/user-group.c:837
 msgid "Groups Manage"
 msgstr ""
 
-#: src/user-group.c:949
+#: src/user-group.c:943
 #, fuzzy
 msgid "New Group Name"
 msgstr "Benutzername"
 
-#: src/user-group.c:960
+#: src/user-group.c:954
 msgid "Please select the user to add to the new group"
 msgstr ""
 
-#: src/user-group.c:1055
+#: src/user-group.c:1046
 msgid "Switch Groups"
 msgstr ""
 
-#: src/user-group.c:1059
+#: src/user-group.c:1050
 #, fuzzy
 msgid "Create Groups"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-group.c:1063
+#: src/user-group.c:1054
 #, fuzzy
 msgid "Remove Groups"
 msgstr "Benutzer entfernen"
+
+#: src/user-history.c:42
+msgid "This Week"
+msgstr ""
+
+#: src/user-history.c:46
+msgid "Last Week"
+msgstr ""
+
+#: src/user-history.c:146
+msgid "Today"
+msgstr ""
+
+#: src/user-history.c:150
+msgid "Yesterday"
+msgstr ""
+
+#: src/user-history.c:156
+msgid "%b %e"
+msgstr ""
+
+#: src/user-history.c:160
+msgid "%b %e, %Y"
+msgstr ""
+
+#: src/user-history.c:243
+msgid "Session Ended"
+msgstr ""
+
+#: src/user-history.c:250
+msgid "Session Started"
+msgstr ""
+
+#: src/user-history.c:301
+#, c-format
+msgid "%s — Account Activity"
+msgstr ""
+
+#~ msgid "Inconsistent password"
+#~ msgstr "Inkonsistentes Passwort"
+
+#~ msgid "Add a password"
+#~ msgstr "Fügen Sie ein Passwort hinzu"
+
+#~ msgid "Cancel"
+#~ msgstr "Abbruch"
+
+#~ msgid "This will be used to name your home folder and can't be changed."
+#~ msgstr ""
+#~ "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
+#~ "geändert werden"
+
+#~ msgid "Two inconsistencies in cipher input"
+#~ msgstr "Zwei Inkonsistenzen bei der Chiffre-Eingabe"
 
 #~ msgid "Unknown"
 #~ msgstr "Unbekannt"

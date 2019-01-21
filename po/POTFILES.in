@@ -8,3 +8,4 @@ src/user-list.c
 src/user-share.c
 src/user-group.c
 src/user-crop.c
+src/user-history.c

@@ -20,6 +20,7 @@
 #include "user-share.h"
 #include "user-info.h"
 #include "user-group.h"
+#include "user-history.h"
 
 /******************************************************************************
 * Function:            SwitchState 
@@ -244,6 +245,11 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ButtonTime = gtk_button_new_with_label (GetLoginTimeText(user->ActUser));
     ua->ButtonUserTime = ButtonTime;
     gtk_grid_attach(GTK_GRID(table) , ButtonTime, 1 , 4 , 2 , 1);
+    g_signal_connect (ButtonTime, 
+                     "clicked",
+                      G_CALLBACK (ViewLoginHistory),
+                      ua);
+
     /*Group Manage*/
     LabelGroup = gtk_label_new(NULL);
     SetLableFontType(LabelGroup,"gray",11,_("Group Manage"));

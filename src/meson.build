@@ -11,6 +11,7 @@ sources = [
 'user-share.c',
 'user-crop.c',
 'user-group.c',
+'user-history.c',
 ]
 
 account_src = gnome.gdbus_codegen(

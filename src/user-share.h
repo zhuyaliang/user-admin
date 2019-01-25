@@ -25,6 +25,7 @@
 #define WARING     2
 #define INFOR      3
 #define QUESTION   4
+#define QUESTIONNORMAL   5
 
 int Change;
 GHashTable  *CreateGroupsHashTable (void);

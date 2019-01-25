@@ -250,7 +250,8 @@ static void clearconfigdata(GroupsManage *gm)
         g_slist_free(gm->NewGroupUsers);
         gm->NewGroupUsers = NULL;
     }    
-}    
+}   
+
 static void CreateNewGroup(GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
@@ -285,11 +286,12 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
     group = GroupInit(gas);
     gm->GroupsList = g_slist_append(gm->GroupsList,g_object_ref(group));
     MessageReport(_("Create User Group"),
-                  _("Create User Group Successfully"),
+                  _("Create User Group Successfully,Please view the end of the switch-groups list."),
                    INFOR);
     clearconfigdata(gm);
     addswitchlistdata (gm->SwitchStore,group,gm->username);
     addremovelistdata (gm->RemoveStore,group);
+    gtk_notebook_prev_page(GTK_NOTEBOOK(gm->NoteBook));
 }   
 
 static guint GetRemoveListGid(GtkWidget *widget)
@@ -360,16 +362,11 @@ static void RemoveGroup(GtkWidget *widget, gpointer data)
     {
         ret = MessageReport(_("Remove Group"),
                             _("Whether to remove the selected group"),
-                             QUESTION);
+                             QUESTIONNORMAL);
         if(ret == GTK_RESPONSE_NO)
         {
             return;
         }		
-        else if(ret == GTK_RESPONSE_DELETE_EVENT ||
-                ret == GTK_RESPONSE_ACCEPT)
-        {
-            CloseGroupWindow(NULL,gm);
-        }
         GroupManager = gas_group_manager_get_default ();
         if(!gas_group_manager_delete_group(GroupManager,
                                            group->gas,
@@ -439,7 +436,7 @@ static void UserSelectGroup (GtkCellRendererToggle *cell,
     GtkTreePath  *path;
     gboolean      fixed;
     uint          gid;  
-    UserGroup     *group; 
+    UserGroup    *group; 
 
     model = gtk_tree_view_get_model (treeview);
     path  = gtk_tree_path_new_from_string (path_str);
@@ -1042,7 +1039,8 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
     NoteBook = gtk_notebook_new();
     gtk_container_add(GTK_CONTAINER(gm->GroupsWindow), NoteBook);
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK (NoteBook), GTK_POS_TOP);
-
+    
+    gm->NoteBook = NoteBook;
     SwitchNoteName = gtk_label_new(_("Switch Groups"));
     gm->SwitchBox = LoadSwitchGroup(gm);
     gtk_notebook_append_page(GTK_NOTEBOOK (NoteBook),gm->SwitchBox,SwitchNoteName);
@@ -1054,7 +1052,7 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
     RemoveNoteName = gtk_label_new(_("Remove Groups"));
     gm->RemoveBox = LoadRemoveGroup(gm);
     gtk_notebook_append_page(GTK_NOTEBOOK (NoteBook),gm->RemoveBox,RemoveNoteName);
-
+    
     gtk_widget_show_all(gm->GroupsWindow);
 }    
 /******************************************************************************

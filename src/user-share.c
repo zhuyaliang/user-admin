@@ -115,6 +115,15 @@ int MessageReport(const char *Title,const char *Msg,int nType)
                                    GTK_RESPONSE_ACCEPT);
             break;
         }
+        case QUESTIONNORMAL:
+        {
+            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+                                            GTK_DIALOG_DESTROY_WITH_PARENT,
+                                            GTK_MESSAGE_QUESTION,
+                                            GTK_BUTTONS_YES_NO,
+                                            "%s",Title);
+            break;
+        }    
         default :
             break;
 

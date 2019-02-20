@@ -666,7 +666,6 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *EntryName;
     GtkWidget *table;
     GtkWidget *fixed;
-    GtkWidget *ButtonFace;
     GError    *error = NULL;
     UserInfo  *user;
      
@@ -686,11 +685,10 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);
 
-    ButtonFace = gtk_button_new();
-    gtk_button_set_image(GTK_BUTTON(ButtonFace),image);
-    ua->ButtonFace = ButtonFace;
-    gtk_grid_attach(GTK_GRID(table) , ButtonFace , 0 , 0 , 8 , 8);
-    g_signal_connect(G_OBJECT(ButtonFace), 
+    ua->ButtonFace = gtk_button_new();
+    gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),image);
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonFace , 0 , 0 , 8 , 8);
+    g_signal_connect(G_OBJECT(ua->ButtonFace), 
                     "clicked",
                      G_CALLBACK(GetFaceList),
                      ua);

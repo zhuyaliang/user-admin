@@ -252,13 +252,11 @@ static UserInfo *UserAdded(ActUser *ActUser)
 int GetUserInfo(UserAdmin *ua)
 {
     GSList *list, *l;
-    ActUserManager *Manager;
     int UserCnt = 0;
     UserInfo *user;
     
     /* get all user list */
-    Manager = act_user_manager_get_default ();
-    list = act_user_manager_list_users (Manager);
+    list = act_user_manager_list_users (ua->um);
     /*user number*/
     UserCnt = g_slist_length (list);     
     if(UserCnt <= 0)

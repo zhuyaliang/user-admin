@@ -228,8 +228,6 @@ static void QuitApp(GtkWidget *widget, gpointer data)
 ******************************************************************************/
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 {
-    GtkWidget *ButtonRemove;
-    GtkWidget *ButtonAdd;
     GtkWidget *ButtonClose;
     GtkWidget *LableSpace;
     GtkWidget *table;
@@ -239,18 +237,18 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 
     LableSpace = gtk_label_new(NULL);
     gtk_grid_attach(GTK_GRID(table) , LableSpace , 0 , 0 , 4 , 1);
-    ButtonAdd    =  gtk_button_new_with_label(_("Add User"));
-    ButtonRemove =  gtk_button_new_with_label(_("Remove User"));
-    ButtonClose  =  gtk_button_new_with_label(_("Close"));
+    ua->ButtonAdd    =  gtk_button_new_with_label(_("Add User"));
+    ua->ButtonRemove =  gtk_button_new_with_label(_("Remove User"));
+    ButtonClose      =  gtk_button_new_with_label(_("Close"));
 
-    gtk_grid_attach(GTK_GRID(table) , ButtonRemove , 0 , 1 , 1 , 1);
-    gtk_grid_attach(GTK_GRID(table) , ButtonAdd ,    1 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonRemove , 0 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonAdd ,    1 , 1 , 1 , 1);
     gtk_grid_attach(GTK_GRID(table) , ButtonClose ,  4 , 1 , 1 , 1);
-    g_signal_connect (ButtonRemove, 
+    g_signal_connect (ua->ButtonRemove, 
                      "clicked",
                       G_CALLBACK (RemoveUser),
                       ua);
-    g_signal_connect (ButtonAdd, 
+    g_signal_connect (ua->ButtonAdd, 
                      "clicked",
                       G_CALLBACK (AddNewUser),
                       ua);

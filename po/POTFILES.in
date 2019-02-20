@@ -1,3 +1,4 @@
+data/org.mate.user.admin.policy.in
 src/main.c	     
 src/user-base.c  
 src/user-info.c  

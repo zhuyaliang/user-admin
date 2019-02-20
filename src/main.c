@@ -22,7 +22,8 @@
 #include "user-face.h"
 #include "user-list.h"
 
-#define  LOCKFILE    "/tmp/user-admin.pid"
+#define  LOCKFILE              "/tmp/user-admin.pid"
+#define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
 static gboolean on_window_quit (GtkWidget *widget, 
                                 GdkEvent  *event, 
@@ -51,18 +52,75 @@ static GdkPixbuf * GetAppIcon(void)
     
     return Pixbuf;
 }    
+static void UpdatePermission(UserAdmin *ua)
+{
+    gboolean is_authorized;
+    gboolean self_selected;
+    UserInfo *user;
+
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    if (!user) 
+    {
+        return;
+    }
+
+    is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
+    self_selected = act_user_get_uid (user->ActUser) == geteuid ();
+    
+    gtk_widget_set_sensitive(ua->ButtonAdd,      is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonRemove,   is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonFace,     is_authorized);
+    gtk_widget_set_sensitive(ua->EntryName,      is_authorized);
+    gtk_widget_set_sensitive(ua->ComUserType,    is_authorized);
+    gtk_widget_set_sensitive(ua->ComUserLanguage,is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonPass,     is_authorized);
+    gtk_widget_set_sensitive(ua->SwitchAutoLogin,is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
+    if (is_authorized == 0 && self_selected == 1)
+    {
+        gtk_widget_set_sensitive(ua->ButtonFace,     self_selected);
+        gtk_widget_set_sensitive(ua->EntryName,      self_selected);
+        gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
+        gtk_widget_set_sensitive(ua->ButtonPass,     self_selected);
+        
+    }    
+
+}    
+static void on_permission_changed (GPermission *permission,
+                                   GParamSpec  *pspec,
+                                   gpointer     data)
+{
+    UserAdmin *ua = (UserAdmin *)data;
+    UpdatePermission(ua);
+}    
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
     GdkPixbuf *AppIcon;
+    GtkWidget *header;
+    GError    *error = NULL;
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Window), _("Mate User Manage"));
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
+    header = gtk_header_bar_new ();
+    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manage"));
     g_signal_connect(G_OBJECT(Window), 
                     "delete-event",
                      G_CALLBACK(on_window_quit),
+                     ua);
+    
+    ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
+    ua->ButtonLock = gtk_lock_button_new(ua->Permission);
+    gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), ua->ButtonLock);
+    gtk_window_set_titlebar (GTK_WINDOW (Window), header);
+    gtk_widget_grab_focus(ua->ButtonLock);    
+    g_signal_connect(ua->Permission, 
+                    "notify",
+                     G_CALLBACK (on_permission_changed), 
                      ua);
     
     AppIcon = GetAppIcon();
@@ -207,11 +265,50 @@ static void GetLocaleLang (void)
         g_hash_table_insert(LocaleHash,lang,all_languages[i]);
         LangList = g_slist_insert_sorted(LangList, lang,LangSort);
     }
-}        
-int main(int argc, char **argv)
+}       
+static void users_loaded(ActUserManager  *manager,
+                         GParamSpec      *pspec, 
+                         UserAdmin       *ua)
 {
     GtkWidget *fixed;
     GtkWidget *Vbox;
+   
+    ua->um = manager;
+    ua->UserCount = GetUserInfo(ua);
+    if(ua->UserCount < 0)
+    {
+        exit(0);
+    }	
+    
+    fixed = gtk_fixed_new();
+    gtk_container_add(GTK_CONTAINER(ua->MainWindow), fixed); 
+  
+    Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
+    gtk_fixed_put(GTK_FIXED(fixed),Vbox, 0, 0);
+   
+    CreateInterface(Vbox,ua);
+    UpdatePermission(ua);
+    gtk_widget_show_all(ua->MainWindow);
+
+}    
+static void SetupUsersList(UserAdmin *ua)
+{
+    gboolean   loaded;
+    ActUserManager *manager;
+    manager = act_user_manager_get_default ();
+   
+    g_object_get (manager, "is-loaded", &loaded, NULL);
+    if (loaded)
+        users_loaded (manager,NULL,ua);
+    else
+        g_signal_connect(manager, 
+                        "notify::is-loaded", 
+                         G_CALLBACK (users_loaded), 
+                         ua);
+
+}    
+int main(int argc, char **argv)
+{
     UserAdmin ua;
 
     bindtextdomain (PACKAGE, LOCALEDIR);   
@@ -229,22 +326,8 @@ int main(int argc, char **argv)
     WindowLogin = ua.MainWindow;
     /* Get local support language */ 
     GetLocaleLang();
-    /* Get local user info */
-    ua.UserCount = GetUserInfo(&ua);
-    if(ua.UserCount < 0)
-    {
-        exit(0);
-    }			
-    fixed = gtk_fixed_new();
-    gtk_container_add(GTK_CONTAINER(ua.MainWindow), fixed); 
-    
-    Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
-    gtk_fixed_put(GTK_FIXED(fixed),Vbox, 0, 0);
-   
-    /* Create an interface */ 
-    CreateInterface(Vbox,&ua);
 
-    gtk_widget_show_all(ua.MainWindow);
+    SetupUsersList(&ua);
     gtk_main();
 
 }

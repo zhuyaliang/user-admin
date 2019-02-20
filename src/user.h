@@ -35,6 +35,7 @@
 #include <accountsservice-1.0/act/act-user.h>
 #include <libintl.h>   
 #include <locale.h>   
+#include <polkit/polkit.h>
 #define  DEFAULT    "/usr/share/mate-user-admin/face/Default.png"
 #define  NUMMAX    20
 #define  PICMAX    20    
@@ -110,6 +111,9 @@ typedef struct
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PasswordDialog;
+    ActUserManager   *um;
+	GtkWidget        *ButtonLock;
+    GPermission      *Permission;
     GtkTreeModel     *Model;
     GtkTreeSelection *UserSelect;
     GtkWidget        *UserList;
@@ -131,6 +135,8 @@ typedef struct
     GtkWidget        *RadioButton1;
     GtkWidget        *RadioButton2;
     GtkWidget        *CropArea;
+    GtkWidget        *ButtonRemove;
+    GtkWidget        *ButtonAdd;
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer
     int               UserCount;             //Valid user number

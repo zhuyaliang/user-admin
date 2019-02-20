@@ -18,7 +18,6 @@
 #include <pwd.h>
 #include <sys/types.h>
 #include <grp.h>
-#include <polkit/polkit.h>
 
 #define  USER_GROUP_PERMISSION  "org.group.admin.group-administration"
 enum

@@ -245,13 +245,18 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
-    int index;
-    int passtype;
+    int        index;
+    int        passtype;
+    gboolean   is_authorized;
+    gboolean   self_selected;
     
     /*Some options change when switching users, 
       causing a signal response, requiring flags, 
       and ignoring signal processing when Chang = 1*/
     Change = 1;           
+
+    is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
+    self_selected = act_user_get_uid (ActUser) == geteuid ();
 
     pb = gdk_pixbuf_new_from_file(GetUserIcon(ActUser),NULL);
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
@@ -277,6 +282,21 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
                           GetLoginTimeText(ActUser));
+
+    if(self_selected == 0)
+    {
+        gtk_widget_set_sensitive(ua->ButtonFace,is_authorized);
+        gtk_widget_set_sensitive(ua->EntryName, is_authorized);
+        gtk_widget_set_sensitive(ua->ButtonPass,is_authorized);
+        gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
+    }  
+    else if(is_authorized == 0 && self_selected == 1)
+    {
+        gtk_widget_set_sensitive(ua->ButtonFace,self_selected);
+        gtk_widget_set_sensitive(ua->EntryName, self_selected);
+        gtk_widget_set_sensitive(ua->ButtonPass,self_selected);
+        gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
+    }    
     Change = 0;
 
 } 

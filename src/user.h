@@ -36,6 +36,8 @@
 #include <libintl.h>   
 #include <locale.h>   
 #include <polkit/polkit.h>
+#include "user-language.h"
+
 #define  DEFAULT    "/usr/share/mate-user-admin/face/Default.png"
 #define  NUMMAX    20
 #define  PICMAX    20    
@@ -107,6 +109,7 @@ typedef struct
 {
     GSList           *UsersList;
     GroupsManage      gm;
+    LanguageChooser  *language_chooser;
     CreateUser        newuser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
@@ -121,7 +124,7 @@ typedef struct
     GtkWidget        *ButtonFace;
     GtkWidget        *EntryName;
     GtkWidget        *ComUserType;
-    GtkWidget        *ComUserLanguage;
+    GtkWidget        *ButtonLanguage;
     GtkWidget        *ButtonPass;
     GtkWidget        *SwitchAutoLogin;
     GtkWidget        *ButtonUserTime;

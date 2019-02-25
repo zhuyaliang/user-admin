@@ -823,7 +823,7 @@ static void CreateManageWindow(GroupsManage *gm)
     gchar       *title;
     GError      *error = NULL;
 
-    title = g_strdup_printf(_("Current user %s"),gm->username);
+    title = g_strdup_printf(_("Current user -- %s"),gm->username);
     
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);

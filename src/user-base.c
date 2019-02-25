@@ -21,6 +21,77 @@
 #include "user-info.h"
 #include "user-group.h"
 #include "user-history.h"
+#include "user-language.h"
+
+static void chooser_language_cancel(GtkWidget *widget, 
+                                    UserAdmin *ua)
+{
+    gtk_widget_hide_on_delete(GTK_WIDGET(ua->language_chooser));
+}
+
+static void chooser_language_done (GtkWidget *widget,
+                                   UserAdmin *ua)
+{
+    UserInfo  *user;
+    const gchar *lang, *account_language;
+    gchar *name = NULL;
+
+
+    user = GetIndexUser(ua->UsersList,0);
+    account_language = act_user_get_language (user->ActUser);
+
+    lang = language_chooser_get_language (LANGUAGE_CHOOSER (ua->language_chooser));
+    if (lang) 
+    {
+        if (g_strcmp0 (lang, account_language) != 0) 
+        {
+            act_user_set_language (user->ActUser, lang);
+        }
+
+        name = mate_get_language_from_locale (lang, NULL);
+        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
+                             name);
+
+        g_free (name);
+     }
+
+    gtk_widget_hide (GTK_WIDGET (ua->language_chooser));
+
+}    
+static void
+change_language (GtkButton   *button,
+                 UserAdmin   *self)
+{
+    const gchar *current_language;
+    UserInfo    *user;
+    const gchar *current_name;
+
+    user = GetIndexUser(self->UsersList,gnCurrentUserIndex);
+    current_language = GetUserLang(user->ActUser);
+    current_name =  GetRealName(user->ActUser);
+
+    if (self->language_chooser != NULL)
+    {
+        language_chooser_clear_filter (self->language_chooser);
+        language_chooser_set_language (self->language_chooser, NULL);
+    }   
+    else
+    {    
+        self->language_chooser = language_chooser_new (current_name);
+        g_signal_connect (self->language_chooser->done_button, 
+                         "clicked",
+                          G_CALLBACK (chooser_language_done), 
+                          self);
+
+        g_signal_connect (self->language_chooser->cancel_button, 
+                         "clicked",
+                          G_CALLBACK (chooser_language_cancel), 
+                          self);
+    }
+    if (current_language && *current_language != '\0')
+        language_chooser_set_language (self->language_chooser, current_language);
+    gtk_widget_show_all(GTK_WIDGET(self->language_chooser));
+}
 
 /******************************************************************************
 * Function:            SwitchState 
@@ -81,39 +152,6 @@ static void ChangePass(GtkWidget *widget,gpointer data)
     CreateNewPass(ua);      //There is no password for the user
 }
 /******************************************************************************
-* Function:              ComboSelectLanguage 
-*        
-* Explain: Switch language signal
-*        
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-static void ComboSelectLanguage(GtkWidget *widget,gpointer data)
-{
-    UserAdmin    *ua = (UserAdmin *)data;
-    char         *text;
-    GtkTreeIter   iter; 
-    GtkTreeModel *model;
-    UserInfo     *user;
-    char         *LangName;
-
-    if(Change == 0) 
-    {       
-        if( gtk_combo_box_get_active_iter(GTK_COMBO_BOX(widget), &iter ) )
-        {
-            model = gtk_combo_box_get_model(GTK_COMBO_BOX(widget));
-            gtk_tree_model_get( model, &iter, 0, &text, -1 );
-        }
-        user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-        LangName = g_hash_table_lookup(LocaleHash,text);
-        act_user_set_language(user->ActUser,LangName);
-        g_free(text);
-    }     
-}
-/******************************************************************************
 * Function:             ComboSelectUserType 
 *        
 * Explain: Select user type signal
@@ -161,14 +199,14 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *LabelLanguage;
     GtkWidget *SwitchLogin;
     GtkWidget *LabelPass;
-    GtkWidget *ComboLanguage;
     GtkWidget *LabelTime;
     GtkWidget *ButtonTime;
     GtkWidget *ComboUser;
     GtkWidget *LabelGroup;
     GtkWidget *ButtonGroup;
     UserInfo  *user;
-    int        index;
+    char      *lang;
+    char      *lang_id;
 
     user = GetIndexUser(ua->UsersList,0);
     fixed = gtk_fixed_new();
@@ -192,21 +230,25 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
                      G_CALLBACK(ComboSelectUserType),
                      ua);
 
-   /*select langusge*/ 
+   /*select language*/ 
     LabelLanguage = gtk_label_new(NULL);
     SetLableFontType(LabelLanguage,"gray",11,_("Language"));
     gtk_grid_attach(GTK_GRID(table) , LabelLanguage , 0 , 1 , 1 , 1);
-
-    ComboLanguage = SetComboLanguageType();
-    ua->ComUserLanguage = ComboLanguage;
-    index = GetCurrentLangIndex(GetUserLang(user->ActUser));
-    gtk_combo_box_set_active(GTK_COMBO_BOX(ComboLanguage),index);
-    gtk_grid_attach(GTK_GRID(table) , ComboLanguage , 1 , 1 , 2 , 1);
-    g_signal_connect(G_OBJECT(ComboLanguage),
-                    "changed",
-                     G_CALLBACK(ComboSelectLanguage),
-                     ua);
-    
+    lang_id = GetUserLang(user->ActUser);
+    if(lang_id == NULL)
+    {
+        ua->ButtonLanguage = gtk_button_new_with_label(_("No Settings"));
+    }    
+    else
+    {
+        lang = mate_get_language_from_locale (lang_id, NULL);
+        ua->ButtonLanguage = gtk_button_new_with_label(lang);
+    }
+    g_signal_connect (ua->ButtonLanguage, 
+                     "clicked",
+                      G_CALLBACK (change_language),
+                      ua);
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonLanguage , 1 , 1 , 2 , 1);
     /*set password*/
     LabelPass = gtk_label_new(NULL);
     SetLableFontType(LabelPass,"gray",11,_("Password"));

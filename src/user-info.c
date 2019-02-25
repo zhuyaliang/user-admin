@@ -153,6 +153,8 @@ const char *GetUserLang(ActUser *user)
     const gchar *Lang = NULL;
 
     Lang = act_user_get_language(user);
+    if(strlen(Lang) <= 0)
+        return NULL;
     return Lang;
 }
 gint GetUserType(ActUser *user)

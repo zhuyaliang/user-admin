@@ -92,6 +92,8 @@ pwquality_deps = dependency('pwquality')
 act_deps = dependency('accountsservice')
 gas_deps = dependency('group-service')
 md_deps = dependency('mate-desktop-2.0')
+fc_deps = dependency('fontconfig')
+
 polkit_deps = dependency('polkit-gobject-1')
 crypt_deps = cc.find_library('crypt', required: true)
 

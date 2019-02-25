@@ -72,7 +72,7 @@ static void UpdatePermission(UserAdmin *ua)
     gtk_widget_set_sensitive(ua->ButtonFace,     is_authorized);
     gtk_widget_set_sensitive(ua->EntryName,      is_authorized);
     gtk_widget_set_sensitive(ua->ComUserType,    is_authorized);
-    gtk_widget_set_sensitive(ua->ComUserLanguage,is_authorized);
+    gtk_widget_set_sensitive(ua->ButtonLanguage, is_authorized);
     gtk_widget_set_sensitive(ua->ButtonPass,     is_authorized);
     gtk_widget_set_sensitive(ua->SwitchAutoLogin,is_authorized);
     gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
@@ -128,7 +128,8 @@ static void InitMainWindow(UserAdmin *ua)
     {
         gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
         g_object_unref(AppIcon);
-    }    
+    }   
+    ua->language_chooser = NULL;
     ua->MainWindow = Window;
 }
 

@@ -884,6 +884,8 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
  
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_size_request (vbox1, -1,200);
+    gtk_widget_set_hexpand(vbox1,TRUE); 
+    gtk_widget_set_vexpand(vbox1,TRUE); 
     
     table = GetGridWidget();
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
@@ -931,6 +933,8 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     vbox  = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_size_request (vbox1, -1,130);
+    gtk_widget_set_hexpand(vbox1,TRUE); 
+    gtk_widget_set_vexpand(vbox1,TRUE); 
 
     table = GetGridWidget();
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
@@ -992,7 +996,8 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
  
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_size_request (vbox1, -1,200);
-    
+    gtk_widget_set_hexpand(vbox1,TRUE); 
+    gtk_widget_set_vexpand(vbox1,TRUE); 
     table = GetGridWidget();
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
     Scrolled = GetScrolledWidget(); 

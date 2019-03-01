@@ -49,7 +49,7 @@ void RefreshUserList(GtkWidget *UserList,GSList *List)
         UserListAppend(UserList,
                        GetUserIcon(user->ActUser),                     
                        GetRealName(user->ActUser),
-                       "black",
+                       GetUserName(user->ActUser),
                        i,
                        &user->Iter);
         i++;
@@ -97,11 +97,9 @@ static void  on_changed(GtkWidget *widget,  gpointer data)
 static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
 {   
     store = gtk_list_store_new(N_COLUMNS,
-                               GDK_TYPE_PIXBUF,
-                               G_TYPE_INT,
-                               G_TYPE_STRING,
-                               G_TYPE_STRING,
-                               G_TYPE_INT);
+                               GDK_TYPE_PIXBUF, //face
+                               G_TYPE_INT,      //user num
+                               G_TYPE_STRING);  //user name and login name
     ua->ListSTore = store;
     return GTK_TREE_MODEL(store);
 }
@@ -120,7 +118,7 @@ static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
 ******************************************************************************/
 static void ListViewInit(GtkWidget *list)
 {
-    GtkCellRenderer *renderer_icon,*renderer_text;
+    GtkCellRenderer   *renderer_icon,*renderer_text;
     GtkTreeViewColumn *column;
     column=gtk_tree_view_column_new ();
 
@@ -139,18 +137,8 @@ static void ListViewInit(GtkWidget *list)
     gtk_tree_view_column_pack_start(column,renderer_text,FALSE);
     gtk_tree_view_column_add_attribute(column,
                                        renderer_text,
-                                       "text",
-                                       LIST_TEXT);
-
-    gtk_tree_view_column_add_attribute(column,
-                                       renderer_text,
-                                       "foreground",
-                                       LIST_COLOR);
-
-    gtk_tree_view_column_add_attribute(column,
-                                       renderer_text,
-                                       "weight",
-                                       LIST_FRONT);
+                                       "markup",
+                                       LIST_LABEL);
     gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 }
 

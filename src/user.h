@@ -56,9 +56,7 @@ enum
 {
     COL_USER_FACE= 0,
     INT_COLUMN,
-    LIST_TEXT ,
-    LIST_COLOR,
-    LIST_FRONT,
+    LIST_LABEL ,
     N_COLUMNS
 };
 typedef struct

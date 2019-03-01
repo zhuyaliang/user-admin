@@ -433,7 +433,7 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
         UserListAppend(ua->UserList,
                        DEFAULT,
                        rn,
-                      "black",
+                       un,
                        ua->UserCount,
                       &ua->newuser.NewUserIter);
         user->Iter     = ua->newuser.NewUserIter;

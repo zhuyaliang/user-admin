@@ -67,8 +67,7 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     gtk_list_store_set(ua->ListSTore,&user->Iter,
                        COL_USER_FACE, face,
-                       LIST_COLOR,"black",
-                       LIST_FRONT,1985,-1);
+                       -1);
     act_user_set_icon_file (user->ActUser,BasePath);
 
 }
@@ -630,17 +629,24 @@ static gboolean RealNameValidCheck (const gchar *name)
 ******************************************************************************/
 static void ModifyName (GtkEntry *entry,gpointer  data)
 {
-    UserAdmin *ua = (UserAdmin *) data;
+    UserAdmin   *ua = (UserAdmin *) data;
     const gchar *NewName;
-    UserInfo *user;
-    NewName = gtk_entry_get_text (entry);
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    const gchar *UserName;
+    UserInfo    *user;
+    gchar       *label;
+
+    NewName  = gtk_entry_get_text (entry);
+    user     = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    UserName = GetUserName(user->ActUser);
+
+    label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
+                                      NewName,UserName);
     if(RealNameValidCheck(NewName))
     {        
-        gtk_list_store_set(ua->ListSTore,&user->Iter,
-                           LIST_TEXT, NewName,
-                           LIST_COLOR,"black",
-                           LIST_FRONT,1985,-1);
+        gtk_list_store_set(ua->ListSTore,
+                           &user->Iter,
+                           LIST_LABEL, label,
+                           -1);
         act_user_set_real_name (user->ActUser,NewName);
     }
     else

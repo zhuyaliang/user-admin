@@ -41,8 +41,8 @@ void         SetLableFontType      (GtkWidget   *Lable ,
 
 void         UserListAppend        (GtkWidget   *list,
                                     const gchar *UserIcon,
+                                    const gchar *RealName,
                                     const gchar *UserName,
-                                    const gchar *Color,
                                     int          Index,
                                     GtkTreeIter *iter);
 

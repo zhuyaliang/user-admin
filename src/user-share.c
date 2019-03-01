@@ -177,29 +177,31 @@ void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const cha
 *
 * AUTHOR:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void UserListAppend(GtkWidget *list,
+void UserListAppend(GtkWidget   *list,
                     const gchar *UserIcon,
+                    const gchar *RealName,
                     const gchar *UserName,
-                    const gchar *Color,
-                    int Index,
+                    int          Index,
                     GtkTreeIter *Iter)
 {
     GtkListStore *store;
-    GtkTreeIter iter;
-    GdkPixbuf *face;
+    GtkTreeIter   iter;
+    GdkPixbuf    *face;
+    char         *label;
 
     /*set user icon size 50 * 50 */
     face = SetUserFaceSize (UserIcon, 50);
     store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(list)));
+    label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
+                                      RealName,UserName);
 
     gtk_list_store_append(store, &iter);
     gtk_list_store_set(store, &iter,COL_USER_FACE, face,  //icon 
                                     INT_COLUMN,Index,     //count
-                                    LIST_TEXT, UserName,  //name
-                                    LIST_COLOR,Color,     //text color
-                                    LIST_FRONT,1985,-1);   //text front
+                                    LIST_LABEL,label,     //two name
+                                    -1);   
     *Iter = iter;
-
+    g_free (label);
 }
 /******************************************************************************
 * 函数:              SetUserFaceSize   

@@ -2,6 +2,8 @@
 ![Homepage:](https://github.com/zhuyaliang/images/blob/master/000.png)
 ![Choose Images:](https://github.com/zhuyaliang/images/blob/master/001.png)
 ![Add User:](https://github.com/zhuyaliang/images/blob/master/002.png)
+![choose lang:](https://github.com/zhuyaliang/images/blob/master/008.png)
+![view login:](https://github.com/zhuyaliang/images/blob/master/009.png)
 ![Group set:](https://github.com/zhuyaliang/images/blob/master/006.png)
 ![Group add:](https://github.com/zhuyaliang/images/blob/master/007.png)
 # Explain

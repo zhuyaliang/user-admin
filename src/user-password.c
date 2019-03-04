@@ -217,14 +217,14 @@ void CreateNewPass(UserAdmin *ua)
     gtk_window_set_deletable(GTK_WINDOW (PasswordDialog), FALSE);
     gtk_window_set_default_size (GTK_WINDOW (PasswordDialog), 450, 200);
     dialog_add_button_with_icon_name ( GTK_DIALOG (PasswordDialog), 
-                                                    _("Close"), 
+                                      _("Close"), 
                                       "window-close", 
-                                                     GTK_RESPONSE_CLOSE);
+                                       GTK_RESPONSE_CLOSE);
 
     ua->ButtonConfirm = dialog_add_button_with_icon_name (GTK_DIALOG (PasswordDialog), 
-                                                     _("Confirm"), 
-                                                      "emblem-default", 
-                                                      GTK_RESPONSE_OK);
+                                                         _("Confirm"), 
+                                                         "emblem-default", 
+                                                          GTK_RESPONSE_OK);
     Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (PasswordDialog))),
                         Vbox,

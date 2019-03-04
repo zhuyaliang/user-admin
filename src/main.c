@@ -82,7 +82,6 @@ static void UpdatePermission(UserAdmin *ua)
         gtk_widget_set_sensitive(ua->ButtonFace,     self_selected);
         gtk_widget_set_sensitive(ua->EntryName,      self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
-        gtk_widget_set_sensitive(ua->ButtonPass,     self_selected);
         
     }    
 

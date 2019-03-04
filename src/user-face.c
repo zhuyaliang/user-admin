@@ -518,6 +518,7 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,8);
     gtk_widget_set_size_request(Vbox,300,-1);
     gtk_container_add(GTK_CONTAINER(window),Vbox);
+    gtk_widget_set_tooltip_text(Vbox,_("Clicking on the main window closes the picture selection window"));
 
     Frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(Frame),GTK_SHADOW_IN);
@@ -701,6 +702,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
 
     /*set real name*/
     EntryName = gtk_entry_new();
+    gtk_widget_set_tooltip_text(EntryName,_("Use Enter Key to Save Modifications"));
     gtk_entry_set_max_length(GTK_ENTRY(EntryName),48);
     gtk_entry_set_text(GTK_ENTRY(EntryName),GetRealName(user->ActUser));
     ua->EntryName = EntryName;

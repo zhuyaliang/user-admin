@@ -299,12 +299,14 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
         gtk_widget_set_sensitive(ua->ButtonFace,is_authorized);
         gtk_widget_set_sensitive(ua->EntryName, is_authorized);
         gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
+        gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
     }  
     else if(is_authorized == 0 && self_selected == 1)
     {
         gtk_widget_set_sensitive(ua->ButtonFace,self_selected);
         gtk_widget_set_sensitive(ua->EntryName, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
+    gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
     }    
     Change = 0;
 

@@ -790,8 +790,12 @@ static void AddUnlockTooltip(GroupsManage *gm,gboolean mode)
 {
     if(!mode)
     {
-        gtk_widget_set_tooltip_markup(gm->GroupsWindow,
+        if(GetUseHeader() == 1)
+            gtk_widget_set_tooltip_markup(gm->GroupsWindow,
                                      _("Please click the unlock sign in the upper left corner"));
+        else
+            gtk_widget_set_tooltip_markup(gm->GroupsWindow,
+                                     _("Click the unlock button on the \"swith-group\" page"));
     }    
     else
     {
@@ -804,7 +808,10 @@ static void UpdateState(GroupsManage *gm)
 
     Authorized = g_permission_get_allowed (G_PERMISSION (gm->Permission));
     gtk_widget_set_sensitive(gm->TreeSwitch,Authorized);
+    gtk_widget_set_sensitive(gm->TreeCreate,Authorized);
+    gtk_widget_set_sensitive(gm->EntryGroupName,Authorized);
     gtk_widget_set_sensitive(gm->ButtonConfirm,Authorized);
+    gtk_widget_set_sensitive(gm->TreeRemove,Authorized);
     gtk_widget_set_sensitive(gm->ButtonRemove,Authorized);
     AddUnlockTooltip(gm,Authorized);
 }    
@@ -816,10 +823,22 @@ static void on_permission_changed (GPermission *permission,
     
     UpdateState(gm);
 }    
+static void LoadHeader_bar(GroupsManage *gm,const char *title)
+{
+    GtkWidget   *header;
+    
+    header = gtk_header_bar_new ();
+    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Groups Manage"));
+    gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_subtitle(GTK_HEADER_BAR (header),title);
+
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), gm->ButtonLock);
+    gtk_window_set_titlebar (GTK_WINDOW (gm->GroupsWindow), header);
+}    
 static void CreateManageWindow(GroupsManage *gm)
 {
     GtkWidget   *Window;
-    GtkWidget   *header;
     gchar       *title;
     GError      *error = NULL;
 
@@ -828,23 +847,24 @@ static void CreateManageWindow(GroupsManage *gm)
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
-    header = gtk_header_bar_new ();
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Groups Manage"));
-    gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_subtitle(GTK_HEADER_BAR (header),title);
+    gm->GroupsWindow = Window;
     
     gm->Permission = polkit_permission_new_sync (USER_GROUP_PERMISSION, NULL, NULL, &error);
     gm->ButtonLock = gtk_lock_button_new(gm->Permission);
     gtk_lock_button_set_permission(GTK_LOCK_BUTTON (gm->ButtonLock),gm->Permission);
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), gm->ButtonLock);
-    gtk_window_set_titlebar (GTK_WINDOW (Window), header);
     gtk_widget_grab_focus(gm->ButtonLock);    
     g_signal_connect(gm->Permission, 
                     "notify",
                      G_CALLBACK (on_permission_changed), 
                      gm);
-    gm->GroupsWindow = Window;
+    if(GetUseHeader() == 1)
+    {
+        LoadHeader_bar(gm,title);
+    }    
+    else
+    {
+        gtk_window_set_title(GTK_WINDOW(Window),title);
+    }    
     g_free(title);
 } 
 static GtkWidget *GetGridWidget (void)
@@ -909,7 +929,12 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
     ButtonClose    =  gtk_button_new_with_label(_("Close"));
-    gtk_grid_attach(GTK_GRID(table) , ButtonClose , 1 , 1 , 1 , 1); 
+    gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 1 , 1 , 1); 
+    if(GetUseHeader() == 0)
+    {
+    
+        gtk_grid_attach(GTK_GRID(table) , gm->ButtonLock , 2 , 1 , 1 , 1); 
+    }    
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
@@ -921,6 +946,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
 {
     GtkWidget *vbox;
     GtkWidget *vbox1;
+    GtkWidget *Hbox;
     GtkWidget *Scrolled;
     GtkWidget *treeview;
     GtkWidget *table;
@@ -928,6 +954,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     GtkWidget *TipsLabel;
     GtkWidget *ButtonClose;
     GtkWidget *ButtonConfirm;
+    GtkWidget *ButtonPlace;
     GtkTreeModel     *model;
 
     vbox  = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -963,22 +990,29 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gm->TreeCreate = treeview;
     gm->NewGroupUsers = NULL;
     AddSelectUsersColumns (gm);
-    gtk_grid_attach(GTK_GRID(table) ,vbox1 ,0 ,2,2 ,1);
-
+    gtk_grid_attach(GTK_GRID(table) ,vbox1 ,0,2,2,1);
+    
+    Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5);
+    gtk_grid_attach(GTK_GRID(table) , Hbox, 0,3,2,1);
     ButtonClose    =  gtk_button_new_with_label(_("Close"));
-    gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 3, 1 , 1);
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
                       gm);
-
+    gtk_box_pack_start (GTK_BOX (Hbox), ButtonClose, TRUE, TRUE, 0);
+    
+    ButtonPlace    =  gtk_label_new(NULL);
+    gtk_box_pack_start (GTK_BOX (Hbox), ButtonPlace, TRUE, TRUE, 0);
+    gtk_widget_hide(ButtonPlace);
+    
     ButtonConfirm    =  gtk_button_new_with_label(_("Confirm"));
-    gtk_grid_attach(GTK_GRID(table) , ButtonConfirm , 1 , 3 , 1 , 1);
     g_signal_connect (ButtonConfirm, 
                      "clicked",
                       G_CALLBACK (CreateNewGroup),
                       gm);
+    gtk_box_pack_start (GTK_BOX (Hbox), ButtonConfirm,TRUE, TRUE, 0);
     gm->ButtonConfirm = ButtonConfirm; 
+    
     return vbox;
 }
 static GtkWidget *LoadRemoveGroup(GroupsManage *gm)

@@ -40,6 +40,7 @@ typedef struct LoginHistoryDialog
     GDateTime    *current_week;
 
     ActUser      *Actuser;
+    int           is_header;
 }LoginHistoryDialog;
 typedef struct LoginHistoryDialogClass
 {

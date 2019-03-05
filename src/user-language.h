@@ -40,6 +40,7 @@ typedef struct LanguageChooser
     GtkWidget     *language_entry;
     GtkWidget     *language_listbox;
     gboolean       showing_extra;
+    gboolean       is_header;
     gchar        *language;
     gchar        **filter_words;
 }LanguageChooser;

@@ -63,7 +63,6 @@ static void UpdatePermission(UserAdmin *ua)
     {
         return;
     }
-
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
     self_selected = act_user_get_uid (user->ActUser) == geteuid ();
     
@@ -93,20 +92,28 @@ static void on_permission_changed (GPermission *permission,
 {
     UserAdmin *ua = (UserAdmin *)data;
     UpdatePermission(ua);
+}   
+static void LoadHeader_bar(UserAdmin *ua)
+{
+    GtkWidget *header;
+    
+    header = gtk_header_bar_new ();
+    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
+    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manage"));
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), ua->ButtonLock);
+    gtk_window_set_titlebar (GTK_WINDOW (ua->MainWindow), header);
 }    
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
     GdkPixbuf *AppIcon;
-    GtkWidget *header;
     GError    *error = NULL;
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    ua->MainWindow = Window;
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
+    gtk_window_set_title(GTK_WINDOW(Window),_("Mate User Manage")); 
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
-    header = gtk_header_bar_new ();
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manage"));
     g_signal_connect(G_OBJECT(Window), 
                     "delete-event",
                      G_CALLBACK(on_window_quit),
@@ -115,8 +122,10 @@ static void InitMainWindow(UserAdmin *ua)
     ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
     ua->ButtonLock = gtk_lock_button_new(ua->Permission);
     gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), ua->ButtonLock);
-    gtk_window_set_titlebar (GTK_WINDOW (Window), header);
+    if(GetUseHeader() == 1)
+    {    
+        LoadHeader_bar(ua);
+    }
     gtk_widget_grab_focus(ua->ButtonLock);    
     g_signal_connect(ua->Permission, 
                     "notify",
@@ -130,7 +139,6 @@ static void InitMainWindow(UserAdmin *ua)
         g_object_unref(AppIcon);
     }   
     ua->language_chooser = NULL;
-    ua->MainWindow = Window;
 }
 
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)

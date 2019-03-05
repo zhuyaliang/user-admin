@@ -565,6 +565,18 @@ static void activate_default (GtkWindow       *window,
     gtk_widget_activate (focus);
 }
 
+static void LoadHeader_bar(LanguageChooser *chooser)
+{
+    chooser->header = GetHeaderbar();
+    chooser->cancel_button = gtk_button_new_with_label(_("Cancel"));
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (chooser->header), 
+                               chooser->cancel_button);
+    chooser->done_button = gtk_button_new_with_label(_("Done"));
+    gtk_header_bar_pack_end (GTK_HEADER_BAR (chooser->header),
+                             chooser->done_button);
+
+    gtk_window_set_titlebar (GTK_WINDOW (chooser), chooser->header);
+}    
 void language_chooser_init (LanguageChooser *chooser)
 {
     GtkWidget *vbox;
@@ -572,17 +584,16 @@ void language_chooser_init (LanguageChooser *chooser)
     GtkWidget *Scrolled;
 
     gtk_window_set_default_size (GTK_WINDOW (chooser), 400, 350);
-   
-    chooser->header = GetHeaderbar();
-    chooser->cancel_button = gtk_button_new_with_label(_("Cancel"));
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (chooser->header), 
-                               chooser->cancel_button);
-    chooser->done_button = gtk_button_new_with_label(_("done"));
-    gtk_header_bar_pack_end (GTK_HEADER_BAR (chooser->header),
-                             chooser->done_button);
-
-    gtk_window_set_titlebar (GTK_WINDOW (chooser), chooser->header);
     
+    if(GetUseHeader() == 1)
+    {
+        LoadHeader_bar(chooser); 
+    }   
+    else
+    {    
+        chooser->cancel_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Cancel"),-5);
+        chooser->done_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Done"),-6);
+    }
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0); 
    
     chooser->language_entry = gtk_search_entry_new (); 
@@ -640,14 +651,25 @@ LanguageChooser *language_chooser_new (const gchar *name)
 {   
     LanguageChooser *chooser;
     g_autofree gchar *title = NULL;
-
-    chooser = g_object_new (TYPE_LANGUAGE_CHOOSER,
-                           "use-header-bar", 1,
-                            NULL);
-
+    
     title = g_strdup_printf (_("Current User - %s"),
                              name);
-    gtk_header_bar_set_subtitle (GTK_HEADER_BAR (chooser->header),title);
+    if(GetUseHeader() == 1)
+    {    
+        chooser = g_object_new (TYPE_LANGUAGE_CHOOSER,
+                                "use-header-bar", 1,
+                                NULL);
+        chooser->is_header = 1;
+        gtk_header_bar_set_subtitle (GTK_HEADER_BAR (chooser->header),title);
+    }    
+    else
+    {
+        chooser = g_object_new (TYPE_LANGUAGE_CHOOSER,
+                                "use-header-bar", 0,
+                                NULL);
+        chooser->is_header = 0;
+        gtk_window_set_title(GTK_WINDOW(chooser),title); 
+    }    
 
     return chooser;
 }

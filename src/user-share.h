@@ -28,6 +28,7 @@
 #define QUESTIONNORMAL   5
 
 int Change;
+gboolean     GetUseHeader          (void);
 GHashTable  *CreateGroupsHashTable (void);
 int          GetCurrentLangIndex   (const char  *Lang);
 int          MessageReport         (const char  *Title,

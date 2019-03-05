@@ -128,11 +128,10 @@ static void SetButtonMode(UserAdmin *ua)
         NextSetPass(GTK_RADIO_BUTTON(ua->RadioButton1),ua);
     }    
 }   
-static GtkWidget*
-dialog_add_button_with_icon_name (GtkDialog   *dialog,
-                                  const gchar *button_text,
-                                  const gchar *icon_name,
-                                  gint         response_id)
+GtkWidget* dialog_add_button_with_icon_name (GtkDialog   *dialog,
+                                             const gchar *button_text,
+                                             const gchar *icon_name,
+                                             gint         response_id)
 {
 	GtkWidget *button;
 

@@ -740,6 +740,20 @@ static void SetNewUserPass(GtkWidget *Vbox,CreateUser *newuser)
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 }        
+static void LoadHeader_bar(UserAdmin *ua)
+{
+    GtkWidget *Header;
+    Header = gtk_header_bar_new (); 
+    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (Header), TRUE);
+    gtk_header_bar_set_title (GTK_HEADER_BAR (Header), _("Create New User"));
+
+    ua->newuser.ButtonConfirm = gtk_button_new_with_label (_("Confirm"));
+    gtk_header_bar_pack_end (GTK_HEADER_BAR (Header), ua->newuser.ButtonConfirm);
+    ua->newuser.ButtonCancel = gtk_button_new_with_label ("Cancel");
+    gtk_header_bar_pack_start (GTK_HEADER_BAR (Header), ua->newuser.ButtonCancel);
+    
+    gtk_window_set_titlebar (GTK_WINDOW (ua->newuser.AddUserDialog), Header);
+}    
 /******************************************************************************
 * Function:              AddNewUser 
 *        
@@ -753,7 +767,6 @@ static void SetNewUserPass(GtkWidget *Vbox,CreateUser *newuser)
 ******************************************************************************/
 void AddNewUser(GtkWidget *widget, gpointer data)
 {
-    GtkWidget *Header;
     GtkWidget *Vbox;
     GtkWidget *Vbox1;
     GtkWidget *Vbox2;
@@ -765,25 +778,30 @@ void AddNewUser(GtkWidget *widget, gpointer data)
                                         GTK_DIALOG_MODAL| GTK_DIALOG_DESTROY_WITH_PARENT,
                                         NULL,
                                         NULL);
-    gtk_dialog_get_header_bar(GTK_DIALOG(ua->newuser.AddUserDialog));
+    if(GetUseHeader() == 1)
+    {
+        LoadHeader_bar(ua); 
+    }
+    else
+    {
+        ua->newuser.ButtonConfirm = gtk_dialog_add_button(GTK_DIALOG(ua->newuser.AddUserDialog),
+                                                         _("Confirm"),
+                                                         GTK_RESPONSE_NONE);    
+        ua->newuser.ButtonCancel  = gtk_dialog_add_button(GTK_DIALOG(ua->newuser.AddUserDialog),
+                                                         _("Cancel"),
+                                                         GTK_RESPONSE_NONE);
+        gtk_window_set_title(GTK_WINDOW(ua->newuser.AddUserDialog),_("Create New User"));
+    }    
     gtk_window_set_deletable(GTK_WINDOW (ua->newuser.AddUserDialog), FALSE);
     gtk_window_set_default_size (GTK_WINDOW (ua->newuser.AddUserDialog), 500, 450);
     gtk_container_set_border_width(GTK_CONTAINER(ua->newuser.AddUserDialog),20);
    
-    Header = gtk_header_bar_new (); 
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (Header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (Header), _("Create New User"));
 
-    ua->newuser.ButtonConfirm = gtk_button_new_with_label (_("Confirm"));
-    gtk_header_bar_pack_end (GTK_HEADER_BAR (Header), ua->newuser.ButtonConfirm);
+    gtk_widget_set_sensitive(ua->newuser.ButtonConfirm,FALSE); 
     g_signal_connect (ua->newuser.ButtonConfirm,
                      "clicked",
                       G_CALLBACK(CreateNewUser),
                       ua);
-    gtk_widget_set_sensitive(ua->newuser.ButtonConfirm,FALSE); 
-    ua->newuser.ButtonCancel = gtk_button_new_with_label ("Cancel");
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (Header), ua->newuser.ButtonCancel);
-    gtk_window_set_titlebar (GTK_WINDOW (ua->newuser.AddUserDialog), Header);
     g_signal_connect (ua->newuser.ButtonCancel, 
                      "clicked",
                       G_CALLBACK (CloseWindow),

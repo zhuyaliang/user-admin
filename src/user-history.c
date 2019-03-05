@@ -22,6 +22,7 @@
 #include "user-history.h"
 #include "user-share.h"
 #include "user-info.h"
+#include "user-password.h"
 
 G_DEFINE_TYPE (LoginHistoryDialog, login_history_dialog, GTK_TYPE_DIALOG)
 
@@ -64,8 +65,10 @@ static void show_week_label (LoginHistoryDialog *self)
 
         label = g_strdup_printf(("%s — %s"), from, to);
     }
-
-    gtk_header_bar_set_subtitle (self->header_bar, label);
+    if(self->is_header == 1)
+        gtk_header_bar_set_subtitle (self->header_bar, label);
+    else
+        gtk_window_set_title(GTK_WINDOW(self),label);
 }
 static void clear_history (LoginHistoryDialog *self)
 {
@@ -283,10 +286,25 @@ static LoginHistoryDialog *login_history_dialog_new (ActUser *user)
     g_autofree gchar *title = NULL;
 
     g_return_val_if_fail (ACT_IS_USER (user), NULL);
-
-    self = g_object_new (TYPE_LOGIN_HISTORY,
-                        "use-header-bar", 1,
-                         NULL);
+    
+    title = g_strdup_printf (_("%s — Account Activity"),
+                              act_user_get_real_name (user));
+    if(GetUseHeader() == 1)
+    {
+        self = g_object_new (TYPE_LOGIN_HISTORY,
+                            "use-header-bar", 1,
+                             NULL);
+        gtk_header_bar_set_title (self->header_bar, title);
+        self->is_header = 1;
+    }  
+    else
+    {
+        self = g_object_new (TYPE_LOGIN_HISTORY,
+                            "use-header-bar", 0,
+                             NULL);
+        self->is_header = 0;
+        gtk_window_set_title(GTK_WINDOW(self),title);
+    }    
 
     self->Actuser = g_object_ref (user);
 
@@ -298,9 +316,6 @@ static LoginHistoryDialog *login_history_dialog_new (ActUser *user)
     self->week = g_date_time_add_days (temp, 1 - g_date_time_get_day_of_week (temp));
     self->current_week = g_date_time_ref (self->week);
 
-    title = g_strdup_printf (_("%s — Account Activity"),
-                              act_user_get_real_name (self->Actuser));
-    gtk_header_bar_set_title (self->header_bar, title);
 
     show_week (self);
 
@@ -324,24 +339,23 @@ static void login_history_dialog_class_init (LoginHistoryDialogClass *class)
     gobject_class->dispose = login_history_dialog_dispose; 
 }
 
-void login_history_dialog_init (LoginHistoryDialog *dialog)
+static void LoadHeader_bar(LoginHistoryDialog *dialog)
 {
-    GtkWidget *button;
-    GtkWidget *box;
-    GtkWidget *Scrolled;
-    GtkWidget *listbox;
     GtkWidget *header;
+    GtkWidget *box;
+    GtkWidget *button;
 
-    gtk_widget_set_size_request (GTK_WIDGET (dialog),580,350);
     header = gtk_header_bar_new ();
     gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
     gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
     dialog->header_bar = GTK_HEADER_BAR(header);
+    gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
+    
 
     box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_style_context_add_class (gtk_widget_get_style_context (box), "linked");
+    
     button = gtk_button_new ();
-
     gtk_container_add (GTK_CONTAINER (button),
                        gtk_image_new_from_icon_name ("go-previous-symbolic",
                        GTK_ICON_SIZE_BUTTON));
@@ -355,7 +369,15 @@ void login_history_dialog_init (LoginHistoryDialog *dialog)
     gtk_container_add (GTK_CONTAINER (box), button);
     dialog->next_button = GTK_BUTTON(button);
     gtk_header_bar_pack_start (GTK_HEADER_BAR (header), box);
-    gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
+
+}    
+void login_history_dialog_init (LoginHistoryDialog *dialog)
+{
+    GtkWidget *Scrolled;
+    GtkWidget *listbox;
+    GtkWidget *button;
+
+    gtk_widget_set_size_request (GTK_WIDGET (dialog),580,350);
     Scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
                                     GTK_POLICY_NEVER,
@@ -368,6 +390,23 @@ void login_history_dialog_init (LoginHistoryDialog *dialog)
     gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
                         Scrolled,
                         TRUE, TRUE, 8);
+    if(GetUseHeader() == 1)
+    {
+        LoadHeader_bar(dialog);
+    }
+    else
+    {
+        button = dialog_add_button_with_icon_name(GTK_DIALOG(dialog),
+                                                 _("previous"),
+                                                 "go-previous-symbolic",
+                                                  GTK_RESPONSE_NONE);    
+        dialog->previous_button = GTK_BUTTON(button); 
+        button     = dialog_add_button_with_icon_name(GTK_DIALOG(dialog),
+                                                     _("next"),
+                                                     "go-next-symbolic",
+                                                      GTK_RESPONSE_NONE);    
+        dialog->next_button = GTK_BUTTON(button);
+    }    
     dialog->history_box = GTK_LIST_BOX(listbox);
 
 }

@@ -27,7 +27,15 @@
 #include "user-share.h"
 #include "user-info.h"
 
+#define  GSM_GSETTINGS_SCHEMA "org.mate.interface"
+gboolean GetUseHeader(void)
+{
+    GSettings *settings;
+    const char *key = "gtk-dialogs-use-header";
 
+    settings = g_settings_new (GSM_GSETTINGS_SCHEMA);
+    return g_settings_get_boolean (settings, key);
+}    
 /******************************************************************************
 * Function:              GetCurrentLangIndex 
 *        

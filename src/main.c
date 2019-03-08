@@ -32,9 +32,6 @@ static gboolean on_window_quit (GtkWidget *widget,
     UserAdmin *ua = (UserAdmin *)user_data;
     
     g_slist_free_full (ua->UsersList,g_object_unref);
-    g_strfreev(all_languages);
-    g_hash_table_destroy(LocaleHash);
-    g_slist_free (LangList);
     gtk_main_quit();
     return TRUE;
 }
@@ -246,35 +243,6 @@ ERROREXIT:
 
 }        
 
-static int LangSort (const void *a,const void *b)
-{
-    gchar *name1, *name2;
-    gint result;
-
-    name1 = g_utf8_collate_key (a, -1);
-    name2 = g_utf8_collate_key (b, -1);
-    result = strcmp (name1, name2);
-    g_free (name1);
-    g_free (name2);
-
-    return result;
-}
-
-static void GetLocaleLang (void)
-{
-    guint i,len;
-    char *lang;
-
-    all_languages = mate_get_all_locales ();
-    LocaleHash = g_hash_table_new(g_str_hash, g_str_equal);
-    len = g_strv_length (all_languages); 
-    for(i = 0; i < len; i++)
-    {        
-        lang = mate_get_language_from_locale (all_languages[i], NULL);    
-        g_hash_table_insert(LocaleHash,lang,all_languages[i]);
-        LangList = g_slist_insert_sorted(LangList, lang,LangSort);
-    }
-}       
 static void users_loaded(ActUserManager  *manager,
                          GParamSpec      *pspec, 
                          UserAdmin       *ua)
@@ -334,7 +302,6 @@ int main(int argc, char **argv)
 
     WindowLogin = ua.MainWindow;
     /* Get local support language */ 
-    GetLocaleLang();
 
     SetupUsersList(&ua);
     gtk_main();

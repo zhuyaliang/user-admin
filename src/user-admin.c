@@ -359,22 +359,19 @@ static int GetNewUserType(GtkWidget *Switch)
                                      ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : 
                                      ACT_USER_ACCOUNT_TYPE_STANDARD;
 }  
-static const gchar *GetNewUserLang(GtkWidget *Combox)
+static const gchar *GetNewUserLang(UserAdmin *ua)
 {
-    char *text;
-    GtkTreeIter   iter;
-    GtkTreeModel *model;
-    const char *LangName;
-
-    if(gtk_combo_box_get_active_iter(GTK_COMBO_BOX(Combox), &iter ))
+    UserInfo *user;
+    char     *Lang_id;
+    
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    Lang_id = act_user_get_language(user->ActUser);
+       
+    if(Lang_id != NULL)
     {
-        model = gtk_combo_box_get_model(GTK_COMBO_BOX(Combox));
-        gtk_tree_model_get( model, &iter, 0, &text, -1 );
-        LangName = g_hash_table_lookup(LocaleHash,text);
-        g_free(text);
-        return LangName;
-    }
-    return NULL;
+        return mate_get_language_from_locale (Lang_id, NULL);
+    }    
+    return mate_get_language_from_locale ("en_US.utf8",NULL);
 }    
 static void CloseWindow(GtkWidget *widget,gpointer data);
 /******************************************************************************
@@ -406,7 +403,8 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
     rn = gtk_entry_get_text(GTK_ENTRY(ua->newuser.RealNameEntry));
     un = gtk_entry_get_text(GTK_ENTRY(ua->newuser.UserNameEntry));
     account_type = GetNewUserType(ua->newuser.NewUserType);
-    NewUserlang  = GetNewUserLang(ua->newuser.NewUserLangType);
+    NewUserlang  = GetNewUserLang(ua);
+
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ua->newuser.RadioButton2)) == TRUE)
     {        
         Password = GetNewUserPassword(ua->newuser.NewPassEntry,ua->newuser.CheckPassEntry);
@@ -458,14 +456,6 @@ static void CloseWindow(GtkWidget *widget,gpointer data)
     newuser->CheckNameTimeId = 0;
     UnlockFlag = 0;
 }       
-static gchar *GetLoginUserLang(ActUser *ActUser)
-{
-    if(getuid() == act_user_get_uid(ActUser))
-    {
-        return act_user_get_language(ActUser);
-    }    
-    return "en_US.utf8";
-}    
 /******************************************************************************
 * Function:             SetNewUserInfo 
 *        
@@ -477,15 +467,12 @@ static gchar *GetLoginUserLang(ActUser *ActUser)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser,UserInfo *user)
+static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser)
 {
     GtkWidget *Table;
     GtkWidget *LabelUserName;
     GtkWidget *LabelRealName;
     GtkWidget *LabelUserType;
-    GtkWidget *LabelLanguageType;
-    const gchar *LoginUserLang;
-    int        index;
     const char *FixedNote = _("This will be used to name your home folder and can't be changed");   
 
     Table = gtk_grid_new();
@@ -521,15 +508,6 @@ static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser,UserInfo *user)
     gtk_combo_box_set_active(GTK_COMBO_BOX(newuser->NewUserType),STANDARD);
    
     gtk_grid_attach(GTK_GRID(Table) ,newuser->NewUserType , 1 , 3 , 3 , 1);        
-    LabelLanguageType = gtk_label_new(NULL);
-    SetLableFontType(LabelLanguageType,"gray",11,_("Language"));
-    gtk_grid_attach(GTK_GRID(Table) ,LabelLanguageType , 0 , 4 , 1 , 1);        
-
-    newuser->NewUserLangType = SetComboLanguageType();
-    LoginUserLang = GetLoginUserLang(user->ActUser);
-    index = GetCurrentLangIndex(LoginUserLang);
-    gtk_combo_box_set_active(GTK_COMBO_BOX(newuser->NewUserLangType), index);
-    gtk_grid_attach(GTK_GRID(Table) ,newuser->NewUserLangType , 1 , 4 , 3 , 1);        
 
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
@@ -575,11 +553,14 @@ static gboolean TimeFun(gpointer data)
     const char  *s;
     int          Level;
     const char  *Message;
+    const char  *tip = _("Hybrid passwords improve security");
 
     s = gtk_entry_get_text(GTK_ENTRY(newuser->NewPassEntry));
     if(strlen(s) == 0)
     {
-        gtk_entry_set_visibility(GTK_ENTRY(newuser->NewPassEntry),FALSE);
+        //gtk_entry_set_visibility(GTK_ENTRY(newuser->NewPassEntry),FALSE);
+        SetLableFontType(newuser->LabelPassNote,"gray",10,tip);
+        return TRUE;
     }
     Level = GetPassStrength (s, NULL,NULL,&Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (newuser->LevelBar), Level);
@@ -590,7 +571,7 @@ static gboolean TimeFun(gpointer data)
                                           GTK_ENTRY_ICON_SECONDARY,
                                           "emblem-ok-symbolic");
         gtk_widget_set_sensitive(newuser->CheckPassEntry, TRUE);
-        gtk_label_set_markup(GTK_LABEL(newuser->LabelPassNote),NULL); 
+        SetLableFontType(newuser->LabelPassNote,"gray",10,tip);
         ComparePassword(newuser);
         return TRUE;
     }
@@ -770,7 +751,6 @@ void AddNewUser(GtkWidget *widget, gpointer data)
     GtkWidget *Vbox;
     GtkWidget *Vbox1;
     GtkWidget *Vbox2;
-    UserInfo  *user;
     UserAdmin *ua = (UserAdmin *)data;
 	
     ua->newuser.AddUserDialog = gtk_dialog_new_with_buttons ("Interactive Dialog",
@@ -821,8 +801,7 @@ void AddNewUser(GtkWidget *widget, gpointer data)
     
     ua->newuser.CheckNameTimeId = 0;
     ua->newuser.CheckPassTimeId = 0;
-    user = GetIndexUser(ua->UsersList,0);
-    SetNewUserInfo(Vbox1,&ua->newuser,user); 
+    SetNewUserInfo(Vbox1,&ua->newuser); 
     SetNewUserPass(Vbox2,&ua->newuser);
     
     gtk_widget_show_all(ua->newuser.AddUserDialog);

@@ -30,7 +30,6 @@
 int Change;
 gboolean     GetUseHeader          (void);
 GHashTable  *CreateGroupsHashTable (void);
-int          GetCurrentLangIndex   (const char  *Lang);
 int          MessageReport         (const char  *Title,
                                     const char  *Msg,
                                     int          nType);
@@ -57,7 +56,6 @@ void        OpenNote               (GtkWidget   *label,
 void        OffNote                (GtkWidget   *label,
                                     UserAdmin   *ua);
 
-GtkWidget  *SetComboLanguageType   (void);
 
 GtkWidget  *SetComboUserType       (const char  *s1,
                                     const char  *s2);

@@ -91,9 +91,9 @@ typedef struct
     GtkWidget        *UserNameEntry;
     GtkWidget        *LabelNameNote;
     GtkWidget        *NewUserType;
-    GtkWidget        *NewUserLangType;
     GtkWidget        *RadioButton1;
     GtkWidget        *RadioButton2;
+
     GtkWidget        *NewPassEntry;
     GtkWidget        *LevelBar;
     GtkWidget        *LabelPassNote;
@@ -148,7 +148,4 @@ typedef struct
 int         gnCnt;                //计数
 int         gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget  *WindowLogin;          //首页窗口
-char      **all_languages;
-GHashTable *LocaleHash;
-GSList     *LangList;
 #endif

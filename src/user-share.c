@@ -37,36 +37,6 @@ gboolean GetUseHeader(void)
     return g_settings_get_boolean (settings, key);
 }    
 /******************************************************************************
-* Function:              GetCurrentLangIndex 
-*        
-* Explain: Get the current user's language
-*        
-* Input:  Zh_CN type       
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-int GetCurrentLangIndex(const char *_Lang)        
-{
-    GSList *l;
-    int i = 0;
-    char *Lang;
-
-    if(strlen(_Lang) <= 0)
-    {
-        return -1;
-    }
-    Lang = mate_get_language_from_locale (_Lang, NULL);
-    for (l = LangList; l; l = l->next,i++)
-    {
-        if (g_ascii_strcasecmp(Lang, l->data) == 0)
-            return i;
-    }
-    return -1; 
-}        
-
-/******************************************************************************
 * Function:            MessageReport
 *        
 * Explain: Prompt information dialog
@@ -384,7 +354,7 @@ static const gchar *pw_error_hint (gint error)
     case PWQ_ERROR_MAX_SEQUENCE:
         return _("Try to avoid sequences like 1234 or abcd");
     case PWQ_ERROR_MIN_LENGTH:
-        return _("Password length needs more than 8 bits. Add more letters, numbers and punctuation");
+        return _("Password length needs more than 8 characters");
     case PWQ_ERROR_EMPTY_PASSWORD:
         return ("     ");
     default:
@@ -596,41 +566,6 @@ void OffNote(GtkWidget *label,UserAdmin *ua)
     gtk_widget_set_sensitive(ua->ButtonConfirm, TRUE);
 }   
 
-/******************************************************************************
-* Function:            SetComboLanguageType 
-*        
-* Explain: Obtaining local support language
-*        
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-GtkWidget *SetComboLanguageType(void)
-{
-    GtkListStore    *Store;
-    GtkTreeIter     Iter;
-    GtkCellRenderer *Renderer;
-    GtkWidget *ComboUser;
-    GSList *l;
-
-    Store = gtk_list_store_new(1,G_TYPE_STRING);
-   
-    for (l = LangList; l; l = l->next)
-    {
-        gtk_list_store_append (Store, &Iter);
-        gtk_list_store_set (Store, &Iter, 0, l->data, -1);
-    } 
-
-    ComboUser = gtk_combo_box_new_with_model(GTK_TREE_MODEL(Store));
-    g_object_unref(G_OBJECT(Store));
-    Renderer = gtk_cell_renderer_text_new();
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(ComboUser),Renderer,TRUE);
-    gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(ComboUser),Renderer,"text",0,NULL);
-
-    return ComboUser;
-}
 /******************************************************************************
 * Function:              SetComboUserType 
 *        

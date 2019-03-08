@@ -198,9 +198,6 @@ static void QuitApp(GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     g_slist_free_full(ua->UsersList,g_object_unref); 
-    g_strfreev(all_languages);
-    g_hash_table_destroy(LocaleHash);
-    g_slist_free (LangList);
     gtk_main_quit();
 }    
 /******************************************************************************

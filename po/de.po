@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 15:34+0800\n"
+"POT-Creation-Date: 2019-03-11 10:31+0800\n"
 "PO-Revision-Date: 2018-09-10 08:59+0200\n"
 "Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
 "Language-Team: German\n"
@@ -26,65 +26,65 @@ msgstr "Benutzeranzahl ist 0"
 msgid "Authentication is required to change user data"
 msgstr ""
 
-#: src/main.c:49
+#: src/main.c:46
 msgid "Get Icon Fail"
 msgstr "Symbolfehler erhalten"
 
-#: src/main.c:109
+#: src/main.c:99 src/main.c:112
 msgid "Mate User Manage"
 msgstr "Mate Benutzer Verwaltung"
 
-#: src/main.c:174 src/main.c:216
+#: src/main.c:179 src/main.c:221
 msgid "open file"
 msgstr "öffne Datei"
 
-#: src/main.c:174
+#: src/main.c:179
 msgid "Create pid file failed"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/main.c:183
+#: src/main.c:188
 msgid "write file"
 msgstr "schreibe Datei"
 
-#: src/main.c:183
+#: src/main.c:188
 msgid "write pid file failed"
 msgstr "Schreiben der pid Datei schlug fehl"
 
-#: src/main.c:216
+#: src/main.c:221
 msgid "open pid file failed"
 msgstr "öffnen von pid Datei schlug fehl"
 
-#: src/main.c:221
+#: src/main.c:226
 msgid "read file"
 msgstr "lese Datei"
 
-#: src/main.c:221
+#: src/main.c:226
 msgid "read pid file failed"
 msgstr "lesen der pid Datei schlug fehl"
 
-#: src/user-base.c:220 src/user-admin.c:517
+#: src/user-base.c:220 src/user-admin.c:503
 msgid "Account Type"
 msgstr "Konto Typ"
 
 #. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:520
+#: src/user-base.c:224 src/user-admin.c:506
 msgid "Standard"
 msgstr "Standard"
 
-#: src/user-base.c:224 src/user-admin.c:520
+#: src/user-base.c:224 src/user-admin.c:506
 msgid "Administrators"
 msgstr "Administratoren"
 
-#: src/user-base.c:235 src/user-admin.c:525 src/user-language.c:137
+#: src/user-base.c:235 src/user-language.c:137
 msgid "Language"
 msgstr "Sprache"
 
-#: src/user-base.c:240 src/user-share.c:278
+#: src/user-base.c:240 src/user-share.c:258
 msgid "No Settings"
 msgstr ""
 
-#: src/user-base.c:254 src/user-password.c:238 src/user-admin.c:675
-#: src/user-admin.c:696
+#: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
+#: src/user-admin.c:676
 msgid "Password"
 msgstr "Passwort"
 
@@ -109,7 +109,7 @@ msgid "Account is disable"
 msgstr "Konto ist deaktiviert"
 
 #. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:243 src/user-admin.c:680
+#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
 msgid "Set up next time"
 msgstr "Beim nächsten Mal einrichten"
 
@@ -122,36 +122,36 @@ msgid "user count is 0"
 msgstr "Benutzeranzahl ist 0"
 
 #. create chnaged passwod dialog
-#: src/user-password.c:211
+#: src/user-password.c:210
 #, fuzzy
 msgid "Set Password"
 msgstr "Benutzer Passwort"
 
-#: src/user-password.c:220 src/user-list.c:242 src/user-group.c:909
-#: src/user-group.c:964 src/user-group.c:1014
+#: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
+#: src/user-group.c:997 src/user-group.c:1053
 #, fuzzy
 msgid "Close"
 msgstr "Beenden"
 
-#: src/user-password.c:225 src/user-password.c:289 src/user-admin.c:721
-#: src/user-admin.c:777 src/user-group.c:971
+#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
+#: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#: src/user-password.c:252
+#: src/user-password.c:251
 msgid "Now set up"
 msgstr "Jetzt einrichten"
 
-#: src/user-password.c:261
+#: src/user-password.c:260
 msgid "User Password"
 msgstr "Benutzer Passwort"
 
-#: src/user-password.c:271 src/user-admin.c:709
+#: src/user-password.c:270 src/user-admin.c:689
 msgid "generation password"
 msgstr "Passwort erzeugen"
 
 #: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
-#: src/user-list.c:241
+#: src/user-list.c:226
 msgid "Remove User"
 msgstr "Benutzer entfernen"
 
@@ -191,70 +191,78 @@ msgstr ""
 "Der Benutzername sollte nur aus Groß- und Kleinbuchstaben, \n"
 "Buchstaben von a-z, Ziffern und die folgenden Zeichen bestehen: . - _"
 
-#: src/user-admin.c:245 src/user-admin.c:489
+#: src/user-admin.c:245 src/user-admin.c:475
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
 "geändert werden"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:319
 msgid "Creating User"
 msgstr "Benutzer erstellen"
 
-#: src/user-admin.c:321
-msgid "Creating a user failed"
-msgstr "Erstellen eines Benutzers fehlgeschlagen"
-
-#: src/user-admin.c:496 src/user-group.c:681
+#: src/user-admin.c:482 src/user-group.c:681
 msgid "User Name"
 msgstr "Benutzername"
 
-#: src/user-admin.c:509
+#: src/user-admin.c:495
 msgid "Login Name"
 msgstr "Login Name"
 
-#: src/user-admin.c:541 src/user-share.c:500
+#: src/user-admin.c:518 src/user-share.c:480
 #, fuzzy
 msgid "The passwords entered twice are different"
 msgstr "Das neue Passwort muß vom alten verschieden sein"
 
-#: src/user-admin.c:688
+#: src/user-admin.c:555
+msgid "Hybrid passwords improve security"
+msgstr ""
+
+#: src/user-admin.c:668
 msgid "Now set the password"
 msgstr "Das Passwort jetzt einrichten"
 
-#: src/user-admin.c:775
+#: src/user-admin.c:728 src/user-admin.c:772
 #, fuzzy
 msgid "Create New User"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
+msgid "Cancel"
+msgstr "Abbruch"
+
+#: src/user-face.c:299 src/user-face.c:310
 #, fuzzy
 msgid "Create Crop File"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-face.c:301
+#: src/user-face.c:300
 msgid "failed to create temporary file for image data"
 msgstr ""
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-face.c:368 src/user-face.c:453
 msgid "_Cancel"
 msgstr "_Abbruch"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
 msgstr ""
 
-#: src/user-face.c:428
+#: src/user-face.c:427
 msgid "Load Local Picture"
 msgstr "Lade lokales Bild"
 
-#: src/user-face.c:451
+#: src/user-face.c:450
 msgid "Browse for more pictures"
 msgstr "Suche nach mehr Bildern"
 
-#: src/user-face.c:455
+#: src/user-face.c:454
 msgid "_Open"
 msgstr "_Öffnen"
+
+#: src/user-face.c:521
+msgid "Clicking on the main window closes the picture selection window"
+msgstr ""
 
 #: src/user-face.c:542
 msgid "Local Picture"
@@ -268,89 +276,93 @@ msgstr "Avatar Liste"
 msgid "There is no address to store photos"
 msgstr "Kein Verzeichnis vohanden um Bilder zu speichern"
 
-#: src/user-face.c:648
+#: src/user-face.c:655
 msgid "Change Name"
 msgstr "Wechsle den Namen"
 
-#: src/user-face.c:648
+#: src/user-face.c:655
 msgid "Please enter a valid character"
 msgstr "Bitte geben Sie ein gültiges Zeichen ein"
 
-#: src/user-list.c:127
+#: src/user-face.c:705
+msgid "Use Enter Key to Save Modifications"
+msgstr ""
+
+#: src/user-list.c:125
 msgid "User List"
 msgstr "Benutzerliste"
 
-#: src/user-list.c:240
+#: src/user-list.c:225
 msgid "Add User"
 msgstr "Benutzer hinzufügen"
 
-#: src/user-share.c:114
+#: src/user-share.c:92
 msgid "_Return"
 msgstr "_Bestätige"
 
-#: src/user-share.c:134
+#: src/user-share.c:112
 msgid "Message"
 msgstr "Nachricht"
 
-#: src/user-share.c:343
+#: src/user-share.c:323
 msgid "The new password needs to be different from the old one"
 msgstr "Das neue Passwort muß vom alten verschieden sein"
 
-#: src/user-share.c:345
+#: src/user-share.c:325
 msgid "Try changing some letters and numbers"
 msgstr "Versuche einige Buchstaben und Zahlen zu verändern"
 
-#: src/user-share.c:347 src/user-share.c:355
+#: src/user-share.c:327 src/user-share.c:335
 msgid "Try changing the password a bit more"
 msgstr "Versuche das Passwort ein wenig mehr zu verändern"
 
-#: src/user-share.c:349
+#: src/user-share.c:329
 msgid "A password without your user name would be stronger"
 msgstr "Ein Passwort was den Benutzernamen nicht beinhaltet ist stärker"
 
-#: src/user-share.c:351
+#: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
 msgstr "Vermeiden Sie ihren Namen im Passwort zu verwenden"
 
-#: src/user-share.c:353
+#: src/user-share.c:333
 msgid "Try to avoid some of the words included in the password"
 msgstr "Versuchen Sie einige Worte im Passwort zu vermeiden"
 
-#: src/user-share.c:357
+#: src/user-share.c:337
 msgid "Try to avoid common words"
 msgstr "Vermeiden Sie allgemeine Worte im Passwort"
 
-#: src/user-share.c:359
+#: src/user-share.c:339
 msgid "Try to avoid reordering existing words"
 msgstr "Vermeiden Sie die Neuanordnung von existierenden Wörtern"
 
-#: src/user-share.c:361
+#: src/user-share.c:341
 msgid "Try to use more numbers"
 msgstr "Versuchen Sie mehr Zahlen zu verwenden"
 
-#: src/user-share.c:363
+#: src/user-share.c:343
 msgid "Try to use more uppercase letters"
 msgstr "Versuchen Sie mehr Großbuchstaben zu verwenden"
 
-#: src/user-share.c:365
+#: src/user-share.c:345
 msgid "Try to use more lowercase letters"
 msgstr "Versuchen Sie mehr Kleinbuchstaben zu verwenden"
 
-#: src/user-share.c:367
+#: src/user-share.c:347
 msgid "Try to use more special characters, like punctuation"
 msgstr "Versuchen Sie mehr Sonderzeichen wie Interpunktion zu verwenden"
 
-#: src/user-share.c:369
+#: src/user-share.c:349
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
 "Versuchen Sie eine Mischung aus Buchstaben, Zahlen und Satzzeichen zu "
 "verwenden"
 
-#: src/user-share.c:371
+#: src/user-share.c:351
 msgid "Try to avoid repeating the same character"
 msgstr "Versuchen Sie widerholende gleiche Zeichen zu vermeiden"
 
-#: src/user-share.c:373
+#: src/user-share.c:353
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
@@ -358,14 +370,13 @@ msgstr ""
 "Versuchen Sie die Wiederholung von Zeichen zu vermeiden: Sie müssen "
 "Buchstaben, Nummern and Interpunktion vermischen."
 
-#: src/user-share.c:375
+#: src/user-share.c:355
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Versuchen Sie Sequenzen wie 1234 oder abcd zu vermeiden"
 
-#: src/user-share.c:377
-msgid ""
-"Password length needs more than 8 bits. Add more letters, numbers and "
-"punctuation"
+#: src/user-share.c:357
+#, fuzzy
+msgid "Password length needs more than 8 characters"
 msgstr ""
 "Die Passwortlänge benötigt mehr als 8 Bit. Fügen Sie weitere Buchstaben "
 "Nummern und Interpunktion hinzu"
@@ -441,7 +452,7 @@ msgstr ""
 msgid "User ID"
 msgstr "Benutzername"
 
-#: src/user-group.c:707 src/user-group.c:1021
+#: src/user-group.c:707 src/user-group.c:1060
 #, fuzzy
 msgid "Remove"
 msgstr "Benutzer entfernen"
@@ -474,77 +485,89 @@ msgstr ""
 msgid "The number of groups is 0."
 msgstr ""
 
-#: src/user-group.c:794
+#: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
 msgstr ""
 
-#: src/user-group.c:826
+#: src/user-group.c:798
+msgid "Click the unlock button on the \"swith-group\" page"
+msgstr ""
+
+#: src/user-group.c:832
+msgid "Groups Manage"
+msgstr ""
+
+#: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
 msgstr ""
 
-#: src/user-group.c:833
-msgid "Groups Manage"
-msgstr ""
-
-#: src/user-group.c:939
+#: src/user-group.c:970
 #, fuzzy
 msgid "New Group Name"
 msgstr "Benutzername"
 
-#: src/user-group.c:950
+#: src/user-group.c:981
 msgid "Please select the user to add to the new group"
 msgstr ""
 
-#: src/user-group.c:1043
+#: src/user-group.c:1082
 msgid "Switch Groups"
 msgstr ""
 
-#: src/user-group.c:1047
+#: src/user-group.c:1086
 #, fuzzy
 msgid "Create Groups"
 msgstr "Erzeugung der pid Datei schlug fehl"
 
-#: src/user-group.c:1051
+#: src/user-group.c:1090
 #, fuzzy
 msgid "Remove Groups"
 msgstr "Benutzer entfernen"
 
-#: src/user-history.c:42
+#: src/user-history.c:43
 msgid "This Week"
 msgstr ""
 
-#: src/user-history.c:46
+#: src/user-history.c:47
 msgid "Last Week"
 msgstr ""
 
-#: src/user-history.c:146
+#: src/user-history.c:149
 msgid "Today"
 msgstr ""
 
-#: src/user-history.c:150
+#: src/user-history.c:153
 msgid "Yesterday"
 msgstr ""
 
-#: src/user-history.c:156
+#: src/user-history.c:159
 msgid "%b %e"
 msgstr ""
 
-#: src/user-history.c:160
+#: src/user-history.c:163
 msgid "%b %e, %Y"
 msgstr ""
 
-#: src/user-history.c:243
+#: src/user-history.c:246
 msgid "Session Ended"
 msgstr ""
 
-#: src/user-history.c:250
+#: src/user-history.c:253
 msgid "Session Started"
 msgstr ""
 
-#: src/user-history.c:301
+#: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
+msgstr ""
+
+#: src/user-history.c:400
+msgid "previous"
+msgstr ""
+
+#: src/user-history.c:405
+msgid "next"
 msgstr ""
 
 #: src/user-language.c:120
@@ -556,18 +579,17 @@ msgstr ""
 msgid "No languages found"
 msgstr "Zuordnen der Sprache fehlgeschlagen"
 
-#: src/user-language.c:577
-msgid "Cancel"
-msgstr "Abbruch"
-
-#: src/user-language.c:580
-msgid "done"
+#: src/user-language.c:574 src/user-language.c:595
+msgid "Done"
 msgstr ""
 
-#: src/user-language.c:648
+#: src/user-language.c:655
 #, fuzzy, c-format
 msgid "Current User - %s"
 msgstr "Benutzer erstellen"
+
+#~ msgid "Creating a user failed"
+#~ msgstr "Erstellen eines Benutzers fehlgeschlagen"
 
 #~ msgid "Get user language"
 #~ msgstr "Benutzersprache erhalten"

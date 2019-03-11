@@ -316,9 +316,8 @@ static ActUser *WriteUserInfo(const gchar *UserName,
                                        &error);
     if(user == NULL)
     {
-        g_error("error Create NewUser Error %s\r\n",error->message);
+        MessageReport(_("Creating User"),error->message,ERROR);
         g_error_free(error); 
-        MessageReport(_("Creating User"),_("Creating a user failed"),ERROR);
         return NULL;
     }        
     if(UserType == ADMIN)
@@ -439,8 +438,8 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
         currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
         UpdateInterface(currentuser->ActUser,ua);
         ua->UserCount +=1;//用户个数加1
+        CloseWindow(NULL,&ua->newuser);
     }    
-    CloseWindow(NULL,&ua->newuser);
 } 
 static void CloseWindow(GtkWidget *widget,gpointer data)
 {

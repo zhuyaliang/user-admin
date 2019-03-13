@@ -20,15 +20,15 @@ msgstr ""
 #: data/org.mate.user.admin.policy.in:11
 #, fuzzy
 msgid "Manage user accounts"
-msgstr "Benutzeranzahl ist 0"
+msgstr "Benutzerkonten verwalten"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr ""
+msgstr "Zum Ändern von Benutzerdaten ist eine Authentifizierung erforderlich"
 
 #: src/main.c:46
 msgid "Get Icon Fail"
-msgstr "Symbolfehler erhalten"
+msgstr "Laden des Sympols fehlgeschlagen"
 
 #: src/main.c:99 src/main.c:112
 msgid "Mate User Manage"
@@ -40,7 +40,7 @@ msgstr "öffne Datei"
 
 #: src/main.c:179
 msgid "Create pid file failed"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Erstellen der PID-Datei ist fehlgeschlagen"
 
 #: src/main.c:188
 msgid "write file"
@@ -48,19 +48,19 @@ msgstr "schreibe Datei"
 
 #: src/main.c:188
 msgid "write pid file failed"
-msgstr "Schreiben der pid Datei schlug fehl"
+msgstr "Schreiben der PID-Datei ist fehlgeschlagen"
 
 #: src/main.c:221
 msgid "open pid file failed"
-msgstr "öffnen von pid Datei schlug fehl"
+msgstr "Öffnen der PID-Datei ist fehlgeschlagen"
 
 #: src/main.c:226
 msgid "read file"
-msgstr "lese Datei"
+msgstr "Lese Datei"
 
 #: src/main.c:226
 msgid "read pid file failed"
-msgstr "lesen der pid Datei schlug fehl"
+msgstr "Lesen der PID-Datei ist fehlgeschlagen"
 
 #: src/user-base.c:220 src/user-admin.c:503
 msgid "Account Type"
@@ -81,7 +81,7 @@ msgstr "Sprache"
 
 #: src/user-base.c:240 src/user-share.c:258
 msgid "No Settings"
-msgstr ""
+msgstr "Keine Einstelungen"
 
 #: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
 #: src/user-admin.c:676
@@ -98,11 +98,11 @@ msgstr "Anmeldezeit"
 
 #: src/user-base.c:295
 msgid "Group Manage"
-msgstr ""
+msgstr "Gruppenverwaltung"
 
 #: src/user-base.c:298
 msgid "Setting Groups"
-msgstr ""
+msgstr "Gruppeneinstellung"
 
 #: src/user-info.c:66
 msgid "Account is disable"
@@ -125,7 +125,7 @@ msgstr "Benutzeranzahl ist 0"
 #: src/user-password.c:210
 #, fuzzy
 msgid "Set Password"
-msgstr "Benutzer Passwort"
+msgstr "Setze Passwort"
 
 #: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
 #: src/user-group.c:997 src/user-group.c:1053
@@ -157,7 +157,7 @@ msgstr "Benutzer entfernen"
 
 #: src/user-admin.c:88
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Sie können nicht ihr eigenes Konto löschen"
 
 #: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
@@ -169,15 +169,15 @@ msgstr "Entfernen Sie den fehlerhaften Benutzer und versuchen Sie es erneut"
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
-msgstr ""
+msgstr "Kein solcher Benutzer"
 
 #: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
-msgstr "Benutzer schon vorhanden, versuchen Sie bitte einen anderen"
+msgstr "Benutzername schon vorhanden, versuchen Sie bitte einen anderen"
 
 #: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
-msgstr "Basisverzeichnis schon vorhanden, versuchen Sie bitte einen anderen"
+msgstr "Name des Basisverzeichnis schon vorhanden, versuchen Sie bitte einen anderen"
 
 #: src/user-admin.c:215
 msgid "The username cannot start with a - ."
@@ -216,7 +216,7 @@ msgstr "Das neue Passwort muß vom alten verschieden sein"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
-msgstr ""
+msgstr "Gemischte Passwörter verbessern die Sicherheit"
 
 #: src/user-admin.c:668
 msgid "Now set the password"
@@ -225,7 +225,7 @@ msgstr "Das Passwort jetzt einrichten"
 #: src/user-admin.c:728 src/user-admin.c:772
 #, fuzzy
 msgid "Create New User"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Erzeugung der PID-Datei ist fehlgeschlagen"
 
 #: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
 msgid "Cancel"
@@ -234,11 +234,11 @@ msgstr "Abbruch"
 #: src/user-face.c:299 src/user-face.c:310
 #, fuzzy
 msgid "Create Crop File"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Schneide Bilddatei zu"
 
 #: src/user-face.c:300
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "Fehler beim Erstellen einer temporären Datei für Bilddaten"
 
 #: src/user-face.c:368 src/user-face.c:453
 msgid "_Cancel"
@@ -246,7 +246,7 @@ msgstr "_Abbruch"
 
 #: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
-msgstr ""
+msgstr "Wähle"
 
 #: src/user-face.c:427
 msgid "Load Local Picture"
@@ -262,7 +262,7 @@ msgstr "_Öffnen"
 
 #: src/user-face.c:521
 msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
+msgstr "Ein Klicken im Hauptfenster schließt die Bildauswahl"
 
 #: src/user-face.c:542
 msgid "Local Picture"
@@ -270,7 +270,7 @@ msgstr "Lokales Bild"
 
 #: src/user-face.c:556
 msgid "Avatar list"
-msgstr "Avatar Liste"
+msgstr "Benutzerbild-Liste"
 
 #: src/user-face.c:557
 msgid "There is no address to store photos"
@@ -286,7 +286,7 @@ msgstr "Bitte geben Sie ein gültiges Zeichen ein"
 
 #: src/user-face.c:705
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Benutze die Eingabetaste um die Veränderung zu speichern"
 
 #: src/user-list.c:125
 msgid "User List"
@@ -322,7 +322,7 @@ msgstr "Ein Passwort was den Benutzernamen nicht beinhaltet ist stärker"
 
 #: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
-msgstr "Vermeiden Sie ihren Namen im Passwort zu verwenden"
+msgstr "Vermeiden Sie die Verwendung ihres Namen im Passwort"
 
 #: src/user-share.c:333
 msgid "Try to avoid some of the words included in the password"
@@ -384,16 +384,16 @@ msgstr ""
 #: src/user-group.c:163
 #, fuzzy
 msgid "Repeat of group name.Please try another"
-msgstr "Benutzer schon vorhanden, versuchen Sie bitte einen anderen"
+msgstr "Gruppenname schon vorhanden, versuchen Sie bitte einen anderen"
 
 #: src/user-group.c:167
 #, fuzzy
 msgid "The groupname cannot start with a - ."
-msgstr "Der Benutzername kann nicht mit einem - beginnen"
+msgstr "Der Gruppenname kann nicht mit einem - beginnen"
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Das erste Zeichen des Gruppennamens benötigt einen Buchstaben"
 
 #: src/user-group.c:175
 #, fuzzy
@@ -401,178 +401,182 @@ msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"Der Benutzername sollte nur aus Groß- und Kleinbuchstaben, \n"
+"Der Gruppenname sollte nur aus Groß- und Kleinbuchstaben, \n"
 "Buchstaben von a-z, Ziffern und die folgenden Zeichen bestehen: . - _"
 
 #: src/user-group.c:269
 #, fuzzy
 msgid "Create New Group"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Erzeuge eine neue Gruppe"
 
 #: src/user-group.c:276
 #, fuzzy
 msgid "Create New Group Faild"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Erzeugen der Gruppe ist fehlgeschlagen"
 
 #: src/user-group.c:287
 #, fuzzy
 msgid "Create User Group"
-msgstr "Benutzer erstellen"
+msgstr "Erzeuge eine Benutzergruppe"
 
 #: src/user-group.c:288
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups list."
-msgstr ""
+msgstr "Erzeugen der Gruppe war erfolgreich, schaue am Ende der Gruppenliste nach"
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
 #, fuzzy
 msgid "Remove Group"
-msgstr "Benutzer entfernen"
+msgstr "Gruppe entfernen"
 
 #: src/user-group.c:355
 msgid "Cannot remove root group"
-msgstr ""
+msgstr "Entfernen der root Gruppe fehlgeschlagen"
 
 #: src/user-group.c:363
 #, fuzzy
 msgid "Whether to remove the selected group"
-msgstr "Gibt an, ob das Basisverzeichnis des Benutzers entfernt werden soll"
+msgstr "Gibt an, ob die ausgewählete Gruppe entfernt werden soll"
 
 #: src/user-group.c:640 src/user-group.c:716
 #, fuzzy
 msgid "Group Name"
-msgstr "Benutzername"
+msgstr "Gruppenname"
 
 #: src/user-group.c:649 src/user-group.c:725
 msgid "Group ID"
-msgstr ""
+msgstr "Gruppen ID"
 
 #: src/user-group.c:690
 #, fuzzy
 msgid "User ID"
-msgstr "Benutzername"
+msgstr "Benutzer ID"
 
 #: src/user-group.c:707 src/user-group.c:1060
 #, fuzzy
 msgid "Remove"
-msgstr "Benutzer entfernen"
+msgstr "Entfernen"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr ""
+msgstr "Initialisiere Gruppenverwaltung"
 
 #: src/user-group.c:758
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Initialisierung fehlgeschlagen, bitte schau in \n"
+"Gruppenverwaltungs Schnittstellenfunktion nach"
 
 #: src/user-group.c:764
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Verbinden zum Gruppenservice fehlgeschlagen"
 
 #: src/user-group.c:765
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Bitte stellen Sie sicher das der Gruppenservice installiert und aktiv ist.\n"
+" url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group.c:773
 msgid "Get the number of groups"
-msgstr ""
+msgstr "Beziehe die Nummer der Gruppen"
 
 #: src/user-group.c:774
 msgid "The number of groups is 0."
-msgstr ""
+msgstr "Die Nummer der Gruppe ist 0"
 
 #: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
+msgstr "Zun Freichalten bitte in die obere linke Ecke klicken"
 
 #: src/user-group.c:798
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Klicke den Freischaltknopf auf der Gruppenseite"
 
 #: src/user-group.c:832
 msgid "Groups Manage"
-msgstr ""
+msgstr "Gruppenverwaltung"
 
 #: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
-msgstr ""
+msgstr "Aktueller Benutzer -- %s"
 
 #: src/user-group.c:970
 #, fuzzy
 msgid "New Group Name"
-msgstr "Benutzername"
+msgstr "Neuer Gruppenname"
 
 #: src/user-group.c:981
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Bitte wähle den Benutzer um ihn der Gruppe hinzufügen"
 
 #: src/user-group.c:1082
 msgid "Switch Groups"
-msgstr ""
+msgstr "Wechsele Gruppe"
 
 #: src/user-group.c:1086
 #, fuzzy
 msgid "Create Groups"
-msgstr "Erzeugung der pid Datei schlug fehl"
+msgstr "Erzeuge Gruppe"
 
 #: src/user-group.c:1090
 #, fuzzy
 msgid "Remove Groups"
-msgstr "Benutzer entfernen"
+msgstr "Entferne Gruppe"
 
 #: src/user-history.c:43
 msgid "This Week"
-msgstr ""
+msgstr "Diese Woche"
 
 #: src/user-history.c:47
 msgid "Last Week"
-msgstr ""
+msgstr "Letzte Woche"
 
 #: src/user-history.c:149
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: src/user-history.c:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Gestern"
 
 #: src/user-history.c:159
 msgid "%b %e"
-msgstr ""
+msgstr "%b %e"
 
 #: src/user-history.c:163
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:246
 msgid "Session Ended"
-msgstr ""
+msgstr "Session beendet"
 
 #: src/user-history.c:253
 msgid "Session Started"
-msgstr ""
+msgstr "Session gestarted"
 
 #: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — Kontoaktivität"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr ""
+msgstr "vorherige"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr ""
+msgstr "nächste"
 
 #: src/user-language.c:120
 msgid "More…"
-msgstr ""
+msgstr "Mehr…"
 
 #: src/user-language.c:161
 #, fuzzy
@@ -581,12 +585,12 @@ msgstr "Zuordnen der Sprache fehlgeschlagen"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
-msgstr ""
+msgstr "Getan"
 
 #: src/user-language.c:655
 #, fuzzy, c-format
 msgid "Current User - %s"
-msgstr "Benutzer erstellen"
+msgstr "Aktueller Benutzer - %s"
 
 #~ msgid "Creating a user failed"
 #~ msgstr "Erstellen eines Benutzers fehlgeschlagen"

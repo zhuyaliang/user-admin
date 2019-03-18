@@ -87,10 +87,11 @@ add_global_link_arguments(
 
 # Dependencies
 gtk_req_version = '>= 3.0.0'
+gas_rep_version = '>= 1.1.0'
 gtk_deps = dependency('gtk+-3.0', version: gtk_req_version)
 pwquality_deps = dependency('pwquality')
 act_deps = dependency('accountsservice')
-gas_deps = dependency('group-service')
+gas_deps = dependency('group-service',version: gas_rep_version)
 md_deps = dependency('mate-desktop-2.0')
 fc_deps = dependency('fontconfig')
 

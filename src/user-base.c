@@ -37,9 +37,8 @@ static void chooser_language_done (GtkWidget *widget,
     gchar *name = NULL;
 
 
-    user = GetIndexUser(ua->UsersList,0);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     account_language = act_user_get_language (user->ActUser);
-
     lang = language_chooser_get_language (LANGUAGE_CHOOSER (ua->language_chooser));
     if (lang) 
     {

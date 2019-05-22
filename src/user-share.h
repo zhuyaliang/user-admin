@@ -28,6 +28,10 @@
 #define QUESTIONNORMAL   5
 
 int Change;
+void         mate_uesr_admin_log   (const char  *level,
+                                    const char  *message,
+                                    ...);
+void         close_log_file        (void);
 gboolean     GetUseHeader          (void);
 GHashTable  *CreateGroupsHashTable (void);
 int          MessageReport         (const char  *Title,

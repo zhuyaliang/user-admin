@@ -264,9 +264,11 @@ int GetUserInfo(UserAdmin *ua)
     if(UserCnt <= 0)
     {
         g_slist_free (list);
+        mate_uesr_admin_log("Error","mate-user-admin No available users");
         MessageReport(_("Get User Info"),_("user count is 0"),ERROR);
         return -1;
     }        
+    mate_uesr_admin_log("Info","mate-user-admin user %d",UserCnt);
     /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);
     ua->UsersList = NULL;

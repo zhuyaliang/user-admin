@@ -438,6 +438,8 @@ add_all_languages (LanguageChooser *chooser)
     GHashTable *initial;
 
     locale_ids = mate_get_all_locales ();
+    if(g_strv_length(locale_ids) == 0)
+        mate_uesr_admin_log("Warning","mate-user-admin get_all_locales ->0 No available language");
     initial = cc_common_language_get_initial_languages ();
     add_languages (chooser, locale_ids, initial);
     g_hash_table_destroy (initial);

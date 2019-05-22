@@ -553,6 +553,7 @@ static void GetFaceList(GtkWidget *button, gpointer data)
     nRet = GetDirFace(Flowbox);
     if(nRet < 0)
     {
+        mate_uesr_admin_log("Warning","mate-user-admin There is no address to store photos");
         MessageReport(_("Avatar list"),
                       _("There is no address to store photos"),
                       WARING);
@@ -687,6 +688,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     pb = gdk_pixbuf_new_from_file(GetUserIcon(user->ActUser),&error);
     if(pb == NULL)
     {
+        mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
         g_print("get icon Fial %s\r\n",error->message);
     }    
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);

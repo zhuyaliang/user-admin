@@ -28,6 +28,55 @@
 #include "user-info.h"
 
 #define  GSM_GSETTINGS_SCHEMA "org.mate.interface"
+static int file_dp = 0;  /*Log file descriptor*/
+
+static int create_log_file(void)
+{
+    time_t t;
+    int    t_stamp;
+    char  *file_name;
+
+    if(file_dp > 0)
+    {
+        return file_dp;
+    }    
+    t_stamp = time(&t);
+    file_name = g_strdup_printf("/tmp/log-%d",t_stamp);
+
+    file_dp = open(file_name,O_RDWR|O_CREAT,0666);
+    
+    g_free(file_name);    
+    return file_dp;
+}    
+/*Record error information to log file*/
+void mate_uesr_admin_log(const char *level,const char *message,...)
+{
+    int     fd;
+    va_list args;
+    char   *file_data;
+    char    buf[256]; 
+
+    fd = create_log_file();
+    if(fd < 0)
+    {
+        return;
+    }    
+    va_start(args,message);
+    vsprintf(buf,message, args);
+    va_end(args);
+    file_data = g_strdup_printf("level:[%s]  message: %s\r\n",level,buf);
+    write(fd,file_data,strlen(file_data));
+
+}    
+
+void close_log_file (void)
+{
+    if(file_dp > 0 )
+    {
+        close(file_dp);
+        file_dp = 0;
+    }    
+}    
 gboolean GetUseHeader(void)
 {
     GSettings *settings;
@@ -249,6 +298,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     gtk_entry_set_text(GTK_ENTRY(ua->EntryName),
                        GetRealName(ActUser)); 
 
+    mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(ActUser));
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
                              GetUserType(ActUser));
     lang_id = GetUserLang(ActUser);
@@ -284,7 +334,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
         gtk_widget_set_sensitive(ua->ButtonFace,self_selected);
         gtk_widget_set_sensitive(ua->EntryName, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
-    gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
+        gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
     }    
     Change = 0;
 

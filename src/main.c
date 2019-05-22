@@ -30,7 +30,7 @@ static gboolean on_window_quit (GtkWidget *widget,
                                 gpointer   user_data)
 {
     UserAdmin *ua = (UserAdmin *)user_data;
-    
+    close_log_file();    
     g_slist_free_full (ua->UsersList,g_object_unref);
     gtk_main_quit();
     return TRUE;
@@ -44,6 +44,7 @@ static GdkPixbuf * GetAppIcon(void)
     if(!Pixbuf)
     {
         MessageReport(_("Get Icon Fail"),Error->message,ERROR);
+        mate_uesr_admin_log("Warning","mate-user-admin user-admin.png %s",Error->message);
         g_error_free(Error);
     }   
     
@@ -121,6 +122,7 @@ static void InitMainWindow(UserAdmin *ua)
     gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
     if(GetUseHeader() == 1)
     {    
+        mate_uesr_admin_log("Info","mate-user-admin dialogs use header");
         LoadHeader_bar(ua);
     }
     gtk_widget_grab_focus(ua->ButtonLock);    
@@ -298,8 +300,10 @@ int main(int argc, char **argv)
 
     /* Check whether the process has been started */
     if(ProcessRuning() == TRUE)
+    {
+        mate_uesr_admin_log("Info","The mate-user-admin process already exists");
         exit(0);        
-
+    }
     WindowLogin = ua.MainWindow;
     /* Get local support language */ 
 

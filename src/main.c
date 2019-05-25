@@ -118,6 +118,12 @@ static void InitMainWindow(UserAdmin *ua)
                      ua);
     
     ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
+    if (ua->Permission == NULL)
+    {
+        g_warning ("Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
+        g_error_free (error);
+    }
+
     ua->ButtonLock = gtk_lock_button_new(ua->Permission);
     gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
     if(GetUseHeader() == 1)

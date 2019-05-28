@@ -120,7 +120,7 @@ static void InitMainWindow(UserAdmin *ua)
     ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
     if (ua->Permission == NULL)
     {
-        g_warning ("Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
+        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
         g_error_free (error);
     }
 

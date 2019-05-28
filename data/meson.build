@@ -1,6 +1,7 @@
 subdir('face')
 subdir('icon')
 subdir('hicolor')
+subdir('mate-user-admin')
 
 i18n = import('i18n')
 

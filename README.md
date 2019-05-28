@@ -9,6 +9,10 @@
 # Explain
 
 Rewrite an interface similar to user management tools in gnome-system-tools and gnome-control-center, displayed in the control center.
+```
+/etc/mate-user-admin/nuconfig 
+```
+Default configuration for new users
 
 ## Interface reference
 

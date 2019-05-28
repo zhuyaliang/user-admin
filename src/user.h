@@ -25,6 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <pwd.h>
+#include <sys/types.h>
 #include <time.h>
 #include <sys/time.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
@@ -99,9 +100,12 @@ typedef struct
     GtkWidget        *LabelPassNote;
     GtkWidget        *CheckPassEntry;
     GtkWidget        *LabelSpace;
-    int               CheckPassTimeId;//Check the password format timer
-    int               CheckNameTimeId; //Check the Realname format timer
+    int               CheckPassTimeId;       //Check the password format timer
+    int               CheckNameTimeId;       //Check the Realname format timer
     GtkTreeIter       NewUserIter;           //user list iter
+	char             *nuLang;
+	char            **nuGroups;
+	gboolean          nuType;
 }CreateUser;
 typedef struct 
 {

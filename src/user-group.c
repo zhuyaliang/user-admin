@@ -850,6 +850,11 @@ static void CreateManageWindow(GroupsManage *gm)
     gm->GroupsWindow = Window;
     
     gm->Permission = polkit_permission_new_sync (USER_GROUP_PERMISSION, NULL, NULL, &error);
+    if (gm->Permission == NULL)
+    {
+        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_GROUP_PERMISSION, error->message);
+        g_error_free (error);
+    }
     gm->ButtonLock = gtk_lock_button_new(gm->Permission);
     gtk_lock_button_set_permission(GTK_LOCK_BUTTON (gm->ButtonLock),gm->Permission);
     gtk_widget_grab_focus(gm->ButtonLock);    

@@ -21,12 +21,92 @@
 #include "user-info.h"
 #include "user-list.h"
 #include <pwd.h>
+#include <grp.h>
 #include <sys/types.h>
+#include <libgroupservice/gas-group.h>
+#include <libgroupservice/gas-group-manager.h>
+
+#define  NUCONFIG      "/etc/mate-user-admin/nuconfig"
+#define  KEYGROUPNAME  "nudefault"
+#define  LANGKEY       "nulanguage"
+#define  TYPEKEY       "nutype"
+#define  GROUPKEY      "nugroups"
 
 GtkWidget *WindowAddUser;
 /* password and name valid */
 static int UnlockFlag;
 
+static gboolean GetNewUserConfig(CreateUser *nu)
+{
+	GKeyFile         *Kconfig = NULL;
+	g_autoptr(GError) error = NULL;
+	char            **ConfigGroups = NULL;
+	char            **unGroups = NULL;
+	gsize             Length = 0;
+	char             *Value = NULL;
+	gboolean          Type;
+
+	Kconfig = g_key_file_new();
+	if(Kconfig == NULL)
+	{
+		mate_uesr_admin_log("Warning","g_key_file_new fail");
+		return FALSE;
+	}
+	if(!g_key_file_load_from_file(Kconfig, NUCONFIG, G_KEY_FILE_NONE, &error))
+	{
+		mate_uesr_admin_log("Warning","Error loading key file: %s", error->message);
+		goto EXIT;
+	}
+	ConfigGroups = g_key_file_get_groups(Kconfig, &Length);
+	if(g_strv_length(ConfigGroups) <= 0)
+	{
+		mate_uesr_admin_log("Warning","key file format errors are not grouped");
+		goto EXIT;
+	}
+	if(g_key_file_has_key(Kconfig,KEYGROUPNAME,LANGKEY,&error) == FALSE)
+	{
+		mate_uesr_admin_log("Warning","key file format errors %s",error->message);
+		goto EXIT;
+	}
+	Value = g_key_file_get_string(Kconfig,KEYGROUPNAME,LANGKEY,&error);
+	if(Value == NULL)
+	{
+		mate_uesr_admin_log("Warning","key file format errors %s",error->message);
+		goto EXIT;
+	}
+	if(mate_get_language_from_locale(Value,NULL) == NULL)
+	{
+		mate_uesr_admin_log("Warning","key file language format errors Language unavailability");
+		goto EXIT;
+	}
+	nu->nuLang = g_strdup((gpointer)Value);
+
+	Type = g_key_file_get_boolean(Kconfig,KEYGROUPNAME,TYPEKEY,&error);
+	if(Type == FALSE && error != NULL)
+	{
+		mate_uesr_admin_log("Warning","key file user type format errors %s",error->message);
+		goto EXIT;
+	}
+	nu->nuType = Type;
+
+	unGroups = g_key_file_get_string_list(Kconfig,KEYGROUPNAME,GROUPKEY,&Length,&error);
+	if(unGroups == NULL)
+	{
+		mate_uesr_admin_log("Info","key file No default add group is set for new users");
+		g_key_file_free(Kconfig);
+		return TRUE;
+	}
+	nu->nuGroups = g_strdupv(unGroups);
+	g_key_file_free(Kconfig);
+	return TRUE;
+
+EXIT:
+
+	nu->nuLang = NULL;
+	nu->nuGroups = NULL;
+	g_key_file_free(Kconfig);
+	return FALSE;
+}
 static uid_t GetLoginUserUid(void)
 {
     int fd;
@@ -362,7 +442,11 @@ static const gchar *GetNewUserLang(UserAdmin *ua)
 {
     UserInfo *user;
     char     *Lang_id;
-    
+
+	if(ua->newuser.nuLang != NULL)
+	{
+		return mate_get_language_from_locale (ua->newuser.nuLang,NULL);
+	}
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     Lang_id = act_user_get_language(user->ActUser);
        
@@ -371,7 +455,41 @@ static const gchar *GetNewUserLang(UserAdmin *ua)
         return mate_get_language_from_locale (Lang_id, NULL);
     }    
     return mate_get_language_from_locale ("en_US.utf8",NULL);
-}    
+}   
+
+static void add_user_to_group(const char *name, char **groups)
+{
+	int groups_num = 0,i;
+    GasGroup        *gas = NULL;
+    GasGroupManager *manage;
+
+	if(groups != NULL)
+	{
+		manage = gas_group_manager_get_default();
+        gas_group_manager_list_groups(manage);
+		groups_num = g_strv_length(groups);
+		for(i = 0;i < groups_num; i++)
+		{
+            if(getgrnam (groups[i]) == NULL)
+            {
+                if(g_utf8_strchr(groups[i],-1,' ') != NULL)
+                {
+				    mate_uesr_admin_log("Warning","Configuration file error,Please delete the extra space keys");
+                }    
+				mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
+				continue;
+            }    
+			gas = gas_group_manager_get_group(manage,groups[i]);
+			if(gas == NULL)
+			{
+				mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
+				continue;
+			}
+			gas_group_add_user_group(gas,name);
+		}
+
+	}
+}
 static void CloseWindow(GtkWidget *widget,gpointer data);
 /******************************************************************************
 * Function:             CreateNewUser
@@ -423,7 +541,8 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
                             Password);
     if(ActUser != NULL)
     {   
-
+		
+		add_user_to_group(un,ua->newuser.nuGroups);
         user = user_new();
         user->UserName = g_strdup(un);
         user->ActUser  = ActUser;
@@ -453,6 +572,14 @@ static void CloseWindow(GtkWidget *widget,gpointer data)
 
     newuser->CheckPassTimeId = 0;
     newuser->CheckNameTimeId = 0;
+	if(newuser->nuLang != NULL)
+	{
+		g_free(newuser->nuLang);
+	}
+	if(newuser->nuGroups != NULL)
+	{
+		g_free(newuser->nuGroups);
+	}
     UnlockFlag = 0;
 }       
 /******************************************************************************
@@ -460,13 +587,16 @@ static void CloseWindow(GtkWidget *widget,gpointer data)
 *        
 * Explain: New user name and type and language
 *        
-* Input:         
+* Input:  @CanConfig 
+*         
+*         TERU    Use configuration files /etc/mate-user-admin/unconfig
+*         FALSE   Use default values
 *        
 * Output: 
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser)
+static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser,gboolean CanConfig)
 {
     GtkWidget *Table;
     GtkWidget *LabelUserName;
@@ -504,7 +634,14 @@ static void SetNewUserInfo(GtkWidget *Vbox,CreateUser *newuser)
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
      
     newuser->NewUserType = SetComboUserType(_("Standard"),_("Administrators"));
-    gtk_combo_box_set_active(GTK_COMBO_BOX(newuser->NewUserType),STANDARD);
+	if(CanConfig == TRUE)
+	{
+		gtk_combo_box_set_active(GTK_COMBO_BOX(newuser->NewUserType),newuser->nuType);
+	}
+	else
+	{
+		gtk_combo_box_set_active(GTK_COMBO_BOX(newuser->NewUserType),STANDARD);
+	}
    
     gtk_grid_attach(GTK_GRID(Table) ,newuser->NewUserType , 1 , 3 , 3 , 1);        
 
@@ -750,6 +887,7 @@ void AddNewUser(GtkWidget *widget, gpointer data)
     GtkWidget *Vbox;
     GtkWidget *Vbox1;
     GtkWidget *Vbox2;
+	gboolean   ret;
     UserAdmin *ua = (UserAdmin *)data;
 	
     ua->newuser.AddUserDialog = gtk_dialog_new_with_buttons ("Interactive Dialog",
@@ -797,10 +935,11 @@ void AddNewUser(GtkWidget *widget, gpointer data)
     gtk_box_pack_start(GTK_BOX(Vbox), Vbox1,TRUE, TRUE, 0);
     Vbox2 =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_pack_start(GTK_BOX(Vbox), Vbox2,TRUE, TRUE, 0);
-    
+	
+	ret = GetNewUserConfig(&ua->newuser);
     ua->newuser.CheckNameTimeId = 0;
     ua->newuser.CheckPassTimeId = 0;
-    SetNewUserInfo(Vbox1,&ua->newuser); 
+    SetNewUserInfo(Vbox1,&ua->newuser,ret); 
     SetNewUserPass(Vbox2,&ua->newuser);
     
     gtk_widget_show_all(ua->newuser.AddUserDialog);

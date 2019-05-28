@@ -55,6 +55,7 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     va_list args;
     char   *file_data;
     char    buf[256]; 
+	int     len;
 
     fd = create_log_file();
     if(fd < 0)
@@ -65,8 +66,11 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     vsprintf(buf,message, args);
     va_end(args);
     file_data = g_strdup_printf("level:[%s]  message: %s\r\n",level,buf);
-    write(fd,file_data,strlen(file_data));
-
+    len = write(fd,file_data,strlen(file_data));
+	if(len <= 0)
+	{
+		MessageReport("write log","write log error",ERROR);	
+	}
 }    
 
 void close_log_file (void)

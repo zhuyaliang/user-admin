@@ -18,6 +18,10 @@
 #ifndef __USER_H__
 #define __USER_H__
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <gtk/gtk.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -39,8 +43,8 @@
 #include <polkit/polkit.h>
 #include "user-language.h"
 
-#define  DEFAULT    "/usr/share/mate-user-admin/face/Default.png"
-#define  NUMMAX    20
+#define  AVATARS    "Default.png"
+#define  DEFAULT   FACEDIR AVATARS 
 #define  PICMAX    20    
 #define  NONE      3
 
@@ -50,8 +54,6 @@
 #define  STANDARD  0
 #define  ADMIN     1
 #define _(STRING)  gettext(STRING)   
-#define PACKAGE    "mate-user-admin"   
-#define LOCALEDIR  "/usr/share/locale/" 
 
 enum
 {

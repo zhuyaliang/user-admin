@@ -50,7 +50,7 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     char BasePath[100] = { 0 };
     if(nCount >= 0)
     {    
-        sprintf(BasePath, FACEDIR"/%s", gcPicBuf[nCount]);
+        sprintf(BasePath, FACEDIR"%s", gcPicBuf[nCount]);
     }
     else
     {
@@ -168,7 +168,7 @@ static GtkWidget *GetFaceFile (const char *FileName)
     GtkWidget *image;
     GdkPixbuf *src;
     GdkPixbuf *dst;
-    sprintf(Path, "%s/%s",FACEDIR, FileName);
+    sprintf(Path, "%s%s",FACEDIR, FileName);
     src = gdk_pixbuf_new_from_file(Path, NULL);
     dst = gdk_pixbuf_scale_simple(src,70,70,GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(dst);
@@ -689,6 +689,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     if(pb == NULL)
     {
         mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
+        g_error_free(error);
         g_print("get icon Fial %s\r\n",error->message);
     }    
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);

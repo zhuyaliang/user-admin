@@ -23,6 +23,7 @@
 #include "user-list.h"
 
 #define  LOCKFILE              "/tmp/user-admin.pid"
+#define  APPICON               "user-admin.png"
 #define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
 static gboolean on_window_quit (GtkWidget *widget, 
@@ -40,7 +41,7 @@ static GdkPixbuf * GetAppIcon(void)
     GdkPixbuf *Pixbuf;
     GError    *Error = NULL;
 
-    Pixbuf = gdk_pixbuf_new_from_file("/usr/share/mate-user-admin/icon/user-admin.png",&Error);
+    Pixbuf = gdk_pixbuf_new_from_file(ICONDIR APPICON,&Error);
     if(!Pixbuf)
     {
         MessageReport(_("Get Icon Fail"),Error->message,ERROR);
@@ -216,7 +217,7 @@ static int RecordPid(void)
 ******************************************************************************/
 static gboolean ProcessRuning(void)
 {
-    int fd = 0;
+    int fd;
     int pid = 0;
     gboolean Run = FALSE;
     char ReadBuf[30] = { 0 };
@@ -296,8 +297,8 @@ int main(int argc, char **argv)
 {
     UserAdmin ua;
 
-    bindtextdomain (PACKAGE, LOCALEDIR);   
-    textdomain (PACKAGE); 
+    bindtextdomain (GETTEXT_PACKAGE,LUNAR_CALENDAR_LOCALEDIR);   
+    textdomain (GETTEXT_PACKAGE); 
     
     gtk_init(&argc, &argv);
     

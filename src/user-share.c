@@ -253,7 +253,7 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
     char Path[128] = { 0 };
     if(PicName == NULL)
     {
-        sprintf(Path, FACEDIR"/Default.png");
+        sprintf(Path,"%s",DEFAULT);
     }
     else
         sprintf(Path, "%s",PicName);

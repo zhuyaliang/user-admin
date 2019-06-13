@@ -196,6 +196,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
                 MessageReport(_("Remove User"),
                               _("Remove user failure and try again"),
                                ERROR); 
+                g_error_free(error);
                 break;
             }    
         }
@@ -388,6 +389,8 @@ static ActUser *WriteUserInfo(const gchar *UserName,
     GError *error = NULL;
     ActUser *user;
 
+	mate_uesr_admin_log("Debug","username %s realname %s usertype %d langname %s passwod %d",
+                        UserName,RealName,UserType,LangName,PasswordType);
     Manager = act_user_manager_get_default ();
     user = act_user_manager_create_user(Manager,
                                         UserName,

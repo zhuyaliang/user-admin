@@ -111,7 +111,9 @@ conf.set_quoted('BINDIR', join_paths(get_option('prefix'), get_option('bindir'))
 conf.set_quoted('SYSCONFDIR', join_paths(get_option('prefix'), get_option('sysconfdir')))
 conf.set_quoted('LOCALSTATEDIR', join_paths(get_option('prefix'), get_option('localstatedir')))
 conf.set_quoted('LIBEXECDIR', join_paths(get_option('prefix'), get_option('libexecdir')))
-conf.set_quoted('FACEDIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name(), 'face'))
+conf.set_quoted('FACEDIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name(), 'face/'))
+conf.set_quoted('ICONDIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name(), 'icon/'))
+conf.set_quoted('NUCONFIG', '/etc/mate-user-admin/nuconfig')
 
 configure_file(
   output : 'config.h',

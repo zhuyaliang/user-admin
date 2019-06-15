@@ -205,7 +205,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *ButtonGroup;
     UserInfo  *user;
     char      *lang;
-    char      *lang_id;
+    const char *lang_id;
 
     user = GetIndexUser(ua->UsersList,0);
     fixed = gtk_fixed_new();

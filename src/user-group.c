@@ -185,7 +185,7 @@ static gboolean QuitGroupWindow (GtkWidget *widget,
                                  gpointer   data)
 {
     GroupsManage *gm = (GroupsManage *)data;
-    g_free(gm->username);
+    g_free((gpointer)gm->username);
     if(gm->GroupsList != NULL)
         g_slist_free_full (gm->GroupsList,g_object_unref);
     if(gm->NewGroupUsers != NULL)
@@ -198,7 +198,7 @@ static gboolean QuitGroupWindow (GtkWidget *widget,
 static void CloseGroupWindow (GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
-    g_free(gm->username);
+    g_free((gpointer)gm->username);
     gm->Permission = NULL;
     g_slist_free_full (gm->GroupsList,g_object_unref);
     if(gm->NewGroupUsers != NULL)
@@ -298,11 +298,11 @@ static guint GetRemoveListGid(GtkWidget *widget)
     GtkTreeView  *treeview = GTK_TREE_VIEW(widget);
     GtkTreeModel *model;
     GtkTreeIter   iter;
-    uint          gid;  
+    uint          gid = 0;  
 
     GtkTreeSelection *selection = gtk_tree_view_get_selection (treeview);
     model = gtk_tree_view_get_model (treeview);
-    if(gtk_tree_selection_get_selected (selection, NULL, &iter))
+    if(gtk_tree_selection_get_selected (selection, NULL, &iter) == TRUE)
     {
         gtk_tree_model_get (model, &iter, COLUMN_REMOVEID, &gid, -1);  
     }
@@ -481,7 +481,7 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     gtk_tree_model_get (model, &iter, COLUMN_USERNAME, &name, -1); 
     if(fixed == FALSE)
     {
-        gm->NewGroupUsers = g_slist_prepend(gm->NewGroupUsers,name);
+        gm->NewGroupUsers = g_slist_prepend(gm->NewGroupUsers,(gpointer)name);
     }   
     else
     {

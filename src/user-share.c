@@ -279,7 +279,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
     char      *lang = NULL;
-    char      *lang_id = NULL;
+    const char      *lang_id;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;

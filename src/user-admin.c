@@ -444,10 +444,11 @@ static int GetNewUserType(GtkWidget *Switch)
 static const gchar *GetNewUserLang(UserAdmin *ua)
 {
     UserInfo *user;
-    char     *Lang_id;
+    const char     *Lang_id;
 
 	if(ua->newuser.nuLang != NULL)
 	{
+		mate_uesr_admin_log("Debug","nuLang = %s",ua->newuser.nuLang);
 		return mate_get_language_from_locale (ua->newuser.nuLang,NULL);
 	}
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
@@ -524,6 +525,7 @@ static void CreateNewUser(GtkWidget *widget,gpointer data)
     un = gtk_entry_get_text(GTK_ENTRY(ua->newuser.UserNameEntry));
     account_type = GetNewUserType(ua->newuser.NewUserType);
     NewUserlang  = GetNewUserLang(ua);
+	mate_uesr_admin_log("Debug","NewUserlang = %s",NewUserlang);
 
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ua->newuser.RadioButton2)) == TRUE)
     {        

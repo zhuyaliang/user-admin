@@ -19,8 +19,45 @@
 #define __USER_ADMIN_H__
 
 #include <gtk/gtk.h>
+G_BEGIN_DECLS
 
-void RemoveUser(GtkWidget *widget, gpointer data);
-void AddNewUser(GtkWidget *widget, gpointer data);
+#define ADD_NU_TYPE_DIALOG     (add_nu_dialog_get_type ())
+#define ADDNUDIALOG(obj)       (G_TYPE_CHECK_INSTANCE_CAST ((obj), ADD_NU_TYPE_DIALOG, AddNUDialog))
+#define ADD_NU_IS_DIALOG(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), ADD_NU_TYPE_DIALOG))
 
+typedef struct AddNUDialog 
+{
+	GtkDialog         parent;
+    GCancellable     *cancellable;
+	GPermission      *permission;
+    GtkWidget        *RealNameEntry;
+    GtkWidget        *UserNameEntry;
+    GtkWidget        *LabelNameNote;
+    GtkWidget        *NewUserType;
+    GtkWidget        *RadioButton1;
+    GtkWidget        *RadioButton2;
+    GtkWidget        *NewPassEntry;
+    GtkWidget        *LevelBar;
+    GtkWidget        *LabelPassNote;
+    GtkWidget        *CheckPassEntry;
+    GtkWidget        *LabelSpace;
+    int               CheckPassTimeId;       //Check the password format timer
+    int               CheckNameTimeId;       //Check the Realname format timer
+    GtkWidget        *ButtonCancel;
+    GtkWidget        *ButtonConfirm;
+    GtkTreeIter       NewUserIter;           //user list iter
+	char             *nuLang;
+	char            **nuGroups;
+	gboolean          nuType;
+}AddNUDialog; 
+typedef struct AddNUDialogClass 
+{
+	GtkDialogClass parent_class;
+}AddNUDialogClass;
+
+GType        add_nu_dialog_get_type (void) G_GNUC_CONST;
+AddNUDialog *Add_NUDialog_new (void);
+void  RemoveUser(GtkWidget *widget, gpointer data);
+void  AddNewUser(GtkWidget *widget, gpointer data);
+G_END_DECLS
 #endif

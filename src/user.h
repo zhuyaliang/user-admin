@@ -42,6 +42,7 @@
 #include <locale.h>   
 #include <polkit/polkit.h>
 #include "user-language.h"
+#include "user-admin.h"
 
 #define  AVATARS    "Default.png"
 #define  DEFAULT   FACEDIR AVATARS 
@@ -85,36 +86,12 @@ typedef struct
     GSList           *NewGroupUsers;          
 }GroupsManage;
 
-typedef struct
-{
-    GtkWidget        *AddUserDialog;
-    GtkWidget        *ButtonCancel;
-    GtkWidget        *ButtonConfirm;
-    GtkWidget        *RealNameEntry;
-    GtkWidget        *UserNameEntry;
-    GtkWidget        *LabelNameNote;
-    GtkWidget        *NewUserType;
-    GtkWidget        *RadioButton1;
-    GtkWidget        *RadioButton2;
-
-    GtkWidget        *NewPassEntry;
-    GtkWidget        *LevelBar;
-    GtkWidget        *LabelPassNote;
-    GtkWidget        *CheckPassEntry;
-    GtkWidget        *LabelSpace;
-    int               CheckPassTimeId;       //Check the password format timer
-    int               CheckNameTimeId;       //Check the Realname format timer
-    GtkTreeIter       NewUserIter;           //user list iter
-	char             *nuLang;
-	char            **nuGroups;
-	gboolean          nuType;
-}CreateUser;
 typedef struct 
 {
     GSList           *UsersList;
     GroupsManage      gm;
+	AddNUDialog      *NUDialog;
     LanguageChooser  *language_chooser;
-    CreateUser        newuser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PasswordDialog;

@@ -252,6 +252,47 @@ ERROREXIT:
 
 }        
 
+static void DeleteOldUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *ua)
+{
+    UserInfo       *user;
+    
+	user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+	ua->UsersList = g_slist_remove(ua->UsersList,user);
+    RefreshUserList(ua->UserList,ua->UsersList);
+    /*Scavenging user information*/
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    if(user == NULL)
+    {
+		g_error(_("No such user!!!"));
+    }    
+    UpdateInterface(user->ActUser,ua);                  
+    ua->UserCount--;                                        
+}
+
+static void AddNewUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *ua)
+{
+    UserInfo   *user;
+    UserInfo   *currentuser;
+	const char *un;
+	const char *rn;
+	
+	user = user_new();
+	un = GetUserName(ActUser); 
+	rn = GetRealName(ActUser);
+	user->UserName = g_strdup(un);
+	user->ActUser  = ActUser;
+	UserListAppend(ua->UserList,
+				   DEFAULT,
+                   rn,
+                   un,
+                   ua->UserCount,
+                   &(ua->NUDialog->NewUserIter));
+	user->Iter     = ua->NUDialog->NewUserIter;
+	ua->UsersList  = g_slist_append(ua->UsersList,g_object_ref(user));
+	currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+	UpdateInterface(currentuser->ActUser,ua);
+	ua->UserCount +=1;//用户个数加1
+}
 static void users_loaded(ActUserManager  *manager,
                          GParamSpec      *pspec, 
                          UserAdmin       *ua)
@@ -274,6 +315,8 @@ static void users_loaded(ActUserManager  *manager,
    
     CreateInterface(Vbox,ua);
     UpdatePermission(ua);
+	g_signal_connect (manager, "user-added", G_CALLBACK (AddNewUserToList), ua);
+	g_signal_connect (manager, "user-removed", G_CALLBACK (DeleteOldUserToList), ua);
     gtk_widget_show_all(ua->MainWindow);
 
 }    

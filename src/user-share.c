@@ -278,8 +278,8 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 {
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
-    char      *lang = NULL;
     const char      *lang_id;
+	const char      *lang_cc;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
@@ -313,9 +313,9 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     }
     else
     {    
-        lang =  mate_get_language_from_locale(GetUserLang(ActUser),NULL);
+		lang_cc = mate_get_language_from_locale(lang_id,NULL);
         gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
-                             lang);
+                             lang_cc);
     }
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
                          GetPasswordModeText(ActUser,&passtype));

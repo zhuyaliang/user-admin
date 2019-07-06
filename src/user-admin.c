@@ -838,20 +838,6 @@ static void SetNewUserPass(GtkWidget *Vbox,AddNUDialog *and)
     gtk_grid_set_row_spacing(GTK_GRID(Table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(Table), 10);
 }        
-static void LoadHeader_bar(AddNUDialog *and)
-{
-    GtkWidget *Header;
-    Header = gtk_header_bar_new (); 
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (Header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (Header), _("Create New User"));
-
-    and->ButtonConfirm = gtk_button_new_with_label (_("Confirm"));
-    gtk_header_bar_pack_end (GTK_HEADER_BAR (Header), and->ButtonConfirm);
-    and->ButtonCancel = gtk_button_new_with_label ("Cancel");
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (Header), and->ButtonCancel);
-    
-    gtk_window_set_titlebar (GTK_WINDOW (and), Header);
-}  
 static void
 add_nu_dialog_init (AddNUDialog *dialog)
 {
@@ -861,15 +847,8 @@ add_nu_dialog_init (AddNUDialog *dialog)
 	gboolean   ret;
 
 	gtk_widget_set_size_request (GTK_WIDGET (dialog),500,450);
-	if(GetUseHeader() == 1)
-    {
-        LoadHeader_bar(dialog);
-    }
-	else
-	{
-		dialog->ButtonCancel  = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
-		dialog->ButtonConfirm = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Confirm"), GTK_RESPONSE_OK);
-	}
+	dialog->ButtonCancel  = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
+	dialog->ButtonConfirm = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Confirm"), GTK_RESPONSE_OK);
     gtk_widget_set_sensitive(dialog->ButtonConfirm,FALSE); 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	gtk_widget_grab_default (dialog->ButtonConfirm);
@@ -954,6 +933,8 @@ add_nu_dialog_response (GtkDialog *dialog,
             g_cancellable_cancel (and->cancellable);
             CloseWindow(GTK_WIDGET(and));
             break;
+		default:
+			break;
     }
 
 }

@@ -652,3 +652,20 @@ GtkWidget *SetComboUserType(const char *s1,const char *s2)
 
     return ComboUser;
 }
+
+GtkWidget *SetButtonIcon(const gchar *button_text,const gchar *icon_name)
+{
+    GtkWidget *button;
+    GtkWidget *image;
+    GtkStyleContext *Context;
+
+    button = gtk_button_new_with_mnemonic (button_text);
+    image  = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON);
+    gtk_button_set_image (GTK_BUTTON (button), image);
+    gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
+    Context = gtk_widget_get_style_context (button);
+    gtk_style_context_add_class (Context, "text-button");
+    gtk_widget_set_can_default (button, TRUE);
+
+    return button;
+}    

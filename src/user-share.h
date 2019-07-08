@@ -81,4 +81,6 @@ int         GetPassStrength        (const char  *password,
                                     const char  *username,
                                     const char **message);
 
+GtkWidget  *SetButtonIcon          (const gchar *button_text,
+                                    const gchar *icon_name);
 #endif

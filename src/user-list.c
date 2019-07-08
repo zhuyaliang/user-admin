@@ -222,9 +222,9 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
 
     LableSpace = gtk_label_new(NULL);
     gtk_grid_attach(GTK_GRID(table) , LableSpace , 0 , 0 , 4 , 1);
-    ua->ButtonAdd    =  gtk_button_new_with_label(_("Add User"));
-    ua->ButtonRemove =  gtk_button_new_with_label(_("Remove User"));
-    ButtonClose      =  gtk_button_new_with_label(_("Close"));
+    ua->ButtonAdd    = SetButtonIcon(_("Add User"),"list-add");
+    ua->ButtonRemove = SetButtonIcon(_("Remove User"),"list-remove");
+    ButtonClose      = SetButtonIcon(_("Close"),"window-close");
 
     gtk_grid_attach(GTK_GRID(table) , ua->ButtonRemove , 0 , 1 , 1 , 1);
     gtk_grid_attach(GTK_GRID(table) , ua->ButtonAdd ,    1 , 1 , 1 , 1);

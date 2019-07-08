@@ -933,7 +933,7 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
-    ButtonClose    =  gtk_button_new_with_label(_("Close"));
+    ButtonClose    =  SetButtonIcon(_("Close"),"window-close");
     gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 1 , 1 , 1); 
     if(GetUseHeader() == 0)
     {
@@ -999,7 +999,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     
     Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5);
     gtk_grid_attach(GTK_GRID(table) , Hbox, 0,3,2,1);
-    ButtonClose    =  gtk_button_new_with_label(_("Close"));
+    ButtonClose    =  SetButtonIcon(_("Close"),"window-close");
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
@@ -1010,7 +1010,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start (GTK_BOX (Hbox), ButtonPlace, TRUE, TRUE, 0);
     gtk_widget_hide(ButtonPlace);
     
-    ButtonConfirm    =  gtk_button_new_with_label(_("Confirm"));
+    ButtonConfirm    =  SetButtonIcon(_("Confirm"),"object-select");
     g_signal_connect (ButtonConfirm, 
                      "clicked",
                       G_CALLBACK (CreateNewGroup),
@@ -1055,14 +1055,14 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
-    ButtonClose    =  gtk_button_new_with_label(_("Close"));
+    ButtonClose    =  SetButtonIcon(_("Close"),"window-close");
     gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 1 , 1 , 1); 
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
                       gm);
  
-    ButtonRemove    =  gtk_button_new_with_label(_("Remove"));
+    ButtonRemove    =  SetButtonIcon(_("Remove"),"list-remove");
     gtk_grid_attach(GTK_GRID(table) , ButtonRemove , 2 , 1 , 1 , 1);
     g_signal_connect (ButtonRemove, 
                      "clicked",

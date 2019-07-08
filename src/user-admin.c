@@ -20,6 +20,7 @@
 #include "user-admin.h"
 #include "user-info.h"
 #include "user-list.h"
+#include "user-password.h"
 #include <pwd.h>
 #include <grp.h>
 #include <sys/types.h>
@@ -449,6 +450,7 @@ static void add_user_to_group(const char *name, char **groups)
 				mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
 				continue;
 			}
+	        mate_uesr_admin_log("Debug","group name %s",groups[i]);
 			gas_group_add_user_group(gas,name);
 		}
 
@@ -498,6 +500,7 @@ static void NewUserLoaded (ActUser         *user,
         act_user_set_password (user,Password, "");
     }
     un = gtk_entry_get_text(GTK_ENTRY(and->UserNameEntry));
+	mate_uesr_admin_log("Debug","New user: %s lang %s", act_user_get_user_name (user),NewUserLang);
 	add_user_to_group(un,and->nuGroups);
     
     CloseWindow(GTK_WIDGET(and));
@@ -847,8 +850,17 @@ add_nu_dialog_init (AddNUDialog *dialog)
 	gboolean   ret;
 
 	gtk_widget_set_size_request (GTK_WIDGET (dialog),500,450);
-	dialog->ButtonCancel  = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
-	dialog->ButtonConfirm = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Confirm"), GTK_RESPONSE_OK);
+	
+   // dialog->ButtonCancel  = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
+    dialog->ButtonCancel  = dialog_add_button_with_icon_name (GTK_DIALOG (dialog), 
+                                                             _("Close"), 
+                                                             "window-close", 
+                                                              GTK_RESPONSE_CANCEL);
+//	dialog->ButtonConfirm = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Confirm"), GTK_RESPONSE_OK);
+    dialog->ButtonConfirm = dialog_add_button_with_icon_name (GTK_DIALOG (dialog), 
+                                                              _("Confirm"), 
+                                                              "emblem-default", 
+                                                              GTK_RESPONSE_OK);
     gtk_widget_set_sensitive(dialog->ButtonConfirm,FALSE); 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	gtk_widget_grab_default (dialog->ButtonConfirm);

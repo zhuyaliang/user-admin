@@ -690,7 +690,6 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     {
         mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
         g_error_free(error);
-        g_print("get icon Fial %s\r\n",error->message);
     }    
     pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf(pb2);

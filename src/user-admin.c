@@ -44,7 +44,7 @@ G_DEFINE_TYPE (AddNUDialog, add_nu_dialog, GTK_TYPE_DIALOG);
 
 static void RemoveTimer(AddNUDialog *and)
 {
-	if(and->CheckPassTimeId > 0)
+    if(and->CheckPassTimeId > 0)
         g_source_remove(and->CheckPassTimeId);
     if(and->CheckNameTimeId > 0)
         g_source_remove(and->CheckNameTimeId);
@@ -55,83 +55,83 @@ static void RemoveTimer(AddNUDialog *and)
 
 static void  AddTimer(AddNUDialog *and)
 {
-	if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(and->RadioButton2)))
-	{
-		and->CheckPassTimeId = g_timeout_add(800,(GSourceFunc)TimeFun,and);
-	}
+    if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(and->RadioButton2)))
+    {
+        and->CheckPassTimeId = g_timeout_add(800,(GSourceFunc)TimeFun,and);
+    }
     and->CheckNameTimeId = g_timeout_add(800,(GSourceFunc)CheckName,and);
 
 }
 static gboolean GetNewUserConfig(AddNUDialog *and)
 {
-	GKeyFile         *Kconfig = NULL;
-	g_autoptr(GError) error = NULL;
-	char            **ConfigGroups = NULL;
-	char            **unGroups = NULL;
-	gsize             Length = 0;
-	char             *Value = NULL;
-	gboolean          Type;
+    GKeyFile         *Kconfig = NULL;
+    g_autoptr(GError) error = NULL;
+    char            **ConfigGroups = NULL;
+    char            **unGroups = NULL;
+    gsize             Length = 0;
+    char             *Value = NULL;
+    gboolean          Type;
 
-	Kconfig = g_key_file_new();
-	if(Kconfig == NULL)
-	{
-		mate_uesr_admin_log("Warning","g_key_file_new fail");
-		return FALSE;
+    Kconfig = g_key_file_new();
+    if(Kconfig == NULL)
+    {
+        mate_uesr_admin_log("Warning","g_key_file_new fail");
+        return FALSE;
+    }
+    if(!g_key_file_load_from_file(Kconfig, NUCONFIG, G_KEY_FILE_NONE, &error))
+    {
+        mate_uesr_admin_log("Warning","Error loading key file: %s", error->message);
+        goto EXIT;
+    }
+    ConfigGroups = g_key_file_get_groups(Kconfig, &Length);
+    if(g_strv_length(ConfigGroups) <= 0)
+    {
+        mate_uesr_admin_log("Warning","key file format errors are not grouped");
+        goto EXIT;
 	}
-	if(!g_key_file_load_from_file(Kconfig, NUCONFIG, G_KEY_FILE_NONE, &error))
-	{
-		mate_uesr_admin_log("Warning","Error loading key file: %s", error->message);
-		goto EXIT;
-	}
-	ConfigGroups = g_key_file_get_groups(Kconfig, &Length);
-	if(g_strv_length(ConfigGroups) <= 0)
-	{
-		mate_uesr_admin_log("Warning","key file format errors are not grouped");
-		goto EXIT;
-	}
-	if(g_key_file_has_key(Kconfig,KEYGROUPNAME,LANGKEY,&error) == FALSE)
-	{
-		mate_uesr_admin_log("Warning","key file format errors %s",error->message);
-		goto EXIT;
-	}
-	Value = g_key_file_get_string(Kconfig,KEYGROUPNAME,LANGKEY,&error);
-	if(Value == NULL)
-	{
-		mate_uesr_admin_log("Warning","key file format errors %s",error->message);
-		goto EXIT;
-	}
-	if(mate_get_language_from_locale(Value,NULL) == NULL)
-	{
-		mate_uesr_admin_log("Warning","key file language format errors Language unavailability");
-		goto EXIT;
-	}
-	and->nuLang = g_strdup((gpointer)Value);
+    if(g_key_file_has_key(Kconfig,KEYGROUPNAME,LANGKEY,&error) == FALSE)
+    {
+        mate_uesr_admin_log("Warning","key file format errors %s",error->message);
+        goto EXIT;
+    }
+    Value = g_key_file_get_string(Kconfig,KEYGROUPNAME,LANGKEY,&error);
+    if(Value == NULL)
+    {
+        mate_uesr_admin_log("Warning","key file format errors %s",error->message);
+        goto EXIT;
+    }
+    if(mate_get_language_from_locale(Value,NULL) == NULL)
+    {
+        mate_uesr_admin_log("Warning","key file language format errors Language unavailability");
+        goto EXIT;
+    }
+    and->nuLang = g_strdup((gpointer)Value);
 
-	Type = g_key_file_get_boolean(Kconfig,KEYGROUPNAME,TYPEKEY,&error);
-	if(Type == FALSE && error != NULL)
-	{
-		mate_uesr_admin_log("Warning","key file user type format errors %s",error->message);
-		goto EXIT;
-	}
-	and->nuType = Type;
+    Type = g_key_file_get_boolean(Kconfig,KEYGROUPNAME,TYPEKEY,&error);
+    if(Type == FALSE && error != NULL)
+    {
+        mate_uesr_admin_log("Warning","key file user type format errors %s",error->message);
+        goto EXIT;
+    }
+    and->nuType = Type;
 
-	unGroups = g_key_file_get_string_list(Kconfig,KEYGROUPNAME,GROUPKEY,&Length,&error);
-	if(unGroups == NULL)
-	{
-		mate_uesr_admin_log("Info","key file No default add group is set for new users");
-		g_key_file_free(Kconfig);
-		return TRUE;
-	}
-	and->nuGroups = g_strdupv(unGroups);
-	g_key_file_free(Kconfig);
-	return TRUE;
+    unGroups = g_key_file_get_string_list(Kconfig,KEYGROUPNAME,GROUPKEY,&Length,&error);
+    if(unGroups == NULL)
+    {
+        mate_uesr_admin_log("Info","key file No default add group is set for new users");
+        g_key_file_free(Kconfig);
+        return TRUE;
+    }
+    and->nuGroups = g_strdupv(unGroups);
+    g_key_file_free(Kconfig);
+    return TRUE;
 
 EXIT:
 
-	and->nuLang = NULL;
-	and->nuGroups = NULL;
-	g_key_file_free(Kconfig);
-	return FALSE;
+    and->nuLang = NULL;
+    and->nuGroups = NULL;
+    g_key_file_free(Kconfig);
+    return FALSE;
 }
 static uid_t GetLoginUserUid(void)
 {
@@ -167,18 +167,18 @@ static void DeleteOldUserDone (ActUserManager *manager,
                                GAsyncResult   *res,
                                UserAdmin      *ua)
 {
-	GError *error = NULL;
+    GError *error = NULL;
 
-	if (!act_user_manager_delete_user_finish (manager, res, &error)) 
-	{
-		if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED)) 
-		{
-			MessageReport(_("Remove User"),
+    if (!act_user_manager_delete_user_finish (manager, res, &error)) 
+    {
+        if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED)) 
+        {
+            MessageReport(_("Remove User"),
                           error->message,
                           ERROR);
-			g_error_free (error);
-		}
-	}	
+            g_error_free (error);
+        }
+    }	
 
 }
 
@@ -232,7 +232,7 @@ void RemoveUser(GtkWidget *widget, gpointer data)
             act_user_set_automatic_login (user->ActUser, FALSE);
         }
 
-		act_user_manager_delete_user_async (Manager,
+        act_user_manager_delete_user_async (Manager,
                                             user->ActUser,
                                             RemoveType,
                                             NULL,
@@ -414,51 +414,51 @@ static int GetNewUserType(GtkWidget *Switch)
 }  
 static const gchar *GetNewUserLang(AddNUDialog *and)
 {
-	if(and->nuLang != NULL)
-	{
-		mate_uesr_admin_log("Debug","nuLang = %s",and->nuLang);
-		return and->nuLang;;
-	}
+    if(and->nuLang != NULL)
+    {
+        mate_uesr_admin_log("Debug","nuLang = %s",and->nuLang);
+        return and->nuLang;;
+    }
     return "en_US.utf8";
 }   
 
 static void add_user_to_group(const char *name, char **groups)
 {
-	int groups_num = 0,i;
+    int groups_num = 0,i;
     GasGroup        *gas = NULL;
     GasGroupManager *manage;
 
-	if(groups != NULL)
-	{
-		manage = gas_group_manager_get_default();
+    if(groups != NULL)
+    {
+        manage = gas_group_manager_get_default();
         gas_group_manager_list_groups(manage);
-		groups_num = g_strv_length(groups);
-		for(i = 0;i < groups_num; i++)
-		{
+        groups_num = g_strv_length(groups);
+        for(i = 0;i < groups_num; i++)
+        {
             if(getgrnam (groups[i]) == NULL)
             {
                 if(g_utf8_strchr(groups[i],-1,' ') != NULL)
                 {
-				    mate_uesr_admin_log("Warning","Configuration file error,Please delete the extra space keys");
+                    mate_uesr_admin_log("Warning","Configuration file error,Please delete the extra space keys");
                 }    
-				mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
-				continue;
+                mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
+                continue;
             }    
-			gas = gas_group_manager_get_group(manage,groups[i]);
-			if(gas == NULL)
-			{
-				mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
-				continue;
-			}
-	        mate_uesr_admin_log("Debug","group name %s",groups[i]);
-			gas_group_add_user_group(gas,name);
-		}
+            gas = gas_group_manager_get_group(manage,groups[i]);
+            if(gas == NULL)
+            {
+                mate_uesr_admin_log("Warning","Configuration file error, no group %s",groups[i]);
+                continue;
+            }
+            mate_uesr_admin_log("Debug","group name %s",groups[i]);
+            gas_group_add_user_group(gas,name);
+        }
 
-	}
+    }
 }
 static void CloseWindow(GtkWidget *widget)
 {
-	gtk_widget_hide (widget);    
+    gtk_widget_hide (widget);    
 
     UnlockFlag = 0;
 }       
@@ -472,7 +472,7 @@ static void NewUserLoaded (ActUser         *user,
     const char *un;
     int         PasswordType = NEWPASS;
     
-	UserType = GetNewUserType(and->NewUserType);
+    UserType = GetNewUserType(and->NewUserType);
     NewUserLang  = GetNewUserLang(and);
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(and->RadioButton2)) == TRUE)
     {        
@@ -500,8 +500,8 @@ static void NewUserLoaded (ActUser         *user,
         act_user_set_password (user,Password, "");
     }
     un = gtk_entry_get_text(GTK_ENTRY(and->UserNameEntry));
-	mate_uesr_admin_log("Debug","New user: %s lang %s", act_user_get_user_name (user),NewUserLang);
-	add_user_to_group(un,and->nuGroups);
+    mate_uesr_admin_log("Debug","New user: %s lang %s", act_user_get_user_name (user),NewUserLang);
+    add_user_to_group(un,and->nuGroups);
     
     CloseWindow(GTK_WIDGET(and));
 
@@ -513,21 +513,21 @@ static void CreateUserDone (ActUserManager  *Manager,
 							AddNUDialog    *and)
 {
     GError  *error = NULL;
-	ActUser *user;
+    ActUser *user;
 
-	user = act_user_manager_create_user_finish (Manager, res, &error);
+    user = act_user_manager_create_user_finish (Manager, res, &error);
     if(user == NULL)
     {
         MessageReport(_("Creating User"),error->message,ERROR);
         g_error_free(error);
-		AddTimer(and);
+        AddTimer(and);
         return;
     }   
-	mate_uesr_admin_log("Debug","Created user: %s success", act_user_get_user_name (user));
+    mate_uesr_admin_log("Debug","Created user: %s success", act_user_get_user_name (user));
     if (act_user_is_loaded (user))
-		NewUserLoaded(user,NULL,and);
+        NewUserLoaded(user,NULL,and);
     else
-		g_signal_connect (user, "notify::is-loaded", G_CALLBACK (NewUserLoaded), and);
+        g_signal_connect (user, "notify::is-loaded", G_CALLBACK (NewUserLoaded), and);
         
 }
 
@@ -553,14 +553,14 @@ static void CreateLocalNewUser(AddNUDialog *and)
     rn = gtk_entry_get_text(GTK_ENTRY(and->RealNameEntry));
     un = gtk_entry_get_text(GTK_ENTRY(and->UserNameEntry));
 	
-	RemoveTimer(and);
+    RemoveTimer(and);
     Manager = act_user_manager_get_default ();
-	mate_uesr_admin_log("Debug","username %s realname %s",
+    mate_uesr_admin_log("Debug","username %s realname %s",
                         un,rn);
     act_user_manager_create_user_async (Manager,
                                         un,
                                         rn,
-										ACT_USER_ACCOUNT_TYPE_STANDARD,
+									    ACT_USER_ACCOUNT_TYPE_STANDARD,
                                         and->cancellable,
                                         (GAsyncReadyCallback)CreateUserDone,
                                         and);
@@ -618,14 +618,14 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
      
     and->NewUserType = SetComboUserType(_("Standard"),_("Administrators"));
-	if(CanConfig == TRUE)
-	{
-		gtk_combo_box_set_active(GTK_COMBO_BOX(and->NewUserType),and->nuType);
-	}
-	else
-	{
-		gtk_combo_box_set_active(GTK_COMBO_BOX(and->NewUserType),STANDARD);
-	}
+    if(CanConfig == TRUE)
+    {
+        gtk_combo_box_set_active(GTK_COMBO_BOX(and->NewUserType),and->nuType);
+    }
+    else
+    {
+        gtk_combo_box_set_active(GTK_COMBO_BOX(and->NewUserType),STANDARD);
+    }
    
     gtk_grid_attach(GTK_GRID(Table) ,and->NewUserType , 1 , 3 , 3 , 1);        
 
@@ -844,27 +844,25 @@ static void SetNewUserPass(GtkWidget *Vbox,AddNUDialog *and)
 static void
 add_nu_dialog_init (AddNUDialog *dialog)
 {
-	GtkWidget *Vbox;
+    GtkWidget *Vbox;
     GtkWidget *Vbox1;
     GtkWidget *Vbox2;
-	gboolean   ret;
+    gboolean   ret;
 
-	gtk_widget_set_size_request (GTK_WIDGET (dialog),500,450);
+    gtk_widget_set_size_request (GTK_WIDGET (dialog),500,450);
 	
-   // dialog->ButtonCancel  = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
     dialog->ButtonCancel  = dialog_add_button_with_icon_name (GTK_DIALOG (dialog), 
                                                              _("Close"), 
                                                              "window-close", 
                                                               GTK_RESPONSE_CANCEL);
-//	dialog->ButtonConfirm = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Confirm"), GTK_RESPONSE_OK);
     dialog->ButtonConfirm = dialog_add_button_with_icon_name (GTK_DIALOG (dialog), 
                                                               _("Confirm"), 
                                                               "emblem-default", 
                                                               GTK_RESPONSE_OK);
     gtk_widget_set_sensitive(dialog->ButtonConfirm,FALSE); 
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	gtk_widget_grab_default (dialog->ButtonConfirm);
-	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New User"));
+    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    gtk_widget_grab_default (dialog->ButtonConfirm);
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Create New User"));
     
 	Vbox =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
@@ -878,10 +876,10 @@ add_nu_dialog_init (AddNUDialog *dialog)
     Vbox2 =  gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_pack_start(GTK_BOX(Vbox), Vbox2,TRUE, TRUE, 0);
 	
-	ret = GetNewUserConfig(dialog);
+    ret = GetNewUserConfig(dialog);
     dialog->CheckNameTimeId = 0;
     dialog->CheckPassTimeId = 0;
-	SetNewUserInfo(Vbox1,dialog,ret); 
+    SetNewUserInfo(Vbox1,dialog,ret); 
     SetNewUserPass(Vbox2,dialog);
     
 }
@@ -894,12 +892,12 @@ static void GetPermission (GObject      *source_object,
     GError *error = NULL;
 
     if (g_permission_acquire_finish (and->permission, res, &error)) 
-	{	
-		g_return_if_fail (g_permission_get_allowed (and->permission));
+    {	
+        g_return_if_fail (g_permission_get_allowed (and->permission));
         add_nu_dialog_response (GTK_DIALOG (and), GTK_RESPONSE_OK);
     } 
-	else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) 
-	{
+    else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) 
+    {
         mate_uesr_admin_log ("Warning","Failed to acquire permission: %s", error->message);
     }
 
@@ -911,10 +909,10 @@ static void GetPermission (GObject      *source_object,
 static void
 add_nu_dialog_finalize (GObject *obj)
 {
-	AddNUDialog *self = ADDNUDIALOG (obj);
+    AddNUDialog *self = ADDNUDIALOG (obj);
 
     if (self->cancellable)
-                g_object_unref (self->cancellable);
+        g_object_unref (self->cancellable);
     g_clear_object (&self->permission);
 
     G_OBJECT_CLASS (add_nu_dialog_parent_class)->finalize (obj);
@@ -924,70 +922,68 @@ static void
 add_nu_dialog_response (GtkDialog *dialog,
                         gint response_id)
 {
-	AddNUDialog *and = ADDNUDIALOG (dialog);
+    AddNUDialog *and = ADDNUDIALOG (dialog);
 
     switch (response_id) 
-	{
-		case GTK_RESPONSE_OK:
-			if (and->permission && !g_permission_get_allowed (and->permission)) 
-			{
-				g_permission_acquire_async (and->permission, 
-											and->cancellable,
+    {
+        case GTK_RESPONSE_OK:
+            if (and->permission && !g_permission_get_allowed (and->permission)) 
+            {
+                g_permission_acquire_async (and->permission, 
+										    and->cancellable,
 						                    GetPermission, 
-											g_object_ref (and));
+										    g_object_ref (and));
                 return;
 			}	
 
-			CreateLocalNewUser (and);
-			break;
-		case GTK_RESPONSE_CANCEL:
-		case GTK_RESPONSE_DELETE_EVENT:
+            CreateLocalNewUser (and);
+            break;
+        case GTK_RESPONSE_CANCEL:
+        case GTK_RESPONSE_DELETE_EVENT:
             g_cancellable_cancel (and->cancellable);
             CloseWindow(GTK_WIDGET(and));
             break;
-		default:
-			break;
+        default:
+            break;
     }
 
 }
 static void
 add_nu_dialog_dispose (GObject *obj)
 {
-	AddNUDialog *and = ADDNUDIALOG (obj);
+    AddNUDialog *and = ADDNUDIALOG (obj);
    
-	RemoveTimer(and);
-	if(and->nuLang != NULL)
-	{
-		g_free(and->nuLang);
-	}
-	if(and->nuGroups != NULL)
-	{
-		g_free(and->nuGroups);
-	}
+    RemoveTimer(and);
+    if(and->nuLang != NULL)
+    {
+        g_free(and->nuLang);
+    }
+    if(and->nuGroups != NULL)
+    {
+        g_free(and->nuGroups);
+    }
 
 }
 static void
 add_nu_dialog_class_init (AddNUDialogClass *klass)
 {
-	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-	GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
+    GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
 
-	object_class->dispose =  add_nu_dialog_dispose;
-	object_class->finalize = add_nu_dialog_finalize;
+    object_class->dispose =  add_nu_dialog_dispose;
+    object_class->finalize = add_nu_dialog_finalize;
 
-	dialog_class->response = add_nu_dialog_response;
+    dialog_class->response = add_nu_dialog_response;
 }
-
-
 
 AddNUDialog *Add_NUDialog_new (void)
 {
-	AddNUDialog *dialog;
+    AddNUDialog *dialog;
 
-	dialog = g_object_new(ADD_NU_TYPE_DIALOG, NULL);
+    dialog = g_object_new(ADD_NU_TYPE_DIALOG, NULL);
 	
-	gtk_widget_show_all(GTK_WIDGET(dialog));
-	return dialog;
+    gtk_widget_show_all(GTK_WIDGET(dialog));
+    return dialog;
 }
 
 /******************************************************************************
@@ -1004,7 +1000,5 @@ AddNUDialog *Add_NUDialog_new (void)
 void AddNewUser(GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-
-	ua->NUDialog = Add_NUDialog_new();
-	
+    ua->NUDialog = Add_NUDialog_new();
 }        

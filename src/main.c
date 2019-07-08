@@ -53,15 +53,11 @@ static GdkPixbuf * GetAppIcon(void)
 }    
 static void UpdatePermission(UserAdmin *ua)
 {
-    gboolean is_authorized;
-    gboolean self_selected;
+    gboolean  is_authorized;
+    gboolean  self_selected;
     UserInfo *user;
 
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    if (!user) 
-    {
-        return;
-    }
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
     self_selected = act_user_get_uid (user->ActUser) == geteuid ();
     
@@ -119,32 +115,32 @@ static void InitMainWindow(UserAdmin *ua)
                      ua);
     
     ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
-    if (ua->Permission == NULL)
+    if (ua->Permission != NULL)
     {
-        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
-        g_error_free (error);
-    }
-
-    ua->ButtonLock = gtk_lock_button_new(ua->Permission);
-    gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
-    if(GetUseHeader() == 1)
-    {    
-        mate_uesr_admin_log("Info","mate-user-admin dialogs use header");
-        LoadHeader_bar(ua);
-    }
-    gtk_widget_grab_focus(ua->ButtonLock);    
-    g_signal_connect(ua->Permission, 
-                    "notify",
-                     G_CALLBACK (on_permission_changed), 
-                     ua);
+        ua->ButtonLock = gtk_lock_button_new(ua->Permission);
+        gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
+        if(GetUseHeader() == 1)
+        {    
+            mate_uesr_admin_log("Info","mate-user-admin dialogs use header");
+            LoadHeader_bar(ua);
+        }
+        gtk_widget_grab_focus(ua->ButtonLock);    
+        g_signal_connect(ua->Permission, 
+                        "notify",
+                         G_CALLBACK (on_permission_changed), 
+                         ua);
     
-    AppIcon = GetAppIcon();
-    if(AppIcon)
-    {
-        gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
-        g_object_unref(AppIcon);
-    }   
-    ua->language_chooser = NULL;
+        AppIcon = GetAppIcon();
+        if(AppIcon)
+        {
+            gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
+            g_object_unref(AppIcon);
+        }   
+        ua->language_chooser = NULL;
+    }
+    mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
+    g_error_free (error);
+
 }
 
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
@@ -254,16 +250,16 @@ ERROREXIT:
 
 static void DeleteOldUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *ua)
 {
-    UserInfo       *user;
+    UserInfo *user;
     
-	user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-	ua->UsersList = g_slist_remove(ua->UsersList,user);
+    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    ua->UsersList = g_slist_remove(ua->UsersList,user);
     RefreshUserList(ua->UserList,ua->UsersList);
     /*Scavenging user information*/
     user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     if(user == NULL)
     {
-		g_error(_("No such user!!!"));
+        g_error(_("No such user!!!"));
     }    
     UpdateInterface(user->ActUser,ua);                  
     ua->UserCount--;                                        
@@ -273,25 +269,25 @@ static void AddNewUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *u
 {
     UserInfo   *user;
     UserInfo   *currentuser;
-	const char *un;
-	const char *rn;
+    const char *un;
+    const char *rn;
 	
-	user = user_new();
-	un = GetUserName(ActUser); 
-	rn = GetRealName(ActUser);
-	user->UserName = g_strdup(un);
-	user->ActUser  = ActUser;
-	UserListAppend(ua->UserList,
-				   DEFAULT,
+    user = user_new();
+    un = GetUserName(ActUser); 
+    rn = GetRealName(ActUser);
+    user->UserName = g_strdup(un);
+    user->ActUser  = ActUser;
+    UserListAppend(ua->UserList,
+    			   DEFAULT,
                    rn,
                    un,
                    ua->UserCount,
-                   &(ua->NUDialog->NewUserIter));
-	user->Iter     = ua->NUDialog->NewUserIter;
-	ua->UsersList  = g_slist_append(ua->UsersList,g_object_ref(user));
-	currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-	UpdateInterface(currentuser->ActUser,ua);
-	ua->UserCount +=1;//用户个数加1
+                  &(ua->NUDialog->NewUserIter));
+    user->Iter     = ua->NUDialog->NewUserIter;
+    ua->UsersList  = g_slist_append(ua->UsersList,g_object_ref(user));
+    currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    UpdateInterface(currentuser->ActUser,ua);
+    ua->UserCount +=1;//用户个数加1
 }
 static void users_loaded(ActUserManager  *manager,
                          GParamSpec      *pspec, 
@@ -315,8 +311,8 @@ static void users_loaded(ActUserManager  *manager,
    
     CreateInterface(Vbox,ua);
     UpdatePermission(ua);
-	g_signal_connect (manager, "user-added", G_CALLBACK (AddNewUserToList), ua);
-	g_signal_connect (manager, "user-removed", G_CALLBACK (DeleteOldUserToList), ua);
+    g_signal_connect (manager, "user-added", G_CALLBACK (AddNewUserToList), ua);
+    g_signal_connect (manager, "user-removed", G_CALLBACK (DeleteOldUserToList), ua);
     gtk_widget_show_all(ua->MainWindow);
 
 }    

@@ -127,7 +127,6 @@ static gboolean GetNewUserConfig(AddNUDialog *and)
     return TRUE;
 
 EXIT:
-
     and->nuLang = NULL;
     and->nuGroups = NULL;
     g_key_file_free(Kconfig);
@@ -560,7 +559,7 @@ static void CreateLocalNewUser(AddNUDialog *and)
     act_user_manager_create_user_async (Manager,
                                         un,
                                         rn,
-									    ACT_USER_ACCOUNT_TYPE_STANDARD,
+                                        ACT_USER_ACCOUNT_TYPE_STANDARD,
                                         and->cancellable,
                                         (GAsyncReadyCallback)CreateUserDone,
                                         and);
@@ -934,7 +933,7 @@ add_nu_dialog_response (GtkDialog *dialog,
 						                    GetPermission, 
 										    g_object_ref (and));
                 return;
-			}	
+            }	
 
             CreateLocalNewUser (and);
             break;

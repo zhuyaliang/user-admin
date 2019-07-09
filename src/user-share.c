@@ -47,7 +47,30 @@ static int create_log_file(void)
     
     g_free(file_name);    
     return file_dp;
-}    
+}
+static GdkPixbuf *GetRoundPixbuf (GdkPixbuf *Spixbuf)
+{
+    GdkPixbuf *Dpixbuf = NULL;
+    cairo_surface_t *CairoFace;
+    cairo_t   *Cairo;
+    int        PixSize;
+
+    PixSize = gdk_pixbuf_get_width (Spixbuf);
+    CairoFace = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, PixSize,PixSize);
+    Cairo = cairo_create (CairoFace);
+
+    cairo_arc (Cairo, PixSize/2, PixSize/2, PixSize/2, 0, 2 * G_PI);
+    cairo_clip (Cairo);
+    cairo_new_path (Cairo);
+    gdk_cairo_set_source_pixbuf (Cairo,Spixbuf,0,0);
+    cairo_paint (Cairo);
+
+    Dpixbuf = gdk_pixbuf_get_from_surface (CairoFace,0,0,PixSize,PixSize);
+    cairo_surface_destroy (CairoFace);
+    cairo_destroy (Cairo);
+
+    return Dpixbuf;
+}
 /*Record error information to log file*/
 void mate_uesr_admin_log(const char *level,const char *message,...)
 {
@@ -55,7 +78,7 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     va_list args;
     char   *file_data;
     char    buf[256]; 
-	int     len;
+    int     len;
 
     fd = create_log_file();
     if(fd < 0)
@@ -67,10 +90,10 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     va_end(args);
     file_data = g_strdup_printf("level:[%s]  message: %s\r\n",level,buf);
     len = write(fd,file_data,strlen(file_data));
-	if(len <= 0)
-	{
-		MessageReport("write log","write log error",ERROR);	
-	}
+    if(len <= 0)
+    {
+        MessageReport("write log","write log error",ERROR);	
+    }
 }    
 
 void close_log_file (void)
@@ -222,6 +245,7 @@ void UserListAppend(GtkWidget   *list,
 
     /*set user icon size 50 * 50 */
     face = SetUserFaceSize (UserIcon, 50);
+    
     store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(list)));
     label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
                                       RealName,UserName);
@@ -249,18 +273,21 @@ void UserListAppend(GtkWidget   *list,
 ******************************************************************************/ 
 GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 {
-    GdkPixbuf *pixbuf;
-    char Path[128] = { 0 };
+    g_autoptr(GdkPixbuf) Spixbuf = NULL;
+    GdkPixbuf *Dpixbuf = NULL;
+    
     if(PicName == NULL)
     {
-        sprintf(Path,"%s",DEFAULT);
+        Spixbuf = gdk_pixbuf_new_from_file_at_size (DEFAULT, Size, Size, NULL);
     }
     else
-        sprintf(Path, "%s",PicName);
-
-    pixbuf = gdk_pixbuf_new_from_file_at_size (Path, Size, Size, NULL);
-
-    return pixbuf;
+    {
+        Spixbuf = gdk_pixbuf_new_from_file_at_size (PicName, Size, Size, NULL);
+    }
+    
+    Dpixbuf = GetRoundPixbuf(Spixbuf);
+    
+    return Dpixbuf;
 }
 
 /******************************************************************************
@@ -279,7 +306,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
     const char      *lang_id;
-	const char      *lang_cc;
+    const char      *lang_cc;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
@@ -313,7 +340,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     }
     else
     {    
-		lang_cc = mate_get_language_from_locale(lang_id,NULL);
+        lang_cc = mate_get_language_from_locale(lang_id,NULL);
         gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
                              lang_cc);
     }

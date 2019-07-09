@@ -138,9 +138,11 @@ static void InitMainWindow(UserAdmin *ua)
         }   
         ua->language_chooser = NULL;
     }
-    mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
-    g_error_free (error);
-
+    else
+    {    
+        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
+        g_error_free (error);
+    }
 }
 
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)

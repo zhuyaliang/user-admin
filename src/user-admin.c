@@ -66,10 +66,10 @@ static gboolean GetNewUserConfig(AddNUDialog *and)
 {
     GKeyFile         *Kconfig = NULL;
     g_autoptr(GError) error = NULL;
-    char            **ConfigGroups = NULL;
-    char            **unGroups = NULL;
+    g_auto(GStrv)     onfigGroups = NULL;
+    g_auto(GStrv)     unGroups = NULL;
     gsize             Length = 0;
-    char             *Value = NULL;
+    g_autofree char  *Value = NULL;
     gboolean          Type;
 
     Kconfig = g_key_file_new();

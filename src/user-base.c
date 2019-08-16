@@ -242,6 +242,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     {
         lang = mate_get_language_from_locale (lang_id, NULL);
         ua->ButtonLanguage = gtk_button_new_with_label(lang);
+		g_free (lang);
     }
     g_signal_connect (ua->ButtonLanguage, 
                      "clicked",

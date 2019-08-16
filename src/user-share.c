@@ -77,7 +77,7 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     int     fd;
     va_list args;
     char   *file_data;
-    char    buf[256]; 
+    char    buf[1024]; 
     int     len;
 
     fd = create_log_file();
@@ -94,6 +94,7 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     {
         MessageReport("write log","write log error",ERROR);	
     }
+	g_free (file_data);
 }    
 
 void close_log_file (void)
@@ -207,13 +208,13 @@ int MessageReport(const char *Title,const char *Msg,int nType)
 ******************************************************************************/
 void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word)        
 {
-    char LableTypeBuf[200] = { 0 };
+    char *LableTypeBuf;
     
-    sprintf(LableTypeBuf,
-           "<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
-            Color,FontSzie,Word);
+    LableTypeBuf =  g_strdup_printf("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
+									Color,FontSzie,Word);
     gtk_label_set_markup(GTK_LABEL(Lable),LableTypeBuf);
-
+	
+	g_free (LableTypeBuf);
 }        
 /******************************************************************************
 * Function:             UserListAppend
@@ -306,7 +307,8 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     GtkWidget *image;
     GdkPixbuf *pb, *pb2;
     const char      *lang_id;
-    const char      *lang_cc;
+    g_autofree char *lang_cc;
+	g_autofree char *text;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
@@ -349,9 +351,10 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     
     gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
                          GetUserAutoLogin(ActUser));
-
+	
+	text = GetLoginTimeText(ActUser);
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
-                          GetLoginTimeText(ActUser));
+                          text);
 
     if(self_selected == 0)
     {
@@ -366,7 +369,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
         gtk_widget_set_sensitive(ua->EntryName, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
-    }    
+    }   
     Change = 0;
 
 } 

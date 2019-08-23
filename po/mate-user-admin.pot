@@ -30,7 +30,7 @@ msgid "Get Icon Fail"
 msgstr ""
 
 #: src/main.c:99 src/main.c:112
-msgid "Mate User Manage"
+msgid "Mate User Manager"
 msgstr ""
 
 #: src/main.c:179 src/main.c:221

@@ -195,7 +195,7 @@ msgid "Creating User"
 msgstr ""
 
 #: src/user-admin.c:482 src/user-group.c:681
-msgid "User Name"
+msgid "Username"
 msgstr ""
 
 #: src/user-admin.c:495

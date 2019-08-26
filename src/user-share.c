@@ -308,7 +308,7 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     GdkPixbuf *pb, *pb2;
     const char      *lang_id;
     g_autofree char *lang_cc;
-	g_autofree char *text;
+	g_autofree const char *text;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;

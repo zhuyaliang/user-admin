@@ -592,7 +592,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
 
     LabelUserName = gtk_label_new(NULL);
-    SetLableFontType(LabelUserName,"gray",11,_("User Name"));
+    SetLableFontType(LabelUserName,"gray",11,_("Username"));
     gtk_grid_attach(GTK_GRID(Table) , LabelUserName , 0 , 0 , 1 , 1);
 
     and->UserNameEntry   = gtk_entry_new();
@@ -605,7 +605,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_attach(GTK_GRID(Table) ,and->LabelNameNote , 0 , 1, 4 , 1);
 
     LabelRealName = gtk_label_new(NULL);
-    SetLableFontType(LabelRealName,"gray",11,_("Login Name"));
+    SetLableFontType(LabelRealName,"gray",11,_("Full Name"));
     gtk_grid_attach(GTK_GRID(Table) , LabelRealName , 0 , 2 , 1 , 1);
 
     and->RealNameEntry = gtk_entry_new();

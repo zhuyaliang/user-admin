@@ -94,7 +94,7 @@ static void LoadHeader_bar(UserAdmin *ua)
     
     header = gtk_header_bar_new ();
     gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manage"));
+    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manager"));
     gtk_header_bar_pack_start (GTK_HEADER_BAR (header), ua->ButtonLock);
     gtk_window_set_titlebar (GTK_WINDOW (ua->MainWindow), header);
 }    
@@ -107,7 +107,7 @@ static void InitMainWindow(UserAdmin *ua)
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     ua->MainWindow = Window;
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Window),_("Mate User Manage")); 
+    gtk_window_set_title(GTK_WINDOW(Window),_("Mate User Manager"));
     gtk_container_set_border_width(GTK_CONTAINER(Window),10);
     g_signal_connect(G_OBJECT(Window), 
                     "delete-event",

@@ -41,7 +41,7 @@ static int create_log_file(void)
         return file_dp;
     }    
     t_stamp = time(&t);
-    file_name = g_strdup_printf("/tmp/log-%d",t_stamp);
+    file_name = g_strdup_printf("/tmp/mate-user-admin-%d.log",t_stamp);
 
     file_dp = open(file_name,O_RDWR|O_CREAT,0666);
     

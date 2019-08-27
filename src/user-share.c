@@ -305,10 +305,11 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 {
     GtkWidget *image;
-    GdkPixbuf *pb, *pb2;
+    g_autoptr(GdkPixbuf) pb = NULL;
+    GdkPixbuf *pb2;
     const char      *lang_id;
-    g_autofree char *lang_cc;
-	g_autofree const char *text;
+    g_autofree char *lang_cc = NULL;
+	g_autofree const char *text = NULL;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
@@ -371,7 +372,6 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
         gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
     }   
     Change = 0;
-
 } 
 static pwquality_settings_t * get_pwq (void)
 {

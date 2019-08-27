@@ -206,6 +206,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     UserInfo  *user;
     char      *lang;
     const char *lang_id;
+    g_autofree const char *time = NULL;
 
     user = GetIndexUser(ua->UsersList,0);
     fixed = gtk_fixed_new();
@@ -281,8 +282,9 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     LabelTime = gtk_label_new(NULL);
     SetLableFontType(LabelTime,"gray",11,_("Login time"));
     gtk_grid_attach(GTK_GRID(table) , LabelTime, 0 , 4 , 1 , 1);
-  
-    ButtonTime = gtk_button_new_with_label (GetLoginTimeText(user->ActUser));
+    
+    time = GetLoginTimeText(user->ActUser);
+    ButtonTime = gtk_button_new_with_label (time);
     ua->ButtonUserTime = ButtonTime;
     gtk_grid_attach(GTK_GRID(table) , ButtonTime, 1 , 4 , 2 , 1);
     g_signal_connect (ButtonTime, 

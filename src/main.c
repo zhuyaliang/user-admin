@@ -38,7 +38,7 @@ static gboolean on_window_quit (GtkWidget *widget,
 }
 static GdkPixbuf * GetAppIcon(void)
 {
-    GdkPixbuf *Pixbuf;
+    GdkPixbuf *Pixbuf = NULL;
     GError    *Error = NULL;
 
     Pixbuf = gdk_pixbuf_new_from_file(ICONDIR APPICON,&Error);
@@ -101,7 +101,7 @@ static void LoadHeader_bar(UserAdmin *ua)
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
-    GdkPixbuf *AppIcon;
+    g_autoptr(GdkPixbuf) AppIcon = NULL;
     GError    *error = NULL;
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -134,7 +134,6 @@ static void InitMainWindow(UserAdmin *ua)
         if(AppIcon)
         {
             gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
-            g_object_unref(AppIcon);
         }   
         ua->language_chooser = NULL;
     }
@@ -273,7 +272,9 @@ static void AddNewUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *u
     UserInfo   *currentuser;
     const char *un;
     const char *rn;
-	
+    
+    if (act_user_get_uid (ActUser) == 0)
+        return;    
     user = user_new();
     un = GetUserName(ActUser); 
     rn = GetRealName(ActUser);

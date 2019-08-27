@@ -46,7 +46,8 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     GtkWidget *image;
     GdkPixbuf *face;
     UserInfo  *user;
-    GdkPixbuf *pb, *pb2;
+    g_autoptr(GdkPixbuf) pb = NULL;
+    GdkPixbuf *pb2;
     char BasePath[100] = { 0 };
     if(nCount >= 0)
     {    
@@ -670,7 +671,8 @@ static void ModifyName (GtkEntry *entry,gpointer  data)
 void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
 {
     GtkWidget *image;
-    GdkPixbuf *pb, *pb2;
+    g_autoptr(GdkPixbuf) pb = NULL;
+    GdkPixbuf *pb2;
     GtkWidget *EntryName;
     GtkWidget *table;
     GtkWidget *fixed;

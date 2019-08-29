@@ -22,7 +22,7 @@
 #include "user-face.h"
 #include "user-list.h"
 
-#define  LOCKFILE              "/tmp/user-admin.pid"
+#define  LOCKFILE              "/tmp/mate-user-admin.pid"
 #define  APPICON               "user-admin.png"
 #define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
@@ -202,7 +202,7 @@ static int RecordPid(void)
 * Function:              ProcessRuning      
 *        
 * Explain: Check whether the process has been started,If the process is not started, 
-*          record the current process ID =====>"/tmp/user-admin.pid"
+*          record the current process ID =====>"/tmp/mate-user-admin.pid"
 *        
 * Input:         
 *        

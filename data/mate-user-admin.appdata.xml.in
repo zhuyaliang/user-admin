@@ -4,8 +4,8 @@
  <metadata_license>CC0-1.0</metadata_license>
  <project_license>GPL-3.0+</project_license>
  <name>MATE Manager</name>
- <_summary>Managing Linux Local Users and Groups</_summary>
- <_description>
+ <summary>Managing Linux Local Users and Groups</summary>
+ <description>
  <p>
    Mate Manager is a graphical application that manages local users and groups. 
    It can add and delete local users, change user name, user type, user language, 
@@ -13,7 +13,7 @@
    By working with group-service, groups of users can be managed, such as 
    adding/removing existing groups and creating/deleting new groups.
  </p>
- </_description>
+ </description>
  <screenshots>
   <screenshot type="default">
    <image width="600" height="540">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 16:02+0800\n"
+"POT-Creation-Date: 2019-09-19 17:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,23 @@ msgstr ""
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
+msgstr ""
+
+#: data/mate-user-admin.appdata.xml.in:6
+msgid "MATE Manager"
+msgstr ""
+
+#: data/mate-user-admin.appdata.xml.in:7
+msgid "Managing Linux Local Users and Groups"
+msgstr ""
+
+#: data/mate-user-admin.appdata.xml.in:9
+msgid ""
+"Mate Manager is a graphical application that manages local users and groups. "
+"It can add and delete local users, change user name, user type, user "
+"language, user password, automatic login. You can view the user's login "
+"record. By working with group-service, groups of users can be managed, such "
+"as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
 
 #: src/main.c:47

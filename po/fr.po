@@ -2,20 +2,27 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Charles Monzat <c.monzat@laposte.net>, 2019
+# Laurent Napias, 2019
+# Wolfgang Ulbrich <mate@raveit.de>, 2019
+# Stefano Karapetsas <stefano@karapetsas.com>, 2019
+# Pierre-Yves <kyrios@skynet.be>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-11 10:31+0800\n"
-"PO-Revision-Date: 2019-03-10 18:50+0100\n"
-"Last-Translator: Pierre-Yves <pyu@riseup.net>\n"
-"Language-Team: \n"
-"Language: fr\n"
+"POT-Creation-Date: 2019-04-22 11:20+0800\n"
+"PO-Revision-Date: 2019-05-07 07:46+0000\n"
+"Last-Translator: Pierre-Yves <kyrios@skynet.be>, 2019\n"
+"Language-Team: French (https://www.transifex.com/mate/teams/13566/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/org.mate.user.admin.policy.in:11
@@ -24,15 +31,16 @@ msgstr "Gérer les comptes utilisateurs"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Authentification nécessaire pour modifier les données de l'utilisateur"
+msgstr ""
+"Authentification nécessaire pour modifier les données de l'utilisateur"
 
 #: src/main.c:46
 msgid "Get Icon Fail"
 msgstr "La récupération de l'icône a échoué"
 
 #: src/main.c:99 src/main.c:112
-msgid "Mate User Manage"
-msgstr "Gestion des Utilisateurs"
+msgid "Mate User Manager"
+msgstr "Gestionnaire d'utilisateurs Mate"
 
 #: src/main.c:179 src/main.c:221
 msgid "open file"
@@ -164,6 +172,7 @@ msgstr "Supprimer également le répertoire personnel de l'utilisateur ?"
 #: src/user-admin.c:117
 msgid "Remove user failure and try again"
 msgstr ""
+"La suppression de l'utilisateur a échoué, veuillez réessayer ultérieurement."
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
@@ -186,8 +195,7 @@ msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"Le nom d'utilisateur ne doit être composé que de lettres majuscules et "
-"minuscules, \n"
+"Le nom d'utilisateur ne doit être composé que de lettres majuscules et minuscules, \n"
 "de chiffres et les caractères suivants : . - _"
 
 #: src/user-admin.c:245 src/user-admin.c:475
@@ -201,12 +209,12 @@ msgid "Creating User"
 msgstr "Création de l'utilisateur"
 
 #: src/user-admin.c:482 src/user-group.c:681
-msgid "User Name"
+msgid "Username"
 msgstr "Nom d'utilisateur"
 
 #: src/user-admin.c:495
-msgid "Login Name"
-msgstr "Identifiant"
+msgid "Full Name"
+msgstr "Nom complet"
 
 #: src/user-admin.c:518 src/user-share.c:480
 msgid "The passwords entered twice are different"
@@ -214,7 +222,7 @@ msgstr "Les mots de passe saisis sont différents"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
-msgstr ""
+msgstr "Les mots de passe hybrides améliorent la sécurité "
 
 #: src/user-admin.c:668
 msgid "Now set the password"
@@ -259,6 +267,8 @@ msgstr "_Ouvrir"
 #: src/user-face.c:521
 msgid "Clicking on the main window closes the picture selection window"
 msgstr ""
+"Cliquez sur la fenêtre principale pour fermer la fenêtre de sélection des "
+"images"
 
 #: src/user-face.c:542
 msgid "Local Picture"
@@ -282,7 +292,7 @@ msgstr "Veuillez saisir un caractère valide"
 
 #: src/user-face.c:705
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Appuyez sur la touche Entrée pour enregistrer les modifications"
 
 #: src/user-list.c:125
 msgid "User List"
@@ -314,7 +324,8 @@ msgstr "Essayez de modifier le mot de passe un peu plus"
 
 #: src/user-share.c:329
 msgid "A password without your user name would be stronger"
-msgstr "Un mot de passe qui ne contient pas votre identifiant serait plus fort"
+msgstr ""
+"Un mot de passe qui ne contient pas votre identifiant serait plus fort"
 
 #: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
@@ -369,11 +380,8 @@ msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Évitez les séquences telles que 1234 ou abcd"
 
 #: src/user-share.c:357
-#, fuzzy
 msgid "Password length needs more than 8 characters"
-msgstr ""
-"Le mot de passe doit faire plus de 8 caractères. Ajoutez plus de lettres, "
-"chiffres ou caractères spéciaux"
+msgstr "Le mot de passe doit contenir plus de 8 caractères"
 
 #: src/user-group.c:163
 msgid "Repeat of group name.Please try another"
@@ -392,8 +400,7 @@ msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"Le nom du groupe ne doit être composé que de lettres majuscules et "
-"minuscules, \n"
+"Le nom du groupe ne doit être composé que de lettres majuscules et minuscules, \n"
 "chiffres et les caractères suivants : . - _"
 
 #: src/user-group.c:269
@@ -410,7 +417,8 @@ msgstr "Créer un groupe utilisateur"
 
 #: src/user-group.c:288
 msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups list."
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
 msgstr "Le groupe à été créé avec succès. Il se trouve en fin de liste."
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
@@ -443,7 +451,7 @@ msgstr "Supprimer"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr ""
+msgstr "Initialisation de group management"
 
 #: src/user-group.c:758
 msgid ""
@@ -548,11 +556,11 @@ msgstr "%s — Activité du compte"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr ""
+msgstr "précédent"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr ""
+msgstr "suivant"
 
 #: src/user-language.c:120
 msgid "More…"
@@ -564,15 +572,9 @@ msgstr "Aucune langue trouvée"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
-msgstr ""
+msgstr "Terminé"
 
 #: src/user-language.c:655
 #, c-format
 msgid "Current User - %s"
 msgstr "Utilisateur actuel - %s"
-
-#~ msgid "Creating a user failed"
-#~ msgstr "La création de l'utilisateur a échoué"
-
-#~ msgid "done"
-#~ msgstr "terminé"

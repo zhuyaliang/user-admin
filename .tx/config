@@ -1,9 +1,10 @@
 [main]
 host = https://www.transifex.com
- 
+
 [MATE.mate-user-admin]
 file_filter = po/<lang>.po
+minimum_perc = 2
 source_file = po/mate-user-admin.pot
 source_lang = en
 type = PO
-minimum_perc = 2
+

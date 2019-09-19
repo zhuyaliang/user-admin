@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Wolfgang Ulbrich <mate@raveit.de>, 2019
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2019
+# 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,567 +15,556 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 11:20+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019\n"
-"Language-Team: Catalan (https://www.transifex.com/mate/teams/13566/ca/)\n"
+"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
+"Language-Team: Korean (https://www.transifex.com/mate/teams/13566/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr "Gestiona els comptes d’usuari"
+msgstr "사용자 계정 관리"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Cal autentificació per canviar les dades dels usuaris"
+msgstr "사용자 데이터를 바꾸시려면 승인이 필요합니다"
 
 #: src/main.c:46
 msgid "Get Icon Fail"
-msgstr "Ha fallat l'obtenció de la icona"
+msgstr "아이콘 보기 실패"
 
 #: src/main.c:99 src/main.c:112
 msgid "Mate User Manager"
-msgstr "Gestor d'usuaris de MATE"
+msgstr ""
 
 #: src/main.c:179 src/main.c:221
 msgid "open file"
-msgstr "obriment de fitxer"
+msgstr "파일 열기"
 
 #: src/main.c:179
 msgid "Create pid file failed"
-msgstr "Ha fallat la creació del fitxer del pid"
+msgstr "pid 파일 만들기 실패"
 
 #: src/main.c:188
 msgid "write file"
-msgstr "escriptura de fitxer"
+msgstr "쓰기 실패"
 
 #: src/main.c:188
 msgid "write pid file failed"
-msgstr "ha fallat l'escriptura del fitxer del pid"
+msgstr "pid 쓰기 실패"
 
 #: src/main.c:221
 msgid "open pid file failed"
-msgstr "ha fallat l'obriment del fitxer del pid"
+msgstr "pid 파일 열기 실패"
 
 #: src/main.c:226
 msgid "read file"
-msgstr "lectura de fitxer"
+msgstr "파일 일기"
 
 #: src/main.c:226
 msgid "read pid file failed"
-msgstr "ha fallat la lectura del fitxer del pid"
+msgstr "pid 파일 읽기 실패"
 
 #: src/user-base.c:220 src/user-admin.c:503
 msgid "Account Type"
-msgstr "Tipus de compte"
+msgstr "계정 종류"
 
 #. drop-down select boxes
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Standard"
-msgstr "Estàndard"
+msgstr "표준"
 
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Administrators"
-msgstr "Administradors"
+msgstr "관리자"
 
 #: src/user-base.c:235 src/user-language.c:137
 msgid "Language"
-msgstr "Idioma"
+msgstr "언어"
 
 #: src/user-base.c:240 src/user-share.c:258
 msgid "No Settings"
-msgstr "Sense ajusts"
+msgstr "설정 안 함"
 
 #: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
 #: src/user-admin.c:676
 msgid "Password"
-msgstr "Contrasenya"
+msgstr "암호"
 
 #: src/user-base.c:267
 msgid "Automatic logon"
-msgstr "Inici de sessió automàtic"
+msgstr "자동 로그온"
 
 #: src/user-base.c:282
 msgid "Login time"
-msgstr "Hora d'inici de sessió"
+msgstr "로그인 시간"
 
 #: src/user-base.c:295
 msgid "Group Manage"
-msgstr "Gestió dels grups"
+msgstr "그룹 관리"
 
 #: src/user-base.c:298
 msgid "Setting Groups"
-msgstr "Establiment dels grups"
+msgstr "그룹 설정"
 
 #: src/user-info.c:66
 msgid "Account is disable"
-msgstr "El compte està inhabilitat"
+msgstr "계정의 사용이 중지 되었습니다"
 
 #. 新建两个单选按钮
 #: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
 msgid "Set up next time"
-msgstr "Configura-la la pròxima vegada"
+msgstr "다음에 설정"
 
 #: src/user-info.c:267
 msgid "Get User Info"
-msgstr "Obtén la informació de l'usuari"
+msgstr "사용자 정보 얻기"
 
 #: src/user-info.c:267
 msgid "user count is 0"
-msgstr "el nombre d'usuaris és 0"
+msgstr "사용자 수는 0입니다"
 
 #. create chnaged passwod dialog
 #: src/user-password.c:210
 msgid "Set Password"
-msgstr "Estableix la contrasenya"
+msgstr "비밀번호 설정"
 
 #: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
 #: src/user-group.c:997 src/user-group.c:1053
 msgid "Close"
-msgstr "Tanca"
+msgstr "닫기"
 
 #: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
 #: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
 msgid "Confirm"
-msgstr "Confirma"
+msgstr "확인"
 
 #: src/user-password.c:251
 msgid "Now set up"
-msgstr "Configura-la ara"
+msgstr "지금 설정"
 
 #: src/user-password.c:260
 msgid "User Password"
-msgstr "Contrasenya de l'usuari"
+msgstr "사용자 비밀번호"
 
 #: src/user-password.c:270 src/user-admin.c:689
 msgid "generation password"
-msgstr "generació de la contrasenya"
+msgstr "비밀번호 만들기"
 
 #: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
 #: src/user-list.c:226
 msgid "Remove User"
-msgstr "Suprimeix l'usuari"
+msgstr "사용자 지우기"
 
 #: src/user-admin.c:88
 msgid "You cannot delete your own account."
-msgstr "No podeu suprimir el vostre compte."
+msgstr "본인 계정은 지울 수 없습니다."
 
 #: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
-msgstr "Si s'ha de suprimir el directori personal de l'usuari"
+msgstr "사용자의 홈 디렉토리 제거 여부를 결정합니다"
 
 #: src/user-admin.c:117
 msgid "Remove user failure and try again"
-msgstr "Ha fallat la supressió de l'usuari, intenteu-ho de nou"
+msgstr "사용자 지우기 실패 다시 시도해보세요"
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
-msgstr "No hi ha tal usuari!"
+msgstr "없는 사용자입니다!!!"
 
 #: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
-msgstr "Repetició de nom d'usuari. Intenteu-ho amb un altre"
+msgstr "같은 사용자 이름이 있습니다. 다른 이름으로 시도해 보세요"
 
 #: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
-msgstr "Repetició de nom de carpeta d'usuari. Intenteu-ho amb un altre"
+msgstr "같은 사용자 홈 이름이 있습니다. 다른 이름으로 시도해 보세요"
 
 #: src/user-admin.c:215
 msgid "The username cannot start with a - ."
-msgstr "El nom d'usuari no pot començar amb un - ."
+msgstr "사용자 이름은 \"-\"로 시작할 수 없습니다."
 
 #: src/user-admin.c:219
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom d'usuari només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"사용자 이름은 반드시 a-z까지의 대소문자와 숫자 \n"
+"그리고 다음의 기호만을 포함해야 합니다:\".\" \"-\" \"_\""
 
 #: src/user-admin.c:245 src/user-admin.c:475
 msgid "This will be used to name your home folder and can't be changed"
-msgstr ""
-"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
-"canviar"
+msgstr "이 이름은 홈 폴더 이름으로 사용되며 바꿀 수 없습니다."
 
 #: src/user-admin.c:319
 msgid "Creating User"
-msgstr "Creació de l'usuari"
+msgstr "사용자 만들기"
 
 #: src/user-admin.c:482 src/user-group.c:681
 msgid "Username"
-msgstr "Nom d'usuari"
+msgstr ""
 
 #: src/user-admin.c:495
 msgid "Full Name"
-msgstr "Nom complet"
+msgstr "전체 이름"
 
 #: src/user-admin.c:518 src/user-share.c:480
 msgid "The passwords entered twice are different"
-msgstr "Les contrasenyes introduïdes dues vegades són diferents"
+msgstr "두 번 입력한 비밀번호가 다릅니다"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
-msgstr "Les contrasenyes híbrides milloren la seguretat"
+msgstr "하이브리드 암호는 보안을 향상합니다"
 
 #: src/user-admin.c:668
 msgid "Now set the password"
-msgstr "Ara establiu la contrasenya"
+msgstr "비밀번호 설정하기"
 
 #: src/user-admin.c:728 src/user-admin.c:772
 msgid "Create New User"
-msgstr "Crea un usuari nou"
+msgstr "새 사용자 만들기"
 
 #: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
 msgid "Cancel"
-msgstr "Cancel·la"
+msgstr "취소"
 
 #: src/user-face.c:299 src/user-face.c:310
 msgid "Create Crop File"
-msgstr "Crea un fitxer de retall"
+msgstr "Crop 파일 만들기"
 
 #: src/user-face.c:300
 msgid "failed to create temporary file for image data"
-msgstr "no s'ha pogut crear un fitxer temporal per a les dades de la imatge"
+msgstr "이미지 데이터용 임시 파일을 만들지 못했습니다"
 
 #: src/user-face.c:368 src/user-face.c:453
 msgid "_Cancel"
-msgstr "_Cancel·la"
+msgstr "취소(_C)"
 
 #: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
-msgstr "Selecciona"
+msgstr "선택"
 
 #: src/user-face.c:427
 msgid "Load Local Picture"
-msgstr "Carrega la imatge local"
+msgstr "컴퓨터에서 사진 불러오기"
 
 #: src/user-face.c:450
 msgid "Browse for more pictures"
-msgstr "Navega per més imatges"
+msgstr "더 많은 사진 둘러보기"
 
 #: src/user-face.c:454
 msgid "_Open"
-msgstr "_Obre"
+msgstr "열기(_O)"
 
 #: src/user-face.c:521
 msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-"En fer clic a la finestra principal es tanca la finestra de selecció de la "
-"imatge"
+msgstr "메인 창을 클릭하면 그림 선택 창이 닫힙니다"
 
 #: src/user-face.c:542
 msgid "Local Picture"
-msgstr "Imatge local"
+msgstr "컴퓨터에 있는 사진"
 
 #: src/user-face.c:556
 msgid "Avatar list"
-msgstr "Llista d'avatars"
+msgstr "아바타 목록"
 
 #: src/user-face.c:557
 msgid "There is no address to store photos"
-msgstr "No hi ha cap adreça per emmagatzemar les imatges"
+msgstr "사진을 저장할 주소가 없습니다"
 
 #: src/user-face.c:655
 msgid "Change Name"
-msgstr "Canvia el nom"
+msgstr "이름 바꾸기"
 
 #: src/user-face.c:655
 msgid "Please enter a valid character"
-msgstr "Introduïu un caràcter vàlid"
+msgstr "올바른 문자를 입력해주세요"
 
 #: src/user-face.c:705
 msgid "Use Enter Key to Save Modifications"
-msgstr "Utilitza la tecla Retorn per desar les modificacions"
+msgstr "설정을 저장하시려면 Enter키를 누르세요"
 
 #: src/user-list.c:125
 msgid "User List"
-msgstr "Llista d'usuaris"
+msgstr "사용자 목록"
 
 #: src/user-list.c:225
 msgid "Add User"
-msgstr "Afegeix un usuari"
+msgstr "사용자 더하기"
 
 #: src/user-share.c:92
 msgid "_Return"
-msgstr "_Retorn"
+msgstr "확인(_R)"
 
 #: src/user-share.c:112
 msgid "Message"
-msgstr "Missatge"
+msgstr "메시지"
 
 #: src/user-share.c:323
 msgid "The new password needs to be different from the old one"
-msgstr "La contrasenya nova ha de ser diferent de l'anterior"
+msgstr "새 비밀번호는 이전 비밀번호와 달라야 합니다"
 
 #: src/user-share.c:325
 msgid "Try changing some letters and numbers"
-msgstr "Intenteu canviar algunes lletres i números"
+msgstr "글자나 숫자를 바꿔보세요"
 
 #: src/user-share.c:327 src/user-share.c:335
 msgid "Try changing the password a bit more"
-msgstr "Intenteu canviar una mica més la contrasenya"
+msgstr "비밀번호를 조금 더 바꿔보세요"
 
 #: src/user-share.c:329
 msgid "A password without your user name would be stronger"
-msgstr "Una contrasenya sense el vostre nom d'usuari seria més forta"
+msgstr "사용자 이름이 없는 비밀번호가 더 강력합니다"
 
 #: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
-msgstr "Intenteu evitar l'ús del vostre nom a la contrasenya"
+msgstr "비밀번호에는 이름을 사용하지 않는 게 좋습니다"
 
 #: src/user-share.c:333
 msgid "Try to avoid some of the words included in the password"
-msgstr "Intenteu evitar algunes de les paraules incloses a la contrasenya"
+msgstr "비밀번호에 사용된 단어 중 일부는 피하는 게 좋습니다"
 
 #: src/user-share.c:337
 msgid "Try to avoid common words"
-msgstr "Intenteu evitar paraules comunes"
+msgstr "일반적인 단어는 피하는 게 좋습니다"
 
 #: src/user-share.c:339
 msgid "Try to avoid reordering existing words"
-msgstr "Intenteu evitar la reordenació de paraules existents"
+msgstr "기존의 단어에서 순서만 바꾸는 것은 피하는 게 좋습니다"
 
 #: src/user-share.c:341
 msgid "Try to use more numbers"
-msgstr "Intenteu utilitzar més números"
+msgstr "숫자를 좀 더 사용해보세요"
 
 #: src/user-share.c:343
 msgid "Try to use more uppercase letters"
-msgstr "Intenteu utilitzar més lletres en majúscules"
+msgstr "대문자를 좀 더 사용해보세요"
 
 #: src/user-share.c:345
 msgid "Try to use more lowercase letters"
-msgstr "Intenteu utilitzar més lletres en minúscules"
+msgstr "소문자를 좀 더 사용해보세요"
 
 #: src/user-share.c:347
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
-"Intenteu utilitzar més caràcters especials, com ara signes de puntuació"
+msgstr "구두점 같은 특수문자를 좀 더 사용해보세요"
 
 #: src/user-share.c:349
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-"Intenteu utilitzar una barreja de lletres, números i signes de puntuació"
+msgstr "문자나 숫자 구두점들을 섞어서 사용해보세요"
 
 #: src/user-share.c:351
 msgid "Try to avoid repeating the same character"
-msgstr "Intenteu evitar la repetició del mateix caràcter"
+msgstr "같은 문자를 반복해서 사용하는 것은 피하는 게 좋습니다"
 
 #: src/user-share.c:353
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
-msgstr ""
-"Intenteu evitar la repetició del mateix tipus de caràcter: heu de barrejar "
-"lletres, números i signes puntuació."
+msgstr "같은 유형의 문자를 반복해서 사용하는 것은 피하는 게 좋습니다 글자나 숫자 구두점들을 섞어서 사용해야 합니다."
 
 #: src/user-share.c:355
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Intenteu evitar les seqüències com ara 1234 o abcd"
+msgstr "1234 또는 abcd 같은 일련의 숫자나 글자의 배열은 피하는 게 좋습니다"
 
 #: src/user-share.c:357
 msgid "Password length needs more than 8 characters"
-msgstr "La longitud de la contrasenya ha de tenir més de 8 caràcters"
+msgstr "비밀번호는 8 글자 이상이어야 합니다"
 
 #: src/user-group.c:163
 msgid "Repeat of group name.Please try another"
-msgstr "Repetició de nom de grup. Intenteu-ho amb un altre"
+msgstr "같은 그룹 이름이 있습니다. 다른 이름으로 시도해 보세요"
 
 #: src/user-group.c:167
 msgid "The groupname cannot start with a - ."
-msgstr "El nom de grup no pot començar amb un - ."
+msgstr "그룹 이름은 \"-\"로 시작할 수 없습니다."
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
-msgstr "El primer caràcter del nom del grup ha de ser una lletra"
+msgstr "그룹 이름에 쓰이는 첫 번째 문자는 글자여야 합니다"
 
 #: src/user-group.c:175
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom de grup només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"그룹 이름은 반드시 a-z까지의 대소문자와 숫자 \n"
+"그리고 다음의 기호만을 포함해야 합니다:\".\" \"-\" \"_\""
 
 #: src/user-group.c:269
 msgid "Create New Group"
-msgstr "Crea un grup nou"
+msgstr "새 그룹 만들기"
 
 #: src/user-group.c:276
 msgid "Create New Group Faild"
-msgstr "Ha fallat la creació del grup nou"
+msgstr "새 그룹 만들기 실패"
 
 #: src/user-group.c:287
 msgid "Create User Group"
-msgstr "Crea un grup d'usuaris"
+msgstr "사용자 그룹 만들기"
 
 #: src/user-group.c:288
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
-msgstr ""
-"S'ha creat amb èxit el grup d'usuaris. Consulteu el final de la llista de "
-"canvis dels grups."
+msgstr "사용자 그룹 만들기를 성공했습니다, switch-groups 목록의 끝을 보아주세요."
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
 msgid "Remove Group"
-msgstr "Suprimeix el grup"
+msgstr "그룹 지우기"
 
 #: src/user-group.c:355
 msgid "Cannot remove root group"
-msgstr "No es pot suprimir el grup root"
+msgstr "root 그룹은 지울 수 없습니다"
 
 #: src/user-group.c:363
 msgid "Whether to remove the selected group"
-msgstr "Si s'ha de suprimir el grup seleccionat"
+msgstr "선택한 그룹의 제거 여부를 결정합니다"
 
 #: src/user-group.c:640 src/user-group.c:716
 msgid "Group Name"
-msgstr "Nom del grup"
+msgstr "그룹 이름"
 
 #: src/user-group.c:649 src/user-group.c:725
 msgid "Group ID"
-msgstr "Id. de grup"
+msgstr "그룹 ID"
 
 #: src/user-group.c:690
 msgid "User ID"
-msgstr "Id. d'usuari"
+msgstr "사용자 ID"
 
 #: src/user-group.c:707 src/user-group.c:1060
 msgid "Remove"
-msgstr "Suprimeix"
+msgstr "제거"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr "Inicialització de la gestió de grups"
+msgstr "초기화 그룹 관리"
 
 #: src/user-group.c:758
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
-"La inicialització ha fallat; consulteu la funció \n"
-"de la interfície del servei de gestió de grups"
+"초기화 실패\n"
+"그룹 관리 서비스 인터페이스 기능을 확인해주세요"
 
 #: src/user-group.c:764
 msgid "Failed to contact the group service"
-msgstr "No s'ha pogut contactar amb group-service"
+msgstr "그룹 서비스에 접근하는 데 실패했습니다"
 
 #: src/user-group.c:765
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
-"Assegureu-vos que group-service està instal·lat i habilitat.\n"
+"group-service를 설치해서 사용 가능하도록 설정했는지 확인해 주세요.\n"
 " url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group.c:773
 msgid "Get the number of groups"
-msgstr "Obtén el nombre de grups"
+msgstr "그룹수 확인하기"
 
 #: src/user-group.c:774
 msgid "The number of groups is 0."
-msgstr "El nombre de grups és 0."
+msgstr "그룹 수는 0 개입니다."
 
 #: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-"Feu clic al signe de desbloqueig que hi ha a la vora superior esquerra"
+msgstr "왼쪽 위 모서리의 잠금 해제 표시를 클릭해 주세요"
 
 #: src/user-group.c:798
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr "Feu clic al botó de desbloqueig a la pàgina «canvi de grup»"
+msgstr "\"swith-group\" 페이지에 있는 잠금 해제 버튼을 클릭해주세요"
 
 #: src/user-group.c:832
 msgid "Groups Manage"
-msgstr "Gestió dels grups"
+msgstr "그룹 관리"
 
 #: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
-msgstr "Usuari actual -- %s"
+msgstr "현재 사용자 -- %s"
 
 #: src/user-group.c:970
 msgid "New Group Name"
-msgstr "Nom del grup nou"
+msgstr "새 그룹 이름"
 
 #: src/user-group.c:981
 msgid "Please select the user to add to the new group"
-msgstr "Seleccioneu l'usuari per afegir-lo al grup nou"
+msgstr "새 그룹에 추가할 사용자를 선택해주세요"
 
 #: src/user-group.c:1082
 msgid "Switch Groups"
-msgstr "Canvis dels grups"
+msgstr "그룹 바꾸기"
 
 #: src/user-group.c:1086
 msgid "Create Groups"
-msgstr "Creació de grups"
+msgstr "그룹 만들기"
 
 #: src/user-group.c:1090
 msgid "Remove Groups"
-msgstr "Supressió de grups"
+msgstr "그룹 지우기"
 
 #: src/user-history.c:43
 msgid "This Week"
-msgstr "aquesta setmana"
+msgstr "이번 주"
 
 #: src/user-history.c:47
 msgid "Last Week"
-msgstr "setmana passada"
+msgstr "지난주"
 
 #: src/user-history.c:149
 msgid "Today"
-msgstr "avui"
+msgstr "오늘"
 
 #: src/user-history.c:153
 msgid "Yesterday"
-msgstr "ahir"
+msgstr "어제"
 
 #: src/user-history.c:159
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%b %e일"
 
 #: src/user-history.c:163
 msgid "%b %e, %Y"
-msgstr "%e %b de %Y"
+msgstr "%Y년 %b %e일"
 
 #: src/user-history.c:246
 msgid "Session Ended"
-msgstr "Sessió finalitzada"
+msgstr "세션 끝"
 
 #: src/user-history.c:253
 msgid "Session Started"
-msgstr "Sessió iniciada"
+msgstr "세션 시작"
 
 #: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
-msgstr "%s — Activitat del compte"
+msgstr "%s — 계정 활동"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr "anterior"
+msgstr "이전"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr "següent"
+msgstr "다음"
 
 #: src/user-language.c:120
 msgid "More…"
-msgstr "Més..."
+msgstr "더보기…"
 
 #: src/user-language.c:161
 msgid "No languages found"
-msgstr "No s'ha trobat cap idioma"
+msgstr "언어를 찾을 수 없습니다"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
-msgstr "Completat"
+msgstr "완료"
 
 #: src/user-language.c:655
 #, c-format
 msgid "Current User - %s"
-msgstr "Usuari actual - %s"
+msgstr "현재 사용자 - %s"

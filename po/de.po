@@ -1,24 +1,31 @@
-# German translations for mate-user-admin package.
-# Copyright (C) 2018 THE mate-user-admin'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
-# Wolfgang Ulbrich <mate@raveit.de>, 2018.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Tobias Bannert <tobannert@gmail.com>, 2019
+# Wolfgang Ulbrich <mate@raveit.de>, 2019
+# Marcel Artz <email@marcel-artz.de>, 2019
+# Stefano Karapetsas <stefano@karapetsas.com>, 2019
+# Ettore Atalan <atalanttore@googlemail.com>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-11 10:31+0800\n"
-"PO-Revision-Date: 2018-09-10 08:59+0200\n"
-"Last-Translator: Wolfgang Ulbrich <mate@raveit.de>\n"
-"Language-Team: German\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-04-22 11:20+0800\n"
+"PO-Revision-Date: 2019-05-07 07:46+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2019\n"
+"Language-Team: German (https://www.transifex.com/mate/teams/13566/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/org.mate.user.admin.policy.in:11
-#, fuzzy
 msgid "Manage user accounts"
 msgstr "Benutzerkonten verwalten"
 
@@ -31,8 +38,8 @@ msgid "Get Icon Fail"
 msgstr "Laden des Sympols fehlgeschlagen"
 
 #: src/main.c:99 src/main.c:112
-msgid "Mate User Manage"
-msgstr "Mate Benutzer Verwaltung"
+msgid "Mate User Manager"
+msgstr "Mate-Benutzerverwaltung"
 
 #: src/main.c:179 src/main.c:221
 msgid "open file"
@@ -123,15 +130,13 @@ msgstr "Benutzeranzahl ist 0"
 
 #. create chnaged passwod dialog
 #: src/user-password.c:210
-#, fuzzy
 msgid "Set Password"
-msgstr "Setze Passwort"
+msgstr "Passwort festlegen"
 
 #: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
 #: src/user-group.c:997 src/user-group.c:1053
-#, fuzzy
 msgid "Close"
-msgstr "Beenden"
+msgstr "Schließen"
 
 #: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
 #: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
@@ -177,7 +182,8 @@ msgstr "Benutzername schon vorhanden, versuchen Sie bitte einen anderen"
 
 #: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
-msgstr "Name des Basisverzeichnis schon vorhanden, versuchen Sie bitte einen anderen"
+msgstr ""
+"Name des Basisverzeichnis schon vorhanden, versuchen Sie bitte einen anderen"
 
 #: src/user-admin.c:215
 msgid "The username cannot start with a - ."
@@ -202,17 +208,16 @@ msgid "Creating User"
 msgstr "Benutzer erstellen"
 
 #: src/user-admin.c:482 src/user-group.c:681
-msgid "User Name"
+msgid "Username"
 msgstr "Benutzername"
 
 #: src/user-admin.c:495
-msgid "Login Name"
-msgstr "Login Name"
+msgid "Full Name"
+msgstr "Vollständiger Name"
 
 #: src/user-admin.c:518 src/user-share.c:480
-#, fuzzy
 msgid "The passwords entered twice are different"
-msgstr "Das neue Passwort muß vom alten verschieden sein"
+msgstr "Das zweite Passwort unterscheidet sich vom ersten"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
@@ -223,18 +228,16 @@ msgid "Now set the password"
 msgstr "Das Passwort jetzt einrichten"
 
 #: src/user-admin.c:728 src/user-admin.c:772
-#, fuzzy
 msgid "Create New User"
-msgstr "Erzeugung der PID-Datei ist fehlgeschlagen"
+msgstr "Neuen Benutzer erstellen"
 
 #: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
 msgid "Cancel"
 msgstr "Abbruch"
 
 #: src/user-face.c:299 src/user-face.c:310
-#, fuzzy
 msgid "Create Crop File"
-msgstr "Schneide Bilddatei zu"
+msgstr ""
 
 #: src/user-face.c:300
 msgid "failed to create temporary file for image data"
@@ -375,57 +378,47 @@ msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Versuchen Sie Sequenzen wie 1234 oder abcd zu vermeiden"
 
 #: src/user-share.c:357
-#, fuzzy
 msgid "Password length needs more than 8 characters"
-msgstr ""
-"Die Passwortlänge benötigt mehr als 8 Bit. Fügen Sie weitere Buchstaben "
-"Nummern und Interpunktion hinzu"
+msgstr "Die Passwortlänge muss mindestens 8 Zeichen lang sein"
 
 #: src/user-group.c:163
-#, fuzzy
 msgid "Repeat of group name.Please try another"
-msgstr "Gruppenname schon vorhanden, versuchen Sie bitte einen anderen"
+msgstr ""
 
 #: src/user-group.c:167
-#, fuzzy
 msgid "The groupname cannot start with a - ."
-msgstr "Der Gruppenname kann nicht mit einem - beginnen"
+msgstr "Der Gruppenname darf nicht mit einem - beginnen."
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
 msgstr "Das erste Zeichen des Gruppennamens benötigt einen Buchstaben"
 
 #: src/user-group.c:175
-#, fuzzy
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"Der Gruppenname sollte nur aus Groß- und Kleinbuchstaben, \n"
-"Buchstaben von a-z, Ziffern und die folgenden Zeichen bestehen: . - _"
 
 #: src/user-group.c:269
-#, fuzzy
 msgid "Create New Group"
-msgstr "Erzeuge eine neue Gruppe"
+msgstr "Neue Gruppe erstellen"
 
 #: src/user-group.c:276
-#, fuzzy
 msgid "Create New Group Faild"
-msgstr "Erzeugen der Gruppe ist fehlgeschlagen"
+msgstr ""
 
 #: src/user-group.c:287
-#, fuzzy
 msgid "Create User Group"
-msgstr "Erzeuge eine Benutzergruppe"
+msgstr "Benutzergruppe erstellen"
 
 #: src/user-group.c:288
 msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups list."
-msgstr "Erzeugen der Gruppe war erfolgreich, schaue am Ende der Gruppenliste nach"
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+"Erzeugen der Gruppe war erfolgreich, schaue am Ende der Gruppenliste nach"
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
-#, fuzzy
 msgid "Remove Group"
 msgstr "Gruppe entfernen"
 
@@ -434,12 +427,10 @@ msgid "Cannot remove root group"
 msgstr "Entfernen der root Gruppe fehlgeschlagen"
 
 #: src/user-group.c:363
-#, fuzzy
 msgid "Whether to remove the selected group"
-msgstr "Gibt an, ob die ausgewählete Gruppe entfernt werden soll"
+msgstr ""
 
 #: src/user-group.c:640 src/user-group.c:716
-#, fuzzy
 msgid "Group Name"
 msgstr "Gruppenname"
 
@@ -448,12 +439,10 @@ msgid "Group ID"
 msgstr "Gruppen ID"
 
 #: src/user-group.c:690
-#, fuzzy
 msgid "User ID"
-msgstr "Benutzer ID"
+msgstr "Benutzerkennung"
 
 #: src/user-group.c:707 src/user-group.c:1060
-#, fuzzy
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -507,7 +496,6 @@ msgid "Current user -- %s"
 msgstr "Aktueller Benutzer -- %s"
 
 #: src/user-group.c:970
-#, fuzzy
 msgid "New Group Name"
 msgstr "Neuer Gruppenname"
 
@@ -520,14 +508,12 @@ msgid "Switch Groups"
 msgstr "Wechsele Gruppe"
 
 #: src/user-group.c:1086
-#, fuzzy
 msgid "Create Groups"
-msgstr "Erzeuge Gruppe"
+msgstr "Gruppen erstellen"
 
 #: src/user-group.c:1090
-#, fuzzy
 msgid "Remove Groups"
-msgstr "Entferne Gruppe"
+msgstr "Gruppen entfernen"
 
 #: src/user-history.c:43
 msgid "This Week"
@@ -579,47 +565,14 @@ msgid "More…"
 msgstr "Mehr…"
 
 #: src/user-language.c:161
-#, fuzzy
 msgid "No languages found"
-msgstr "Zuordnen der Sprache fehlgeschlagen"
+msgstr "Keine Sprachen gefunden"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
 msgstr "Getan"
 
 #: src/user-language.c:655
-#, fuzzy, c-format
+#, c-format
 msgid "Current User - %s"
 msgstr "Aktueller Benutzer - %s"
-
-#~ msgid "Creating a user failed"
-#~ msgstr "Erstellen eines Benutzers fehlgeschlagen"
-
-#~ msgid "Get user language"
-#~ msgstr "Benutzersprache erhalten"
-
-#~ msgid "get user language failed"
-#~ msgstr "Benutzersprache erhalten schlug fehl"
-
-#~ msgid "Inconsistent password"
-#~ msgstr "Inkonsistentes Passwort"
-
-#~ msgid "Add a password"
-#~ msgstr "Fügen Sie ein Passwort hinzu"
-
-#~ msgid "This will be used to name your home folder and can't be changed."
-#~ msgstr ""
-#~ "Dies wird verwendet, um Ihr Basisverzeichnis zu benennen und kann nicht "
-#~ "geändert werden"
-
-#~ msgid "Two inconsistencies in cipher input"
-#~ msgstr "Zwei Inkonsistenzen bei der Chiffre-Eingabe"
-
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgid "Get user languages"
-#~ msgstr "Wähle Benutzer Sprachen"
-
-#~ msgid "The number of users exceeds the scope of management."
-#~ msgstr "Die Anzahl der Benutzer übersteigt den Umfang der Verwaltung"

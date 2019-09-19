@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Wolfgang Ulbrich <mate@raveit.de>, 2019
+# Aputsiak Niels Janussen <aj@isit.gl>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,567 +15,560 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 11:20+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019\n"
-"Language-Team: Catalan (https://www.transifex.com/mate/teams/13566/ca/)\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2019\n"
+"Language-Team: Danish (https://www.transifex.com/mate/teams/13566/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr "Gestiona els comptes d’usuari"
+msgstr "Håndter brugerkonti"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Cal autentificació per canviar les dades dels usuaris"
+msgstr "Der kræves godkendelse for at ændre brugerdata"
 
 #: src/main.c:46
 msgid "Get Icon Fail"
-msgstr "Ha fallat l'obtenció de la icona"
+msgstr "Kunne ikke hente ikon"
 
 #: src/main.c:99 src/main.c:112
 msgid "Mate User Manager"
-msgstr "Gestor d'usuaris de MATE"
+msgstr "Mates brugerhåndtering"
 
 #: src/main.c:179 src/main.c:221
 msgid "open file"
-msgstr "obriment de fitxer"
+msgstr "åbn fil"
 
 #: src/main.c:179
 msgid "Create pid file failed"
-msgstr "Ha fallat la creació del fitxer del pid"
+msgstr "Kunne ikke oprette pid-fil"
 
 #: src/main.c:188
 msgid "write file"
-msgstr "escriptura de fitxer"
+msgstr "skriv fil"
 
 #: src/main.c:188
 msgid "write pid file failed"
-msgstr "ha fallat l'escriptura del fitxer del pid"
+msgstr "kunne ikke skrive pid-fil"
 
 #: src/main.c:221
 msgid "open pid file failed"
-msgstr "ha fallat l'obriment del fitxer del pid"
+msgstr "kunne ikke åbne pid-fil"
 
 #: src/main.c:226
 msgid "read file"
-msgstr "lectura de fitxer"
+msgstr "læs fil"
 
 #: src/main.c:226
 msgid "read pid file failed"
-msgstr "ha fallat la lectura del fitxer del pid"
+msgstr "kunne ikke læse pid-fil"
 
 #: src/user-base.c:220 src/user-admin.c:503
 msgid "Account Type"
-msgstr "Tipus de compte"
+msgstr "Kontotype"
 
 #. drop-down select boxes
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Standard"
-msgstr "Estàndard"
+msgstr "Standard"
 
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Administrators"
-msgstr "Administradors"
+msgstr "Administratorer"
 
 #: src/user-base.c:235 src/user-language.c:137
 msgid "Language"
-msgstr "Idioma"
+msgstr "Sprog"
 
 #: src/user-base.c:240 src/user-share.c:258
 msgid "No Settings"
-msgstr "Sense ajusts"
+msgstr "Ingen indstillinger"
 
 #: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
 #: src/user-admin.c:676
 msgid "Password"
-msgstr "Contrasenya"
+msgstr "Adgangskode"
 
 #: src/user-base.c:267
 msgid "Automatic logon"
-msgstr "Inici de sessió automàtic"
+msgstr "Automatisk logind"
 
 #: src/user-base.c:282
 msgid "Login time"
-msgstr "Hora d'inici de sessió"
+msgstr "logindtidspunkt"
 
 #: src/user-base.c:295
 msgid "Group Manage"
-msgstr "Gestió dels grups"
+msgstr "Gruppehåndtering"
 
 #: src/user-base.c:298
 msgid "Setting Groups"
-msgstr "Establiment dels grups"
+msgstr "Indstillingsgrupper"
 
 #: src/user-info.c:66
 msgid "Account is disable"
-msgstr "El compte està inhabilitat"
+msgstr "Konto er deaktiveret"
 
 #. 新建两个单选按钮
 #: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
 msgid "Set up next time"
-msgstr "Configura-la la pròxima vegada"
+msgstr "Opsæt næste gang"
 
 #: src/user-info.c:267
 msgid "Get User Info"
-msgstr "Obtén la informació de l'usuari"
+msgstr "Hent brugerinformation"
 
 #: src/user-info.c:267
 msgid "user count is 0"
-msgstr "el nombre d'usuaris és 0"
+msgstr "brugerkonto er 0"
 
 #. create chnaged passwod dialog
 #: src/user-password.c:210
 msgid "Set Password"
-msgstr "Estableix la contrasenya"
+msgstr "Angiv adgangskode"
 
 #: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
 #: src/user-group.c:997 src/user-group.c:1053
 msgid "Close"
-msgstr "Tanca"
+msgstr "Luk"
 
 #: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
 #: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
 msgid "Confirm"
-msgstr "Confirma"
+msgstr "Bekræft"
 
 #: src/user-password.c:251
 msgid "Now set up"
-msgstr "Configura-la ara"
+msgstr "Sæt op nu"
 
 #: src/user-password.c:260
 msgid "User Password"
-msgstr "Contrasenya de l'usuari"
+msgstr "Brugeradgangskode"
 
 #: src/user-password.c:270 src/user-admin.c:689
 msgid "generation password"
-msgstr "generació de la contrasenya"
+msgstr "tilfældig adgangskode"
 
 #: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
 #: src/user-list.c:226
 msgid "Remove User"
-msgstr "Suprimeix l'usuari"
+msgstr "Fjern bruger"
 
 #: src/user-admin.c:88
 msgid "You cannot delete your own account."
-msgstr "No podeu suprimir el vostre compte."
+msgstr "Du kan ikke slette din egen konto."
 
 #: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
-msgstr "Si s'ha de suprimir el directori personal de l'usuari"
+msgstr "Om brugerens hjemmemapppe skal fjernes"
 
 #: src/user-admin.c:117
 msgid "Remove user failure and try again"
-msgstr "Ha fallat la supressió de l'usuari, intenteu-ho de nou"
+msgstr "Fjernelse af bruger mislykkedes og prøv igen"
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
-msgstr "No hi ha tal usuari!"
+msgstr "Ingen sådan bruger!!!"
 
 #: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
-msgstr "Repetició de nom d'usuari. Intenteu-ho amb un altre"
+msgstr "Gentagelse af brugernavn. Prøv venligst et andet"
 
 #: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
-msgstr "Repetició de nom de carpeta d'usuari. Intenteu-ho amb un altre"
+msgstr "Gentagelse af brugers hjemmenavn. Prøv venligst et andet"
 
 #: src/user-admin.c:215
 msgid "The username cannot start with a - ."
-msgstr "El nom d'usuari no pot començar amb un - ."
+msgstr "Brugernavnet kan ikke starte med et -."
 
 #: src/user-admin.c:219
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom d'usuari només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"Brugernavnet bør kun bestå af store/små bogstaver\n"
+"fra a-z, tal og de følgende tegn: .-_"
 
 #: src/user-admin.c:245 src/user-admin.c:475
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
-"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
-"canviar"
+"Dette vil blive brugt til at navngive din hjemmemappe og kan ikke ændres"
 
 #: src/user-admin.c:319
 msgid "Creating User"
-msgstr "Creació de l'usuari"
+msgstr "Opretter bruger"
 
 #: src/user-admin.c:482 src/user-group.c:681
 msgid "Username"
-msgstr "Nom d'usuari"
+msgstr "Brugernavn"
 
 #: src/user-admin.c:495
 msgid "Full Name"
-msgstr "Nom complet"
+msgstr "Fulde navn"
 
 #: src/user-admin.c:518 src/user-share.c:480
 msgid "The passwords entered twice are different"
-msgstr "Les contrasenyes introduïdes dues vegades són diferents"
+msgstr "De to indtastede adgangskoder er forskellige"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
-msgstr "Les contrasenyes híbrides milloren la seguretat"
+msgstr "Hybride adgangskoder forbedrer sikkerheden"
 
 #: src/user-admin.c:668
 msgid "Now set the password"
-msgstr "Ara establiu la contrasenya"
+msgstr "Angiv adgangskoden nu"
 
 #: src/user-admin.c:728 src/user-admin.c:772
 msgid "Create New User"
-msgstr "Crea un usuari nou"
+msgstr "Opret ny bruger"
 
 #: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
 msgid "Cancel"
-msgstr "Cancel·la"
+msgstr "Annuller"
 
 #: src/user-face.c:299 src/user-face.c:310
 msgid "Create Crop File"
-msgstr "Crea un fitxer de retall"
+msgstr "Opret beskæringsfil"
 
 #: src/user-face.c:300
 msgid "failed to create temporary file for image data"
-msgstr "no s'ha pogut crear un fitxer temporal per a les dades de la imatge"
+msgstr "kunne ikke oprette midlertidig fil for billeddata"
 
 #: src/user-face.c:368 src/user-face.c:453
 msgid "_Cancel"
-msgstr "_Cancel·la"
+msgstr "_Afbryd"
 
 #: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Vælg"
 
 #: src/user-face.c:427
 msgid "Load Local Picture"
-msgstr "Carrega la imatge local"
+msgstr "Indlæs lokalt billede"
 
 #: src/user-face.c:450
 msgid "Browse for more pictures"
-msgstr "Navega per més imatges"
+msgstr "Gennemse efter flere billeder"
 
 #: src/user-face.c:454
 msgid "_Open"
-msgstr "_Obre"
+msgstr "_Åbn"
 
 #: src/user-face.c:521
 msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-"En fer clic a la finestra principal es tanca la finestra de selecció de la "
-"imatge"
+msgstr "Et klik på hovedvinduet lukker vinduet for billedvalg"
 
 #: src/user-face.c:542
 msgid "Local Picture"
-msgstr "Imatge local"
+msgstr "Lokalt billede"
 
 #: src/user-face.c:556
 msgid "Avatar list"
-msgstr "Llista d'avatars"
+msgstr "Avatarliste"
 
 #: src/user-face.c:557
 msgid "There is no address to store photos"
-msgstr "No hi ha cap adreça per emmagatzemar les imatges"
+msgstr "Der er ingen adresse at lagre billeder"
 
 #: src/user-face.c:655
 msgid "Change Name"
-msgstr "Canvia el nom"
+msgstr "Ændr navn"
 
 #: src/user-face.c:655
 msgid "Please enter a valid character"
-msgstr "Introduïu un caràcter vàlid"
+msgstr "Indtast venligst et gyldigt tegn"
 
 #: src/user-face.c:705
 msgid "Use Enter Key to Save Modifications"
-msgstr "Utilitza la tecla Retorn per desar les modificacions"
+msgstr "Brug tasten Retur til at gemme ændringer"
 
 #: src/user-list.c:125
 msgid "User List"
-msgstr "Llista d'usuaris"
+msgstr "Brugerliste"
 
 #: src/user-list.c:225
 msgid "Add User"
-msgstr "Afegeix un usuari"
+msgstr "Tilføj bruger"
 
 #: src/user-share.c:92
 msgid "_Return"
-msgstr "_Retorn"
+msgstr "_Retur"
 
 #: src/user-share.c:112
 msgid "Message"
-msgstr "Missatge"
+msgstr "Besked"
 
 #: src/user-share.c:323
 msgid "The new password needs to be different from the old one"
-msgstr "La contrasenya nova ha de ser diferent de l'anterior"
+msgstr "Den nye adgangskode skal være forskellig fra den gamle"
 
 #: src/user-share.c:325
 msgid "Try changing some letters and numbers"
-msgstr "Intenteu canviar algunes lletres i números"
+msgstr "Prøv at ændre nogle bogstaver og tal"
 
 #: src/user-share.c:327 src/user-share.c:335
 msgid "Try changing the password a bit more"
-msgstr "Intenteu canviar una mica més la contrasenya"
+msgstr "Prøv at ændre adgangskoden en smule mere"
 
 #: src/user-share.c:329
 msgid "A password without your user name would be stronger"
-msgstr "Una contrasenya sense el vostre nom d'usuari seria més forta"
+msgstr "En adgangskode uden dit brugernavn vil være mere sikker"
 
 #: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
-msgstr "Intenteu evitar l'ús del vostre nom a la contrasenya"
+msgstr "Prøv at undgå at bruge dit navn i adgangskoden"
 
 #: src/user-share.c:333
 msgid "Try to avoid some of the words included in the password"
-msgstr "Intenteu evitar algunes de les paraules incloses a la contrasenya"
+msgstr "Prøv at undgå nogle af ordene inkluderet i adgangskoden"
 
 #: src/user-share.c:337
 msgid "Try to avoid common words"
-msgstr "Intenteu evitar paraules comunes"
+msgstr "Prøv at undgå gængse ord"
 
 #: src/user-share.c:339
 msgid "Try to avoid reordering existing words"
-msgstr "Intenteu evitar la reordenació de paraules existents"
+msgstr "Prøv at undgå ændring af rækkefølge på eksisterende ord"
 
 #: src/user-share.c:341
 msgid "Try to use more numbers"
-msgstr "Intenteu utilitzar més números"
+msgstr "Prøv at bruge flere tal"
 
 #: src/user-share.c:343
 msgid "Try to use more uppercase letters"
-msgstr "Intenteu utilitzar més lletres en majúscules"
+msgstr "Prøv at bruge flere store bogstaver"
 
 #: src/user-share.c:345
 msgid "Try to use more lowercase letters"
-msgstr "Intenteu utilitzar més lletres en minúscules"
+msgstr "Prøv at bruge flere mindre bogstaver"
 
 #: src/user-share.c:347
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
-"Intenteu utilitzar més caràcters especials, com ara signes de puntuació"
+msgstr "Prøv at bruge flere specielle tegn, såsom tegnsætning"
 
 #: src/user-share.c:349
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-"Intenteu utilitzar una barreja de lletres, números i signes de puntuació"
+msgstr "Prøv at bruge en blanding af bogstaver, tal og tegnsætning"
 
 #: src/user-share.c:351
 msgid "Try to avoid repeating the same character"
-msgstr "Intenteu evitar la repetició del mateix caràcter"
+msgstr "Prøv at undgå gentagelse af det samme tegn"
 
 #: src/user-share.c:353
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
-"Intenteu evitar la repetició del mateix tipus de caràcter: heu de barrejar "
-"lletres, números i signes puntuació."
+"Prøv at undgå gentagelse af den samme type af tegn: du skal blande "
+"bogstaver, tal og tegnsætning."
 
 #: src/user-share.c:355
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Intenteu evitar les seqüències com ara 1234 o abcd"
+msgstr "Prøv at undgå sekvenser såsom 1234 eller abcd"
 
 #: src/user-share.c:357
 msgid "Password length needs more than 8 characters"
-msgstr "La longitud de la contrasenya ha de tenir més de 8 caràcters"
+msgstr "Adgangskoden skal være længere end 8 tegn"
 
 #: src/user-group.c:163
 msgid "Repeat of group name.Please try another"
-msgstr "Repetició de nom de grup. Intenteu-ho amb un altre"
+msgstr "Gentagelse af gruppenavn. Prøv venligt et andet"
 
 #: src/user-group.c:167
 msgid "The groupname cannot start with a - ."
-msgstr "El nom de grup no pot començar amb un - ."
+msgstr "Gruppenavnet kan ikke starte med en -."
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
-msgstr "El primer caràcter del nom del grup ha de ser una lletra"
+msgstr "Det første tegn i gruppenavnet skal være et bogstav"
 
 #: src/user-group.c:175
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom de grup només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"Gruppenavnet bør kun bestå af store/små bogstaver\n"
+"fra a-z, tal og de følgende tegn: .-_"
 
 #: src/user-group.c:269
 msgid "Create New Group"
-msgstr "Crea un grup nou"
+msgstr "Opret ny gruppe"
 
 #: src/user-group.c:276
 msgid "Create New Group Faild"
-msgstr "Ha fallat la creació del grup nou"
+msgstr "Opret ny gruppe mislykkedes"
 
 #: src/user-group.c:287
 msgid "Create User Group"
-msgstr "Crea un grup d'usuaris"
+msgstr "Opret brugergruppe"
 
 #: src/user-group.c:288
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
 msgstr ""
-"S'ha creat amb èxit el grup d'usuaris. Consulteu el final de la llista de "
-"canvis dels grups."
+"Opret brugergruppe lykkedes, se venligst slutningen af switch-groups-listen."
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
 msgid "Remove Group"
-msgstr "Suprimeix el grup"
+msgstr "Fjern gruppe"
 
 #: src/user-group.c:355
 msgid "Cannot remove root group"
-msgstr "No es pot suprimir el grup root"
+msgstr "Kan ikke fjerne root-gruppe"
 
 #: src/user-group.c:363
 msgid "Whether to remove the selected group"
-msgstr "Si s'ha de suprimir el grup seleccionat"
+msgstr "Om den valgte gruppe skal fjernes"
 
 #: src/user-group.c:640 src/user-group.c:716
 msgid "Group Name"
-msgstr "Nom del grup"
+msgstr "Gruppenavn"
 
 #: src/user-group.c:649 src/user-group.c:725
 msgid "Group ID"
-msgstr "Id. de grup"
+msgstr "Gruppe-id"
 
 #: src/user-group.c:690
 msgid "User ID"
-msgstr "Id. d'usuari"
+msgstr "Bruger-ID"
 
 #: src/user-group.c:707 src/user-group.c:1060
 msgid "Remove"
-msgstr "Suprimeix"
+msgstr "Fjern"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr "Inicialització de la gestió de grups"
+msgstr "Initialiseringsgruppehåndtering"
 
 #: src/user-group.c:758
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
-"La inicialització ha fallat; consulteu la funció \n"
-"de la interfície del servei de gestió de grups"
+"Initialisering mislykkedes, se venligst funktionen\n"
+"Tjenestegrænseflade for gruppehåndtering"
 
 #: src/user-group.c:764
 msgid "Failed to contact the group service"
-msgstr "No s'ha pogut contactar amb group-service"
+msgstr "Kunne ikke kontakte gruppetjenesten"
 
 #: src/user-group.c:765
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
-"Assegureu-vos que group-service està instal·lat i habilitat.\n"
+"Sikr dig venligst at group-service er installeret og aktiveret.\n"
 " url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group.c:773
 msgid "Get the number of groups"
-msgstr "Obtén el nombre de grups"
+msgstr "Hent antallet af grupper"
 
 #: src/user-group.c:774
 msgid "The number of groups is 0."
-msgstr "El nombre de grups és 0."
+msgstr "Antallet af grupper er 0."
 
 #: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-"Feu clic al signe de desbloqueig que hi ha a la vora superior esquerra"
+msgstr "Dobbeltklik tegnet for lås op i øverste venstre hjørne"
 
 #: src/user-group.c:798
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr "Feu clic al botó de desbloqueig a la pàgina «canvi de grup»"
+msgstr "Klik på knappen lås op på siden »swith-group«"
 
 #: src/user-group.c:832
 msgid "Groups Manage"
-msgstr "Gestió dels grups"
+msgstr "Gruppehåndtering"
 
 #: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
-msgstr "Usuari actual -- %s"
+msgstr "Nuværende bruger -- %s"
 
 #: src/user-group.c:970
 msgid "New Group Name"
-msgstr "Nom del grup nou"
+msgstr "Nyt gruppenavn"
 
 #: src/user-group.c:981
 msgid "Please select the user to add to the new group"
-msgstr "Seleccioneu l'usuari per afegir-lo al grup nou"
+msgstr "Vælg venligst brugeren at tilføje til den nye gruppe"
 
 #: src/user-group.c:1082
 msgid "Switch Groups"
-msgstr "Canvis dels grups"
+msgstr "Skift grupper"
 
 #: src/user-group.c:1086
 msgid "Create Groups"
-msgstr "Creació de grups"
+msgstr "Opret grupper"
 
 #: src/user-group.c:1090
 msgid "Remove Groups"
-msgstr "Supressió de grups"
+msgstr "Fjern grupper"
 
 #: src/user-history.c:43
 msgid "This Week"
-msgstr "aquesta setmana"
+msgstr "Denne uge"
 
 #: src/user-history.c:47
 msgid "Last Week"
-msgstr "setmana passada"
+msgstr "Sidste uge"
 
 #: src/user-history.c:149
 msgid "Today"
-msgstr "avui"
+msgstr "I dag"
 
 #: src/user-history.c:153
 msgid "Yesterday"
-msgstr "ahir"
+msgstr "I går"
 
 #: src/user-history.c:159
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%b %e"
 
 #: src/user-history.c:163
 msgid "%b %e, %Y"
-msgstr "%e %b de %Y"
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:246
 msgid "Session Ended"
-msgstr "Sessió finalitzada"
+msgstr "Session sluttede"
 
 #: src/user-history.c:253
 msgid "Session Started"
-msgstr "Sessió iniciada"
+msgstr "Session startede"
 
 #: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
-msgstr "%s — Activitat del compte"
+msgstr "%s — Kontoaktivitet"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr "anterior"
+msgstr "forrige"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr "següent"
+msgstr "næste"
 
 #: src/user-language.c:120
 msgid "More…"
-msgstr "Més..."
+msgstr "Mere ..."
 
 #: src/user-language.c:161
 msgid "No languages found"
-msgstr "No s'ha trobat cap idioma"
+msgstr "Ingen sprog fundet"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
-msgstr "Completat"
+msgstr "Færdig"
 
 #: src/user-language.c:655
 #, c-format
 msgid "Current User - %s"
-msgstr "Usuari actual - %s"
+msgstr "Nuværende bruger - %s"

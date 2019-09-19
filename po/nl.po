@@ -4,9 +4,10 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Wolfgang Ulbrich <mate@raveit.de>, 2019
+# Michael Steenbeek <m.o.steenbeek@gmail.com>, 2019
+# Erik Bent <hj.bent.60@gmail.com>, 2019
+# Pjotr <pjotrvertaalt@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,567 +16,564 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 11:20+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2019\n"
-"Language-Team: Catalan (https://www.transifex.com/mate/teams/13566/ca/)\n"
+"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
+"Language-Team: Dutch (https://www.transifex.com/mate/teams/13566/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr "Gestiona els comptes d’usuari"
+msgstr "Gebruikersaccounts beheren"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Cal autentificació per canviar les dades dels usuaris"
+msgstr "Authenticatie is vereist voor het wijzigen van gebruikersgegevens"
 
 #: src/main.c:46
 msgid "Get Icon Fail"
-msgstr "Ha fallat l'obtenció de la icona"
+msgstr "Pictogram verkrijgen mislukt"
 
 #: src/main.c:99 src/main.c:112
 msgid "Mate User Manager"
-msgstr "Gestor d'usuaris de MATE"
+msgstr ""
 
 #: src/main.c:179 src/main.c:221
 msgid "open file"
-msgstr "obriment de fitxer"
+msgstr "bestand openen"
 
 #: src/main.c:179
 msgid "Create pid file failed"
-msgstr "Ha fallat la creació del fitxer del pid"
+msgstr "Aanmaken van pid-bestand mislukt"
 
 #: src/main.c:188
 msgid "write file"
-msgstr "escriptura de fitxer"
+msgstr "bestand schrijven"
 
 #: src/main.c:188
 msgid "write pid file failed"
-msgstr "ha fallat l'escriptura del fitxer del pid"
+msgstr "pid-bestand schrijven mislukt"
 
 #: src/main.c:221
 msgid "open pid file failed"
-msgstr "ha fallat l'obriment del fitxer del pid"
+msgstr "pid-bestand openen mislukt"
 
 #: src/main.c:226
 msgid "read file"
-msgstr "lectura de fitxer"
+msgstr "bestand lezen"
 
 #: src/main.c:226
 msgid "read pid file failed"
-msgstr "ha fallat la lectura del fitxer del pid"
+msgstr "pid-bestand lezen mislukt"
 
 #: src/user-base.c:220 src/user-admin.c:503
 msgid "Account Type"
-msgstr "Tipus de compte"
+msgstr "Soort account"
 
 #. drop-down select boxes
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Standard"
-msgstr "Estàndard"
+msgstr "Standaard"
 
 #: src/user-base.c:224 src/user-admin.c:506
 msgid "Administrators"
-msgstr "Administradors"
+msgstr "Beheerders"
 
 #: src/user-base.c:235 src/user-language.c:137
 msgid "Language"
-msgstr "Idioma"
+msgstr "Talen"
 
 #: src/user-base.c:240 src/user-share.c:258
 msgid "No Settings"
-msgstr "Sense ajusts"
+msgstr "Geen instellingen"
 
 #: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
 #: src/user-admin.c:676
 msgid "Password"
-msgstr "Contrasenya"
+msgstr "Wachtwoord"
 
 #: src/user-base.c:267
 msgid "Automatic logon"
-msgstr "Inici de sessió automàtic"
+msgstr "Automatisch aanmelden"
 
 #: src/user-base.c:282
 msgid "Login time"
-msgstr "Hora d'inici de sessió"
+msgstr "Aanmeldtijd"
 
 #: src/user-base.c:295
 msgid "Group Manage"
-msgstr "Gestió dels grups"
+msgstr "Groepsbeheer"
 
 #: src/user-base.c:298
 msgid "Setting Groups"
-msgstr "Establiment dels grups"
+msgstr "Groepen instellen"
 
 #: src/user-info.c:66
 msgid "Account is disable"
-msgstr "El compte està inhabilitat"
+msgstr "Account is uitgeschakeld"
 
 #. 新建两个单选按钮
 #: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
 msgid "Set up next time"
-msgstr "Configura-la la pròxima vegada"
+msgstr "Volgende keer instellen"
 
 #: src/user-info.c:267
 msgid "Get User Info"
-msgstr "Obtén la informació de l'usuari"
+msgstr "Gebruikersinformatie verkrijgen"
 
 #: src/user-info.c:267
 msgid "user count is 0"
-msgstr "el nombre d'usuaris és 0"
+msgstr "aantal gebruikers is 0"
 
 #. create chnaged passwod dialog
 #: src/user-password.c:210
 msgid "Set Password"
-msgstr "Estableix la contrasenya"
+msgstr "Wachtwoord instellen"
 
 #: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
 #: src/user-group.c:997 src/user-group.c:1053
 msgid "Close"
-msgstr "Tanca"
+msgstr "Sluiten"
 
 #: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
 #: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
 msgid "Confirm"
-msgstr "Confirma"
+msgstr "Bevestigen"
 
 #: src/user-password.c:251
 msgid "Now set up"
-msgstr "Configura-la ara"
+msgstr "Nu instellen"
 
 #: src/user-password.c:260
 msgid "User Password"
-msgstr "Contrasenya de l'usuari"
+msgstr "Gebruikerswachtwoord"
 
 #: src/user-password.c:270 src/user-admin.c:689
 msgid "generation password"
-msgstr "generació de la contrasenya"
+msgstr "wachtwoord aanmaken"
 
 #: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
 #: src/user-list.c:226
 msgid "Remove User"
-msgstr "Suprimeix l'usuari"
+msgstr "Gebruiker verwijderen"
 
 #: src/user-admin.c:88
 msgid "You cannot delete your own account."
-msgstr "No podeu suprimir el vostre compte."
+msgstr "U kunt uw eigen account niet verwijderen."
 
 #: src/user-admin.c:94
 msgid "Whether to remove the user's home directory"
-msgstr "Si s'ha de suprimir el directori personal de l'usuari"
+msgstr "Of de persoonlijke map van de gebruiker moet worden verwijderd"
 
 #: src/user-admin.c:117
 msgid "Remove user failure and try again"
-msgstr "Ha fallat la supressió de l'usuari, intenteu-ho de nou"
+msgstr "Verwijderen van gebruiker mislukt en probeer opnieuw"
 
 #: src/user-admin.c:131
 msgid "No such user!!!"
-msgstr "No hi ha tal usuari!"
+msgstr "Die gebruiker bestaat niet!"
 
 #: src/user-admin.c:207
 msgid "Repeat of user name.Please try another"
-msgstr "Repetició de nom d'usuari. Intenteu-ho amb un altre"
+msgstr "Herhaal de gebruikersnaam. Probeer a.u.b. een andere"
 
 #: src/user-admin.c:211
 msgid "Repeat of user home name.Please try another"
-msgstr "Repetició de nom de carpeta d'usuari. Intenteu-ho amb un altre"
+msgstr ""
+"Herhaal de naam van de persoonlijke map van de gebruiker. Probeer a.u.b. een"
+" andere"
 
 #: src/user-admin.c:215
 msgid "The username cannot start with a - ."
-msgstr "El nom d'usuari no pot començar amb un - ."
+msgstr "De gebruikersnaam mag niet beginnen met een - ."
 
 #: src/user-admin.c:219
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom d'usuari només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"De gebruikersnaam mag alleen bestaan uit hoofd- en kleine\n"
+"letters in de a-z reeks, cijfers en de volgende tekens: . - _"
 
 #: src/user-admin.c:245 src/user-admin.c:475
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
-"Això s'utilitzarà per posar el nom a la vostra carpeta d'usuari i no es pot "
-"canviar"
+"Dit zal worden gebruikt om uw persoonlijke map een naam te geven en kan niet"
+" worden veranderd"
 
 #: src/user-admin.c:319
 msgid "Creating User"
-msgstr "Creació de l'usuari"
+msgstr "Gebruiker maken"
 
 #: src/user-admin.c:482 src/user-group.c:681
 msgid "Username"
-msgstr "Nom d'usuari"
+msgstr ""
 
 #: src/user-admin.c:495
 msgid "Full Name"
-msgstr "Nom complet"
+msgstr "Volledige naam"
 
 #: src/user-admin.c:518 src/user-share.c:480
 msgid "The passwords entered twice are different"
-msgstr "Les contrasenyes introduïdes dues vegades són diferents"
+msgstr "De beide wachtwoorden zijn niet identiek"
 
 #: src/user-admin.c:555
 msgid "Hybrid passwords improve security"
-msgstr "Les contrasenyes híbrides milloren la seguretat"
+msgstr "Hybride wachtwoorden verhogen de veiligheid"
 
 #: src/user-admin.c:668
 msgid "Now set the password"
-msgstr "Ara establiu la contrasenya"
+msgstr "Wachtwoord nu instellen"
 
 #: src/user-admin.c:728 src/user-admin.c:772
 msgid "Create New User"
-msgstr "Crea un usuari nou"
+msgstr "Nieuwe gebruiker maken"
 
 #: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
 msgid "Cancel"
-msgstr "Cancel·la"
+msgstr "Afbreken"
 
 #: src/user-face.c:299 src/user-face.c:310
 msgid "Create Crop File"
-msgstr "Crea un fitxer de retall"
+msgstr "Cropbestand maken"
 
 #: src/user-face.c:300
 msgid "failed to create temporary file for image data"
-msgstr "no s'ha pogut crear un fitxer temporal per a les dades de la imatge"
+msgstr "kon geen tijdelijk bestand aanmaken voor afbeeldingsgegevens"
 
 #: src/user-face.c:368 src/user-face.c:453
 msgid "_Cancel"
-msgstr "_Cancel·la"
+msgstr "_Afbreken"
 
 #: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Selecteren"
 
 #: src/user-face.c:427
 msgid "Load Local Picture"
-msgstr "Carrega la imatge local"
+msgstr "Lokale foto laden"
 
 #: src/user-face.c:450
 msgid "Browse for more pictures"
-msgstr "Navega per més imatges"
+msgstr "Doorbladeren naar meer foto's"
 
 #: src/user-face.c:454
 msgid "_Open"
-msgstr "_Obre"
+msgstr "_Openen"
 
 #: src/user-face.c:521
 msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-"En fer clic a la finestra principal es tanca la finestra de selecció de la "
-"imatge"
+msgstr "Klikken op het hoofdvenster sluit het fotoselectievenster"
 
 #: src/user-face.c:542
 msgid "Local Picture"
-msgstr "Imatge local"
+msgstr "Lokale foto"
 
 #: src/user-face.c:556
 msgid "Avatar list"
-msgstr "Llista d'avatars"
+msgstr "Avatarlijst"
 
 #: src/user-face.c:557
 msgid "There is no address to store photos"
-msgstr "No hi ha cap adreça per emmagatzemar les imatges"
+msgstr "Er is geen adres om foto's op te slaan"
 
 #: src/user-face.c:655
 msgid "Change Name"
-msgstr "Canvia el nom"
+msgstr "Naam wijzigen"
 
 #: src/user-face.c:655
 msgid "Please enter a valid character"
-msgstr "Introduïu un caràcter vàlid"
+msgstr "Voer a.u.b. een geldig teken in"
 
 #: src/user-face.c:705
 msgid "Use Enter Key to Save Modifications"
-msgstr "Utilitza la tecla Retorn per desar les modificacions"
+msgstr "Gebruik Entertoets om wijzigingen op te slaan"
 
 #: src/user-list.c:125
 msgid "User List"
-msgstr "Llista d'usuaris"
+msgstr "Gebruikerslijst"
 
 #: src/user-list.c:225
 msgid "Add User"
-msgstr "Afegeix un usuari"
+msgstr "Gebruiker toevoegen"
 
 #: src/user-share.c:92
 msgid "_Return"
-msgstr "_Retorn"
+msgstr "_Terug"
 
 #: src/user-share.c:112
 msgid "Message"
-msgstr "Missatge"
+msgstr "Bericht"
 
 #: src/user-share.c:323
 msgid "The new password needs to be different from the old one"
-msgstr "La contrasenya nova ha de ser diferent de l'anterior"
+msgstr "Het nieuwe wachtwoord moet verschillen van het oude"
 
 #: src/user-share.c:325
 msgid "Try changing some letters and numbers"
-msgstr "Intenteu canviar algunes lletres i números"
+msgstr "Probeer om wat letters en cijfers te veranderen"
 
 #: src/user-share.c:327 src/user-share.c:335
 msgid "Try changing the password a bit more"
-msgstr "Intenteu canviar una mica més la contrasenya"
+msgstr "Probeer om het wachtwoord wat meer te veranderen"
 
 #: src/user-share.c:329
 msgid "A password without your user name would be stronger"
-msgstr "Una contrasenya sense el vostre nom d'usuari seria més forta"
+msgstr "Een wachtwoord zonder uw gebruikersnaam erin zou sterker zijn"
 
 #: src/user-share.c:331
 msgid "Try to avoid using your name in the password"
-msgstr "Intenteu evitar l'ús del vostre nom a la contrasenya"
+msgstr "Probeer om het gebruik van uw naam in het wachtwoord te vermijden"
 
 #: src/user-share.c:333
 msgid "Try to avoid some of the words included in the password"
-msgstr "Intenteu evitar algunes de les paraules incloses a la contrasenya"
+msgstr "Probeer om sommige woorden in het wachtwoord te vermijden"
 
 #: src/user-share.c:337
 msgid "Try to avoid common words"
-msgstr "Intenteu evitar paraules comunes"
+msgstr "Probeer om gewone woorden te vermijden"
 
 #: src/user-share.c:339
 msgid "Try to avoid reordering existing words"
-msgstr "Intenteu evitar la reordenació de paraules existents"
+msgstr "Probeer om het herschikken van bestaande woorden te vermijden"
 
 #: src/user-share.c:341
 msgid "Try to use more numbers"
-msgstr "Intenteu utilitzar més números"
+msgstr "Probeer meer cijfers te gebruiken"
 
 #: src/user-share.c:343
 msgid "Try to use more uppercase letters"
-msgstr "Intenteu utilitzar més lletres en majúscules"
+msgstr "Probeer meer hoofdletters te gebruiken"
 
 #: src/user-share.c:345
 msgid "Try to use more lowercase letters"
-msgstr "Intenteu utilitzar més lletres en minúscules"
+msgstr "Probeer meer kleine letters te gebruiken"
 
 #: src/user-share.c:347
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
-"Intenteu utilitzar més caràcters especials, com ara signes de puntuació"
+msgstr "Probeer meer bijzondere tekens te gebruiken, zoals interpunctie"
 
 #: src/user-share.c:349
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
-"Intenteu utilitzar una barreja de lletres, números i signes de puntuació"
+"Probeer om een mengsel van letters, cijfers en interpunctie te gebruiken"
 
 #: src/user-share.c:351
 msgid "Try to avoid repeating the same character"
-msgstr "Intenteu evitar la repetició del mateix caràcter"
+msgstr "Probeer om het herhalen van hetzelfde teken te vermijden"
 
 #: src/user-share.c:353
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
-"Intenteu evitar la repetició del mateix tipus de caràcter: heu de barrejar "
-"lletres, números i signes puntuació."
+"Probeer om het herhalen van hetzelfde soort teken te vermijden: u dient "
+"letters, cijfers en interpunctie te vermengen."
 
 #: src/user-share.c:355
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Intenteu evitar les seqüències com ara 1234 o abcd"
+msgstr "Probeer om reeksen als 1234 of abcd te vermijden"
 
 #: src/user-share.c:357
 msgid "Password length needs more than 8 characters"
-msgstr "La longitud de la contrasenya ha de tenir més de 8 caràcters"
+msgstr "Wachtwoord moet meer dan acht tekens bevatten"
 
 #: src/user-group.c:163
 msgid "Repeat of group name.Please try another"
-msgstr "Repetició de nom de grup. Intenteu-ho amb un altre"
+msgstr "Herhalen van groepsnaam. Probeer a.u.b. een andere"
 
 #: src/user-group.c:167
 msgid "The groupname cannot start with a - ."
-msgstr "El nom de grup no pot començar amb un - ."
+msgstr "De groepsnaam mag niet beginnen met een - ."
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
-msgstr "El primer caràcter del nom del grup ha de ser una lletra"
+msgstr "Het eerste teken van de groepsnaam moet een letter zijn"
 
 #: src/user-group.c:175
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
-"El nom de grup només hauria de contenir lletres en majúscules\n"
-"i minúscules de la a fins a la z, dígits i els caràcters següents: . - _"
+"De groepsnaam mag alleen bestaan uit hoofd- en kleine\n"
+"letters in de a-z reeks, cijfers en de volgende tekens: . - _"
 
 #: src/user-group.c:269
 msgid "Create New Group"
-msgstr "Crea un grup nou"
+msgstr "Nieuwe groep maken"
 
 #: src/user-group.c:276
 msgid "Create New Group Faild"
-msgstr "Ha fallat la creació del grup nou"
+msgstr "Aanmaken nieuwe groep mislukt"
 
 #: src/user-group.c:287
 msgid "Create User Group"
-msgstr "Crea un grup d'usuaris"
+msgstr "Gebruikersgroep maken"
 
 #: src/user-group.c:288
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
 msgstr ""
-"S'ha creat amb èxit el grup d'usuaris. Consulteu el final de la llista de "
-"canvis dels grups."
+"Groep met succes aangemaakt, zie a.u.b. het einde van de groepswissellijst."
 
 #: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
 msgid "Remove Group"
-msgstr "Suprimeix el grup"
+msgstr "Groep verwijderen"
 
 #: src/user-group.c:355
 msgid "Cannot remove root group"
-msgstr "No es pot suprimir el grup root"
+msgstr "Kan groep root niet verwijderen"
 
 #: src/user-group.c:363
 msgid "Whether to remove the selected group"
-msgstr "Si s'ha de suprimir el grup seleccionat"
+msgstr "Of de gekozen groep moet worden verwijderd"
 
 #: src/user-group.c:640 src/user-group.c:716
 msgid "Group Name"
-msgstr "Nom del grup"
+msgstr "Groepsnaam"
 
 #: src/user-group.c:649 src/user-group.c:725
 msgid "Group ID"
-msgstr "Id. de grup"
+msgstr "Groeps-ID"
 
 #: src/user-group.c:690
 msgid "User ID"
-msgstr "Id. d'usuari"
+msgstr "User-id"
 
 #: src/user-group.c:707 src/user-group.c:1060
 msgid "Remove"
-msgstr "Suprimeix"
+msgstr "Verwijderen"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr "Inicialització de la gestió de grups"
+msgstr "Initialisatie van groepsbeheer"
 
 #: src/user-group.c:758
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
-"La inicialització ha fallat; consulteu la funció \n"
-"de la interfície del servei de gestió de grups"
+"Initialisatie is mislukt, zie a.u.b. de\n"
+"functie Groepsbeheerdienst-bediening"
 
 #: src/user-group.c:764
 msgid "Failed to contact the group service"
-msgstr "No s'ha pogut contactar amb group-service"
+msgstr "Kon geen contact maken met de groepsdienst"
 
 #: src/user-group.c:765
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
-"Assegureu-vos que group-service està instal·lat i habilitat.\n"
+"Zorg er a.u.b. voor dat de groepsdienst is geïnstalleerd en ingeschakeld.\n"
 " url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group.c:773
 msgid "Get the number of groups"
-msgstr "Obtén el nombre de grups"
+msgstr "Toon het aantal groepen"
 
 #: src/user-group.c:774
 msgid "The number of groups is 0."
-msgstr "El nombre de grups és 0."
+msgstr "Het aantal groepen is 0."
 
 #: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-"Feu clic al signe de desbloqueig que hi ha a la vora superior esquerra"
+msgstr "Klik a.u.b. op het ontgrendelingsteken in de linkerbovenhoek"
 
 #: src/user-group.c:798
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr "Feu clic al botó de desbloqueig a la pàgina «canvi de grup»"
+msgstr "Klik op de ontgrendelingsknop op de 'groepswissel'-pagina"
 
 #: src/user-group.c:832
 msgid "Groups Manage"
-msgstr "Gestió dels grups"
+msgstr "Groepen beheren"
 
 #: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
-msgstr "Usuari actual -- %s"
+msgstr "Huidige gebruiker -- %s"
 
 #: src/user-group.c:970
 msgid "New Group Name"
-msgstr "Nom del grup nou"
+msgstr "Nieuwe groepsnaam"
 
 #: src/user-group.c:981
 msgid "Please select the user to add to the new group"
-msgstr "Seleccioneu l'usuari per afegir-lo al grup nou"
+msgstr "Kies a.u.b. de gebruiker om toe te voegen aan de nieuwe groep"
 
 #: src/user-group.c:1082
 msgid "Switch Groups"
-msgstr "Canvis dels grups"
+msgstr "Groepen wisselen"
 
 #: src/user-group.c:1086
 msgid "Create Groups"
-msgstr "Creació de grups"
+msgstr "Groepen aanmaken"
 
 #: src/user-group.c:1090
 msgid "Remove Groups"
-msgstr "Supressió de grups"
+msgstr "Groepen verwijderen"
 
 #: src/user-history.c:43
 msgid "This Week"
-msgstr "aquesta setmana"
+msgstr "Deze week"
 
 #: src/user-history.c:47
 msgid "Last Week"
-msgstr "setmana passada"
+msgstr "Vorige week"
 
 #: src/user-history.c:149
 msgid "Today"
-msgstr "avui"
+msgstr "Vandaag"
 
 #: src/user-history.c:153
 msgid "Yesterday"
-msgstr "ahir"
+msgstr "Gisteren"
 
 #: src/user-history.c:159
 msgid "%b %e"
-msgstr "%e %b"
+msgstr "%b %e"
 
 #: src/user-history.c:163
 msgid "%b %e, %Y"
-msgstr "%e %b de %Y"
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:246
 msgid "Session Ended"
-msgstr "Sessió finalitzada"
+msgstr "Sessie geëindigd"
 
 #: src/user-history.c:253
 msgid "Session Started"
-msgstr "Sessió iniciada"
+msgstr "Sessie aangevangen"
 
 #: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
-msgstr "%s — Activitat del compte"
+msgstr "%s — Accountactiviteit"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr "anterior"
+msgstr "vorige"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr "següent"
+msgstr "volgende"
 
 #: src/user-language.c:120
 msgid "More…"
-msgstr "Més..."
+msgstr "Meer..."
 
 #: src/user-language.c:161
 msgid "No languages found"
-msgstr "No s'ha trobat cap idioma"
+msgstr "Geen talen gevonden"
 
 #: src/user-language.c:574 src/user-language.c:595
 msgid "Done"
-msgstr "Completat"
+msgstr "Gereed"
 
 #: src/user-language.c:655
 #, c-format
 msgid "Current User - %s"
-msgstr "Usuari actual - %s"
+msgstr "Huidige gebruiker - %s"

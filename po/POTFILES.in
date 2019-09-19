@@ -1,4 +1,5 @@
 data/org.mate.user.admin.policy.in
+data/mate-user-admin.appdata.xml.in
 src/main.c	     
 src/user-base.c  
 src/user-info.c  

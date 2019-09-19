@@ -15,7 +15,6 @@ i18n.merge_file(
   type: 'desktop',
 )
 polkit = 'org.mate.user.admin.policy'
-
 i18n.merge_file(
   polkit,
   input: polkit + '.in',
@@ -25,3 +24,12 @@ i18n.merge_file(
   install_dir: join_paths(get_option('prefix'), 'share/polkit-1', 'actions')
 )  
 
+appdata = 'mate-user-admin.appdata.xml'
+i18n.merge_file(
+  polkit,
+  input: appdata + '.in',
+  output: appdata,
+  po_dir: join_paths(meson.source_root(), 'po'),
+  install: true,
+  install_dir: join_paths(get_option('prefix'), 'share/metainfo')
+)  

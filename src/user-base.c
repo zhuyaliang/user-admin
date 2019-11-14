@@ -267,12 +267,11 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     LabelAutoLogin = gtk_label_new(NULL);
     SetLableFontType(LabelAutoLogin,"gray",11,_("Automatic logon"));
     gtk_grid_attach(GTK_GRID(table) , LabelAutoLogin , 0 , 3 , 1 , 1);
-    
     SwitchLogin = gtk_switch_new();
     ua->SwitchAutoLogin = SwitchLogin;
     gtk_switch_set_state (GTK_SWITCH(SwitchLogin),
                           GetUserType(user->ActUser));
-    gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 2 , 1);
     g_signal_connect(G_OBJECT(SwitchLogin),
                     "state-set",
                      G_CALLBACK(SwitchState),

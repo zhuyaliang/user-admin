@@ -154,7 +154,7 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     gtk_box_pack_start(GTK_BOX(Vbox),Hbox,FALSE,FALSE,0); 
     
     Hbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
-    gtk_box_pack_start(GTK_BOX(Hbox),Hbox2,TRUE,TRUE,10); 
+    gtk_box_pack_start(GTK_BOX(Hbox),Hbox2,FALSE,FALSE,10); 
     gtk_widget_set_size_request (Hbox2, 200,-1);
 
     /*Display user list on the left side*/   

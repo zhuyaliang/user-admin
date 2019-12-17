@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 11:20+0800\n"
+"POT-Creation-Date: 2019-09-19 17:39+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
 "Language-Team: Igbo (https://www.transifex.com/mate/teams/13566/ig/)\n"
@@ -29,52 +29,73 @@ msgstr ""
 msgid "Authentication is required to change user data"
 msgstr ""
 
-#: src/main.c:46
+#: data/mate-user-admin.appdata.xml.in:6
+msgid "MATE Manager"
+msgstr ""
+
+#: data/mate-user-admin.appdata.xml.in:7
+msgid "Managing Linux Local Users and Groups"
+msgstr ""
+
+#: data/mate-user-admin.appdata.xml.in:9
+msgid ""
+"Mate Manager is a graphical application that manages local users and groups."
+" It can add and delete local users, change user name, user type, user "
+"language, user password, automatic login. You can view the user's login "
+"record. By working with group-service, groups of users can be managed, such "
+"as adding/removing existing groups and creating/deleting new groups."
+msgstr ""
+
+#: src/main.c:47
 msgid "Get Icon Fail"
 msgstr ""
 
-#: src/main.c:99 src/main.c:112
+#: src/main.c:97 src/main.c:110
 msgid "Mate User Manager"
 msgstr ""
 
-#: src/main.c:179 src/main.c:221
+#: src/main.c:185 src/main.c:227
 msgid "open file"
 msgstr ""
 
-#: src/main.c:179
+#: src/main.c:185
 msgid "Create pid file failed"
 msgstr ""
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write file"
 msgstr ""
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write pid file failed"
 msgstr ""
 
-#: src/main.c:221
+#: src/main.c:227
 msgid "open pid file failed"
 msgstr ""
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read file"
 msgstr ""
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read pid file failed"
 msgstr ""
 
-#: src/user-base.c:220 src/user-admin.c:503
+#: src/main.c:263
+msgid "No such user!!!"
+msgstr ""
+
+#: src/user-base.c:220 src/user-admin.c:616
 msgid "Account Type"
 msgstr ""
 
 #. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Standard"
 msgstr ""
 
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Administrators"
 msgstr ""
 
@@ -82,28 +103,28 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/user-base.c:240 src/user-share.c:258
+#: src/user-base.c:240 src/user-share.c:342
 msgid "No Settings"
 msgstr ""
 
-#: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
-#: src/user-admin.c:676
+#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
+#: src/user-admin.c:796
 msgid "Password"
 msgstr ""
 
-#: src/user-base.c:267
+#: src/user-base.c:268
 msgid "Automatic logon"
 msgstr ""
 
-#: src/user-base.c:282
+#: src/user-base.c:283
 msgid "Login time"
 msgstr ""
 
-#: src/user-base.c:295
+#: src/user-base.c:297
 msgid "Group Manage"
 msgstr ""
 
-#: src/user-base.c:298
+#: src/user-base.c:300
 msgid "Setting Groups"
 msgstr ""
 
@@ -112,15 +133,15 @@ msgid "Account is disable"
 msgstr ""
 
 #. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
+#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
 msgid "Set up next time"
 msgstr ""
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "Get User Info"
 msgstr ""
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "user count is 0"
 msgstr ""
 
@@ -129,13 +150,13 @@ msgstr ""
 msgid "Set Password"
 msgstr ""
 
-#: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
-#: src/user-group.c:997 src/user-group.c:1053
+#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
+#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
 msgid "Close"
 msgstr ""
 
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
-#: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
+#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
+#: src/user-admin.c:858 src/user-group.c:1013
 msgid "Confirm"
 msgstr ""
 
@@ -147,138 +168,126 @@ msgstr ""
 msgid "User Password"
 msgstr ""
 
-#: src/user-password.c:270 src/user-admin.c:689
+#: src/user-password.c:270 src/user-admin.c:809
 msgid "generation password"
 msgstr ""
 
-#: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
+#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
 #: src/user-list.c:226
 msgid "Remove User"
 msgstr ""
 
-#: src/user-admin.c:88
+#: src/user-admin.c:211
 msgid "You cannot delete your own account."
 msgstr ""
 
-#: src/user-admin.c:94
+#: src/user-admin.c:217
 msgid "Whether to remove the user's home directory"
 msgstr ""
 
-#: src/user-admin.c:117
-msgid "Remove user failure and try again"
-msgstr ""
-
-#: src/user-admin.c:131
-msgid "No such user!!!"
-msgstr ""
-
-#: src/user-admin.c:207
+#: src/user-admin.c:313
 msgid "Repeat of user name.Please try another"
 msgstr ""
 
-#: src/user-admin.c:211
+#: src/user-admin.c:317
 msgid "Repeat of user home name.Please try another"
 msgstr ""
 
-#: src/user-admin.c:215
+#: src/user-admin.c:321
 msgid "The username cannot start with a - ."
 msgstr ""
 
-#: src/user-admin.c:219
+#: src/user-admin.c:325
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
 
-#: src/user-admin.c:245 src/user-admin.c:475
+#: src/user-admin.c:350 src/user-admin.c:588
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 
-#: src/user-admin.c:319
+#: src/user-admin.c:520
 msgid "Creating User"
 msgstr ""
 
-#: src/user-admin.c:482 src/user-group.c:681
+#: src/user-admin.c:595 src/user-group.c:681
 msgid "Username"
 msgstr ""
 
-#: src/user-admin.c:495
+#: src/user-admin.c:608
 msgid "Full Name"
 msgstr ""
 
-#: src/user-admin.c:518 src/user-share.c:480
+#: src/user-admin.c:638 src/user-share.c:564
 msgid "The passwords entered twice are different"
 msgstr ""
 
-#: src/user-admin.c:555
+#: src/user-admin.c:675
 msgid "Hybrid passwords improve security"
 msgstr ""
 
-#: src/user-admin.c:668
+#: src/user-admin.c:788
 msgid "Now set the password"
 msgstr ""
 
-#: src/user-admin.c:728 src/user-admin.c:772
+#: src/user-admin.c:864
 msgid "Create New User"
 msgstr ""
 
-#: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
-msgid "Cancel"
-msgstr "Wepụ"
-
-#: src/user-face.c:299 src/user-face.c:310
+#: src/user-face.c:300 src/user-face.c:311
 msgid "Create Crop File"
 msgstr ""
 
-#: src/user-face.c:300
+#: src/user-face.c:301
 msgid "failed to create temporary file for image data"
 msgstr ""
 
-#: src/user-face.c:368 src/user-face.c:453
+#: src/user-face.c:369 src/user-face.c:454
 msgid "_Cancel"
 msgstr ""
 
-#: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
+#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
 msgstr ""
 
-#: src/user-face.c:427
+#: src/user-face.c:428
 msgid "Load Local Picture"
 msgstr ""
 
-#: src/user-face.c:450
+#: src/user-face.c:451
 msgid "Browse for more pictures"
 msgstr ""
 
-#: src/user-face.c:454
+#: src/user-face.c:455
 msgid "_Open"
 msgstr "_Mepee"
 
-#: src/user-face.c:521
+#: src/user-face.c:522
 msgid "Clicking on the main window closes the picture selection window"
 msgstr ""
 
-#: src/user-face.c:542
+#: src/user-face.c:543
 msgid "Local Picture"
 msgstr ""
 
-#: src/user-face.c:556
+#: src/user-face.c:558
 msgid "Avatar list"
 msgstr ""
 
-#: src/user-face.c:557
+#: src/user-face.c:559
 msgid "There is no address to store photos"
 msgstr ""
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Change Name"
 msgstr ""
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Please enter a valid character"
 msgstr ""
 
-#: src/user-face.c:705
+#: src/user-face.c:709
 msgid "Use Enter Key to Save Modifications"
 msgstr ""
 
@@ -290,81 +299,81 @@ msgstr ""
 msgid "Add User"
 msgstr ""
 
-#: src/user-share.c:92
+#: src/user-share.c:169
 msgid "_Return"
 msgstr ""
 
-#: src/user-share.c:112
+#: src/user-share.c:189
 msgid "Message"
 msgstr ""
 
-#: src/user-share.c:323
+#: src/user-share.c:407
 msgid "The new password needs to be different from the old one"
 msgstr ""
 
-#: src/user-share.c:325
+#: src/user-share.c:409
 msgid "Try changing some letters and numbers"
 msgstr ""
 
-#: src/user-share.c:327 src/user-share.c:335
+#: src/user-share.c:411 src/user-share.c:419
 msgid "Try changing the password a bit more"
 msgstr ""
 
-#: src/user-share.c:329
+#: src/user-share.c:413
 msgid "A password without your user name would be stronger"
 msgstr ""
 
-#: src/user-share.c:331
+#: src/user-share.c:415
 msgid "Try to avoid using your name in the password"
 msgstr ""
 
-#: src/user-share.c:333
+#: src/user-share.c:417
 msgid "Try to avoid some of the words included in the password"
 msgstr ""
 
-#: src/user-share.c:337
+#: src/user-share.c:421
 msgid "Try to avoid common words"
 msgstr ""
 
-#: src/user-share.c:339
+#: src/user-share.c:423
 msgid "Try to avoid reordering existing words"
 msgstr ""
 
-#: src/user-share.c:341
+#: src/user-share.c:425
 msgid "Try to use more numbers"
 msgstr ""
 
-#: src/user-share.c:343
+#: src/user-share.c:427
 msgid "Try to use more uppercase letters"
 msgstr ""
 
-#: src/user-share.c:345
+#: src/user-share.c:429
 msgid "Try to use more lowercase letters"
 msgstr ""
 
-#: src/user-share.c:347
+#: src/user-share.c:431
 msgid "Try to use more special characters, like punctuation"
 msgstr ""
 
-#: src/user-share.c:349
+#: src/user-share.c:433
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
 
-#: src/user-share.c:351
+#: src/user-share.c:435
 msgid "Try to avoid repeating the same character"
 msgstr ""
 
-#: src/user-share.c:353
+#: src/user-share.c:437
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
 
-#: src/user-share.c:355
+#: src/user-share.c:439
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr ""
 
-#: src/user-share.c:357
+#: src/user-share.c:441
 msgid "Password length needs more than 8 characters"
 msgstr ""
 
@@ -428,7 +437,7 @@ msgstr ""
 msgid "User ID"
 msgstr ""
 
-#: src/user-group.c:707 src/user-group.c:1060
+#: src/user-group.c:707 src/user-group.c:1065
 msgid "Remove"
 msgstr "Wepụ"
 
@@ -477,23 +486,23 @@ msgstr ""
 msgid "Current user -- %s"
 msgstr ""
 
-#: src/user-group.c:970
+#: src/user-group.c:975
 msgid "New Group Name"
 msgstr ""
 
-#: src/user-group.c:981
+#: src/user-group.c:986
 msgid "Please select the user to add to the new group"
 msgstr ""
 
-#: src/user-group.c:1082
+#: src/user-group.c:1087
 msgid "Switch Groups"
 msgstr ""
 
-#: src/user-group.c:1086
+#: src/user-group.c:1091
 msgid "Create Groups"
 msgstr ""
 
-#: src/user-group.c:1090
+#: src/user-group.c:1095
 msgid "Remove Groups"
 msgstr ""
 
@@ -550,11 +559,15 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: src/user-language.c:574 src/user-language.c:595
+#: src/user-language.c:573 src/user-language.c:596
+msgid "Cancel"
+msgstr "Wepụ"
+
+#: src/user-language.c:576 src/user-language.c:597
 msgid "Done"
 msgstr ""
 
-#: src/user-language.c:655
+#: src/user-language.c:657
 #, c-format
 msgid "Current User - %s"
 msgstr ""

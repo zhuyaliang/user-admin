@@ -271,7 +271,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     ua->SwitchAutoLogin = SwitchLogin;
     gtk_switch_set_state (GTK_SWITCH(SwitchLogin),
                           GetUserType(user->ActUser));
-    gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 2 , 1);
+    gtk_grid_attach(GTK_GRID(table) , SwitchLogin , 1 , 3 , 1 , 1);
     g_signal_connect(G_OBJECT(SwitchLogin),
                     "state-set",
                      G_CALLBACK(SwitchState),

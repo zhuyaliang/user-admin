@@ -6,17 +6,17 @@
 # Translators:
 # Michael Steenbeek <m.o.steenbeek@gmail.com>, 2019
 # Erik Bent <hj.bent.60@gmail.com>, 2019
-# Pjotr <pjotrvertaalt@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
+# Pjotr <pjotrvertaalt@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 11:20+0800\n"
+"POT-Creation-Date: 2019-09-19 17:39+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/mate/teams/13566/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,52 +32,80 @@ msgstr "Gebruikersaccounts beheren"
 msgid "Authentication is required to change user data"
 msgstr "Authenticatie is vereist voor het wijzigen van gebruikersgegevens"
 
-#: src/main.c:46
+#: data/mate-user-admin.appdata.xml.in:6
+msgid "MATE Manager"
+msgstr "MATE Beheer"
+
+#: data/mate-user-admin.appdata.xml.in:7
+msgid "Managing Linux Local Users and Groups"
+msgstr "Beheren van lokale gebruikers en groepen in Linux"
+
+#: data/mate-user-admin.appdata.xml.in:9
+msgid ""
+"Mate Manager is a graphical application that manages local users and groups."
+" It can add and delete local users, change user name, user type, user "
+"language, user password, automatic login. You can view the user's login "
+"record. By working with group-service, groups of users can be managed, such "
+"as adding/removing existing groups and creating/deleting new groups."
+msgstr ""
+"MATE Beheer is een grafische toepassing die lokale gebruikers en groepen "
+"beheert. Hij kan plaatselijke gebruikers toevoegen en verwijderen. Van een "
+"gebruiker kan hij de volgende zaken veranderen: naam, type, taal, "
+"wachtwoord, automatische aanmelding. U kunt het aanmeldgedrag zien van een "
+"gebruiker. Door te werken met group-service, kunnen groepen van gebruikers "
+"worden beheerd, zoals het toevoegen en verwijderen van bestaande groepen en "
+"het aanmaken/wissen van nieuwe groepen. "
+
+#: src/main.c:47
 msgid "Get Icon Fail"
 msgstr "Pictogram verkrijgen mislukt"
 
-#: src/main.c:99 src/main.c:112
+#: src/main.c:97 src/main.c:110
 msgid "Mate User Manager"
-msgstr ""
+msgstr "MATE Gebruikersbeheer"
 
-#: src/main.c:179 src/main.c:221
+#: src/main.c:185 src/main.c:227
 msgid "open file"
 msgstr "bestand openen"
 
-#: src/main.c:179
+#: src/main.c:185
 msgid "Create pid file failed"
 msgstr "Aanmaken van pid-bestand mislukt"
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write file"
 msgstr "bestand schrijven"
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write pid file failed"
 msgstr "pid-bestand schrijven mislukt"
 
-#: src/main.c:221
+#: src/main.c:227
 msgid "open pid file failed"
 msgstr "pid-bestand openen mislukt"
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read file"
 msgstr "bestand lezen"
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read pid file failed"
 msgstr "pid-bestand lezen mislukt"
 
-#: src/user-base.c:220 src/user-admin.c:503
+#: src/main.c:263
+msgid "No such user!!!"
+msgstr "Die gebruiker bestaat niet!"
+
+#: src/user-base.c:220 src/user-admin.c:616
 msgid "Account Type"
 msgstr "Soort account"
 
 #. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Standard"
 msgstr "Standaard"
 
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Administrators"
 msgstr "Beheerders"
 
@@ -85,28 +113,28 @@ msgstr "Beheerders"
 msgid "Language"
 msgstr "Talen"
 
-#: src/user-base.c:240 src/user-share.c:258
+#: src/user-base.c:240 src/user-share.c:342
 msgid "No Settings"
 msgstr "Geen instellingen"
 
-#: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
-#: src/user-admin.c:676
+#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
+#: src/user-admin.c:796
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: src/user-base.c:267
+#: src/user-base.c:268
 msgid "Automatic logon"
 msgstr "Automatisch aanmelden"
 
-#: src/user-base.c:282
+#: src/user-base.c:283
 msgid "Login time"
 msgstr "Aanmeldtijd"
 
-#: src/user-base.c:295
+#: src/user-base.c:297
 msgid "Group Manage"
 msgstr "Groepsbeheer"
 
-#: src/user-base.c:298
+#: src/user-base.c:300
 msgid "Setting Groups"
 msgstr "Groepen instellen"
 
@@ -115,15 +143,15 @@ msgid "Account is disable"
 msgstr "Account is uitgeschakeld"
 
 #. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
+#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
 msgid "Set up next time"
 msgstr "Volgende keer instellen"
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "Get User Info"
 msgstr "Gebruikersinformatie verkrijgen"
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "user count is 0"
 msgstr "aantal gebruikers is 0"
 
@@ -132,13 +160,13 @@ msgstr "aantal gebruikers is 0"
 msgid "Set Password"
 msgstr "Wachtwoord instellen"
 
-#: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
-#: src/user-group.c:997 src/user-group.c:1053
+#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
+#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
 msgid "Close"
 msgstr "Sluiten"
 
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
-#: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
+#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
+#: src/user-admin.c:858 src/user-group.c:1013
 msgid "Confirm"
 msgstr "Bevestigen"
 
@@ -150,46 +178,38 @@ msgstr "Nu instellen"
 msgid "User Password"
 msgstr "Gebruikerswachtwoord"
 
-#: src/user-password.c:270 src/user-admin.c:689
+#: src/user-password.c:270 src/user-admin.c:809
 msgid "generation password"
 msgstr "wachtwoord aanmaken"
 
-#: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
+#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
 #: src/user-list.c:226
 msgid "Remove User"
 msgstr "Gebruiker verwijderen"
 
-#: src/user-admin.c:88
+#: src/user-admin.c:211
 msgid "You cannot delete your own account."
 msgstr "U kunt uw eigen account niet verwijderen."
 
-#: src/user-admin.c:94
+#: src/user-admin.c:217
 msgid "Whether to remove the user's home directory"
 msgstr "Of de persoonlijke map van de gebruiker moet worden verwijderd"
 
-#: src/user-admin.c:117
-msgid "Remove user failure and try again"
-msgstr "Verwijderen van gebruiker mislukt en probeer opnieuw"
-
-#: src/user-admin.c:131
-msgid "No such user!!!"
-msgstr "Die gebruiker bestaat niet!"
-
-#: src/user-admin.c:207
+#: src/user-admin.c:313
 msgid "Repeat of user name.Please try another"
 msgstr "Herhaal de gebruikersnaam. Probeer a.u.b. een andere"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:317
 msgid "Repeat of user home name.Please try another"
 msgstr ""
 "Herhaal de naam van de persoonlijke map van de gebruiker. Probeer a.u.b. een"
 " andere"
 
-#: src/user-admin.c:215
+#: src/user-admin.c:321
 msgid "The username cannot start with a - ."
 msgstr "De gebruikersnaam mag niet beginnen met een - ."
 
-#: src/user-admin.c:219
+#: src/user-admin.c:325
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -197,97 +217,93 @@ msgstr ""
 "De gebruikersnaam mag alleen bestaan uit hoofd- en kleine\n"
 "letters in de a-z reeks, cijfers en de volgende tekens: . - _"
 
-#: src/user-admin.c:245 src/user-admin.c:475
+#: src/user-admin.c:350 src/user-admin.c:588
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Dit zal worden gebruikt om uw persoonlijke map een naam te geven en kan niet"
 " worden veranderd"
 
-#: src/user-admin.c:319
+#: src/user-admin.c:520
 msgid "Creating User"
 msgstr "Gebruiker maken"
 
-#: src/user-admin.c:482 src/user-group.c:681
+#: src/user-admin.c:595 src/user-group.c:681
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
-#: src/user-admin.c:495
+#: src/user-admin.c:608
 msgid "Full Name"
 msgstr "Volledige naam"
 
-#: src/user-admin.c:518 src/user-share.c:480
+#: src/user-admin.c:638 src/user-share.c:564
 msgid "The passwords entered twice are different"
 msgstr "De beide wachtwoorden zijn niet identiek"
 
-#: src/user-admin.c:555
+#: src/user-admin.c:675
 msgid "Hybrid passwords improve security"
 msgstr "Hybride wachtwoorden verhogen de veiligheid"
 
-#: src/user-admin.c:668
+#: src/user-admin.c:788
 msgid "Now set the password"
 msgstr "Wachtwoord nu instellen"
 
-#: src/user-admin.c:728 src/user-admin.c:772
+#: src/user-admin.c:864
 msgid "Create New User"
 msgstr "Nieuwe gebruiker maken"
 
-#: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
-msgid "Cancel"
-msgstr "Afbreken"
-
-#: src/user-face.c:299 src/user-face.c:310
+#: src/user-face.c:300 src/user-face.c:311
 msgid "Create Crop File"
 msgstr "Cropbestand maken"
 
-#: src/user-face.c:300
+#: src/user-face.c:301
 msgid "failed to create temporary file for image data"
 msgstr "kon geen tijdelijk bestand aanmaken voor afbeeldingsgegevens"
 
-#: src/user-face.c:368 src/user-face.c:453
+#: src/user-face.c:369 src/user-face.c:454
 msgid "_Cancel"
 msgstr "_Afbreken"
 
-#: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
+#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
 msgstr "Selecteren"
 
-#: src/user-face.c:427
+#: src/user-face.c:428
 msgid "Load Local Picture"
 msgstr "Lokale foto laden"
 
-#: src/user-face.c:450
+#: src/user-face.c:451
 msgid "Browse for more pictures"
 msgstr "Doorbladeren naar meer foto's"
 
-#: src/user-face.c:454
+#: src/user-face.c:455
 msgid "_Open"
 msgstr "_Openen"
 
-#: src/user-face.c:521
+#: src/user-face.c:522
 msgid "Clicking on the main window closes the picture selection window"
 msgstr "Klikken op het hoofdvenster sluit het fotoselectievenster"
 
-#: src/user-face.c:542
+#: src/user-face.c:543
 msgid "Local Picture"
 msgstr "Lokale foto"
 
-#: src/user-face.c:556
+#: src/user-face.c:558
 msgid "Avatar list"
 msgstr "Avatarlijst"
 
-#: src/user-face.c:557
+#: src/user-face.c:559
 msgid "There is no address to store photos"
 msgstr "Er is geen adres om foto's op te slaan"
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Change Name"
 msgstr "Naam wijzigen"
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Please enter a valid character"
 msgstr "Voer a.u.b. een geldig teken in"
 
-#: src/user-face.c:705
+#: src/user-face.c:709
 msgid "Use Enter Key to Save Modifications"
 msgstr "Gebruik Entertoets om wijzigingen op te slaan"
 
@@ -299,72 +315,72 @@ msgstr "Gebruikerslijst"
 msgid "Add User"
 msgstr "Gebruiker toevoegen"
 
-#: src/user-share.c:92
+#: src/user-share.c:169
 msgid "_Return"
 msgstr "_Terug"
 
-#: src/user-share.c:112
+#: src/user-share.c:189
 msgid "Message"
 msgstr "Bericht"
 
-#: src/user-share.c:323
+#: src/user-share.c:407
 msgid "The new password needs to be different from the old one"
 msgstr "Het nieuwe wachtwoord moet verschillen van het oude"
 
-#: src/user-share.c:325
+#: src/user-share.c:409
 msgid "Try changing some letters and numbers"
 msgstr "Probeer om wat letters en cijfers te veranderen"
 
-#: src/user-share.c:327 src/user-share.c:335
+#: src/user-share.c:411 src/user-share.c:419
 msgid "Try changing the password a bit more"
 msgstr "Probeer om het wachtwoord wat meer te veranderen"
 
-#: src/user-share.c:329
+#: src/user-share.c:413
 msgid "A password without your user name would be stronger"
 msgstr "Een wachtwoord zonder uw gebruikersnaam erin zou sterker zijn"
 
-#: src/user-share.c:331
+#: src/user-share.c:415
 msgid "Try to avoid using your name in the password"
 msgstr "Probeer om het gebruik van uw naam in het wachtwoord te vermijden"
 
-#: src/user-share.c:333
+#: src/user-share.c:417
 msgid "Try to avoid some of the words included in the password"
 msgstr "Probeer om sommige woorden in het wachtwoord te vermijden"
 
-#: src/user-share.c:337
+#: src/user-share.c:421
 msgid "Try to avoid common words"
 msgstr "Probeer om gewone woorden te vermijden"
 
-#: src/user-share.c:339
+#: src/user-share.c:423
 msgid "Try to avoid reordering existing words"
 msgstr "Probeer om het herschikken van bestaande woorden te vermijden"
 
-#: src/user-share.c:341
+#: src/user-share.c:425
 msgid "Try to use more numbers"
 msgstr "Probeer meer cijfers te gebruiken"
 
-#: src/user-share.c:343
+#: src/user-share.c:427
 msgid "Try to use more uppercase letters"
 msgstr "Probeer meer hoofdletters te gebruiken"
 
-#: src/user-share.c:345
+#: src/user-share.c:429
 msgid "Try to use more lowercase letters"
 msgstr "Probeer meer kleine letters te gebruiken"
 
-#: src/user-share.c:347
+#: src/user-share.c:431
 msgid "Try to use more special characters, like punctuation"
 msgstr "Probeer meer bijzondere tekens te gebruiken, zoals interpunctie"
 
-#: src/user-share.c:349
+#: src/user-share.c:433
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
 "Probeer om een mengsel van letters, cijfers en interpunctie te gebruiken"
 
-#: src/user-share.c:351
+#: src/user-share.c:435
 msgid "Try to avoid repeating the same character"
 msgstr "Probeer om het herhalen van hetzelfde teken te vermijden"
 
-#: src/user-share.c:353
+#: src/user-share.c:437
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
@@ -372,11 +388,11 @@ msgstr ""
 "Probeer om het herhalen van hetzelfde soort teken te vermijden: u dient "
 "letters, cijfers en interpunctie te vermengen."
 
-#: src/user-share.c:355
+#: src/user-share.c:439
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Probeer om reeksen als 1234 of abcd te vermijden"
 
-#: src/user-share.c:357
+#: src/user-share.c:441
 msgid "Password length needs more than 8 characters"
 msgstr "Wachtwoord moet meer dan acht tekens bevatten"
 
@@ -443,7 +459,7 @@ msgstr "Groeps-ID"
 msgid "User ID"
 msgstr "User-id"
 
-#: src/user-group.c:707 src/user-group.c:1060
+#: src/user-group.c:707 src/user-group.c:1065
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -496,23 +512,23 @@ msgstr "Groepen beheren"
 msgid "Current user -- %s"
 msgstr "Huidige gebruiker -- %s"
 
-#: src/user-group.c:970
+#: src/user-group.c:975
 msgid "New Group Name"
 msgstr "Nieuwe groepsnaam"
 
-#: src/user-group.c:981
+#: src/user-group.c:986
 msgid "Please select the user to add to the new group"
 msgstr "Kies a.u.b. de gebruiker om toe te voegen aan de nieuwe groep"
 
-#: src/user-group.c:1082
+#: src/user-group.c:1087
 msgid "Switch Groups"
 msgstr "Groepen wisselen"
 
-#: src/user-group.c:1086
+#: src/user-group.c:1091
 msgid "Create Groups"
 msgstr "Groepen aanmaken"
 
-#: src/user-group.c:1090
+#: src/user-group.c:1095
 msgid "Remove Groups"
 msgstr "Groepen verwijderen"
 
@@ -569,11 +585,15 @@ msgstr "Meer..."
 msgid "No languages found"
 msgstr "Geen talen gevonden"
 
-#: src/user-language.c:574 src/user-language.c:595
+#: src/user-language.c:573 src/user-language.c:596
+msgid "Cancel"
+msgstr "Afbreken"
+
+#: src/user-language.c:576 src/user-language.c:597
 msgid "Done"
 msgstr "Gereed"
 
-#: src/user-language.c:655
+#: src/user-language.c:657
 #, c-format
 msgid "Current User - %s"
 msgstr "Huidige gebruiker - %s"

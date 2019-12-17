@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Микола Ткач <chistomov@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
+# Микола Ткач <chistomov@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 11:20+0800\n"
+"POT-Creation-Date: 2019-09-19 17:39+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
+"Last-Translator: Микола Ткач <chistomov@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/mate/teams/13566/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,81 +30,108 @@ msgstr "Керування обліківками користувачів"
 msgid "Authentication is required to change user data"
 msgstr "Для зміни даних користувача потрібна автентифікація"
 
-#: src/main.c:46
+#: data/mate-user-admin.appdata.xml.in:6
+msgid "MATE Manager"
+msgstr "Розпорядник MATE"
+
+#: data/mate-user-admin.appdata.xml.in:7
+msgid "Managing Linux Local Users and Groups"
+msgstr "Керування локальними користувачами та групами Linux"
+
+#: data/mate-user-admin.appdata.xml.in:9
+msgid ""
+"Mate Manager is a graphical application that manages local users and groups."
+" It can add and delete local users, change user name, user type, user "
+"language, user password, automatic login. You can view the user's login "
+"record. By working with group-service, groups of users can be managed, such "
+"as adding/removing existing groups and creating/deleting new groups."
+msgstr ""
+"Розпорядник Mate - це графічний додаток, який керує локальними користувачами"
+" та групами. Він може додавати та вилучати локальних користувачів, змінювати"
+" ім’я користувача, тип користувача, мову користувача, пароль користувача, "
+"самочинний вхід. Ви можете переглянути запис про вхід користувача. Працюючи "
+"з груповим сервісом, можна керувати групами користувачів, такими як "
+"додавання/вилучення наявних груп та створення/вилучення нових груп."
+
+#: src/main.c:47
 msgid "Get Icon Fail"
 msgstr ""
 
-#: src/main.c:99 src/main.c:112
+#: src/main.c:97 src/main.c:110
 msgid "Mate User Manager"
-msgstr ""
+msgstr "Упорядник користувача Mate"
 
-#: src/main.c:179 src/main.c:221
+#: src/main.c:185 src/main.c:227
 msgid "open file"
 msgstr "відкрити файл"
 
-#: src/main.c:179
+#: src/main.c:185
 msgid "Create pid file failed"
-msgstr ""
+msgstr " Не вдалося створити pid-файл"
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write file"
-msgstr ""
+msgstr "записати файл"
 
-#: src/main.c:188
+#: src/main.c:194
 msgid "write pid file failed"
-msgstr ""
+msgstr "не вдалося записати pid-файл"
 
-#: src/main.c:221
+#: src/main.c:227
 msgid "open pid file failed"
-msgstr ""
+msgstr "не вдалося відкрити pid-файл "
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read file"
-msgstr ""
+msgstr "файл читання"
 
-#: src/main.c:226
+#: src/main.c:232
 msgid "read pid file failed"
-msgstr ""
+msgstr "не вдалося прочитати pid-файл"
 
-#: src/user-base.c:220 src/user-admin.c:503
+#: src/main.c:263
+msgid "No such user!!!"
+msgstr "Немає такого користувача!!!"
+
+#: src/user-base.c:220 src/user-admin.c:616
 msgid "Account Type"
-msgstr "Тип облікового запису"
+msgstr "Тип обліківки"
 
 #. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Standard"
 msgstr "Стандартні"
 
-#: src/user-base.c:224 src/user-admin.c:506
+#: src/user-base.c:224 src/user-admin.c:619
 msgid "Administrators"
-msgstr "Адміністратори"
+msgstr "Розпорядники"
 
 #: src/user-base.c:235 src/user-language.c:137
 msgid "Language"
 msgstr "Мова"
 
-#: src/user-base.c:240 src/user-share.c:258
+#: src/user-base.c:240 src/user-share.c:342
 msgid "No Settings"
 msgstr "Немає налаштувань"
 
-#: src/user-base.c:254 src/user-password.c:237 src/user-admin.c:655
-#: src/user-admin.c:676
+#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
+#: src/user-admin.c:796
 msgid "Password"
 msgstr "Пароль"
 
-#: src/user-base.c:267
+#: src/user-base.c:268
 msgid "Automatic logon"
-msgstr ""
+msgstr "Самочинний вхід"
 
-#: src/user-base.c:282
+#: src/user-base.c:283
 msgid "Login time"
-msgstr ""
+msgstr "Час входу"
 
-#: src/user-base.c:295
+#: src/user-base.c:297
 msgid "Group Manage"
-msgstr ""
+msgstr "Керування групою"
 
-#: src/user-base.c:298
+#: src/user-base.c:300
 msgid "Setting Groups"
 msgstr "Налаштування груп"
 
@@ -113,175 +140,166 @@ msgid "Account is disable"
 msgstr "Обліковий запис вимкнено"
 
 #. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:660
+#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
 msgid "Set up next time"
-msgstr ""
+msgstr "Налаштувати наступного разу"
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "Get User Info"
 msgstr "Отримати інформацію про користувача"
 
-#: src/user-info.c:267
+#: src/user-info.c:268
 msgid "user count is 0"
-msgstr ""
+msgstr "кількість користувачів - 0"
 
 #. create chnaged passwod dialog
 #: src/user-password.c:210
 msgid "Set Password"
 msgstr "Встановити пароль"
 
-#: src/user-password.c:219 src/user-list.c:227 src/user-group.c:931
-#: src/user-group.c:997 src/user-group.c:1053
+#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
+#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
 msgid "Close"
 msgstr "Закрити"
 
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:701
-#: src/user-admin.c:730 src/user-admin.c:767 src/user-group.c:1008
+#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
+#: src/user-admin.c:858 src/user-group.c:1013
 msgid "Confirm"
 msgstr "Схвалити"
 
 #: src/user-password.c:251
 msgid "Now set up"
-msgstr ""
+msgstr "Тепер налаштуйте"
 
 #: src/user-password.c:260
 msgid "User Password"
 msgstr "Пароль користувача"
 
-#: src/user-password.c:270 src/user-admin.c:689
+#: src/user-password.c:270 src/user-admin.c:809
 msgid "generation password"
-msgstr ""
+msgstr "генерувати пароль"
 
-#: src/user-admin.c:87 src/user-admin.c:93 src/user-admin.c:116
+#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
 #: src/user-list.c:226
 msgid "Remove User"
 msgstr "Вилучити користувача"
 
-#: src/user-admin.c:88
-msgid "You cannot delete your own account."
-msgstr ""
-
-#: src/user-admin.c:94
-msgid "Whether to remove the user's home directory"
-msgstr ""
-
-#: src/user-admin.c:117
-msgid "Remove user failure and try again"
-msgstr ""
-
-#: src/user-admin.c:131
-msgid "No such user!!!"
-msgstr ""
-
-#: src/user-admin.c:207
-msgid "Repeat of user name.Please try another"
-msgstr ""
-
 #: src/user-admin.c:211
+msgid "You cannot delete your own account."
+msgstr "Ви не можете вилучити власний обліковий запис."
+
+#: src/user-admin.c:217
+msgid "Whether to remove the user's home directory"
+msgstr "Вилучити домашній каталог користувача"
+
+#: src/user-admin.c:313
+msgid "Repeat of user name.Please try another"
+msgstr "Повторіть ім’я користувача. Спробуйте инше"
+
+#: src/user-admin.c:317
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Повторіть домашнє ім’я користувача. Спробуйте инше"
 
-#: src/user-admin.c:215
+#: src/user-admin.c:321
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Ім'я користувача не може починатися з a - ."
 
-#: src/user-admin.c:219
+#: src/user-admin.c:325
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Ім'я користувача має складатися лише з верхнього та нижнього регістру \n"
+"літер від a-z, цифр та таких символів: . - _"
 
-#: src/user-admin.c:245 src/user-admin.c:475
+#: src/user-admin.c:350 src/user-admin.c:588
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
+"Це буде використано для імени вашої домашньої теки, і її неможливо змінити"
 
-#: src/user-admin.c:319
+#: src/user-admin.c:520
 msgid "Creating User"
 msgstr "Створити користувача"
 
-#: src/user-admin.c:482 src/user-group.c:681
+#: src/user-admin.c:595 src/user-group.c:681
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
-#: src/user-admin.c:495
+#: src/user-admin.c:608
 msgid "Full Name"
 msgstr "Повне ім'я"
 
-#: src/user-admin.c:518 src/user-share.c:480
+#: src/user-admin.c:638 src/user-share.c:564
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "Уведені двічі паролі різні"
 
-#: src/user-admin.c:555
+#: src/user-admin.c:675
 msgid "Hybrid passwords improve security"
-msgstr ""
+msgstr "Гібридні паролі покращують безпеку"
 
-#: src/user-admin.c:668
+#: src/user-admin.c:788
 msgid "Now set the password"
-msgstr ""
+msgstr "Тепер встановіть пароль"
 
-#: src/user-admin.c:728 src/user-admin.c:772
+#: src/user-admin.c:864
 msgid "Create New User"
 msgstr "Створити нового користувача"
 
-#: src/user-admin.c:770 src/user-language.c:571 src/user-language.c:594
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: src/user-face.c:299 src/user-face.c:310
+#: src/user-face.c:300 src/user-face.c:311
 msgid "Create Crop File"
 msgstr ""
 
-#: src/user-face.c:300
+#: src/user-face.c:301
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "не вдалося створити тимчасовий файл для даних зображень"
 
-#: src/user-face.c:368 src/user-face.c:453
+#: src/user-face.c:369 src/user-face.c:454
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/user-face.c:370 src/user-group.c:628 src/user-group.c:670
+#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
 msgid "Select"
 msgstr "Вибрати"
 
-#: src/user-face.c:427
+#: src/user-face.c:428
 msgid "Load Local Picture"
-msgstr ""
+msgstr "Завантажити локальне зображення"
 
-#: src/user-face.c:450
+#: src/user-face.c:451
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "Шукати додаткові світлини"
 
-#: src/user-face.c:454
+#: src/user-face.c:455
 msgid "_Open"
 msgstr "_Відкрити"
 
-#: src/user-face.c:521
+#: src/user-face.c:522
 msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
+msgstr "Клацання на головному вікні закриває вікно вибору зображення"
 
-#: src/user-face.c:542
+#: src/user-face.c:543
 msgid "Local Picture"
-msgstr ""
+msgstr "Локальне зображення"
 
-#: src/user-face.c:556
+#: src/user-face.c:558
 msgid "Avatar list"
 msgstr "Перелік мармизок"
 
-#: src/user-face.c:557
+#: src/user-face.c:559
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "Немає адреси для зберігання світлин"
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Change Name"
 msgstr "Змінити ім'я"
 
-#: src/user-face.c:655
+#: src/user-face.c:657
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Уведіть дійсний символ"
 
-#: src/user-face.c:705
+#: src/user-face.c:709
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Використовуйте клавішу Enter, щоб зберегти зміни"
 
 #: src/user-list.c:125
 msgid "User List"
@@ -291,101 +309,106 @@ msgstr "Перелік користувачів"
 msgid "Add User"
 msgstr "Додати користувача"
 
-#: src/user-share.c:92
+#: src/user-share.c:169
 msgid "_Return"
 msgstr ""
 
-#: src/user-share.c:112
+#: src/user-share.c:189
 msgid "Message"
 msgstr "Повідомлення"
 
-#: src/user-share.c:323
+#: src/user-share.c:407
 msgid "The new password needs to be different from the old one"
 msgstr "Новий пароль повинен відрізнятися від старого"
 
-#: src/user-share.c:325
+#: src/user-share.c:409
 msgid "Try changing some letters and numbers"
 msgstr "Спробуйте змінити деякі літери та цифри"
 
-#: src/user-share.c:327 src/user-share.c:335
+#: src/user-share.c:411 src/user-share.c:419
 msgid "Try changing the password a bit more"
 msgstr "Спробуйте змінити пароль трохи більше"
 
-#: src/user-share.c:329
+#: src/user-share.c:413
 msgid "A password without your user name would be stronger"
-msgstr "Пароль без імені користувача буде сильнішим"
+msgstr "Пароль без імени користувача буде сильнішим"
 
-#: src/user-share.c:331
+#: src/user-share.c:415
 msgid "Try to avoid using your name in the password"
-msgstr "Намагайтеся уникати використання свого імені в паролі"
+msgstr "Намагайтеся уникати використання свого імени в паролі"
 
-#: src/user-share.c:333
+#: src/user-share.c:417
 msgid "Try to avoid some of the words included in the password"
-msgstr ""
+msgstr "Постарайтеся уникати деяких слів, що входять до паролю"
 
-#: src/user-share.c:337
+#: src/user-share.c:421
 msgid "Try to avoid common words"
-msgstr ""
+msgstr "Намагайтеся уникати загальних слів"
 
-#: src/user-share.c:339
+#: src/user-share.c:423
 msgid "Try to avoid reordering existing words"
-msgstr ""
+msgstr "Намагайтеся уникати перевпорядкування наявних слів"
 
-#: src/user-share.c:341
+#: src/user-share.c:425
 msgid "Try to use more numbers"
-msgstr ""
+msgstr "Спробуйте використовувати більше цифр"
 
-#: src/user-share.c:343
+#: src/user-share.c:427
 msgid "Try to use more uppercase letters"
-msgstr ""
+msgstr "Спробуйте використовувати більше великих літер"
 
-#: src/user-share.c:345
+#: src/user-share.c:429
 msgid "Try to use more lowercase letters"
-msgstr ""
+msgstr "Спробуйте використовувати більше малі літери"
 
-#: src/user-share.c:347
+#: src/user-share.c:431
 msgid "Try to use more special characters, like punctuation"
 msgstr ""
+"Спробуйте використовувати більше спеціальних символів, як розділові знаки"
 
-#: src/user-share.c:349
+#: src/user-share.c:433
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
+msgstr "Спробуйте використовувати суміш літер, цифр та розділових знаків"
 
-#: src/user-share.c:351
+#: src/user-share.c:435
 msgid "Try to avoid repeating the same character"
-msgstr ""
+msgstr "Намагайтеся уникати повторення одного і того ж символу"
 
-#: src/user-share.c:353
+#: src/user-share.c:437
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
+"Намагайтеся не повторювати однотипні символи: вам потрібно змішати літери, "
+"цифри та пунктуацію."
 
-#: src/user-share.c:355
+#: src/user-share.c:439
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
+msgstr "Намагайтеся уникати таких послідовностей, як 1234 або abcd"
 
-#: src/user-share.c:357
+#: src/user-share.c:441
 msgid "Password length needs more than 8 characters"
-msgstr ""
+msgstr "Довжина паролю потребує більше 8 символів"
 
 #: src/user-group.c:163
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Повторіть назву групи. Спробуйте иншу"
 
 #: src/user-group.c:167
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "Ім'я групи не може починатися з a - ."
 
 #: src/user-group.c:171
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Перший символ назви групи потребує використання літери"
 
 #: src/user-group.c:175
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Ім'я групи має складатися лише з верхнього та нижнього регістру \n"
+"літер від a-z, цифр та таких символів: . - _"
 
 #: src/user-group.c:269
 msgid "Create New Group"
@@ -393,11 +416,11 @@ msgstr "Створити нову групу"
 
 #: src/user-group.c:276
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "Створити нову групу"
 
 #: src/user-group.c:287
 msgid "Create User Group"
-msgstr ""
+msgstr "Створити групу користувачів"
 
 #: src/user-group.c:288
 msgid ""
@@ -411,11 +434,11 @@ msgstr "Вилучити групу"
 
 #: src/user-group.c:355
 msgid "Cannot remove root group"
-msgstr ""
+msgstr "Не вдається вилучити кореневу групу"
 
 #: src/user-group.c:363
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Вилучити вибрану групу"
 
 #: src/user-group.c:640 src/user-group.c:716
 msgid "Group Name"
@@ -423,43 +446,47 @@ msgstr "Назва групи"
 
 #: src/user-group.c:649 src/user-group.c:725
 msgid "Group ID"
-msgstr ""
+msgstr "ID групи"
 
 #: src/user-group.c:690
 msgid "User ID"
 msgstr "Ідентифікатор користувача"
 
-#: src/user-group.c:707 src/user-group.c:1060
+#: src/user-group.c:707 src/user-group.c:1065
 msgid "Remove"
 msgstr "Вилучити"
 
 #: src/user-group.c:757
 msgid "Initialization group management"
-msgstr ""
+msgstr "Керування групою ініціалізації"
 
 #: src/user-group.c:758
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Помилка ініціалізації, див. Групу \n"
+" Функція сервісу інтерфейсу керування"
 
 #: src/user-group.c:764
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Не вдалося зв’язатися із службою групи"
 
 #: src/user-group.c:765
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Переконайтеся, що встановлено та увімкнено груповий сервіс.\n"
+" url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group.c:773
 msgid "Get the number of groups"
-msgstr ""
+msgstr "Отримайте кількість груп"
 
 #: src/user-group.c:774
 msgid "The number of groups is 0."
-msgstr ""
+msgstr "Кількість груп - 0."
 
 #: src/user-group.c:795
 msgid "Please click the unlock sign in the upper left corner"
@@ -467,34 +494,34 @@ msgstr "Натисніть знак розблокування у верхньо
 
 #: src/user-group.c:798
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Натисніть кнопку розблокування на сторінці 'swith-group'"
 
 #: src/user-group.c:832
 msgid "Groups Manage"
-msgstr ""
+msgstr "Керування групами"
 
 #: src/user-group.c:845
 #, c-format
 msgid "Current user -- %s"
 msgstr "Поточний користувач -- %s"
 
-#: src/user-group.c:970
+#: src/user-group.c:975
 msgid "New Group Name"
 msgstr "Нове ім'я групи"
 
-#: src/user-group.c:981
+#: src/user-group.c:986
 msgid "Please select the user to add to the new group"
 msgstr "Виберіть користувача, якого потрібно додати до нової групи"
 
-#: src/user-group.c:1082
+#: src/user-group.c:1087
 msgid "Switch Groups"
-msgstr ""
+msgstr "Перемикання груп"
 
-#: src/user-group.c:1086
+#: src/user-group.c:1091
 msgid "Create Groups"
 msgstr "Створити групи"
 
-#: src/user-group.c:1090
+#: src/user-group.c:1095
 msgid "Remove Groups"
 msgstr "Вилучити групи"
 
@@ -520,42 +547,46 @@ msgstr "%b %e"
 
 #: src/user-history.c:163
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:246
 msgid "Session Ended"
-msgstr "Сеанс закінчився"
+msgstr "Сеанс закінчено"
 
 #: src/user-history.c:253
 msgid "Session Started"
-msgstr ""
+msgstr "Сеанс розпочато"
 
 #: src/user-history.c:290
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — Активність обліківки"
 
 #: src/user-history.c:400
 msgid "previous"
-msgstr ""
+msgstr "попередній"
 
 #: src/user-history.c:405
 msgid "next"
-msgstr ""
+msgstr "черговий"
 
 #: src/user-language.c:120
 msgid "More…"
-msgstr ""
+msgstr "Більше…"
 
 #: src/user-language.c:161
 msgid "No languages found"
 msgstr "Мов не знайдено"
 
-#: src/user-language.c:574 src/user-language.c:595
+#: src/user-language.c:573 src/user-language.c:596
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/user-language.c:576 src/user-language.c:597
 msgid "Done"
 msgstr "Завершено"
 
-#: src/user-language.c:655
+#: src/user-language.c:657
 #, c-format
 msgid "Current User - %s"
 msgstr "Поточний користувач - %s"

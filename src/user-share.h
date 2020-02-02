@@ -27,7 +27,7 @@
 #define QUESTION   4
 #define QUESTIONNORMAL   5
 
-int Change;
+extern int Change;
 void         mate_uesr_admin_log   (const char  *level,
                                     const char  *message,
                                     ...);

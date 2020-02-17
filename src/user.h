@@ -128,6 +128,6 @@ typedef struct
     int               KeyId;
     char              TmpPass[24];
 }UserAdmin;
-int         gnCurrentUserIndex;   //代表当前用户标号
-GtkWidget  *WindowLogin;          //首页窗口
+extern int         gnCurrentUserIndex;   //代表当前用户标号
+extern GtkWidget  *WindowLogin;          //首页窗口
 #endif

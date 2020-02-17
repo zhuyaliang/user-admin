@@ -26,6 +26,9 @@
 #define  APPICON               "user-admin.png"
 #define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
+int         gnCurrentUserIndex;   //代表当前用户标号
+GtkWidget  *WindowLogin;          //首页窗口
+
 static gboolean on_window_quit (GtkWidget *widget, 
                                 GdkEvent  *event, 
                                 gpointer   user_data)

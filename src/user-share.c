@@ -30,6 +30,8 @@
 #define  GSM_GSETTINGS_SCHEMA "org.mate.interface"
 static int file_dp = 0;  /*Log file descriptor*/
 
+int Change;
+
 static int create_log_file(void)
 {
     time_t t;

@@ -78,6 +78,7 @@ static void UpdatePermission(UserAdmin *ua)
     gtk_widget_set_sensitive(ua->SwitchAutoLogin,is_authorized);
     gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
     gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
+    gtk_widget_set_visible(ua->Popover,!is_authorized);
     if (is_authorized == 0 && self_selected == 1)
     {
         gtk_widget_set_sensitive(ua->ButtonFace,     self_selected);
@@ -107,6 +108,7 @@ static void LoadHeader_bar(UserAdmin *ua)
 }    
 static void InitMainWindow(UserAdmin *ua)
 {
+    GtkWidget *label;
     GtkWidget *Window;
     g_autoptr(GdkPixbuf) AppIcon = NULL;
     GError    *error = NULL;
@@ -125,6 +127,14 @@ static void InitMainWindow(UserAdmin *ua)
     if (ua->Permission != NULL)
     {
         ua->ButtonLock = gtk_lock_button_new(ua->Permission);
+        ua->Popover = gtk_popover_new (ua->ButtonLock);
+        label = gtk_label_new (_("Some settings must be unlocked before they can be changed"));
+        gtk_popover_set_position (GTK_POPOVER (ua->Popover), GTK_POS_TOP);
+        gtk_container_add (GTK_CONTAINER (ua->Popover), label);
+        gtk_container_set_border_width (GTK_CONTAINER (ua->Popover), 6);
+        gtk_popover_set_modal (GTK_POPOVER (ua->Popover), FALSE); 
+        gtk_widget_show (label);
+
         gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
         if(GetUseHeader() == 1)
         {    

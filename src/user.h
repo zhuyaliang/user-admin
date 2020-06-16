@@ -97,6 +97,7 @@ typedef struct
     GtkWidget        *PasswordDialog;
     ActUserManager   *um;
 	GtkWidget        *ButtonLock;
+	GtkWidget        *Popover;
     GPermission      *Permission;
     GtkTreeModel     *Model;
     GtkTreeSelection *UserSelect;

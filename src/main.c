@@ -29,6 +29,10 @@
 int         gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget  *WindowLogin;          //首页窗口
 
+static void ExitHook (void)
+{
+    remove(LOCKFILE);    
+}    
 static gboolean on_window_quit (GtkWidget *widget, 
                                 GdkEvent  *event, 
                                 gpointer   user_data)
@@ -349,7 +353,9 @@ int main(int argc, char **argv)
     
     /* Create the main window */
     InitMainWindow(&ua);
-
+    
+    /* Program exit processing */
+    atexit(ExitHook);
     /* Check whether the process has been started */
     if(ProcessRuning() == TRUE)
     {

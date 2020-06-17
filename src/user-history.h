@@ -48,6 +48,6 @@ typedef struct LoginHistoryDialogClass
 } LoginHistoryDialogClass;
 
 GType       login_history_dialog_get_type          (void) G_GNUC_CONST;
-void ViewLoginHistory (GtkWidget *widget, gpointer data);
+void        ViewLoginHistory (GtkWidget *widget, gpointer data);
 G_END_DECLS
 #endif

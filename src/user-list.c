@@ -20,128 +20,134 @@
 #include "user-share.h"
 #include "user-info.h"
 
-static GtkListStore *store;
-static gboolean SelectUser = TRUE;
-/******************************************************************************
-* Function:              RefreshUserList 
-*        
-* Explain: Refresh User List Call after adding or deleting user 
-*        
-* Input:  @UserList User List on the left       
-*         @List     Store a list of user classes
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
+
+G_DEFINE_TYPE (UserListRow,     user_list_row,     GTK_TYPE_LIST_BOX_ROW)
+void
+user_list_row_set_data (UserListRow *row)
+{
+    GdkPixbuf   *face;
+    const char  *user_image;
+    const char  *real_name;
+    const char  *user_name;
+
+    user_image = GetUserIcon(row->Actuser);
+	real_name  = GetRealName(row->Actuser),
+    user_name  = GetUserName(row->Actuser),
+    
+    face = SetUserFaceSize (user_image, 50);
+	gtk_image_set_from_pixbuf(GTK_IMAGE(row->user_image),face);
+
+	SetLableFontType(row->real_name,"black",14,real_name,TRUE);
+	SetLableFontType(row->user_name,"black",11,user_name,FALSE);
+}
+static void
+user_list_row_destroy (GtkWidget *widget)
+{   
+    UserListRow *row = USER_LIST_ROW (widget);
+    g_clear_object (&row->Actuser);
+}
+
+static void
+user_list_row_init (UserListRow *row)
+{
+    GtkWidget *box;
+    GtkWidget *hbox;
+    GtkWidget *vbox;
+
+    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+	gtk_widget_set_size_request (box,190,-1);
+	gtk_widget_set_halign(box, GTK_ALIGN_START);
+    gtk_widget_set_valign(box, GTK_ALIGN_CENTER);
+    gtk_container_add (GTK_CONTAINER (row), box);
+
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_box_pack_start(GTK_BOX(box),hbox ,TRUE,TRUE, 0);
+
+    row->user_image = gtk_image_new();
+    gtk_box_pack_start(GTK_BOX(hbox),row->user_image ,TRUE,TRUE, 6);
+
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+	gtk_widget_set_size_request (vbox,110,-1);
+    gtk_box_pack_start(GTK_BOX(hbox),vbox ,TRUE,TRUE, 12);
+
+    row->real_name = gtk_label_new(NULL);
+    gtk_label_set_ellipsize (GTK_LABEL(row->real_name),PANGO_ELLIPSIZE_END);
+    gtk_label_set_max_width_chars (GTK_LABEL(row->real_name),10);
+    gtk_box_pack_start(GTK_BOX(vbox),row->real_name ,TRUE,TRUE, 1);
+    
+	row->user_name = gtk_label_new(NULL);
+    gtk_label_set_ellipsize (GTK_LABEL(row->user_name),PANGO_ELLIPSIZE_END);
+    gtk_label_set_max_width_chars (GTK_LABEL(row->user_name),10);
+    gtk_box_pack_start(GTK_BOX(vbox),row->user_name ,TRUE,TRUE, 1);
+
+
+    gtk_box_pack_start(GTK_BOX(box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL) ,TRUE,TRUE, 3);
+
+}
+
+static void
+user_list_row_class_init (UserListRowClass *klass)
+{
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+    widget_class->destroy = user_list_row_destroy;
+}
+
+GtkWidget *
+user_list_row_new (ActUser *Actuser)
+{
+    UserListRow *row;
+
+    row = g_object_new (USER_LIST_TYPE_ROW, NULL);
+	g_set_object (&row->Actuser, Actuser);
+    user_list_row_set_data (row);
+
+    return GTK_WIDGET (row);
+}
 void RefreshUserList(GtkWidget *UserList,GSList *List)
 {
-    UserInfo *user;
-    GSList *l;
+	GtkWidget *row;
+    GSList    *l;
+	ActUser   *Actuser;
+
     int i = 0;
-    SelectUser = FALSE;
-    if(store != NULL)
+	for (l = List ; l; l = l->next)
     {
-        gtk_list_store_clear(store);
-    }    
-    for (l = List ; l; l = l->next)
-    {
-        user = (UserInfo *)l->data;
-        UserListAppend(UserList,
-                       GetUserIcon(user->ActUser),                     
-                       GetRealName(user->ActUser),
-                       GetUserName(user->ActUser),
-                       i,
-                       &user->Iter);
-        i++;
+		Actuser  = l->data;
+   		row = user_list_row_new (Actuser);
+        gtk_list_box_row_set_activatable(GTK_LIST_BOX_ROW(row),TRUE);
+        gtk_list_box_insert (GTK_LIST_BOX(UserList), row, i);
+		i++;
     }
-    gnCurrentUserIndex = 0;
-    SelectUser = TRUE;
-}    
-/******************************************************************************
-* Function:              on_changed     
-*        
-* Explain: Switching users to display user information
-*        
-* Input:         
-*        
-* Output:  
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-static void  on_changed(GtkWidget *widget,  gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *) data;
-    GtkTreeIter iter;
-    UserInfo *user;
-    gint count = 0;
-    if(SelectUser == TRUE)
-    {    
-        if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &ua->Model, &iter))
-        {
-            /*Get the user line number*/
-            gtk_tree_model_get (ua->Model, &iter,
-                                INT_COLUMN, &count,
-                                -1);
-            gnCurrentUserIndex = count;
-            user = GetIndexUser(ua->UsersList,count);
-            if(user == NULL)
-            {
-                g_error("No such user !!!\r\n");
-            }    
-            /*update display*/
-            UpdateInterface(user->ActUser,ua);
-        }
-    }    
+    gtk_widget_show_all(UserList);
 }
 
-static GtkTreeModel  *ListModelCreate(UserAdmin *ua)
-{   
-    store = gtk_list_store_new(N_COLUMNS,
-                               GDK_TYPE_PIXBUF, //face
-                               G_TYPE_INT,      //user num
-                               G_TYPE_STRING);  //user name and login name
-    ua->ListSTore = store;
-    return GTK_TREE_MODEL(store);
-}
-
-/******************************************************************************
-* Function:              ListViewInit 
-*        
-* Explain:  Initialization list.@renderer_icon user icon;
-*                               @renderer_text user real name; 
-*                               include color and front;
-* Input:         
-*        
-* Output:  
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-static void ListViewInit(GtkWidget *list)
+static void SwitchUser (GtkListBox    *list_box,
+                      	GtkListBoxRow *Row,
+                        gpointer       data)
 {
-    GtkCellRenderer   *renderer_icon,*renderer_text;
-    GtkTreeViewColumn *column;
-    column=gtk_tree_view_column_new ();
+    UserAdmin *ua = (UserAdmin *)data;
+	UserListRow *row = USER_LIST_ROW(Row);
+	ua->CurrentUser  = row->Actuser;
+    ua->CurrentImage = row->user_image;
+	ua->CurrentName  = row->real_name;
+	UpdateInterface(row->Actuser,ua);
+}
+void init_user_option_data (UserAdmin *ua)
+{
+    ActUser       *user;
+    GtkListBoxRow *row;
+    UserListRow   *user_row;
 
-    gtk_tree_view_column_set_title(column,_("User List"));
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(ua->UserList),0);
+    user = g_slist_nth_data(ua->UsersList,0); 
+    user_row = USER_LIST_ROW(row);
     
-    renderer_icon = gtk_cell_renderer_pixbuf_new();   //user icon
-    renderer_text = gtk_cell_renderer_text_new();     //user real name text
-
-    gtk_tree_view_column_pack_start (column, renderer_icon, FALSE);
-    gtk_tree_view_column_set_attributes (column, 
-                                         renderer_icon,
-                                         "pixbuf", 
-                                         COL_USER_FACE,
-                                         NULL);
-
-    gtk_tree_view_column_pack_start(column,renderer_text,FALSE);
-    gtk_tree_view_column_add_attribute(column,
-                                       renderer_text,
-                                       "markup",
-                                       LIST_LABEL);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
-}
-
+    ua->CurrentUser  = user;
+    ua->CurrentImage = user_row->user_image;
+	ua->CurrentName  = user_row->real_name;
+    
+}    
 /******************************************************************************
 * Function:              DisplayUserList      
 *        
@@ -155,12 +161,8 @@ static void ListViewInit(GtkWidget *list)
 ******************************************************************************/
 void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
 {
-    GtkWidget *table;
-    GtkTreeSelection *selection;
-    GtkWidget *UserList;
     GtkWidget *Scrolled;
-    GtkTreeModel *model;
-    
+	
     Scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_box_pack_start(GTK_BOX(Hbox),Scrolled, TRUE, TRUE,0);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
@@ -169,30 +171,17 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
                                          GTK_SHADOW_IN);
     
-    table = gtk_grid_new();
-    gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);
-    gtk_container_add (GTK_CONTAINER (Scrolled), table);
-   /* create user list */ 
-    UserList= gtk_tree_view_new_with_model(ListModelCreate(ua)); 
-
-    /* init user list */
-    ListViewInit(UserList);
-    ua->UserList = UserList;
-
-    /* Add the user to the lis */
+	ua->UserList = gtk_list_box_new ();
 
     RefreshUserList(ua->UserList,ua->UsersList);
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(UserList));
-    gtk_tree_selection_set_mode(selection,GTK_SELECTION_SINGLE);
-    model=gtk_tree_view_get_model(GTK_TREE_VIEW(UserList));
-    ua->Model = model;
-    ua->UserSelect = selection;
+    gtk_container_add (GTK_CONTAINER (Scrolled), ua->UserList);
 
-    gtk_grid_attach(GTK_GRID(table) , UserList , 0 , 0 , 3 , 6);
-    gtk_grid_set_row_spacing(GTK_GRID(table), 10);
-    gtk_grid_set_column_spacing(GTK_GRID(table), 10);
-
-    g_signal_connect(selection, "changed", G_CALLBACK(on_changed), ua);
+    init_user_option_data (ua);
+    
+	g_signal_connect (ua->UserList,
+                     "row-activated",
+                      G_CALLBACK (SwitchUser),
+                      ua);
 }
 static void QuitApp(GtkWidget *widget, gpointer data)
 {

@@ -96,14 +96,14 @@ typedef struct
     GtkWidget        *IconWindow;
     GtkWidget        *PasswordDialog;
     ActUserManager   *um;
+	ActUser          *CurrentUser;
+	GtkWidget        *CurrentImage;
+	GtkWidget        *CurrentName;
 	GtkWidget        *ButtonLock;
 	GtkWidget        *Popover;
     GPermission      *Permission;
-    GtkTreeModel     *Model;
-    GtkTreeSelection *UserSelect;
     GtkWidget        *UserList;
-    GtkListStore     *ListSTore;
-    GtkWidget        *ButtonFace;
+	GtkWidget        *ButtonFace;
     GtkWidget        *EntryName;
     GtkWidget        *ComUserType;
     GtkWidget        *ButtonLanguage;
@@ -129,6 +129,5 @@ typedef struct
     int               KeyId;
     char              TmpPass[24];
 }UserAdmin;
-extern int         gnCurrentUserIndex;   //代表当前用户标号
 extern GtkWidget  *WindowLogin;          //首页窗口
 #endif

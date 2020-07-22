@@ -19,7 +19,39 @@
 #define __USER_LIST_H__
 
 #include "user.h"
+G_BEGIN_DECLS
+    
+#define USER_LIST_TYPE_ROW                (user_list_row_get_type ())
+#define USER_LIST_ROW(object)             (G_TYPE_CHECK_INSTANCE_CAST ((object),\
+                                           USER_LIST_TYPE_ROW,\
+                                           UserListRow))
+    
+typedef struct UserListRow
+{   
+    GtkListBoxRow   parent_instance;
+    
+    ActUser        *Actuser;
+    GtkWidget      *user_image;
+    GtkWidget      *user_name;
+    GtkWidget      *real_name;
+
+}UserListRow;
+
+typedef struct UserListRowClass
+{
+    GtkListBoxRowClass   parent_instance_class;
+
+}UserListRowClass;
+
+GType             user_list_row_get_type                (void) G_GNUC_CONST;
+
+GtkWidget        *user_list_row_new                     (ActUser     *Actuser);
+
+void              user_list_row_set_data                (UserListRow *Row);
+
+void              init_user_option_data                 (UserAdmin   *ua);
 void RefreshUserList(GtkWidget *UserList,GSList *List);
 void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua);
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua);
+G_END_DECLS
 #endif

@@ -29,6 +29,7 @@
 #include "user-share.h"
 #include "user-info.h"
 #include "user-crop.h"
+#include "user-list.h"
 static char gcPicBuf[PICMAX][50];   //照片
 /******************************************************************************
 * Function:              UpdataFace 
@@ -44,11 +45,11 @@ static char gcPicBuf[PICMAX][50];   //照片
 static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
 {
     GtkWidget *image;
-    GdkPixbuf *face;
-    UserInfo  *user;
     g_autoptr(GdkPixbuf) pb = NULL;
     GdkPixbuf *pb2;
-    char BasePath[100] = { 0 };
+    GdkPixbuf *face;
+
+	char BasePath[100] = { 0 };
     if(nCount >= 0)
     {    
         sprintf(BasePath, FACEDIR"%s", gcPicBuf[nCount]);
@@ -63,14 +64,9 @@ static void UpdataFace(int nCount,const char *LocalFileName,UserAdmin *ua)
     image = gtk_image_new_from_pixbuf(pb2);
     gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),image);
     
-    /*Update the left list picture*/
-    face = SetUserFaceSize (BasePath, 50);
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    gtk_list_store_set(ua->ListSTore,&user->Iter,
-                       COL_USER_FACE, face,
-                       -1);
-    act_user_set_icon_file (user->ActUser,BasePath);
-
+    act_user_set_icon_file (ua->CurrentUser,BasePath);
+	face = SetUserFaceSize (BasePath, 50);	
+	gtk_image_set_from_pixbuf(GTK_IMAGE(ua->CurrentImage),face);
 }
 /******************************************************************************
 * Function:              Unbind 
@@ -630,27 +626,17 @@ static gboolean RealNameValidCheck (const gchar *name)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-static void ModifyName (GtkEntry *entry,gpointer  data)
+static void ModifyName (GtkEntry *entry,gpointer data)
 {
     UserAdmin   *ua = (UserAdmin *) data;
     const gchar *NewName;
-    const gchar *UserName;
-    UserInfo    *user;
-    gchar       *label;
 
     NewName  = gtk_entry_get_text (entry);
-    user     = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    UserName = GetUserName(user->ActUser);
 
-    label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
-                                      NewName,UserName);
     if(RealNameValidCheck(NewName))
     {        
-        gtk_list_store_set(ua->ListSTore,
-                           &user->Iter,
-                           LIST_LABEL, label,
-                           -1);
-        act_user_set_real_name (user->ActUser,NewName);
+        act_user_set_real_name (ua->CurrentUser,NewName);
+		SetLableFontType(ua->CurrentName,"black",14,NewName,TRUE);
     }
     else
     {
@@ -677,7 +663,6 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     GtkWidget *table;
     GtkWidget *fixed;
     GError    *error = NULL;
-    UserInfo  *user;
      
     fixed = gtk_fixed_new();
     gtk_box_pack_start(GTK_BOX(Hbox),fixed,TRUE,TRUE,0);  
@@ -685,9 +670,8 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     table = gtk_grid_new();
     gtk_fixed_put(GTK_FIXED(fixed),table, 0, 0);
    
-    user = GetIndexUser(ua->UsersList,0);
     /*set user icon 96 *96 */
-    pb = gdk_pixbuf_new_from_file(GetUserIcon(user->ActUser),&error);
+    pb = gdk_pixbuf_new_from_file(GetUserIcon(ua->CurrentUser),&error);
     if(pb == NULL)
     {
         mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
@@ -708,7 +692,7 @@ void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua)
     EntryName = gtk_entry_new();
     gtk_widget_set_tooltip_text(EntryName,_("Use Enter Key to Save Modifications"));
     gtk_entry_set_max_length(GTK_ENTRY(EntryName),48);
-    gtk_entry_set_text(GTK_ENTRY(EntryName),GetRealName(user->ActUser));
+    gtk_entry_set_text(GTK_ENTRY(EntryName),GetRealName(ua->CurrentUser));
     ua->EntryName = EntryName;
     gtk_grid_attach(GTK_GRID(table) ,EntryName , 8 , 4 , 1 , 1);
     g_signal_connect (EntryName, "activate",G_CALLBACK (ModifyName),ua);

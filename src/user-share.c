@@ -208,16 +208,33 @@ int MessageReport(const char *Title,const char *Msg,int nType)
 *        
 * Author:  zhuyaliang  25/05/2018
 ******************************************************************************/
-void SetLableFontType(GtkWidget *Lable ,const char *Color,int FontSzie,const char *Word)        
+void SetLableFontType(GtkWidget  *Lable ,
+                      const char *Color,
+                      int         FontSzie,
+                      const char *Word,
+                      gboolean    Blod)
 {
     char *LableTypeBuf;
-    
-    LableTypeBuf =  g_strdup_printf("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
-									Color,FontSzie,Word);
+
+    if(Blod)
+    {
+        LableTypeBuf = g_strdup_printf ("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
+                         Color,
+                         FontSzie,
+                         Word);
+    }
+    else
+    {
+        LableTypeBuf = g_strdup_printf("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
+                        Color,
+                        FontSzie,
+                        Word);
+
+    }
     gtk_label_set_markup(GTK_LABEL(Lable),LableTypeBuf);
-	
-	g_free (LableTypeBuf);
-}        
+    g_free(LableTypeBuf);
+}
+
 /******************************************************************************
 * Function:             UserListAppend
 *
@@ -642,7 +659,7 @@ void AutoGenera (GtkEntry            *entry,
 ******************************************************************************/
 void OpenNote(GtkWidget *label,const char *note,UserAdmin *ua)
 {
-    SetLableFontType(label,"red",10,note);
+    SetLableFontType(label,"red",10,note,FALSE);
     gtk_widget_set_sensitive(ua->ButtonConfirm, FALSE);
 }  
      

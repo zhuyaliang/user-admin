@@ -195,51 +195,44 @@ static void DeleteOldUserDone (ActUserManager *manager,
 void RemoveUser(GtkWidget *widget, gpointer data)
 {
     UserAdmin      *ua = (UserAdmin *)data;
-    GtkTreeIter     iter;
     int             nRet;
     gboolean        RemoveType = TRUE;
     ActUserManager *Manager;
-    UserInfo       *user;
+   
     Manager =       act_user_manager_get_default ();
-
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    if (gtk_tree_selection_get_selected(ua->UserSelect, &ua->Model, &iter))
+    if(CheckLoginUser(act_user_get_uid(ua->CurrentUser)) == TRUE)
     {
-        if(CheckLoginUser(act_user_get_uid(user->ActUser)) == TRUE)
-        {
-            MessageReport(_("Remove User"),
-                          _("You cannot delete your own account."),
-                           ERROR); 
-            return;
-        
-        }    
-        nRet = MessageReport(_("Remove User"),
-                             _("Whether to remove the user's home directory"),
-                              QUESTION);
-        if(nRet == GTK_RESPONSE_NO)
-        {
-             RemoveType = FALSE;
-        }
-        else if(nRet == GTK_RESPONSE_DELETE_EVENT ||
-                nRet ==  GTK_RESPONSE_ACCEPT)
-        {
-             return;
-        }
-         /* remove autologin */
-        if (act_user_get_automatic_login (user->ActUser)) 
-        {
-            act_user_set_automatic_login (user->ActUser, FALSE);
-        }
-
-        act_user_manager_delete_user_async (Manager,
-                                            user->ActUser,
-                                            RemoveType,
-                                            NULL,
-                                            (GAsyncReadyCallback)DeleteOldUserDone,
-                                            ua);
-
-        g_object_unref (user);
+        MessageReport(_("Remove User"),
+                      _("You cannot delete your own account."),
+                       ERROR); 
+        return;
+    
+    }    
+    nRet = MessageReport(_("Remove User"),
+                         _("Whether to remove the user's home directory"),
+                          QUESTION);
+    if(nRet == GTK_RESPONSE_NO)
+    {
+         RemoveType = FALSE;
     }
+    else if(nRet == GTK_RESPONSE_DELETE_EVENT ||
+            nRet ==  GTK_RESPONSE_ACCEPT)
+    {
+         return;
+    }
+     /* remove autologin */
+    if (act_user_get_automatic_login (ua->CurrentUser)) 
+    {
+        act_user_set_automatic_login (ua->CurrentUser, FALSE);
+    }
+
+    act_user_manager_delete_user_async (Manager,
+                                        ua->CurrentUser,
+                                        RemoveType,
+                                        NULL,
+                                        (GAsyncReadyCallback)DeleteOldUserDone,
+                                        ua);
+
 
 }        
 
@@ -375,14 +368,14 @@ static gboolean CheckName(AddNUDialog *and)
     }
     Valid = UserNameValidCheck(s,&Message);
     if(Message != NULL)
-        SetLableFontType(and->LabelNameNote,"red",10,Message);
+        SetLableFontType(and->LabelNameNote,"red",10,Message,FALSE);
     else
     { 
         gtk_entry_set_icon_from_icon_name(GTK_ENTRY(and->UserNameEntry),
                                           GTK_ENTRY_ICON_SECONDARY,
                                          "emblem-ok-symbolic");
         
-        SetLableFontType(and->LabelNameNote,"gray",10,FixedNote);
+        SetLableFontType(and->LabelNameNote,"gray",10,FixedNote,FALSE);
     }
     if(UnlockFlag == 0 && Valid && input == 0)
         gtk_widget_set_sensitive(and->ButtonConfirm, TRUE);
@@ -592,7 +585,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_set_column_homogeneous(GTK_GRID(Table),TRUE);
 
     LabelUserName = gtk_label_new(NULL);
-    SetLableFontType(LabelUserName,"gray",11,_("Username"));
+    SetLableFontType(LabelUserName,"gray",11,_("User Name"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) , LabelUserName , 0 , 0 , 1 , 1);
 
     and->UserNameEntry   = gtk_entry_new();
@@ -601,11 +594,11 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_attach(GTK_GRID(Table) ,and->UserNameEntry , 1 , 0 , 3 , 1);
 
     and->LabelNameNote = gtk_label_new (NULL);
-    SetLableFontType(and->LabelNameNote,"gray",10,FixedNote);
+    SetLableFontType(and->LabelNameNote,"gray",10,FixedNote,TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,and->LabelNameNote , 0 , 1, 4 , 1);
 
     LabelRealName = gtk_label_new(NULL);
-    SetLableFontType(LabelRealName,"gray",11,_("Full Name"));
+    SetLableFontType(LabelRealName,"gray",11,_("Full Name"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) , LabelRealName , 0 , 2 , 1 , 1);
 
     and->RealNameEntry = gtk_entry_new();
@@ -613,7 +606,7 @@ static void SetNewUserInfo(GtkWidget *Vbox,AddNUDialog *and,gboolean CanConfig)
     gtk_grid_attach(GTK_GRID(Table), and->RealNameEntry , 1 , 2 , 3 , 1);
 	  
     LabelUserType = gtk_label_new(NULL);
-    SetLableFontType(LabelUserType,"gray",11,_("Account Type"));
+    SetLableFontType(LabelUserType,"gray",11,_("Account Type"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,LabelUserType , 0 , 3 , 1 , 1);        
      
     and->NewUserType = SetComboUserType(_("Standard"),_("Administrators"));
@@ -645,7 +638,7 @@ static void ComparePassword (AddNUDialog *and)
         gtk_entry_set_icon_from_icon_name(GTK_ENTRY(and->CheckPassEntry),
                                           GTK_ENTRY_ICON_SECONDARY,
                                           NULL);
-        SetLableFontType(and->LabelSpace,"red",10,NoteMessage);
+        SetLableFontType(and->LabelSpace,"red",10,NoteMessage,FALSE);
         UnlockFlag = 1;
         return;
     }    
@@ -678,7 +671,7 @@ static gboolean TimeFun(gpointer data)
     if(strlen(s) == 0)
     {
         //gtk_entry_set_visibility(GTK_ENTRY(newuser->NewPassEntry),FALSE);
-        SetLableFontType(and->LabelPassNote,"gray",10,tip);
+        SetLableFontType(and->LabelPassNote,"gray",10,tip,FALSE);
         return TRUE;
     }
     Level = GetPassStrength (s, NULL,NULL,&Message);
@@ -690,14 +683,14 @@ static gboolean TimeFun(gpointer data)
                                           GTK_ENTRY_ICON_SECONDARY,
                                           "emblem-ok-symbolic");
         gtk_widget_set_sensitive(and->CheckPassEntry, TRUE);
-        SetLableFontType(and->LabelPassNote,"gray",10,tip);
+        SetLableFontType(and->LabelPassNote,"gray",10,tip,FALSE);
         ComparePassword(and);
         return TRUE;
     }
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY(and->NewPassEntry), 
                                       GTK_ENTRY_ICON_SECONDARY,
                                      "system-run");
-    SetLableFontType(and->LabelPassNote,"red",10,Message);
+    SetLableFontType(and->LabelPassNote,"red",10,Message,FALSE);
     UnlockFlag = 1;
     return TRUE;
 }
@@ -793,7 +786,7 @@ static void SetNewUserPass(GtkWidget *Vbox,AddNUDialog *and)
                      and); 
    
     LabelPass = gtk_label_new(NULL);
-    SetLableFontType(LabelPass,"gray",11,_("Password"));
+    SetLableFontType(LabelPass,"gray",11,_("Password"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);     
 
     and->NewPassEntry = gtk_entry_new();
@@ -818,7 +811,7 @@ static void SetNewUserPass(GtkWidget *Vbox,AddNUDialog *and)
     gtk_grid_attach(GTK_GRID(Table) ,and->LabelPassNote , 0 , 5 , 4 , 1);
 
     LabelConfirm = gtk_label_new (NULL);
-    SetLableFontType(LabelConfirm,"gray",11,_("Confirm"));
+    SetLableFontType(LabelConfirm,"gray",11,_("Confirm"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0 , 6 , 1 , 1);
 
     and->CheckPassEntry = gtk_entry_new();

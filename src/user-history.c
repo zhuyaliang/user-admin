@@ -414,10 +414,8 @@ void ViewLoginHistory (GtkWidget *widget, gpointer data)
 {
     LoginHistoryDialog *dialog;
     UserAdmin *ua = (UserAdmin *)data;
-    UserInfo    *user;
 
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    dialog = login_history_dialog_new (user->ActUser);
+    dialog = login_history_dialog_new (ua->CurrentUser);
     g_signal_connect (dialog->previous_button, 
                      "clicked",
                       G_CALLBACK (previous_button_clicked_cb),

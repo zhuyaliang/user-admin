@@ -586,7 +586,7 @@ static GtkTreeModel * CreateAddUsersModel (GSList *List)
     GtkListStore *store;
     GtkTreeIter   iter;
     int           UserNum = 0;
-    UserInfo     *user;
+	ActUser      *Actuser;
 
     UserNum = GetGroupNum(List);
     store = gtk_list_store_new (NUM_USER,
@@ -597,8 +597,8 @@ static GtkTreeModel * CreateAddUsersModel (GSList *List)
     
     for (i = 0; i < UserNum ; i++)
     {
-        user = g_slist_nth_data(List,i); 
-        if(user == NULL)
+        Actuser = g_slist_nth_data(List,i); 
+        if(Actuser == NULL)
         {
             g_error("No such the User!!!\r\n");
             break;
@@ -606,8 +606,8 @@ static GtkTreeModel * CreateAddUsersModel (GSList *List)
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter,
                             COLUMN_SELECT,   FALSE,
-                            COLUMN_USERNAME, GetUserName(user->ActUser),
-                            COLUMN_USERID,   GetUserUid (user->ActUser),
+                            COLUMN_USERNAME, GetUserName(Actuser),
+                            COLUMN_USERID,   GetUserUid (Actuser),
                             -1);
     }
 
@@ -972,7 +972,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
     
     GroupNameLabel = gtk_label_new(NULL);
-    SetLableFontType(GroupNameLabel,"gray",10,_("New Group Name"));
+    SetLableFontType(GroupNameLabel,"gray",10,_("New Group Name"),TRUE);
     gtk_grid_attach(GTK_GRID(table) ,GroupNameLabel ,0,0,1 ,1);
 
     gm->EntryGroupName = gtk_entry_new();
@@ -983,7 +983,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
     TipsLabel = gtk_label_new(NULL);
-    SetLableFontType(TipsLabel,"black",12,_("Please select the user to add to the new group"));
+    SetLableFontType(TipsLabel,"black",12,_("Please select the user to add to the new group"),FALSE);
     gtk_grid_attach(GTK_GRID(table) , TipsLabel ,0 ,1,2 ,1);
 
     model = CreateAddUsersModel(List);
@@ -1113,10 +1113,8 @@ void UserGroupsManage (GtkWidget *widget, gpointer data)
 {
     UserAdmin   *ua = (UserAdmin *)data;
     const gchar *CurrentUserName;
-    UserInfo    *user;
 
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    CurrentUserName = GetUserName(user->ActUser);
+    CurrentUserName = GetUserName(ua->CurrentUser);
     ua->gm.username = g_strdup(CurrentUserName);
     gtk_widget_hide(WindowLogin);
     ua->gm.GroupsList = NULL;

@@ -26,7 +26,6 @@
 #define  APPICON               "user-admin.png"
 #define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
-int         gnCurrentUserIndex;   //代表当前用户标号
 GtkWidget  *WindowLogin;          //首页窗口
 
 static void ExitHook (void)
@@ -62,11 +61,9 @@ static void UpdatePermission(UserAdmin *ua)
 {
     gboolean  is_authorized;
     gboolean  self_selected;
-    UserInfo *user;
 
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
-    self_selected = act_user_get_uid (user->ActUser) == geteuid ();
+    self_selected = act_user_get_uid (ua->CurrentUser) == geteuid ();
     
     gtk_widget_set_sensitive(ua->ButtonAdd,      is_authorized);
     gtk_widget_set_sensitive(ua->ButtonRemove,   is_authorized);
@@ -115,7 +112,7 @@ static GtkWidget *SetUnlockButtonTips (GtkWidget *button_lock)
     image = gtk_image_new_from_icon_name ("system-lock-screen-symbolic",GTK_ICON_SIZE_LARGE_TOOLBAR);
     gtk_container_add(GTK_CONTAINER(box), image);
     label = gtk_label_new (NULL);
-    SetLableFontType(label,"black",11,_("Some settings must be unlocked before they can be changed"));
+    SetLableFontType(label,"black",11,_("Some settings must be unlocked before they can be changed"),FALSE);
     gtk_container_add(GTK_CONTAINER(box), label);
     
     gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_LEFT);
@@ -185,7 +182,7 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     
     Hbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox2,FALSE,FALSE,10); 
-    gtk_widget_set_size_request (Hbox2, 200,-1);
+    gtk_widget_set_size_request (Hbox2, 180,-1);
 
     /*Display user list on the left side*/   
     DisplayUserList(Hbox2,ua);
@@ -279,48 +276,31 @@ ERROREXIT:
 
 }        
 
-static void DeleteOldUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *ua)
+static void RemoveAllRow (GtkWidget *row,gpointer data)
 {
-    UserInfo *user;
-    
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
+    UserAdmin *ua = (UserAdmin *)data;
+
+    gtk_container_remove(GTK_CONTAINER(ua->UserList),row);
+}    
+static void DeleteOldUserToList (ActUserManager *um, ActUser *user, UserAdmin *ua)
+{
     ua->UsersList = g_slist_remove(ua->UsersList,user);
+    gtk_container_foreach (GTK_CONTAINER(ua->UserList),RemoveAllRow,ua);
     RefreshUserList(ua->UserList,ua->UsersList);
-    /*Scavenging user information*/
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    if(user == NULL)
-    {
-        g_error(_("No such user!!!"));
-    }    
-    UpdateInterface(user->ActUser,ua);                  
-    ua->UserCount--;                                        
+    init_user_option_data (ua);
+    UpdateInterface(ua->CurrentUser,ua);                  
 }
 
-static void AddNewUserToList (ActUserManager *um, ActUser *ActUser, UserAdmin *ua)
+static void AddNewUserToList (ActUserManager *um, ActUser *Actuser, UserAdmin *ua)
 {
-    UserInfo   *user;
-    UserInfo   *currentuser;
-    const char *un;
-    const char *rn;
-    
-    if (act_user_get_uid (ActUser) == 0)
-        return;    
-    user = user_new();
-    un = GetUserName(ActUser); 
-    rn = GetRealName(ActUser);
-    user->UserName = g_strdup(un);
-    user->ActUser  = ActUser;
-    UserListAppend(ua->UserList,
-    			   DEFAULT,
-                   rn,
-                   un,
-                   ua->UserCount,
-                  &(ua->NUDialog->NewUserIter));
-    user->Iter     = ua->NUDialog->NewUserIter;
-    ua->UsersList  = g_slist_append(ua->UsersList,g_object_ref(user));
-    currentuser    = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    UpdateInterface(currentuser->ActUser,ua);
-    ua->UserCount +=1;//用户个数加1
+    GtkWidget *row;
+    if (act_user_get_uid (Actuser) == 0)
+        return;  
+    ua->UsersList  = g_slist_append(ua->UsersList,Actuser);
+   	row = user_list_row_new (Actuser);
+    gtk_list_box_row_set_activatable(GTK_LIST_BOX_ROW(row),TRUE);
+    gtk_list_box_insert (GTK_LIST_BOX(ua->UserList), row, -1);
+    gtk_widget_show_all(ua->UserList);
 }
 static void users_loaded(ActUserManager  *manager,
                          GParamSpec      *pspec, 

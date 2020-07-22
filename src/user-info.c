@@ -19,32 +19,6 @@
 #include "user.h"
 #include "user-share.h"
 
-G_DEFINE_TYPE (UserInfo, user_info, G_TYPE_OBJECT)
-static void user_finalize (GObject *object)
-{
-    UserInfo *user;
-
-    user = USERINFO (object);
-    g_free (user->UserName);
-}
-static void user_info_class_init (UserInfoClass *class)
-{
-    GObjectClass *gobject_class;
-    gobject_class = G_OBJECT_CLASS (class);
-    gobject_class->finalize = user_finalize;
-}
-static void user_info_init (UserInfo *user)
-{
-    user->ActUser = NULL;
-}
-UserInfo * user_new (void)
-{
-    UserInfo *user;
-
-    user = g_object_new (USER_TYPE_INFO, NULL);
-    return user;
-}
-
 /******************************************************************************
 * Function:              GetPasswordModeText      
 *        
@@ -175,14 +149,6 @@ gint GetUserAutoLogin(ActUser *user)
 
     return Auto;
 }       
-UserInfo * GetIndexUser(GSList *UsersList,guint index)
-{
-    if(g_slist_length(UsersList) <= index)
-    {
-        return NULL;
-    }
-    return g_slist_nth_data(UsersList,index); 
-}    
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {
     ActUser *ua, *ub;
@@ -210,32 +176,6 @@ static gint SortUsers (gconstpointer a, gconstpointer b)
     }
     return result;
 }
-/******************************************************************************
-* Function:              UserAdded      
-*        
-* Explain: Save user information
-*        
-* Input:  @index  user label      
-*        
-*        
-* Output:  
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
-static UserInfo *UserAdded(ActUser *ActUser)
-{
-    UserInfo *user;
-
-    user = user_new();
-    user->ActUser = ActUser;
-
-    /*user name Cannot be modified*/
-    user->UserName  =  g_strdup(GetUserName(ActUser));
-    if(user->UserName == NULL)
-        return NULL;
-    
-    return user;
-}    
 
 /******************************************************************************
 * Function:              GetUserInfo      
@@ -255,8 +195,7 @@ int GetUserInfo(UserAdmin *ua)
 {
     GSList *list, *l;
     int UserCnt = 0;
-    UserInfo *user;
-    
+    ActUser *user;
     /* get all user list */
     list = act_user_manager_list_users (ua->um);
     /*user number*/
@@ -274,12 +213,9 @@ int GetUserInfo(UserAdmin *ua)
     ua->UsersList = NULL;
     for (l = list; l; l = l->next)
     {
-        user = UserAdded (l->data);
-        if(user != NULL)
-        {
-            ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(user));
-        }    
+		user = l->data;
+    	ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(user));
     }
     g_slist_free (list);
     return UserCnt; 
-}        
+}       

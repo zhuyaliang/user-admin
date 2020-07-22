@@ -40,7 +40,6 @@
 static void NextSetPass (GtkRadioButton *button,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    UserInfo *user;
 
     gtk_widget_set_sensitive(ua->NewPassEntry, FALSE);  //lock widget
     gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);
@@ -52,8 +51,7 @@ static void NextSetPass (GtkRadioButton *button,gpointer data)
         g_source_remove(ua->CheckPassTimeId);
         ua->CheckPassTimeId = 0;
     }
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+    act_user_set_password_mode(ua->CurrentUser,ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
     
 }        
 
@@ -72,7 +70,6 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
 {
     int CheckPassTimeId;
     UserAdmin *ua = (UserAdmin *)data;
-    UserInfo *user;
     gtk_widget_set_sensitive(ua->CheckPassEntry, FALSE);  //Unlocking Widget
     gtk_widget_set_sensitive(ua->NewPassEntry, TRUE);
     gtk_widget_set_sensitive(ua->LevelBar, TRUE);
@@ -80,8 +77,7 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
 
     CheckPassTimeId = g_timeout_add(800,(GSourceFunc)CheckPassword,ua);
     ua->CheckPassTimeId = CheckPassTimeId;
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    act_user_set_password_mode(user->ActUser,ACT_USER_PASSWORD_MODE_REGULAR); 
+    act_user_set_password_mode(ua->CurrentUser,ACT_USER_PASSWORD_MODE_REGULAR); 
 }        
 /******************************************************************************
 * Function:              SetNewPass 
@@ -97,26 +93,22 @@ static void NowSetPass (GtkRadioButton *button,gpointer data)
 static void SetNewPass(UserAdmin *ua)
 {
     int         passtype;
-    UserInfo   *user;
     const char *password;
 
     password =  gtk_entry_get_text(GTK_ENTRY(ua->CheckPassEntry));
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    GetPasswordModeText(user->ActUser,&passtype);
+    GetPasswordModeText(ua->CurrentUser,&passtype);
     /*choose now set password*/
     if(passtype == OLDPASS)
     {        
-        act_user_set_password (user->ActUser,password, "");
+        act_user_set_password (ua->CurrentUser,password, "");
     }
-    UpdateInterface(user->ActUser,ua);
+    UpdateInterface(ua->CurrentUser,ua);
 }
 static void SetButtonMode(UserAdmin *ua)
 {
     int passtype;
-    UserInfo *user;
     
-    user = GetIndexUser(ua->UsersList,gnCurrentUserIndex);
-    GetPasswordModeText(user->ActUser,&passtype);
+    GetPasswordModeText(ua->CurrentUser,&passtype);
     if(passtype == OLDPASS)
     {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ua->RadioButton2), TRUE);
@@ -257,7 +249,7 @@ void CreateNewPass(UserAdmin *ua)
     ua->RadioButton2 = RadioButton2;
     
     LabelPass = gtk_label_new(NULL);
-    SetLableFontType(LabelPass,"gray",11,_("User Password"));
+    SetLableFontType(LabelPass,"gray",11,_("User Password"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,LabelPass , 0 , 3 , 1 , 1);
 
     NewPassEntry = gtk_entry_new();
@@ -285,7 +277,7 @@ void CreateNewPass(UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(Table) ,LabelPassNote , 0 , 5 , 4 , 1);
 
     LabelConfirm = gtk_label_new (NULL);
-    SetLableFontType(LabelConfirm,"gray",11,_("Confirm"));
+    SetLableFontType(LabelConfirm,"gray",11,_("Confirm"),TRUE);
     gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0 , 6 , 1 , 1);
 
     CheckPassEntry = gtk_entry_new();

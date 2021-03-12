@@ -177,45 +177,27 @@ static gint SortUsers (gconstpointer a, gconstpointer b)
     return result;
 }
 
-/******************************************************************************
-* Function:              GetUserInfo      
-*        
-* Explain: Using accountsservice-0.6.49 services to get user information. 
-*          Information includes: name, icon, user type, language...
-*        
-* Input:         
-*        
-*        
-* Output:  Success       :0
-*          failure       :-1
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-int GetUserInfo(UserAdmin *ua)
+GSList *get_user_info_list (ActUserManager *manager)
 {
-    GSList *list, *l;
-    int UserCnt = 0;
-    ActUser *user;
+    GSList  *list;
+    int      user_count = 0;
+
     /* get all user list */
-    list = act_user_manager_list_users (ua->um);
+    list = act_user_manager_list_users (manager);
     /*user number*/
-    UserCnt = g_slist_length (list);     
-    if(UserCnt <= 0)
+    user_count = g_slist_length (list);
+    if(user_count <= 0)
     {
         g_slist_free (list);
         mate_uesr_admin_log("Error","mate-user-admin No available users");
-        MessageReport(_("Get User Info"),_("user count is 0"),ERROR);
-        return -1;
-    }        
-    mate_uesr_admin_log("Info","mate-user-admin user %d",UserCnt);
+        MessageReport(_("Get User Info"), _("user count is 0"), ERROR);
+
+        return NULL;
+    }
+    mate_uesr_admin_log("Info","mate-user-admin user %d", user_count);
+
     /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);
-    ua->UsersList = NULL;
-    for (l = list; l; l = l->next)
-    {
-		user = l->data;
-    	ua->UsersList = g_slist_append(ua->UsersList,g_object_ref(user));
-    }
-    g_slist_free (list);
-    return UserCnt; 
-}       
+
+    return list;
+}

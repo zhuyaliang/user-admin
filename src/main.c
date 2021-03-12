@@ -310,11 +310,7 @@ static void users_loaded(ActUserManager  *manager,
     GtkWidget *Vbox;
    
     ua->um = manager;
-    ua->UserCount = GetUserInfo(ua);
-    if(ua->UserCount < 0)
-    {
-        exit(0);
-    }	
+    ua->UsersList = get_user_info_list (manager);
     
     fixed = gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(ua->MainWindow), fixed); 

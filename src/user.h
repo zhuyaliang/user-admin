@@ -124,7 +124,6 @@ typedef struct
     GtkWidget        *ButtonAdd;
     int               CheckPassTimeId;//Check the password format timer
     int               CheckNameTimeId; //Check the Realname format timer
-    int               UserCount;             //Valid user number
     int               MouseId;
     int               KeyId;
     char              TmpPass[24];

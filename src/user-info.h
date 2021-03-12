@@ -21,7 +21,7 @@
 #include "user.h"
 G_BEGIN_DECLS
 
-int           GetUserInfo              (UserAdmin *ua);
+GSList       *get_user_info_list      (ActUserManager *manager);
 
 const gchar  *GetPasswordModeText      (ActUser   *user,
                                         int       *Type);

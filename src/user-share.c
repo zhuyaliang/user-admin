@@ -50,7 +50,7 @@ static int create_log_file(void)
     g_free(file_name);    
     return file_dp;
 }
-static GdkPixbuf *GetRoundPixbuf (GdkPixbuf *Spixbuf)
+GdkPixbuf *GetRoundPixbuf (GdkPixbuf *Spixbuf)
 {
     GdkPixbuf *Dpixbuf = NULL;
     cairo_surface_t *CairoFace;

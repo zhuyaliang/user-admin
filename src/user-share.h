@@ -84,4 +84,6 @@ int         GetPassStrength        (const char  *password,
 
 GtkWidget  *SetButtonIcon          (const gchar *button_text,
                                     const gchar *icon_name);
+
+GdkPixbuf  *GetRoundPixbuf         (GdkPixbuf *Spixbuf);
 #endif

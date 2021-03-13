@@ -10,6 +10,7 @@ sources = [
 'user-password.c',
 'user-share.c',
 'user-crop.c',
+'user-avatar.c',
 'user-group.c',
 'user-history.c',
 'user-language.c',

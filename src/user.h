@@ -43,6 +43,7 @@
 #include <polkit/polkit.h>
 #include "user-language.h"
 #include "user-admin.h"
+#include "user-face.h"
 
 #define  AVATARS    "Default.png"
 #define  DEFAULT   FACEDIR AVATARS 
@@ -90,6 +91,7 @@ typedef struct
 {
     GSList           *UsersList;
     GroupsManage      gm;
+    UserFace         *face;
 	AddNUDialog      *NUDialog;
     LanguageChooser  *language_chooser;
     GtkWidget        *MainWindow;
@@ -103,8 +105,6 @@ typedef struct
 	GtkWidget        *Popover;
     GPermission      *Permission;
     GtkWidget        *UserList;
-	GtkWidget        *ButtonFace;
-    GtkWidget        *EntryName;
     GtkWidget        *ComUserType;
     GtkWidget        *ButtonLanguage;
     GtkWidget        *ButtonPass;

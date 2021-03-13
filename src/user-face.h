@@ -19,6 +19,35 @@
 #define __USER_FACE_H__
 
 #include <gtk/gtk.h>
-void DisplayUserSetFace(GtkWidget *Hbox,UserAdmin *ua);
+#include <act/act.h>
+
+#define USER_TYPE_FACE         (user_face_get_type ())
+#define USER_FACE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), USER_TYPE_FACE, UserFace))
+#define USER_FACE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), USER_TYPE_FACE, UserFaceClass))
+
+typedef struct _UserFace        UserFace;
+typedef struct _UserFaceClass   UserFaceClass;
+typedef struct _UserFacePrivate UserFacePrivate;
+
+struct _UserFace {
+    GtkGrid          parent_instance;
+    UserFacePrivate *priv;
+};
+
+struct _UserFaceClass {
+    GtkGridClass parent_class;
+};
+
+GType         user_face_get_type                 (void) G_GNUC_CONST;
+
+UserFace     *user_face_new                      (ActUser    *user);
+
+char         *user_face_get_image_name           (UserFace   *face);
+
+char         *user_face_get_real_name            (UserFace   *face);
+
+void          user_face_update                   (UserFace   *face,
+                                                  const char *image_name,
+                                                  const char *real_name);
 
 #endif

@@ -30,14 +30,14 @@ GtkWidget  *WindowLogin;          //首页窗口
 
 static void ExitHook (void)
 {
-    remove(LOCKFILE);    
-}    
-static gboolean on_window_quit (GtkWidget *widget, 
-                                GdkEvent  *event, 
+    remove(LOCKFILE);
+}
+static gboolean on_window_quit (GtkWidget *widget,
+                                GdkEvent  *event,
                                 gpointer   user_data)
 {
     UserAdmin *ua = (UserAdmin *)user_data;
-    close_log_file();    
+    close_log_file();
     g_slist_free_full (ua->UsersList,g_object_unref);
     gtk_main_quit();
     return TRUE;
@@ -53,10 +53,10 @@ static GdkPixbuf * GetAppIcon(void)
         MessageReport(_("Get Icon Fail"),Error->message,ERROR);
         mate_uesr_admin_log("Warning","mate-user-admin user-admin.png %s",Error->message);
         g_error_free(Error);
-    }   
-    
+    }
+
     return Pixbuf;
-}    
+}
 static void UpdatePermission(UserAdmin *ua)
 {
     gboolean  is_authorized;
@@ -64,11 +64,10 @@ static void UpdatePermission(UserAdmin *ua)
 
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
     self_selected = act_user_get_uid (ua->CurrentUser) == geteuid ();
-    
+
     gtk_widget_set_sensitive(ua->ButtonAdd,      is_authorized);
     gtk_widget_set_sensitive(ua->ButtonRemove,   is_authorized);
-    gtk_widget_set_sensitive(ua->ButtonFace,     is_authorized);
-    gtk_widget_set_sensitive(ua->EntryName,      is_authorized);
+    gtk_widget_set_sensitive(GTK_WIDGET (ua->face),is_authorized);
     gtk_widget_set_sensitive(ua->ComUserType,    is_authorized);
     gtk_widget_set_sensitive(ua->ButtonLanguage, is_authorized);
     gtk_widget_set_sensitive(ua->ButtonPass,     is_authorized);
@@ -78,31 +77,29 @@ static void UpdatePermission(UserAdmin *ua)
     gtk_widget_set_visible(ua->Popover,!is_authorized);
     if (is_authorized == 0 && self_selected == 1)
     {
-        gtk_widget_set_sensitive(ua->ButtonFace,     self_selected);
-        gtk_widget_set_sensitive(ua->EntryName,      self_selected);
+        gtk_widget_set_sensitive(GTK_WIDGET (ua->face), self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
-        
-    }    
+    }
 
-}    
+}
 static void on_permission_changed (GPermission *permission,
                                    GParamSpec  *pspec,
                                    gpointer     data)
 {
     UserAdmin *ua = (UserAdmin *)data;
     UpdatePermission(ua);
-}   
+}
 static void LoadHeader_bar(UserAdmin *ua)
 {
     GtkWidget *header;
-    
+
     header = gtk_header_bar_new ();
     gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
     gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Mate User Manager"));
     gtk_header_bar_pack_start (GTK_HEADER_BAR (header), ua->ButtonLock);
     gtk_window_set_titlebar (GTK_WINDOW (ua->MainWindow), header);
-}    
+}
 static GtkWidget *SetUnlockButtonTips (GtkWidget *button_lock)
 {
     GtkWidget *popover,*box,*label,*image;
@@ -114,15 +111,15 @@ static GtkWidget *SetUnlockButtonTips (GtkWidget *button_lock)
     label = gtk_label_new (NULL);
     SetLableFontType(label,"black",11,_("Some settings must be unlocked before they can be changed"),FALSE);
     gtk_container_add(GTK_CONTAINER(box), label);
-    
+
     gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_LEFT);
     gtk_container_add (GTK_CONTAINER (popover), box);
     gtk_container_set_border_width (GTK_CONTAINER (popover), 6);
     gtk_widget_show_all(popover);
     gtk_popover_popup(GTK_POPOVER(popover));
-    
+
     return popover;
-}    
+}
 static void InitMainWindow(UserAdmin *ua)
 {
     GtkWidget *Window;
@@ -138,7 +135,7 @@ static void InitMainWindow(UserAdmin *ua)
                     "delete-event",
                      G_CALLBACK(on_window_quit),
                      ua);
-    
+
     ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
     if (ua->Permission != NULL)
     {
@@ -147,28 +144,47 @@ static void InitMainWindow(UserAdmin *ua)
 
         gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
         if(GetUseHeader() == 1)
-        {    
+        {
             mate_uesr_admin_log("Info","mate-user-admin dialogs use header");
             LoadHeader_bar(ua);
         }
-        gtk_widget_grab_focus(ua->ButtonLock);    
-        g_signal_connect(ua->Permission, 
+        gtk_widget_grab_focus(ua->ButtonLock);
+        g_signal_connect(ua->Permission,
                         "notify",
-                         G_CALLBACK (on_permission_changed), 
+                         G_CALLBACK (on_permission_changed),
                          ua);
-    
+
         AppIcon = GetAppIcon();
         if(AppIcon)
         {
             gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
-        }   
+        }
         ua->language_chooser = NULL;
     }
     else
-    {    
+    {
         mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
         g_error_free (error);
     }
+}
+
+static void user_image_changed_cb (UserFace *face, UserAdmin *ua)
+{
+    char      *file_name;
+    GdkPixbuf *pb;
+
+    file_name = user_face_get_image_name (face);
+    pb = SetUserFaceSize (file_name, 50);
+    gtk_image_set_from_pixbuf(GTK_IMAGE(ua->CurrentImage), pb);
+}
+
+static void user_name_changed_cb (UserFace *face, UserAdmin *ua)
+{
+    char *name;
+
+    name = user_face_get_real_name (face);
+    act_user_set_real_name (ua->CurrentUser, name);
+    SetLableFontType(ua->CurrentName, "black", 14, name, TRUE);
 }
 
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
@@ -176,10 +192,11 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     GtkWidget *Hbox;
     GtkWidget *Hbox1;
     GtkWidget *Hbox2;
+    UserFace  *face;
 
     Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);  
     gtk_box_pack_start(GTK_BOX(Vbox),Hbox,FALSE,FALSE,0); 
-    
+
     Hbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox2,FALSE,FALSE,10); 
     gtk_widget_set_size_request (Hbox2, 180,-1);
@@ -189,12 +206,24 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 
     Hbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox1,TRUE,TRUE,10); 
-   
+
     /* Display the user's head image and name */
-    DisplayUserSetFace(Hbox1,ua);
-    
+    face = user_face_new (ua->CurrentUser);
+
+    g_signal_connect (face,
+                     "image-changed",
+                      G_CALLBACK (user_image_changed_cb),
+                      ua);
+
+    g_signal_connect (face,
+                     "name-changed",
+                      G_CALLBACK (user_name_changed_cb),
+                      ua);
+
+    gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (face), TRUE, TRUE, 0);
+    ua->face = face;
     /*user type and user password and user langusge and auto login and login time */    
-    DisplayUserSetOther(Hbox1,ua);  
+    DisplayUserSetOther(Hbox1,ua);
 
     /*Adding new users or remove users*/
     AddRemoveUser(Vbox,ua);

@@ -323,33 +323,23 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 ******************************************************************************/
 void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
 {
-    GtkWidget *image;
-    g_autoptr(GdkPixbuf) pb = NULL;
-    GdkPixbuf *pb2;
     const char      *lang_id;
     g_autofree char *lang_cc = NULL;
-	g_autofree const char *text = NULL;
+    g_autofree const char *text = NULL;
     int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
-    
+
     /*Some options change when switching users, 
       causing a signal response, requiring flags, 
       and ignoring signal processing when Chang = 1*/
-    Change = 1;           
+    Change = 1;
 
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
     self_selected = act_user_get_uid (ActUser) == geteuid ();
 
-    pb = gdk_pixbuf_new_from_file(GetUserIcon(ActUser),NULL);
-    pb2 = gdk_pixbuf_scale_simple (pb,96,96, GDK_INTERP_BILINEAR);
-    image = gtk_image_new_from_pixbuf(pb2);
-    /*Switching icon*/ 
-    gtk_button_set_image(GTK_BUTTON(ua->ButtonFace),
-                         image);
-
-    gtk_entry_set_text(GTK_ENTRY(ua->EntryName),
-                       GetRealName(ActUser)); 
+    /*Switching icon*/
+    user_face_update (ua->face, GetUserIcon(ActUser), GetRealName(ActUser));
 
     mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(ActUser));
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
@@ -361,49 +351,47 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
                              _("No Settings"));
     }
     else
-    {    
+    {
         lang_cc = mate_get_language_from_locale(lang_id,NULL);
         gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
                              lang_cc);
     }
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
                          GetPasswordModeText(ActUser,&passtype));
-    
+
     gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
                          GetUserAutoLogin(ActUser));
-	
-	text = GetLoginTimeText(ActUser);
+
+    text = GetLoginTimeText(ActUser);
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
                           text);
 
     if(self_selected == 0)
     {
-        gtk_widget_set_sensitive(ua->ButtonFace,is_authorized);
-        gtk_widget_set_sensitive(ua->EntryName, is_authorized);
+        gtk_widget_set_sensitive(GTK_WIDGET (ua->face),is_authorized);
         gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
         gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
-    }  
+    }
     else if(is_authorized == 0 && self_selected == 1)
     {
-        gtk_widget_set_sensitive(ua->ButtonFace,self_selected);
-        gtk_widget_set_sensitive(ua->EntryName, self_selected);
+        gtk_widget_set_sensitive(GTK_WIDGET (ua->face),self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
         gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
-    }   
+    }
     Change = 0;
-} 
+}
 static pwquality_settings_t * get_pwq (void)
 {
     static pwquality_settings_t *settings;
 
     if (settings == NULL)
     {
-    	char *err = NULL;
+        char *err = NULL;
         settings = pwquality_default_settings ();
         pwquality_set_int_value (settings, PWQ_SETTING_MIN_LENGTH , 8);
         if (pwquality_read_config (settings, NULL, (gpointer)&err) < 0)
-       	{
-        	return NULL;
+       {
+            return NULL;
         }
     }
 
@@ -495,12 +483,12 @@ int GetPassStrength (const char  *password,
                           &auxerror);
 
     if (password != NULL)
-    	length = strlen (password);
+        length = strlen (password);
     strength = 0.01 * rv;
 
     if (rv < 0)
     {
-    	level = (length > 0) ? 1 : 0;
+        level = (length > 0) ? 1 : 0;
     }
     else if (strength < 0.50)
     {
@@ -528,7 +516,7 @@ int GetPassStrength (const char  *password,
     {        
         *message = pw_error_hint (rv);
     }    
-	return level;
+    return level;
 }
 /******************************************************************************
 * Function:              DiffPassword 
@@ -717,4 +705,4 @@ GtkWidget *SetButtonIcon(const gchar *button_text,const gchar *icon_name)
     gtk_widget_set_can_default (button, TRUE);
 
     return button;
-}    
+}

@@ -30,12 +30,13 @@ GtkWidget  *WindowLogin;          //首页窗口
 
 static void user_admin_get_first_list_row_data (UserAdmin *ua)
 {
-    ActUser       *user;
-
-    user = g_slist_nth_data(ua->UsersList, 0); 
-    ua->CurrentUser  = user;
-    ua->CurrentName = user_list_get_row_name_label (ua->UserList, 0); 
-    ua->CurrentImage = user_list_get_row_image_label (ua->UserList, 0); 
+    GtkListBoxRow  *row;
+    
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (ua->UserList), 0);
+    
+    ua->CurrentUser  = user_list_row_get_user (USER_LIST_ROW (row));
+    ua->CurrentName = user_list_row_get_name_label (USER_LIST_ROW (row)); 
+    ua->CurrentImage = user_list_row_get_image_label (USER_LIST_ROW (row)); 
 }
 
 static void ExitHook (void)
@@ -197,13 +198,41 @@ static void user_name_changed_cb (UserFace *face, UserAdmin *ua)
     SetLableFontType(ua->CurrentName, "black", 14, name, TRUE);
 }
 
+static GtkWidget *create_user_list_box (GtkWidget *box)
+{
+    GtkWidget *list_box;
+    GtkWidget *scrolled;
+
+    scrolled = gtk_scrolled_window_new (NULL, NULL);
+    gtk_box_pack_start (GTK_BOX(box), scrolled, TRUE, TRUE, 0);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
+                                    GTK_POLICY_NEVER,
+                                    GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
+                                         GTK_SHADOW_IN);
+    list_box = gtk_list_box_new ();
+    gtk_container_add (GTK_CONTAINER (scrolled), list_box);
+
+
+    return list_box;
+}
+
+static void user_list_select_user (GtkListBox    *list_box,
+                      	           GtkListBoxRow *row,
+                                   gpointer       data)
+{
+    UserAdmin *ua = (UserAdmin *)data;
+    ua->CurrentUser  = user_list_row_get_user (USER_LIST_ROW (row));
+    ua->CurrentImage = user_list_row_get_image_label (USER_LIST_ROW (row));
+    ua->CurrentName  = user_list_row_get_name_label (USER_LIST_ROW (row));
+    UpdateInterface (ua->CurrentUser, ua);
+}
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Hbox;
     GtkWidget *Hbox1;
     UserFace  *face;
     GtkWidget *Hbox2;
-    GtkWidget *scrolled;
     GtkWidget *user_list_box;
 
     Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);  
@@ -215,17 +244,12 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 
     /*Display user list on the left side*/   
 
-    scrolled = gtk_scrolled_window_new (NULL, NULL);
-    gtk_box_pack_start (GTK_BOX(Hbox2), scrolled, TRUE, TRUE, 0);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-                                    GTK_POLICY_NEVER,
-                                    GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
-                                         GTK_SHADOW_IN);
-    user_list_box = create_user_list_box (ua);
+    user_list_box = create_user_list_box (Hbox2);
     user_list_box_update (user_list_box, ua->UsersList);
-
-    gtk_container_add (GTK_CONTAINER (scrolled), user_list_box);
+    g_signal_connect (user_list_box,
+                     "row-activated",
+                      G_CALLBACK (user_list_select_user),
+                      ua);
     ua->UserList = user_list_box;
     user_admin_get_first_list_row_data (ua);
 

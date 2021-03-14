@@ -49,18 +49,15 @@ GtkWidget        *user_list_row_new                     (ActUser     *user);
 
 void              user_list_row_set_data                (UserListRow *Row);
 
-void              init_user_option_data                 (UserAdmin   *ua);
+GtkWidget        *user_list_row_get_image_label         (UserListRow *row);
 
-GtkWidget        *create_user_list_box                  (UserAdmin   *ua);
+GtkWidget        *user_list_row_get_name_label          (UserListRow *row);
 
-GtkWidget        *user_list_get_row_image_label         (GtkWidget  *list_box,
-                                                         int         index);
+ActUser          *user_list_row_get_user                (UserListRow *row);
 
-GtkWidget        *user_list_get_row_name_label          (GtkWidget  *list_box,
-                                                         int         index);
+void              user_list_box_update                  (GtkWidget   *list_box,
+                                                         GSList      *user_list);
 
-void              user_list_box_update                  (GtkWidget  *list_box,
-                                                         GSList     *user_list);
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua);
 G_END_DECLS
 #endif

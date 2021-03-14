@@ -146,64 +146,19 @@ void user_list_box_update (GtkWidget *list_box, GSList *user_list)
     }
 }
 
-static void SwitchUser (GtkListBox    *list_box,
-                      	GtkListBoxRow *Row,
-                        gpointer       data)
+GtkWidget *user_list_row_get_image_label (UserListRow *row)
 {
-
-    UserAdmin *ua = (UserAdmin *)data;
-    UserListRow *row = USER_LIST_ROW(Row);
-    ua->CurrentUser  = row->priv->user;
-    ua->CurrentImage = row->priv->user_image;
-    ua->CurrentName  = row->priv->real_name;
-    UpdateInterface(row->priv->user, ua);
+    return row->priv->user_image;
 }
 
-GtkWidget *user_list_get_row_image_label (GtkWidget *list_box, int index)
+GtkWidget *user_list_row_get_name_label (UserListRow *row)
 {
-    GtkListBoxRow *row;
-    UserListRow   *user_row;
-
-    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (list_box), index);
-    user_row = USER_LIST_ROW (row);
-    
-    return user_row->priv->user_image;
+    return row->priv->real_name;
 }
 
-GtkWidget *user_list_get_row_name_label (GtkWidget *list_box, int index)
+ActUser *user_list_row_get_user (UserListRow *row)
 {
-    GtkListBoxRow *row;
-    UserListRow   *user_row;
-
-    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (list_box), index);
-    user_row = USER_LIST_ROW (row);
-    
-    return user_row->priv->real_name;
-}
-
-/******************************************************************************
-* Function:              DisplayUserList      
-*        
-* Explain: Display user list on the left side,icon and name 
-*        
-* Input:         
-*        
-* Output:  
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-GtkWidget *create_user_list_box (UserAdmin *ua)
-{
-    GtkWidget *list_box;
-
-    list_box = gtk_list_box_new ();
-
-    g_signal_connect (list_box,
-                     "row-activated",
-                      G_CALLBACK (SwitchUser),
-                      ua);
-
-    return list_box;
+    return row->priv->user;
 }
 
 static void QuitApp(GtkWidget *widget, gpointer data)

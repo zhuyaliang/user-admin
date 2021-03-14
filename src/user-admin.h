@@ -21,42 +21,28 @@
 #include <gtk/gtk.h>
 G_BEGIN_DECLS
 
-#define ADD_NU_TYPE_DIALOG     (add_nu_dialog_get_type ())
-#define ADDNUDIALOG(obj)       (G_TYPE_CHECK_INSTANCE_CAST ((obj), ADD_NU_TYPE_DIALOG, AddNUDialog))
-#define ADD_NU_IS_DIALOG(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), ADD_NU_TYPE_DIALOG))
+#define USER_TYPE_MANAGER         (user_manager_get_type ())
+#define USER_MANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), USER_TYPE_MANAGER, UserManager))
+#define USER_MANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), USER_TYPE_MANAGER, UserManagerClass))
 
-typedef struct AddNUDialog 
-{
-	GtkDialog         parent;
-    GCancellable     *cancellable;
-	GPermission      *permission;
-    GtkWidget        *RealNameEntry;
-    GtkWidget        *UserNameEntry;
-    GtkWidget        *LabelNameNote;
-    GtkWidget        *NewUserType;
-    GtkWidget        *RadioButton1;
-    GtkWidget        *RadioButton2;
-    GtkWidget        *NewPassEntry;
-    GtkWidget        *LevelBar;
-    GtkWidget        *LabelPassNote;
-    GtkWidget        *CheckPassEntry;
-    GtkWidget        *LabelSpace;
-    int               CheckPassTimeId;       //Check the password format timer
-    int               CheckNameTimeId;       //Check the Realname format timer
-    GtkWidget        *ButtonCancel;
-    GtkWidget        *ButtonConfirm;
-    GtkTreeIter       NewUserIter;           //user list iter
-	char             *nuLang;
-	char            **nuGroups;
-	gboolean          nuType;
-}AddNUDialog; 
-typedef struct AddNUDialogClass 
-{
-	GtkDialogClass parent_class;
-}AddNUDialogClass;
+typedef struct _UserManager        UserManager;
+typedef struct _UserManagerClass   UserManagerClass;
+typedef struct _UserManagerPrivate UserManagerPrivate;
 
-GType        add_nu_dialog_get_type (void) G_GNUC_CONST;
-AddNUDialog *Add_NUDialog_new (void);
+struct _UserManager
+{
+    GtkDialog          parent_instance;
+    UserManagerPrivate  *priv;
+};
+
+struct _UserManagerClass {
+    GtkDialogClass parent_class;
+};
+
+GType          user_manager_get_type                 (void) G_GNUC_CONST;
+ 
+UserManager   *user_manager_new                      (void);
+
 void  RemoveUser(GtkWidget *widget, gpointer data);
 void  AddNewUser(GtkWidget *widget, gpointer data);
 G_END_DECLS

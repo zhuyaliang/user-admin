@@ -18,6 +18,7 @@
 #include "user-info.h"
 #include "user.h"
 #include "user-base.h"
+#include "user-admin.h"
 #include "user-share.h"
 #include "user-face.h"
 #include "user-list.h"

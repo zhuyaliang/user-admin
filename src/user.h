@@ -42,7 +42,6 @@
 #include <locale.h>   
 #include <polkit/polkit.h>
 #include "user-language.h"
-#include "user-admin.h"
 #include "user-face.h"
 
 #define  AVATARS    "Default.png"
@@ -92,7 +91,6 @@ typedef struct
     GSList           *UsersList;
     GroupsManage      gm;
     UserFace         *face;
-	AddNUDialog      *NUDialog;
     LanguageChooser  *language_chooser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;

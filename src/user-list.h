@@ -1,5 +1,5 @@
 /*   mate-user-admin 
-*   Copyright (C) 2018  zhuyaliang https://github.com/zhuyaliang/
+*   Copyright (C) 2021  zhuyaliang https://github.com/zhuyaliang/
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -20,24 +20,24 @@
 
 #include "user.h"
 G_BEGIN_DECLS
-    
+
 #define USER_LIST_TYPE_ROW                (user_list_row_get_type ())
 #define USER_LIST_ROW(object)             (G_TYPE_CHECK_INSTANCE_CAST ((object),\
                                            USER_LIST_TYPE_ROW,\
                                            UserListRow))
-    
-typedef struct UserListRow
-{   
+
+typedef struct _UserListRow        UserListRow;
+typedef struct _UserListRowClass   UserListRowClass;
+typedef struct _UserListRowPrivate UserListRowPrivate;
+
+typedef struct _UserListRow
+{
     GtkListBoxRow   parent_instance;
-    
-    ActUser        *Actuser;
-    GtkWidget      *user_image;
-    GtkWidget      *user_name;
-    GtkWidget      *real_name;
+    UserListRowPrivate  *priv;
 
 }UserListRow;
 
-typedef struct UserListRowClass
+typedef struct _UserListRowClass
 {
     GtkListBoxRowClass   parent_instance_class;
 

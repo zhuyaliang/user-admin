@@ -21,7 +21,15 @@
 #include "user-info.h"
 
 
-G_DEFINE_TYPE (UserListRow,     user_list_row,     GTK_TYPE_LIST_BOX_ROW)
+struct _UserListRowPrivate
+{
+    ActUser      *user;
+    GtkWidget    *user_image;
+    GtkWidget    *user_name;
+    GtkWidget    *real_name;
+};
+
+G_DEFINE_TYPE_WITH_PRIVATE (UserListRow, user_list_row, GTK_TYPE_LIST_BOX_ROW)
 void
 user_list_row_set_data (UserListRow *row)
 {
@@ -30,21 +38,33 @@ user_list_row_set_data (UserListRow *row)
     const char  *real_name;
     const char  *user_name;
 
-    user_image = GetUserIcon(row->Actuser);
-	real_name  = GetRealName(row->Actuser),
-    user_name  = GetUserName(row->Actuser),
-    
-    face = SetUserFaceSize (user_image, 50);
-	gtk_image_set_from_pixbuf(GTK_IMAGE(row->user_image),face);
+    user_image = GetUserIcon (row->priv->user);
+    real_name  = GetRealName (row->priv->user),
+    user_name  = GetUserName (row->priv->user),
 
-	SetLableFontType(row->real_name,"black",14,real_name,TRUE);
-	SetLableFontType(row->user_name,"black",11,user_name,FALSE);
+    face = SetUserFaceSize (user_image, 50);
+    gtk_image_set_from_pixbuf (GTK_IMAGE (row->priv->user_image),face);
+
+    SetLableFontType (row->priv->real_name, "black", 14, real_name, TRUE);
+    SetLableFontType (row->priv->user_name, "black", 11, user_name, FALSE);
 }
+
 static void
 user_list_row_destroy (GtkWidget *widget)
-{   
+{
     UserListRow *row = USER_LIST_ROW (widget);
-    g_clear_object (&row->Actuser);
+    g_clear_object (&row->priv->user);
+}
+
+static GtkWidget *create_user_list_row_label (void)
+{
+    GtkWidget *label;
+
+    label = gtk_label_new (NULL);
+    gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    gtk_label_set_max_width_chars (GTK_LABEL (label), 10);
+
+    return label;
 }
 
 static void
@@ -54,34 +74,30 @@ user_list_row_init (UserListRow *row)
     GtkWidget *hbox;
     GtkWidget *vbox;
 
+    row->priv = user_list_row_get_instance_private (row);
     box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-	gtk_widget_set_size_request (box,190,-1);
-	gtk_widget_set_halign(box, GTK_ALIGN_START);
+    gtk_widget_set_size_request (box, 190, -1);
+    gtk_widget_set_halign(box, GTK_ALIGN_START);
     gtk_widget_set_valign(box, GTK_ALIGN_CENTER);
     gtk_container_add (GTK_CONTAINER (row), box);
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start(GTK_BOX(box),hbox ,TRUE,TRUE, 0);
+    gtk_box_pack_start (GTK_BOX(box), hbox, TRUE, TRUE, 0);
 
-    row->user_image = gtk_image_new();
-    gtk_box_pack_start(GTK_BOX(hbox),row->user_image ,TRUE,TRUE, 6);
+    row->priv->user_image = gtk_image_new();
+    gtk_box_pack_start(GTK_BOX(hbox),row->priv->user_image ,TRUE, TRUE, 6);
 
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_widget_set_size_request (vbox,110,-1);
-    gtk_box_pack_start(GTK_BOX(hbox),vbox ,TRUE,TRUE, 12);
+    gtk_widget_set_size_request (vbox, 110, -1);
+    gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 12);
 
-    row->real_name = gtk_label_new(NULL);
-    gtk_label_set_ellipsize (GTK_LABEL(row->real_name),PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (GTK_LABEL(row->real_name),10);
-    gtk_box_pack_start(GTK_BOX(vbox),row->real_name ,TRUE,TRUE, 1);
-    
-	row->user_name = gtk_label_new(NULL);
-    gtk_label_set_ellipsize (GTK_LABEL(row->user_name),PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (GTK_LABEL(row->user_name),10);
-    gtk_box_pack_start(GTK_BOX(vbox),row->user_name ,TRUE,TRUE, 1);
+    row->priv->real_name = create_user_list_row_label ();
+    gtk_box_pack_start(GTK_BOX(vbox),row->priv->real_name ,TRUE, TRUE, 1);
 
+    row->priv->user_name = create_user_list_row_label ();
+    gtk_box_pack_start (GTK_BOX (vbox), row->priv->user_name ,TRUE, TRUE, 1);
 
-    gtk_box_pack_start(GTK_BOX(box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL) ,TRUE,TRUE, 3);
+    gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL) ,TRUE, TRUE, 3);
 
 }
 
@@ -99,25 +115,25 @@ user_list_row_new (ActUser *Actuser)
     UserListRow *row;
 
     row = g_object_new (USER_LIST_TYPE_ROW, NULL);
-	g_set_object (&row->Actuser, Actuser);
+    g_set_object (&row->priv->user, Actuser);
     user_list_row_set_data (row);
 
     return GTK_WIDGET (row);
 }
 void RefreshUserList(GtkWidget *UserList,GSList *List)
 {
-	GtkWidget *row;
+    GtkWidget *row;
     GSList    *l;
-	ActUser   *Actuser;
+    ActUser   *Actuser;
 
     int i = 0;
-	for (l = List ; l; l = l->next)
+    for (l = List ; l; l = l->next)
     {
-		Actuser  = l->data;
-   		row = user_list_row_new (Actuser);
+        Actuser  = l->data;
+        row = user_list_row_new (Actuser);
         gtk_list_box_row_set_activatable(GTK_LIST_BOX_ROW(row),TRUE);
         gtk_list_box_insert (GTK_LIST_BOX(UserList), row, i);
-		i++;
+        i++;
     }
     gtk_widget_show_all(UserList);
 }
@@ -127,11 +143,11 @@ static void SwitchUser (GtkListBox    *list_box,
                         gpointer       data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-	UserListRow *row = USER_LIST_ROW(Row);
-	ua->CurrentUser  = row->Actuser;
-    ua->CurrentImage = row->user_image;
-	ua->CurrentName  = row->real_name;
-	UpdateInterface(row->Actuser,ua);
+    UserListRow *row = USER_LIST_ROW(Row);
+    ua->CurrentUser  = row->priv->user;
+    ua->CurrentImage = row->priv->user_image;
+    ua->CurrentName  = row->priv->real_name;
+    UpdateInterface(row->priv->user, ua);
 }
 void init_user_option_data (UserAdmin *ua)
 {
@@ -142,12 +158,12 @@ void init_user_option_data (UserAdmin *ua)
     row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(ua->UserList),0);
     user = g_slist_nth_data(ua->UsersList,0); 
     user_row = USER_LIST_ROW(row);
-    
+
     ua->CurrentUser  = user;
-    ua->CurrentImage = user_row->user_image;
-	ua->CurrentName  = user_row->real_name;
-    
-}    
+    ua->CurrentImage = user_row->priv->user_image;
+    ua->CurrentName  = user_row->priv->real_name;
+
+}
 /******************************************************************************
 * Function:              DisplayUserList      
 *        
@@ -162,7 +178,7 @@ void init_user_option_data (UserAdmin *ua)
 void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
 {
     GtkWidget *Scrolled;
-	
+
     Scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_box_pack_start(GTK_BOX(Hbox),Scrolled, TRUE, TRUE,0);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
@@ -170,15 +186,15 @@ void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
                                     GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
                                          GTK_SHADOW_IN);
-    
-	ua->UserList = gtk_list_box_new ();
+
+    ua->UserList = gtk_list_box_new ();
 
     RefreshUserList(ua->UserList,ua->UsersList);
     gtk_container_add (GTK_CONTAINER (Scrolled), ua->UserList);
 
     init_user_option_data (ua);
-    
-	g_signal_connect (ua->UserList,
+
+    g_signal_connect (ua->UserList,
                      "row-activated",
                       G_CALLBACK (SwitchUser),
                       ua);
@@ -188,7 +204,7 @@ static void QuitApp(GtkWidget *widget, gpointer data)
     UserAdmin *ua = (UserAdmin *)data;
     g_slist_free_full(ua->UsersList,g_object_unref); 
     gtk_main_quit();
-}    
+}
 /******************************************************************************
 * Function:              AddRemoveUser 
 *        
@@ -239,4 +255,3 @@ void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua)
     gtk_grid_set_column_spacing(GTK_GRID(table), 10);
 
 }  
-

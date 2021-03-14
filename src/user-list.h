@@ -45,13 +45,21 @@ typedef struct _UserListRowClass
 
 GType             user_list_row_get_type                (void) G_GNUC_CONST;
 
-GtkWidget        *user_list_row_new                     (ActUser     *Actuser);
+GtkWidget        *user_list_row_new                     (ActUser     *user);
 
 void              user_list_row_set_data                (UserListRow *Row);
 
 void              init_user_option_data                 (UserAdmin   *ua);
+
+GtkWidget        *create_user_list_box                  (UserAdmin   *ua);
+
+GtkWidget        *user_list_get_row_image_label         (GtkWidget  *list_box,
+                                                         int         index);
+
+GtkWidget        *user_list_get_row_name_label          (GtkWidget  *list_box,
+                                                         int         index);
+
 void RefreshUserList(GtkWidget *UserList,GSList *List);
-void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua);
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua);
 G_END_DECLS
 #endif

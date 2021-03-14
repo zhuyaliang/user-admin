@@ -149,21 +149,29 @@ static void SwitchUser (GtkListBox    *list_box,
     ua->CurrentName  = row->priv->real_name;
     UpdateInterface(row->priv->user, ua);
 }
-void init_user_option_data (UserAdmin *ua)
+
+GtkWidget *user_list_get_row_image_label (GtkWidget *list_box, int index)
 {
-    ActUser       *user;
     GtkListBoxRow *row;
     UserListRow   *user_row;
 
-    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(ua->UserList),0);
-    user = g_slist_nth_data(ua->UsersList,0); 
-    user_row = USER_LIST_ROW(row);
-
-    ua->CurrentUser  = user;
-    ua->CurrentImage = user_row->priv->user_image;
-    ua->CurrentName  = user_row->priv->real_name;
-
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (list_box), index);
+    user_row = USER_LIST_ROW (row);
+    
+    return user_row->priv->user_image;
 }
+
+GtkWidget *user_list_get_row_name_label (GtkWidget *list_box, int index)
+{
+    GtkListBoxRow *row;
+    UserListRow   *user_row;
+
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (list_box), index);
+    user_row = USER_LIST_ROW (row);
+    
+    return user_row->priv->real_name;
+}
+
 /******************************************************************************
 * Function:              DisplayUserList      
 *        
@@ -175,30 +183,21 @@ void init_user_option_data (UserAdmin *ua)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void DisplayUserList(GtkWidget *Hbox,UserAdmin *ua)
+GtkWidget *create_user_list_box (UserAdmin *ua)
 {
-    GtkWidget *Scrolled;
+    GtkWidget *list_box;
 
-    Scrolled = gtk_scrolled_window_new (NULL, NULL);
-    gtk_box_pack_start(GTK_BOX(Hbox),Scrolled, TRUE, TRUE,0);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
-                                    GTK_POLICY_NEVER,
-                                    GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
-                                         GTK_SHADOW_IN);
+    list_box = gtk_list_box_new ();
+    RefreshUserList (list_box, ua->UsersList);
 
-    ua->UserList = gtk_list_box_new ();
-
-    RefreshUserList(ua->UserList,ua->UsersList);
-    gtk_container_add (GTK_CONTAINER (Scrolled), ua->UserList);
-
-    init_user_option_data (ua);
-
-    g_signal_connect (ua->UserList,
+    g_signal_connect (list_box,
                      "row-activated",
                       G_CALLBACK (SwitchUser),
                       ua);
+
+    return list_box;
 }
+
 static void QuitApp(GtkWidget *widget, gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;

@@ -30,6 +30,7 @@ struct _UserListRowPrivate
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (UserListRow, user_list_row, GTK_TYPE_LIST_BOX_ROW)
+
 void
 user_list_row_set_data (UserListRow *row)
 {
@@ -120,28 +121,36 @@ user_list_row_new (ActUser *Actuser)
 
     return GTK_WIDGET (row);
 }
-void RefreshUserList(GtkWidget *UserList,GSList *List)
+
+static void remove_all_row (GtkWidget *row, gpointer data)
+{
+    gtk_container_remove (GTK_CONTAINER (data), row);
+    g_object_unref (row);
+}    
+
+void user_list_box_update (GtkWidget *list_box, GSList *user_list)
 {
     GtkWidget *row;
     GSList    *l;
-    ActUser   *Actuser;
+    int        i = 0;
+    ActUser   *user;
 
-    int i = 0;
-    for (l = List ; l; l = l->next)
+    gtk_container_foreach (GTK_CONTAINER (list_box), remove_all_row, list_box);
+    for (l = user_list ; l; l = l->next)
     {
-        Actuser  = l->data;
-        row = user_list_row_new (Actuser);
-        gtk_list_box_row_set_activatable(GTK_LIST_BOX_ROW(row),TRUE);
-        gtk_list_box_insert (GTK_LIST_BOX(UserList), row, i);
+        user  = l->data;
+        row = user_list_row_new (user);
+        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+        gtk_list_box_insert (GTK_LIST_BOX (list_box), g_object_ref (row), i);
         i++;
     }
-    gtk_widget_show_all(UserList);
 }
 
 static void SwitchUser (GtkListBox    *list_box,
                       	GtkListBoxRow *Row,
                         gpointer       data)
 {
+
     UserAdmin *ua = (UserAdmin *)data;
     UserListRow *row = USER_LIST_ROW(Row);
     ua->CurrentUser  = row->priv->user;
@@ -188,7 +197,6 @@ GtkWidget *create_user_list_box (UserAdmin *ua)
     GtkWidget *list_box;
 
     list_box = gtk_list_box_new ();
-    RefreshUserList (list_box, ua->UsersList);
 
     g_signal_connect (list_box,
                      "row-activated",

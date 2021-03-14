@@ -223,6 +223,7 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
                                          GTK_SHADOW_IN);
     user_list_box = create_user_list_box (ua);
+    user_list_box_update (user_list_box, ua->UsersList);
 
     gtk_container_add (GTK_CONTAINER (scrolled), user_list_box);
     ua->UserList = user_list_box;
@@ -329,30 +330,21 @@ ERROREXIT:
 
 }        
 
-static void RemoveAllRow (GtkWidget *row,gpointer data)
-{
-    UserAdmin *ua = (UserAdmin *)data;
-
-    gtk_container_remove(GTK_CONTAINER(ua->UserList),row);
-}    
 static void DeleteOldUserToList (ActUserManager *um, ActUser *user, UserAdmin *ua)
 {
     ua->UsersList = g_slist_remove(ua->UsersList,user);
-    gtk_container_foreach (GTK_CONTAINER(ua->UserList),RemoveAllRow,ua);
-    RefreshUserList(ua->UserList,ua->UsersList);
+    user_list_box_update (ua->UserList, ua->UsersList);
     user_admin_get_first_list_row_data (ua);
     UpdateInterface(ua->CurrentUser,ua);                  
+    gtk_widget_show_all (ua->UserList);
 }
 
 static void AddNewUserToList (ActUserManager *um, ActUser *Actuser, UserAdmin *ua)
 {
-    GtkWidget *row;
     if (act_user_get_uid (Actuser) == 0)
         return;  
     ua->UsersList  = g_slist_append(ua->UsersList,Actuser);
-   	row = user_list_row_new (Actuser);
-    gtk_list_box_row_set_activatable(GTK_LIST_BOX_ROW(row),TRUE);
-    gtk_list_box_insert (GTK_LIST_BOX(ua->UserList), row, -1);
+    user_list_box_update (ua->UserList, ua->UsersList);
     gtk_widget_show_all(ua->UserList);
 }
 static void users_loaded(ActUserManager  *manager,

@@ -59,7 +59,8 @@ GtkWidget        *user_list_get_row_image_label         (GtkWidget  *list_box,
 GtkWidget        *user_list_get_row_name_label          (GtkWidget  *list_box,
                                                          int         index);
 
-void RefreshUserList(GtkWidget *UserList,GSList *List);
+void              user_list_box_update                  (GtkWidget  *list_box,
+                                                         GSList     *user_list);
 void AddRemoveUser(GtkWidget *Vbox,UserAdmin *ua);
 G_END_DECLS
 #endif

@@ -227,6 +227,58 @@ static void user_list_select_user (GtkListBox    *list_box,
     ua->CurrentName  = user_list_row_get_name_label (USER_LIST_ROW (row));
     UpdateInterface (ua->CurrentUser, ua);
 }
+static void QuitApp(GtkWidget *widget, gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *)data;
+    g_slist_free_full(ua->UsersList,g_object_unref); 
+    gtk_main_quit();
+}
+
+static void create_button_box (GtkWidget *box, UserAdmin *ua)
+{
+    GtkWidget *button_close;
+    GtkWidget *lable_space;
+    GtkWidget *table;
+    
+    table = gtk_grid_new ();
+    gtk_grid_set_column_homogeneous (GTK_GRID (table), TRUE);
+    gtk_box_pack_start (GTK_BOX (box), table, TRUE, TRUE, 0);
+
+    lable_space = gtk_label_new (NULL);
+    gtk_grid_attach (GTK_GRID (table) , lable_space , 0, 0, 4, 1);
+
+    ua->ButtonAdd    = SetButtonIcon (_("Add User"), "list-add");
+    gtk_grid_attach (GTK_GRID (table) , ua->ButtonAdd , 1, 1, 1, 1);
+    
+    ua->ButtonRemove = SetButtonIcon (_("Remove User"), "list-remove");
+    gtk_grid_attach (GTK_GRID (table) , ua->ButtonRemove , 0 , 1 , 1 , 1);
+    
+    button_close     = SetButtonIcon (_("Close"), "window-close");
+    gtk_grid_attach (GTK_GRID (table) , button_close ,4, 1, 1, 1);
+
+    if(GetUseHeader() == 0)
+    {
+        gtk_grid_attach (GTK_GRID (table), ua->ButtonLock, 3, 1, 1, 1);
+    }    
+
+    g_signal_connect (ua->ButtonRemove, 
+                     "clicked",
+                      G_CALLBACK (RemoveUser),
+                      ua);
+
+    g_signal_connect (ua->ButtonAdd, 
+                     "clicked",
+                      G_CALLBACK (AddNewUser),
+                      ua);
+
+    g_signal_connect (button_close, 
+                     "clicked",
+                      G_CALLBACK (QuitApp),
+                      ua);
+    
+    gtk_grid_set_row_spacing(GTK_GRID(table), 10);
+    gtk_grid_set_column_spacing(GTK_GRID(table), 10);
+}  
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Hbox;
@@ -275,8 +327,7 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     DisplayUserSetOther(Hbox1,ua);
 
     /*Adding new users or remove users*/
-    AddRemoveUser(Vbox,ua);
-
+    create_button_box (Vbox, ua);
 }
 static int RecordPid(void)
 {

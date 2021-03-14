@@ -16,10 +16,8 @@
 */
 
 #include "user-list.h"
-#include "user-admin.h"
 #include "user-share.h"
 #include "user-info.h"
-
 
 struct _UserListRowPrivate
 {
@@ -160,4 +158,3 @@ ActUser *user_list_row_get_user (UserListRow *row)
 {
     return row->priv->user;
 }
-

@@ -132,35 +132,6 @@ EXIT:
     g_key_file_free(Kconfig);
     return FALSE;
 }
-static uid_t GetLoginUserUid(void)
-{
-    int fd;
-    char LoginUid[10] = { 0 };
-
-    fd = open("/proc/self/loginuid",O_RDONLY);
-    if(fd < 0)
-    {
-        return -1;
-    }
-
-    if(read(fd,LoginUid,10) < 0)
-    {
-        close(fd);
-        return -1;
-    }
-
-    close(fd);
-    return atoi(LoginUid);
-}
-
-static gboolean CheckLoginUser(uid_t uid)
-{
-    if(uid == GetLoginUserUid())
-    {
-        return TRUE;
-    }    
-    return FALSE;
-}   
 
 static void DeleteOldUserDone (ActUserManager *manager,
                                GAsyncResult   *res,
@@ -200,7 +171,8 @@ void RemoveUser(GtkWidget *widget, gpointer data)
     ActUserManager *Manager;
    
     Manager =       act_user_manager_get_default ();
-    if(CheckLoginUser(act_user_get_uid(ua->CurrentUser)) == TRUE)
+
+    if (act_user_get_uid (ua->CurrentUser) == getuid ()) 
     {
         MessageReport(_("Remove User"),
                       _("You cannot delete your own account."),
@@ -208,6 +180,13 @@ void RemoveUser(GtkWidget *widget, gpointer data)
         return;
     
     }    
+    else if (act_user_is_logged_in_anywhere (ua->CurrentUser))
+    {
+        MessageReport(_("Remove User"),
+                      _("user is still logged in"),
+                       ERROR); 
+        return;
+    }
     nRet = MessageReport(_("Remove User"),
                          _("Whether to remove the user's home directory"),
                           QUESTION);
@@ -232,7 +211,6 @@ void RemoveUser(GtkWidget *widget, gpointer data)
                                         NULL,
                                         (GAsyncReadyCallback)DeleteOldUserDone,
                                         ua);
-
 
 }        
 

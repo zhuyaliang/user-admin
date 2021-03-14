@@ -59,5 +59,6 @@ GType        add_nu_dialog_get_type (void) G_GNUC_CONST;
 AddNUDialog *Add_NUDialog_new (void);
 void  RemoveUser(GtkWidget *widget, gpointer data);
 void  AddNewUser(GtkWidget *widget, gpointer data);
+void AddRemoveUser(GtkWidget *Vbox, gpointer data);
 G_END_DECLS
 #endif

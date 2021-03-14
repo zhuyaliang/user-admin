@@ -994,3 +994,60 @@ void AddNewUser(GtkWidget *widget, gpointer data)
     UserAdmin *ua = (UserAdmin *)data;
     ua->NUDialog = Add_NUDialog_new();
 }        
+static void QuitApp(GtkWidget *widget, gpointer data)
+{
+    UserAdmin *ua = (UserAdmin *)data;
+    g_slist_free_full(ua->UsersList,g_object_unref); 
+    gtk_main_quit();
+}
+/******************************************************************************
+* Function:              AddRemoveUser 
+*        
+* Explain: Adding new users or remove users 
+*        
+* Input:         
+*        
+* Output: 
+*        
+* Author:  zhuyaliang  09/05/2018
+******************************************************************************/
+void AddRemoveUser(GtkWidget *Vbox, gpointer data)
+{
+    UserAdmin *ua = data;
+    GtkWidget *ButtonClose;
+    GtkWidget *LableSpace;
+    GtkWidget *table;
+    table = gtk_grid_new();
+    gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);
+    gtk_box_pack_start(GTK_BOX(Vbox),table, TRUE, TRUE,0);
+
+    LableSpace = gtk_label_new(NULL);
+    gtk_grid_attach(GTK_GRID(table) , LableSpace , 0 , 0 , 4 , 1);
+    ua->ButtonAdd    = SetButtonIcon(_("Add User"),"list-add");
+    ua->ButtonRemove = SetButtonIcon(_("Remove User"),"list-remove");
+    ButtonClose      = SetButtonIcon(_("Close"),"window-close");
+
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonRemove , 0 , 1 , 1 , 1);
+    gtk_grid_attach(GTK_GRID(table) , ua->ButtonAdd ,    1 , 1 , 1 , 1);
+    if(GetUseHeader() == 0)
+    {
+        gtk_grid_attach(GTK_GRID(table) ,ua->ButtonLock, 3 , 1 , 1 , 1);
+    }    
+    gtk_grid_attach(GTK_GRID(table) , ButtonClose ,      4 , 1 , 1 , 1);
+    g_signal_connect (ua->ButtonRemove, 
+                     "clicked",
+                      G_CALLBACK (RemoveUser),
+                      ua);
+    g_signal_connect (ua->ButtonAdd, 
+                     "clicked",
+                      G_CALLBACK (AddNewUser),
+                      ua);
+    g_signal_connect (ButtonClose, 
+                     "clicked",
+                      G_CALLBACK (QuitApp),
+                      ua);
+    
+    gtk_grid_set_row_spacing(GTK_GRID(table), 10);
+    gtk_grid_set_column_spacing(GTK_GRID(table), 10);
+
+}  

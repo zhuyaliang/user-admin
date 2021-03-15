@@ -33,6 +33,7 @@
 #define  TYPEKEY       "nutype"
 #define  GROUPKEY      "nugroups"
 
+#define CHECK_TIME_OUT 600
 struct _UserManagerPrivate
 {
     GtkWidget     *button;
@@ -546,7 +547,7 @@ static void SetNewUserInfo(GtkWidget *Vbox, UserManager *dialog, gboolean CanCon
     gtk_grid_attach (GTK_GRID (table), LabelUserName , 0, 0, 1, 1);
 
     dialog->priv->name_entry = gtk_entry_new ();
-    dialog->priv->name_time_id = g_timeout_add (800, (GSourceFunc)check_user_name, dialog);
+    dialog->priv->name_time_id = g_timeout_add (CHECK_TIME_OUT, (GSourceFunc)check_user_name, dialog);
     gtk_entry_set_max_length (GTK_ENTRY (dialog->priv->name_entry),24);
     gtk_grid_attach (GTK_GRID (table) ,dialog->priv->name_entry ,1 ,0 ,3, 1);
 
@@ -697,7 +698,7 @@ static void now_set_password (GtkRadioButton *button,gpointer data)
     dialog->priv->success = FALSE;
     gtk_widget_set_sensitive(dialog->priv->check_entry, TRUE);
 
-    dialog->priv->password_time_id = g_timeout_add (800,(GSourceFunc) start_check_entry, dialog);
+    dialog->priv->password_time_id = g_timeout_add (CHECK_TIME_OUT, (GSourceFunc) start_check_entry, dialog);
     dialog->priv->password_mode = ACT_USER_PASSWORD_MODE_REGULAR;    
 }        
 /******************************************************************************

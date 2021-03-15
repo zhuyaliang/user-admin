@@ -24,6 +24,13 @@
 #include "user-info.h"
 #include <fontconfig/fontconfig.h>
 
+enum
+{
+    LANG_CHANGED,
+    LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 G_DEFINE_TYPE (LanguageChooser, language_chooser, GTK_TYPE_DIALOG)
 #define IS_CDM_UCS4(c) (((c) >= 0x0300 && (c) <= 0x036F)  || \
                         ((c) >= 0x1DC0 && (c) <= 0x1DFF)  || \
@@ -107,6 +114,15 @@ void language_chooser_class_init (LanguageChooserClass *klass)
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
     object_class->dispose = language_chooser_dispose;
+    
+    signals [LANG_CHANGED] =
+         g_signal_new ("lang-changed",
+                       G_TYPE_FROM_CLASS (klass),
+                       G_SIGNAL_RUN_LAST,
+                       0,
+                       NULL, NULL,
+                       g_cclosure_marshal_VOID__VOID,
+                       G_TYPE_NONE, 0);
 
 }
 
@@ -577,8 +593,6 @@ static void chooser_language_done (GtkWidget       *widget,
                                    LanguageChooser *chooser)
 {
     const gchar *lang, *account_language;
-    //gchar *name = NULL;
-
 
     account_language = act_user_get_language (chooser->user);
     lang = language_chooser_get_language (LANGUAGE_CHOOSER (chooser));
@@ -588,12 +602,7 @@ static void chooser_language_done (GtkWidget       *widget,
         {
             act_user_set_language (chooser->user, lang);
         }
-/*
-        name = mate_get_language_from_locale (lang, NULL);
-        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
-                             name);
-
-        g_free (name);*/
+        g_signal_emit (chooser, signals[LANG_CHANGED], 0);
      }
 
     gtk_widget_destroy (GTK_WIDGET(chooser));

@@ -23,6 +23,19 @@
 #include "user-history.h"
 #include "user-language.h"
 
+
+static void user_language_set_done (LanguageChooser *chooser, UserAdmin *ua)
+{
+    gchar *name = NULL;
+    gchar *lang;
+
+    lang = language_chooser_get_language (chooser);
+    name = mate_get_language_from_locale (lang, NULL);
+    gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
+                         name);
+
+    g_free (name);
+}
 static void
 change_language (GtkButton   *button,
                  UserAdmin   *self)
@@ -32,6 +45,11 @@ change_language (GtkButton   *button,
     current_language = GetUserLang(self->CurrentUser);
 
     self->language_chooser = language_chooser_new (self->CurrentUser);
+    g_signal_connect (G_OBJECT(self->language_chooser),
+                    "lang-changed",
+                     G_CALLBACK(user_language_set_done),
+                     self);
+    
     if (current_language && *current_language != '\0')
         language_chooser_set_language (self->language_chooser, current_language);
     gtk_widget_show_all(GTK_WIDGET(self->language_chooser));

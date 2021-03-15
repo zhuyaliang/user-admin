@@ -32,14 +32,15 @@
 #include <sys/types.h>
 #include <time.h>
 #include <sys/time.h>
+#include <libintl.h>
+#include <locale.h>
+#include <glib/gi18n.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <mate-desktop-2.0/libmate-desktop/mate-languages.h>
-#include <mate-desktop-2.0/libmate-desktop/mate-desktop-thumbnail.h>
+#include <libmate-desktop/mate-languages.h>
+#include <libmate-desktop/mate-desktop-thumbnail.h>
 
-#include <accountsservice-1.0/act/act-user-manager.h>
-#include <accountsservice-1.0/act/act-user.h>
-#include <libintl.h>   
-#include <locale.h>   
+#include <act/act-user-manager.h>
+#include <act/act-user.h>
 #include <polkit/polkit.h>
 #include "user-language.h"
 #include "user-face.h"
@@ -54,7 +55,6 @@
 
 #define  STANDARD  0
 #define  ADMIN     1
-#define _(STRING)  gettext(STRING)   
 
 enum
 {

@@ -18,9 +18,6 @@
   Created Time: 2021年03月13日 星期五 20时32分34秒
  ************************************************************************/
 
-#include <libintl.h>
-#include <locale.h>
-#include <glib/gi18n.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
 #include <libmate-desktop/mate-desktop-thumbnail.h>
 #include <gio/gio.h>

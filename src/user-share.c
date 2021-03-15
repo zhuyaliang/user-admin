@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include <shadow.h>
 #include <pwquality.h>
+#include <act/act-user.h>
 #include "user-share.h"
 #include "user-info.h"
 
@@ -321,7 +322,7 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
+void UpdateInterface(ActUser *user,UserAdmin *ua)
 {
     const char      *lang_id;
     g_autofree char *lang_cc = NULL;
@@ -336,15 +337,15 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
     Change = 1;
 
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
-    self_selected = act_user_get_uid (ActUser) == geteuid ();
+    self_selected = act_user_get_uid (user) == geteuid ();
 
     /*Switching icon*/
-    user_face_update (ua->face, GetUserIcon(ActUser), GetRealName(ActUser));
+    user_face_update (ua->face, GetUserIcon(user), GetRealName(user));
 
-    mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(ActUser));
+    mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(user));
     gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
-                             GetUserType(ActUser));
-    lang_id = GetUserLang(ActUser);
+                             GetUserType(user));
+    lang_id = GetUserLang(user);
     if(lang_id == NULL)
     {
         gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
@@ -357,12 +358,12 @@ void UpdateInterface(ActUser *ActUser,UserAdmin *ua)
                              lang_cc);
     }
     gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
-                         GetPasswordModeText(ActUser,&passtype));
+                         GetPasswordModeText(user,&passtype));
 
     gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
-                         GetUserAutoLogin(ActUser));
+                         GetUserAutoLogin(user));
 
-    text = GetLoginTimeText(ActUser);
+    text = GetLoginTimeText(user);
     gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
                           text);
 

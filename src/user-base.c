@@ -94,6 +94,14 @@ static void SwitchState(GtkSwitch *widget,gboolean state,gpointer data)
             act_user_set_automatic_login(ua->CurrentUser,FALSE);
     }
 }    
+
+static void user_password_set_done (UserPassword *dialog, UserAdmin *ua)
+{
+    char *label;
+    
+    label = user_password_get_label (dialog);
+    gtk_button_set_label (GTK_BUTTON (ua->ButtonPass), label);
+}
 /******************************************************************************
 * Function:             ChangePass 
 *        
@@ -111,6 +119,10 @@ static void ChangePass(GtkWidget *widget,gpointer data)
     UserPassword *dialog;
 
     dialog = user_password_new (ua->CurrentUser);
+    g_signal_connect (G_OBJECT(dialog),
+                    "changed",
+                     G_CALLBACK(user_password_set_done),
+                     ua);
     gtk_widget_show_all (GTK_WIDGET (dialog));
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (GTK_WIDGET (dialog));

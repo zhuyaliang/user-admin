@@ -96,6 +96,7 @@ static void language_chooser_dispose (GObject *object)
     
     g_clear_object (&chooser->no_results);
     g_clear_pointer (&chooser->filter_words, g_strfreev);
+    g_clear_object (&chooser->user);
     g_clear_pointer (&chooser->language, g_free);
 
     G_OBJECT_CLASS (language_chooser_parent_class)->dispose (object);
@@ -429,7 +430,6 @@ add_languages (LanguageChooser *chooser,
 
     gtk_container_add (GTK_CONTAINER (chooser->language_listbox), GTK_WIDGET (chooser->more_item));
 
-    gtk_widget_show_all (chooser->language_listbox);
 }
 static void
 add_all_languages (LanguageChooser *chooser)
@@ -567,6 +567,38 @@ static void activate_default (GtkWindow       *window,
     gtk_widget_activate (focus);
 }
 
+static void chooser_language_cancel(GtkWidget       *widget, 
+                                    LanguageChooser *chooser)
+{
+    gtk_widget_destroy (GTK_WIDGET(chooser));
+}
+
+static void chooser_language_done (GtkWidget       *widget,
+                                   LanguageChooser *chooser)
+{
+    const gchar *lang, *account_language;
+    //gchar *name = NULL;
+
+
+    account_language = act_user_get_language (chooser->user);
+    lang = language_chooser_get_language (LANGUAGE_CHOOSER (chooser));
+    if (lang) 
+    {
+        if (g_strcmp0 (lang, account_language) != 0) 
+        {
+            act_user_set_language (chooser->user, lang);
+        }
+/*
+        name = mate_get_language_from_locale (lang, NULL);
+        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
+                             name);
+
+        g_free (name);*/
+     }
+
+    gtk_widget_destroy (GTK_WIDGET(chooser));
+
+}    
 static void LoadHeader_bar(LanguageChooser *chooser)
 {
     chooser->header = GetHeaderbar();
@@ -596,6 +628,16 @@ void language_chooser_init (LanguageChooser *chooser)
         chooser->cancel_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Cancel"),-5);
         chooser->done_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Done"),-6);
     }
+    g_signal_connect (chooser->done_button, 
+                     "clicked",
+                      G_CALLBACK (chooser_language_done), 
+                      chooser);
+
+    g_signal_connect (chooser->cancel_button, 
+                     "clicked",
+                      G_CALLBACK (chooser_language_cancel), 
+                      chooser);
+
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0); 
    
     chooser->language_entry = gtk_search_entry_new (); 
@@ -621,7 +663,6 @@ void language_chooser_init (LanguageChooser *chooser)
     gtk_container_add(GTK_CONTAINER(Scrolled),vbox);
     chooser->more_item = more_widget_new ();
     chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-    gtk_widget_show_all (chooser->no_results);
 
     gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->language_listbox),
                                 sort_languages, chooser, NULL);
@@ -649,11 +690,13 @@ void language_chooser_init (LanguageChooser *chooser)
     g_signal_connect (chooser, "activate-default",
                           G_CALLBACK (activate_default), chooser);
 }
-LanguageChooser *language_chooser_new (const gchar *name)
+LanguageChooser *language_chooser_new (ActUser *user)
 {   
-    LanguageChooser *chooser;
+    LanguageChooser  *chooser;
     g_autofree gchar *title = NULL;
-    
+    char             *name;
+
+    name = GetUserName (user); 
     title = g_strdup_printf (_("Current User - %s"),
                              name);
     if(GetUseHeader() == 1)
@@ -672,6 +715,7 @@ LanguageChooser *language_chooser_new (const gchar *name)
         chooser->is_header = 0;
         gtk_window_set_title(GTK_WINDOW(chooser),title); 
     }    
+    chooser->user = g_object_ref (user);
 
     return chooser;
 }

@@ -23,66 +23,15 @@
 #include "user-history.h"
 #include "user-language.h"
 
-static void chooser_language_cancel(GtkWidget *widget, 
-                                    UserAdmin *ua)
-{
-    gtk_widget_hide_on_delete(GTK_WIDGET(ua->language_chooser));
-}
-
-static void chooser_language_done (GtkWidget *widget,
-                                   UserAdmin *ua)
-{
-    const gchar *lang, *account_language;
-    gchar *name = NULL;
-
-
-    account_language = act_user_get_language (ua->CurrentUser);
-    lang = language_chooser_get_language (LANGUAGE_CHOOSER (ua->language_chooser));
-    if (lang) 
-    {
-        if (g_strcmp0 (lang, account_language) != 0) 
-        {
-            act_user_set_language (ua->CurrentUser, lang);
-        }
-
-        name = mate_get_language_from_locale (lang, NULL);
-        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
-                             name);
-
-        g_free (name);
-     }
-
-    gtk_widget_hide (GTK_WIDGET (ua->language_chooser));
-
-}    
 static void
 change_language (GtkButton   *button,
                  UserAdmin   *self)
 {
     const gchar *current_language;
-    const gchar *current_name;
 
     current_language = GetUserLang(self->CurrentUser);
-    current_name =  GetRealName(self->CurrentUser);
 
-    if (self->language_chooser != NULL)
-    {
-        language_chooser_clear_filter (self->language_chooser);
-        language_chooser_set_language (self->language_chooser, NULL);
-    }   
-    else
-    {    
-        self->language_chooser = language_chooser_new (current_name);
-        g_signal_connect (self->language_chooser->done_button, 
-                         "clicked",
-                          G_CALLBACK (chooser_language_done), 
-                          self);
-
-        g_signal_connect (self->language_chooser->cancel_button, 
-                         "clicked",
-                          G_CALLBACK (chooser_language_cancel), 
-                          self);
-    }
+    self->language_chooser = language_chooser_new (self->CurrentUser);
     if (current_language && *current_language != '\0')
         language_chooser_set_language (self->language_chooser, current_language);
     gtk_widget_show_all(GTK_WIDGET(self->language_chooser));
@@ -125,7 +74,6 @@ static void SwitchState(GtkSwitch *widget,gboolean state,gpointer data)
         }
         else
             act_user_set_automatic_login(ua->CurrentUser,FALSE);
-
     }
 }    
 /******************************************************************************

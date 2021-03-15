@@ -349,6 +349,7 @@ user_password_destroy (GtkWidget *obj)
         g_source_remove (dialog->check_password_time_id);
         dialog->check_password_time_id = 0;
     }
+    g_clear_object (&dialog->user);
 }
 
 static void

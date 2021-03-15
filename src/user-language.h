@@ -19,6 +19,7 @@
 #define __USER_LANGUAGE_H__
 
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -41,8 +42,9 @@ typedef struct LanguageChooser
     GtkWidget     *language_listbox;
     gboolean       showing_extra;
     gboolean       is_header;
-    gchar        *language;
+    gchar         *language;
     gchar        **filter_words;
+    ActUser       *user;
 }LanguageChooser;
 
 
@@ -52,7 +54,7 @@ typedef struct LanguageChooserClass
 } LanguageChooserClass;
 
 GType            language_chooser_get_type     (void) G_GNUC_CONST;
-LanguageChooser *language_chooser_new          (const gchar *name);
+LanguageChooser *language_chooser_new          (ActUser         *user);
 void             language_chooser_clear_filter (LanguageChooser *chooser);
 const gchar     *language_chooser_get_language (LanguageChooser *chooser);
 void             language_chooser_set_language (LanguageChooser *chooser,

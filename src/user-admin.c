@@ -54,7 +54,6 @@ struct _UserManagerPrivate
 	GPermission   *permission;
     GCancellable  *cancellable;
     ActUserPasswordMode password_mode;
-
 };
 
 enum
@@ -950,7 +949,6 @@ user_manager_set_property (GObject      *object,
     {
         case PROP_USER_TYPE:
             dialog->priv->user_type = g_value_get_int (value);
-    g_print ("type = %d \r\n",dialog->priv->user_type);
             break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -991,6 +989,7 @@ UserManager *user_manager_new (void)
 	
     return dialog;
 }
+
 void AddNewUser(GtkWidget *widget, gpointer data)
 {
     UserManager *dialog;

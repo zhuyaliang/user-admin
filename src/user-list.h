@@ -56,7 +56,8 @@ GtkWidget        *user_list_row_get_name_label          (UserListRow *row);
 ActUser          *user_list_row_get_user                (UserListRow *row);
 
 void              user_list_box_update                  (GtkWidget   *list_box,
-                                                         GSList      *user_list);
+                                                         GSList      *user_list,
+                                                         int          index);
 
 G_END_DECLS
 #endif

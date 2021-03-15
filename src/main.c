@@ -29,11 +29,11 @@
 
 GtkWidget  *WindowLogin;          //首页窗口
 
-static void user_admin_get_first_list_row_data (UserAdmin *ua)
+static void user_admin_get_index_list_row_data (UserAdmin *ua, int index)
 {
     GtkListBoxRow  *row;
     
-    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (ua->UserList), 0);
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (ua->UserList), index);
     
     ua->CurrentUser  = user_list_row_get_user (USER_LIST_ROW (row));
     ua->CurrentName = user_list_row_get_name_label (USER_LIST_ROW (row)); 
@@ -298,13 +298,13 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     /*Display user list on the left side*/   
 
     user_list_box = create_user_list_box (Hbox2);
-    user_list_box_update (user_list_box, ua->UsersList);
+    user_list_box_update (user_list_box, ua->UsersList, 0);
     g_signal_connect (user_list_box,
                      "row-activated",
                       G_CALLBACK (user_list_select_user),
                       ua);
     ua->UserList = user_list_box;
-    user_admin_get_first_list_row_data (ua);
+    user_admin_get_index_list_row_data (ua, 0);
 
     Hbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);  
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox1,TRUE,TRUE,10); 
@@ -409,18 +409,30 @@ ERROREXIT:
 static void DeleteOldUserToList (ActUserManager *um, ActUser *user, UserAdmin *ua)
 {
     ua->UsersList = g_slist_remove(ua->UsersList,user);
-    user_list_box_update (ua->UserList, ua->UsersList);
-    user_admin_get_first_list_row_data (ua);
-    UpdateInterface(ua->CurrentUser,ua);                  
+
+    user_list_box_update (ua->UserList, ua->UsersList, 0);
+
+    user_admin_get_index_list_row_data (ua, 0);
+    UpdateInterface(ua->CurrentUser,ua);
+
     gtk_widget_show_all (ua->UserList);
 }
 
 static void AddNewUserToList (ActUserManager *um, ActUser *Actuser, UserAdmin *ua)
 {
+    int index;
+
     if (act_user_get_uid (Actuser) == 0)
-        return;  
+        return;
+
     ua->UsersList  = g_slist_append(ua->UsersList,Actuser);
-    user_list_box_update (ua->UserList, ua->UsersList);
+
+    index = g_slist_length (ua->UsersList) - 1;
+    user_list_box_update (ua->UserList, ua->UsersList, index);
+
+    user_admin_get_index_list_row_data (ua, index);
+    UpdateInterface(ua->CurrentUser,ua);
+
     gtk_widget_show_all(ua->UserList);
 }
 static void users_loaded(ActUserManager  *manager,

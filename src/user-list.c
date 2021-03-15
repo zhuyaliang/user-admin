@@ -126,7 +126,20 @@ static void remove_all_row (GtkWidget *row, gpointer data)
     g_object_unref (row);
 }    
 
-void user_list_box_update (GtkWidget *list_box, GSList *user_list)
+static void user_list_set_select_user (GtkWidget *list_box, gint index)
+{
+    GtkListBoxRow *row;
+
+    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (list_box), index);
+    if (row == NULL)
+    {
+        g_warning ("The selected user does not exist \r\n");
+        return;
+    }
+    gtk_list_box_select_row (GTK_LIST_BOX (list_box), row);
+}
+
+void user_list_box_update (GtkWidget *list_box, GSList *user_list, int index)
 {
     GtkWidget *row;
     GSList    *l;
@@ -142,6 +155,7 @@ void user_list_box_update (GtkWidget *list_box, GSList *user_list)
         gtk_list_box_insert (GTK_LIST_BOX (list_box), g_object_ref (row), i);
         i++;
     }
+    user_list_set_select_user (list_box, index);
 }
 
 GtkWidget *user_list_row_get_image_label (UserListRow *row)

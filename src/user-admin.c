@@ -622,6 +622,7 @@ static gboolean start_check_entry (gpointer data)
     if(strlen(s) == 0)
     {
         dialog->priv->success = FALSE;
+        gtk_entry_set_text (GTK_ENTRY (dialog->priv->check_entry), "");
         SetLableFontType(dialog->priv->label_pass_note,"gray",10,tip,FALSE);
         return TRUE;
     }
@@ -664,7 +665,10 @@ static void next_login_set_password (GtkRadioButton *button, gpointer data)
  
     gtk_widget_set_sensitive(dialog->priv->password_entry, FALSE);  //lock widget
     gtk_widget_set_sensitive(dialog->priv->check_entry, FALSE);
- 
+    gtk_entry_set_text (GTK_ENTRY (dialog->priv->check_entry), "");
+    gtk_entry_set_text (GTK_ENTRY (dialog->priv->password_entry), "");
+    gtk_level_bar_set_value (GTK_LEVEL_BAR (dialog->priv->level_bar), 0);
+
     if(dialog->priv->password_time_id > 0)                //因为不需要检查密码所以移除定时器
     {
         g_source_remove (dialog->priv->password_time_id);

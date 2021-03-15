@@ -28,6 +28,13 @@
 
 #define PASSWORD_CHECK_TIMEOUT 600
 
+enum
+{
+    CHANGED,
+    LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 struct _UserPassword
 {
     GtkDialog     parent_instance;
@@ -193,6 +200,7 @@ static void SetNewPass(UserPassword *dialog)
         act_user_set_password_mode (dialog->user, dialog->password_mode);
         act_user_set_password (dialog->user, password, "");
     }
+    g_signal_emit (dialog, signals[CHANGED], 0);
 }
 
 static void user_password_set_mode (UserPassword *dialog, ActUser *user)
@@ -381,6 +389,14 @@ user_password_class_init (UserPasswordClass *klass)
 
     widget_class->destroy = user_password_destroy;
     dialog_class->response = user_password_response;
+    signals [CHANGED] =
+         g_signal_new ("changed",
+                       G_TYPE_FROM_CLASS (klass),
+                       G_SIGNAL_RUN_LAST,
+                       0,
+                       NULL, NULL,
+                       g_cclosure_marshal_VOID__VOID,
+                       G_TYPE_NONE, 0);
 }
 
 UserPassword *

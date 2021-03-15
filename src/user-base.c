@@ -142,7 +142,12 @@ static void SwitchState(GtkSwitch *widget,gboolean state,gpointer data)
 static void ChangePass(GtkWidget *widget,gpointer data)
 {
     UserAdmin *ua = (UserAdmin *)data;
-    CreateNewPass(ua);      //There is no password for the user
+    UserPassword *dialog;
+
+    dialog = user_password_new (ua->CurrentUser);
+    gtk_widget_show_all (GTK_WIDGET (dialog));
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 /******************************************************************************
 * Function:             ComboSelectUserType 

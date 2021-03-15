@@ -18,11 +18,23 @@
 #ifndef __USER_PASSWORD_H__
 #define __USER_PASSWORD_H__
 
-#include "user.h"
-GtkWidget* dialog_add_button_with_icon_name (GtkDialog   *dialog,
-                                             const gchar *button_text,
-                                             const gchar *icon_name,
-                                             gint         response_id);
-void CreateNewPass(UserAdmin *ua);
-void ChangeOldPass(UserAdmin *ua);
+#include <gtk/gtk.h>
+#include <act/act.h>
+        
+G_BEGIN_DECLS
+
+#define USER_TYPE_PASSWORD (user_password_get_type ())
+
+G_DECLARE_FINAL_TYPE (UserPassword, user_password, USER, PASSWORD, GtkDialog)
+
+UserPassword     *user_password_new      (ActUser *user);
+
+GtkWidget        *dialog_add_button_with_icon_name (GtkDialog   *dialog,
+                                                    const gchar *button_text,
+                                                    const gchar *icon_name,
+                                                     gint         response_id);
+ 
+G_END_DECLS
+
+
 #endif

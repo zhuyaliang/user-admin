@@ -54,13 +54,6 @@ void         UserListAppend        (GtkWidget   *list,
 GdkPixbuf  *SetUserFaceSize        (const char  *PicName, 
                                     int          Size);
 
-void        OpenNote               (GtkWidget   *label,
-                                    const char  *note,
-                                    UserAdmin   *ua);
-
-void        OffNote                (GtkWidget   *label,
-                                    UserAdmin   *ua);
-
 
 GtkWidget  *SetComboUserType       (const char  *s1,
                                     const char  *s2);
@@ -68,7 +61,6 @@ GtkWidget  *SetComboUserType       (const char  *s1,
 void        UpdateInterface        (ActUser     *ActUser,
                                     UserAdmin   *ua);
 
-gboolean    CheckPassword          (gpointer     data);
 void        SelectSetPassMode      (GtkRadioButton *button,
                                     gpointer     user_data);
 

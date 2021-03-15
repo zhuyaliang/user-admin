@@ -47,7 +47,8 @@ struct _UserPassword
     GtkWidget    *verify_entry;
     GtkWidget    *level_bar;
     GtkWidget    *label_note;
-
+    
+    char         *label;
     gint          check_password_time_id;
     gboolean      sensitive;
 
@@ -193,12 +194,14 @@ static void SetNewPass(UserPassword *dialog)
     if (dialog->password_mode == ACT_USER_PASSWORD_MODE_SET_AT_LOGIN)
     {
         act_user_set_password_mode (dialog->user, dialog->password_mode);
+        dialog->label = g_strdup (_("Set up next time"));
     }
     else
     {
         password =  gtk_entry_get_text (GTK_ENTRY (dialog->password_entry));
         act_user_set_password_mode (dialog->user, dialog->password_mode);
         act_user_set_password (dialog->user, password, "");
+        dialog->label = g_strdup ("●●●●●●");
     }
     g_signal_emit (dialog, signals[CHANGED], 0);
 }
@@ -358,6 +361,12 @@ user_password_destroy (GtkWidget *obj)
         dialog->check_password_time_id = 0;
     }
     g_clear_object (&dialog->user);
+
+    if (dialog->label != NULL)
+    {
+        dialog->label = NULL;
+        g_free (dialog->label);
+    }
 }
 
 static void
@@ -399,17 +408,27 @@ user_password_class_init (UserPasswordClass *klass)
                        G_TYPE_NONE, 0);
 }
 
+char *user_password_get_label (UserPassword *dialog)
+{
+    return dialog->label;
+}
+
 UserPassword *
 user_password_new (ActUser *user)
 {
     UserPassword  *dialog;
-    
+    int           password_type;
+    char         *label;
+
     g_return_val_if_fail (ACT_IS_USER (user), NULL);
 
     dialog = g_object_new (USER_TYPE_PASSWORD,
                           "use-header-bar", 1,
                            NULL);
     dialog->user = g_object_ref (user);
+    label = GetPasswordModeText (user, &password_type);
+    
+    dialog->label = g_strdup (label);
     user_password_set_mode (dialog, user);
     
     return dialog;

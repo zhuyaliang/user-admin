@@ -91,7 +91,6 @@ typedef struct
     GSList           *UsersList;
     GroupsManage      gm;
     UserFace         *face;
-    LanguageChooser  *language_chooser;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PasswordDialog;

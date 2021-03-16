@@ -23,41 +23,32 @@
 
 G_BEGIN_DECLS
 
-#define TYPE_LANGUAGE_CHOOSER     (language_chooser_get_type ())
-#define LANGUAGE_CHOOSER(object)   (G_TYPE_CHECK_INSTANCE_CAST ((object), \
-                                   TYPE_LANGUAGE_CHOOSER, \
-                                   LanguageChooser))
+#define USER_TYPE_LANGUAGE         (user_language_get_type ())
+#define USER_LANGUAGE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), USER_TYPE_LANGUAGE, UserLanguage))
+#define USER_LANGUAGE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), USER_TYPE_LANGUAGE, UserLanguageClass))
 
-typedef struct LanguageChooser 
-{
-    GtkDialog parent_instance;
+typedef struct _UserLanguage        UserLanguage;
+typedef struct _UserLanguageClass   UserLanguageClass;
+typedef struct _UserLanguagePrivate UserLanguagePrivate;
 
-    GtkWidget     *done_button;
-    GtkWidget     *cancel_button;
-    GtkWidget     *no_results;
-    GtkWidget     *header;
-    GtkListBoxRow *more_item;
-    GtkWidget     *search_bar;
-    GtkWidget     *language_entry;
-    GtkWidget     *language_listbox;
-    gboolean       showing_extra;
-    gboolean       is_header;
-    gchar         *language;
-    gchar        **filter_words;
-    ActUser       *user;
-}LanguageChooser;
+struct _UserLanguage {
+    GtkDialog             parent_instance;
+    UserLanguagePrivate  *priv;
+};
 
+struct _UserLanguageClass {
+    GtkDialogClass parent_class;
+};
 
-typedef struct LanguageChooserClass
-{
-	GtkDialogClass parent_class;
-} LanguageChooserClass;
+GType            user_language_get_type        (void) G_GNUC_CONST;
 
-GType            language_chooser_get_type     (void) G_GNUC_CONST;
-LanguageChooser *language_chooser_new          (ActUser         *user);
-void             language_chooser_clear_filter (LanguageChooser *chooser);
-const gchar     *language_chooser_get_language (LanguageChooser *chooser);
-void             language_chooser_set_language (LanguageChooser *chooser,
+UserLanguage    *user_language_new             (ActUser         *user);
+
+void             user_language_clear_filter    (UserLanguage    *chooser);
+
+const gchar     *user_language_get_language    (UserLanguage    *chooser);
+
+void             user_language_set_language    (UserLanguage    *chooser,
                                                 const gchar     *language);
 G_END_DECLS
 #endif

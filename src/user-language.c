@@ -24,6 +24,12 @@
 #include "user-info.h"
 #include <fontconfig/fontconfig.h>
 
+#define IS_CDM_UCS4(c) (((c) >= 0x0300 && (c) <= 0x036F)  || \
+                        ((c) >= 0x1DC0 && (c) <= 0x1DFF)  || \
+                        ((c) >= 0x20D0 && (c) <= 0x20FF)  || \
+                        ((c) >= 0xFE20 && (c) <= 0xFE2F))
+
+#define IS_SOFT_HYPHEN(c) ((c) == 0x00AD)
 enum
 {
     LANG_CHANGED,
@@ -31,13 +37,21 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-G_DEFINE_TYPE (LanguageChooser, language_chooser, GTK_TYPE_DIALOG)
-#define IS_CDM_UCS4(c) (((c) >= 0x0300 && (c) <= 0x036F)  || \
-                        ((c) >= 0x1DC0 && (c) <= 0x1DFF)  || \
-                        ((c) >= 0x20D0 && (c) <= 0x20FF)  || \
-                        ((c) >= 0xFE20 && (c) <= 0xFE2F))
+struct _UserLanguagePrivate
+{
+    GtkWidget     *no_results;
+    GtkWidget     *header;
+    GtkListBoxRow *more_item;
+    GtkWidget     *search_bar;
+    GtkWidget     *language_entry;
+    GtkWidget     *language_listbox;
+    gboolean       showing_extra;
+    gchar         *language;
+    gchar        **filter_words;
+    ActUser       *user;
+};
 
-#define IS_SOFT_HYPHEN(c) ((c) == 0x00AD)
+G_DEFINE_TYPE_WITH_PRIVATE (UserLanguage, user_language, GTK_TYPE_DIALOG)
 
 static char *
 normalize_fold_and_unaccent (const char *str)
@@ -97,24 +111,69 @@ normalize_fold_and_unaccent (const char *str)
     return tmp;
 }
 
-static void language_chooser_dispose (GObject *object)
+static void user_language_dispose (GObject *object)
 {
-    LanguageChooser *chooser = LANGUAGE_CHOOSER (object);
-    
-    g_clear_object (&chooser->no_results);
-    g_clear_pointer (&chooser->filter_words, g_strfreev);
-    g_clear_object (&chooser->user);
-    g_clear_pointer (&chooser->language, g_free);
+    UserLanguage *chooser = USER_LANGUAGE (object);
 
-    G_OBJECT_CLASS (language_chooser_parent_class)->dispose (object);
+    g_clear_object (&chooser->priv->no_results);
+    g_clear_pointer (&chooser->priv->filter_words, g_strfreev);
+    g_clear_object (&chooser->priv->user);
+    g_clear_pointer (&chooser->priv->language, g_free);
+
+    G_OBJECT_CLASS (user_language_parent_class)->dispose (object);
 }
 
-void language_chooser_class_init (LanguageChooserClass *klass)
+static void chooser_language_cancel(UserLanguage *chooser)
 {
-    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    gtk_widget_destroy (GTK_WIDGET(chooser));
+}
 
-    object_class->dispose = language_chooser_dispose;
-    
+static void chooser_language_done (UserLanguage *chooser)
+{
+    const gchar *lang, *account_language;
+
+    account_language = act_user_get_language (chooser->priv->user);
+    lang = user_language_get_language (USER_LANGUAGE (chooser));
+    if (lang)
+    {
+        if (g_strcmp0 (lang, account_language) != 0)
+        {
+            act_user_set_language (chooser->priv->user, lang);
+        }
+        g_signal_emit (chooser, signals[LANG_CHANGED], 0);
+     }
+
+    gtk_widget_destroy (GTK_WIDGET(chooser));
+}
+
+static void
+user_language_response (GtkDialog *dia,
+                       int        response_id)
+{
+
+    UserLanguage *dialog = USER_LANGUAGE (dia);
+
+    switch (response_id) 
+    {
+        case GTK_RESPONSE_CLOSE:
+            chooser_language_cancel (dialog);
+            break;
+        case GTK_RESPONSE_OK:
+            chooser_language_done (dialog);
+            break;
+        default:
+            break;
+    }
+}
+
+void user_language_class_init (UserLanguageClass *klass)
+{
+    GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
+
+    object_class->dispose = user_language_dispose;
+    dialog_class->response = user_language_response;
+
     signals [LANG_CHANGED] =
          g_signal_new ("lang-changed",
                        G_TYPE_FROM_CLASS (klass),
@@ -126,7 +185,7 @@ void language_chooser_class_init (LanguageChooserClass *klass)
 
 }
 
-static GtkListBoxRow * more_widget_new (void)
+static GtkListBoxRow *create_more_widget_new (void)
 {
     GtkWidget *box, *row;
     GtkWidget *arrow;
@@ -145,17 +204,6 @@ static GtkListBoxRow * more_widget_new (void)
     return GTK_LIST_BOX_ROW (row);
 }
 
-static GtkWidget *GetHeaderbar(void)
-{
-    GtkWidget *header;
-    
-    header = gtk_header_bar_new (); 
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), FALSE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Language"));
-    gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), FALSE);
-
-    return header;
-}   
 static GtkWidget *
 padded_label_new (char *text, gboolean narrow)
 {
@@ -171,12 +219,13 @@ padded_label_new (char *text, gboolean narrow)
 
     return widget;
 }
-static GtkWidget * no_results_widget_new (void)
+static GtkWidget *no_results_widget_new (void)
 {
     GtkWidget *widget;
 
     widget = padded_label_new (_("No languages found"), TRUE);
     gtk_widget_set_sensitive (widget, FALSE);
+   
     return widget;
 }
 static gint
@@ -211,47 +260,45 @@ match_all (gchar       **words,
     return TRUE;
 }
 
-static gboolean language_visible (GtkListBoxRow *row,
-                  gpointer   user_data)
+static gboolean user_language_show_rows (GtkListBoxRow *row,
+                                         gpointer       user_data)
 {
-    LanguageChooser *chooser = user_data;
+    UserLanguage *chooser = USER_LANGUAGE (user_data);
     g_autofree gchar *locale_name = NULL;
     g_autofree gchar *locale_current_name = NULL;
     g_autofree gchar *locale_untranslated_name = NULL;
     gboolean is_extra;
     gboolean visible;
 
-    if (row == chooser->more_item)
-        return !chooser->showing_extra;
+    if (row == chooser->priv->more_item)
+        return !chooser->priv->showing_extra;
 
     is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
 
-    if (!chooser->showing_extra && is_extra)
+    if (!chooser->priv->showing_extra && is_extra)
         return FALSE;
 
-    if (!chooser->filter_words)
+    if (!chooser->priv->filter_words)
         return TRUE;
 
-    locale_name =
-        normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
-    visible = match_all (chooser->filter_words, locale_name);
-    if (visible)
-            return TRUE;
-
-    locale_current_name =
-        normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
-    visible = match_all (chooser->filter_words, locale_current_name);
+    locale_name = normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
+    visible = match_all (chooser->priv->filter_words, locale_name);
     if (visible)
         return TRUE;
 
-    locale_untranslated_name =
-        normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
-    return match_all (chooser->filter_words, locale_untranslated_name);
+    locale_current_name = normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
+    visible = match_all (chooser->priv->filter_words, locale_current_name);
+    if (visible)
+        return TRUE;
+
+    locale_untranslated_name = normalize_fold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
+
+    return match_all (chooser->priv->filter_words, locale_untranslated_name);
 }
 static void
-cc_list_box_update_header_func (GtkListBoxRow *row,
-                                GtkListBoxRow *before,
-                                gpointer user_data)
+list_box_update_header_func (GtkListBoxRow *row,
+                             GtkListBoxRow *before,
+                             gpointer user_data)
 {
     GtkWidget *current;
 
@@ -294,7 +341,7 @@ insert_language (GHashTable *ht,
     }
 }
 static GHashTable *
-cc_common_language_get_initial_languages (void)
+create_language_hash_table (void)
 {
     GHashTable *ht;
 
@@ -313,7 +360,7 @@ cc_common_language_get_initial_languages (void)
     return ht;
 }
 static gboolean
-cc_common_language_has_font (const gchar *locale)
+language_has_font (const gchar *locale)
 {
     const FcCharSet  *charset;
     FcPattern        *pattern;
@@ -399,32 +446,38 @@ language_widget_new (const gchar *locale_id,
     gtk_widget_set_opacity (check, 0.0);
     g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
     gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
+
     if (g_strcmp0 (locale_id, current_locale_id) == 0)
         gtk_widget_set_opacity (check, 1.0);
 
     g_object_set_data (G_OBJECT (row), "check", check);
-    g_object_set_data_full (G_OBJECT (row), 
-                           "locale-id", 
-                            g_strdup (locale_id), 
+    g_object_set_data_full (G_OBJECT (row),
+                           "locale-id",
+                            g_strdup (locale_id),
                             g_free);
-    g_object_set_data_full (G_OBJECT (row), 
-                           "locale-name", 
-                            locale_name, 
+
+    g_object_set_data_full (G_OBJECT (row),
+                           "locale-name",
+                            locale_name,
                             g_free);
-    g_object_set_data_full (G_OBJECT (row), 
-                           "locale-current-name", 
-                            locale_current_name, 
+
+    g_object_set_data_full (G_OBJECT (row),
+                           "locale-current-name",
+                            locale_current_name,
                             g_free);
-    g_object_set_data_full (G_OBJECT (row), 
-                           "locale-untranslated-name", 
-                            locale_untranslated_name, 
+
+    g_object_set_data_full (G_OBJECT (row),
+                           "locale-untranslated-name",
+                            locale_untranslated_name,
                             g_free);
+
     g_object_set_data (G_OBJECT (row), "is-extra", GUINT_TO_POINTER (is_extra));
 
     return row;
 }
+
 static void
-add_languages (LanguageChooser *chooser,
+add_languages (UserLanguage *chooser,
                gchar            **locale_ids,
                GHashTable        *initial)
 {
@@ -436,68 +489,70 @@ add_languages (LanguageChooser *chooser,
     {
         locale_id = *locale_ids;
         locale_ids ++;
-        if (!cc_common_language_has_font (locale_id))
-                continue;
+        if (!language_has_font (locale_id))
+            continue;
 
         is_initial = (g_hash_table_lookup (initial, locale_id) != NULL);
-        widget = language_widget_new (locale_id, chooser->language, !is_initial);
-        gtk_container_add (GTK_CONTAINER (chooser->language_listbox), widget);
+        widget = language_widget_new (locale_id, chooser->priv->language, !is_initial);
+        gtk_container_add (GTK_CONTAINER (chooser->priv->language_listbox), widget);
     }
 
-    gtk_container_add (GTK_CONTAINER (chooser->language_listbox), GTK_WIDGET (chooser->more_item));
-
+    gtk_container_add (GTK_CONTAINER (chooser->priv->language_listbox), GTK_WIDGET (chooser->priv->more_item));
 }
+
 static void
-add_all_languages (LanguageChooser *chooser)
+add_all_languages (UserLanguage *chooser)
 {
-    gchar **locale_ids;
+    gchar      **locale_ids;
     GHashTable *initial;
 
     locale_ids = mate_get_all_locales ();
     if(g_strv_length(locale_ids) == 0)
         mate_uesr_admin_log("Warning","mate-user-admin get_all_locales ->0 No available language");
-    initial = cc_common_language_get_initial_languages ();
+    initial = create_language_hash_table ();
+
     add_languages (chooser, locale_ids, initial);
     g_hash_table_destroy (initial);
     g_strfreev (locale_ids);
 }
+
 static void
-filter_changed (LanguageChooser *chooser)
+filter_changed (UserLanguage *chooser)
 {
     g_autofree gchar *filter_contents = NULL;
 
-    g_clear_pointer (&chooser->filter_words, g_strfreev);
+    g_clear_pointer (&chooser->priv->filter_words, g_strfreev);
 
-    filter_contents =
-        normalize_fold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (chooser->language_entry)));
-    if (!filter_contents) 
+    filter_contents = normalize_fold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (chooser->priv->language_entry)));
+    if (!filter_contents)
     {
-        gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
-        gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->language_listbox), NULL);
+        gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->priv->language_listbox));
+        gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->priv->language_listbox), NULL);
         return;
     }
-    chooser->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-    gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->language_listbox), chooser->no_results);
-    gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
+    chooser->priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
+    gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->priv->language_listbox), chooser->priv->no_results);
+    gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->priv->language_listbox));
 }
+
 static void
-show_more (LanguageChooser *chooser, gboolean visible)
+show_more (UserLanguage *chooser, gboolean visible)
 {
     gint width, height;
 
     gtk_window_get_size (GTK_WINDOW (chooser), &width, &height);
     gtk_widget_set_size_request (GTK_WIDGET (chooser), width, height);
 
-    gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (chooser->search_bar), visible);
-    gtk_widget_grab_focus (visible ? chooser->language_entry : chooser->language_listbox);
+    gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (chooser->priv->search_bar), visible);
+    gtk_widget_grab_focus (visible ? chooser->priv->language_entry : chooser->priv->language_listbox);
 
-    chooser->showing_extra = visible;
+    chooser->priv->showing_extra = visible;
 
-    gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
+    gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->priv->language_listbox));
 }
 
-static void set_locale_id (LanguageChooser *chooser,
-                           const gchar     *locale_id)
+static void set_locale_id (UserLanguage *chooser,
+                           const gchar  *locale_id)
 {
     g_autoptr(GList) children = NULL;
     GList      *l;
@@ -505,10 +560,9 @@ static void set_locale_id (LanguageChooser *chooser,
     GtkWidget  *check;
     const char *language;
     gboolean    is_extra;
-    gtk_widget_set_sensitive (chooser->done_button, FALSE);
 
-    children = gtk_container_get_children (GTK_CONTAINER (chooser->language_listbox));
-    for (l = children; l; l = l->next) 
+    children = gtk_container_get_children (GTK_CONTAINER (chooser->priv->language_listbox));
+    for (l = children; l; l = l->next)
     {
         row = l->data;
         check = g_object_get_data (G_OBJECT (row), "check");
@@ -516,57 +570,47 @@ static void set_locale_id (LanguageChooser *chooser,
         if (check == NULL || language == NULL)
                 continue;
 
-        if (g_strcmp0 (locale_id, language) == 0) 
+        if (g_strcmp0 (locale_id, language) == 0)
         {
             gtk_widget_set_opacity (check, 1.0);
-            gtk_widget_set_sensitive (chooser->done_button, TRUE);
 
             is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (row), "is-extra"));
-            if (!chooser->showing_extra && is_extra) 
+            if (!chooser->priv->showing_extra && is_extra)
             {
                 g_object_set_data (G_OBJECT (row), "is-extra", GINT_TO_POINTER (FALSE));
-                gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
+                gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->priv->language_listbox));
             }
-        } 
-        else 
+        }
+        else
         {
             gtk_widget_set_opacity (check, 0.0);
         }
     }
 
-    g_free (chooser->language);
-    chooser->language = g_strdup (locale_id);
+    g_free (chooser->priv->language);
+    chooser->priv->language = g_strdup (locale_id);
 }
 
 static void
 row_activated (GtkListBox        *box,
                GtkListBoxRow     *row,
-               LanguageChooser *chooser)
+               UserLanguage *chooser)
 {
     gchar *new_locale_id;
 
     if (row == NULL)
         return;
 
-    if (row == chooser->more_item) 
+    if (row == chooser->priv->more_item) 
     {
         show_more (chooser, TRUE);
         return;
     }
     new_locale_id = g_object_get_data (G_OBJECT (row), "locale-id");
-    if (g_strcmp0 (new_locale_id, chooser->language) == 0) 
-    {
-        gtk_dialog_response (GTK_DIALOG (chooser),
-                             gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
-                                                                 chooser->done_button));
-    } 
-    else 
-    {
-        set_locale_id (chooser, new_locale_id);
-    }
+    set_locale_id (chooser, new_locale_id);
 }
-static void activate_default (GtkWindow       *window,
-                              LanguageChooser *chooser)
+static void activate_default (GtkWindow    *window,
+                              UserLanguage *chooser)
 {
     GtkWidget *focus;
     gchar *locale_id;
@@ -576,90 +620,60 @@ static void activate_default (GtkWindow       *window,
         return;
 
     locale_id = g_object_get_data (G_OBJECT (focus), "locale-id");
-    if (g_strcmp0 (locale_id, chooser->language) == 0)
+    if (g_strcmp0 (locale_id, chooser->priv->language) == 0)
         return;
 
     g_signal_stop_emission_by_name (window, "activate-default");
     gtk_widget_activate (focus);
 }
 
-static void chooser_language_cancel(GtkWidget       *widget, 
-                                    LanguageChooser *chooser)
+static GtkWidget *create_language_list_box (UserLanguage *chooser)
 {
-    gtk_widget_destroy (GTK_WIDGET(chooser));
+    GtkWidget *listbox;
+
+    listbox = gtk_list_box_new();
+    gtk_list_box_set_sort_func (GTK_LIST_BOX (listbox),
+                                sort_languages,
+                                NULL,
+                                NULL);
+
+    gtk_list_box_set_filter_func (GTK_LIST_BOX (listbox),
+                                  user_language_show_rows,
+                                  chooser,
+                                  NULL);
+
+    gtk_list_box_set_selection_mode (GTK_LIST_BOX (listbox),
+                                     GTK_SELECTION_NONE);
+
+    gtk_list_box_set_header_func (GTK_LIST_BOX (listbox),
+                                  list_box_update_header_func,
+                                  NULL,
+                                  NULL);
+
+    gtk_list_box_invalidate_filter (GTK_LIST_BOX (listbox));
+
+    return listbox;
 }
 
-static void chooser_language_done (GtkWidget       *widget,
-                                   LanguageChooser *chooser)
-{
-    const gchar *lang, *account_language;
-
-    account_language = act_user_get_language (chooser->user);
-    lang = language_chooser_get_language (LANGUAGE_CHOOSER (chooser));
-    if (lang) 
-    {
-        if (g_strcmp0 (lang, account_language) != 0) 
-        {
-            act_user_set_language (chooser->user, lang);
-        }
-        g_signal_emit (chooser, signals[LANG_CHANGED], 0);
-     }
-
-    gtk_widget_destroy (GTK_WIDGET(chooser));
-
-}    
-static void LoadHeader_bar(LanguageChooser *chooser)
-{
-    chooser->header = GetHeaderbar();
-    chooser->cancel_button = gtk_button_new_with_label(_("Cancel"));
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (chooser->header), 
-                               chooser->cancel_button);
-    chooser->done_button = gtk_button_new_with_label(_("Done"));
-    gtk_header_bar_pack_end (GTK_HEADER_BAR (chooser->header),
-                             chooser->done_button);
-
-    gtk_window_set_titlebar (GTK_WINDOW (chooser), chooser->header);
-}    
-void language_chooser_init (LanguageChooser *chooser)
+void user_language_init (UserLanguage *chooser)
 {
     GtkWidget *vbox;
     GtkWidget *hbox;
     GtkWidget *Scrolled;
 
+    chooser->priv = user_language_get_instance_private (chooser);
     gtk_window_set_default_size (GTK_WINDOW (chooser), 400, 350);
-    
-    if(GetUseHeader() == 1)
-    {
-        LoadHeader_bar(chooser); 
-    }   
-    else
-    {    
-        chooser->cancel_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Cancel"),-5);
-        chooser->done_button = gtk_dialog_add_button(GTK_DIALOG(chooser),_("Done"),-6);
-    }
-    g_signal_connect (chooser->done_button, 
-                     "clicked",
-                      G_CALLBACK (chooser_language_done), 
-                      chooser);
 
-    g_signal_connect (chooser->cancel_button, 
-                     "clicked",
-                      G_CALLBACK (chooser_language_cancel), 
-                      chooser);
+    dialog_add_button_with_icon_name (GTK_DIALOG(chooser),
+                                     _("Cancel"),
+                                     "window-close",
+                                     GTK_RESPONSE_CLOSE);
 
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0); 
-   
-    chooser->language_entry = gtk_search_entry_new (); 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-    gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (hbox), chooser->language_entry, FALSE, FALSE, 0); 
-    
-    chooser->search_bar = gtk_search_bar_new (); 
-    gtk_search_bar_connect_entry (GTK_SEARCH_BAR (chooser->search_bar), 
-                                  GTK_ENTRY (chooser->language_entry));
-    gtk_search_bar_set_show_close_button (GTK_SEARCH_BAR (chooser->search_bar), FALSE);
-    gtk_container_add (GTK_CONTAINER (chooser->search_bar), hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), chooser->search_bar, FALSE, FALSE, 0);
+    dialog_add_button_with_icon_name (GTK_DIALOG(chooser),
+                                     _("Done"),
+                                     "emblem-default",
+                                     GTK_RESPONSE_OK);
+
     Scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (Scrolled),
                                     GTK_POLICY_NEVER,
@@ -667,81 +681,86 @@ void language_chooser_init (LanguageChooser *chooser)
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (Scrolled),
                                          GTK_SHADOW_IN);
 
-    chooser->language_listbox = gtk_list_box_new();
-    gtk_box_pack_start (GTK_BOX (vbox), chooser->language_listbox, FALSE, FALSE, 0);
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     gtk_container_add(GTK_CONTAINER(Scrolled),vbox);
-    chooser->more_item = more_widget_new ();
-    chooser->no_results = g_object_ref_sink (no_results_widget_new ());
 
-    gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->language_listbox),
-                                sort_languages, chooser, NULL);
-    gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->language_listbox),
-                                  language_visible, chooser, NULL);
-    gtk_list_box_set_selection_mode (GTK_LIST_BOX (chooser->language_listbox),
-                                     GTK_SELECTION_NONE);
-    gtk_list_box_set_header_func (GTK_LIST_BOX (chooser->language_listbox),
-                                  cc_list_box_update_header_func, NULL, NULL);
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
+
+    chooser->priv->language_entry = gtk_search_entry_new ();
+    gtk_box_pack_start (GTK_BOX (hbox),
+                        chooser->priv->language_entry,
+                        FALSE,
+                        FALSE,
+                        6);
+
+    chooser->priv->search_bar = gtk_search_bar_new ();
+    gtk_search_bar_connect_entry (GTK_SEARCH_BAR (chooser->priv->search_bar),
+                                  GTK_ENTRY (chooser->priv->language_entry));
+    gtk_search_bar_set_show_close_button (GTK_SEARCH_BAR (chooser->priv->search_bar), FALSE);
+    gtk_container_add (GTK_CONTAINER (chooser->priv->search_bar), hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), chooser->priv->search_bar, FALSE, FALSE, 0);
+
+    chooser->priv->language_listbox = create_language_list_box (chooser); 
+    gtk_box_pack_start (GTK_BOX (vbox), chooser->priv->language_listbox, FALSE, FALSE, 0);
+
+    chooser->priv->more_item = create_more_widget_new ();
+    chooser->priv->no_results = g_object_ref_sink (no_results_widget_new ());
+
     add_all_languages (chooser);
 
-    g_signal_connect_swapped (chooser->language_entry, "search-changed",
-                              G_CALLBACK (filter_changed), chooser);
+    g_signal_connect_swapped (chooser->priv->language_entry,
+                             "search-changed",
+                              G_CALLBACK (filter_changed),
+                              chooser);
 
-    g_signal_connect (chooser->language_listbox, "row-activated",
-                      G_CALLBACK (row_activated), chooser);
+    g_signal_connect (chooser->priv->language_listbox,
+                     "row-activated",
+                      G_CALLBACK (row_activated),
+                      chooser);
 
-
-    gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
 
     gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (chooser))),
                         Scrolled,
                         TRUE, TRUE, 8);
 
-    g_signal_connect (chooser, "activate-default",
-                          G_CALLBACK (activate_default), chooser);
+    g_signal_connect (chooser,
+                     "activate-default",
+                      G_CALLBACK (activate_default),
+                      chooser);
 }
-LanguageChooser *language_chooser_new (ActUser *user)
+
+UserLanguage *user_language_new (ActUser *user)
 {   
-    LanguageChooser  *chooser;
+    UserLanguage     *chooser;
     g_autofree gchar *title = NULL;
     char             *name;
 
     name = GetUserName (user); 
-    title = g_strdup_printf (_("Current User - %s"),
-                             name);
-    if(GetUseHeader() == 1)
-    {    
-        chooser = g_object_new (TYPE_LANGUAGE_CHOOSER,
-                                "use-header-bar", 1,
-                                NULL);
-        chooser->is_header = 1;
-        gtk_header_bar_set_subtitle (GTK_HEADER_BAR (chooser->header),title);
-    }    
-    else
-    {
-        chooser = g_object_new (TYPE_LANGUAGE_CHOOSER,
-                                "use-header-bar", 0,
-                                NULL);
-        chooser->is_header = 0;
-        gtk_window_set_title(GTK_WINDOW(chooser),title); 
-    }    
-    chooser->user = g_object_ref (user);
+    title = g_strdup_printf (_("Current User - %s"), name);
+
+    chooser = g_object_new (USER_TYPE_LANGUAGE,
+                           "use-header-bar", 0,
+                            NULL);
+    gtk_window_set_title(GTK_WINDOW(chooser),title); 
+    chooser->priv->user = g_object_ref (user);
 
     return chooser;
 }
-void language_chooser_clear_filter (LanguageChooser *chooser)
+
+void user_language_clear_filter (UserLanguage *chooser)
 {
-    gtk_entry_set_text (GTK_ENTRY (chooser->language_entry), "");
+    gtk_entry_set_text (GTK_ENTRY (chooser->priv->language_entry), "");
     show_more (chooser, FALSE);
 }
 
-const gchar *language_chooser_get_language (LanguageChooser *chooser)
+const gchar *user_language_get_language (UserLanguage *chooser)
 {
-    return chooser->language;
+    return chooser->priv->language;
 }
 
-void language_chooser_set_language (LanguageChooser *chooser,
-                                    const gchar     *language)
+void user_language_set_language (UserLanguage *chooser,
+                                 const gchar  *language)
 {
     set_locale_id (chooser, language);
 }
-

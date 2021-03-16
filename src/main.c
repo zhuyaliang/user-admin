@@ -171,7 +171,6 @@ static void InitMainWindow(UserAdmin *ua)
         {
             gtk_window_set_icon(GTK_WINDOW(Window),AppIcon);
         }
-        ua->language_chooser = NULL;
     }
     else
     {

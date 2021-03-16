@@ -460,21 +460,27 @@ static void RefreshSwitchList(GtkListStore *store,
     }
 }		
 
-static GtkTreeModel * CreateRemoveModel (GSList *List)
+static GtkTreeModel *GetRemoveModel (void)
 {
     GtkListStore *RemoveStore = NULL;
-    gint          i = 0;
-    int           GroupNum = 0;
-    UserGroup    *group;
-
-    GroupNum = GetGroupNum(List);
+    
     RemoveStore = gtk_list_store_new (NUM_REMOVE,
                                       G_TYPE_STRING,
                                       G_TYPE_STRING,
                                       G_TYPE_UINT,
                                       G_TYPE_POINTER);
-
     
+    return GTK_TREE_MODEL (RemoveStore);
+}
+
+static void RefreshRemoveList (GtkListStore *store,
+				               GSList       *List)
+{
+    gint          i = 0;
+    int           GroupNum = 0;
+    UserGroup    *group;
+
+    GroupNum = GetGroupNum(List);
     for (i = 0; i < GroupNum ; i++)
     {
         group = g_slist_nth_data(List,i); 
@@ -485,11 +491,9 @@ static GtkTreeModel * CreateRemoveModel (GSList *List)
         }   
         if(!user_group_is_primary_group (group) &&
             user_group_get_group_id (group) >= 1000)
-            addremovelistdata(RemoveStore,group);
+            addremovelistdata(store,group);
     }
-    return GTK_TREE_MODEL (RemoveStore);
-}
-
+}		
 static GtkTreeModel * CreateAddUsersModel (GSList *List)
 {
     gint          i = 0;
@@ -952,7 +956,7 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     Scrolled = GetScrolledWidget(); 
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
-    model    = CreateRemoveModel(gm->GroupsList);
+    model    = GetRemoveModel();
     gm->RemoveStore = GTK_LIST_STORE(model);	
     treeview = gtk_tree_view_new_with_model (model);
     gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview),
@@ -961,6 +965,7 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeRemove = treeview;
+    RefreshRemoveList (gm->RemoveStore, gm->GroupsList);
     AddRemoveGroupColumns (gm);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 

@@ -189,7 +189,8 @@ static gboolean QuitGroupWindow (GtkWidget *widget,
     if(gm->GroupsList != NULL)
         g_slist_free_full (gm->GroupsList,g_object_unref);
     if(gm->NewGroupUsers != NULL)
-        g_slist_free(gm->NewGroupUsers);   
+        g_slist_free(gm->NewGroupUsers);
+    g_free (gm);
     gtk_widget_destroy(gm->GroupsWindow);
 	gtk_widget_show(WindowLogin);
     return TRUE;
@@ -1109,28 +1110,27 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
 *        
 * Author:  zhuyaliang  01/04/2019
 ******************************************************************************/
-void UserGroupsManage (GtkWidget *widget, gpointer data)
+void UserGroupsManage (const char *user_name, GSList *user_list)
 {
-    UserAdmin   *ua = (UserAdmin *)data;
-    const gchar *CurrentUserName;
+    GroupsManage *gm = g_new0 (GroupsManage, 1);
 
-    CurrentUserName = GetUserName(ua->CurrentUser);
-    ua->gm.username = g_strdup(CurrentUserName);
+    gm->username = g_strdup(user_name);
     gtk_widget_hide(WindowLogin);
-    ua->gm.GroupsList = NULL;
-    ua->gm.NewGroupUsers = NULL;
-    ua->gm.GroupsList = GetGroupInfo();
-    if(ua->gm.GroupsList == NULL)
+    gm->GroupsList = NULL;
+    gm->NewGroupUsers = NULL;
+    gm->GroupsList = GetGroupInfo();
+
+    if(gm->GroupsList == NULL)
     {
-		gtk_widget_show(WindowLogin);
+        gtk_widget_show(WindowLogin);
         return;
-    }  
-    ua->gm.GroupNum = g_slist_length(ua->gm.GroupsList);  
-    CreateManageWindow(&ua->gm);
-    StartManageGroups(&ua->gm,ua->UsersList);
-    UpdateState(&ua->gm);   
-    g_signal_connect(G_OBJECT(ua->gm.GroupsWindow), 
+    }
+    gm->GroupNum = g_slist_length(gm->GroupsList);
+    CreateManageWindow(gm);
+    StartManageGroups(gm, user_list);
+    UpdateState(gm);
+    g_signal_connect(G_OBJECT(gm->GroupsWindow),
                     "delete-event",
                      G_CALLBACK(QuitGroupWindow),
-                     &ua->gm);
-}    
+                     gm);
+}

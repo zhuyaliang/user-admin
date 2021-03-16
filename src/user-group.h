@@ -15,7 +15,7 @@
 #ifndef __USER_GROUP__
 #define __USER_GROUP__
 
-#include "user.h"
+#include <gtk/gtk.h>
 #include <libgroupservice/gas-group.h>
 #include <libgroupservice/gas-group-manager.h>
 G_BEGIN_DECLS
@@ -41,8 +41,8 @@ GType          user_group_get_type           (void) G_GNUC_CONST;
 UserGroup *    group_new                     (const char *GroupName,
 				                              gid_t       gid);
 
-void           UserGroupsManage              (GtkWidget  *widget, 
-                                              gpointer    data);
+void           UserGroupsManage              (const char *user_name,
+                                              GSList     *user_list);
 G_END_DECLS
 
 #endif

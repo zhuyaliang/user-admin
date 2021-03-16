@@ -152,6 +152,14 @@ static void ComboSelectUserType(GtkWidget *widget,gpointer data)
         act_user_set_account_type(ua->CurrentUser,account_type);
     }    
 }
+static void set_user_group (GtkWidget *widget, gpointer data)
+{
+    UserAdmin  *ua = (UserAdmin *)data;
+    const char *name;
+
+    name = GetUserName (ua->CurrentUser);
+    UserGroupsManage (name, ua->UsersList);
+}
 /******************************************************************************
 * Function:              DisplayUserSetOther 
 *        
@@ -275,7 +283,7 @@ void DisplayUserSetOther(GtkWidget *Hbox,UserAdmin *ua)
     gtk_grid_attach(GTK_GRID(table) , ButtonGroup, 1 , 5 , 2 , 1);
     g_signal_connect (ButtonGroup, 
                      "clicked",
-                      G_CALLBACK (UserGroupsManage),
+                      G_CALLBACK (set_user_group),
                       ua);
 
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);

@@ -78,4 +78,9 @@ GtkWidget  *SetButtonIcon          (const gchar *button_text,
                                     const gchar *icon_name);
 
 GdkPixbuf  *GetRoundPixbuf         (GdkPixbuf *Spixbuf);
+
+GtkWidget        *dialog_add_button_with_icon_name (GtkDialog   *dialog,
+                                                    const gchar *button_text,
+                                                    const gchar *icon_name,
+                                                     gint         response_id);
 #endif

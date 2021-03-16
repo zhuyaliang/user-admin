@@ -30,11 +30,6 @@ G_DECLARE_FINAL_TYPE (UserPassword, user_password, USER, PASSWORD, GtkDialog)
 UserPassword     *user_password_new       (ActUser       *user);
 
 char             *user_password_get_label (UserPassword *dialog);
-
-GtkWidget        *dialog_add_button_with_icon_name (GtkDialog   *dialog,
-                                                    const gchar *button_text,
-                                                    const gchar *icon_name,
-                                                     gint         response_id);
  
 G_END_DECLS
 

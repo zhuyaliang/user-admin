@@ -24,10 +24,11 @@
 
 enum
 {
-  COLUMN_FIXED,
-  COLUMN_GROUPNAME,
-  COLUMN_GROUPID,
-  NUM_COLUMNS
+    COLUMN_FIXED,
+    COLUMN_GROUPNAME,
+    COLUMN_GROUPID,
+    COLUMN_DATA,
+    NUM_COLUMNS
 };
 enum
 {
@@ -41,6 +42,7 @@ enum
   COLUMN_ICON,
   COLUMN_REMOVENAME,
   COLUMN_REMOVEID,
+  COLUMN_GROUP,
   NUM_REMOVE
 };
 static void addswitchlistdata    (GtkListStore *store,
@@ -49,9 +51,6 @@ static void addswitchlistdata    (GtkListStore *store,
 
 static void addremovelistdata    (GtkListStore *store,
                                   UserGroup    *group);
-
-static UserGroup *GetGroupObject (GSList       *List,
-                                  guint         gid);
 
 static void RefreshSwitchList    (GtkListStore *store,
                                   GSList       *List,
@@ -237,21 +236,21 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
     gtk_notebook_prev_page(GTK_NOTEBOOK(gm->NoteBook));
 }   
 
-static guint GetRemoveListGid(GtkWidget *widget)
+static UserGroup *user_group_tree_get_group (GtkWidget *widget)
 {
     GtkTreeView  *treeview = GTK_TREE_VIEW(widget);
     GtkTreeModel *model;
     GtkTreeIter   iter;
-    uint          gid = 0;  
+    UserGroup    *group;
 
     GtkTreeSelection *selection = gtk_tree_view_get_selection (treeview);
     model = gtk_tree_view_get_model (treeview);
     if(gtk_tree_selection_get_selected (selection, NULL, &iter) == TRUE)
     {
-        gtk_tree_model_get (model, &iter, COLUMN_REMOVEID, &gid, -1);  
+        gtk_tree_model_get (model, &iter, COLUMN_GROUP, &group, -1);  
     }
 	
-    return gid;
+    return group;
 }		
 static void RemoveListData(GtkWidget *widget)
 {
@@ -292,15 +291,8 @@ static void RemoveGroup(GtkWidget *widget, gpointer data)
     GasGroupManager *GroupManager;
     GError       *error = NULL;
 	
-    gid = GetRemoveListGid(gm->TreeRemove);
-    if(gid == 0)
-    {
-        MessageReport(_("Remove Group"),
-                      _("Cannot remove root group"),
-                       INFOR);
-        return;
-    }		
-    group = GetGroupObject(gm->GroupsList,gid);
+    group = user_group_tree_get_group (gm->TreeRemove);
+    gid = user_group_get_group_id (group);
     if(group != NULL)
     {
         ret = MessageReport(_("Remove Group"),
@@ -325,7 +317,6 @@ static void RemoveGroup(GtkWidget *widget, gpointer data)
             return;
         }		
         gm->GroupsList = g_slist_remove(gm->GroupsList,group);
-        g_object_unref(group);
         RemoveListData(gm->TreeRemove);
         model = gtk_tree_view_get_model(GTK_TREE_VIEW(gm->TreeSwitch));
         gtk_tree_model_foreach (model,
@@ -336,25 +327,6 @@ static void RemoveGroup(GtkWidget *widget, gpointer data)
 static int GetGroupNum(GSList *List)
 {
     return g_slist_length(List);
-}    
-
-static UserGroup *GetGroupObject (GSList *List,guint gid)
-{
-    GSList *node;
-    guint groupgid;
-
-    for (node = List; node != NULL; node = node->next) 
-    {
-        UserGroup *group = (UserGroup*)node->data;
-
-        groupgid = user_group_get_group_id (group);
-        
-        if (groupgid == gid) 
-        {
-            return group;
-        }
-    }    
-    return NULL;
 }    
 
 static void UserSelectGroup (GtkCellRendererToggle *cell,
@@ -376,8 +348,8 @@ static void UserSelectGroup (GtkCellRendererToggle *cell,
     gtk_tree_model_get_iter (model, &iter, path);
     gtk_tree_model_get (model, &iter, COLUMN_FIXED, &fixed, -1);
     gtk_tree_model_get (model, &iter, COLUMN_GROUPID, &gid, -1); 
+    gtk_tree_model_get (model, &iter, COLUMN_DATA, &group, -1); 
     
-    group = GetGroupObject(gm->GroupsList,gid);
     if(fixed == TRUE)
     {
         user_group_remove_user_from_group (group, gm->username);
@@ -437,6 +409,7 @@ static void addswitchlistdata(GtkListStore *store,
                         COLUMN_FIXED,     user_group_user_is_group (group,name),
                         COLUMN_GROUPNAME, user_group_get_group_name (group),
                         COLUMN_GROUPID,   user_group_get_group_id (group),
+                        COLUMN_DATA,      group,
                         -1);
 
 }		
@@ -444,11 +417,13 @@ static void addremovelistdata(GtkListStore *store,
                               UserGroup    *group)
 {
     GtkTreeIter   iter;
+
     gtk_list_store_append (store, &iter);
     gtk_list_store_set (store, &iter,
                         COLUMN_ICON,      "edit-delete",
                         COLUMN_REMOVENAME, user_group_get_group_name (group),
                         COLUMN_REMOVEID,   user_group_get_group_id (group),
+                        COLUMN_GROUP, group,
                         -1);
 
 }
@@ -459,7 +434,8 @@ static GtkTreeModel *GetSwicthModel(void)
     SwitchStore = gtk_list_store_new (NUM_COLUMNS,
                                       G_TYPE_BOOLEAN,
                                       G_TYPE_STRING,
-                                      G_TYPE_UINT);
+                                      G_TYPE_UINT,
+                                      G_TYPE_POINTER);
     return GTK_TREE_MODEL (SwitchStore);
 
 }
@@ -495,7 +471,8 @@ static GtkTreeModel * CreateRemoveModel (GSList *List)
     RemoveStore = gtk_list_store_new (NUM_REMOVE,
                                       G_TYPE_STRING,
                                       G_TYPE_STRING,
-                                      G_TYPE_UINT);
+                                      G_TYPE_UINT,
+                                      G_TYPE_POINTER);
 
     
     for (i = 0; i < GroupNum ; i++)

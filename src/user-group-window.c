@@ -52,10 +52,6 @@ static void addswitchlistdata    (GtkListStore *store,
 static void addremovelistdata    (GtkListStore *store,
                                   UserGroup    *group);
 
-static void RefreshSwitchList    (GtkListStore *store,
-                                  GSList       *List,
-                                  const gchar  *name);
-
 static gboolean CheckGroupNameUsed (const gchar *name)
 {
     struct group *grent;
@@ -406,7 +402,7 @@ static void addswitchlistdata(GtkListStore *store,
     GtkTreeIter   iter;
     gtk_list_store_append (store, &iter);
     gtk_list_store_set (store, &iter,
-                        COLUMN_FIXED,     user_group_user_is_group (group,name),
+                        COLUMN_FIXED,     user_group_user_is_group (group, name),
                         COLUMN_GROUPNAME, user_group_get_group_name (group),
                         COLUMN_GROUPID,   user_group_get_group_id (group),
                         COLUMN_DATA,      group,
@@ -439,26 +435,6 @@ static GtkTreeModel *GetSwicthModel(void)
     return GTK_TREE_MODEL (SwitchStore);
 
 }
-static void RefreshSwitchList(GtkListStore *store,
-				              GSList       *List,
-							  const gchar  *name)
-{
-    gint          i = 0;
-    int           GroupNum = 0;
-    UserGroup    *group;
-
-    GroupNum = GetGroupNum(List);
-    for (i = 0; i < GroupNum ; i++)
-    {
-        group = g_slist_nth_data(List,i); 
-        if(group == NULL)
-        {
-            g_error("No such the Group!!!\r\n");
-            break;
-        }   
-        addswitchlistdata(store,group,name);
-    }
-}		
 
 static GtkTreeModel *GetRemoveModel (void)
 {
@@ -473,27 +449,6 @@ static GtkTreeModel *GetRemoveModel (void)
     return GTK_TREE_MODEL (RemoveStore);
 }
 
-static void RefreshRemoveList (GtkListStore *store,
-				               GSList       *List)
-{
-    gint          i = 0;
-    int           GroupNum = 0;
-    UserGroup    *group;
-
-    GroupNum = GetGroupNum(List);
-    for (i = 0; i < GroupNum ; i++)
-    {
-        group = g_slist_nth_data(List,i); 
-        if(group == NULL)
-        {
-            g_error("No such the Group!!!\r\n");
-            break;
-        }   
-        if(!user_group_is_primary_group (group) &&
-            user_group_get_group_id (group) >= 1000)
-            addremovelistdata(store,group);
-    }
-}		
 static GtkTreeModel * CreateAddUsersModel (GSList *List)
 {
     gint          i = 0;
@@ -840,9 +795,6 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeSwitch = treeview;
-    RefreshSwitchList(gm->SwitchStore,
-                      gm->GroupsList,
-                      gm->username);
     AddSwitchGroupColumns (gm);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
@@ -965,7 +917,6 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeRemove = treeview;
-    RefreshRemoveList (gm->RemoveStore, gm->GroupsList);
     AddRemoveGroupColumns (gm);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
@@ -1013,6 +964,29 @@ static void StartManageGroups (GroupsManage *gm,GSList *UsersList)
     
     gtk_widget_show_all(gm->GroupsWindow);
 }    
+
+static void user_group_window_update_list_store (GroupsManage *gm)
+{
+    gint          i = 0;
+    int           GroupNum = 0;
+    UserGroup    *group;
+
+    GroupNum = GetGroupNum (gm->GroupsList);
+    for (i = 0; i < GroupNum ; i++)
+    {
+        group = g_slist_nth_data(gm->GroupsList, i); 
+        if(group == NULL)
+        {
+            g_error("No such the Group!!!\r\n");
+            break;
+        }   
+        addswitchlistdata(gm->SwitchStore, group, gm->username);
+        if(!user_group_is_primary_group (group) &&
+            user_group_get_group_id (group) >= 1000)
+            addremovelistdata (gm->RemoveStore, group);
+    }
+
+}
 /******************************************************************************
 * Function:             UserGroupsManage 
 *        
@@ -1043,6 +1017,7 @@ void UserGroupsManage (const char *user_name, GSList *user_list)
     CreateManageWindow(gm);
     StartManageGroups(gm, user_list);
     UpdateState(gm);
+    user_group_window_update_list_store (gm);
     g_signal_connect(G_OBJECT(gm->GroupsWindow),
                     "delete-event",
                      G_CALLBACK(QuitGroupWindow),

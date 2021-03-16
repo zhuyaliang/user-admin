@@ -12,6 +12,7 @@ sources = [
 'user-crop.c',
 'user-avatar.c',
 'user-group.c',
+'user-group-window.c',
 'user-history.c',
 'user-language.c',
 ]

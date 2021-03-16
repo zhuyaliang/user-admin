@@ -19,7 +19,7 @@
 #include "user-password.h"
 #include "user-share.h"
 #include "user-info.h"
-#include "user-group.h"
+#include "user-group-window.h"
 #include "user-history.h"
 #include "user-language.h"
 

@@ -59,6 +59,11 @@ enum
     NUM_COLUMNS
 };
 
+struct _UserGroupWindowPrivate
+{
+};
+
+G_DEFINE_TYPE_WITH_PRIVATE (UserGroupWindow, user_group_window, GTK_TYPE_WINDOW)
 static void user_group_window_update_list_store (GroupsManage *gm);
 static void addswitchlistdata    (GtkWidget    *tree,
                                   GtkListStore *store,
@@ -925,4 +930,45 @@ void UserGroupsManage (const char *user_name, GSList *user_list)
                     "delete-event",
                      G_CALLBACK(QuitGroupWindow),
                      gm);
+}
+static void user_group_window_dispose (GObject *object)
+{
+    UserGroupWindow *group_window = USER_GROUP_WINDOW (object);
+    
+    G_OBJECT_CLASS (user_group_window_parent_class)->dispose (object);
+}
+
+void user_group_window_class_init (UserGroupWindowClass *klass)
+{
+    GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
+
+    object_class->dispose = user_group_window_dispose;
+}
+
+void user_group_window_init (UserGroupWindow *group_window)
+{
+    group_window->priv = user_group_window_get_instance_private (group_window);
+}
+
+UserGroupWindow *user_group_window_new (const char *user_name,
+                                        GSList     *user_list)
+{   
+    UserGroupWindow  *group_window;
+    g_autofree gchar *title = NULL;
+
+    title = g_strdup_printf (_("Current User - %s"), user_name);
+
+    group_window = g_object_new (USER_TYPE_GROUP_WINDOW,
+                                "window-position", GTK_WIN_POS_CENTER,
+                                 "title", title,
+                                 NULL);
+/*
+    if(group_window->priv->group_list == NULL)
+    {
+        gtk_widget_destroy (GTK_WIDGET (group_window));
+        return;
+    }  
+*/
+    return group_window;
 }

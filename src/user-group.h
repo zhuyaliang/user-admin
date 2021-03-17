@@ -62,6 +62,10 @@ void           user_group_remove_user_from_group  (UserGroup       *group,
                                                    const char      *user);
 
 gboolean       user_group_is_primary_group        (UserGroup       *group);
+
+void           add_user_to_new_group              (GSList          *list,
+                                                   GasGroup        *gas);
+
 G_END_DECLS
 
 #endif

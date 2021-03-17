@@ -63,33 +63,9 @@ enum
     LIST_LABEL ,
     N_COLUMNS
 };
-typedef struct
-{
-    GSList           *GroupsList;
-    GtkWidget        *GroupsWindow;
-    GtkWidget        *NoteBook;
-    GtkWidget        *SwitchBox;
-    GtkWidget        *CreateBox;
-    GtkWidget        *RemoveBox;
-    GtkWidget        *ButtonConfirm;
-    GtkWidget        *ButtonRemove;
-    GtkWidget        *TreeSwitch;
-    GtkWidget        *TreeCreate;
-    GtkWidget        *TreeRemove;
-    GtkListStore     *SwitchStore;
-    GtkListStore     *RemoveStore;
-	GtkWidget        *EntryGroupName;
-	GtkWidget        *ButtonLock;
-    GPermission      *Permission;
-    int               GroupNum;
-    const gchar      *username;
-    GSList           *NewGroupUsers;          
-}GroupsManage;
-
 typedef struct 
 {
     GSList           *UsersList;
-    GroupsManage      gm;
     UserFace         *face;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;

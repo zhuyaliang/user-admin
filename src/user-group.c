@@ -125,3 +125,15 @@ gboolean user_group_is_primary_group (UserGroup *group)
 
     return gas_group_is_primary_group (group->priv->gas);
 }
+
+void add_user_to_new_group(GSList *list, GasGroup *gas)
+{
+    GSList     *node;
+    const char *name;
+
+    for(node = list; node; node = node->next)
+    {
+        name = node->data;
+        gas_group_add_user_group (gas, name);
+    }
+}

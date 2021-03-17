@@ -41,6 +41,8 @@ typedef struct
     GtkWidget        *ButtonLock;
     GPermission      *Permission;
     int               GroupNum;
+    int               remove_id;
+    int               add_id;
     const gchar      *username;
     const gchar      *remove_group_name;
     GasGroupManager  *g_manager;
@@ -164,12 +166,16 @@ static void CloseGroupWindow (GtkWidget *widget, gpointer data)
 {
     GroupsManage *gm = (GroupsManage *)data;
     g_free((gpointer)gm->username);
-    gm->Permission = NULL;
+    
     g_slist_free_full (gm->GroupsList,g_object_unref);
+    gm->GroupsList = NULL;
     if(gm->NewGroupUsers != NULL)
-        g_slist_free(gm->NewGroupUsers);   
+        g_slist_free(gm->NewGroupUsers);
     gtk_widget_destroy(gm->GroupsWindow);
 	gtk_widget_show(WindowLogin);
+    g_signal_handler_disconnect (gm->g_manager, gm->add_id);
+    g_signal_handler_disconnect (gm->g_manager, gm->remove_id);
+    g_free (gm);
 }    
 static gboolean restartlist  (GtkTreeModel *model,
                               GtkTreePath  *path,
@@ -439,123 +445,64 @@ static GtkTreeModel * CreateAddUsersModel (GSList *List)
 
     return GTK_TREE_MODEL (store);
 }
-static void AddSwitchGroupColumns (GroupsManage *gm)
-{
-    GtkCellRenderer *renderer;
-    GtkTreeViewColumn *column;
-    GtkTreeView  *treeview = GTK_TREE_VIEW(gm->TreeSwitch);
-    
-    renderer = gtk_cell_renderer_toggle_new (); 
-    g_signal_connect (renderer, 
-                     "toggled",
-                      G_CALLBACK (UserSelectGroup), 
-                      gm);
 
-    column = gtk_tree_view_column_new_with_attributes (_("Select"),
-                                                        renderer,
-                                                       "active", COLUMN_FIXED,
-                                                        NULL);
-
-    gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column),
-                                     GTK_TREE_VIEW_COLUMN_FIXED);
-    gtk_tree_view_column_set_fixed_width (GTK_TREE_VIEW_COLUMN (column), 50);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_FIXED);
-    gtk_tree_view_append_column (treeview, column);
-
-    renderer = gtk_cell_renderer_text_new (); 
-    column = gtk_tree_view_column_new_with_attributes (_("Group Name"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_GROUPNAME,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_GROUPNAME);
-    gtk_tree_view_append_column (treeview, column);
-
-    renderer = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes (_("Group ID"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_GROUPID,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_GROUPID);
-    gtk_tree_view_append_column (treeview, column);
-
-}
-static void AddSelectUsersColumns (GroupsManage *gm)
-{
-    GtkCellRenderer *renderer;
-    GtkTreeViewColumn *column;
-    GtkTreeView  *treeview = GTK_TREE_VIEW(gm->TreeCreate);
-    
-    renderer = gtk_cell_renderer_toggle_new (); 
-    g_signal_connect (renderer, 
-                     "toggled",
-                      G_CALLBACK (NewGroupSelectUsers), 
-                      gm);
-
-    column = gtk_tree_view_column_new_with_attributes (_("Select"),
-                                                        renderer,
-                                                       "active", COLUMN_SELECT,
-                                                        NULL);
-
-    gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column),
-                                     GTK_TREE_VIEW_COLUMN_FIXED);
-    gtk_tree_view_column_set_fixed_width (GTK_TREE_VIEW_COLUMN (column), 50);
-    gtk_tree_view_append_column (treeview, column);
-
-    renderer = gtk_cell_renderer_text_new (); 
-    column = gtk_tree_view_column_new_with_attributes (_("Username"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_USERNAME,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_USERNAME);
-    gtk_tree_view_append_column (treeview, column);
-
-    renderer = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes (_("User ID"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_USERID,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_USERID);
-    gtk_tree_view_append_column (treeview, column);
-
-}
-
-static void AddRemoveGroupColumns (GroupsManage *gm)
+static GtkCellRenderer *create_tree_toggled_renderer (GtkTreeView *tree,
+                                                      const char  *name,
+                                                      int          index)
 {
     GtkCellRenderer   *renderer;
     GtkTreeViewColumn *column;
-    GtkTreeView  *treeview = GTK_TREE_VIEW(gm->TreeRemove);
     
-    renderer = gtk_cell_renderer_pixbuf_new ();
-    column = gtk_tree_view_column_new_with_attributes (_("Remove"),
-                                                        renderer,
-                                                       "icon-name",
-                                                        COLUMN_ICON,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_ICON);
-    gtk_tree_view_append_column (treeview, column);
+    renderer = gtk_cell_renderer_toggle_new (); 
+
+    column = gtk_tree_view_column_new_with_attributes (name,
+                                                       renderer,
+                                                       "active",
+                                                       index,
+                                                       NULL);
+
+    gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column),
+                                     GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_fixed_width (GTK_TREE_VIEW_COLUMN (column), 50);
+    gtk_tree_view_append_column (tree, column);
+
+    return renderer;
+}
+
+static void create_tree_text_renderer (GtkTreeView *tree,
+                                       const char  *name,
+                                       int          index)
+{
+    GtkCellRenderer   *renderer;
+    GtkTreeViewColumn *column;
 
     renderer = gtk_cell_renderer_text_new (); 
-    column = gtk_tree_view_column_new_with_attributes (_("Group Name"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_REMOVENAME,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_REMOVENAME);
-    gtk_tree_view_append_column (treeview, column);
+    column = gtk_tree_view_column_new_with_attributes (name,
+                                                       renderer,
+                                                      "text",
+                                                       index,
+                                                       NULL);
+    gtk_tree_view_column_set_sort_column_id (column, index);
 
-    renderer = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes (_("Group ID"),
-                                                        renderer,
-                                                       "text",
-                                                        COLUMN_REMOVEID,
-                                                        NULL);
-    gtk_tree_view_column_set_sort_column_id (column, COLUMN_REMOVEID);
-    gtk_tree_view_append_column (treeview, column);
+    gtk_tree_view_append_column (tree, column);
+}
 
+static void create_tree_pixbuf_renderer (GtkTreeView *tree,
+                                         const char  *name,
+                                         int          index)
+{
+    GtkCellRenderer   *renderer;
+    GtkTreeViewColumn *column;
+
+    renderer = gtk_cell_renderer_pixbuf_new (); 
+    column = gtk_tree_view_column_new_with_attributes (name,
+                                                       renderer,
+                                                      "icon-name",
+                                                       index,
+                                                       NULL);
+    gtk_tree_view_column_set_sort_column_id (column, index);
+
+    gtk_tree_view_append_column (tree, column);
 }
 
 static GasGroupManager *user_group_start_group_manager (void)
@@ -638,19 +585,6 @@ static void on_permission_changed (GPermission *permission,
     
     UpdateState(gm);
 }    
-static void LoadHeader_bar(GroupsManage *gm,const char *title)
-{
-    GtkWidget   *header;
-    
-    header = gtk_header_bar_new ();
-    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_title (GTK_HEADER_BAR (header), _("Groups Manage"));
-    gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
-    gtk_header_bar_set_subtitle(GTK_HEADER_BAR (header),title);
-
-    gtk_header_bar_pack_start (GTK_HEADER_BAR (header), gm->ButtonLock);
-    gtk_window_set_titlebar (GTK_WINDOW (gm->GroupsWindow), header);
-}    
 static void CreateManageWindow(GroupsManage *gm)
 {
     GtkWidget   *Window;
@@ -677,14 +611,7 @@ static void CreateManageWindow(GroupsManage *gm)
                     "notify",
                      G_CALLBACK (on_permission_changed), 
                      gm);
-    if(GetUseHeader() == 1)
-    {
-        LoadHeader_bar(gm,title);
-    }    
-    else
-    {
-        gtk_window_set_title(GTK_WINDOW(Window),title);
-    }    
+    gtk_window_set_title(GTK_WINDOW(Window),title);
     g_free(title);
 } 
 static GtkWidget *GetGridWidget (void)
@@ -720,6 +647,8 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     GtkWidget *treeview;
     GtkWidget *table;
     GtkWidget *ButtonClose;
+    GtkCellRenderer *renderer;
+
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
  
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -741,7 +670,13 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeSwitch = treeview;
-    AddSwitchGroupColumns (gm);
+    renderer = create_tree_toggled_renderer (GTK_TREE_VIEW (treeview), _("Select"), COLUMN_FIXED);
+    g_signal_connect (renderer, 
+                     "toggled",
+                      G_CALLBACK (UserSelectGroup), 
+                      gm);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_GROUPNAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group ID"), COLUMN_GROUPID);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
@@ -773,6 +708,7 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     GtkWidget *ButtonConfirm;
     GtkWidget *ButtonPlace;
     GtkTreeModel     *model;
+    GtkCellRenderer  *renderer;
 
     vbox  = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -806,7 +742,13 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
     gm->TreeCreate = treeview;
     gm->NewGroupUsers = NULL;
-    AddSelectUsersColumns (gm);
+    renderer = create_tree_toggled_renderer (GTK_TREE_VIEW (treeview), _("Select"), COLUMN_SELECT);
+    g_signal_connect (renderer, 
+                     "toggled",
+                      G_CALLBACK (NewGroupSelectUsers), 
+                      gm);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Username"), COLUMN_USERNAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("User ID"), COLUMN_USERID);
     gtk_grid_attach(GTK_GRID(table) ,vbox1 ,0,2,2,1);
     
     Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5);
@@ -863,7 +805,9 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeRemove = treeview;
-    AddRemoveGroupColumns (gm);
+    create_tree_pixbuf_renderer (GTK_TREE_VIEW (treeview), _("Remove"), COLUMN_ICON);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_GROUPNAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group id"), COLUMN_GROUPID);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
@@ -943,7 +887,10 @@ static void list_remove_data (gpointer  data,
     UserGroup    *group = data;
 
     if (g_strcmp0 (gm->remove_group_name, user_group_get_group_name (group)) == 0)
-        gm->GroupsList = g_slist_remove_all (gm->GroupsList, group);
+    {
+        gm->GroupsList = g_slist_remove (gm->GroupsList, group);
+        g_object_unref (group);
+    }
 }
 static void user_group_remove_cb (GasGroupManager *g_manager,
                                   GasGroup        *gas,
@@ -955,9 +902,7 @@ static void user_group_remove_cb (GasGroupManager *g_manager,
     group = user_group_new (gas);
     name = user_group_get_group_name (group);
     gm->remove_group_name = name;
-
     g_slist_foreach (gm->GroupsList, list_remove_data, gm);
-    gm->GroupsList = g_slist_remove_all (gm->GroupsList, group);
     g_object_unref (group);
     user_group_window_update_list_store (gm);
 }
@@ -991,12 +936,12 @@ void UserGroupsManage (const char *user_name, GSList *user_list)
     gm->g_manager = user_group_start_group_manager ();
     gm->GroupsList = user_group_group_list (gm->g_manager);
 
-    g_signal_connect (gm->g_manager,
+    gm->add_id = g_signal_connect (gm->g_manager,
                      "group-added",
                      G_CALLBACK (user_group_add_cb),
                      gm);
 
-    g_signal_connect (gm->g_manager,
+    gm->remove_id = g_signal_connect (gm->g_manager,
                      "group-removed",
                      G_CALLBACK (user_group_remove_cb),
                      gm);

@@ -37,6 +37,7 @@ typedef struct
     GtkWidget        *TreeRemove;
     GtkListStore     *SwitchStore;
     GtkListStore     *RemoveStore;
+    GtkListStore     *UserStore;
     GtkWidget        *EntryGroupName;
     GtkWidget        *ButtonLock;
     GPermission      *Permission;
@@ -51,26 +52,13 @@ typedef struct
 enum
 {
     COLUMN_FIXED,
-    COLUMN_GROUPNAME,
-    COLUMN_GROUPID,
+    COLUMN_ICON,
+    COLUMN_NAME,
+    COLUMN_ID,
     COLUMN_DATA,
     NUM_COLUMNS
 };
-enum
-{
-  COLUMN_SELECT,
-  COLUMN_USERNAME,
-  COLUMN_USERID,
-  NUM_USER
-};
-enum
-{
-  COLUMN_ICON,
-  COLUMN_REMOVENAME,
-  COLUMN_REMOVEID,
-  COLUMN_GROUP,
-  NUM_REMOVE
-};
+
 static void user_group_window_update_list_store (GroupsManage *gm);
 static void addswitchlistdata    (GtkWidget    *tree,
                                   GtkListStore *store,
@@ -246,7 +234,7 @@ static UserGroup *user_group_tree_get_group (GtkWidget *widget)
     model = gtk_tree_view_get_model (treeview);
     if(gtk_tree_selection_get_selected (selection, NULL, &iter) == TRUE)
     {
-        gtk_tree_model_get (model, &iter, COLUMN_GROUP, &group, -1);  
+        gtk_tree_model_get (model, &iter, COLUMN_DATA, &group, -1);  
     }
 	
     return group;
@@ -337,8 +325,8 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     path  = gtk_tree_path_new_from_string (path_str);
     /* get toggled iter */
     gtk_tree_model_get_iter (model, &iter, path);
-    gtk_tree_model_get (model, &iter, COLUMN_SELECT,   &fixed, -1);
-    gtk_tree_model_get (model, &iter, COLUMN_USERNAME, &name, -1); 
+    gtk_tree_model_get (model, &iter, COLUMN_FIXED,   &fixed, -1);
+    gtk_tree_model_get (model, &iter, COLUMN_NAME, &name, -1); 
     if(fixed == FALSE)
     {
         gm->NewGroupUsers = g_slist_prepend(gm->NewGroupUsers,(gpointer)name);
@@ -348,7 +336,7 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
         gm->NewGroupUsers = g_slist_remove(gm->NewGroupUsers,name);
     }    
     fixed ^= 1;
-    gtk_list_store_set (GTK_LIST_STORE (model), &iter, COLUMN_SELECT, fixed, -1);
+    gtk_list_store_set (GTK_LIST_STORE (model), &iter, COLUMN_FIXED, fixed, -1);
     gtk_tree_path_free (path);
 }
 static void addswitchlistdata(GtkWidget    *tree,
@@ -363,8 +351,8 @@ static void addswitchlistdata(GtkWidget    *tree,
     gtk_list_store_append (store, &iter);
     gtk_list_store_set (store, &iter,
                         COLUMN_FIXED,     user_group_user_is_group (group, name),
-                        COLUMN_GROUPNAME, user_group_get_group_name (group),
-                        COLUMN_GROUPID,   user_group_get_group_id (group),
+                        COLUMN_NAME, user_group_get_group_name (group),
+                        COLUMN_ID,   user_group_get_group_id (group),
                         COLUMN_DATA,      group,
                         -1);
     gtk_tree_selection_select_iter (selection,&iter);
@@ -380,52 +368,35 @@ static void addremovelistdata(GtkWidget    *tree,
     gtk_list_store_append (store, &iter);
     gtk_list_store_set (store, &iter,
                         COLUMN_ICON,      "edit-delete",
-                        COLUMN_REMOVENAME, user_group_get_group_name (group),
-                        COLUMN_REMOVEID,   user_group_get_group_id (group),
-                        COLUMN_GROUP, group,
+                        COLUMN_NAME, user_group_get_group_name (group),
+                        COLUMN_ID,   user_group_get_group_id (group),
+                        COLUMN_DATA, group,
                         -1);
     gtk_tree_selection_select_iter (selection,&iter);
 }
 
-static GtkTreeModel *GetSwicthModel(void)
+static GtkTreeModel *create_tree_model (void)
 {
-    GtkListStore *SwitchStore = NULL;
-    SwitchStore = gtk_list_store_new (NUM_COLUMNS,
-                                      G_TYPE_BOOLEAN,
-                                      G_TYPE_STRING,
-                                      G_TYPE_UINT,
-                                      G_TYPE_POINTER);
-    return GTK_TREE_MODEL (SwitchStore);
+    GtkListStore *store = NULL;
 
+    store = gtk_list_store_new (NUM_COLUMNS,
+                                G_TYPE_BOOLEAN,
+                                G_TYPE_STRING,
+                                G_TYPE_STRING,
+                                G_TYPE_UINT,
+                                G_TYPE_POINTER);
+    
+    return GTK_TREE_MODEL (store);
 }
 
-static GtkTreeModel *GetRemoveModel (void)
-{
-    GtkListStore *RemoveStore = NULL;
-    
-    RemoveStore = gtk_list_store_new (NUM_REMOVE,
-                                      G_TYPE_STRING,
-                                      G_TYPE_STRING,
-                                      G_TYPE_UINT,
-                                      G_TYPE_POINTER);
-    
-    return GTK_TREE_MODEL (RemoveStore);
-}
-
-static GtkTreeModel * CreateAddUsersModel (GSList *List)
+static void user_list_store_update (GSList *List, GtkListStore *store)
 {
     gint          i = 0;
-    GtkListStore *store;
     GtkTreeIter   iter;
     int           UserNum = 0;
 	ActUser      *Actuser;
 
     UserNum = GetGroupNum(List);
-    store = gtk_list_store_new (NUM_USER,
-                                G_TYPE_BOOLEAN,
-                                G_TYPE_STRING,
-                                G_TYPE_UINT);
-
     
     for (i = 0; i < UserNum ; i++)
     {
@@ -437,13 +408,11 @@ static GtkTreeModel * CreateAddUsersModel (GSList *List)
         }    
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter,
-                            COLUMN_SELECT,   FALSE,
-                            COLUMN_USERNAME, GetUserName(Actuser),
-                            COLUMN_USERID,   GetUserUid (Actuser),
+                            COLUMN_FIXED,   FALSE,
+                            COLUMN_NAME, GetUserName(Actuser),
+                            COLUMN_ID,   GetUserUid (Actuser),
                             -1);
     }
-
-    return GTK_TREE_MODEL (store);
 }
 
 static GtkCellRenderer *create_tree_toggled_renderer (GtkTreeView *tree,
@@ -661,11 +630,11 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
     Scrolled = GetScrolledWidget(); 
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
-    model    = GetSwicthModel();
+    model    = create_tree_model ();
     gm->SwitchStore = GTK_LIST_STORE(model);	
     treeview = gtk_tree_view_new_with_model (model);
     gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview),
-                                     COLUMN_GROUPID);
+                                     COLUMN_ID);
     g_object_unref (model);
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
@@ -675,18 +644,13 @@ static GtkWidget *LoadSwitchGroup(GroupsManage *gm)
                      "toggled",
                       G_CALLBACK (UserSelectGroup), 
                       gm);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_GROUPNAME);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group ID"), COLUMN_GROUPID);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_NAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group ID"), COLUMN_ID);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
     ButtonClose    =  SetButtonIcon(_("Close"),"window-close");
     gtk_grid_attach(GTK_GRID(table) , ButtonClose , 0 , 1 , 1 , 1); 
-    if(GetUseHeader() == 0)
-    {
-    
-        gtk_grid_attach(GTK_GRID(table) , gm->ButtonLock , 2 , 1 , 1 , 1); 
-    }    
     g_signal_connect (ButtonClose, 
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
@@ -734,21 +698,22 @@ static GtkWidget *LoadCreateGroup(GroupsManage *gm,GSList *List)
     SetLableFontType(TipsLabel,"black",12,_("Please select the user to add to the new group"),FALSE);
     gtk_grid_attach(GTK_GRID(table) , TipsLabel ,0 ,1,2 ,1);
 
-    model = CreateAddUsersModel(List);
+    model = create_tree_model ();
+    gm->UserStore = GTK_LIST_STORE (model);	
     treeview = gtk_tree_view_new_with_model (model);
     gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview),
-                                     COLUMN_USERID);
+                                     COLUMN_ID);
     g_object_unref (model);
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
     gm->TreeCreate = treeview;
     gm->NewGroupUsers = NULL;
-    renderer = create_tree_toggled_renderer (GTK_TREE_VIEW (treeview), _("Select"), COLUMN_SELECT);
+    renderer = create_tree_toggled_renderer (GTK_TREE_VIEW (treeview), _("Select"), COLUMN_FIXED);
     g_signal_connect (renderer, 
                      "toggled",
                       G_CALLBACK (NewGroupSelectUsers), 
                       gm);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Username"), COLUMN_USERNAME);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("User ID"), COLUMN_USERID);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Username"), COLUMN_NAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("User ID"), COLUMN_ID);
     gtk_grid_attach(GTK_GRID(table) ,vbox1 ,0,2,2,1);
     
     Hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5);
@@ -796,18 +761,18 @@ static GtkWidget *LoadRemoveGroup(GroupsManage *gm)
     Scrolled = GetScrolledWidget(); 
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
     
-    model    = GetRemoveModel();
+    model = create_tree_model ();
     gm->RemoveStore = GTK_LIST_STORE(model);	
     treeview = gtk_tree_view_new_with_model (model);
     gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview),
-                                     COLUMN_REMOVEID);
+                                     COLUMN_ID);
     g_object_unref (model);
     gtk_container_add (GTK_CONTAINER (Scrolled), treeview);
 
     gm->TreeRemove = treeview;
     create_tree_pixbuf_renderer (GTK_TREE_VIEW (treeview), _("Remove"), COLUMN_ICON);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_GROUPNAME);
-    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group id"), COLUMN_GROUPID);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group Name"), COLUMN_NAME);
+    create_tree_text_renderer (GTK_TREE_VIEW (treeview), _("Group id"), COLUMN_ID);
     
     gtk_grid_attach(GTK_GRID(table) , vbox1 , 0 , 0 , 3 , 1); 
     
@@ -955,6 +920,7 @@ void UserGroupsManage (const char *user_name, GSList *user_list)
     StartManageGroups(gm, user_list);
     UpdateState(gm);
     user_group_window_update_list_store (gm);
+    user_list_store_update (user_list, gm->UserStore);
     g_signal_connect(G_OBJECT(gm->GroupsWindow),
                     "delete-event",
                      G_CALLBACK(QuitGroupWindow),

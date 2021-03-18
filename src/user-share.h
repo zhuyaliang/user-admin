@@ -44,13 +44,6 @@ void         SetLableFontType      (GtkWidget   *Lable ,
                                     const char  *Word,
 									gboolean     Blod);
 
-void         UserListAppend        (GtkWidget   *list,
-                                    const gchar *UserIcon,
-                                    const gchar *RealName,
-                                    const gchar *UserName,
-                                    int          Index,
-                                    GtkTreeIter *iter);
-
 GdkPixbuf  *SetUserFaceSize        (const char  *PicName, 
                                     int          Size);
 

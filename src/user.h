@@ -42,7 +42,6 @@
 #include <act/act-user-manager.h>
 #include <act/act-user.h>
 #include <polkit/polkit.h>
-#include "user-language.h"
 #include "user-face.h"
 #include "user-base.h"
 
@@ -57,21 +56,12 @@
 #define  STANDARD  0
 #define  ADMIN     1
 
-enum
-{
-    COL_USER_FACE= 0,
-    INT_COLUMN,
-    LIST_LABEL ,
-    N_COLUMNS
-};
 typedef struct 
 {
     GSList           *UsersList;
     UserFace         *face;
     UserBase         *base;
     GtkWidget        *MainWindow;
-    GtkWidget        *IconWindow;
-    GtkWidget        *PasswordDialog;
     ActUserManager   *um;
 	ActUser          *CurrentUser;
 	GtkWidget        *CurrentImage;
@@ -83,4 +73,5 @@ typedef struct
     GPermission      *Permission;
     GtkWidget        *UserList;
 }UserAdmin;
+
 #endif

@@ -39,7 +39,7 @@ struct _UserBaseClass {
 };
 
 GType         user_base_get_type                 (void) G_GNUC_CONST;
- 
+
 UserBase     *user_base_new                      (ActUser  *user);
 
 void          user_base_set_user                 (UserBase *base,

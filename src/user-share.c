@@ -137,7 +137,7 @@ int MessageReport(const char *Title,const char *Msg,int nType)
     {
         case ERROR:
         {
-            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+            dialog = gtk_message_dialog_new(NULL,
                                             GTK_DIALOG_DESTROY_WITH_PARENT,
                                             GTK_MESSAGE_ERROR,
                                             GTK_BUTTONS_OK,
@@ -146,7 +146,7 @@ int MessageReport(const char *Title,const char *Msg,int nType)
         }
         case WARING:
         {
-            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+            dialog = gtk_message_dialog_new(NULL,
                                             GTK_DIALOG_DESTROY_WITH_PARENT,
                                             GTK_MESSAGE_WARNING,
                                             GTK_BUTTONS_OK,
@@ -155,7 +155,7 @@ int MessageReport(const char *Title,const char *Msg,int nType)
         }
         case INFOR:
         {
-            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+            dialog = gtk_message_dialog_new(NULL,
                                             GTK_DIALOG_DESTROY_WITH_PARENT,
                                             GTK_MESSAGE_INFO,
                                             GTK_BUTTONS_OK,
@@ -164,7 +164,7 @@ int MessageReport(const char *Title,const char *Msg,int nType)
         }
         case QUESTION:
         {
-            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+            dialog = gtk_message_dialog_new(NULL,
                                             GTK_DIALOG_DESTROY_WITH_PARENT,
                                             GTK_MESSAGE_QUESTION,
                                             GTK_BUTTONS_YES_NO,
@@ -175,7 +175,7 @@ int MessageReport(const char *Title,const char *Msg,int nType)
         }
         case QUESTIONNORMAL:
         {
-            dialog = gtk_message_dialog_new(GTK_WINDOW(WindowLogin),
+            dialog = gtk_message_dialog_new(NULL,
                                             GTK_DIALOG_DESTROY_WITH_PARENT,
                                             GTK_MESSAGE_QUESTION,
                                             GTK_BUTTONS_YES_NO,

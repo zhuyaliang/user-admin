@@ -28,8 +28,6 @@
 #define  APPICON               "user-admin.png"
 #define  USER_ADMIN_PERMISSION "org.mate.user.admin.administration"
 
-GtkWidget  *WindowLogin;          //首页窗口
-
 static void user_admin_get_index_list_row_data (UserAdmin *ua, int index)
 {
     GtkListBoxRow  *row;
@@ -519,8 +517,6 @@ int main(int argc, char **argv)
         mate_uesr_admin_log("Info","The mate-user-admin process already exists");
         exit(0);        
     }
-    WindowLogin = ua.MainWindow;
-    /* Get local support language */ 
 
     SetupUsersList(&ua);
     gtk_main();

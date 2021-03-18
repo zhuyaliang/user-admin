@@ -83,5 +83,4 @@ typedef struct
     GPermission      *Permission;
     GtkWidget        *UserList;
 }UserAdmin;
-extern GtkWidget  *WindowLogin;          //首页窗口
 #endif

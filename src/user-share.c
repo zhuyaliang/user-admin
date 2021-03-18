@@ -324,10 +324,6 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 ******************************************************************************/
 void UpdateInterface(ActUser *user,UserAdmin *ua)
 {
-    const char      *lang_id;
-    g_autofree char *lang_cc = NULL;
-    g_autofree const char *text = NULL;
-    int        passtype;
     gboolean   is_authorized;
     gboolean   self_selected;
 
@@ -341,43 +337,20 @@ void UpdateInterface(ActUser *user,UserAdmin *ua)
 
     /*Switching icon*/
     user_face_update (ua->face, GetUserIcon(user), GetRealName(user));
+    user_base_update_user_info (ua->base, user);
 
     mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(user));
-    gtk_combo_box_set_active(GTK_COMBO_BOX(ua->ComUserType),
-                             GetUserType(user));
-    lang_id = GetUserLang(user);
-    if(lang_id == NULL)
-    {
-        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
-                             _("No Settings"));
-    }
-    else
-    {
-        lang_cc = mate_get_language_from_locale(lang_id,NULL);
-        gtk_button_set_label(GTK_BUTTON(ua->ButtonLanguage),
-                             lang_cc);
-    }
-    gtk_button_set_label(GTK_BUTTON(ua->ButtonPass),
-                         GetPasswordModeText(user,&passtype));
-
-    gtk_switch_set_state(GTK_SWITCH(ua->SwitchAutoLogin),
-                         GetUserAutoLogin(user));
-
-    text = GetLoginTimeText(user);
-    gtk_button_set_label (GTK_BUTTON(ua->ButtonUserTime),
-                          text);
+    
 
     if(self_selected == 0)
     {
         gtk_widget_set_sensitive(GTK_WIDGET (ua->face),is_authorized);
-        gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
-        gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
+        user_base_set_private_sensitive (ua->base, is_authorized);
     }
     else if(is_authorized == 0 && self_selected == 1)
     {
         gtk_widget_set_sensitive(GTK_WIDGET (ua->face),self_selected);
-        gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
-        gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
+        user_base_set_private_sensitive (ua->base, self_selected);
     }
     Change = 0;
 }

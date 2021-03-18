@@ -19,6 +19,7 @@
 #define __USER_HISTORY_H__
 
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -47,7 +48,9 @@ typedef struct LoginHistoryDialogClass
 	GtkDialogClass parent_class;
 } LoginHistoryDialogClass;
 
-GType       login_history_dialog_get_type          (void) G_GNUC_CONST;
-void        ViewLoginHistory (GtkWidget *widget, gpointer data);
+GType               login_history_dialog_get_type          (void) G_GNUC_CONST;
+
+LoginHistoryDialog *login_history_dialog_new               (ActUser *user);
+
 G_END_DECLS
 #endif

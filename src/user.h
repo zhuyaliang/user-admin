@@ -44,6 +44,7 @@
 #include <polkit/polkit.h>
 #include "user-language.h"
 #include "user-face.h"
+#include "user-base.h"
 
 #define  AVATARS    "Default.png"
 #define  DEFAULT   FACEDIR AVATARS 
@@ -67,6 +68,7 @@ typedef struct
 {
     GSList           *UsersList;
     UserFace         *face;
+    UserBase         *base;
     GtkWidget        *MainWindow;
     GtkWidget        *IconWindow;
     GtkWidget        *PasswordDialog;
@@ -75,31 +77,11 @@ typedef struct
 	GtkWidget        *CurrentImage;
 	GtkWidget        *CurrentName;
 	GtkWidget        *ButtonLock;
+	GtkWidget        *ButtonRemove;
+	GtkWidget        *ButtonAdd;
 	GtkWidget        *Popover;
     GPermission      *Permission;
     GtkWidget        *UserList;
-    GtkWidget        *ComUserType;
-    GtkWidget        *ButtonLanguage;
-    GtkWidget        *ButtonPass;
-    GtkWidget        *SwitchAutoLogin;
-    GtkWidget        *ButtonUserTime;
-    GtkWidget        *ButtonUserGroup;
-    GtkWidget        *NewPassEntry;
-    GtkWidget        *CheckPassEntry;
-    GtkWidget        *LabelPassNote;
-    GtkWidget        *LevelBar;
-    GtkWidget        *ButtonConfirm;
-    GtkWidget        *LabelSpace;
-    GtkWidget        *RadioButton1;
-    GtkWidget        *RadioButton2;
-    GtkWidget        *CropArea;
-    GtkWidget        *ButtonRemove;
-    GtkWidget        *ButtonAdd;
-    int               CheckPassTimeId;//Check the password format timer
-    int               CheckNameTimeId; //Check the Realname format timer
-    int               MouseId;
-    int               KeyId;
-    char              TmpPass[24];
 }UserAdmin;
 extern GtkWidget  *WindowLogin;          //首页窗口
 #endif

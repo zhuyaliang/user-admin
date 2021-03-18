@@ -22,6 +22,7 @@
 #include "user-share.h"
 #include "user-face.h"
 #include "user-list.h"
+#include "user-group-window.h"
 
 #define  LOCKFILE              "/tmp/mate-user-admin.pid"
 #define  APPICON               "user-admin.png"
@@ -80,18 +81,13 @@ static void UpdatePermission(UserAdmin *ua)
     gtk_widget_set_sensitive(ua->ButtonAdd,      is_authorized);
     gtk_widget_set_sensitive(ua->ButtonRemove,   is_authorized);
     gtk_widget_set_sensitive(GTK_WIDGET (ua->face),is_authorized);
-    gtk_widget_set_sensitive(ua->ComUserType,    is_authorized);
-    gtk_widget_set_sensitive(ua->ButtonLanguage, is_authorized);
-    gtk_widget_set_sensitive(ua->ButtonPass,     is_authorized);
-    gtk_widget_set_sensitive(ua->SwitchAutoLogin,is_authorized);
-    gtk_widget_set_sensitive(ua->ButtonUserTime, is_authorized);
-    gtk_widget_set_sensitive(ua->ButtonUserGroup,is_authorized);
+    user_base_set_public_sensitive (ua->base, is_authorized);
+    user_base_set_private_sensitive (ua->base, is_authorized);
     gtk_widget_set_visible(ua->Popover,!is_authorized);
     if (is_authorized == 0 && self_selected == 1)
     {
         gtk_widget_set_sensitive(GTK_WIDGET (ua->face), self_selected);
-        gtk_widget_set_sensitive(ua->ButtonUserTime, self_selected);
-        gtk_widget_set_sensitive(ua->ButtonUserGroup,self_selected);
+        user_base_set_private_sensitive (ua->base, self_selected);
     }
 
 }
@@ -225,6 +221,7 @@ static void user_list_select_user (GtkListBox    *list_box,
     ua->CurrentUser  = user_list_row_get_user (USER_LIST_ROW (row));
     ua->CurrentImage = user_list_row_get_image_label (USER_LIST_ROW (row));
     ua->CurrentName  = user_list_row_get_name_label (USER_LIST_ROW (row));
+    user_base_set_user (ua->base, ua->CurrentUser);
     UpdateInterface (ua->CurrentUser, ua);
 }
 static void QuitApp(GtkWidget *widget, gpointer data)
@@ -279,6 +276,28 @@ static void create_button_box (GtkWidget *box, UserAdmin *ua)
     gtk_grid_set_row_spacing(GTK_GRID(table), 10);
     gtk_grid_set_column_spacing(GTK_GRID(table), 10);
 }  
+
+static void show_main_window (UserGroupWindow *win, GtkWidget *window)
+{
+    gtk_widget_show (window);
+}
+
+static void user_group_manager_cb (UserBase *base, UserAdmin *ua)
+{
+    UserGroupWindow *group_window;
+    const char      *name;
+    name = GetUserName (ua->CurrentUser);
+    
+    gtk_widget_hide (ua->MainWindow);
+    group_window = user_group_window_new (name, ua->UsersList);
+    g_signal_connect (group_window,
+                      "window-closed",
+                      G_CALLBACK (show_main_window),
+                      ua->MainWindow);
+
+    gtk_widget_show_all (GTK_WIDGET (group_window));
+}
+
 static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Hbox;
@@ -324,10 +343,17 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (face), TRUE, TRUE, 0);
     ua->face = face;
     /*user type and user password and user langusge and auto login and login time */    
-    DisplayUserSetOther(Hbox1,ua);
+    ua->base = user_base_new (ua->CurrentUser);
+    g_signal_connect (ua->base,
+                     "group-viewed",
+                      G_CALLBACK (user_group_manager_cb),
+                      ua);
+
+    gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (ua->base), TRUE, TRUE, 0);
 
     /*Adding new users or remove users*/
     create_button_box (Vbox, ua);
+    UpdateInterface (ua->CurrentUser, ua);
 }
 static int RecordPid(void)
 {

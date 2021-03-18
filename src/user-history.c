@@ -278,7 +278,8 @@ next_button_clicked_cb (GtkWidget *widget, gpointer data)
 
     show_week (self);
 }
-static LoginHistoryDialog *login_history_dialog_new (ActUser *user)
+
+LoginHistoryDialog *login_history_dialog_new (ActUser *user)
 {
     LoginHistoryDialog *self;
     g_autoptr(GDateTime) temp = NULL;
@@ -408,22 +409,13 @@ void login_history_dialog_init (LoginHistoryDialog *dialog)
         dialog->next_button = GTK_BUTTON(button);
     }    
     dialog->history_box = GTK_LIST_BOX(listbox);
-
-}
-void ViewLoginHistory (GtkWidget *widget, gpointer data)
-{
-    LoginHistoryDialog *dialog;
-    UserAdmin *ua = (UserAdmin *)data;
-
-    dialog = login_history_dialog_new (ua->CurrentUser);
     g_signal_connect (dialog->previous_button, 
                      "clicked",
                       G_CALLBACK (previous_button_clicked_cb),
                       dialog);
+
     g_signal_connect (dialog->next_button, 
                      "clicked",
                       G_CALLBACK (next_button_clicked_cb),
                       dialog);
-    gtk_widget_show_all(GTK_WIDGET(dialog));
-//    gtk_dialog_run (GTK_DIALOG (dialog));
-}    
+}

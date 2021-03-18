@@ -78,13 +78,13 @@ static gboolean RealNameValidCheck (const gchar *name)
 {
     gboolean is_empty = TRUE;
     const gchar *c;
-    for (c = name; *c; c++) 
+    for (c = name; *c; c++)
     {
         gunichar unichar;
         unichar = g_utf8_get_char_validated (c, -1);
         if (unichar == (gunichar) -1 || unichar == (gunichar) -2)
             break;
-        if (!g_unichar_isspace (unichar)) 
+        if (!g_unichar_isspace (unichar))
         {
             is_empty = FALSE;
             break;

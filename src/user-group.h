@@ -66,6 +66,7 @@ gboolean       user_group_is_primary_group        (UserGroup       *group);
 void           add_user_to_new_group              (GSList          *list,
                                                    GasGroup        *gas);
 
+GSList        *user_group_get_group_list          (GasGroupManager *g_manager);
 G_END_DECLS
 
 #endif

@@ -152,13 +152,28 @@ static void ComboSelectUserType(GtkWidget *widget,gpointer data)
         act_user_set_account_type(ua->CurrentUser,account_type);
     }    
 }
+
+static void show_main_window (UserGroupWindow *win, GtkWidget *window)
+{
+    gtk_widget_show (window);
+}
+
 static void set_user_group (GtkWidget *widget, gpointer data)
 {
-    UserAdmin  *ua = (UserAdmin *)data;
-    const char *name;
+    UserAdmin       *ua = (UserAdmin *)data;
+    UserGroupWindow *group_window;
+    const char      *name;
 
     name = GetUserName (ua->CurrentUser);
-    UserGroupsManage (name, ua->UsersList);
+    
+    gtk_widget_hide (ua->MainWindow);
+    group_window = user_group_window_new (name, ua->UsersList);
+    g_signal_connect (group_window,
+                      "window-closed",
+                      G_CALLBACK (show_main_window),
+                      ua->MainWindow);
+
+    gtk_widget_show_all (GTK_WIDGET (group_window));
 }
 /******************************************************************************
 * Function:              DisplayUserSetOther 

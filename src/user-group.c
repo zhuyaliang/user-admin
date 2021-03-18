@@ -58,7 +58,6 @@ UserGroup *user_group_new (GasGroup *gas)
 
     name = gas_group_get_group_name (gas);
     gid  = gas_group_get_gid (gas);
-
     group = g_object_new (USER_TYPE_GROUP, NULL);
 
     group->priv->gas = g_object_ref (gas);
@@ -71,12 +70,14 @@ UserGroup *user_group_new (GasGroup *gas)
 gid_t user_group_get_group_id (UserGroup *group)
 {
     g_return_val_if_fail (USER_IS_GROUP (group), -1);
+
     return group->priv->gid;
 }
 
 const char *user_group_get_group_name (UserGroup *group)
 {
     g_return_val_if_fail (USER_IS_GROUP (group), NULL);
+
     return group->priv->gname;
 }
 
@@ -136,4 +137,25 @@ void add_user_to_new_group(GSList *list, GasGroup *gas)
         name = node->data;
         gas_group_add_user_group (gas, name);
     }
+}
+
+GSList *user_group_get_group_list (GasGroupManager *g_manager)
+{
+    GSList    *list, *l;
+    GSList    *group_list = NULL;
+    UserGroup *usergroup;
+
+    list = gas_group_manager_list_groups (g_manager);
+    for(l = list; l ; l = l->next)
+    {
+        usergroup = user_group_new (l->data);
+
+        if(usergroup != NULL)
+        {
+            group_list = g_slist_append (group_list, g_object_ref(usergroup));
+        }
+    }
+    g_slist_free (list);
+
+    return group_list;
 }

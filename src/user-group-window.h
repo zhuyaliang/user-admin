@@ -44,6 +44,5 @@ GType               user_group_window_get_type        (void) G_GNUC_CONST;
 UserGroupWindow    *user_group_window_new             (const char *user_name,
                                                        GSList     *user_list);
 
-void                UserGroupsManage (const char *user_name, GSList *user_list);
 G_END_DECLS
 #endif

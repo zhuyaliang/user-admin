@@ -57,7 +57,6 @@ static void user_avatar_changed_cb (UserAvatar *avatar, UserFace *face)
     image = gtk_image_new_from_pixbuf(pb2);
     gtk_button_set_image(GTK_BUTTON(face->priv->button), image);
 
-    act_user_set_icon_file (face->priv->user, file_name);
     face->priv->file_name = g_strdup (file_name);
     g_signal_emit (face, signals[IMAGE_CHANGED], 0);
 

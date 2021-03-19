@@ -179,6 +179,7 @@ static void user_image_changed_cb (UserFace *face, UserAdmin *ua)
     GdkPixbuf *pb;
 
     file_name = user_face_get_image_name (face);
+    act_user_set_icon_file (ua->CurrentUser, file_name);
     pb = SetUserFaceSize (file_name, 50);
     gtk_image_set_from_pixbuf(GTK_IMAGE(ua->CurrentImage), pb);
 }

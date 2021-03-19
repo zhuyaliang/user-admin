@@ -91,26 +91,23 @@ static void SwitchState (GtkSwitch *switch_login,
     GSList    *l;
     ActUserManager *um;
 
-    if(Change == 0)
+    um =  act_user_manager_get_default ();
+    if(state == TRUE)
     {
-        um =  act_user_manager_get_default ();
-        if(state == TRUE)
+        list = act_user_manager_list_users (um);
+        for (l = list; l != NULL; l = l->next)
         {
-            list = act_user_manager_list_users (um);
-            for (l = list; l != NULL; l = l->next)
+            ActUser *u = l->data;
+            if (act_user_get_uid (u) != act_user_get_uid (base->priv->user))
             {
-                ActUser *u = l->data;
-                if (act_user_get_uid (u) != act_user_get_uid (base->priv->user)) 
-                {
-                    act_user_set_automatic_login (u, FALSE);
-                }
+                act_user_set_automatic_login (u, FALSE);
             }
-            g_slist_free (list);
-            act_user_set_automatic_login (base->priv->user, TRUE);
         }
-        else
-            act_user_set_automatic_login (base->priv->user,FALSE);
+        g_slist_free (list);
+        act_user_set_automatic_login (base->priv->user, TRUE);
     }
+    else
+        act_user_set_automatic_login (base->priv->user,FALSE);
 }
 
 static void user_password_set_done (UserPassword *dialog, GtkButton *button)
@@ -120,17 +117,7 @@ static void user_password_set_done (UserPassword *dialog, GtkButton *button)
     label = user_password_get_label (dialog);
     gtk_button_set_label (button, label);
 }
-/******************************************************************************
-* Function:             ChangePass 
-*        
-* Explain: Modifying the cipher signal.The two state .Change the password 
-*          .Set set the new password.
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  15/05/2018
-******************************************************************************/
+
 static void ChangePass (GtkButton *button, UserBase *base)
 {
     UserPassword *dialog;
@@ -169,19 +156,40 @@ static void ComboSelectUserType(GtkWidget *widget, UserBase *base)
 {
     gint account_type;
 
-    if( Change ==0 )
-    {
-        account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) ? 
-                                                  ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR:
-                                                  ACT_USER_ACCOUNT_TYPE_STANDARD;
-        act_user_set_account_type(base->priv->user, account_type);
-    }
+    account_type =  gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) ?
+                                              ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR:
+                                              ACT_USER_ACCOUNT_TYPE_STANDARD;
+    act_user_set_account_type(base->priv->user, account_type);
 }
 
 static void set_user_group (GtkWidget *widget, UserBase *base)
 {
 
     g_signal_emit (base, signals[GROUP_VIEWED], 0);
+}
+
+static void user_base_block_signal (UserBase *base)
+{
+    g_return_if_fail (USER_IS_BASE (base));
+
+    g_signal_handlers_block_by_func (base->priv->combox,
+                                     ComboSelectUserType,
+                                     base);
+    g_signal_handlers_block_by_func (base->priv->switch_login,
+                                     SwitchState,
+                                     base);
+}
+
+static void user_base_unblock_signal (UserBase *base)
+{
+    g_return_if_fail (USER_IS_BASE (base));
+
+    g_signal_handlers_unblock_by_func (base->priv->combox,
+                                       ComboSelectUserType,
+                                       base);
+    g_signal_handlers_unblock_by_func (base->priv->switch_login,
+                                       SwitchState,
+                                       base);
 }
 
 void user_base_update_user_info (UserBase *base, ActUser *user)
@@ -191,6 +199,8 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
     const char *time;
     const char *label;
     int         PasswordType;
+
+    user_base_block_signal (base);
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (base->priv->combox), GetUserType (user));
 
@@ -209,10 +219,12 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
     label = GetPasswordModeText(user, &PasswordType);
     gtk_button_set_label (GTK_BUTTON (base->priv->button_password), label);
 
-    gtk_switch_set_state (GTK_SWITCH (base->priv->switch_login), GetUserType (user));
+    gtk_switch_set_state (GTK_SWITCH (base->priv->switch_login), GetUserAutoLogin (user));
 
     time = GetLoginTimeText (user);
     gtk_button_set_label (GTK_BUTTON (base->priv->button_time), time);
+
+    user_base_unblock_signal (base);
 }
 
 static void

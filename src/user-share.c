@@ -31,8 +31,6 @@
 #define  GSM_GSETTINGS_SCHEMA "org.mate.interface"
 static int file_dp = 0;  /*Log file descriptor*/
 
-int Change;
-
 static int create_log_file(void)
 {
     time_t t;
@@ -283,11 +281,6 @@ void UpdateInterface(ActUser *user,UserAdmin *ua)
     gboolean   is_authorized;
     gboolean   self_selected;
 
-    /*Some options change when switching users, 
-      causing a signal response, requiring flags, 
-      and ignoring signal processing when Chang = 1*/
-    Change = 1;
-
     is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
     self_selected = act_user_get_uid (user) == geteuid ();
 
@@ -308,7 +301,6 @@ void UpdateInterface(ActUser *user,UserAdmin *ua)
         gtk_widget_set_sensitive(GTK_WIDGET (ua->face),self_selected);
         user_base_set_private_sensitive (ua->base, self_selected);
     }
-    Change = 0;
 }
 static pwquality_settings_t * get_pwq (void)
 {

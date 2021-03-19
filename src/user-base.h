@@ -24,6 +24,7 @@
 #define USER_TYPE_BASE         (user_base_get_type ())
 #define USER_BASE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), USER_TYPE_BASE, UserBase))
 #define USER_BASE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), USER_TYPE_BASE, UserBaseClass))
+#define USER_IS_BASE(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), USER_TYPE_BASE))
 
 typedef struct _UserBase        UserBase;
 typedef struct _UserBaseClass   UserBaseClass;

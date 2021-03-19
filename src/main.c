@@ -348,7 +348,8 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 
     gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (ua->face), TRUE, TRUE, 0);
     /*user type and user password and user langusge and auto login and login time */    
-    ua->base = user_base_new (ua->CurrentUser);
+    ua->base = user_base_new ();
+    user_base_set_user (ua->base, ua->CurrentUser);
     g_signal_connect (ua->base,
                      "group-viewed",
                       G_CALLBACK (user_group_manager_cb),

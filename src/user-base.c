@@ -361,7 +361,7 @@ user_base_init (UserBase *base)
 }
 
 UserBase *
-user_base_new (ActUser *user)
+user_base_new (void)
 {
     UserBase *base;
 
@@ -370,9 +370,6 @@ user_base_new (ActUser *user)
                         "row-spacing", 10,
                         "column-spacing", 10,
                         NULL);
-
-    base->priv->user = g_object_ref (user);
-
     return base;
 }
 

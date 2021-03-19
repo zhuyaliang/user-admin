@@ -30,7 +30,6 @@ struct _UserFacePrivate
 
     char      *file_name;
     char      *real_name;
-    ActUser   *user;
 };
 
 enum
@@ -182,7 +181,7 @@ user_face_init (UserFace *face)
     gtk_grid_attach(GTK_GRID(face) ,face->priv->entry, 8, 4, 1, 1);
 }
 
-static void fill_user_face (UserFace *face)
+void user_face_fill (UserFace *face, ActUser *user)
 {
     UserAvatar *avatar;
     GtkWidget  *image;
@@ -191,7 +190,7 @@ static void fill_user_face (UserFace *face)
     GdkPixbuf  *pb2;
 
     /*set user icon 96 *96 */
-    pb = gdk_pixbuf_new_from_file (GetUserIcon (face->priv->user),&error);
+    pb = gdk_pixbuf_new_from_file (GetUserIcon (user),&error);
     if(pb == NULL)
     {
         mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
@@ -201,7 +200,7 @@ static void fill_user_face (UserFace *face)
     image = gtk_image_new_from_pixbuf (pb2);
     gtk_button_set_image (GTK_BUTTON(face->priv->button), image);
 
-    gtk_entry_set_text (GTK_ENTRY (face->priv->entry), GetRealName (face->priv->user));
+    gtk_entry_set_text (GTK_ENTRY (face->priv->entry), GetRealName (user));
     g_signal_connect (face->priv->entry,
                      "activate",
                       G_CALLBACK (ModifyName),
@@ -254,13 +253,11 @@ void user_face_update (UserFace  *face,
 }
 
 UserFace *
-user_face_new (ActUser *user)
+user_face_new (void)
 {
     UserFace   *face;
 
     face = g_object_new (USER_TYPE_FACE, NULL);
-    face->priv->user = user;
-    fill_user_face (face);
 
     return face;
 }

@@ -333,7 +333,8 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox1,TRUE,TRUE,10); 
 
     /* Display the user's head image and name */
-    ua->face = user_face_new (ua->CurrentUser);
+    ua->face = user_face_new ();
+    user_face_fill (ua->face, ua->CurrentUser);
 
     g_signal_connect (ua->face,
                      "image-changed",

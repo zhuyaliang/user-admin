@@ -40,7 +40,7 @@ struct _UserFaceClass {
 
 GType         user_face_get_type                 (void) G_GNUC_CONST;
 
-UserFace     *user_face_new                      (ActUser    *user);
+UserFace     *user_face_new                      (void);
 
 char         *user_face_get_image_name           (UserFace   *face);
 
@@ -49,5 +49,8 @@ char         *user_face_get_real_name            (UserFace   *face);
 void          user_face_update                   (UserFace   *face,
                                                   const char *image_name,
                                                   const char *real_name);
+
+void          user_face_fill                     (UserFace   *face,
+                                                  ActUser    *user);
 
 #endif

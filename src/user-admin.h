@@ -43,7 +43,7 @@ GType          user_manager_get_type                 (void) G_GNUC_CONST;
  
 UserManager   *user_manager_new                      (void);
 
-void  RemoveUser(GtkWidget *widget, gpointer data);
+void  RemoveUser(ActUser *user);
 void  AddNewUser(GtkWidget *widget, gpointer data);
 G_END_DECLS
 #endif

@@ -15,7 +15,6 @@
 *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "user.h"
 #include "user-share.h"
 #include "user-admin.h"
 #include "user-info.h"
@@ -142,7 +141,7 @@ EXIT:
 
 static void DeleteOldUserDone (ActUserManager *manager,
                                GAsyncResult   *res,
-                               UserAdmin      *ua)
+                               gpointer        data)
 {
     GError *error = NULL;
 
@@ -170,28 +169,26 @@ static void DeleteOldUserDone (ActUserManager *manager,
 *        
 * Author:  zhuyaliang  09/05/2018
 ******************************************************************************/
-void RemoveUser(GtkWidget *widget, gpointer data)
+void RemoveUser(ActUser *user)
 {
-    UserAdmin      *ua = (UserAdmin *)data;
     int             nRet;
     gboolean        RemoveType = TRUE;
     ActUserManager *Manager;
-   
-    Manager =       act_user_manager_get_default ();
 
-    if (act_user_get_uid (ua->CurrentUser) == getuid ()) 
+    Manager =       act_user_manager_get_default ();
+    if (act_user_get_uid (user) == getuid ())
     {
         MessageReport(_("Remove User"),
                       _("You cannot delete your own account."),
-                       ERROR); 
+                       ERROR);
         return;
     
-    }    
-    else if (act_user_is_logged_in_anywhere (ua->CurrentUser))
+    }
+    else if (act_user_is_logged_in_anywhere (user))
     {
         MessageReport(_("Remove User"),
                       _("user is still logged in"),
-                       ERROR); 
+                       ERROR);
         return;
     }
     nRet = MessageReport(_("Remove User"),
@@ -207,19 +204,19 @@ void RemoveUser(GtkWidget *widget, gpointer data)
          return;
     }
      /* remove autologin */
-    if (act_user_get_automatic_login (ua->CurrentUser)) 
+    if (act_user_get_automatic_login (user))
     {
-        act_user_set_automatic_login (ua->CurrentUser, FALSE);
+        act_user_set_automatic_login (user, FALSE);
     }
 
     act_user_manager_delete_user_async (Manager,
-                                        ua->CurrentUser,
+                                        user,
                                         RemoveType,
                                         NULL,
                                         (GAsyncReadyCallback)DeleteOldUserDone,
-                                        ua);
+                                        NULL);
 
-}        
+}
 
 static gboolean CheckUserNameUsed (const gchar *UserName)
 {

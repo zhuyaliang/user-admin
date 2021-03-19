@@ -229,6 +229,13 @@ static void QuitApp(GtkWidget *widget, gpointer data)
     gtk_main_quit();
 }
 
+
+static void remove_user_cb (GtkWidget *widget, UserAdmin *ua)
+{
+    ActUser *user = ua->CurrentUser;
+
+    RemoveUser (user);
+}
 static void create_button_box (GtkWidget *box, UserAdmin *ua)
 {
     GtkWidget *button_close;
@@ -258,13 +265,13 @@ static void create_button_box (GtkWidget *box, UserAdmin *ua)
 
     g_signal_connect (ua->ButtonRemove, 
                      "clicked",
-                      G_CALLBACK (RemoveUser),
+                      G_CALLBACK (remove_user_cb),
                       ua);
 
     g_signal_connect (ua->ButtonAdd, 
                      "clicked",
                       G_CALLBACK (AddNewUser),
-                      ua);
+                      NULL);
 
     g_signal_connect (button_close, 
                      "clicked",
@@ -300,7 +307,6 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
 {
     GtkWidget *Hbox;
     GtkWidget *Hbox1;
-    UserFace  *face;
     GtkWidget *Hbox2;
     GtkWidget *user_list_box;
 
@@ -326,20 +332,19 @@ static void CreateInterface(GtkWidget *Vbox,UserAdmin *ua)
     gtk_box_pack_start(GTK_BOX(Hbox),Hbox1,TRUE,TRUE,10); 
 
     /* Display the user's head image and name */
-    face = user_face_new (ua->CurrentUser);
+    ua->face = user_face_new (ua->CurrentUser);
 
-    g_signal_connect (face,
+    g_signal_connect (ua->face,
                      "image-changed",
                       G_CALLBACK (user_image_changed_cb),
                       ua);
 
-    g_signal_connect (face,
+    g_signal_connect (ua->face,
                      "name-changed",
                       G_CALLBACK (user_name_changed_cb),
                       ua);
 
-    gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (face), TRUE, TRUE, 0);
-    ua->face = face;
+    gtk_box_pack_start (GTK_BOX (Hbox1), GTK_WIDGET (ua->face), TRUE, TRUE, 0);
     /*user type and user password and user langusge and auto login and login time */    
     ua->base = user_base_new (ua->CurrentUser);
     g_signal_connect (ua->base,
@@ -520,5 +525,4 @@ int main(int argc, char **argv)
 
     SetupUsersList(&ua);
     gtk_main();
-
 }

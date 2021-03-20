@@ -45,6 +45,8 @@ struct _UserWindowPrivate
 	GtkWidget      *button_lock;
 	GtkWidget      *button_add;
     GtkWidget      *popover;
+
+    gint            update_user_id;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (UserWindow, user_window, GTK_TYPE_WINDOW)
@@ -251,6 +253,10 @@ user_window_destroy (GtkWidget *data)
     close_log_file ();
     gtk_widget_destroy (GTK_WIDGET (userwin->priv->face));
     gtk_widget_destroy (GTK_WIDGET (userwin->priv->base));
+    if (userwin->priv->update_user_id > 0)
+    {
+        g_source_remove (userwin->priv->update_user_id);
+    }
     g_clear_object (&userwin->priv->manager);
     gtk_main_quit ();
 }
@@ -455,6 +461,16 @@ void user_window_remove_user_cb (ActUserManager *um,
     gtk_widget_show_all (win->priv->list_box);
 }
 
+static gboolean update_new_user_info (UserWindow *win)
+{
+    user_window_update (win, win->priv->user);
+    
+    g_source_remove (win->priv->update_user_id);
+    win->priv->update_user_id = 0;
+
+    return FALSE;
+}
+
 void user_window_add_user_cb (ActUserManager *um,
                               ActUser        *user,
                               UserWindow     *win)
@@ -470,7 +486,8 @@ void user_window_add_user_cb (ActUserManager *um,
     user_list_box_update (win->priv->list_box, win->priv->user_list, index);
 
     user_window_set_list_data (win, index);
-    user_window_update (win, win->priv->user);
+   
+    win->priv->update_user_id = g_timeout_add (800, (GSourceFunc) update_new_user_info, win);
 
     gtk_widget_show_all (win->priv->list_box);
 }

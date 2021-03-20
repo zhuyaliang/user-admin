@@ -87,7 +87,7 @@ add_global_link_arguments(
 
 # Dependencies
 gtk_req_version = '>= 3.0.0'
-gas_rep_version = '>= 1.2.0'
+gas_rep_version = '>= 1.3.0'
 gtk_deps = dependency('gtk+-3.0', version: gtk_req_version)
 pwquality_deps = dependency('pwquality')
 act_deps = dependency('accountsservice')

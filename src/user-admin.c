@@ -832,7 +832,7 @@ user_manager_response (GtkDialog *dia,
                                             dialog->priv->cancellable,
                                             GetPermission,
                                             g_object_ref (dialog));
-                return;`
+                return;
             }
 
             CreateLocalNewUser (dialog);

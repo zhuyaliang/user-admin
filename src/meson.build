@@ -2,6 +2,7 @@ gnome = import('gnome')
 
 sources = [
 'main.c',
+'user-window.c',
 'user-admin.c',
 'user-base.c',
 'user-face.c',

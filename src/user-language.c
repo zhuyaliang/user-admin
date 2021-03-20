@@ -18,7 +18,6 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include "user.h"
 #include "user-language.h"
 #include "user-share.h"
 #include "user-info.h"

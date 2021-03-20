@@ -18,7 +18,9 @@
 #ifndef __USER_LIST_H__
 #define __USER_LIST_H__
 
-#include "user.h"
+#include <gtk/gtk.h>
+#include <act/act.h>
+
 G_BEGIN_DECLS
 
 #define USER_LIST_TYPE_ROW                (user_list_row_get_type ())

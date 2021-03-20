@@ -19,6 +19,7 @@
 #define __USER_ADMIN_H__
 
 #include <gtk/gtk.h>
+#include <act/act.h>
 G_BEGIN_DECLS
 
 #define USER_TYPE_MANAGER         (user_manager_get_type ())

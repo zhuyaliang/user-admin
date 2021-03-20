@@ -21,6 +21,9 @@
 #include "user-list.h"
 #include "user-password.h"
 #include <pwd.h>
+#include <libintl.h>
+#include <locale.h>
+#include <glib/gi18n.h>
 #include <grp.h>
 #include <sys/types.h>
 #include <libgroupservice/gas-group.h>

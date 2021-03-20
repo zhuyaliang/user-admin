@@ -18,7 +18,21 @@
 #ifndef __USER_SHARE_H__
 #define __USER_SHARE_H__
 
-#include "user.h"
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include <gtk/gtk.h>
+#include <libintl.h>
+#include <locale.h>
+#include <glib/gi18n.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <polkit/polkit.h>
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-languages.h>
+#include <libmate-desktop/mate-desktop-thumbnail.h>
+
 
 #define TYPEMSG    "<span foreground='red'font_desc='13'>%s </span>"
 #define ERROR      1
@@ -26,6 +40,13 @@
 #define INFOR      3
 #define QUESTION   4
 #define QUESTIONNORMAL   5
+#define  AVATARS    "Default.png"
+#define  DEFAULT   FACEDIR AVATARS 
+#define  OLDPASS   0
+#define  NEWPASS   1
+#define  STANDARD  0
+#define  ADMIN     1
+
 
 void         mate_uesr_admin_log   (const char  *level,
                                     const char  *message,
@@ -49,9 +70,6 @@ GdkPixbuf  *SetUserFaceSize        (const char  *PicName,
 
 GtkWidget  *SetComboUserType       (const char  *s1,
                                     const char  *s2);
-
-void        UpdateInterface        (ActUser     *ActUser,
-                                    UserAdmin   *ua);
 
 void        SelectSetPassMode      (GtkRadioButton *button,
                                     gpointer     user_data);

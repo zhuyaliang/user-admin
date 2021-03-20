@@ -18,7 +18,8 @@
 #ifndef __USER_INFO_H__
 #define __USER_INFO_H__
 
-#include "user.h"
+#include <act/act.h>
+
 G_BEGIN_DECLS
 
 GSList       *get_user_info_list      (ActUserManager *manager);

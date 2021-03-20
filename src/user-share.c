@@ -265,43 +265,6 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
     return Dpixbuf;
 }
 
-/******************************************************************************
-* Function:              UpdateInterface 
-*        
-* Explain: Switching user information
-*        
-* Input:  @Cnt  user index.       
-*        
-* Output:  
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
-void UpdateInterface(ActUser *user,UserAdmin *ua)
-{
-    gboolean   is_authorized;
-    gboolean   self_selected;
-
-    is_authorized = g_permission_get_allowed (G_PERMISSION (ua->Permission));
-    self_selected = act_user_get_uid (user) == geteuid ();
-
-    /*Switching icon*/
-    user_face_update (ua->face, GetUserIcon(user), GetRealName(user));
-    user_base_update_user_info (ua->base, user);
-
-    mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(user));
-    
-
-    if(self_selected == 0)
-    {
-        gtk_widget_set_sensitive(GTK_WIDGET (ua->face),is_authorized);
-        user_base_set_private_sensitive (ua->base, is_authorized);
-    }
-    else if(is_authorized == 0 && self_selected == 1)
-    {
-        gtk_widget_set_sensitive(GTK_WIDGET (ua->face),self_selected);
-        user_base_set_private_sensitive (ua->base, self_selected);
-    }
-}
 static pwquality_settings_t * get_pwq (void)
 {
     static pwquality_settings_t *settings;

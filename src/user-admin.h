@@ -41,7 +41,7 @@ struct _UserManagerClass {
 };
 
 GType          user_manager_get_type                 (void) G_GNUC_CONST;
- 
+
 UserManager   *user_manager_new                      (void);
 
 void  RemoveUser(ActUser *user);

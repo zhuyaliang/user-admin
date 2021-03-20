@@ -42,7 +42,7 @@ struct _UserAvatarClass {
 };
 
 GType         user_avatar_get_type                 (void) G_GNUC_CONST;
- 
+
 UserAvatar   *user_avatar_new                      (GtkWidget      *button);
 
 char         *user_avatar_get_file_name            (UserAvatar     *avatar);

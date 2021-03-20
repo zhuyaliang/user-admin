@@ -29,16 +29,17 @@ G_DECLARE_FINAL_TYPE (UserCropArea, user_crop_area, USER, CROP_AREA, GtkDrawingA
 
 GtkWidget *user_crop_area_new                  (void);
 
-GdkPixbuf *user_crop_area_get_picture          (UserCropArea *area);
+GdkPixbuf *user_crop_area_get_picture          (UserCropArea  *area);
 
-void       user_crop_area_set_picture          (UserCropArea *area,GdkPixbuf  *pixbuf);
+void       user_crop_area_set_picture          (UserCropArea  *area,
+                                                GdkPixbuf     *pixbuf);
 
-void       user_crop_area_set_min_size         (UserCropArea *area,
-                                                gint        width,
-                                                gint        height);
+void       user_crop_area_set_min_size         (UserCropArea  *area,
+                                                gint           width,
+                                                gint           height);
 
-void       user_crop_area_set_constrain_aspect (UserCropArea *area,
-                                                gboolean    constrain);
+void       user_crop_area_set_constrain_aspect (UserCropArea  *area,
+                                                gboolean       constrain);
 
 G_END_DECLS
 

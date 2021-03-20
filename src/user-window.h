@@ -44,7 +44,7 @@ struct _UserWindowClass {
 };
 
 GType         user_window_get_type         (void) G_GNUC_CONST;
- 
+
 UserWindow   *user_window_new              (ActUserManager *manager);
 
 void          user_window_remove_user_cb   (ActUserManager *um,

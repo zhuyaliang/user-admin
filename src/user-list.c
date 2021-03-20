@@ -124,7 +124,7 @@ static void remove_all_row (GtkWidget *row, gpointer data)
 {
     gtk_container_remove (GTK_CONTAINER (data), row);
     g_object_unref (row);
-}    
+}
 
 static void user_list_set_select_user (GtkWidget *list_box, gint index)
 {

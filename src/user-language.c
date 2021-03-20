@@ -327,7 +327,7 @@ insert_language (GHashTable *ht,
     label_current_lang = mate_get_language_from_locale (lang, NULL);
     label_untranslated = mate_get_language_from_locale (lang, "C");
 
-    if (g_strcmp0 (label_own_lang, label_untranslated) == 0) 
+    if (g_strcmp0 (label_own_lang, label_untranslated) == 0)
     {
         if (g_strcmp0 (label_current_lang, label_untranslated) == 0)
             g_hash_table_insert (ht, g_strdup (lang), g_strdup (label_untranslated));
@@ -741,7 +741,7 @@ UserLanguage *user_language_new (ActUser *user)
     chooser = g_object_new (USER_TYPE_LANGUAGE,
                            "use-header-bar", 0,
                             NULL);
-    gtk_window_set_title(GTK_WINDOW(chooser),title); 
+    gtk_window_set_title(GTK_WINDOW(chooser),title);
     chooser->priv->user = g_object_ref (user);
 
     return chooser;

@@ -39,11 +39,11 @@ struct _UserWindowPrivate
     GtkWidget      *list_box;
     UserFace       *face;
     UserBase       *base;
-	GtkWidget      *list_image;
-	GtkWidget      *list_label;
-	GtkWidget      *button_remove;
-	GtkWidget      *button_lock;
-	GtkWidget      *button_add;
+    GtkWidget      *list_image;
+    GtkWidget      *list_label;
+    GtkWidget      *button_remove;
+    GtkWidget      *button_lock;
+    GtkWidget      *button_add;
     GtkWidget      *popover;
 
     gint            update_user_id;
@@ -93,13 +93,13 @@ static GtkWidget *set_unlock_button_tips (GtkWidget *button_lock)
     label = gtk_label_new (NULL);
     SetLableFontType(label, "black", 11, _("Some settings must be unlocked before they can be changed"), FALSE);
     gtk_container_add(GTK_CONTAINER(box), label);
-    
+
     gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_LEFT);
     gtk_container_add (GTK_CONTAINER (popover), box);
     gtk_container_set_border_width (GTK_CONTAINER (popover), 6);
     gtk_widget_show_all (popover);
     gtk_popover_popup (GTK_POPOVER(popover));
-    
+
     return popover;
 }
 
@@ -117,7 +117,7 @@ static void update_permission (UserWindow *win)
     user_base_set_public_sensitive (win->priv->base, is_authorized);
     user_base_set_private_sensitive (win->priv->base, is_authorized);
     gtk_widget_set_visible (win->priv->popover,!is_authorized);
-    
+
     if (is_authorized == 0 && self_selected == 1)
     {
         gtk_widget_set_sensitive (GTK_WIDGET (win->priv->face), self_selected);
@@ -130,20 +130,20 @@ static void on_permission_changed (GPermission *permission,
                                    gpointer     data)
 {
     UserWindow *userwin = USER_WINDOW (data);
-    
+
     update_permission(userwin);
-}   
+}
 
 static void user_window_set_permission (UserWindow *win)
 {
     GError    *error = NULL;
-    
+
     win->priv->permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
     if (win->priv->permission != NULL)
     {
         win->priv->button_lock = gtk_lock_button_new (win->priv->permission);
         win->priv->popover = set_unlock_button_tips (win->priv->button_lock);
-        
+
         gtk_lock_button_set_permission (GTK_LOCK_BUTTON (win->priv->button_lock), win->priv->permission);
         gtk_widget_grab_focus (win->priv->button_lock);
 
@@ -153,7 +153,7 @@ static void user_window_set_permission (UserWindow *win)
                          win);
     }
     else
-    {    
+    {
         mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
         g_error_free (error);
     }
@@ -177,15 +177,15 @@ static GtkWidget *create_user_list_box (GtkWidget *box)
 }
 
 static void user_window_list_select_user (GtkListBox    *list_box,
-                      	                  GtkListBoxRow *row,
+                                          GtkListBoxRow *row,
                                           UserWindow    *win)
 {
     win->priv->user = user_list_row_get_user (USER_LIST_ROW (row));
     win->priv->list_image = user_list_row_get_image_label (USER_LIST_ROW (row));
     win->priv->list_label = user_list_row_get_name_label (USER_LIST_ROW (row));
-    
+
     user_base_set_user (win->priv->base, win->priv->user);
-   
+
     user_window_update (win, win->priv->user);
 }
 
@@ -212,7 +212,7 @@ static void user_group_manager_cb (UserBase *base, UserWindow *win)
     const char      *name;
 
     name = GetUserName (win->priv->user);
-    
+
     gtk_widget_hide (GTK_WIDGET (win));
     group_window = user_group_window_new (name, win->priv->user_list);
     g_signal_connect (group_window,
@@ -246,9 +246,9 @@ static void QuitApp (GtkWidget *widget, UserWindow *win)
 
 static void
 user_window_destroy (GtkWidget *data)
-{   
+{
     UserWindow *userwin = USER_WINDOW (data);
-    
+
     g_slist_free_full (userwin->priv->user_list, g_object_unref);
     close_log_file ();
     gtk_widget_destroy (GTK_WIDGET (userwin->priv->face));
@@ -266,7 +266,7 @@ static void create_button_box (GtkWidget *box, GtkWidget *button_lock, UserWindo
     GtkWidget *button_close;
     GtkWidget *lable_space;
     GtkWidget *table;
-    
+
     table = gtk_grid_new ();
     gtk_grid_set_column_homogeneous (GTK_GRID (table), TRUE);
     gtk_box_pack_start (GTK_BOX (box), table, TRUE, TRUE, 0);
@@ -276,25 +276,25 @@ static void create_button_box (GtkWidget *box, GtkWidget *button_lock, UserWindo
 
     win->priv->button_add = SetButtonIcon (_("Add User"), "list-add");
     gtk_grid_attach (GTK_GRID (table), win->priv->button_add, 1, 1, 1, 1);
-    
+
     win->priv->button_remove = SetButtonIcon (_("Remove User"), "list-remove");
     gtk_grid_attach (GTK_GRID (table), win->priv->button_remove ,0 ,1 ,1 ,1);
-    
+
     button_close = SetButtonIcon (_("Close"), "window-close");
     gtk_grid_attach (GTK_GRID (table) , button_close ,4, 1, 1, 1);
 
     gtk_grid_attach (GTK_GRID (table), button_lock, 3, 1, 1, 1);
 
-    g_signal_connect (win->priv->button_remove, 
+    g_signal_connect (win->priv->button_remove,
                      "clicked",
                       G_CALLBACK (remove_user_cb),
                       win);
 
-    g_signal_connect (win->priv->button_add, 
+    g_signal_connect (win->priv->button_add,
                      "clicked",
                       G_CALLBACK (AddNewUser),
                       NULL);
-    
+
     g_signal_connect (button_close,
                      "clicked",
                       G_CALLBACK (QuitApp),
@@ -314,16 +314,16 @@ user_window_fill (UserWindow *userwin)
     GtkWidget *hbox2;
 
     fixed = gtk_fixed_new ();
-    gtk_container_add (GTK_CONTAINER (userwin), fixed); 
-  
-    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);  
-    gtk_fixed_put (GTK_FIXED (fixed), box, 0, 0);
-   
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);  
-    gtk_box_pack_start (GTK_BOX(box), hbox, FALSE, FALSE, 0); 
+    gtk_container_add (GTK_CONTAINER (userwin), fixed);
 
-    hbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);  
-    gtk_box_pack_start (GTK_BOX (hbox), hbox2, FALSE, FALSE, 10); 
+    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
+    gtk_fixed_put (GTK_FIXED (fixed), box, 0, 0);
+
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_box_pack_start (GTK_BOX(box), hbox, FALSE, FALSE, 0);
+
+    hbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
+    gtk_box_pack_start (GTK_BOX (hbox), hbox2, FALSE, FALSE, 10);
     gtk_widget_set_size_request (hbox2, 180, -1);
 
     userwin->priv->list_box = create_user_list_box (hbox2);
@@ -332,8 +332,7 @@ user_window_fill (UserWindow *userwin)
                       G_CALLBACK (user_window_list_select_user),
                       userwin);
 
-
-    hbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);  
+    hbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
     gtk_box_pack_start (GTK_BOX (hbox), hbox1, TRUE, TRUE, 10); 
 
     userwin->priv->face = user_face_new ();
@@ -348,7 +347,7 @@ user_window_fill (UserWindow *userwin)
                       userwin);
 
     gtk_box_pack_start (GTK_BOX (hbox1), GTK_WIDGET (userwin->priv->face), TRUE, TRUE, 0);
-    
+
     userwin->priv->base = user_base_new ();
     g_signal_connect (userwin->priv->base,
                      "group-viewed",
@@ -365,24 +364,24 @@ static GObject *
 user_window_constructor (GType                  type,
                          guint                  n_construct_properties,
                          GObjectConstructParam *construct_properties)
-{   
+{
     GObject      *obj;
     UserWindow   *userwin;
 
     obj = G_OBJECT_CLASS (user_window_parent_class)->constructor (type,
                                       n_construct_properties,
                                       construct_properties);
-    
+
     userwin = USER_WINDOW (obj);
-    
+
     user_window_fill (userwin);
-    
+
     return obj;
 }
 
 static void
 user_window_class_init (UserWindowClass *klass)
-{   
+{
     GObjectClass   *gobject_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -400,34 +399,34 @@ user_window_init (UserWindow *userwin)
     window = GTK_WINDOW (userwin);
 
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    
+
     user_window_set_permission (userwin);
 }
 
 static void user_window_set_list_data (UserWindow *win, int index)
 {
     GtkListBoxRow  *row;
-    
+
     row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (win->priv->list_box), index);
-    
+
     win->priv->user  = user_list_row_get_user (USER_LIST_ROW (row));
-    win->priv->list_label = user_list_row_get_name_label (USER_LIST_ROW (row)); 
-    win->priv->list_image = user_list_row_get_image_label (USER_LIST_ROW (row)); 
+    win->priv->list_label = user_list_row_get_name_label (USER_LIST_ROW (row));
+    win->priv->list_image = user_list_row_get_image_label (USER_LIST_ROW (row));
 }
 
 UserWindow *
 user_window_new (ActUserManager *manager)
-{   
+{
     UserWindow *userwin;
     g_autoptr(GdkPixbuf) icon = NULL;
-    
+
 
     userwin = g_object_new (USER_TYPE_WINDOW,
                            "type", GTK_WINDOW_TOPLEVEL,
                            "window-position", GTK_WIN_POS_CENTER,
                            "title", _("Mate User Manager"),
                             NULL);
-    
+
     icon = gdk_pixbuf_new_from_file(ICONDIR APPICON, NULL);
     if(icon)
     {
@@ -443,7 +442,7 @@ user_window_new (ActUserManager *manager)
 
     update_permission (userwin);
     userwin->priv->manager = g_object_ref (manager);
-    
+
     return userwin;
 }
 
@@ -486,7 +485,7 @@ void user_window_add_user_cb (ActUserManager *um,
     user_list_box_update (win->priv->list_box, win->priv->user_list, index);
 
     user_window_set_list_data (win, index);
-   
+
     win->priv->update_user_id = g_timeout_add (800, (GSourceFunc) update_new_user_info, win);
 
     gtk_widget_show_all (win->priv->list_box);

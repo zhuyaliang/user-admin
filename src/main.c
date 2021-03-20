@@ -35,9 +35,9 @@ static int RecordPid(void)
     if(fd < 0)
     {
          MessageReport(_("open file"),_("Create pid file failed"),ERROR);
-         return -1;      
-    }       
-    chmod(LOCKFILE,0777); 
+         return -1;
+    }
+    chmod(LOCKFILE,0777);
     pid = getpid();
     sprintf(WriteBuf,"%d",pid);
     Length = write(fd,WriteBuf,strlen(WriteBuf));
@@ -45,11 +45,11 @@ static int RecordPid(void)
     {
         MessageReport(_("write file"),_("write pid file failed"),ERROR);
         return -1;      
-    }			
+    }
     close(fd);
 
     return 0;
-}        
+}
 /******************************************************************************
 * Function:              ProcessRuning      
 *        
@@ -78,31 +78,31 @@ static gboolean ProcessRuning(void)
         {
              MessageReport(_("open file"),_("open pid file failed"),ERROR);
              return TRUE;
-        }        
+        }
         if(read(fd,ReadBuf,sizeof(ReadBuf)) <= 0)
         {
              MessageReport(_("read file"),_("read pid file failed"),ERROR);
              goto ERROREXIT;
-        }        
+        }
         pid = atoi(ReadBuf);
         if(kill(pid,0) == 0)
-        {        
+        {
              goto ERROREXIT;
         }
     }
-    
+
     if(RecordPid() < 0)
         Run = TRUE;
-    
+
     return Run;
 ERROREXIT:
     close(fd);
     return TRUE;
 
-}        
+}
 
 static void users_loaded(ActUserManager  *manager,
-                         GParamSpec      *pspec, 
+                         GParamSpec      *pspec,
                          gpointer         data)
 {
     UserWindow *window;
@@ -128,31 +128,31 @@ static void SetupUsersList (void)
     ActUserManager *manager;
 
     manager = act_user_manager_get_default ();
-   
+
     g_object_get (manager, "is-loaded", &loaded, NULL);
     if (loaded)
         users_loaded (manager,NULL, NULL);
     else
-        g_signal_connect(manager, 
-                        "notify::is-loaded", 
-                         G_CALLBACK (users_loaded), 
+        g_signal_connect(manager,
+                        "notify::is-loaded",
+                         G_CALLBACK (users_loaded),
                          NULL);
 
-}    
+}
 int main(int argc, char **argv)
 {
-    bindtextdomain (GETTEXT_PACKAGE,LUNAR_CALENDAR_LOCALEDIR);   
+   bindtextdomain (GETTEXT_PACKAGE,LUNAR_CALENDAR_LOCALEDIR);
     textdomain (GETTEXT_PACKAGE); 
-    
+
     gtk_init(&argc, &argv);
-    
+
     /* Program exit processing */
     atexit(ExitHook);
     /* Check whether the process has been started */
     if(ProcessRuning() == TRUE)
     {
         mate_uesr_admin_log("Info","The mate-user-admin process already exists");
-        exit(0);        
+        exit(0);
     }
 
     SetupUsersList ();

@@ -107,7 +107,7 @@ static void update_pixbufs (UserCropArea *area)
 
     if (area->pixbuf == NULL ||
         gdk_pixbuf_get_width (area->pixbuf) != allocation.width ||
-        gdk_pixbuf_get_height (area->pixbuf) != allocation.height) 
+        gdk_pixbuf_get_height (area->pixbuf) != allocation.height)
     {
         g_clear_object (&area->pixbuf);
         area->pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
@@ -128,7 +128,7 @@ static void update_pixbufs (UserCropArea *area)
         area->color_shifted = gdk_pixbuf_copy (area->pixbuf);
         shift_colors (area->color_shifted, -32, -32, -32, 0);
 
-        if (area->scale == 0.0) 
+        if (area->scale == 0.0)
         {
             gdouble scale_to_80, scale_to_image, crop_scale;
 
@@ -204,7 +204,7 @@ static gboolean user_crop_area_draw (GtkWidget *widget,cairo_t   *cr)
     cairo_rectangle (cr, crop.x, crop.y, crop.width, crop.height);
     cairo_fill (cr);
 
-    if (uarea->active_region != OUTSIDE) 
+    if (uarea->active_region != OUTSIDE)
     {
         gint x1, x2, y1, y2;
         cairo_set_source_rgb (cr, 1, 1, 1);
@@ -342,11 +342,11 @@ static void update_cursor (UserCropArea *area,
     case BOTTOM_RIGHT:
         cursor_type = GDK_BOTTOM_RIGHT_CORNER;
         break;
-	default:
-		g_assert_not_reached ();
+    default:
+        g_assert_not_reached ();
     }
 
-    if (cursor_type != area->current_cursor) 
+    if (cursor_type != area->current_cursor)
     {
         GdkCursor *cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (area)),
                                                                 cursor_type);
@@ -436,14 +436,14 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
 
         adj_width = right - left + 1;
         adj_height = bottom - top + 1;
-        if (adj_width != width) 
+        if (adj_width != width)
         {
             if (delta_x < 0)
                 right = left + width - 1;
             else
                 left = right - width + 1;
         }
-        if (adj_height != height) 
+        if (adj_height != height)
         {
             if (delta_y < 0)
                 bottom = top + height - 1;
@@ -454,12 +454,12 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         break;
 
     case TOP_LEFT:
-        if (area->aspect < 0) 
+        if (area->aspect < 0)
         {
             top = y;
             left = x;
         }
-        else if (y < eval_radial_line (center_x, center_y, left, top, x)) 
+        else if (y < eval_radial_line (center_x, center_y, left, top, x))
         {
             top = y;
             new_width = (bottom - top) * area->aspect;
@@ -483,18 +483,18 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         break;
 
     case TOP_RIGHT:
-        if (area->aspect < 0) 
+        if (area->aspect < 0)
         {
             top = y;
             right = x;
         }
-    else if (y < eval_radial_line (center_x, center_y, right, top, x)) 
+    else if (y < eval_radial_line (center_x, center_y, right, top, x))
     {
         top = y;
         new_width = (bottom - top) * area->aspect;
         right = left + new_width;
     }
-    else 
+    else
     {
         right = x;
         new_height = (right - left) / area->aspect;
@@ -504,7 +504,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
 
     case LEFT:
         left = x;
-        if (area->aspect > 0) 
+        if (area->aspect > 0)
         {
             new_height = (right - left) / area->aspect;
             bottom = top + new_height;
@@ -512,18 +512,18 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         break;
 
     case BOTTOM_LEFT:
-        if (area->aspect < 0) 
+        if (area->aspect < 0)
         {
             bottom = y;
             left = x;
         }
-        else if (y < eval_radial_line (center_x, center_y, left, bottom, x)) 
+        else if (y < eval_radial_line (center_x, center_y, left, bottom, x))
         {
             left = x;
             new_height = (right - left) / area->aspect;
                     bottom = top + new_height;
         }
-        else 
+        else
         {
             bottom = y;
             new_width = (bottom - top) * area->aspect;
@@ -533,7 +533,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
 
     case RIGHT:
         right = x;
-        if (area->aspect > 0) 
+        if (area->aspect > 0)
         {
             new_height = (right - left) / area->aspect;
             bottom = top + new_height;
@@ -541,12 +541,12 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         break;
 
     case BOTTOM_RIGHT:
-        if (area->aspect < 0) 
+        if (area->aspect < 0)
         {
             bottom = y;
             right = x;
         }
-        else if (y < eval_radial_line (center_x, center_y, right, bottom, x)) 
+        else if (y < eval_radial_line (center_x, center_y, right, bottom, x))
         {
             right = x;
             new_height = (right - left) / area->aspect;
@@ -562,7 +562,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
 
     case BOTTOM:
         bottom = y;
-        if (area->aspect > 0) 
+        if (area->aspect > 0)
         {
             new_width = (bottom - top) * area->aspect;
             right= left + new_width;
@@ -578,7 +578,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
 
     width = right - left + 1;
     height = bottom - top + 1;
-    if (area->aspect < 0) 
+    if (area->aspect < 0)
     {
         if (left < 0)
             left = 0;
@@ -592,7 +592,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         width = right - left + 1;
         height = bottom - top + 1;
 
-        switch (area->active_region) 
+        switch (area->active_region)
         {
         case LEFT:
         case TOP_LEFT:
@@ -610,7 +610,7 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         default: ;
         }
 
-        switch (area->active_region) 
+        switch (area->active_region)
         {
         case TOP:
         case TOP_LEFT:
@@ -628,11 +628,11 @@ static gboolean user_crop_area_motion_notify_event (GtkWidget      *widget,
         default: ;
         }
     }
-    else 
+    else
     {
         if (left < 0 || top < 0 ||
         right > pb_width || bottom > pb_height ||
-        width < min_width || height < min_height) 
+        width < min_width || height < min_height)
         {
             left = area->crop.x;
             right = area->crop.x + area->crop.width - 1;
@@ -709,17 +709,17 @@ static void user_crop_area_finalize (GObject *object)
 {
     UserCropArea *area = USER_CROP_AREA (object);
 
-    if (area->browse_pixbuf) 
+    if (area->browse_pixbuf)
     {
         g_object_unref (area->browse_pixbuf);
         area->browse_pixbuf = NULL;
     }
-    if (area->pixbuf) 
+    if (area->pixbuf)
     {
         g_object_unref (area->pixbuf);
         area->pixbuf = NULL;
     }
-    if (area->color_shifted) 
+    if (area->color_shifted)
     {
         g_object_unref (area->color_shifted);
         area->color_shifted = NULL;
@@ -784,18 +784,18 @@ void user_crop_area_set_picture (UserCropArea *area,GdkPixbuf  *pixbuf)
     int width;
     int height;
 
-    if (area->browse_pixbuf) 
+    if (area->browse_pixbuf)
     {
         g_object_unref (area->browse_pixbuf);
         area->browse_pixbuf = NULL;
     }
-    if (pixbuf) 
+    if (pixbuf)
     {
         area->browse_pixbuf = g_object_ref (pixbuf);
         width = gdk_pixbuf_get_width (pixbuf);
         height = gdk_pixbuf_get_height (pixbuf);
-    } 
-    else 
+    }
+    else
     {
         width = 0;
         height = 0;
@@ -824,7 +824,7 @@ void user_crop_area_set_min_size (UserCropArea *area,
 
     user_crop_area_set_size_request (area);
 
-    if (area->aspect > 0) 
+    if (area->aspect > 0)
     {
         area->aspect = area->base_width / (gdouble)area->base_height;
     }
@@ -833,11 +833,11 @@ void user_crop_area_set_min_size (UserCropArea *area,
 void user_crop_area_set_constrain_aspect (UserCropArea *area,
                                           gboolean    constrain)
 {
-    if (constrain) 
+    if (constrain)
     {
         area->aspect = area->base_width / (gdouble)area->base_height;
     }
-    else 
+    else
     {
         area->aspect = -1;
     }

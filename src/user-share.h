@@ -51,9 +51,13 @@
 void         mate_uesr_admin_log   (const char  *level,
                                     const char  *message,
                                     ...);
+
 void         close_log_file        (void);
+
 gboolean     GetUseHeader          (void);
+
 GHashTable  *CreateGroupsHashTable (void);
+
 int          MessageReport         (const char  *Title,
                                     const char  *Msg,
                                     int          nType);
@@ -62,11 +66,10 @@ void         SetLableFontType      (GtkWidget   *Lable ,
                                     const char  *Color,
                                     int          FontSzie,
                                     const char  *Word,
-									gboolean     Blod);
+                                    gboolean     Blod);
 
 GdkPixbuf  *SetUserFaceSize        (const char  *PicName, 
                                     int          Size);
-
 
 GtkWidget  *SetComboUserType       (const char  *s1,
                                     const char  *s2);

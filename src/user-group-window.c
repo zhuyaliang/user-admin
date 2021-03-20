@@ -267,7 +267,7 @@ static void UserSelectGroup (GtkCellRendererToggle *cell,
     gtk_tree_model_get_iter (model, &iter, path);
     gtk_tree_model_get (model, &iter, COLUMN_FIXED, &fixed, -1);
     gtk_tree_model_get (model, &iter, COLUMN_DATA, &group, -1);
-    
+
     if(fixed == TRUE)
     {
         user_group_remove_user_from_group (group, win->priv->user_name);
@@ -280,6 +280,7 @@ static void UserSelectGroup (GtkCellRendererToggle *cell,
     gtk_list_store_set (GTK_LIST_STORE (win->priv->SwitchStore), &iter, COLUMN_FIXED, fixed, -1);
     gtk_tree_path_free (path);
 }
+
 static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
                                  gchar                 *path_str,
                                  gpointer               data)
@@ -310,6 +311,7 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     gtk_list_store_set (GTK_LIST_STORE (model), &iter, COLUMN_FIXED, fixed, -1);
     gtk_tree_path_free (path);
 }
+
 static void addswitchlistdata(GtkWidget    *tree,
                               GtkListStore *store,
                               UserGroup    *group,
@@ -393,7 +395,7 @@ static GtkCellRenderer *create_tree_toggled_renderer (GtkTreeView *tree,
     GtkCellRenderer   *renderer;
     GtkTreeViewColumn *column;
 
-    renderer = gtk_cell_renderer_toggle_new (); 
+    renderer = gtk_cell_renderer_toggle_new ();
 
     column = gtk_tree_view_column_new_with_attributes (name,
                                                        renderer,
@@ -480,6 +482,7 @@ static void AddUnlockTooltip (UserGroupWindow *win, gboolean mode)
         gtk_widget_set_tooltip_markup (GTK_WIDGET (win), NULL);
     }
 }
+
 static void update_sensitive (UserGroupWindow *win)
 {
     gboolean Authorized;
@@ -495,6 +498,7 @@ static void update_sensitive (UserGroupWindow *win)
 
     AddUnlockTooltip (win, Authorized);
 }
+
 static void on_permission_changed (GPermission *permission,
                                    GParamSpec  *pspec,
                                    gpointer     data)
@@ -540,6 +544,7 @@ static GtkWidget *vbox_widget_new (void)
 
     return box;
 }
+
 static GtkWidget *load_select_group (UserGroupWindow *win)
 {
     GtkWidget *vbox;
@@ -552,12 +557,12 @@ static GtkWidget *load_select_group (UserGroupWindow *win)
     GtkCellRenderer *renderer;
 
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
- 
+
     vbox1 = vbox_widget_new ();
 
     table = grid_widget_new ();
     gtk_box_pack_start(GTK_BOX(vbox),table, TRUE, TRUE,0);
-    Scrolled = scrolled_widget_new (); 
+    Scrolled = scrolled_widget_new ();
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
 
     model    = create_tree_model ();

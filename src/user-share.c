@@ -40,13 +40,13 @@ static int create_log_file(void)
     if(file_dp > 0)
     {
         return file_dp;
-    }    
+    }
     t_stamp = time(&t);
     file_name = g_strdup_printf("/tmp/mate-user-admin-%d.log",t_stamp);
 
     file_dp = open(file_name,O_RDWR|O_CREAT,0666);
-    
-    g_free(file_name);    
+
+    g_free(file_name);
     return file_dp;
 }
 GdkPixbuf *GetRoundPixbuf (GdkPixbuf *Spixbuf)
@@ -78,14 +78,14 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     int     fd;
     va_list args;
     char   *file_data;
-    char    buf[1024]; 
+    char    buf[1024];
     int     len;
 
     fd = create_log_file();
     if(fd < 0)
     {
         return;
-    }    
+    }
     va_start(args,message);
     vsprintf(buf,message, args);
     va_end(args);
@@ -93,10 +93,10 @@ void mate_uesr_admin_log(const char *level,const char *message,...)
     len = write(fd,file_data,strlen(file_data));
     if(len <= 0)
     {
-        MessageReport("write log","write log error",ERROR);	
+        MessageReport("write log","write log error",ERROR);
     }
-	g_free (file_data);
-}    
+    g_free (file_data);
+}
 
 void close_log_file (void)
 {
@@ -104,8 +104,8 @@ void close_log_file (void)
     {
         close(file_dp);
         file_dp = 0;
-    }    
-}    
+    }
+}
 gboolean GetUseHeader(void)
 {
     GSettings *settings;
@@ -113,7 +113,7 @@ gboolean GetUseHeader(void)
 
     settings = g_settings_new (GSM_GSETTINGS_SCHEMA);
     return g_settings_get_boolean (settings, key);
-}    
+}
 /******************************************************************************
 * Function:            MessageReport
 *        
@@ -250,7 +250,7 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
 {
     g_autoptr(GdkPixbuf) Spixbuf = NULL;
     GdkPixbuf *Dpixbuf = NULL;
-    
+
     if(PicName == NULL)
     {
         Spixbuf = gdk_pixbuf_new_from_file_at_size (DEFAULT, Size, Size, NULL);
@@ -259,9 +259,9 @@ GdkPixbuf * SetUserFaceSize (const char  *PicName, int Size)
     {
         Spixbuf = gdk_pixbuf_new_from_file_at_size (PicName, Size, Size, NULL);
     }
-    
+
     Dpixbuf = GetRoundPixbuf(Spixbuf);
-    
+
     return Dpixbuf;
 }
 
@@ -362,8 +362,8 @@ int GetPassStrength (const char  *password,
     void *auxerror;
 
     rv = pwquality_check (get_pwq (),
-                          password, 
-                          old_password, 
+                          password,
+                          old_password,
                           username,
                           &auxerror);
 
@@ -394,13 +394,13 @@ int GetPassStrength (const char  *password,
 
     if ( length < pw_min_length())
     {        
-    	*message = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
+        *message = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
          level = 0;
     }
     else
-    {        
+    {
         *message = pw_error_hint (rv);
-    }    
+    }
     return level;
 }
 /******************************************************************************
@@ -484,16 +484,16 @@ GtkWidget* dialog_add_button_with_icon_name (GtkDialog   *dialog,
                                              const gchar *icon_name,
                                              gint         response_id)
 {
-	GtkWidget *button;
+    GtkWidget *button;
 
-	button = gtk_button_new_with_mnemonic (button_text);
-	gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
+    button = gtk_button_new_with_mnemonic (button_text);
+    gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
 
-	gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
-	gtk_style_context_add_class (gtk_widget_get_style_context (button), "text-button");
-	gtk_widget_set_can_default (button, TRUE);
-	gtk_widget_show (button);
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
+    gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
+    gtk_style_context_add_class (gtk_widget_get_style_context (button), "text-button");
+    gtk_widget_set_can_default (button, TRUE);
+    gtk_widget_show (button);
+    gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
 
-	return button;
+    return button;
 }

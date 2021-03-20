@@ -70,7 +70,7 @@ static void thumbnail_preview (GtkFileChooser  *chooser,
                                        NULL, NULL);
         g_object_unref (file);
         if (file_info != NULL &&
-            g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY) 
+            g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY)
         {
             mime_type = g_strdup (g_file_info_get_content_type (file_info));
             g_object_unref (file_info);
@@ -87,7 +87,7 @@ static void thumbnail_preview (GtkFileChooser  *chooser,
                                            GTK_RESPONSE_ACCEPT,
                                            (pixbuf != NULL));
 
-        if (pixbuf != NULL) 
+        if (pixbuf != NULL)
         {
             gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
             g_object_unref (pixbuf);
@@ -139,7 +139,6 @@ static void save_new_user_icon (UserAvatar *avatar, GdkPixbuf *pb)
     g_object_unref (stream);
     avatar->priv->new_avatar_path = g_strdup (FilePath);
     g_signal_emit (avatar, signals[AVATAR_CHANGED], 0);
-    g_print ("file = %s\r\n", FilePath);
 
     g_remove (FilePath);
     g_free (FilePath);
@@ -190,7 +189,7 @@ static void face_dialog_crop (UserAvatar *avatar, GdkPixbuf *pixbuf)
                       G_CALLBACK (crop_dialog_response_cb),
                       avatar);
 
-    avatar->priv->crop_area = user_crop_area_new (); 
+    avatar->priv->crop_area = user_crop_area_new ();
     user_crop_area_set_min_size (USER_CROP_AREA (avatar->priv->crop_area), 50, 50);
     user_crop_area_set_constrain_aspect (USER_CROP_AREA (avatar->priv->crop_area), TRUE);
     user_crop_area_set_picture (USER_CROP_AREA (avatar->priv->crop_area), pixbuf);
@@ -222,7 +221,7 @@ static void local_picture_chooser (GtkDialog *chooser,
     FileName = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 
     pixbuf = gdk_pixbuf_new_from_file (FileName, &error);
-    if (pixbuf == NULL) 
+    if (pixbuf == NULL)
     {
         MessageReport(_("Load Local Picture"),
                        error->message,
@@ -275,7 +274,7 @@ static void user_select_local_picture (GtkWidget *button, gpointer data)
     gtk_file_filter_add_pixbuf_formats (filter);
     gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
-    g_signal_connect (chooser, 
+    g_signal_connect (chooser,
                      "response",
                       G_CALLBACK (local_picture_chooser),
                       avatar);
@@ -313,7 +312,7 @@ user_avatar_fill (UserAvatar *avatar)
     scrolled = gtk_scrolled_window_new (NULL, NULL);
     gtk_box_pack_start(GTK_BOX(box), scrolled, TRUE, TRUE, 0);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-                                    GTK_POLICY_NEVER, 
+                                    GTK_POLICY_NEVER,
                                     GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
                                          GTK_SHADOW_IN);

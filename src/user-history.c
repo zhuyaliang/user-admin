@@ -22,12 +22,13 @@
 
 G_DEFINE_TYPE (LoginHistoryDialog, login_history_dialog, GTK_TYPE_DIALOG)
 
-typedef struct 
+typedef struct
 {
-    gint64 login_time;
-    gint64 logout_time;
+    gint64       login_time;
+    gint64       logout_time;
     const gchar *type;
 }LoginHistory;
+
 static void show_week_label (LoginHistoryDialog *self)
 {
     g_autofree gchar *label = NULL;
@@ -38,11 +39,11 @@ static void show_week_label (LoginHistoryDialog *self)
     {
         label = g_strdup (_("This Week"));
     }
-    else if (span == G_TIME_SPAN_DAY * 7) 
+    else if (span == G_TIME_SPAN_DAY * 7)
     {
         label = g_strdup (_("Last Week"));
     }
-    else 
+    else
     {
         g_autofree gchar *from = NULL;
         g_autofree gchar *to = NULL;
@@ -50,11 +51,11 @@ static void show_week_label (LoginHistoryDialog *self)
 
         date = g_date_time_add_days (self->week, 6);
         from = g_date_time_format (self->week, ("%b %e"));
-        if (g_date_time_get_year (self->week) == g_date_time_get_year (self->current_week)) 
+        if (g_date_time_get_year (self->week) == g_date_time_get_year (self->current_week))
         {
             to = g_date_time_format (date, ("%b %e"));
         }
-        else 
+        else
         {
             to = g_date_time_format (date, ("%b %e, %Y"));
         }
@@ -134,14 +135,14 @@ cc_util_get_smart_date (GDateTime *date)
     g_autoptr(GDateTime) local = NULL;
     GTimeSpan span;
 
-    local = g_date_time_new_now_local (); 
+    local = g_date_time_new_now_local ();
     today = g_date_time_new_local (g_date_time_get_year (local),
                                    g_date_time_get_month (local),
                                    g_date_time_get_day_of_month (local),
-                                   0, 0, 0); 
+                                   0, 0, 0);
     span = g_date_time_difference (today, date);
     if (span <= 0)
-    {   
+    {
         return g_strdup (_("Today"));
     }
     else if (span <= G_TIME_SPAN_DAY)
@@ -205,7 +206,7 @@ show_week (LoginHistoryDialog *self)
     set_sensitivity (self);
 
     login_history = get_login_history (self->Actuser);
-    if (login_history == NULL) 
+    if (login_history == NULL)
     {
         return;
     }
@@ -216,34 +217,34 @@ show_week (LoginHistoryDialog *self)
     for (i = login_history->len - 1; i >= 0; i--)
     {
         history = g_array_index (login_history, LoginHistory, i);
-        if (history.login_time < to) 
+        if (history.login_time < to)
         {
             break;
         }
     }
     line = 0;
-    for (;i >= 0; i--) 
+    for (;i >= 0; i--)
     {
         history = g_array_index (login_history, LoginHistory, i);
 
         if (!g_str_has_prefix (history.type, ":") &&
-            !g_str_has_prefix (history.type, "tty")) 
+            !g_str_has_prefix (history.type, "tty"))
         {
             continue;
         }
 
-        if (history.logout_time > 0 && history.logout_time < from) 
+        if (history.logout_time > 0 && history.logout_time < from)
         {
             break;
         }
-        if (history.logout_time > 0 && history.logout_time < to) 
+        if (history.logout_time > 0 && history.logout_time < to)
         {
             datetime = g_date_time_new_from_unix_local (history.logout_time);
             add_record (self, datetime, _("Session Ended"), line);
             line++;
         }
 
-        if (history.login_time >= from) 
+        if (history.login_time >= from)
         {
             datetime = g_date_time_new_from_unix_local (history.login_time);
             add_record (self, datetime, _("Session Started"), line);
@@ -283,7 +284,7 @@ LoginHistoryDialog *login_history_dialog_new (ActUser *user)
     g_autofree gchar *title = NULL;
 
     g_return_val_if_fail (ACT_IS_USER (user), NULL);
-    
+
     title = g_strdup_printf (_("%s — Account Activity"),
                               act_user_get_real_name (user));
     if(GetUseHeader() == 1)
@@ -333,7 +334,7 @@ static void login_history_dialog_dispose (GObject *object)
 static void login_history_dialog_class_init (LoginHistoryDialogClass *class)
 {
     GObjectClass   *gobject_class = G_OBJECT_CLASS (class);
-    gobject_class->dispose = login_history_dialog_dispose; 
+    gobject_class->dispose = login_history_dialog_dispose;
 }
 
 static void LoadHeader_bar(LoginHistoryDialog *dialog)
@@ -347,11 +348,10 @@ static void LoadHeader_bar(LoginHistoryDialog *dialog)
     gtk_header_bar_set_has_subtitle (GTK_HEADER_BAR (header), TRUE);
     dialog->header_bar = GTK_HEADER_BAR(header);
     gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
-    
 
     box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_style_context_add_class (gtk_widget_get_style_context (box), "linked");
-    
+
     button = gtk_button_new ();
     gtk_container_add (GTK_CONTAINER (button),
                        gtk_image_new_from_icon_name ("go-previous-symbolic",
@@ -367,7 +367,7 @@ static void LoadHeader_bar(LoginHistoryDialog *dialog)
     dialog->next_button = GTK_BUTTON(button);
     gtk_header_bar_pack_start (GTK_HEADER_BAR (header), box);
 
-}    
+}
 void login_history_dialog_init (LoginHistoryDialog *dialog)
 {
     GtkWidget *Scrolled;
@@ -396,21 +396,21 @@ void login_history_dialog_init (LoginHistoryDialog *dialog)
         button = dialog_add_button_with_icon_name(GTK_DIALOG(dialog),
                                                  _("previous"),
                                                  "go-previous-symbolic",
-                                                  GTK_RESPONSE_NONE);    
+                                                  GTK_RESPONSE_NONE);
         dialog->previous_button = GTK_BUTTON(button); 
         button     = dialog_add_button_with_icon_name(GTK_DIALOG(dialog),
                                                      _("next"),
                                                      "go-next-symbolic",
-                                                      GTK_RESPONSE_NONE);    
+                                                      GTK_RESPONSE_NONE);
         dialog->next_button = GTK_BUTTON(button);
     }    
     dialog->history_box = GTK_LIST_BOX(listbox);
-    g_signal_connect (dialog->previous_button, 
+    g_signal_connect (dialog->previous_button,
                      "clicked",
                       G_CALLBACK (previous_button_clicked_cb),
                       dialog);
 
-    g_signal_connect (dialog->next_button, 
+    g_signal_connect (dialog->next_button,
                      "clicked",
                       G_CALLBACK (next_button_clicked_cb),
                       dialog);

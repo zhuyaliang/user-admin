@@ -41,7 +41,7 @@ const gchar * GetPasswordModeText (ActUser *user,int *Type)
     }
     else
     {
-        switch (act_user_get_password_mode (user)) 
+        switch (act_user_get_password_mode (user))
         {
             case ACT_USER_PASSWORD_MODE_REGULAR:
                 text = ("●●●●●●");
@@ -68,11 +68,11 @@ const gchar * GetLoginTimeText (ActUser *user)
     GDateTime *date_time;
     gint64 time;
     time = act_user_get_login_time (user);
-    if (act_user_is_logged_in (user)) 
+    if (act_user_is_logged_in (user))
     {
         text = g_strdup ("Logged in");
     }
-    else if (time > 0) 
+    else if (time > 0)
     {
         date_time = g_date_time_new_from_unix_local (time);
         text = g_date_time_format (date_time, ("%m/%d %k:%M"));
@@ -100,11 +100,11 @@ guint GetUserUid(ActUser *user)
 
 const gchar *GetUserName(ActUser *user)
 {
-    const gchar *name =NULL; 
+    const gchar *name =NULL;
     name = act_user_get_user_name (user);
     return name;
 
-}        
+}
 const gchar *GetHomeName(ActUser *user)
 {
     const gchar *name = NULL;
@@ -112,7 +112,7 @@ const gchar *GetHomeName(ActUser *user)
     
     return name;
 
-}        
+}
 const gchar *GetUserIcon(ActUser *user)
 {
     const gchar *Icon = NULL;
@@ -120,7 +120,7 @@ const gchar *GetUserIcon(ActUser *user)
     if(access(Icon,F_OK)== 0)
         return Icon;
     return DEFAULT;
-}        
+}
 const char *GetUserLang(ActUser *user)
 {
     const gchar *Lang = NULL;
@@ -139,7 +139,7 @@ gint GetUserType(ActUser *user)
         return ADMIN;
 
     return STANDARD;
-}        
+}
 gint GetUserAutoLogin(ActUser *user)
 {
     int Auto;
@@ -147,7 +147,7 @@ gint GetUserAutoLogin(ActUser *user)
     Auto = act_user_get_automatic_login(user);
 
     return Auto;
-}       
+}
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {
     ActUser *ua, *ub;

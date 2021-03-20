@@ -45,8 +45,8 @@ typedef struct LoginHistoryDialog
 }LoginHistoryDialog;
 typedef struct LoginHistoryDialogClass
 {
-	GtkDialogClass parent_class;
-} LoginHistoryDialogClass;
+    GtkDialogClass parent_class;
+}   LoginHistoryDialogClass;
 
 GType               login_history_dialog_get_type          (void) G_GNUC_CONST;
 

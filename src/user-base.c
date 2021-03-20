@@ -263,7 +263,7 @@ user_base_fill (UserBase *base)
     gtk_grid_attach (GTK_GRID(base), label, 0, 2, 1, 1);
 
     base->priv->button_password = gtk_button_new ();
-    g_signal_connect (base->priv->button_password, 
+    g_signal_connect (base->priv->button_password,
                      "clicked",
                       G_CALLBACK (ChangePass),
                       base);

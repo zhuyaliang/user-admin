@@ -20,7 +20,7 @@
 
 #include <gtk/gtk.h>
 #include <act/act.h>
-        
+
 G_BEGIN_DECLS
 
 #define USER_TYPE_PASSWORD (user_password_get_type ())
@@ -29,8 +29,8 @@ G_DECLARE_FINAL_TYPE (UserPassword, user_password, USER, PASSWORD, GtkDialog)
 
 UserPassword     *user_password_new       (ActUser       *user);
 
-char             *user_password_get_label (UserPassword *dialog);
- 
+char             *user_password_get_label (UserPassword  *dialog);
+
 G_END_DECLS
 
 

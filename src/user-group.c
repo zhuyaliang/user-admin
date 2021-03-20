@@ -18,7 +18,7 @@
 struct _UserGroupPrivate
 {
     GasGroup  *gas;
-    gid_t      gid ;
+    gid_t      gid;
     gchar     *gname;
 };
 

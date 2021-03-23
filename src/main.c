@@ -25,25 +25,27 @@ static void ExitHook (void)
     remove(LOCKFILE);
 }
 
-static int RecordPid(void)
+static int record_pid (void)
 {
-    int pid = 0;
-    int fd;
-    int Length = 0; 
+    int  pid;
+    int  fd;
+    int  Length;
     char WriteBuf[30] = { 0 };
-    fd = open(LOCKFILE,O_WRONLY|O_CREAT|O_TRUNC,0777);
-    if(fd < 0)
+
+    fd = open (LOCKFILE, O_WRONLY|O_CREAT|O_TRUNC, 0777);
+    if (fd < 0)
     {
-         MessageReport(_("open file"),_("Create pid file failed"),ERROR);
+         MessageReport (_("open file"), _("Create pid file failed"), ERROR);
          return -1;
     }
-    chmod(LOCKFILE,0777);
-    pid = getpid();
-    sprintf(WriteBuf,"%d",pid);
-    Length = write(fd,WriteBuf,strlen(WriteBuf));
-    if(Length <= 0 )
+    chmod (LOCKFILE, 0777);
+    pid = getpid ();
+
+    sprintf(WriteBuf, "%d", pid);
+    Length = write (fd, WriteBuf, strlen(WriteBuf));
+    if (Length <= 0)
     {
-        MessageReport(_("write file"),_("write pid file failed"),ERROR);
+        MessageReport (_("write file"), _("write pid file failed"), ERROR);
         return -1;      
     }
     close(fd);
@@ -66,35 +68,35 @@ static int RecordPid(void)
 ******************************************************************************/
 static gboolean ProcessRuning(void)
 {
-    int fd;
-    int pid = 0;
-    gboolean Run = FALSE;
-    char ReadBuf[30] = { 0 };
+    int      fd;
+    int      pid = 0;
+    gboolean run = FALSE;
+    char     read_buf[30] = { 0 };
 
-    if(access(LOCKFILE,F_OK) == 0)
+    if (access (LOCKFILE, F_OK) == 0)
     {
-        fd = open(LOCKFILE,O_RDONLY);
-        if(fd < 0)
+        fd = open (LOCKFILE, O_RDONLY);
+        if (fd < 0)
         {
-             MessageReport(_("open file"),_("open pid file failed"),ERROR);
+             MessageReport (_("open file"), _("open pid file failed"), ERROR);
              return TRUE;
         }
-        if(read(fd,ReadBuf,sizeof(ReadBuf)) <= 0)
+        if (read(fd, read_buf, sizeof (read_buf)) <= 0)
         {
-             MessageReport(_("read file"),_("read pid file failed"),ERROR);
+             MessageReport (_("read file"), _("read pid file failed"), ERROR);
              goto ERROREXIT;
         }
-        pid = atoi(ReadBuf);
-        if(kill(pid,0) == 0)
+        pid = atoi (read_buf);
+        if (kill (pid, 0) == 0)
         {
              goto ERROREXIT;
         }
     }
 
-    if(RecordPid() < 0)
-        Run = TRUE;
+    if (record_pid () < 0)
+        run = TRUE;
 
-    return Run;
+    return run;
 ERROREXIT:
     close(fd);
     return TRUE;
@@ -131,7 +133,7 @@ static void SetupUsersList (void)
 
     g_object_get (manager, "is-loaded", &loaded, NULL);
     if (loaded)
-        users_loaded (manager,NULL, NULL);
+        users_loaded (manager, NULL, NULL);
     else
         g_signal_connect(manager,
                         "notify::is-loaded",
@@ -139,20 +141,21 @@ static void SetupUsersList (void)
                          NULL);
 
 }
+
 int main(int argc, char **argv)
 {
-   bindtextdomain (GETTEXT_PACKAGE,LUNAR_CALENDAR_LOCALEDIR);
-    textdomain (GETTEXT_PACKAGE); 
+    bindtextdomain (GETTEXT_PACKAGE, LUNAR_CALENDAR_LOCALEDIR);
+    textdomain (GETTEXT_PACKAGE);
 
-    gtk_init(&argc, &argv);
+    gtk_init (&argc, &argv);
 
     /* Program exit processing */
     atexit(ExitHook);
     /* Check whether the process has been started */
-    if(ProcessRuning() == TRUE)
+    if (ProcessRuning() == TRUE)
     {
-        mate_uesr_admin_log("Info","The mate-user-admin process already exists");
-        exit(0);
+        mate_uesr_admin_log ("Info","The mate-user-admin process already exists");
+        exit (0);
     }
 
     SetupUsersList ();

@@ -38,6 +38,8 @@ struct _UserBasePrivate
     GtkWidget  *button_time;
     GtkWidget  *switch_login;
     GtkWidget  *button_group;
+
+    char       *time_text;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (UserBase, user_base, GTK_TYPE_GRID)
@@ -52,6 +54,7 @@ static void user_language_set_done (UserLanguage *chooser, GtkButton *button)
 
     g_free (name);
 }
+
 static void
 change_language (GtkButton   *button,
                  UserBase    *base)
@@ -196,7 +199,6 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
 {
     char       *lang;
     const char *lang_id;
-    const char *time;
     const char *label;
     int         PasswordType;
 
@@ -221,8 +223,8 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
 
     gtk_switch_set_state (GTK_SWITCH (base->priv->switch_login), GetUserAutoLogin (user));
 
-    time = GetLoginTimeText (user);
-    gtk_button_set_label (GTK_BUTTON (base->priv->button_time), time);
+    base->priv->time_text = GetLoginTimeText (user);
+    gtk_button_set_label (GTK_BUTTON (base->priv->button_time), base->priv->time_text);
 
     user_base_unblock_signal (base);
 }
@@ -235,24 +237,24 @@ user_base_fill (UserBase *base)
     /*user type*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Account Type"), TRUE);
-    gtk_grid_attach (GTK_GRID(base), label, 0 , 0 , 1 , 1);
+    gtk_grid_attach (GTK_GRID(base), label, 0, 0, 1, 1);
 
     /*drop-down select boxes*/
-    base->priv->combox = SetComboUserType (_("Standard"),_("Administrators"));
-    gtk_grid_attach(GTK_GRID(base) , base->priv->combox , 1 , 0 , 2 , 1);
+    base->priv->combox = SetComboUserType (_("Standard"), _("Administrators"));
+    gtk_grid_attach (GTK_GRID (base) , base->priv->combox, 1, 0, 2, 1);
     g_signal_connect (G_OBJECT (base->priv->combox),
-                    "changed",
-                     G_CALLBACK(ComboSelectUserType),
-                     base);
+                     "changed",
+                      G_CALLBACK (ComboSelectUserType),
+                      base);
 
    /*select language*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Language"), TRUE);
-    gtk_grid_attach (GTK_GRID(base) , label, 0 , 1 , 1 , 1);
+    gtk_grid_attach (GTK_GRID(base), label, 0, 1, 1, 1);
 
     base->priv->button_lang = gtk_button_new ();
-    gtk_grid_attach(GTK_GRID(base) ,base->priv->button_lang, 1 , 1 , 2 , 1);
-    g_signal_connect (base->priv->button_lang, 
+    gtk_grid_attach (GTK_GRID (base), base->priv->button_lang, 1, 1, 2, 1);
+    g_signal_connect (base->priv->button_lang,
                      "clicked",
                       G_CALLBACK (change_language),
                       base);
@@ -260,7 +262,7 @@ user_base_fill (UserBase *base)
     /*set password*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Password"), TRUE);
-    gtk_grid_attach (GTK_GRID(base), label, 0, 2, 1, 1);
+    gtk_grid_attach (GTK_GRID (base), label, 0, 2, 1, 1);
 
     base->priv->button_password = gtk_button_new ();
     g_signal_connect (base->priv->button_password,
@@ -272,22 +274,22 @@ user_base_fill (UserBase *base)
     /*auto login*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Automatic logon"), TRUE);
-    gtk_grid_attach (GTK_GRID (base) ,label, 0 , 3 , 1 , 1);
+    gtk_grid_attach (GTK_GRID (base), label, 0, 3, 1, 1);
 
     base->priv->switch_login = gtk_switch_new ();
-    gtk_grid_attach(GTK_GRID(base), base->priv->switch_login, 1, 3 , 1 , 1);
-    g_signal_connect(base->priv->switch_login,
-                    "state-set",
-                     G_CALLBACK(SwitchState),
-                     base);
+    gtk_grid_attach (GTK_GRID (base), base->priv->switch_login, 1, 3, 1, 1);
+    g_signal_connect (base->priv->switch_login,
+                     "state-set",
+                      G_CALLBACK (SwitchState),
+                      base);
 
     /*login time*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Login time"), TRUE);
-    gtk_grid_attach (GTK_GRID (base) ,label, 0 , 4 , 1 , 1);
+    gtk_grid_attach (GTK_GRID (base), label, 0, 4, 1, 1);
 
     base->priv->button_time = gtk_button_new ();
-    gtk_grid_attach(GTK_GRID(base) ,base->priv->button_time, 1 , 4 , 2 , 1);
+    gtk_grid_attach (GTK_GRID (base), base->priv->button_time, 1, 4, 2, 1);
     g_signal_connect (base->priv->button_time,
                      "clicked",
                       G_CALLBACK (ViewLoginHistory),
@@ -296,7 +298,7 @@ user_base_fill (UserBase *base)
     /*Group Manage*/
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("Group Manage"), TRUE);
-    gtk_grid_attach(GTK_GRID(base) ,label, 0 , 5 , 1 , 1);
+    gtk_grid_attach (GTK_GRID (base), label, 0, 5, 1, 1);
 
     base->priv->button_group = gtk_button_new_with_label (_("Setting Groups"));
     gtk_grid_attach (GTK_GRID (base), base->priv->button_group, 1, 5, 2, 1);
@@ -333,6 +335,11 @@ user_base_dispose (GObject *object)
     UserBase *base = USER_BASE (object);
 
     g_clear_object (&base->priv->user);
+    if (base->priv->time_text != NULL)
+    {
+        g_free (base->priv->time_text);
+        base->priv->time_text = NULL;
+    }
     G_OBJECT_CLASS (user_base_parent_class)->dispose (object);
 }
 
@@ -365,7 +372,7 @@ user_base_new (void)
 {
     UserBase *base;
 
-    base = g_object_new (USER_TYPE_BASE, 
+    base = g_object_new (USER_TYPE_BASE,
                         "column-homogeneous", TRUE,
                         "row-spacing", 10,
                         "column-spacing", 10,

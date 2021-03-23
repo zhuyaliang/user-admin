@@ -193,7 +193,7 @@ void RemoveUser (ActUser *user)
                        ERROR);
         return;
     }
-    nRet = MessageRepor t(_("Remove User"),
+    nRet = MessageReport (_("Remove User"),
                           _("Whether to remove the user's home directory"),
                           QUESTION);
     if (nRet == GTK_RESPONSE_NO)

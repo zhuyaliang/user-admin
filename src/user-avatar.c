@@ -359,6 +359,7 @@ user_avatar_dispose (GObject *object)
     if (avatar->priv->new_avatar_path != NULL)
     {
         g_free (avatar->priv->new_avatar_path);
+        avatar->priv->new_avatar_path = NULL;
     }
     G_OBJECT_CLASS (user_avatar_parent_class)->dispose (object);
 }
@@ -443,16 +444,16 @@ static gboolean add_list_faces_file (GListStore *faces)
     GFile  *file;
     char   *file_path;
 
-    if((dp = opendir(FACEDIR)) == NULL)
+    if ((dp = opendir (FACEDIR)) == NULL)
         return FALSE;
 
-    while((entry = readdir(dp)) != NULL)
+    while ((entry = readdir (dp)) != NULL)
     {
-        lstat(entry->d_name,&statbuf);
-        if(S_ISDIR(statbuf.st_mode))
+        lstat (entry->d_name, &statbuf);
+        if (S_ISDIR (statbuf.st_mode))
         {
-            if(strcmp(".",entry->d_name) == 0 ||strcmp("..",entry->d_name) == 0)
-            continue;
+            if (strcmp (".", entry->d_name) == 0 ||strcmp ("..", entry->d_name) == 0)
+                continue;
         }
         file_path = g_strdup_printf ("%s%s", FACEDIR, entry->d_name);
         file = g_file_new_for_path (file_path);
@@ -527,6 +528,7 @@ user_avatar_get_file_name (UserAvatar *avatar)
 {
     if (avatar->priv->new_avatar_path != NULL)
         return avatar->priv->new_avatar_path;
+
     return DEFAULT; 
 }
 
@@ -536,8 +538,8 @@ user_avatar_new (GtkWidget *button)
     UserAvatar *avatar;
 
     avatar = g_object_new (USER_TYPE_AVATAR,
-                         "relative-to", button,
-                          NULL);
+                          "relative-to", button,
+                           NULL);
 
     avatar->priv->button = button;
     create_avatar_menus (avatar);

@@ -90,12 +90,12 @@ static void SwitchState (GtkSwitch *switch_login,
                          gboolean   state,
                          UserBase  *base)
 {
-    GSList    *list;
-    GSList    *l;
+    GSList         *list;
+    GSList         *l;
     ActUserManager *um;
 
     um =  act_user_manager_get_default ();
-    if(state == TRUE)
+    if (state == TRUE)
     {
         list = act_user_manager_list_users (um);
         for (l = list; l != NULL; l = l->next)
@@ -110,7 +110,7 @@ static void SwitchState (GtkSwitch *switch_login,
         act_user_set_automatic_login (base->priv->user, TRUE);
     }
     else
-        act_user_set_automatic_login (base->priv->user,FALSE);
+        act_user_set_automatic_login (base->priv->user, FALSE);
 }
 
 static void user_password_set_done (UserPassword *dialog, GtkButton *button)
@@ -207,7 +207,7 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
     gtk_combo_box_set_active (GTK_COMBO_BOX (base->priv->combox), GetUserType (user));
 
     lang_id = GetUserLang (user);
-    if(lang_id == NULL)
+    if (lang_id == NULL)
     {
         gtk_button_set_label (GTK_BUTTON (base->priv->button_lang), _("No Settings"));
     }

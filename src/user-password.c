@@ -65,8 +65,8 @@ static void next_login_set_password (GtkRadioButton *button, gpointer data)
     gtk_widget_set_sensitive (dialog->verify_entry, FALSE);
     gtk_widget_set_sensitive (dialog->level_bar, FALSE);
     gtk_widget_set_sensitive (GTK_WIDGET (dialog->button_ok), TRUE);
-    gtk_entry_set_text (GTK_ENTRY(dialog->password_entry), "");
-    gtk_entry_set_text (GTK_ENTRY(dialog->verify_entry), "");
+    gtk_entry_set_text (GTK_ENTRY (dialog->password_entry), "");
+    gtk_entry_set_text (GTK_ENTRY (dialog->verify_entry), "");
     gtk_label_set_markup (GTK_LABEL (dialog->label_note), NULL);
     gtk_entry_set_icon_from_icon_name (GTK_ENTRY (dialog->password_entry),
                                        GTK_ENTRY_ICON_SECONDARY,
@@ -76,7 +76,7 @@ static void next_login_set_password (GtkRadioButton *button, gpointer data)
     if (dialog->check_password_time_id > 0)                //因为不需要检查密码所以移除定时器
     {
         g_source_remove (dialog->check_password_time_id);
-        dialog->check_password_time_id = 0;;
+        dialog->check_password_time_id = 0;
     }
 
     dialog->password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
@@ -88,21 +88,21 @@ static void check_password_strength (UserPassword *dialog)
     int         Level;
     const char *Message;
 
-    s = gtk_entry_get_text (GTK_ENTRY(dialog->password_entry));
-    if(strlen(s) == 0)
+    s = gtk_entry_get_text (GTK_ENTRY (dialog->password_entry));
+    if (strlen(s) == 0)
     {
         dialog->sensitive = FALSE;
         return;
     }
-    Level = GetPassStrength (s, NULL,NULL,&Message);
+    Level = GetPassStrength (s, NULL, NULL, &Message);
     gtk_level_bar_set_value (GTK_LEVEL_BAR (dialog->level_bar), Level);
      
     /*The new password meets the requirements*/
-    if(Message == NULL && Level > 1)
+    if (Message == NULL && Level > 1)
     {
-        gtk_entry_set_icon_from_icon_name(GTK_ENTRY(dialog->password_entry),
-                                          GTK_ENTRY_ICON_SECONDARY,
-                                         "emblem-ok-symbolic");
+        gtk_entry_set_icon_from_icon_name (GTK_ENTRY (dialog->password_entry),
+                                           GTK_ENTRY_ICON_SECONDARY,
+                                          "emblem-ok-symbolic");
         gtk_label_set_markup (GTK_LABEL (dialog->label_note), NULL);
         dialog->sensitive = TRUE;
 
@@ -110,15 +110,16 @@ static void check_password_strength (UserPassword *dialog)
     }
     dialog->sensitive = FALSE;
     SetLableFontType (dialog->label_note, "red", 10, Message, FALSE);
-    gtk_entry_set_icon_from_icon_name(GTK_ENTRY(dialog->password_entry),
-                                      GTK_ENTRY_ICON_SECONDARY,
-                                     "system-run");
+    gtk_entry_set_icon_from_icon_name (GTK_ENTRY (dialog->password_entry),
+                                       GTK_ENTRY_ICON_SECONDARY,
+                                      "system-run");
 }
+
 static void
 update_sensitivity (UserPassword *dialog)
 {
     if (!dialog->sensitive)
-        gtk_entry_set_text (GTK_ENTRY(dialog->verify_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (dialog->verify_entry), "");
     gtk_widget_set_sensitive (dialog->verify_entry, dialog->sensitive);
 }
 
@@ -156,16 +157,17 @@ setup_check_password (UserPassword *dialog)
 
     return TRUE;
 }
+
 static void now_set_password (GtkRadioButton *button, gpointer data)
 {
     UserPassword *dialog = USER_PASSWORD (data);
 
-    gtk_widget_set_sensitive (dialog->password_entry, TRUE);  //unlock widget
+    gtk_widget_set_sensitive (dialog->password_entry, TRUE);
     gtk_widget_set_sensitive (dialog->verify_entry, FALSE);
     gtk_widget_set_sensitive (dialog->level_bar, TRUE);
     gtk_widget_set_sensitive (dialog->button_ok, FALSE);
 
-    if (dialog->check_password_time_id > 0)                //因为不需要检查密码所以移除定时器
+    if (dialog->check_password_time_id > 0)
     {
         g_source_remove (dialog->check_password_time_id);
         dialog->check_password_time_id = 0;
@@ -267,18 +269,18 @@ user_password_init (UserPassword *dialog)
     gtk_grid_set_column_homogeneous (GTK_GRID (table), TRUE);
 
     label = gtk_label_new (_("Password"));
-    gtk_grid_attach (GTK_GRID (table) ,label, 0 , 0 , 1 , 1);
+    gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
 
     login_button = gtk_radio_button_new_with_label (NULL, _("Set up next time"));
     radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (login_button));
-    gtk_grid_attach (GTK_GRID (table) ,login_button, 0 , 1 , 5 , 1);
-    g_signal_connect(login_button,
+    gtk_grid_attach (GTK_GRID (table), login_button, 0, 1, 5, 1);
+    g_signal_connect (login_button,
                     "toggled",
                      G_CALLBACK (next_login_set_password),
                      dialog);
 
     now_button = gtk_radio_button_new_with_label (radio_group, _("Now set up"));
-    gtk_grid_attach (GTK_GRID (table) ,now_button, 0, 2, 5, 1);
+    gtk_grid_attach (GTK_GRID (table), now_button, 0, 2, 5, 1);
     g_signal_connect (now_button,
                      "toggled",
                       G_CALLBACK (now_set_password),
@@ -288,10 +290,10 @@ user_password_init (UserPassword *dialog)
 
     label = gtk_label_new (NULL);
     SetLableFontType (label, "gray", 11, _("User Password"), TRUE);
-    gtk_grid_attach (GTK_GRID (table) ,label, 0, 3, 1, 1);
+    gtk_grid_attach (GTK_GRID (table), label, 0, 3, 1, 1);
 
     dialog->password_entry = gtk_entry_new ();
-    gtk_entry_set_icon_from_icon_name (GTK_ENTRY (dialog->password_entry), 
+    gtk_entry_set_icon_from_icon_name (GTK_ENTRY (dialog->password_entry),
                                        GTK_ENTRY_ICON_SECONDARY,
                                       "system-run");
 
@@ -299,13 +301,13 @@ user_password_init (UserPassword *dialog)
                                      GTK_ENTRY_ICON_SECONDARY,
                                     _("generation password"));
     gtk_entry_set_max_length (GTK_ENTRY (dialog->password_entry), 20);
-    gtk_grid_attach (GTK_GRID (table) ,dialog->password_entry, 1 , 3 , 4 , 1);
+    gtk_grid_attach (GTK_GRID (table), dialog->password_entry, 1, 3, 4, 1);
 
     dialog->level_bar = gtk_level_bar_new ();
     gtk_level_bar_set_min_value (GTK_LEVEL_BAR (dialog->level_bar), 0.0);
     gtk_level_bar_set_max_value (GTK_LEVEL_BAR (dialog->level_bar), 5.0);
     gtk_level_bar_set_mode (GTK_LEVEL_BAR (dialog->level_bar), GTK_LEVEL_BAR_MODE_DISCRETE);
-    gtk_grid_attach (GTK_GRID (table), dialog->level_bar, 1 , 4 , 4 , 1);
+    gtk_grid_attach (GTK_GRID (table), dialog->level_bar, 1, 4, 4, 1);
 
     dialog->label_note = gtk_label_new (NULL);
     gtk_grid_attach (GTK_GRID (table), dialog->label_note, 0, 5, 4, 1);
@@ -318,19 +320,19 @@ user_password_init (UserPassword *dialog)
     gtk_entry_set_visibility (GTK_ENTRY (dialog->verify_entry), FALSE);
     gtk_entry_set_max_length (GTK_ENTRY(dialog->verify_entry),20);
     gtk_entry_set_visibility (GTK_ENTRY(dialog->verify_entry),FALSE);
-    gtk_grid_attach(GTK_GRID(table) ,dialog->verify_entry, 1 , 6 , 4 , 1);
-    g_signal_connect (G_OBJECT(dialog->password_entry),
+    gtk_grid_attach(GTK_GRID(table) ,dialog->verify_entry, 1, 6, 4, 1);
+    g_signal_connect (G_OBJECT (dialog->password_entry),
                      "icon-press",
                       G_CALLBACK(AutoGenera),
                       dialog->verify_entry);
 
     label = gtk_label_new(NULL);
-    gtk_grid_attach (GTK_GRID (table) ,label, 0 , 7 , 4 , 1);
+    gtk_grid_attach (GTK_GRID (table), label, 0, 7, 4, 1);
 
-    gtk_widget_set_sensitive (dialog->password_entry, FALSE);  //lock widget
+    gtk_widget_set_sensitive (dialog->password_entry, FALSE);
     gtk_widget_set_sensitive (dialog->verify_entry, FALSE);
     hseparator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
-    gtk_grid_attach(GTK_GRID(table) , hseparator , 0 , 8 , 5 , 1);
+    gtk_grid_attach(GTK_GRID(table), hseparator, 0, 8, 5, 1);
 }
 
 static void
@@ -362,11 +364,11 @@ user_password_response (GtkDialog *dia,
     switch (response_id) 
     {
     case GTK_RESPONSE_CLOSE:
-        CloseNewPassWindow(dialog);
+        CloseNewPassWindow (dialog);
         break;
     case GTK_RESPONSE_OK:
         SetNewPass(dialog);
-        CloseNewPassWindow(dialog);
+        CloseNewPassWindow (dialog);
         break;
     default:
         break;
@@ -400,8 +402,8 @@ UserPassword *
 user_password_new (ActUser *user)
 {
     UserPassword  *dialog;
-    int           password_type;
-    char         *label;
+    int            password_type;
+    char          *label;
 
     g_return_val_if_fail (ACT_IS_USER (user), NULL);
 

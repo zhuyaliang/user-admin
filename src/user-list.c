@@ -76,27 +76,27 @@ user_list_row_init (UserListRow *row)
     row->priv = user_list_row_get_instance_private (row);
     box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
     gtk_widget_set_size_request (box, 190, -1);
-    gtk_widget_set_halign(box, GTK_ALIGN_START);
-    gtk_widget_set_valign(box, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign (box, GTK_ALIGN_START);
+    gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
     gtk_container_add (GTK_CONTAINER (row), box);
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_pack_start (GTK_BOX(box), hbox, TRUE, TRUE, 0);
 
     row->priv->user_image = gtk_image_new();
-    gtk_box_pack_start(GTK_BOX(hbox),row->priv->user_image ,TRUE, TRUE, 6);
+    gtk_box_pack_start (GTK_BOX (hbox), row->priv->user_image, TRUE, TRUE, 6);
 
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_size_request (vbox, 110, -1);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 12);
 
     row->priv->real_name = create_user_list_row_label ();
-    gtk_box_pack_start(GTK_BOX(vbox),row->priv->real_name ,TRUE, TRUE, 1);
+    gtk_box_pack_start (GTK_BOX (vbox), row->priv->real_name, TRUE, TRUE, 1);
 
     row->priv->user_name = create_user_list_row_label ();
-    gtk_box_pack_start (GTK_BOX (vbox), row->priv->user_name ,TRUE, TRUE, 1);
+    gtk_box_pack_start (GTK_BOX (vbox), row->priv->user_name, TRUE, TRUE, 1);
 
-    gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL) ,TRUE, TRUE, 3);
+    gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), TRUE, TRUE, 3);
 
 }
 
@@ -109,12 +109,12 @@ user_list_row_class_init (UserListRowClass *klass)
 }
 
 GtkWidget *
-user_list_row_new (ActUser *Actuser)
+user_list_row_new (ActUser *user)
 {
     UserListRow *row;
 
     row = g_object_new (USER_LIST_TYPE_ROW, NULL);
-    g_set_object (&row->priv->user, Actuser);
+    g_set_object (&row->priv->user, user);
     user_list_row_set_data (row);
 
     return GTK_WIDGET (row);

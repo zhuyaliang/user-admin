@@ -105,7 +105,7 @@ static gboolean RealNameValidCheck (const gchar *name)
 ******************************************************************************/
 static void ModifyName (GtkEntry *entry, gpointer data)
 {
-    UserFace *face = USER_FACE (data);
+    UserFace    *face = USER_FACE (data);
     const gchar *NewName;
 
     NewName  = gtk_entry_get_text (entry);
@@ -172,13 +172,13 @@ user_face_init (UserFace *face)
 
     /* avatar button */
     face->priv->button = gtk_button_new ();
-    gtk_grid_attach(GTK_GRID(face) , face->priv->button, 0, 0, 8, 8);
+    gtk_grid_attach (GTK_GRID(face), face->priv->button, 0, 0, 8, 8);
 
     /*set real name*/
     face->priv->entry = gtk_entry_new ();
     gtk_widget_set_tooltip_text (face->priv->entry, _("Use Enter Key to Save Modifications"));
     gtk_entry_set_max_length (GTK_ENTRY (face->priv->entry), 48);
-    gtk_grid_attach(GTK_GRID(face) ,face->priv->entry, 8, 4, 1, 1);
+    gtk_grid_attach (GTK_GRID (face), face->priv->entry, 8, 4, 1, 1);
 }
 
 void user_face_fill (UserFace *face, ActUser *user)
@@ -190,11 +190,11 @@ void user_face_fill (UserFace *face, ActUser *user)
     GdkPixbuf  *pb2;
 
     /*set user icon 96 *96 */
-    pb = gdk_pixbuf_new_from_file (GetUserIcon (user),&error);
-    if(pb == NULL)
+    pb = gdk_pixbuf_new_from_file (GetUserIcon (user), &error);
+    if (pb == NULL)
     {
-        mate_uesr_admin_log("Warning","mate-user-admin user icon %s",error->message);
-        g_error_free(error);
+        mate_uesr_admin_log ("Warning","mate-user-admin user icon %s", error->message);
+        g_error_free (error);
     }
     pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
     image = gtk_image_new_from_pixbuf (pb2);

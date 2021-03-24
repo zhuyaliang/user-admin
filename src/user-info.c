@@ -64,9 +64,10 @@ const gchar * GetPasswordModeText (ActUser *user,int *Type)
 }
 const gchar * GetLoginTimeText (ActUser *user)
 {
-    gchar *text;
+    gchar     *text;
     GDateTime *date_time;
-    gint64 time;
+    gint64     time;
+
     time = act_user_get_login_time (user);
     if (act_user_is_logged_in (user))
     {
@@ -78,7 +79,7 @@ const gchar * GetLoginTimeText (ActUser *user)
         text = g_date_time_format (date_time, ("%m/%d %k:%M"));
         g_date_time_unref (date_time);
     }
-    else 
+    else
     {
         text = g_strdup ("—");
     }
@@ -88,66 +89,80 @@ const gchar * GetLoginTimeText (ActUser *user)
 const gchar *GetRealName (ActUser *user)
 {
     const gchar *name = NULL;
+
     name = act_user_get_real_name (user);
-    if(name == NULL)
+    if (name == NULL)
         name = act_user_get_user_name (user);
     return name;
 }
-guint GetUserUid(ActUser *user)
+
+guint GetUserUid (ActUser *user)
 {
     return act_user_get_uid(user);
-}    
+}
 
-const gchar *GetUserName(ActUser *user)
+const gchar *GetUserName (ActUser *user)
 {
     const gchar *name =NULL;
+
     name = act_user_get_user_name (user);
+
     return name;
 
 }
-const gchar *GetHomeName(ActUser *user)
+
+const gchar *GetHomeName (ActUser *user)
 {
     const gchar *name = NULL;
+
     name = act_user_get_home_dir (user);
-    
+
     return name;
 
 }
-const gchar *GetUserIcon(ActUser *user)
+
+const gchar *GetUserIcon (ActUser *user)
 {
     const gchar *Icon = NULL;
+
     Icon = act_user_get_icon_file (user);
-    if(access(Icon,F_OK)== 0)
+    if (access (Icon, F_OK)== 0)
         return Icon;
+
     return DEFAULT;
 }
-const char *GetUserLang(ActUser *user)
+
+const char *GetUserLang (ActUser *user)
 {
     const gchar *Lang = NULL;
 
     Lang = act_user_get_language(user);
-    if(strlen(Lang) <= 0)
+    if (strlen (Lang) <= 0)
         return NULL;
+
     return Lang;
 }
-gint GetUserType(ActUser *user)
+
+gint GetUserType (ActUser *user)
 {
     ActUserAccountType UserType;
 
     UserType = act_user_get_account_type (user);
-    if(UserType == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR)
+    if( UserType == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR)
         return ADMIN;
 
     return STANDARD;
 }
-gint GetUserAutoLogin(ActUser *user)
+
+gint GetUserAutoLogin (ActUser *user)
 {
     int Auto;
 
-    Auto = act_user_get_automatic_login(user);
+    Auto = act_user_get_automatic_login (user);
 
     return Auto;
 }
+
 static gint SortUsers (gconstpointer a, gconstpointer b)
 {
     ActUser *ua, *ub;
@@ -185,15 +200,15 @@ GSList *get_user_info_list (ActUserManager *manager)
     list = act_user_manager_list_users (manager);
     /*user number*/
     user_count = g_slist_length (list);
-    if(user_count <= 0)
+    if (user_count <= 0)
     {
         g_slist_free (list);
-        mate_uesr_admin_log("Error","mate-user-admin No available users");
-        MessageReport(_("Get User Info"), _("user count is 0"), ERROR);
+        mate_uesr_admin_log ("Error","mate-user-admin No available users");
+        MessageReport (_("Get User Info"), _("user count is 0"), ERROR);
 
         return NULL;
     }
-    mate_uesr_admin_log("Info","mate-user-admin user %d", user_count);
+    mate_uesr_admin_log ("Info","mate-user-admin user %d", user_count);
 
     /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);

@@ -75,7 +75,7 @@ user_list_row_init (UserListRow *row)
 
     row->priv = user_list_row_get_instance_private (row);
     box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    gtk_widget_set_size_request (box, 190, -1);
+    gtk_widget_set_size_request (box, 210, -1);
     gtk_widget_set_halign (box, GTK_ALIGN_START);
     gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
     gtk_container_add (GTK_CONTAINER (row), box);
@@ -87,7 +87,7 @@ user_list_row_init (UserListRow *row)
     gtk_box_pack_start (GTK_BOX (hbox), row->priv->user_image, TRUE, TRUE, 6);
 
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_set_size_request (vbox, 110, -1);
+    gtk_widget_set_size_request (vbox, 130, -1);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 12);
 
     row->priv->real_name = create_user_list_row_label ();

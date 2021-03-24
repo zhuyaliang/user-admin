@@ -129,10 +129,12 @@ user_face_dispose (GObject *object)
     if (face->priv->file_name != NULL)
     {
         g_free (face->priv->file_name);
+        face->priv->file_name = NULL;
     }
     if (face->priv->real_name != NULL)
     {
         g_free (face->priv->real_name);
+        face->priv->real_name = NULL;
     }
     G_OBJECT_CLASS (user_face_parent_class)->dispose (object);
 }

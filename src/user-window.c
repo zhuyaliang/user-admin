@@ -462,6 +462,7 @@ void user_window_remove_user_cb (ActUserManager *um,
 
 static gboolean update_new_user_info (UserWindow *win)
 {
+    g_print ("user name = %s\r\n",GetUserName (win->priv->user));
     user_window_update (win, win->priv->user);
     
     g_source_remove (win->priv->update_user_id);
@@ -486,7 +487,7 @@ void user_window_add_user_cb (ActUserManager *um,
 
     user_window_set_list_data (win, index);
 
-    win->priv->update_user_id = g_timeout_add (800, (GSourceFunc) update_new_user_info, win);
+    win->priv->update_user_id = g_timeout_add (1000, (GSourceFunc) update_new_user_info, win);
 
     gtk_widget_show_all (win->priv->list_box);
 }

@@ -261,7 +261,7 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
         in_use = FALSE;
         home_use = FALSE;
     }
-    else 
+    else
     {
         empty = FALSE;
         in_use = CheckUserNameUsed (UserName);
@@ -354,7 +354,7 @@ static gboolean check_user_name (UserManager *dialog)
     if(Message != NULL)
         SetLableFontType (dialog->priv->label_note, "red", 10, Message, FALSE);
     else
-    { 
+    {
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY(dialog->priv->name_entry),
                                            GTK_ENTRY_ICON_SECONDARY,
                                           "emblem-ok-symbolic");
@@ -435,9 +435,9 @@ static void close_dialog (GtkWidget *widget)
     gtk_widget_destroy (widget);
 }
 
-static void NewUserLoaded (ActUser         *user,
-                           GParamSpec      *pspec,
-                           UserManager     *dialog)
+static void set_new_user_base_info (ActUser         *user,
+                                    GParamSpec      *pspec,
+                                    UserManager     *dialog)
 {
     const char *NewUserLang;
     const char *Password;
@@ -466,7 +466,7 @@ static void NewUserLoaded (ActUser         *user,
 
 static void CreateUserDone (ActUserManager  *Manager,
                             GAsyncResult    *res,
-                            UserManager    *dialog)
+                            UserManager     *dialog)
 {
     GError  *error = NULL;
     ActUser *user;
@@ -481,9 +481,12 @@ static void CreateUserDone (ActUserManager  *Manager,
     }
     mate_uesr_admin_log ("Debug","Created user: %s success", act_user_get_user_name (user));
     if (act_user_is_loaded (user))
-        NewUserLoaded (user, NULL, dialog);
+        set_new_user_base_info (user, NULL, dialog);
     else
-        g_signal_connect (user, "notify::is-loaded", G_CALLBACK (NewUserLoaded), dialog);
+        g_signal_connect (user,
+                         "notify::is-loaded",
+                          G_CALLBACK (set_new_user_base_info),
+                          dialog);
 
 }
 
@@ -509,6 +512,11 @@ static void CreateLocalNewUser(UserManager *dialog)
     rn = gtk_entry_get_text (GTK_ENTRY (dialog->priv->real_entry));
     un = gtk_entry_get_text (GTK_ENTRY (dialog->priv->name_entry));
 
+    if (dialog->priv->name_time_id != 0)
+    {
+        g_source_remove (dialog->priv->name_time_id);
+        dialog->priv->name_time_id = 0;
+    }
     Manager = act_user_manager_get_default ();
     mate_uesr_admin_log ("Debug","username %s realname %s",
                          un, rn);

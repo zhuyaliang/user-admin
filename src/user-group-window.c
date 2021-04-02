@@ -546,7 +546,7 @@ static GtkWidget *vbox_widget_new (void)
     return box;
 }
 
-static GtkWidget *load_select_group (UserGroupWindow *win)
+static GtkWidget *load_select_group (UserGroupWindow *win, GtkWidget *button_lock)
 {
     GtkWidget    *vbox;
     GtkWidget    *vbox1;
@@ -591,6 +591,7 @@ static GtkWidget *load_select_group (UserGroupWindow *win)
                      "clicked",
                       G_CALLBACK (CloseGroupWindow),
                       win);
+    gtk_grid_attach (GTK_GRID (table), button_lock, 2, 1, 1, 1);
     return vbox;
 }
 
@@ -831,7 +832,7 @@ static void user_group_window_dispose (GObject *object)
         g_signal_handler_disconnect (win->priv->g_manager, win->priv->remove_id);
         win->priv->remove_id = 0;
     }
-
+    g_signal_handlers_disconnect_by_func (win->priv->permission, on_permission_changed, win);
     g_signal_emit (win, signals[WINDOW_CLOSED], 0);
     G_OBJECT_CLASS (user_group_window_parent_class)->dispose (object);
 }
@@ -883,7 +884,7 @@ void user_group_window_init (UserGroupWindow *group_window)
     gtk_notebook_set_tab_pos (GTK_NOTEBOOK (note_book), GTK_POS_TOP);
 
     label = gtk_label_new (_("Switch Groups"));
-    box = load_select_group (group_window);
+    box = load_select_group (group_window, button_lock);
     gtk_notebook_append_page (GTK_NOTEBOOK (note_book), box, label);
 
     label = gtk_label_new (_("Create Groups"));
@@ -925,7 +926,6 @@ UserGroupWindow *user_group_window_new (const char *user_name,
         gtk_widget_destroy (GTK_WIDGET (group_window));
         return NULL;
     }
-
     update_sensitive (group_window);
     user_group_window_update_list_store (group_window);
     user_list_store_update (user_list, group_window->priv->UserStore);

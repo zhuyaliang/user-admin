@@ -173,9 +173,10 @@ static void DeleteOldUserDone (ActUserManager *manager,
 ******************************************************************************/
 void RemoveUser (ActUser *user)
 {
-    int             nRet;
-    gboolean        RemoveType = TRUE;
-    ActUserManager *Manager;
+    int              nRet;
+    gboolean         RemoveType = TRUE;
+    ActUserManager  *Manager;
+    g_autofree char *title = NULL;
 
     Manager = act_user_manager_get_default ();
     if (act_user_get_uid (user) == getuid ())
@@ -193,8 +194,9 @@ void RemoveUser (ActUser *user)
                        ERROR);
         return;
     }
-    nRet = MessageReport (_("Remove User"),
-                          _("Whether to remove the user's home directory"),
+    title = g_strdup_printf (_("Remove '%s' user"), act_user_get_user_name (user));
+    nRet = MessageReport (title,
+                         _("Whether to remove the user's home directory"),
                           QUESTION);
     if (nRet == GTK_RESPONSE_NO)
     {

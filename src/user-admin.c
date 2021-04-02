@@ -347,12 +347,18 @@ static gboolean check_user_name (UserManager *dialog)
         gtk_entry_set_icon_from_icon_name(GTK_ENTRY(dialog->priv->real_entry),
                                           GTK_ENTRY_ICON_SECONDARY,
                                           NULL);
-        gtk_widget_set_sensitive (dialog->priv->button, FALSE);
+        dialog->priv->sensitive = FALSE;
     }
 
     Valid = UserNameValidCheck (user_name_text, &Message);
     if(Message != NULL)
+    {
         SetLableFontType (dialog->priv->label_note, "red", 10, Message, FALSE);
+        gtk_entry_set_icon_from_icon_name(GTK_ENTRY(dialog->priv->name_entry),
+                                          GTK_ENTRY_ICON_SECONDARY,
+                                          NULL);
+        gtk_widget_set_sensitive (dialog->priv->button, FALSE);
+    }
     else
     {
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY(dialog->priv->name_entry),

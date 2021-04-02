@@ -116,7 +116,6 @@ static void update_permission (UserWindow *win)
     gtk_widget_set_sensitive (GTK_WIDGET (win->priv->face), is_authorized);
     user_base_set_public_sensitive (win->priv->base, is_authorized);
     user_base_set_private_sensitive (win->priv->base, is_authorized);
-    gtk_widget_set_visible (win->priv->popover,!is_authorized);
 
     if (is_authorized == 0 && self_selected == 1)
     {
@@ -132,6 +131,11 @@ static void on_permission_changed (GPermission *permission,
     UserWindow *userwin = USER_WINDOW (data);
 
     update_permission(userwin);
+}
+
+static void button_active_changed (GtkButton *button, UserWindow *win)
+{
+    gtk_widget_set_visible (win->priv->popover, FALSE);
 }
 
 static void user_window_set_permission (UserWindow *win)
@@ -150,6 +154,11 @@ static void user_window_set_permission (UserWindow *win)
         g_signal_connect (win->priv->permission,
                         "notify",
                          G_CALLBACK (on_permission_changed),
+                         win);
+
+        g_signal_connect (win->priv->button_lock,
+                        "clicked",
+                         G_CALLBACK (button_active_changed),
                          win);
     }
     else

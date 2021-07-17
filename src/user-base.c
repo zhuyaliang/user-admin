@@ -39,7 +39,6 @@ struct _UserBasePrivate
     GtkWidget  *switch_login;
     GtkWidget  *button_group;
 
-    char       *time_text;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (UserBase, user_base, GTK_TYPE_GRID)
@@ -200,6 +199,7 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
     char       *lang;
     const char *lang_id;
     const char *label;
+    g_autofree char *time_text = NULL;
     int         PasswordType;
 
     user_base_block_signal (base);
@@ -223,8 +223,8 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
 
     gtk_switch_set_state (GTK_SWITCH (base->priv->switch_login), GetUserAutoLogin (user));
 
-    base->priv->time_text = GetLoginTimeText (user);
-    gtk_button_set_label (GTK_BUTTON (base->priv->button_time), base->priv->time_text);
+    time_text = GetLoginTimeText (user);
+    gtk_button_set_label (GTK_BUTTON (base->priv->button_time), time_text);
 
     user_base_unblock_signal (base);
 }
@@ -335,11 +335,6 @@ user_base_dispose (GObject *object)
     UserBase *base = USER_BASE (object);
 
     g_clear_object (&base->priv->user);
-    if (base->priv->time_text != NULL)
-    {
-        g_free (base->priv->time_text);
-        base->priv->time_text = NULL;
-    }
     G_OBJECT_CLASS (user_base_parent_class)->dispose (object);
 }
 

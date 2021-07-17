@@ -322,7 +322,7 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
 static gboolean check_user_name (UserManager *dialog)
 {
     gboolean    Valid;
-    char       *Message = NULL;
+    g_autofree gchar *message = NULL;
     const char *user_name_text;
     const char *real_name_text;
     const char *FixedNote = _("This will be used to name your home folder and can't be changed");
@@ -352,10 +352,10 @@ static gboolean check_user_name (UserManager *dialog)
         dialog->priv->sensitive = FALSE;
     }
 
-    Valid = UserNameValidCheck (user_name_text, &Message);
-    if(Message != NULL)
+    Valid = UserNameValidCheck (user_name_text, &message);
+    if(message != NULL)
     {
-        SetLableFontType (dialog->priv->label_note, "red", 10, Message, FALSE);
+        SetLableFontType (dialog->priv->label_note, "red", 10, message, FALSE);
         gtk_entry_set_icon_from_icon_name(GTK_ENTRY(dialog->priv->name_entry),
                                           GTK_ENTRY_ICON_SECONDARY,
                                           NULL);

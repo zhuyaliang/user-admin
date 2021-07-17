@@ -201,7 +201,7 @@ static void user_window_list_select_user (GtkListBox    *list_box,
 static void user_image_changed_cb (UserFace *face, UserWindow *win)
 {
     char      *file_name;
-    GdkPixbuf *pb;
+    g_autoptr(GdkPixbuf) pb = NULL;
 
     file_name = user_face_get_image_name (face);
     act_user_set_icon_file (win->priv->user, file_name);

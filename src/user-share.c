@@ -420,13 +420,12 @@ void AutoGenera (GtkEntry            *entry,
                  gpointer             data)
 {
 
-    char *NewPassWord;
+    g_autofree char *new_password = NULL;
 
-    gtk_entry_set_visibility(GTK_ENTRY(entry),TRUE);
-    pwquality_generate (get_pwq (), 0, &NewPassWord);
-    gtk_entry_set_text(GTK_ENTRY(entry),NewPassWord);
-    gtk_entry_set_text(GTK_ENTRY(data),NewPassWord);
-
+    gtk_entry_set_visibility (GTK_ENTRY (entry), TRUE);
+    pwquality_generate (get_pwq (), 0, &new_password);
+    gtk_entry_set_text (GTK_ENTRY (entry), new_password);
+    gtk_entry_set_text (GTK_ENTRY (data), new_password);
 }
 
 /******************************************************************************

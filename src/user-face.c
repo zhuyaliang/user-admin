@@ -47,7 +47,7 @@ static void user_avatar_changed_cb (UserAvatar *avatar, UserFace *face)
     GtkWidget *image;
     char      *file_name;
     g_autoptr(GdkPixbuf) pb = NULL;
-    GdkPixbuf *pb2;
+    g_autoptr(GdkPixbuf) pb2 = NULL;
 
     file_name = user_avatar_get_file_name (avatar);
     /*Update the home page picture*/
@@ -56,6 +56,10 @@ static void user_avatar_changed_cb (UserAvatar *avatar, UserFace *face)
     image = gtk_image_new_from_pixbuf(pb2);
     gtk_button_set_image(GTK_BUTTON(face->priv->button), image);
 
+    if (face->priv->file_name != NULL)
+    {
+        g_free (face->priv->file_name);
+    }
     face->priv->file_name = g_strdup (file_name);
     g_signal_emit (face, signals[IMAGE_CHANGED], 0);
 
@@ -189,7 +193,7 @@ void user_face_fill (UserFace *face, ActUser *user)
     GtkWidget  *image;
     GError     *error = NULL;
     g_autoptr(GdkPixbuf) pb = NULL;
-    GdkPixbuf  *pb2;
+    g_autoptr(GdkPixbuf) pb2 = NULL;
 
     /*set user icon 96 *96 */
     pb = gdk_pixbuf_new_from_file (GetUserIcon (user), &error);
@@ -241,7 +245,7 @@ void user_face_update (UserFace  *face,
 {
     GtkWidget *image;
     g_autoptr(GdkPixbuf) pb = NULL;
-    GdkPixbuf *pb2;
+    g_autoptr(GdkPixbuf) pb2 = NULL;
 
     pb = gdk_pixbuf_new_from_file (image_name, NULL);
     pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);

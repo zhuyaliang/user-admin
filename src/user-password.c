@@ -349,8 +349,8 @@ user_password_destroy (GtkWidget *obj)
 
     if (dialog->label != NULL)
     {
-        dialog->label = NULL;
         g_free (dialog->label);
+        dialog->label = NULL;
     }
 }
 

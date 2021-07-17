@@ -52,7 +52,7 @@ static void thumbnail_preview (GtkFileChooser  *chooser,
                               MateDesktopThumbnailFactory *thumbnail)
 {
     char      *uri;
-    GdkPixbuf *pixbuf = NULL;
+    g_autoptr(GdkPixbuf) pixbuf = NULL;
     char      *mime_type = NULL;
     GFile     *file;
     GFileInfo *file_info;
@@ -429,7 +429,8 @@ static void face_widget_activated (GtkFlowBox      *flowbox,
     image = gtk_bin_get_child (GTK_BIN (child));
     filename = g_object_get_data (G_OBJECT (image), "filename");
 
-    avatar->priv->new_avatar_path = NULL;
+    if (avatar->priv->new_avatar_path != NULL)
+        g_free (avatar->priv->new_avatar_path);
     avatar->priv->new_avatar_path = g_strdup (filename);
 
     g_signal_emit (avatar, signals[AVATAR_CHANGED], 0);

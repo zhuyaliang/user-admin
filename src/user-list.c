@@ -32,7 +32,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (UserListRow, user_list_row, GTK_TYPE_LIST_BOX_ROW)
 void
 user_list_row_set_data (UserListRow *row)
 {
-    GdkPixbuf   *face;
+    g_autoptr(GdkPixbuf) face = NULL;
     const char  *user_image;
     const char  *real_name;
     const char  *user_name;

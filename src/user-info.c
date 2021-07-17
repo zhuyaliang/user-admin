@@ -55,12 +55,12 @@ const gchar * GetPasswordModeText (ActUser *user,int *Type)
                 text = ("None");
                 *Type = NEWPASS;
                     break;
-                default:
+            default:
                     g_assert_not_reached ();
         }
     }
 
-        return text;
+    return text;
 }
 const gchar * GetLoginTimeText (ActUser *user)
 {

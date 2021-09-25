@@ -215,20 +215,29 @@ void SetLableFontType(GtkWidget  *Lable ,
 {
     char *LableTypeBuf;
 
-    if(Blod)
+    if (Color == NULL)
     {
-        LableTypeBuf = g_strdup_printf ("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
-                         Color,
+        LableTypeBuf = g_strdup_printf ("<span weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
                          FontSzie,
                          Word);
     }
     else
     {
-        LableTypeBuf = g_strdup_printf("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
-                        Color,
-                        FontSzie,
-                        Word);
+        if(Blod)
+        {
+            LableTypeBuf = g_strdup_printf ("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
+                             Color,
+                             FontSzie,
+                             Word);
+        }
+        else
+        {
+            LableTypeBuf = g_strdup_printf("<span foreground=\'%s\'weight=\'light\'font_desc=\'%d\'>%s</span>",
+                            Color,
+                            FontSzie,
+                            Word);
 
+        }
     }
     gtk_label_set_markup(GTK_LABEL(Lable),LableTypeBuf);
     g_free(LableTypeBuf);

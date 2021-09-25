@@ -44,8 +44,8 @@ user_list_row_set_data (UserListRow *row)
     face = SetUserFaceSize (user_image, 50);
     gtk_image_set_from_pixbuf (GTK_IMAGE (row->priv->user_image),face);
 
-    SetLableFontType (row->priv->real_name, "black", 14, real_name, TRUE);
-    SetLableFontType (row->priv->user_name, "black", 11, user_name, FALSE);
+    SetLableFontType (row->priv->real_name, NULL, 14, real_name, TRUE);
+    SetLableFontType (row->priv->user_name, NULL, 11, user_name, FALSE);
 }
 
 static void

@@ -6,7 +6,6 @@ subdir('mate-user-admin')
 i18n = import('i18n')
 
 i18n.merge_file(
-  'mate-user-admin-desktop',
   input: 'mate-user-admin.desktop.in',
   output: 'mate-user-admin.desktop',
   install: true,
@@ -16,7 +15,6 @@ i18n.merge_file(
 )
 polkit = 'org.mate.user.admin.policy'
 i18n.merge_file(
-  polkit,
   input: polkit + '.in',
   output: polkit,
   po_dir: join_paths(meson.source_root(), 'po'),
@@ -26,7 +24,6 @@ i18n.merge_file(
 
 appdata = 'mate-user-admin.appdata.xml'
 i18n.merge_file(
-  polkit,
   input: appdata + '.in',
   output: appdata,
   po_dir: join_paths(meson.source_root(), 'po'),

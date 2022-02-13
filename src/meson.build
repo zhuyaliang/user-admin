@@ -18,20 +18,6 @@ sources = [
 'user-language.c',
 ]
 
-account_src = gnome.gdbus_codegen(
-  'account-generated',
-  'org.freedesktop.Accounts.xml',
-  interface_prefix : 'org.freedesktop.',
-  namespace : 'Admin'
-)
-
-account_user_src = gnome.gdbus_codegen(
-  'account-user-generated',
-  'org.freedesktop.Accounts.User.xml',
-  interface_prefix : 'org.freedesktop.',
-  namespace : 'Admin'
-  )
-
 executable('mate-user-admin',
   sources : sources,
   dependencies : [gtk_deps, pwquality_deps, act_deps, gas_deps, crypt_deps, md_deps,polkit_deps,fc_deps],

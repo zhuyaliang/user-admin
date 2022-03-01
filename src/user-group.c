@@ -111,8 +111,8 @@ gboolean user_group_remove_group (GasGroupManager *ggm,
                                           error);
 }
 
-gboolean user_group_user_is_group (UserGroup  *group,
-                                  const gchar *user)
+gboolean user_group_user_is_group (UserGroup   *group,
+                                   const gchar *user)
 {
     g_return_val_if_fail (USER_IS_GROUP (group), FALSE);
     g_return_val_if_fail (user != NULL, FALSE);
@@ -127,7 +127,7 @@ gboolean user_group_is_primary_group (UserGroup *group)
     return gas_group_is_primary_group (group->priv->gas);
 }
 
-void add_user_to_new_group(GSList *list, GasGroup *gas)
+void add_user_to_new_group (GSList *list, GasGroup *gas)
 {
     GSList     *node;
     const char *name;
@@ -146,13 +146,13 @@ GSList *user_group_get_group_list (GasGroupManager *g_manager)
     UserGroup *usergroup;
 
     list = gas_group_manager_list_groups (g_manager);
-    for(l = list; l ; l = l->next)
+    for (l = list; l ; l = l->next)
     {
         usergroup = user_group_new (l->data);
 
-        if(usergroup != NULL)
+        if (usergroup != NULL)
         {
-            group_list = g_slist_append (group_list, g_object_ref(usergroup));
+            group_list = g_slist_append (group_list, g_object_ref (usergroup));
         }
     }
     g_slist_free (list);

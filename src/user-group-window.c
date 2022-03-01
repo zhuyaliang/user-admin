@@ -78,6 +78,7 @@ static gboolean CheckGroupNameUsed (const gchar *name)
 
     return grent != NULL;
 }
+
 static gboolean CheckGroupName (const gchar *name, gchar **Message)
 {
     gboolean empty;
@@ -140,10 +141,11 @@ static void CloseGroupWindow (GtkWidget *widget, gpointer data)
 {
     gtk_widget_destroy (GTK_WIDGET (data));
 }
-static gboolean restartlist  (GtkTreeModel *model,
-                              GtkTreePath  *path,
-                              GtkTreeIter  *iter,
-                              gpointer      data)
+
+static gboolean restartlist (GtkTreeModel *model,
+                             GtkTreePath  *path,
+                             GtkTreeIter  *iter,
+                             gpointer      data)
 {
     gtk_list_store_set (GTK_LIST_STORE (model),
                         iter,
@@ -152,6 +154,7 @@ static gboolean restartlist  (GtkTreeModel *model,
                         -1);
     return FALSE;
 }
+
 static void clearconfigdata (UserGroupWindow *win)
 {
     GtkTreeModel *model;
@@ -281,6 +284,26 @@ static void UserSelectGroup (GtkCellRendererToggle *cell,
     gtk_tree_path_free (path);
 }
 
+static GSList *remove_list_element (GSList *list, char *name)
+{
+    guint i;
+    guint length;
+    const char *data;
+
+    length = g_slist_length (list);
+    for (i = 0; i < length; i++)
+    {
+        data = g_slist_nth_data (list, i);
+        if (g_strcmp0 (data, name) == 0)
+        {
+            list = g_slist_remove_all (list, data);
+            break;
+        }
+    }
+
+    return list;
+}
+
 static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
                                  gchar                 *path_str,
                                  gpointer               data)
@@ -291,13 +314,13 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     GtkTreeIter      iter;
     GtkTreePath     *path;
     gboolean         fixed;
-    const gchar     *name;
+    char            *name = NULL;
 
     model = gtk_tree_view_get_model (treeview);
     path  = gtk_tree_path_new_from_string (path_str);
     /* get toggled iter */
     gtk_tree_model_get_iter (model, &iter, path);
-    gtk_tree_model_get (model, &iter, COLUMN_FIXED,   &fixed, -1);
+    gtk_tree_model_get (model, &iter, COLUMN_FIXED, &fixed, -1);
     gtk_tree_model_get (model, &iter, COLUMN_NAME, &name, -1);
     if (fixed == FALSE)
     {
@@ -305,9 +328,11 @@ static void NewGroupSelectUsers (GtkCellRendererToggle *cell,
     }
     else
     {
-        win->priv->NewGroupUsers = g_slist_remove (win->priv->NewGroupUsers, name);
+        win->priv->NewGroupUsers = remove_list_element (win->priv->NewGroupUsers, name);
+        g_free (name);
     }
     fixed ^= 1;
+
     gtk_list_store_set (GTK_LIST_STORE (model), &iter, COLUMN_FIXED, fixed, -1);
     gtk_tree_path_free (path);
 }
@@ -419,7 +444,7 @@ static void create_tree_text_renderer (GtkTreeView *tree,
     GtkCellRenderer   *renderer;
     GtkTreeViewColumn *column;
 
-    renderer = gtk_cell_renderer_text_new (); 
+    renderer = gtk_cell_renderer_text_new ();
     column = gtk_tree_view_column_new_with_attributes (name,
                                                        renderer,
                                                       "text",
@@ -520,6 +545,7 @@ static GtkWidget *grid_widget_new (void)
 
     return table;
 }
+
 static GtkWidget *scrolled_widget_new (void)
 {
     GtkWidget *Scrolled;
@@ -785,7 +811,6 @@ static void user_group_add_cb (GasGroupManager   *g_manager,
                                UserGroupWindow   *win)
 {
     UserGroup *group;
-
     add_user_to_new_group (win->priv->NewGroupUsers, gas);
 
     group = user_group_new (gas);
@@ -839,7 +864,7 @@ static void user_group_window_dispose (GObject *object)
 
 void user_group_window_class_init (UserGroupWindowClass *klass)
 {
-    GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
     object_class->dispose = user_group_window_dispose;
 
@@ -865,7 +890,6 @@ void user_group_window_init (UserGroupWindow *group_window)
     gtk_container_set_border_width (GTK_CONTAINER (group_window), 10);
     group_window->priv->permission = polkit_permission_new_sync (USER_GROUP_PERMISSION, NULL, NULL, &error);
     group_window->priv->NewGroupUsers = NULL;
-    
     if (group_window->priv->permission == NULL)
     {
         mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_GROUP_PERMISSION, error->message);
@@ -911,6 +935,7 @@ UserGroupWindow *user_group_window_new (const char *user_name,
     group_window->priv->user_name = g_strdup (user_name);
     group_window->priv->g_manager = user_group_start_group_manager ();
     group_window->priv->group_list = user_group_get_group_list (group_window->priv->g_manager);
+
     group_window->priv->add_id = g_signal_connect (group_window->priv->g_manager,
                                                   "group-added",
                                                    G_CALLBACK (user_group_add_cb),

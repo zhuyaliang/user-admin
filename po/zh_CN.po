@@ -233,7 +233,7 @@ msgstr "混合密码可以提高安全性"
 
 #: src/user-admin.c:788
 msgid "Now set the password"
-msgstr "现在社设置密码"
+msgstr "现在设置密码"
 
 #: src/user-admin.c:864
 msgid "Create New User"

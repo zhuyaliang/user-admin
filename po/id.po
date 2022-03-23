@@ -1,577 +1,574 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Translation of mate-user-admin into Indonesian
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-# Translators:
-# Ibnu Daru Aji, 2019
-# Willy Sudiarto Raharjo <willysr@slackware-id.org>, 2019
-# Hatta.z, 2019
-# Febrian Setianto (Feber) <febrian.setianto@gmail.com>, 2019
-# Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# 
-#, fuzzy
+#
+# Andika Triwidada <andika@gmail.com>, 2022
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
-"PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
+"PO-Revision-Date: 2022-03-23 11:33+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian (https://www.transifex.com/mate/teams/13566/id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr ""
+msgstr "Mengelola akun pengguna"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr ""
+msgstr "Otentikasi diperlukan untuk mengubah data pengguna"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "Manajer MATE"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Mengelola Pengguna dan Grup Lokal Linux"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
-"Mate Manager is a graphical application that manages local users and groups."
-" It can add and delete local users, change user name, user type, user "
+"Mate Manager is a graphical application that manages local users and groups. "
+"It can add and delete local users, change user name, user type, user "
 "language, user password, automatic login. You can view the user's login "
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Manajer Mate adalah aplikasi grafis yang mengelola pengguna dan grup lokal. "
+"Ini bisa menambah dan menghapus pengguna lokal, mengubah nama pengguna, tipe "
+"pengguna, bahasa pengguna, kata sandi pengguna, login otomatis. Anda dapat "
+"melihat rekaman masuk pengguna. Dengan bekerja dengan group-service, "
+"kelompok pengguna dapat dikelola, seperti menambah/menghapus grup yang ada "
+"dan membuat/menghapus grup baru."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr ""
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr ""
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
-msgstr ""
+msgstr "buka berkas"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
-msgstr ""
+msgstr "Membuat berkas pid gagal"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
-msgstr ""
+msgstr "tulis berkas"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
-msgstr ""
+msgstr "gagal menulis berkas pid"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
-msgstr ""
+msgstr "gagal membuka berkas pid"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
-msgstr ""
+msgstr "baca berkas"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
-msgstr ""
+msgstr "gagal membaca berkas pid"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr ""
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr ""
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Standar"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr ""
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Bahasa"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr ""
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Sandi"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr ""
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr ""
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr ""
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr ""
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr ""
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr ""
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr ""
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Tutup"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Konfirmasi"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr ""
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr ""
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr ""
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
-msgstr ""
+msgstr "Hapus Pengguna"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "pengguna masih login"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "Hapus pengguna '%s'"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "Apakah akan menghapus direktori rumah pengguna"
 
-#: src/user-admin.c:313
+# typo, need space after dot
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "Pengulangan nama pengguna. Silakan coba yang lain"
 
-#: src/user-admin.c:317
+# typo: need space after dot
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Pengulangan nama rumah pengguna. Silakan coba yang lain"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Nama pengguna tidak dapat dimulai dengan - ."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Nama pengguna hanya boleh terdiri dari huruf besar dan kecil \n"
+"dari a-z, digit, dan karakter berikut: . - _"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
+"Ini akan digunakan untuk menamai folder rumah Anda dan tidak dapat diubah"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "Membuat Pengguna"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
-msgstr ""
+#: src/user-admin.c:570
+msgid "User Name"
+msgstr "Nama Pengguna"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Nama Lengkap"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Tipe Akun"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Standar"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Administrator"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "Kata sandi yang dimasukkan dua kali berbeda"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr ""
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "Kata sandi campuran meningkatkan keamanan"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Kata Sandi"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Siapkan kali berikutnya"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
-msgstr ""
+msgstr "Sekarang mengatur kata sandi"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "pembuatan kata sandi"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Konfirmasi"
+
+#: src/user-admin.c:919 src/user-group-window.c:588 src/user-group-window.c:654
+#: src/user-group-window.c:712 src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Tutup"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Buat Pengguna Baru"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr ""
+msgstr "Buat Berkas Pangkas"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "gagal membuat berkas sementara untuk data gambar"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "Pilih"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
-msgstr ""
+msgstr "Muat Gambar Lokal"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "Ramban untuk lebih banyak gambar"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "B_uka"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
-msgstr ""
+msgstr "Gambar Lokal"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
-msgstr ""
+msgstr "Daftar avatar"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "Tidak ada alamat untuk menyimpan foto"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Tidak Ada Pengaturan"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Bahasa"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Logon otomatis"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "Waktu login"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Kelola Grup"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Mengatur Grup"
+
+#: src/user-face.c:120
 msgid "Change Name"
-msgstr ""
+msgstr "Ganti Nama"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Silakan masukkan karakter yang valid"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Gunakan Tombol Enter untuk Menyimpan Modifikasi"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr ""
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr ""
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr ""
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "Pesan"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr ""
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr ""
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr ""
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr ""
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr ""
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr ""
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr ""
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr ""
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr ""
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr ""
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr ""
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr ""
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr ""
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr ""
-
-#: src/user-group.c:163
+# typo: need space after dot
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Pengulangan nama grup. Silakan coba yang lain"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "Nama grup tidak dapat dimulai dengan - ."
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Karakter pertama dari nama grup perlu menggunakan huruf"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Nama grup hanya boleh berupa huruf besar dan kecil \n"
+"dari a-z, digit, dan karakter berikut: . - _"
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
-msgstr ""
+msgstr "Buat Grup Baru"
 
-#: src/user-group.c:276
+# typo: Faild -> Failed
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "Gagal Membuat Grup Baru"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr ""
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "Hapus Grup"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr ""
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Apakah akan menghapus grup yang dipilih"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr ""
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr ""
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ID Pengguna"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Hapus"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Inisialisasi manajemen grup"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Inisialisasi gagal, silakan lihat fungsi \n"
+" Antar Muka Layanan Manajemen Grup"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Gagal menghubungi layanan grup"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Pastikan bahwa group-service dipasang dan diaktifkan.\n"
+" URL: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr ""
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr ""
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Klik tombol buka kunci pada halaman \"switch-group\""
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr ""
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Nama Grup"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr ""
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "ID Grup"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
-msgstr ""
+msgstr "Nama Grup Baru"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Silakan pilih pengguna untuk ditambahkan ke grup baru"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Nama Pengguna"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ID Pengguna"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Hapus"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "ID grup"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Buat Grup Pengguna"
+
+# typo: need space after comma
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups list."
+msgstr "Sukses Membuat Grup Pengguna, Silakan lihat akhir daftar switch-group."
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
-msgstr ""
+msgstr "Beralih Grup"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
-msgstr ""
+msgstr "Buat Grup"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
-msgstr ""
+msgstr "Hapus Grup"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Pengguna Saat Ini - %s"
+
+#: src/user-history.c:40
 msgid "This Week"
-msgstr ""
+msgstr "Minggu Ini"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
-msgstr ""
+msgstr "Minggu Lalu"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "Hari ini"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
-msgstr ""
+msgstr "Kemarin"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
-msgstr ""
+msgstr "%e %b"
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%e %b %Y"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
-msgstr ""
+msgstr "Sesi Berakhir"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
-msgstr ""
+msgstr "Sesi Dimulai"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — Aktivitas Akun"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
-msgstr ""
+msgstr "sebelumnya"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
-msgstr ""
+msgstr "berikutnya"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "Akun dinonaktifkan"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Dapatkan Info Pengguna"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "cacah pengguna adalah 0"
+
+#: src/user-language.c:195
 msgid "More…"
-msgstr ""
+msgstr "Lebih banyak…"
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
-msgstr ""
+msgstr "Tak ada bahasa yang ditemukan"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "Selesai"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "Kata sandi tidak cocok."
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Sekarang telah siap"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Kata Sandi Pengguna"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "_Return"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "Pesan"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "Kata sandi baru harus berbeda dari yang lama"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "Cobalah mengubah beberapa huruf dan angka"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "Cobalah mengubah kata sandi sedikit lebih lagi"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "Kata sandi tanpa nama pengguna Anda akan lebih kuat"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "Cobalah untuk menghindari menggunakan nama Anda di kata sandi"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
 msgstr ""
+"Cobalah untuk menghindari beberapa kata yang disertakan dalam kata sandi"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "Cobalah hindari kata-kata umum"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "Cobalah untuk menghindari penataan ulang kata yang ada"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "Cobalah untuk menggunakan lebih banyak angka"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "Cobalah untuk menggunakan lebih banyak huruf besar"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "Cobalah untuk menggunakan lebih banyak huruf kecil"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr "Coba gunakan karakter khusus lainnya, seperti tanda baca"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Cobalah untuk menggunakan campuran huruf, angka, dan tanda baca"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "Cobalah untuk menghindari mengulangi karakter yang sama"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Cobalah menghindari mengulang karakter bertipe sama: Anda perlu mencampur "
+"huruf, angka, dan tanda baca."
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Cobalah untuk menghindari urutan seperti 1234 atau abcd"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "Panjang kata sandi perlu lebih dari 8 karakter"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr "Beberapa pengaturan harus dibuka sebelum dapat diubah"
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Tambahkan User"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Manajer berkas untuk lingkungan desktop MATE"

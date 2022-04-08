@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2019
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>, 2019\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>, 2021\n"
 "Language-Team: Serbian (https://www.transifex.com/mate/teams/13566/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,19 +24,19 @@ msgstr ""
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr ""
+msgstr "Управљајте корисничким налозима"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr ""
+msgstr "Потребно је потврђивање идентитета за промену корисничких података"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "Мејтов управник"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Управљање Линуксовим локалним корисницима и групама"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -46,529 +46,530 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Мејтов управник је графички програм који управља локалним корисницима и "
+"групама. Може додати и брисати локалне кориснике, променити име, врсту, "
+"језик и лозинку корисника, аутоматско пријављивање. Можете видети запис "
+"пријављивања корисника. У раду са услугом-групе, групама корисника се може "
+"управљати, као што је додавање/уклањање постојећих група и стварање/брисање "
+"нових група."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr ""
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr ""
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
-msgstr ""
+msgstr "отварање датотеке"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
-msgstr ""
+msgstr "Стварање датотеке пид-а није успело"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
-msgstr ""
+msgstr "писање датотеке"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
-msgstr ""
+msgstr "писање датотеке пид-а није успело"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
-msgstr ""
+msgstr "отварање датотеке пид-а није успело"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
-msgstr ""
+msgstr "читање датотеке"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
-msgstr ""
+msgstr "читање датотеке пид-а није успело"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr ""
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr ""
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Уобичајена"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr ""
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Језик"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr ""
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Лозинка"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr ""
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr ""
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr ""
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr ""
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr ""
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr ""
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr ""
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Затвори"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Потврди"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr ""
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr ""
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr ""
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
-msgstr ""
+msgstr "Уклони корисника"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Не можете обрисати ваш лични налог."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "корисник је и даље пријављен"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "Уклони „%s“ корисника"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "Да ли се уклања корисникова лична фасцикла"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "Понавља се корисничко име. Пробајте неко друго"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Понавља се назив личне фасцикле. Пробајте неки други"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Корисничко име не може почети са „-“ ."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Име корисника треба да се састоји само од великих малих \n"
+"слова од „a-z“, цифара и следећих знакова: . - _"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
+"Ово ће бити коришћено за именовање ваше личне фасцикле и не може бити "
+"измењено"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "Стварање корисника"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
-msgstr ""
+#: src/user-admin.c:570
+msgid "User Name"
+msgstr "Корисничко име"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Име и презиме"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Врста налога"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Уобичајена"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Администратори"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "Два пута унесене лозинке се разликују"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr ""
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "Мешовите лозинке побољшавају безбедност"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Лозинка"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Подеси следећи пут"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
-msgstr ""
+msgstr "Сада поставите лозинку"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "стварање лозинке"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Потврди"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Затвори"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Направи новог корисника"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr ""
+msgstr "Направите датотеку одсецања"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "Нисам успео да направим привремену датотеку за податке слике"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "Одабери"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
-msgstr ""
+msgstr "Учитај локалну слику"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "Потражите још слика"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "_Отвори"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
-msgstr ""
+msgstr "ЛОкална слика"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
-msgstr ""
+msgstr "Списак аватара"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "Нема адресе за смештај фотографија"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Нема поставки"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Језик"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Аутоматска пријава"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "Време пријаве"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Управљање групом"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Подешавам групе"
+
+#: src/user-face.c:120
 msgid "Change Name"
-msgstr ""
+msgstr "Промени назив"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Унесите исправан знак"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Користите тастер „Унеси“ да сачувате измене"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr ""
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr ""
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr ""
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "Порука"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr ""
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr ""
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr ""
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr ""
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr ""
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr ""
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr ""
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr ""
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr ""
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr ""
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr ""
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr ""
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr ""
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr ""
-
-#: src/user-group.c:163
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Понавља се назив групе. Пробајте неко друго"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "Назив групе не може почети са „-“ ."
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Први знак назива групе треба да буде слово"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Назив групе треба да се састоји само од великих малих \n"
+"слова од „a-z“, цифара и следећих знакова: . - _"
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
-msgstr ""
+msgstr "Направите нову групу"
 
-#: src/user-group.c:276
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "Није успело стварање нове групе"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr ""
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "Уклањање групе"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr ""
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Да ли се уклања изабрана група"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr ""
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr ""
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ИБ корисника"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Уклони"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Започињање управљања групом"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Започињање није успело, погледајте функцију \n"
+" сучеља услуге управљања групом"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Нисам успео да контактирам услугу групе"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Уверите се да је „group-service“ инсталирано и омогућено.\n"
+" url: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr ""
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr ""
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Кликните на дугме откључавања на странице „swith-group“"
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr ""
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Назив групе"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr ""
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "ИБ групе"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
-msgstr ""
+msgstr "Нови назив групе"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Изаберите корисника за додавање у нову групу"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Корисничко име"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ИБ корисника"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Уклони"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "Иб групе"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Направите корисничку групу"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+"Стварање корисничке групе је успело, погледајте крај списка промене група."
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
-msgstr ""
+msgstr "Промени групе"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
-msgstr ""
+msgstr "Направи групе"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
-msgstr ""
+msgstr "Уклони групе"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Текући корисник – %s"
+
+#: src/user-history.c:40
 msgid "This Week"
-msgstr ""
+msgstr "Ове седмице"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
-msgstr ""
+msgstr "Прошле седмице"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "Данас"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
-msgstr ""
+msgstr "Јуче"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
-msgstr ""
+msgstr "%b. %e"
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%e. %b, %Y"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
-msgstr ""
+msgstr "Сесија је завршена"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
-msgstr ""
+msgstr "Сесија је започета"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — Активност налога"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
-msgstr ""
+msgstr "претходно"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
-msgstr ""
+msgstr "следеће"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "Налог је искључен"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Прибави податке о кориснику"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "број корисника је 0"
+
+#: src/user-language.c:195
 msgid "More…"
-msgstr ""
+msgstr "Још…"
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
-msgstr ""
+msgstr "Нисам пронашао језике"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "Готово"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "Лозинке се не подударају."
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Сада подеси"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Лозинка корисника"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "_Врати"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "Порука"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "Нова лозинка треба да се разликује од старе"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "Пробајте да измените нека слова и бројеве"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "Пробајте још само мало да измените лозинку"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "Лозинка без вашег корисничког имена биће јача"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "Покушајте да избегнете ваше име у лозинки"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
+msgstr "Покушајте да избегнете неке од речи употребљених у лозинки"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "Покушајте да избегнете уобичајене речи"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "Покушајте да избегнете преуређивање постојећих речи"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "Покушајте да користите више бројева"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "Покушајте да користите више великих слова"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "Покушајте да користите више малих слова"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr "Покушајте да користите више посебних знакова, као тачка"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Покушајте да користите мешавину слова, бројева и тачака"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "Покушајте да избегнете понављање истог знака"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
 msgstr ""
+"Покушајте да избегнете понављање исте врсте знака: треба да мешате велика "
+"слова, бројеве и тачке."
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Покушајте да избегнете низове 1234 или „abcd“"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "Дужина лозинке треба да има више од 8 знакова"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr "Неке поставке морају бити откључане да би могле да се мењају"
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Додајте корисника"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Мејтов управник корисницима"

@@ -4,20 +4,21 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Stefano Karapetsas <stefano@karapetsas.com>, 2019
 # ABE Tsunehiko, 2019
 # Rockers <sumorock@hotmail.com>, 2019
 # Yoshifumi Kinoshita <yoshifumi1975@gmail.com>, 2019
-# Stefano Karapetsas <stefano@karapetsas.com>, 2019
 # Aefgh Threenine <aefgh3962@gmail.com>, 2019
+# Green, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Aefgh Threenine <aefgh3962@gmail.com>, 2019\n"
+"Last-Translator: Green, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/mate/teams/13566/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,15 +32,15 @@ msgstr "ユーザーアカウントの管理"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "ユーザーデータの変更には認証が必要"
+msgstr "ユーザーデータの変更には認証が必要です"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "MATE マネージャ"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Linux のローカルユーザーとグループの管理"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -49,529 +50,521 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Mate "
+"マネージャは、ローカルユーザーとグループを管理するグラフィカルなアプリケーションです。ローカルユーザーの追加と削除、ユーザー名の変更、ユーザーのタイプ変更、ユーザーの言語変更、ユーザーのパスワード変更、自動ログインなどの設定が可能です。ユーザーのログイン記録を見ることができます。グループサービスと連携することで、既存のグループの追加・削除や、新しいグループの作成・削除など、ユーザーのグループを管理することができます。"
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr ""
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr ""
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
 msgstr "ファイルを開く"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
-msgstr ""
+msgstr "pidファイルの作成を失敗"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
-msgstr ""
+msgstr "ファイルの書き込み"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
-msgstr ""
+msgstr "pid ファイルの書き込み失敗"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
-msgstr ""
+msgstr "pid ファイルを開くことができなせん"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
-msgstr ""
+msgstr "ファイルの読み込み"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
-msgstr ""
+msgstr "pid ファイルを読み込めません"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr ""
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr "アカウントタイプ"
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "標準"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr "管理者"
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "言語"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr ""
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "パスワード"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr "自動ログオン"
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr ""
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr ""
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr ""
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr ""
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr ""
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr ""
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr ""
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "閉じる"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "確認"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr ""
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr ""
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr ""
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
 msgstr "ユーザーの削除"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "自分自身のアカウントを削除することはできません。"
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "ユーザーは現在ログイン中です"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "'%s' ユーザーの削除"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "ユーザーのホームディレクトリを削除しますか"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "ユーザー名の重複です。別のユーザー名を試してください。"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "ユーザーのホーム名の重複です。別の名前を試してください。"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "ユーザ名は a - で始めることができません!"
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"ユーザー名は大文字と小文字だけで構成されています。\n"
+"a-z の文字や数字と次の記号です： .- "
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
-msgstr ""
+msgstr "これがホームフォルダの名前として使用され、変更することはできません。"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "ユーザーの作成"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
-msgstr ""
+#: src/user-admin.c:570
+msgid "User Name"
+msgstr "ユーザーの名前"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
-msgstr "氏名"
+msgstr "フルネーム"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "アカウントのタイプ"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "標準"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "管理者"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "2回入力したパスワードが異なっています"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr ""
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "パスワードを使い分けるとセキュリティが向上"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "パスワード"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "次回に設定する"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
-msgstr ""
+msgstr "パスワードを設定します"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "自動生成したパスワード"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "確認"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "閉じる"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "新しいユーザーの作成"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr ""
+msgstr "Crop ファイルを作成"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "画像データの一時ファイル作成に失敗"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "選択"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
-msgstr ""
+msgstr "ローカルの画像を読み込む"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "もっとたくさんの写真を見る"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "開く(_O)"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr ""
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
-msgstr ""
+msgstr "ローカルの画像"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
-msgstr ""
+msgstr "アバターの一覧"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "写真を保存するアドレスがありません"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "設定なし"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "言語"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "自動ログオン"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "ログインの時刻"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "グループ管理"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "グループ設定"
+
+#: src/user-face.c:120
 msgid "Change Name"
-msgstr ""
+msgstr "名前の変更"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "有効な文字を入力してください"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "修正内容を保存するには Enter キーを使用します"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr "ユーザーリスト"
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr "ユーザーの追加"
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr ""
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "メッセージ"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr ""
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr ""
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr ""
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr ""
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr ""
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr ""
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr ""
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr ""
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr ""
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr ""
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr ""
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr ""
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr ""
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr ""
-
-#: src/user-group.c:163
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "グループ名の重複。違う名前を使ってください"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "グループ名は a - で始めることができません。"
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "グループ名の最初の文字にはアルファベットを使用してください"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"グループ名は大文字と小文字だけで構成されます。\n"
+"a-z の文字や数字と次の記号です： .- "
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
-msgstr ""
+msgstr "新規グループを作成"
 
-#: src/user-group.c:276
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "新しいグループを作成することができません"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr ""
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "グループを削除"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr ""
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "選択したグループを削除しますか"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr ""
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr ""
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ユーザー ID"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "削除"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "グループ管理を初期化"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"初期化失敗です。グループを見てください\n"
+"マネジメントサービスのインタフェース機能"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "グループサービスへの接続に失敗しました"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"グループサービスがインストールされ、有効になっているか確認してください。\n"
+" url: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr ""
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr ""
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr ""
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "\"swith-group\" ページのロック解除ボタンを押しください"
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr ""
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "グループ名"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr ""
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "グループ ID"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
-msgstr ""
+msgstr "新規グループ名"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "新規グループに追加するユーザーを選択してください"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "ユーザ名"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ユーザー ID"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "削除"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "グループ ID"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "ユーザーグループを作成"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr "ユーザーグループの作成に成功しました。スイッチグループリストの最後を表示してください。"
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
-msgstr ""
+msgstr "スイッチグループ"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
-msgstr ""
+msgstr "グループを作成"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
-msgstr ""
+msgstr "グループを削除"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "現在のユーザー - %s"
+
+#: src/user-history.c:40
 msgid "This Week"
-msgstr ""
+msgstr "今週"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
-msgstr ""
+msgstr "先週"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "今日"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
-msgstr ""
+msgstr "昨日"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
-msgstr ""
+msgstr "%b %e"
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%Y年 %B月%e日"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
-msgstr ""
+msgstr "セッションの終了"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
-msgstr ""
+msgstr "セッションの開始"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — アカウント・アクティビティ"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
-msgstr ""
+msgstr "前へ"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
-msgstr ""
+msgstr "次へ"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "アカウントは無効です"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "ユーザー情報の取得"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "ユーザー数は 0 です"
+
+#: src/user-language.c:195
 msgid "More…"
-msgstr ""
+msgstr "もっと"
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
-msgstr ""
+msgstr "言語が見つかりません"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "完了"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
-msgstr ""
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "パスワードが一致しません。"
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "今設定する"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "ユーザーのパスワード"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "戻る(_R)"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "メッセージ"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "新しいパスワードは、古いパスワードとは異なるものでないといけません"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "文字や数字を変えてみてください"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "パスワードを少し変えてみてください"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "ユーザー名を含まないパスワードの方が強力です"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "パスワードに自分の名前を使わないようにします"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
+msgstr "パスワードに単語が含まれるのを避けてください"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "一般的な言葉は避けるようにしてください"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "既存の単語を並べ替えないようにしてください"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "もっと多くの数字を使うようにしてください"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "もっと多くの大文字を使うようにしてください"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "もっと多くの小文字を使うようにしてください"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr "句読点など、もっと特殊文字を使うようにします"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "文字や数字、句読点を組み合わせて使うようにしてください"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "同じ文字を繰り返し使うのは避けてください"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr "同じ種類の文字の繰り返しを避けるには、文字、数字、句読点を混ぜる必要があります。"
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "1234 や abcd のような並びシーケンスは避けてください"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "パスワードの長さは8文字以上必要です"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr "一部の設定を変更するにはロック解除が必要です。"
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "ユーザーの追加"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Mate ユーザー管理"

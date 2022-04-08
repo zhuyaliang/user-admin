@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stefano Karapetsas <stefano@karapetsas.com>, 2019
+# Hakim Oubouali <hakim1bal@protonmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -13,13 +13,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Maithili (https://www.transifex.com/mate/teams/13566/mai/)\n"
+"Last-Translator: Hakim Oubouali <hakim1bal@protonmail.com>, 2020\n"
+"Language-Team: Central Atlas Tamazight (https://www.transifex.com/mate/teams/13566/tzm/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mai\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tzm\n"
+"Plural-Forms: nplurals=2; plural=(n == 0 || n == 1 || (n > 10 && n < 100) ? 0 : 1;\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: src/main.c:38 src/main.c:81
 msgid "open file"
-msgstr ""
+msgstr "ṛẓem afaylu"
 
 #: src/main.c:38
 msgid "Create pid file failed"
@@ -68,7 +68,7 @@ msgstr ""
 
 #: src/main.c:86
 msgid "read file"
-msgstr ""
+msgstr "ɣer afaylu"
 
 #: src/main.c:86
 msgid "read pid file failed"
@@ -128,7 +128,7 @@ msgstr ""
 
 #: src/user-admin.c:583
 msgid "Full Name"
-msgstr "पूरा नाम"
+msgstr ""
 
 #: src/user-admin.c:591 src/user-base.c:239
 msgid "Account Type"
@@ -154,7 +154,7 @@ msgstr ""
 #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
 #: src/user-password.c:271
 msgid "Password"
-msgstr "कूटशब्द"
+msgstr "Taguri n uzray"
 
 #. 新建两个单选按钮
 #: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
@@ -173,13 +173,13 @@ msgstr ""
 #: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
 #: src/user-password.c:257 src/user-password.c:316
 msgid "Confirm"
-msgstr ""
+msgstr "Ssentem"
 
 #: src/user-admin.c:919 src/user-group-window.c:588
 #: src/user-group-window.c:654 src/user-group-window.c:712
 #: src/user-password.c:252 src/user-window.c:283
 msgid "Close"
-msgstr ""
+msgstr "Rgel"
 
 #: src/user-admin.c:931
 msgid "Create New User"
@@ -195,12 +195,12 @@ msgstr ""
 
 #: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
-msgstr "रद्द करू (_C)"
+msgstr "_Sser"
 
 #: src/user-avatar.c:179 src/user-group-window.c:578
 #: src/user-group-window.c:643
 msgid "Select"
-msgstr "चुनू"
+msgstr ""
 
 #: src/user-avatar.c:226
 msgid "Load Local Picture"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: src/user-avatar.c:253
 msgid "_Open"
-msgstr "खोलू (_O)"
+msgstr "_Ṛẓem"
 
 #: src/user-avatar.c:323
 msgid "Local Picture"
@@ -232,7 +232,7 @@ msgstr ""
 
 #: src/user-base.c:252
 msgid "Language"
-msgstr ""
+msgstr "Tutlayt"
 
 #: src/user-base.c:276
 msgid "Automatic logon"
@@ -252,7 +252,7 @@ msgstr ""
 
 #: src/user-face.c:120
 msgid "Change Name"
-msgstr ""
+msgstr "Ssenfel isem"
 
 #: src/user-face.c:120
 msgid "Please enter a valid character"
@@ -290,7 +290,7 @@ msgstr ""
 
 #: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "Kkes Tarabbut"
 
 #: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
@@ -322,7 +322,7 @@ msgstr ""
 
 #: src/user-group-window.c:583 src/user-group-window.c:707
 msgid "Group Name"
-msgstr ""
+msgstr "Isem n Trabbut"
 
 #: src/user-group-window.c:584
 msgid "Group ID"
@@ -342,11 +342,11 @@ msgstr ""
 
 #: src/user-group-window.c:649
 msgid "User ID"
-msgstr "प्रयोक्ता आइ डी"
+msgstr ""
 
 #: src/user-group-window.c:706 src/user-group-window.c:719
 msgid "Remove"
-msgstr "हटाबू"
+msgstr "Kkes"
 
 #: src/user-group-window.c:708
 msgid "Group id"
@@ -389,19 +389,19 @@ msgstr ""
 
 #: src/user-history.c:146
 msgid "Today"
-msgstr ""
+msgstr "Ass-a"
 
 #: src/user-history.c:150
 msgid "Yesterday"
-msgstr ""
+msgstr "Assennaṭ"
 
 #: src/user-history.c:156
 msgid "%b %e"
-msgstr ""
+msgstr "%b %e"
 
 #: src/user-history.c:160
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:243
 msgid "Session Ended"
@@ -438,7 +438,7 @@ msgstr ""
 
 #: src/user-language.c:195
 msgid "More…"
-msgstr ""
+msgstr "Uggar…"
 
 #: src/user-language.c:225
 msgid "No languages found"
@@ -446,7 +446,7 @@ msgstr ""
 
 #: src/user-language.c:667
 msgid "Cancel"
-msgstr "रद करू"
+msgstr "Sser"
 
 #: src/user-language.c:672
 msgid "Done"
@@ -466,11 +466,11 @@ msgstr ""
 
 #: src/user-share.c:170
 msgid "_Return"
-msgstr ""
+msgstr "_Aɣul"
 
 #: src/user-share.c:190
 msgid "Message"
-msgstr "संदेश"
+msgstr "Tuzint"
 
 #: src/user-share.c:299
 msgid "The new password needs to be different from the old one"

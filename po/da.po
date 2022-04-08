@@ -6,16 +6,16 @@
 # Translators:
 # Aputsiak Niels Janussen <aj@isit.gl>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Joe Hansen <joedalton2@yahoo.dk>, 2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2019\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/mate/teams/13566/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,158 +54,69 @@ msgstr ""
 "grupper af brugere håndteres, såsom tilføjelse/fjernelse fra eksisterende "
 "grupper og oprettelse/sletning af nye grupper."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr "Kunne ikke hente ikon"
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr "Mates brugerhåndtering"
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
 msgstr "åbn fil"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
 msgstr "Kunne ikke oprette pid-fil"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
 msgstr "skriv fil"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
 msgstr "kunne ikke skrive pid-fil"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
 msgstr "kunne ikke åbne pid-fil"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
 msgstr "læs fil"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
 msgstr "kunne ikke læse pid-fil"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr "Ingen sådan bruger!!!"
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr "Kontotype"
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Standard"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr "Administratorer"
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Sprog"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr "Ingen indstillinger"
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Adgangskode"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr "Automatisk logind"
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr "logindtidspunkt"
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr "Gruppehåndtering"
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr "Indstillingsgrupper"
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr "Konto er deaktiveret"
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr "Opsæt næste gang"
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr "Hent brugerinformation"
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr "brugerkonto er 0"
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr "Angiv adgangskode"
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Luk"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Bekræft"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr "Sæt op nu"
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr "Brugeradgangskode"
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr "tilfældig adgangskode"
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
 msgstr "Fjern bruger"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "bruger er stadig logget ind"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "Fjern brugeren »%s«"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
 msgstr "Om brugerens hjemmemapppe skal fjernes"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
 msgstr "Gentagelse af brugernavn. Prøv venligst et andet"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
 msgstr "Gentagelse af brugers hjemmenavn. Prøv venligst et andet"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
 msgstr "Brugernavnet kan ikke starte med et -."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -213,196 +124,168 @@ msgstr ""
 "Brugernavnet bør kun bestå af store/små bogstaver\n"
 "fra a-z, tal og de følgende tegn: .-_"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Dette vil blive brugt til at navngive din hjemmemappe og kan ikke ændres"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
 msgstr "Opretter bruger"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
+#: src/user-admin.c:570
+msgid "User Name"
 msgstr "Brugernavn"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Fulde navn"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Kontotype"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Standard"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Administratorer"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
 msgstr "De to indtastede adgangskoder er forskellige"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr "Hybride adgangskoder forbedrer sikkerheden"
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "Blandede adgangskoder forbedrer sikkerheden"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Adgangskode"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Opsæt næste gang"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
 msgstr "Angiv adgangskoden nu"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "tilfældig adgangskode"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Bekræft"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Luk"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Opret ny bruger"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
 msgstr "Opret beskæringsfil"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
 msgstr "kunne ikke oprette midlertidig fil for billeddata"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "_Afbryd"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "Vælg"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
 msgstr "Indlæs lokalt billede"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
 msgstr "Gennemse efter flere billeder"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "_Åbn"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr "Et klik på hovedvinduet lukker vinduet for billedvalg"
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
 msgstr "Lokalt billede"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
 msgstr "Avatarliste"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
 msgstr "Der er ingen adresse at lagre billeder"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Ingen indstillinger"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Sprog"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Automatisk logind"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "logindtidspunkt"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Gruppehåndtering"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Indstillingsgrupper"
+
+#: src/user-face.c:120
 msgid "Change Name"
 msgstr "Ændr navn"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
 msgstr "Indtast venligst et gyldigt tegn"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
 msgstr "Brug tasten Retur til at gemme ændringer"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr "Brugerliste"
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr "Tilføj bruger"
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr "_Retur"
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "Besked"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr "Den nye adgangskode skal være forskellig fra den gamle"
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr "Prøv at ændre nogle bogstaver og tal"
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr "Prøv at ændre adgangskoden en smule mere"
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr "En adgangskode uden dit brugernavn vil være mere sikker"
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr "Prøv at undgå at bruge dit navn i adgangskoden"
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr "Prøv at undgå nogle af ordene inkluderet i adgangskoden"
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr "Prøv at undgå gængse ord"
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr "Prøv at undgå ændring af rækkefølge på eksisterende ord"
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr "Prøv at bruge flere tal"
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr "Prøv at bruge flere store bogstaver"
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr "Prøv at bruge flere mindre bogstaver"
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr "Prøv at bruge flere specielle tegn, såsom tegnsætning"
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr "Prøv at bruge en blanding af bogstaver, tal og tegnsætning"
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr "Prøv at undgå gentagelse af det samme tegn"
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-"Prøv at undgå gentagelse af den samme type af tegn: du skal blande "
-"bogstaver, tal og tegnsætning."
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Prøv at undgå sekvenser såsom 1234 eller abcd"
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr "Adgangskoden skal være længere end 8 tegn"
-
-#: src/user-group.c:163
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
 msgstr "Gentagelse af gruppenavn. Prøv venligt et andet"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
 msgstr "Gruppenavnet kan ikke starte med en -."
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
 msgstr "Det første tegn i gruppenavnet skal være et bogstav"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -410,58 +293,27 @@ msgstr ""
 "Gruppenavnet bør kun bestå af store/små bogstaver\n"
 "fra a-z, tal og de følgende tegn: .-_"
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
 msgstr "Opret ny gruppe"
 
-#: src/user-group.c:276
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
 msgstr "Opret ny gruppe mislykkedes"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr "Opret brugergruppe"
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-"Opret brugergruppe lykkedes, se venligst slutningen af switch-groups-listen."
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
 msgstr "Fjern gruppe"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr "Kan ikke fjerne root-gruppe"
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
 msgstr "Om den valgte gruppe skal fjernes"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr "Gruppenavn"
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr "Gruppe-id"
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "Bruger-ID"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Fjern"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
 msgstr "Initialiseringsgruppehåndtering"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
@@ -469,11 +321,11 @@ msgstr ""
 "Initialisering mislykkedes, se venligst funktionen\n"
 "Tjenestegrænseflade for gruppehåndtering"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
 msgstr "Kunne ikke kontakte gruppetjenesten"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
@@ -481,113 +333,243 @@ msgstr ""
 "Sikr dig venligst at group-service er installeret og aktiveret.\n"
 " url: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr "Hent antallet af grupper"
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr "Antallet af grupper er 0."
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr "Dobbeltklik tegnet for lås op i øverste venstre hjørne"
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
 msgstr "Klik på knappen lås op på siden »swith-group«"
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr "Gruppehåndtering"
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Gruppenavn"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr "Nuværende bruger -- %s"
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "Gruppe-id"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
 msgstr "Nyt gruppenavn"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
 msgstr "Vælg venligst brugeren at tilføje til den nye gruppe"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Brugernavn"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "Bruger-ID"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Fjern"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "Gruppe-id"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Opret brugergruppe"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+"Opret brugergruppe lykkedes, se venligst slutningen af switch-groups-listen."
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
 msgstr "Skift grupper"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
 msgstr "Opret grupper"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
 msgstr "Fjern grupper"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Nuværende bruger - %s"
+
+#: src/user-history.c:40
 msgid "This Week"
 msgstr "Denne uge"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
 msgstr "Sidste uge"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "I dag"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
 msgstr "I går"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
 msgstr "%b %e"
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
 msgstr "%b %e, %Y"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
 msgstr "Session sluttede"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
 msgstr "Session startede"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
 msgstr "%s — Kontoaktivitet"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
 msgstr "forrige"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
 msgstr "næste"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "Konto er deaktiveret"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Hent brugerinformation"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "brugerkonto er 0"
+
+#: src/user-language.c:195
 msgid "More…"
 msgstr "Mere ..."
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
 msgstr "Ingen sprog fundet"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "Annuller"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "Færdig"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
-msgstr "Nuværende bruger - %s"
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "Adgangskoderne er forskellige."
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Sæt op nu"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Brugeradgangskode"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "_Retur"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "Besked"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "Den nye adgangskode skal være forskellig fra den gamle"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "Prøv at ændre nogle bogstaver og tal"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "Prøv at ændre adgangskoden en smule mere"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "En adgangskode uden dit brugernavn vil være mere sikker"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "Prøv at undgå at bruge dit navn i adgangskoden"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
+msgstr "Prøv at undgå nogle af ordene inkluderet i adgangskoden"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "Prøv at undgå gængse ord"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "Prøv at undgå ændring af rækkefølge på eksisterende ord"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "Prøv at bruge flere tal"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "Prøv at bruge flere store bogstaver"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "Prøv at bruge flere mindre bogstaver"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr "Prøv at bruge flere specielle tegn, såsom tegnsætning"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Prøv at bruge en blanding af bogstaver, tal og tegnsætning"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "Prøv at undgå gentagelse af det samme tegn"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Prøv at undgå gentagelse af den samme type af tegn: du skal blande "
+"bogstaver, tal og tegnsætning."
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Prøv at undgå sekvenser såsom 1234 eller abcd"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "Adgangskoden skal være længere end 8 tegn"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr "Nogle indstillinger skal være låst op før de kan ændres"
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Tilføj bruger"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Mates brugerhåndtering"

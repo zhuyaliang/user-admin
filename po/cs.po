@@ -5,19 +5,19 @@
 # 
 # Translators:
 # Michal <sinope@seznam.cz>, 2019
-# Lucas Lommer <drom@kdyne.net>, 2019
-# LiberteCzech <liberte.czech@gmail.com>, 2019
+# LiberteCzech <martin.kriz.czech@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# ToMáš Marný, 2019
+# ToMáš Marný, 2021
+# Lukáš Lommer <drom@kdyne.net>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: ToMáš Marný, 2019\n"
+"Last-Translator: Lukáš Lommer <drom@kdyne.net>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/mate/teams/13566/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +35,11 @@ msgstr "Ke změně uživatelských dat je požadováno ověření"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "Správce MATE"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Správa místních linuxových uživatelských účtů a skupin"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -49,159 +49,76 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Správce MATE je grafický nástroj pro správu místních uživatelských účtů a "
+"skupin. Umožňuje přidávat a odstraňovat místní uživatele, měnit uživatelská "
+"jména, typy účtů, jazyk uživatele, jeho heslo a spravovat automatické "
+"přihlášení. Umožňuje také prohlížet podrobnosti účtů. Ve spolupráci s "
+"„group-service” umožňuje správu uživatelských skupin jako přidávání a "
+"odstraňování existujících skupin a vytváření či mazáni nových skupin."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr "Nepodařilo se získat ikonu"
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr ""
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
 msgstr "otevřít soubor"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
 msgstr "Selhalo vytvoření souboru pid"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
 msgstr "zapsat soubor"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
 msgstr "pokus o zapsání souboru pid selhal"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
 msgstr "pokus o otevření souboru pid selhal"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
 msgstr "číst soubor"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
 msgstr "pokus o načtení souboru pid selhal"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr "Takový uživatel neexistuje!"
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr "Typ účtu"
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Standardní"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr "Správci"
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Jazyk"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr "Žádná nastavení"
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Heslo"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr "Automatické přihlášení"
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr "Čas přihlášení"
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr "Správa skupiny"
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr "Nastavení skupin"
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr "Účet je zakázán"
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr "Nastavit příště"
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr "Získat informace o uživateli"
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr "počet uživatelů je 0"
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr "Nastavit heslo"
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Zavřené"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Potvrdit"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr "Nastavit nyní"
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr "Uživatelské heslo"
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr "generování hesla"
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
 msgstr "Odebrat uživatele"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
 msgstr "Nemůžete smazat svůj vlastní účet."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "uživatel je stále přihlášen"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "Odebrat uživatele „%s“"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
 msgstr "Zda odebrat domovský adresář uživatele"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
 msgstr "Opakujte uživatelské jméno. Zkuste prosím jiné"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Opakujte název domácího adresáře uživatele. Zkuste prosím jiný"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
 msgstr "Uživatelské jméno nemůže začínat znakem -."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -209,196 +126,168 @@ msgstr ""
 "Uživatelské jméno by mělo obsahovat pouze malá a velká \n"
 "písmena a-z (bez diakritiky), číslice a následující znaky: . - _ (tečka, spojovník a podtržítko)"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
 "Bude použito jako název vaší domovské složky a nelze jej později změnit"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
 msgstr "Vytvoření uživatele"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
+#: src/user-admin.c:570
+msgid "User Name"
 msgstr "Uživatelské jméno"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Celé jméno"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Typ účtu"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Standardní"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Správci"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
 msgstr "Zadaná hesla se liší"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr "Hybridní hesla zvyšují zabezpečení"
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "Smíšená hesla zlepšují zabezpečení"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Heslo"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Nastavit příště"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
 msgstr "Nastavit heslo nyní"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "generování hesla"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Potvrdit"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Zavřené"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Vytvoření nového uživatele"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
 msgstr ""
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
 msgstr "nepodařilo se vytvořit dočasný soubor pro obrazová data"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "Vybrat"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
 msgstr "Načíst místní obrázek"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
 msgstr "Procházet další obrázky"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr "Kliknutím na hlavní okno se okno výběru obrázků zavře"
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
 msgstr "Místní obrázek"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
 msgstr "Seznam avatarů"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
 msgstr "Neexistuje adresa pro ukládání fotografií"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Žádná nastavení"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Jazyk"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Automatické přihlášení"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "Čas přihlášení"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Správa skupiny"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Nastavení skupin"
+
+#: src/user-face.c:120
 msgid "Change Name"
 msgstr "Změnit jméno"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
 msgstr "Zadejte prosím platný znak"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
 msgstr "Pro uložení úprav použijte klávesu Enter"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr "Seznam uživatelů"
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr "Přidat uživatele"
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr ""
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "Zpráva"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr "Nové heslo musí být odlišné od starého"
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr "Zkuste změnit některá písmena a čísla"
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr "Zkuste změnit heslo o něco více"
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr "Heslo bez vašeho uživatelského jména by bylo silnější"
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr "Snažte se vyhnout použití svého jména v hesle"
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr "Snažte se vyhnout některým slovům obsaženým v hesle"
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr "Snažte se vyhnout běžným slovům"
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr "Snažte se vyhnout přeskupování existujících slov"
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr "Zkuste použít více čísel"
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr "Zkuste použít více velkých písmen"
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr "Zkuste použít více malých písmen"
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr "Zkuste použít více speciálních znaků, například interpunkci"
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr "Zkuste použít kombinaci písmen, čísel a interpunkčních znamének"
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr "Snažte se vyhnout opakování stejného znaku"
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-"Snažte se vyhnout opakování stejného typu znaku: musíte míchat písmena, "
-"číslice a interpunkci."
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Snažte se vyhnout sekvencím jako 1234 nebo abcd"
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr "Délka hesla vyžaduje více než 8 znaků"
-
-#: src/user-group.c:163
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
 msgstr "Opakujte název skupiny. Vyzkoušejte jiný"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
 msgstr "Název skupiny nemůže začínat znakem -."
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
 msgstr "Pro první znak názvu skupiny je vyžadováno použít písmeno"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -406,67 +295,39 @@ msgstr ""
 "Název skupiny by měl obsahovat pouze malá a velká \n"
 "písmena a-z (bez diakritiky), číslice a následující znaky: . - _ (tečka, spojovník a podtržítko)"
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
 msgstr "Vytvořit novou skupinu"
 
-#: src/user-group.c:276
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
 msgstr "Vytvoření nové skupiny se nezdařilo"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr "Vytvořit skupinu uživatelů"
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
 msgstr "Odstranit skupinu"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr "Nelze odebrat skupinu superuživatele"
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
 msgstr "Zda odebrat vybranou skupinu"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr "Název skupiny"
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr "ID skupiny"
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ID uživatele"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Odstranit"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Inicializace správy skupin"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Inicializace selhala, zkontrolujte prosím funkci\n"
+"Group Management Service Interface"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Nepodařilo se napojit na „group-service”"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
@@ -474,113 +335,242 @@ msgstr ""
 "Ujistěte se, že je group-service nainstalována a povolena.\n"
 " url: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr "Zjistit počet skupin"
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr "Počet skupin je 0."
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr "Klikněte na znak odemknutí v levém horním rohu"
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
 msgstr "Na stránce Přepnout skupiny klikněte na tlačítko odemknutí"
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr "Spravovat skupiny"
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Název skupiny"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr "Aktuální uživatel -- %s"
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "ID skupiny"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
 msgstr "Nový název skupiny"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
 msgstr "Vyberte uživatele, kterého chcete přidat do nové skupiny"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ID uživatele"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Odstranit"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "ID skupiny"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Vytvořit skupinu uživatelů"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
 msgstr "Přepnout skupiny"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
 msgstr "Vytvořit skupiny"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
 msgstr "Odebrat skupiny"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Současný uživatel - %s"
+
+#: src/user-history.c:40
 msgid "This Week"
 msgstr "Tento týden"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
 msgstr "Minulý týden"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "Dnes"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
 msgstr "Včera"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
 msgstr "%e. %b"
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
 msgstr "%e. %b %Y"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
 msgstr "Sezení ukončeno"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
 msgstr "Sezení započato"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
 msgstr "%s — Aktivita účtu"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
 msgstr "předchozí"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
 msgstr "další"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "Účet je zakázán"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Získat informace o uživateli"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "počet uživatelů je 0"
+
+#: src/user-language.c:195
 msgid "More…"
 msgstr "Více…"
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
 msgstr "Žádné jazyky nenalezeny"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "Hotovo"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
-msgstr "Současný uživatel - %s"
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "Hesla se neshodují."
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Nastavit nyní"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Uživatelské heslo"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "V_rátit"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "Zpráva"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "Nové heslo musí být odlišné od starého"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "Zkuste změnit některá písmena a čísla"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "Zkuste změnit heslo o něco více"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "Heslo bez vašeho uživatelského jména by bylo silnější"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "Snažte se vyhnout použití svého jména v hesle"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
+msgstr "Snažte se vyhnout některým slovům obsaženým v hesle"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "Snažte se vyhnout běžným slovům"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "Snažte se vyhnout přeskupování existujících slov"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "Zkuste použít více čísel"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "Zkuste použít více velkých písmen"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "Zkuste použít více malých písmen"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr "Zkuste použít více speciálních znaků, například interpunkci"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Zkuste použít kombinaci písmen, čísel a interpunkčních znamének"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "Snažte se vyhnout opakování stejného znaku"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Snažte se vyhnout opakování stejného typu znaku: musíte míchat písmena, "
+"číslice a interpunkci."
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Snažte se vyhnout sekvencím jako 1234 nebo abcd"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "Délka hesla vyžaduje více než 8 znaků"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr "Některá nastavení musí být před změnou odemčena"
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Přidat uživatele"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Správce uživatelů Mate"

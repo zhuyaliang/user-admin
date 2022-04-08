@@ -4,19 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giuseppe Pignataro <rogepix@gmail.com>, 2019
 # Enrico B. <enricobe@hotmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Alessandro Volturno <alelvb@inwind.it>, 2019
+# Giuseppe Pignataro <rogepix@gmail.com>, 2021
+# Alessandro Volturno <alelvb@inwind.it>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Alessandro Volturno <alelvb@inwind.it>, 2019\n"
+"Last-Translator: Alessandro Volturno <alelvb@inwind.it>, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/mate/teams/13566/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,19 +26,19 @@ msgstr ""
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr "Gestione account utenti"
+msgstr "Gestisce gli account utenti"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Autenticazione obbligatoria per modificare i dati utente"
+msgstr "È richiesta l'autenticazione per modificare i dati dell'utente"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr "Manager MATE "
+msgstr "MATE Manager"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr "Gestire Utenti Locali e Gruppi Linux"
+msgstr "Gestire Utenti Locali e Gruppi in Linux"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -48,165 +48,76 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
-"Manager Mate è una applicazione grafica che gestisce gruppi e utenti locali."
-"  Può aggiungere o cancellare utenti locali, cambiare nome utente, tipo "
-"utente, lingua utente, password utente, login automatico. È possibile "
+"Mate Manager è una applicazione grafica che gestisce gruppi e utenti locali."
+"  Può aggiungere o cancellare utenti locali, cambiare il nome utente, tipo "
+"di utente, lingua utente, password utente, login automatico. È possibile "
 "visualizzare il rapporto di login utente. Lavorando con servizi di gruppo, "
 "possono essere gestiti gruppi di utenti, come ad esempio "
 "aggiungere/rimuovere gruppi esistenti e creare/cancellare nuovi gruppi."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr "Inserimento icona fallita"
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr "Manager Utente Mate"
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
-msgstr "apri file"
+msgstr "apri un file"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
-msgstr "Creazione file pid fallita"
+msgstr "Creazione del file pid fallita"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
-msgstr "Scrivi file"
+msgstr "Scrivi il file"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
-msgstr "Scrittura file pid fallita"
+msgstr "La scrittura del file pid è fallita"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
-msgstr "Apertura file pid fallita"
+msgstr "L'apertura del file pid è fallita"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
-msgstr "Leggi file"
+msgstr "Leggi il file"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
-msgstr "Lettura file pid fallita"
+msgstr "La lettura del file pid è fallita"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr "Nessun utente!!!"
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr "Tipo account"
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Predefinito"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr "Amministratori"
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Lingua"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr "Nessuna impostazione"
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Password"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr "Accesso automatico"
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr "Ora di accesso"
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr "Gestione gruppi"
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr "Impostazioni gruppi"
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr "Account disabilitato"
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr "Imposta successivamente"
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr "Inserimento info utente"
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr "Conteggio utente è 0"
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr "Imposta password"
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Chiudi"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Conferma"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr "Imposta adesso"
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr "Password utente"
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr "Genera password"
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
 msgstr "Rimuovi utente"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
 msgstr "Non puoi eliminare il tuo account."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr "l'utente è ancora connesso"
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr "Rimuovi l'utente '%s'"
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr "Rimuovere o meno la cartella home dell'utente"
+msgstr "Indica se rimuovere o meno la cartella home dell'utente"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr "Nome utente ripetuto. Riprova"
+msgstr "Nome utente ripetuto. PEr favore inserirne un altro"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr "Nome home utente ripetuto. Riprova"
+msgstr "Nome della home utente ripetuto. Per favore provarne un altro"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr "Il nome utente non può iniziare con - ."
+msgstr "Il nome utente non può iniziare con un - ."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -214,167 +125,429 @@ msgstr ""
 "Il nome utente deve essere composto da lettere maiuscole \n"
 "o minuscole dalla a alla z, numeri e i seguenti caratteri: . - _"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
-msgstr "Verrà usato per creare la cartella home e non può esser cambiato"
+msgstr "Verrà utilizzato per creare la cartella home e non può esser cambiato"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
-msgstr "Creazione utente"
+msgstr "Creazione di un utente"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
+#: src/user-admin.c:570
+msgid "User Name"
 msgstr "Nome utente"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Tipo di account"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Standard"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Amministratori"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
 msgstr "Le password inserite non corrispondono"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr "Le password ibride migliorano la sicurezza"
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr "Le password miste migliorano la sicurezza"
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Password"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Imposta successivamente"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
-msgstr "Imposta password ora"
+msgstr "Adesso Imposta la password"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "Genera la password"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Conferma"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Chiudi"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Crea nuovo utente"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr "Crea file di ritaglio"
+msgstr "Crea il file Crop"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr "Creazione file temporaneo per i dati immagine fallita"
+msgstr "Creazione del file temporaneo per i dati dell'immagine fallita"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "A_nnulla"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
-msgstr "Selezione"
+msgstr "Seleziona"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
-msgstr "Carica immagine locale"
+msgstr "Carica un'immagine locale"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
 msgstr "Sfoglia per altre immagini"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "_Apri"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr "Fare clic sulla finestra principale chiude la selezione dell'immagine"
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
 msgstr "Immagine locale"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
 msgstr "Lista avatar"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
 msgstr "Nessun indirizzo per archiviare le foto"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Nessuna impostazione"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Lingua"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Accesso automatico"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "Ora di accesso"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Gestione del gruppo"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Impostazioni dei gruppi"
+
+#: src/user-face.c:120
 msgid "Change Name"
 msgstr "Modifica nome"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr "Inserisci un carattere valido"
+msgstr "Per favore inserire un carattere valido"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
 msgstr "Usa il tasto Invio per salvare le modifiche"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr "Lista utenti"
+#: src/user-group-window.c:120
+msgid "Repeat of group name.Please try another"
+msgstr "Nome del gruppo ripetuto. Per favore inserirne un altro"
 
-#: src/user-list.c:225
-msgid "Add User"
-msgstr "Aggiungi utente"
+#: src/user-group-window.c:124
+msgid "The groupname cannot start with a - ."
+msgstr "Il nome del gruppo non può iniziare con - ."
 
-#: src/user-share.c:169
+#: src/user-group-window.c:128
+msgid "The first character of the group name needs use letter"
+msgstr "Il primo carattere del nome del gruppo deve essere una lettera"
+
+#: src/user-group-window.c:132
+msgid ""
+"The groupname should only consist of upper and lower case \n"
+"letters from a-z,digits and the following characters: . - _"
+msgstr ""
+"Il nome del gruppo deve essere composto da lettere\n"
+"maiuscole o minuscole dalla a alla z, numeri e i seguenti caratteri: . - _"
+
+#: src/user-group-window.c:185
+msgid "Create New Group"
+msgstr "Crea un nuovo gruppo"
+
+#: src/user-group-window.c:192
+msgid "Create New Group Faild"
+msgstr "La creazione del nuovo gruppo è fallita"
+
+#: src/user-group-window.c:229 src/user-group-window.c:241
+msgid "Remove Group"
+msgstr "Rimuovi il gruppo"
+
+#: src/user-group-window.c:230
+msgid "Whether to remove the selected group"
+msgstr "Indica se rimuovere o meno il gruppo selezionato"
+
+#: src/user-group-window.c:458
+msgid "Initialization group management"
+msgstr "Gestione di inizializzazione del gruppo "
+
+#: src/user-group-window.c:459
+msgid ""
+"Initialization failed, please see Group \n"
+" Management Service Interface function"
+msgstr ""
+"Inizializzazione fallita, per favore controllare Groupo\n"
+"funzione Management Service Interface."
+
+#: src/user-group-window.c:465
+msgid "Failed to contact the group service"
+msgstr "Errore nel contattare il servizio di gruppo"
+
+#: src/user-group-window.c:466
+msgid ""
+"Please make sure that the group-service is installed and enabled.\n"
+" url: https://github.com/zhuyaliang/group-service"
+msgstr ""
+"Per favore assicurarsi che il group-service sia installato e abilitato.\n"
+" url: https://github.com/zhuyaliang/group-service"
+
+#: src/user-group-window.c:479
+msgid "Click the unlock button on the \"swith-group\" page"
+msgstr "Fare clic sul tasto di sblocco nella scheda \"cambia gruppo\""
+
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Nome del gruppo"
+
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "ID del gruppo"
+
+#: src/user-group-window.c:620
+msgid "New Group Name"
+msgstr "Nome del nuovo gruppo"
+
+#: src/user-group-window.c:631
+msgid "Please select the user to add to the new group"
+msgstr "Selezionare l'utente da aggiungere al nuovo gruppo"
+
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Nome utente"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ID utente"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr "ID del Gruppo"
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Crea un gruppo di utenti"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+"Creazione del gruppo di utenti completato, controllare alla fine della lista"
+" switch-groups."
+
+#: src/user-group-window.c:886
+msgid "Switch Groups"
+msgstr "Cambia gruppi"
+
+#: src/user-group-window.c:890
+msgid "Create Groups"
+msgstr "Crea gruppi"
+
+#: src/user-group-window.c:894
+msgid "Remove Groups"
+msgstr "Rimuovi gruppi"
+
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Utente attuale -- %s"
+
+#: src/user-history.c:40
+msgid "This Week"
+msgstr "Questa settimana"
+
+#: src/user-history.c:44
+msgid "Last Week"
+msgstr "La settimana scorsa"
+
+#: src/user-history.c:146
+msgid "Today"
+msgstr "Oggi"
+
+#: src/user-history.c:150
+msgid "Yesterday"
+msgstr "Ieri"
+
+#: src/user-history.c:156
+msgid "%b %e"
+msgstr "%b %e"
+
+#: src/user-history.c:160
+msgid "%b %e, %Y"
+msgstr "%b %e, %Y"
+
+#: src/user-history.c:243
+msgid "Session Ended"
+msgstr "Sessione conclusa"
+
+#: src/user-history.c:250
+msgid "Session Started"
+msgstr "Sessione avviata"
+
+#: src/user-history.c:288
+#, c-format
+msgid "%s — Account Activity"
+msgstr "%s — Attività dell'account"
+
+#: src/user-history.c:397
+msgid "previous"
+msgstr "precedente"
+
+#: src/user-history.c:402
+msgid "next"
+msgstr "successivo"
+
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "Account disabilitato"
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Ottieni informazioni sull'utente"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "Il numero di utenti è 0"
+
+#: src/user-language.c:195
+msgid "More…"
+msgstr "Altro…"
+
+#: src/user-language.c:225
+msgid "No languages found"
+msgstr "Nessuna lingua trovata"
+
+#: src/user-language.c:667
+msgid "Cancel"
+msgstr "Annulla"
+
+#: src/user-language.c:672
+msgid "Done"
+msgstr "Fatto"
+
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr "Le password non corrispondono."
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Imposta adesso"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Password utente"
+
+#: src/user-share.c:170
 msgid "_Return"
 msgstr "_Annulla"
 
-#: src/user-share.c:189
+#: src/user-share.c:190
 msgid "Message"
 msgstr "Messaggio"
 
-#: src/user-share.c:407
+#: src/user-share.c:299
 msgid "The new password needs to be different from the old one"
 msgstr "La nuova password deve essere diversa dalla precedente"
 
-#: src/user-share.c:409
+#: src/user-share.c:301
 msgid "Try changing some letters and numbers"
 msgstr "Prova a cambiare alcune lettere o numeri"
 
-#: src/user-share.c:411 src/user-share.c:419
+#: src/user-share.c:303 src/user-share.c:311
 msgid "Try changing the password a bit more"
-msgstr "Prova a modificare di più la password"
+msgstr "Prova a modificare la password un po' di più"
 
-#: src/user-share.c:413
+#: src/user-share.c:305
 msgid "A password without your user name would be stronger"
 msgstr "Una password senza il tuo nome utente sarebbe più robusta"
 
-#: src/user-share.c:415
+#: src/user-share.c:307
 msgid "Try to avoid using your name in the password"
 msgstr "Evita di inserire il tuo nome nella password"
 
-#: src/user-share.c:417
+#: src/user-share.c:309
 msgid "Try to avoid some of the words included in the password"
 msgstr "Evita alcune parole inserite nella password"
 
-#: src/user-share.c:421
+#: src/user-share.c:313
 msgid "Try to avoid common words"
 msgstr "Evita parole comuni"
 
-#: src/user-share.c:423
+#: src/user-share.c:315
 msgid "Try to avoid reordering existing words"
-msgstr "Evita di cambiare l'ordine delle stesse parole"
+msgstr "Evita di cambiare l'ordine delle parole esistenti"
 
-#: src/user-share.c:425
+#: src/user-share.c:317
 msgid "Try to use more numbers"
 msgstr "Cerca di usare più numeri"
 
-#: src/user-share.c:427
+#: src/user-share.c:319
 msgid "Try to use more uppercase letters"
 msgstr "Cerca di usare più lettere maiuscole"
 
-#: src/user-share.c:429
+#: src/user-share.c:321
 msgid "Try to use more lowercase letters"
 msgstr "Cerca di usare più lettere minuscole"
 
-#: src/user-share.c:431
+#: src/user-share.c:323
 msgid "Try to use more special characters, like punctuation"
-msgstr "Cerca di usare più caratteri speciali come la punteggiatura"
+msgstr "Cerca di usare più caratteri speciali, come punteggiatura"
 
-#: src/user-share.c:433
+#: src/user-share.c:325
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr "Cerca di usare un mix di lettere, numeri e punteggiatura"
 
-#: src/user-share.c:435
+#: src/user-share.c:327
 msgid "Try to avoid repeating the same character"
 msgstr "Evita di ripetere lo stesso carattere"
 
-#: src/user-share.c:437
+#: src/user-share.c:329
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
@@ -382,213 +555,23 @@ msgstr ""
 "Evita di ripetere caratteri dello stesso tipo: crea un mix di lettere, "
 "numeri e punteggiatura."
 
-#: src/user-share.c:439
+#: src/user-share.c:331
 msgid "Try to avoid sequences like 1234 or abcd"
 msgstr "Evita sequenze come 1234 o abcd"
 
-#: src/user-share.c:441
+#: src/user-share.c:333
 msgid "Password length needs more than 8 characters"
 msgstr "La lunghezza minima della password è 8 caratteri"
 
-#: src/user-group.c:163
-msgid "Repeat of group name.Please try another"
-msgstr "Nome gruppo ripetuto. Riprova"
-
-#: src/user-group.c:167
-msgid "The groupname cannot start with a - ."
-msgstr "Il nome del gruppo non può iniziare con - ."
-
-#: src/user-group.c:171
-msgid "The first character of the group name needs use letter"
-msgstr "Il primo carattere del nome del gruppo deve essere una lettera"
-
-#: src/user-group.c:175
-msgid ""
-"The groupname should only consist of upper and lower case \n"
-"letters from a-z,digits and the following characters: . - _"
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
 msgstr ""
-"Il nome del gruppo deve essere composto da lettere maiuscole \n"
-"o minuscole dalla a alla z, numeri e i seguenti caratteri: . - _"
+"Alcune impostazioni devono essere sbloccate prima di poter essere modificate"
 
-#: src/user-group.c:269
-msgid "Create New Group"
-msgstr "Crea nuovo gruppo"
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Aggiungi utente"
 
-#: src/user-group.c:276
-msgid "Create New Group Faild"
-msgstr "Creazione nuovo gruppo fallita"
-
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr "Crea gruppo utente"
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-"Creazione gruppo utenti completato, controlla alla fine della lista switch-"
-"groups."
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
-msgid "Remove Group"
-msgstr "Rimuovi gruppo"
-
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr "Impossibile rimuovere il gruppo root"
-
-#: src/user-group.c:363
-msgid "Whether to remove the selected group"
-msgstr "Rimuovere o meno il gruppo selezionato"
-
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr "Nome gruppo"
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr "ID gruppo"
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ID utente"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Rimuovi"
-
-#: src/user-group.c:757
-msgid "Initialization group management"
-msgstr "Avvio gestione gruppi"
-
-#: src/user-group.c:758
-msgid ""
-"Initialization failed, please see Group \n"
-" Management Service Interface function"
-msgstr ""
-"Avvio fallito, controlla funzionamento della \n"
-"Interfaccia del servizio di gestione gruppo"
-
-#: src/user-group.c:764
-msgid "Failed to contact the group service"
-msgstr "Collegamento con il servizio non riuscito"
-
-#: src/user-group.c:765
-msgid ""
-"Please make sure that the group-service is installed and enabled.\n"
-" url: https://github.com/zhuyaliang/group-service"
-msgstr ""
-"Assicurati che il group-service sia installato e abilitato.\n"
-" url: https://github.com/zhuyaliang/group-service"
-
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr "Ottieni numero dei gruppi"
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr "Il numero di gruppi è 0."
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr "Premi il simbolo di sblocco nell'angolo in alto a sinistra"
-
-#: src/user-group.c:798
-msgid "Click the unlock button on the \"swith-group\" page"
-msgstr "Fai clic sul tasto di sblocco nella scheda \"cambio gruppo\""
-
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr "Gestione gruppi"
-
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr "Utente attuale -- %s"
-
-#: src/user-group.c:975
-msgid "New Group Name"
-msgstr "Nome del nuovo gruppo"
-
-#: src/user-group.c:986
-msgid "Please select the user to add to the new group"
-msgstr "Seleziona l'utente da aggiungere al nuovo gruppo"
-
-#: src/user-group.c:1087
-msgid "Switch Groups"
-msgstr "Cambio gruppo"
-
-#: src/user-group.c:1091
-msgid "Create Groups"
-msgstr "Crea gruppo"
-
-#: src/user-group.c:1095
-msgid "Remove Groups"
-msgstr "Rimuovi gruppo"
-
-#: src/user-history.c:43
-msgid "This Week"
-msgstr "Questa settimana"
-
-#: src/user-history.c:47
-msgid "Last Week"
-msgstr "Ultima settimana"
-
-#: src/user-history.c:149
-msgid "Today"
-msgstr "Oggi"
-
-#: src/user-history.c:153
-msgid "Yesterday"
-msgstr "Ieri"
-
-#: src/user-history.c:159
-msgid "%b %e"
-msgstr "%b %e"
-
-#: src/user-history.c:163
-msgid "%b %e, %Y"
-msgstr "%b %e, %Y"
-
-#: src/user-history.c:246
-msgid "Session Ended"
-msgstr "Sessione conclusa"
-
-#: src/user-history.c:253
-msgid "Session Started"
-msgstr "Sessione avviata"
-
-#: src/user-history.c:290
-#, c-format
-msgid "%s — Account Activity"
-msgstr "%s — Attività account"
-
-#: src/user-history.c:400
-msgid "previous"
-msgstr "precedente"
-
-#: src/user-history.c:405
-msgid "next"
-msgstr "successivo"
-
-#: src/user-language.c:120
-msgid "More…"
-msgstr "Altro…"
-
-#: src/user-language.c:161
-msgid "No languages found"
-msgstr "Nessuna lingua trovata"
-
-#: src/user-language.c:573 src/user-language.c:596
-msgid "Cancel"
-msgstr "Annulla"
-
-#: src/user-language.c:576 src/user-language.c:597
-msgid "Done"
-msgstr "Fatto"
-
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
-msgstr "Utente attuale -- %s"
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Mate User Manager"

@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# Miguel Anxo Bouzada <mbouzada@gmail.com>, 2019
+# Miguel Anxo Bouzada <mbouzada@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 17:39+0800\n"
+"POT-Creation-Date: 2021-04-02 15:19+0800\n"
 "PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, 2019\n"
+"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, 2021\n"
 "Language-Team: Galician (https://www.transifex.com/mate/teams/13566/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,158 +53,69 @@ msgstr ""
 " con servizo de grupo, pódense xestionar grupos de usuarios, como "
 "engadir/eliminar grupos existentes e crear/eliminar novos grupos."
 
-#: src/main.c:47
-msgid "Get Icon Fail"
-msgstr "Produciuse un fallo ao obter a icona"
-
-#: src/main.c:97 src/main.c:110
-msgid "Mate User Manager"
-msgstr "Xestión de usuarios do Mate"
-
-#: src/main.c:185 src/main.c:227
+#: src/main.c:38 src/main.c:81
 msgid "open file"
 msgstr "abrir o ficheiro"
 
-#: src/main.c:185
+#: src/main.c:38
 msgid "Create pid file failed"
 msgstr "Produciuse un fallo ao crear o ficheiro PID"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write file"
 msgstr "escribir o ficheiro"
 
-#: src/main.c:194
+#: src/main.c:48
 msgid "write pid file failed"
 msgstr "produciuse un fallo ao escribir o ficheiro PID"
 
-#: src/main.c:227
+#: src/main.c:81
 msgid "open pid file failed"
 msgstr "produciuse un fallo ao abrir o ficheiro PID"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read file"
 msgstr "ler o ficheiro"
 
-#: src/main.c:232
+#: src/main.c:86
 msgid "read pid file failed"
 msgstr "Produciuse un fallo ao ler o ficheiro PID"
 
-#: src/main.c:263
-msgid "No such user!!!"
-msgstr "Non existe ese usuario!!!"
-
-#: src/user-base.c:220 src/user-admin.c:616
-msgid "Account Type"
-msgstr "Tipo de conta"
-
-#. drop-down select boxes
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Standard"
-msgstr "Estándar"
-
-#: src/user-base.c:224 src/user-admin.c:619
-msgid "Administrators"
-msgstr "Administradores"
-
-#: src/user-base.c:235 src/user-language.c:137
-msgid "Language"
-msgstr "Idioma"
-
-#: src/user-base.c:240 src/user-share.c:342
-msgid "No Settings"
-msgstr "Sen axustes"
-
-#: src/user-base.c:255 src/user-password.c:237 src/user-admin.c:775
-#: src/user-admin.c:796
-msgid "Password"
-msgstr "Contrasinal"
-
-#: src/user-base.c:268
-msgid "Automatic logon"
-msgstr "Acceso automático"
-
-#: src/user-base.c:283
-msgid "Login time"
-msgstr "Hora de acceso"
-
-#: src/user-base.c:297
-msgid "Group Manage"
-msgstr "Xestión do grupo"
-
-#: src/user-base.c:300
-msgid "Setting Groups"
-msgstr "Axustes dos grupos"
-
-#: src/user-info.c:66
-msgid "Account is disable"
-msgstr "A conta está desactivada."
-
-#. 新建两个单选按钮
-#: src/user-info.c:78 src/user-password.c:242 src/user-admin.c:780
-msgid "Set up next time"
-msgstr "Estabelecela a próxima vez"
-
-#: src/user-info.c:268
-msgid "Get User Info"
-msgstr "Obter información do usuario"
-
-#: src/user-info.c:268
-msgid "user count is 0"
-msgstr "o número de usuarios é 0"
-
-#. create chnaged passwod dialog
-#: src/user-password.c:210
-msgid "Set Password"
-msgstr "Estabelecer o contrasinal"
-
-#: src/user-password.c:219 src/user-admin.c:854 src/user-list.c:227
-#: src/user-group.c:936 src/user-group.c:1002 src/user-group.c:1058
-msgid "Close"
-msgstr "Pechar"
-
-#: src/user-password.c:224 src/user-password.c:288 src/user-admin.c:821
-#: src/user-admin.c:858 src/user-group.c:1013
-msgid "Confirm"
-msgstr "Confirmar"
-
-#: src/user-password.c:251
-msgid "Now set up"
-msgstr "Estabelecela agora"
-
-#: src/user-password.c:260
-msgid "User Password"
-msgstr "Contrasinal do usuario"
-
-#: src/user-password.c:270 src/user-admin.c:809
-msgid "generation password"
-msgstr "xeración do contrasinal"
-
-#: src/user-admin.c:175 src/user-admin.c:210 src/user-admin.c:216
-#: src/user-list.c:226
+#: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
+#: src/user-window.c:280
 msgid "Remove User"
 msgstr "Retirar o usuario"
 
-#: src/user-admin.c:211
+#: src/user-admin.c:185
 msgid "You cannot delete your own account."
 msgstr "Vostede non pode eliminar a súa propia conta."
 
-#: src/user-admin.c:217
+#: src/user-admin.c:193
+msgid "user is still logged in"
+msgstr ""
+
+#: src/user-admin.c:197
+#, c-format
+msgid "Remove '%s' user"
+msgstr ""
+
+#: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
 msgstr "Se se debe retirar o directorio persoal do usuario"
 
-#: src/user-admin.c:313
+#: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
 msgstr "Repítese o nome de usuario, tenteo con outro"
 
-#: src/user-admin.c:317
+#: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
 msgstr "Repítese o nome do cartafol persoal de usuario, tenteo con outro"
 
-#: src/user-admin.c:321
+#: src/user-admin.c:300
 msgid "The username cannot start with a - ."
 msgstr "O nome de usuario non pode comezar cun - ."
 
-#: src/user-admin.c:325
+#: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -212,197 +123,168 @@ msgstr ""
 "O nome de usuario debe consistir só en maiúsculas e minúsculas\n"
 "letras da a-z, díxitos e os seguintes caracteres: . - _"
 
-#: src/user-admin.c:350 src/user-admin.c:588
+#: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr "Empregarase para nomear o seu cartafol persoal e non se pode cambiar"
 
-#: src/user-admin.c:520
+#: src/user-admin.c:485
 msgid "Creating User"
 msgstr "Creación de usuarios"
 
-#: src/user-admin.c:595 src/user-group.c:681
-msgid "Username"
-msgstr "Nome de usuario"
+#: src/user-admin.c:570
+msgid "User Name"
+msgstr "Nome do usuario"
 
-#: src/user-admin.c:608
+#: src/user-admin.c:583
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: src/user-admin.c:638 src/user-share.c:564
+#: src/user-admin.c:591 src/user-base.c:239
+msgid "Account Type"
+msgstr "Tipo de conta"
+
+#. drop-down select boxes
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Standard"
+msgstr "Estándar"
+
+#: src/user-admin.c:594 src/user-base.c:243
+msgid "Administrators"
+msgstr "Administradores"
+
+#: src/user-admin.c:606
 msgid "The passwords entered twice are different"
 msgstr "Os contrasinais introducidos dúas veces son diferentes"
 
-#: src/user-admin.c:675
-msgid "Hybrid passwords improve security"
-msgstr "Os contrasinais híbridos melloran a seguridade"
+#: src/user-admin.c:644
+msgid "Mixed passwords improve security"
+msgstr ""
 
-#: src/user-admin.c:788
+#: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+#: src/user-password.c:271
+msgid "Password"
+msgstr "Contrasinal"
+
+#. 新建两个单选按钮
+#: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+#: src/user-password.c:274
+msgid "Set up next time"
+msgstr "Estabelecela a próxima vez"
+
+#: src/user-admin.c:764
 msgid "Now set the password"
 msgstr "Estabelecer agora o contrasinal"
 
-#: src/user-admin.c:864
+#: src/user-admin.c:785 src/user-password.c:302
+msgid "generation password"
+msgstr "xeración do contrasinal"
+
+#: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+#: src/user-password.c:257 src/user-password.c:316
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: src/user-admin.c:919 src/user-group-window.c:588
+#: src/user-group-window.c:654 src/user-group-window.c:712
+#: src/user-password.c:252 src/user-window.c:283
+msgid "Close"
+msgstr "Pechar"
+
+#: src/user-admin.c:931
 msgid "Create New User"
 msgstr "Crear un novo usuario"
 
-#: src/user-face.c:300 src/user-face.c:311
+#: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
 msgstr "Crear un ficheiro de recorte"
 
-#: src/user-face.c:301
+#: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
 msgstr ""
 "Produciuse un fallo ao crear un ficheiro temporal para os datos da imaxe"
 
-#: src/user-face.c:369 src/user-face.c:454
+#: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/user-face.c:371 src/user-group.c:628 src/user-group.c:670
+#: src/user-avatar.c:179 src/user-group-window.c:578
+#: src/user-group-window.c:643
 msgid "Select"
 msgstr "Seleccionar"
 
-#: src/user-face.c:428
+#: src/user-avatar.c:226
 msgid "Load Local Picture"
 msgstr "Cargar a imaxe local"
 
-#: src/user-face.c:451
+#: src/user-avatar.c:249
 msgid "Browse for more pictures"
 msgstr "Navegar para buscar máis imaxes"
 
-#: src/user-face.c:455
+#: src/user-avatar.c:253
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/user-face.c:522
-msgid "Clicking on the main window closes the picture selection window"
-msgstr "Ao premer na xanela principal péchase a xanela de selección de imaxes"
-
-#: src/user-face.c:543
+#: src/user-avatar.c:323
 msgid "Local Picture"
 msgstr "Imaxe local"
 
-#: src/user-face.c:558
+#: src/user-avatar.c:489
 msgid "Avatar list"
 msgstr "Lista de avatares"
 
-#: src/user-face.c:559
+#: src/user-avatar.c:490
 msgid "There is no address to store photos"
 msgstr "Non hai enderezo para almacenar fotos"
 
-#: src/user-face.c:657
+#: src/user-base.c:212
+msgid "No Settings"
+msgstr "Sen axustes"
+
+#: src/user-base.c:252
+msgid "Language"
+msgstr "Idioma"
+
+#: src/user-base.c:276
+msgid "Automatic logon"
+msgstr "Acceso automático"
+
+#: src/user-base.c:288
+msgid "Login time"
+msgstr "Hora de acceso"
+
+#: src/user-base.c:300
+msgid "Group Manage"
+msgstr "Xestión do grupo"
+
+#: src/user-base.c:303
+msgid "Setting Groups"
+msgstr "Axustes dos grupos"
+
+#: src/user-face.c:120
 msgid "Change Name"
 msgstr "Cambiar o nome"
 
-#: src/user-face.c:657
+#: src/user-face.c:120
 msgid "Please enter a valid character"
 msgstr "Introduza un carácter válido"
 
-#: src/user-face.c:709
+#: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
 msgstr "Empregue a tecla Intro para gardar as modificacións"
 
-#: src/user-list.c:125
-msgid "User List"
-msgstr "Lista de usuarios"
-
-#: src/user-list.c:225
-msgid "Add User"
-msgstr "Engadir un usuario"
-
-#: src/user-share.c:169
-msgid "_Return"
-msgstr "_Retorno"
-
-#: src/user-share.c:189
-msgid "Message"
-msgstr "Mensaxe"
-
-#: src/user-share.c:407
-msgid "The new password needs to be different from the old one"
-msgstr "O novo contrasinal debe ser diferente do anterior"
-
-#: src/user-share.c:409
-msgid "Try changing some letters and numbers"
-msgstr "Tente cambiar algunhas letras e números"
-
-#: src/user-share.c:411 src/user-share.c:419
-msgid "Try changing the password a bit more"
-msgstr "Tente cambiar un pouco máis o contrasinal"
-
-#: src/user-share.c:413
-msgid "A password without your user name would be stronger"
-msgstr "Un contrasinal sen o seu nome de usuario sería máis forte"
-
-#: src/user-share.c:415
-msgid "Try to avoid using your name in the password"
-msgstr "Tente evitar o uso de seu nome no contrasinal"
-
-#: src/user-share.c:417
-msgid "Try to avoid some of the words included in the password"
-msgstr "Tente evitar algunhas das palabras incluídas no contrasinal"
-
-#: src/user-share.c:421
-msgid "Try to avoid common words"
-msgstr "Tente evitar palabras comúns"
-
-#: src/user-share.c:423
-msgid "Try to avoid reordering existing words"
-msgstr "Tente evitar a reordenación das palabras existentes"
-
-#: src/user-share.c:425
-msgid "Try to use more numbers"
-msgstr "Tente empregar máis números"
-
-#: src/user-share.c:427
-msgid "Try to use more uppercase letters"
-msgstr "Tente empregar máis letras maiúsculas"
-
-#: src/user-share.c:429
-msgid "Try to use more lowercase letters"
-msgstr "Tente empregar máis letras minúsculas"
-
-#: src/user-share.c:431
-msgid "Try to use more special characters, like punctuation"
-msgstr ""
-"Tente empregar máis caracteres especiais, como os signos de puntuación"
-
-#: src/user-share.c:433
-msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr "Tente empregar unha mestura de letras, números e signos de puntuación"
-
-#: src/user-share.c:435
-msgid "Try to avoid repeating the same character"
-msgstr "Tente evitar a repetición do mesmo carácter"
-
-#: src/user-share.c:437
-msgid ""
-"Try to avoid repeating the same type of character: you need to mix up "
-"letters, numbers and punctuation."
-msgstr ""
-"Tente evitar a repetición do mesmo tipo de carácter: necesita mesturar "
-"letras, números e signos de puntuación."
-
-#: src/user-share.c:439
-msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Tente evitar secuencias como 1234 ou abcd"
-
-#: src/user-share.c:441
-msgid "Password length needs more than 8 characters"
-msgstr "O contrasinal deberá ter unha lonxitude de máis de 8 caracteres"
-
-#: src/user-group.c:163
+#: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
 msgstr "Repítese o nome de grupo, tenteo con outro"
 
-#: src/user-group.c:167
+#: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
 msgstr "O nome de grupo non pode comezar cun - ."
 
-#: src/user-group.c:171
+#: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
 msgstr "O primeiro carácter do nome de grupo debe ser unha letra"
 
-#: src/user-group.c:175
+#: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
@@ -410,59 +292,27 @@ msgstr ""
 "O nome de grupo debe consistir só en maiúsculas e minúsculas\n"
 "letras da a-z, díxitos e os seguintes caracteres: . - _"
 
-#: src/user-group.c:269
+#: src/user-group-window.c:185
 msgid "Create New Group"
 msgstr "Crear un novo grupo"
 
-#: src/user-group.c:276
+#: src/user-group-window.c:192
 msgid "Create New Group Faild"
 msgstr "Produciuse un fallo ao crear un novo grupo"
 
-#: src/user-group.c:287
-msgid "Create User Group"
-msgstr "Crear un grupo de usuarios"
-
-#: src/user-group.c:288
-msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups "
-"list."
-msgstr ""
-"Crear satisfactoriamente un grupo de usuarios. Vexa o final da lista de "
-"cambios de grupos."
-
-#: src/user-group.c:354 src/user-group.c:362 src/user-group.c:374
+#: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
 msgstr "Retirar grupo"
 
-#: src/user-group.c:355
-msgid "Cannot remove root group"
-msgstr "Non é posíbel retirar o grupo raíz (root)"
-
-#: src/user-group.c:363
+#: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
 msgstr "Se se debe retirar o o grupo seleccionado"
 
-#: src/user-group.c:640 src/user-group.c:716
-msgid "Group Name"
-msgstr "Nome do grupo"
-
-#: src/user-group.c:649 src/user-group.c:725
-msgid "Group ID"
-msgstr "ID do grupo"
-
-#: src/user-group.c:690
-msgid "User ID"
-msgstr "ID de usuario"
-
-#: src/user-group.c:707 src/user-group.c:1065
-msgid "Remove"
-msgstr "Retirar"
-
-#: src/user-group.c:757
+#: src/user-group-window.c:458
 msgid "Initialization group management"
 msgstr "Inicialización da xestión de grupos"
 
-#: src/user-group.c:758
+#: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
@@ -470,11 +320,11 @@ msgstr ""
 "Produciuse un fallo coa inicialización. Consulte a\n"
 "función Interface do servizo de xestión de grupos"
 
-#: src/user-group.c:764
+#: src/user-group-window.c:465
 msgid "Failed to contact the group service"
 msgstr "Produciuse un fallo ao contactar co servizo de grupo"
 
-#: src/user-group.c:765
+#: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
@@ -482,113 +332,245 @@ msgstr ""
 "Asegúrese de que o servizo de grupo está instalado e activado.\n"
 "url: https://github.com/zhuyaliang/group-service"
 
-#: src/user-group.c:773
-msgid "Get the number of groups"
-msgstr "Obter o número de grupos"
-
-#: src/user-group.c:774
-msgid "The number of groups is 0."
-msgstr "O número de grupos é 0."
-
-#: src/user-group.c:795
-msgid "Please click the unlock sign in the upper left corner"
-msgstr "Prema no signo de desbloqueo no canto superior esquerdo"
-
-#: src/user-group.c:798
+#: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
 msgstr "Prema no botón de desbloqueo na páxina de «cambio de grupo»"
 
-#: src/user-group.c:832
-msgid "Groups Manage"
-msgstr "Xestión dos grupos"
+#: src/user-group-window.c:583 src/user-group-window.c:707
+msgid "Group Name"
+msgstr "Nome do grupo"
 
-#: src/user-group.c:845
-#, c-format
-msgid "Current user -- %s"
-msgstr "Usuario actual  -- %s"
+#: src/user-group-window.c:584
+msgid "Group ID"
+msgstr "ID do grupo"
 
-#: src/user-group.c:975
+#: src/user-group-window.c:620
 msgid "New Group Name"
 msgstr "Novo nome do grupo"
 
-#: src/user-group.c:986
+#: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
 msgstr "Seleccione un usuario para engadilo ao novo grupo"
 
-#: src/user-group.c:1087
+#: src/user-group-window.c:648
+msgid "Username"
+msgstr "Nome de usuario"
+
+#: src/user-group-window.c:649
+msgid "User ID"
+msgstr "ID de usuario"
+
+#: src/user-group-window.c:706 src/user-group-window.c:719
+msgid "Remove"
+msgstr "Retirar"
+
+#: src/user-group-window.c:708
+msgid "Group id"
+msgstr ""
+
+#: src/user-group-window.c:793
+msgid "Create User Group"
+msgstr "Crear un grupo de usuarios"
+
+#: src/user-group-window.c:794
+msgid ""
+"Create User Group Successfully,Please view the end of the switch-groups "
+"list."
+msgstr ""
+"Crear satisfactoriamente un grupo de usuarios. Vexa o final da lista de "
+"cambios de grupos."
+
+#: src/user-group-window.c:886
 msgid "Switch Groups"
 msgstr "Cambiar de grupos"
 
-#: src/user-group.c:1091
+#: src/user-group-window.c:890
 msgid "Create Groups"
 msgstr "Crear grupos"
 
-#: src/user-group.c:1095
+#: src/user-group-window.c:894
 msgid "Remove Groups"
 msgstr "Retirar grupos"
 
-#: src/user-history.c:43
+#: src/user-group-window.c:905 src/user-language.c:739
+#, c-format
+msgid "Current User - %s"
+msgstr "Usuario actual - %s"
+
+#: src/user-history.c:40
 msgid "This Week"
 msgstr "Esta semana"
 
-#: src/user-history.c:47
+#: src/user-history.c:44
 msgid "Last Week"
 msgstr "A semana pasada"
 
-#: src/user-history.c:149
+#: src/user-history.c:146
 msgid "Today"
 msgstr "Hoxe"
 
-#: src/user-history.c:153
+#: src/user-history.c:150
 msgid "Yesterday"
 msgstr "Onte"
 
-#: src/user-history.c:159
+#: src/user-history.c:156
 msgid "%b %e"
 msgstr "%e de %b "
 
-#: src/user-history.c:163
+#: src/user-history.c:160
 msgid "%b %e, %Y"
 msgstr "%e de %b de %Y"
 
-#: src/user-history.c:246
+#: src/user-history.c:243
 msgid "Session Ended"
 msgstr "Sesión rematada"
 
-#: src/user-history.c:253
+#: src/user-history.c:250
 msgid "Session Started"
 msgstr "Sesión iniciada"
 
-#: src/user-history.c:290
+#: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
 msgstr "%s — Actividade da conta"
 
-#: src/user-history.c:400
+#: src/user-history.c:397
 msgid "previous"
 msgstr "anterior"
 
-#: src/user-history.c:405
+#: src/user-history.c:402
 msgid "next"
 msgstr "seguinte"
 
-#: src/user-language.c:120
+#: src/user-info.c:39
+msgid "Account is disable"
+msgstr "A conta está desactivada."
+
+#: src/user-info.c:207
+msgid "Get User Info"
+msgstr "Obter información do usuario"
+
+#: src/user-info.c:207
+msgid "user count is 0"
+msgstr "o número de usuarios é 0"
+
+#: src/user-language.c:195
 msgid "More…"
 msgstr "Máis…"
 
-#: src/user-language.c:161
+#: src/user-language.c:225
 msgid "No languages found"
 msgstr "Non se atopou ningún idioma"
 
-#: src/user-language.c:573 src/user-language.c:596
+#: src/user-language.c:667
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/user-language.c:576 src/user-language.c:597
+#: src/user-language.c:672
 msgid "Done"
 msgstr "Feito"
 
-#: src/user-language.c:657
-#, c-format
-msgid "Current User - %s"
-msgstr "Usuario actual - %s"
+#: src/user-password.c:131
+msgid "The passwords do not match."
+msgstr ""
+
+#: src/user-password.c:282
+msgid "Now set up"
+msgstr "Estabelecela agora"
+
+#: src/user-password.c:292
+msgid "User Password"
+msgstr "Contrasinal do usuario"
+
+#: src/user-share.c:170
+msgid "_Return"
+msgstr "_Retorno"
+
+#: src/user-share.c:190
+msgid "Message"
+msgstr "Mensaxe"
+
+#: src/user-share.c:299
+msgid "The new password needs to be different from the old one"
+msgstr "O novo contrasinal debe ser diferente do anterior"
+
+#: src/user-share.c:301
+msgid "Try changing some letters and numbers"
+msgstr "Tente cambiar algunhas letras e números"
+
+#: src/user-share.c:303 src/user-share.c:311
+msgid "Try changing the password a bit more"
+msgstr "Tente cambiar un pouco máis o contrasinal"
+
+#: src/user-share.c:305
+msgid "A password without your user name would be stronger"
+msgstr "Un contrasinal sen o seu nome de usuario sería máis forte"
+
+#: src/user-share.c:307
+msgid "Try to avoid using your name in the password"
+msgstr "Tente evitar o uso de seu nome no contrasinal"
+
+#: src/user-share.c:309
+msgid "Try to avoid some of the words included in the password"
+msgstr "Tente evitar algunhas das palabras incluídas no contrasinal"
+
+#: src/user-share.c:313
+msgid "Try to avoid common words"
+msgstr "Tente evitar palabras comúns"
+
+#: src/user-share.c:315
+msgid "Try to avoid reordering existing words"
+msgstr "Tente evitar a reordenación das palabras existentes"
+
+#: src/user-share.c:317
+msgid "Try to use more numbers"
+msgstr "Tente empregar máis números"
+
+#: src/user-share.c:319
+msgid "Try to use more uppercase letters"
+msgstr "Tente empregar máis letras maiúsculas"
+
+#: src/user-share.c:321
+msgid "Try to use more lowercase letters"
+msgstr "Tente empregar máis letras minúsculas"
+
+#: src/user-share.c:323
+msgid "Try to use more special characters, like punctuation"
+msgstr ""
+"Tente empregar máis caracteres especiais, como os signos de puntuación"
+
+#: src/user-share.c:325
+msgid "Try to use a mixture of letters, numbers and punctuation"
+msgstr "Tente empregar unha mestura de letras, números e signos de puntuación"
+
+#: src/user-share.c:327
+msgid "Try to avoid repeating the same character"
+msgstr "Tente evitar a repetición do mesmo carácter"
+
+#: src/user-share.c:329
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up "
+"letters, numbers and punctuation."
+msgstr ""
+"Tente evitar a repetición do mesmo tipo de carácter: necesita mesturar "
+"letras, números e signos de puntuación."
+
+#: src/user-share.c:331
+msgid "Try to avoid sequences like 1234 or abcd"
+msgstr "Tente evitar secuencias como 1234 ou abcd"
+
+#: src/user-share.c:333
+msgid "Password length needs more than 8 characters"
+msgstr "O contrasinal deberá ter unha lonxitude de máis de 8 caracteres"
+
+#: src/user-window.c:94
+msgid "Some settings must be unlocked before they can be changed"
+msgstr ""
+
+#: src/user-window.c:277
+msgid "Add User"
+msgstr "Engadir un usuario"
+
+#: src/user-window.c:427
+msgid "Mate User Manager"
+msgstr "Xestión de usuarios do Mate"

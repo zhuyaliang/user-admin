@@ -1,0 +1,29 @@
+Source: user-admin
+Section: utils
+Priority: optional
+Maintainer: N0rbert <nrbrtx@gmail.com>
+Depends: group-service,
+         accountsservice,
+         libpwquality1,
+         mate-desktop-common
+Build-Depends: debhelper-compat (= 13),
+               meson (>= 0.53.0),
+               cmake,
+               pkg-config,
+               libgtk-3-dev,
+               libpwquality-dev,
+               libaccountsservice-dev,
+               group-service,
+               libmate-desktop-dev
+Standards-Version: 4.6.0
+Homepage: https://github.com/zhuyaliang/user-admin
+
+Package: user-admin
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: MATE User Manager
+ Using Dbus to manage user groups, you can complete the addition 
+ and deletion of user groups, add \ remove users to groups, and 
+ change the name of user groups.The `test` directory is some 
+ testing process.
+ 

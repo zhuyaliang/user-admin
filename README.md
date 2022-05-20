@@ -35,5 +35,16 @@ Now there are accountservice DBUS services, which provide many user management r
 meson build -Dprefix=/usr
 ninja -C build
 sudo ninja -C build install
+```
 
+## Create deb package on Ubuntu MATE 22.04 LTS
 
+Note: you have to build and install deb-package of *group-service* first, then run below commands.
+
+```
+sudo apt-get update
+sudo apt-get install dpkg-dev debhelper-compat meson cmake pkg-config libgtk-3-dev libpwquality-dev libaccountsservice-dev libmate-desktop-dev
+
+dpkg-buildpackage -uc -us
+sudo apt-get install ../user-admin*.deb
+```

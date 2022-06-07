@@ -7,5 +7,8 @@ nulanguage = en_US.utf8
 #Default Type for New User, 0 Ordinary User 1 Manage User
 nutype = 0                 
 
-#Default Add Groups for New Users
-nugroups =mail;audio;video;lightdm
+#Default Add Groups for New Users (Administrtors)
+nuadmingroups =mail;audio;video;lightdm
+
+#Default Add Groups for New Users (Standard)
+nustandgroups =mail;audio;video;cdrom;sshd

@@ -149,6 +149,7 @@ int main(int argc, char **argv)
 
     gtk_init (&argc, &argv);
 
+    mate_uesr_admin_log ("Info","mate-user-admin Version:%s",VERSION );
     /* Program exit processing */
     atexit(ExitHook);
     /* Check whether the process has been started */

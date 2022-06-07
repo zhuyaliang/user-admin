@@ -33,7 +33,8 @@
 #define  KEYGROUPNAME  "nudefault"
 #define  LANGKEY       "nulanguage"
 #define  TYPEKEY       "nutype"
-#define  GROUPKEY      "nugroups"
+#define  ADMINGROUPKEY      "nuadmingroups"
+#define  STANDGROUPKEY      "nustandgroups"
 
 #define CHECK_TIME_OUT 600
 struct _UserManagerPrivate
@@ -50,7 +51,8 @@ struct _UserManagerPrivate
     int            name_time_id;       //Check the password format timer
     int            password_time_id;       //Check the Realname format timer
     char          *user_lang;
-    char         **user_groups;
+    char         **admin_user_groups;
+    char         **stand_user_groups;
     int            user_type;
     gboolean       sensitive;
     gboolean       success;
@@ -75,7 +77,8 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     GKeyFile         *Kconfig = NULL;
     g_autoptr(GError) error = NULL;
     g_auto(GStrv)     ConfigGroups = NULL;
-    g_auto(GStrv)     unGroups = NULL;
+    g_auto(GStrv)     admin_groups = NULL;
+    g_auto(GStrv)     stand_groups = NULL;
     gsize             Length = 0;
     g_autofree char  *Value = NULL;
     gboolean          Type;
@@ -123,19 +126,28 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     }
     dialog->priv->user_type = Type;
 
-    unGroups = g_key_file_get_string_list (Kconfig, KEYGROUPNAME, GROUPKEY, &Length, &error);
-    if (unGroups == NULL)
+    admin_groups = g_key_file_get_string_list (Kconfig, KEYGROUPNAME, ADMINGROUPKEY, &Length, &error);
+    if (admin_groups == NULL)
     {
-        mate_uesr_admin_log ("Info", "key file No default add group is set for new users");
+        mate_uesr_admin_log ("Info", "key file No default add group is set for admin new users");
         g_key_file_free (Kconfig);
         return TRUE;
     }
-    dialog->priv->user_groups = g_strdupv (unGroups);
+    dialog->priv->admin_user_groups = g_strdupv (admin_groups);
+
+    stand_groups = g_key_file_get_string_list (Kconfig, KEYGROUPNAME, STANDGROUPKEY, &Length, &error);
+    if (stand_groups == NULL)
+    {
+        mate_uesr_admin_log ("Info", "key file No default add group is set for stand new users");
+        g_key_file_free (Kconfig);
+        return TRUE;
+    }
+    dialog->priv->stand_user_groups = g_strdupv (stand_groups);
+
     g_key_file_free (Kconfig);
     return TRUE;
 
 EXIT:
-    dialog->priv->user_groups = NULL;
     dialog->priv->user_lang = NULL;
     g_key_file_free (Kconfig);
     return FALSE;
@@ -467,7 +479,11 @@ static void set_new_user_base_info (ActUser         *user,
     }
     un = gtk_entry_get_text (GTK_ENTRY (dialog->priv->name_entry));
     mate_uesr_admin_log ("Debug","New user: %s lang %s", act_user_get_user_name (user), NewUserLang);
-    add_user_to_group (un, dialog->priv->user_groups);
+
+    if (dialog->priv->user_type == 0)
+        add_user_to_group (un, dialog->priv->stand_user_groups);
+    else
+        add_user_to_group (un, dialog->priv->admin_user_groups);
 
     close_dialog (GTK_WIDGET (dialog));
 }
@@ -886,9 +902,14 @@ user_manager_destroy (GtkWidget *obj)
         dialog->priv->password_time_id = 0;
     }
 
-    if (dialog->priv->user_groups != NULL)
+    if (dialog->priv->stand_user_groups != NULL)
     {
-        g_strfreev (dialog->priv->user_groups);
+        g_strfreev (dialog->priv->stand_user_groups);
+    }
+
+    if (dialog->priv->admin_user_groups != NULL)
+    {
+        g_strfreev (dialog->priv->admin_user_groups);
     }
 
     if (dialog->priv->user_lang != NULL)

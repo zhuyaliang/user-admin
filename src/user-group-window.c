@@ -192,7 +192,7 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
     gas    = gas_group_manager_create_group (manage, s, &error);
     if (gas == NULL)
     {
-        MessageReport (_("Create New Group Faild"), error->message, ERROR);
+        MessageReport (_("Create New Group Failed"), error->message, ERROR);
         if (error != NULL)
         {
             g_error_free (error);

@@ -93,11 +93,11 @@ msgid "Whether to remove the user's home directory"
 msgstr ""
 
 #: src/user-admin.c:292
-msgid "Repeat of user name.Please try another"
+msgid "This username is already taken. Please try another"
 msgstr ""
 
 #: src/user-admin.c:296
-msgid "Repeat of user home name.Please try another"
+msgid "This user home name is already taken. Please try another"
 msgstr ""
 
 #: src/user-admin.c:300
@@ -107,7 +107,7 @@ msgstr ""
 #: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
-"letters from a-z,digits and the following characters: . - _"
+"letters from a-z, digits, and the following characters: . - _"
 msgstr ""
 
 #: src/user-admin.c:328 src/user-admin.c:563
@@ -140,11 +140,11 @@ msgid "Administrators"
 msgstr ""
 
 #: src/user-admin.c:606
-msgid "The passwords entered twice are different"
+msgid "Passwords do not match"
 msgstr ""
 
 #: src/user-admin.c:644
-msgid "Mixed passwords improve security"
+msgid "Add symbols and numbers to your password to make it even more secure"
 msgstr ""
 
 #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
@@ -159,7 +159,7 @@ msgid "Set up next time"
 msgstr ""
 
 #: src/user-admin.c:764
-msgid "Now set the password"
+msgid "Set up a password now"
 msgstr ""
 
 #: src/user-admin.c:785 src/user-password.c:302

@@ -301,11 +301,11 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
     {
         if (in_use)
         {
-            *Message = g_strdup (_("Repeat of user name.Please try another"));
+            *Message = g_strdup (_("This username is already taken. Please try another"));
         }
         else if(home_use)
         {
-            *Message = g_strdup (_("Repeat of user home name.Please try another"));
+            *Message = g_strdup (_("This user home name is already taken. Please try another"));
         }
         else if (UserName[0] == '-')
         {
@@ -313,7 +313,7 @@ static gboolean UserNameValidCheck (const gchar *UserName, gchar **Message)
         }
         else
         {
-            *Message = g_strdup (_("The username should only consist of upper and lower case \nletters from a-z,digits and the following characters: . - _"));
+            *Message = g_strdup (_("The username should only consist of upper and lower case \nletters from a-z, digits, and the following characters: . - _"));
         }
     }
 
@@ -432,7 +432,7 @@ static void add_user_to_group (const char *name, char **groups)
             {
                 if (g_utf8_strchr (groups[i],-1,' ') != NULL)
                 {
-                    mate_uesr_admin_log ("Warning","Configuration file error,Please delete the extra space keys");
+                    mate_uesr_admin_log ("Warning","Configuration file error, please delete the extra space keys");
                 }
                 mate_uesr_admin_log ("Warning","Configuration file error, no group %s",groups[i]);
                 continue;
@@ -619,7 +619,7 @@ static void SetNewUserInfo (GtkWidget   *Vbox,
 static void ComparePassword (UserManager *dialog)
 {
     const gchar *password;
-    const gchar *NoteMessage = _("The passwords entered twice are different");
+    const gchar *NoteMessage = _("Passwords do not match");
 
     password = gtk_entry_get_text (GTK_ENTRY (dialog->priv->check_entry));
     if (strlen (password) <=0)
@@ -657,7 +657,7 @@ static gboolean start_check_entry (gpointer data)
     const char  *s;
     int          Level;
     const char  *Message;
-    const char  *tip = _("Mixed passwords improve security");
+    const char  *tip = _("Add symbols and numbers to your password to make it even more secure");
 
     s = gtk_entry_get_text (GTK_ENTRY (dialog->priv->password_entry));
     if (strlen (s) == 0)
@@ -777,7 +777,7 @@ static void SetNewUserPass (GtkWidget *Vbox, UserManager *dialog)
                       G_CALLBACK (next_login_set_password),
                       dialog);
 
-    radio_button1 = gtk_radio_button_new_with_label (RadioGroup, _("Now set the password"));
+    radio_button1 = gtk_radio_button_new_with_label (RadioGroup, _("Set up a password now"));
     gtk_grid_attach (GTK_GRID (Table), radio_button1, 0, 2, 5, 1);
     g_signal_connect (radio_button1,
                      "released",

@@ -339,7 +339,7 @@ static const gchar *pw_error_hint (gint error)
     case PWQ_ERROR_MAX_SEQUENCE:
         return _("Try to avoid sequences like 1234 or abcd");
     case PWQ_ERROR_MIN_LENGTH:
-        return _("Password length needs more than 8 characters");
+        return _("The password needs to be longer than 8 characters");
     case PWQ_ERROR_EMPTY_PASSWORD:
         return ("     ");
     default:

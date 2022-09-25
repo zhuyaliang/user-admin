@@ -279,7 +279,7 @@ user_password_init (UserPassword *dialog)
                      G_CALLBACK (next_login_set_password),
                      dialog);
 
-    now_button = gtk_radio_button_new_with_label (radio_group, _("Now set up"));
+    now_button = gtk_radio_button_new_with_label (radio_group, _("Set up a password now"));
     gtk_grid_attach (GTK_GRID (table), now_button, 0, 2, 5, 1);
     g_signal_connect (now_button,
                      "toggled",

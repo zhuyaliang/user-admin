@@ -258,7 +258,7 @@ msgid "Use Enter Key to Save Modifications"
 msgstr ""
 
 #: src/user-group-window.c:120
-msgid "Repeat of group name.Please try another"
+msgid "This group already exists. Please try a different name"
 msgstr ""
 
 #: src/user-group-window.c:124
@@ -266,13 +266,13 @@ msgid "The groupname cannot start with a - ."
 msgstr ""
 
 #: src/user-group-window.c:128
-msgid "The first character of the group name needs use letter"
+msgid "The group name must start with a letter"
 msgstr ""
 
 #: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
-"letters from a-z,digits and the following characters: . - _"
+"letters from a-z, digits, and the following characters: . - _"
 msgstr ""
 
 #: src/user-group-window.c:185
@@ -280,7 +280,7 @@ msgid "Create New Group"
 msgstr ""
 
 #: src/user-group-window.c:192
-msgid "Create New Group Faild"
+msgid "Create New Group Failed"
 msgstr ""
 
 #: src/user-group-window.c:229 src/user-group-window.c:241
@@ -353,7 +353,7 @@ msgstr ""
 
 #: src/user-group-window.c:794
 msgid ""
-"Create User Group Successfully,Please view the end of the switch-groups list."
+"Created User Group Successfully, please view the end of the switch-groups list."
 msgstr ""
 
 #: src/user-group-window.c:886
@@ -419,7 +419,7 @@ msgid "next"
 msgstr ""
 
 #: src/user-info.c:39
-msgid "Account is disable"
+msgid "Account is disabled"
 msgstr ""
 
 #: src/user-info.c:207
@@ -451,7 +451,7 @@ msgid "The passwords do not match."
 msgstr ""
 
 #: src/user-password.c:282
-msgid "Now set up"
+msgid "Set up a password now"
 msgstr ""
 
 #: src/user-password.c:292

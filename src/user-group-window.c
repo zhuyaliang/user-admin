@@ -118,7 +118,7 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
     {
         if (in_use)
         {
-            *Message = g_strdup (_("Repeat of group name.Please try another"));
+            *Message = g_strdup (_("This group already exists.Please try a different name"));
         }
         else if (name[0] == '-') 
         {
@@ -126,11 +126,11 @@ static gboolean CheckGroupName (const gchar *name, gchar **Message)
         }
         else if(character)
         {
-            *Message = g_strdup (_("The first character of the group name needs use letter"));
+            *Message = g_strdup (_("The group name must start with a letter"));
         }
         else
         {
-            *Message = g_strdup (_("The groupname should only consist of upper and lower case \nletters from a-z,digits and the following characters: . - _"));
+            *Message = g_strdup (_("The groupname should only consist of upper and lower case \nletters from a-z, digits, and the following characters: . - _"));
         }
     }
 
@@ -192,7 +192,7 @@ static void CreateNewGroup(GtkWidget *widget, gpointer data)
     gas    = gas_group_manager_create_group (manage, s, &error);
     if (gas == NULL)
     {
-        MessageReport (_("Create New Group Faild"), error->message, ERROR);
+        MessageReport (_("Create New Group Failed"), error->message, ERROR);
         if (error != NULL)
         {
             g_error_free (error);
@@ -767,7 +767,7 @@ static void user_group_window_update_list_store (UserGroupWindow *win)
         group = g_slist_nth_data (win->priv->group_list, i);
         if (group == NULL)
         {
-            g_error ("No such the Group!!!\r\n");
+            g_error ("No such Group!!!\r\n");
             break;
         }
         addswitchlistdata (win->priv->TreeSwitch, win->priv->SwitchStore, group, win->priv->user_name);
@@ -816,7 +816,7 @@ static void user_group_add_cb (GasGroupManager   *g_manager,
     group = user_group_new (gas);
     win->priv->group_list = g_slist_append (win->priv->group_list, g_object_ref (group));
     MessageReport (_("Create User Group"),
-                   _("Create User Group Successfully,Please view the end of the switch-groups list."),
+                   _("Created User Group Successfully, please view the end of the switch-groups list."),
                    INFOR);
 
     user_group_window_update_list_store (win);

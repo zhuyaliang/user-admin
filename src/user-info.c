@@ -36,7 +36,7 @@ const gchar * GetPasswordModeText (ActUser *user,int *Type)
 
     if (act_user_get_locked (user)) 
     {
-        text = (_("Account is disable"));
+        text = (_("Account is disabled"));
         *Type = NEWPASS;
     }
     else
@@ -48,7 +48,7 @@ const gchar * GetPasswordModeText (ActUser *user,int *Type)
                 *Type = OLDPASS;
                     break;
             case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
-                text = (_("Set up next time"));
+                text = (_("Set up a password next time"));
                 *Type = NEWPASS;
                     break;
             case ACT_USER_PASSWORD_MODE_NONE:

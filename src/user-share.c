@@ -217,9 +217,18 @@ void SetLableFontType(GtkWidget  *Lable ,
 
     if (Color == NULL)
     {
-        LableTypeBuf = g_strdup_printf ("<span weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
-                         FontSzie,
-                         Word);
+        if(Blod)
+        {
+            LableTypeBuf = g_strdup_printf ("<span weight=\'light\'font_desc=\'%d\'><b>%s</b></span>",
+                             FontSzie,
+                             Word);
+        }
+        else
+        {
+            LableTypeBuf = g_strdup_printf ("<span weight=\'light\'font_desc=\'%d\'>%s</span>",
+                             FontSzie,
+                             Word);
+        }
     }
     else
     {

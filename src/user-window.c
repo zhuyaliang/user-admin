@@ -91,7 +91,7 @@ static GtkWidget *set_unlock_button_tips (GtkWidget *button_lock)
     gtk_container_add(GTK_CONTAINER(box), image);
 
     label = gtk_label_new (NULL);
-    SetLableFontType(label, "black", 11, _("Some settings must be unlocked before they can be changed"), FALSE);
+    SetLableFontType(label, NULL, 11, _("Some settings must be unlocked before they can be changed"), FALSE);
     gtk_container_add(GTK_CONTAINER(box), label);
 
     gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_LEFT);
@@ -238,7 +238,7 @@ static void user_name_changed_cb (UserFace *face, UserWindow *win)
 
     name = user_face_get_real_name (face);
     act_user_set_real_name (win->priv->user, name);
-    SetLableFontType (win->priv->list_label, "black", 14, name, TRUE);
+    SetLableFontType (win->priv->list_label, NULL, 14, name, TRUE);
 }
 
 static void remove_user_cb (GtkWidget *widget, UserWindow *win)

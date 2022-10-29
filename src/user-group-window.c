@@ -654,7 +654,7 @@ static GtkWidget *load_create_group (UserGroupWindow *win)
     gtk_box_pack_start (GTK_BOX (vbox1), Scrolled, TRUE, TRUE, 0);
 
     label = gtk_label_new (NULL);
-    SetLableFontType(label, "black", 12, _("Please select the user to add to the new group"), FALSE);
+    SetLableFontType(label, NULL, 12, _("Please select the user to add to the new group"), FALSE);
     gtk_grid_attach (GTK_GRID (table), label, 0, 1, 2, 1);
 
     model = create_tree_model ();

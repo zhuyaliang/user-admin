@@ -90,7 +90,6 @@ static void thumbnail_preview (GtkFileChooser  *chooser,
         if (pixbuf != NULL)
         {
             gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
-            g_object_unref (pixbuf);
         }
         else
         {

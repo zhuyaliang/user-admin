@@ -1,0 +1,369 @@
+--- a/po/ru.po	2022-12-23 06:32:30.000000000 +0400
++++ b/po/ru.po	2023-08-30 13:11:24.714415191 +0400
+@@ -50,6 +50,11 @@
+ "record. By working with group-service, groups of users can be managed, such "
+ "as adding/removing existing groups and creating/deleting new groups."
+ msgstr ""
++"Mate Manager — графическое приложение, которое управляет локальными пользователями и группами."
++" Он может добавлять и удалять локальных пользователей, изменять имя пользователя, тип пользователя, язык "
++"пользователя, пароль пользователя, устанавливать автоматический вход в систему. Вы можете просмотреть "
++"запись входа пользователя. Работая с групповым сервисом, можно управлять группами пользователей," 
++"например добавлять/удалять существующие группы и создавать/удалять новые группы."
+ 
+ #: src/main.c:38 src/main.c:81
+ msgid "open file"
+@@ -103,25 +108,26 @@
+ 
+ #: src/user-admin.c:292
+ msgid "Repeat of user name.Please try another"
+-msgstr ""
++msgstr "Повторение имени пользователя. Попробуйте другое."
+ 
+ #: src/user-admin.c:296
+ msgid "Repeat of user home name.Please try another"
+-msgstr ""
++msgstr "Повторение имени домашнего католога пользователя. Попробуйте другое имя."
+ 
+ #: src/user-admin.c:300
+ msgid "The username cannot start with a - ."
+-msgstr ""
++msgstr "Имя пользователя не может начинаться с - ."
+ 
+ #: src/user-admin.c:304
+ msgid ""
+ "The username should only consist of upper and lower case \n"
+ "letters from a-z,digits and the following characters: . - _"
+ msgstr ""
+-
++"Имя пользователя должно состоять только из верхнего и нижнего регистра. \n"
++"букв от a-z, цифры и следующие символы: . - _"
+ #: src/user-admin.c:328 src/user-admin.c:563
+ msgid "This will be used to name your home folder and can't be changed"
+-msgstr ""
++msgstr "Это будет использоваться для названия вашей домашней папки и не может быть изменено."
+ 
+ #: src/user-admin.c:485
+ msgid "Creating User"
+@@ -150,11 +156,11 @@
+ 
+ #: src/user-admin.c:606
+ msgid "The passwords entered twice are different"
+-msgstr ""
++msgstr "Введённые пароли отличаются"
+ 
+ #: src/user-admin.c:644
+ msgid "Mixed passwords improve security"
+-msgstr ""
++msgstr "Использование различных символов повышает безопасность"
+ 
+ #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
+ #: src/user-password.c:271
+@@ -165,15 +171,15 @@
+ #: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
+ #: src/user-password.c:274
+ msgid "Set up next time"
+-msgstr ""
++msgstr "Установить пароль позже"
+ 
+ #: src/user-admin.c:764
+ msgid "Now set the password"
+-msgstr ""
++msgstr "Установить пароль сейчас"
+ 
+ #: src/user-admin.c:785 src/user-password.c:302
+ msgid "generation password"
+-msgstr ""
++msgstr "сгенерировать пароль"
+ 
+ #: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
+ #: src/user-password.c:257 src/user-password.c:316
+@@ -192,15 +198,15 @@
+ 
+ #: src/user-avatar.c:120 src/user-avatar.c:131
+ msgid "Create Crop File"
+-msgstr ""
++msgstr "Создать аватар"
+ 
+ #: src/user-avatar.c:121
+ msgid "failed to create temporary file for image data"
+-msgstr ""
++msgstr "не удалось создать временный файл для данных изображения"
+ 
+ #: src/user-avatar.c:177 src/user-avatar.c:252
+ msgid "_Cancel"
+-msgstr "О_тмена"
++msgstr "_Отмена"
+ 
+ #: src/user-avatar.c:179 src/user-group-window.c:578
+ #: src/user-group-window.c:643
+@@ -209,11 +215,11 @@
+ 
+ #: src/user-avatar.c:226
+ msgid "Load Local Picture"
+-msgstr ""
++msgstr "Загрузить изображение"
+ 
+ #: src/user-avatar.c:249
+ msgid "Browse for more pictures"
+-msgstr ""
++msgstr "Просмотрите больше картинок"
+ 
+ #: src/user-avatar.c:253
+ msgid "_Open"
+@@ -229,7 +235,7 @@
+ 
+ #: src/user-avatar.c:490
+ msgid "There is no address to store photos"
+-msgstr ""
++msgstr "Нет адреса для хранения фотографий"
+ 
+ #: src/user-base.c:212
+ msgid "No Settings"
+@@ -249,31 +255,31 @@
+ 
+ #: src/user-base.c:300
+ msgid "Group Manage"
+-msgstr ""
++msgstr "Управление группой"
+ 
+ #: src/user-base.c:303
+ msgid "Setting Groups"
+-msgstr ""
++msgstr "Настройка групп"
+ 
+ #: src/user-face.c:120
+ msgid "Change Name"
+-msgstr ""
++msgstr "Изменить имя"
+ 
+ #: src/user-face.c:120
+ msgid "Please enter a valid character"
+-msgstr ""
++msgstr "Пожалуйста введите допустимый символ"
+ 
+ #: src/user-face.c:181
+ msgid "Use Enter Key to Save Modifications"
+-msgstr ""
++msgstr "Используйте клавишу Enter для сохранения изменений"
+ 
+ #: src/user-group-window.c:120
+ msgid "Repeat of group name.Please try another"
+-msgstr ""
++msgstr "Повторение названия группы. Попробуйте другое."
+ 
+ #: src/user-group-window.c:124
+ msgid "The groupname cannot start with a - ."
+-msgstr ""
++msgstr "Имя группы не может начинаться с - ."
+ 
+ #: src/user-group-window.c:128
+ msgid "The first character of the group name needs use letter"
+@@ -287,11 +293,11 @@
+ 
+ #: src/user-group-window.c:185
+ msgid "Create New Group"
+-msgstr ""
++msgstr "Создать новую группу"
+ 
+ #: src/user-group-window.c:192
+ msgid "Create New Group Faild"
+-msgstr ""
++msgstr "Создать новую группу не удалось"
+ 
+ #: src/user-group-window.c:229 src/user-group-window.c:241
+ msgid "Remove Group"
+@@ -299,31 +305,33 @@
+ 
+ #: src/user-group-window.c:230
+ msgid "Whether to remove the selected group"
+-msgstr ""
++msgstr "Удалить выбранную группу?"
+ 
+ #: src/user-group-window.c:458
+ msgid "Initialization group management"
+-msgstr ""
++msgstr "Управление группой на стадии инициализации"
+ 
+ #: src/user-group-window.c:459
+ msgid ""
+ "Initialization failed, please see Group \n"
+ " Management Service Interface function"
+ msgstr ""
+-
++"Инициализация не удалась, см. группу \n"
++" Management Service Interface function"
+ #: src/user-group-window.c:465
+ msgid "Failed to contact the group service"
+-msgstr ""
++msgstr "Не удалось связаться со службой групп."
+ 
+ #: src/user-group-window.c:466
+ msgid ""
+ "Please make sure that the group-service is installed and enabled.\n"
+ " url: https://github.com/zhuyaliang/group-service"
+ msgstr ""
+-
++"Убедитесь, что групповая служба установлена и включена.\n"
++" url: https://github.com/zhuyaliang/group-service"
+ #: src/user-group-window.c:479
+ msgid "Click the unlock button on the \"swith-group\" page"
+-msgstr ""
++msgstr "Нажмите кнопку разблокировки на странице \"группа переключателей\"."
+ 
+ #: src/user-group-window.c:583 src/user-group-window.c:707
+ msgid "Group Name"
+@@ -366,23 +374,25 @@
+ "Create User Group Successfully,Please view the end of the switch-groups "
+ "list."
+ msgstr ""
++"Группа пользователей создана успешно. Просмотрите конец списка групп "
++"переключателей."
+ 
+ #: src/user-group-window.c:886
+ msgid "Switch Groups"
+-msgstr "Группы переключателей "
++msgstr "Сменить группы"
+ 
+ #: src/user-group-window.c:890
+ msgid "Create Groups"
+-msgstr ""
++msgstr "Создание групп"
+ 
+ #: src/user-group-window.c:894
+ msgid "Remove Groups"
+-msgstr ""
++msgstr "Удаление групп"
+ 
+ #: src/user-group-window.c:905 src/user-language.c:739
+ #, c-format
+ msgid "Current User - %s"
+-msgstr ""
++msgstr "Текущий пользователь - %s"
+ 
+ #: src/user-history.c:40
+ msgid "This Week"
+@@ -414,40 +424,40 @@
+ 
+ #: src/user-history.c:250
+ msgid "Session Started"
+-msgstr ""
++msgstr "Сеанс запущен"
+ 
+ #: src/user-history.c:288
+ #, c-format
+ msgid "%s — Account Activity"
+-msgstr ""
++msgstr "%s — Активность аккаунта"
+ 
+ #: src/user-history.c:397
+ msgid "previous"
+-msgstr ""
++msgstr "предыдущий"
+ 
+ #: src/user-history.c:402
+ msgid "next"
+-msgstr ""
++msgstr "следующий"
+ 
+ #: src/user-info.c:39
+ msgid "Account is disable"
+-msgstr ""
++msgstr "Аккаунт отключен"
+ 
+ #: src/user-info.c:207
+ msgid "Get User Info"
+-msgstr ""
++msgstr "Информация о пользователе"
+ 
+ #: src/user-info.c:207
+ msgid "user count is 0"
+-msgstr ""
++msgstr "количество пользователей - 0"
+ 
+ #: src/user-language.c:195
+ msgid "More…"
+-msgstr ""
++msgstr "Больше…"
+ 
+ #: src/user-language.c:225
+ msgid "No languages found"
+-msgstr ""
++msgstr "Языки не найдены"
+ 
+ #: src/user-language.c:667
+ msgid "Cancel"
+@@ -459,11 +469,11 @@
+ 
+ #: src/user-password.c:131
+ msgid "The passwords do not match."
+-msgstr ""
++msgstr "Пароли не совпадают."
+ 
+ #: src/user-password.c:282
+ msgid "Now set up"
+-msgstr ""
++msgstr "Теперь настройте"
+ 
+ #: src/user-password.c:292
+ msgid "User Password"
+@@ -471,7 +481,7 @@
+ 
+ #: src/user-share.c:170
+ msgid "_Return"
+-msgstr ""
++msgstr "_Возврат"
+ 
+ #: src/user-share.c:190
+ msgid "Message"
+@@ -499,7 +509,7 @@
+ 
+ #: src/user-share.c:309
+ msgid "Try to avoid some of the words included in the password"
+-msgstr ""
++msgstr "Старайтесь избегать некоторых слов, включенных в пароль."
+ 
+ #: src/user-share.c:313
+ msgid "Try to avoid common words"
+@@ -507,7 +517,7 @@
+ 
+ #: src/user-share.c:315
+ msgid "Try to avoid reordering existing words"
+-msgstr ""
++msgstr "Старайтесь избегать изменения порядка существующих слов."
+ 
+ #: src/user-share.c:317
+ msgid "Try to use more numbers"
+@@ -515,15 +525,15 @@
+ 
+ #: src/user-share.c:319
+ msgid "Try to use more uppercase letters"
+-msgstr ""
++msgstr "Старайтесь использовать больше заглавных букв"
+ 
+ #: src/user-share.c:321
+ msgid "Try to use more lowercase letters"
+-msgstr ""
++msgstr "Старайтесь использовать больше строчных букв"
+ 
+ #: src/user-share.c:323
+ msgid "Try to use more special characters, like punctuation"
+-msgstr ""
++msgstr "Старайтесь использовать больше специальных символов, например знаков препинания."
+ 
+ #: src/user-share.c:325
+ msgid "Try to use a mixture of letters, numbers and punctuation"
+@@ -551,7 +561,7 @@
+ 
+ #: src/user-window.c:94
+ msgid "Some settings must be unlocked before they can be changed"
+-msgstr ""
++msgstr "Некоторые настройки необходимо разблокировать, прежде чем их можно будет изменить."
+ 
+ #: src/user-window.c:277
+ msgid "Add User"
+@@ -559,4 +569,4 @@
+ 
+ #: src/user-window.c:427
+ msgid "Mate User Manager"
+-msgstr ""
++msgstr "Менеджер пользователей Mate"

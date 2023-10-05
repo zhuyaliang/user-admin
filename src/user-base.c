@@ -38,7 +38,6 @@ struct _UserBasePrivate
     GtkWidget  *button_time;
     GtkWidget  *switch_login;
     GtkWidget  *button_group;
-
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (UserBase, user_base, GTK_TYPE_GRID)
@@ -74,17 +73,6 @@ change_language (GtkButton   *button,
     gtk_widget_show_all(GTK_WIDGET(user_language));
 }
 
-/******************************************************************************
-* Function:            SwitchState 
-*        
-* Explain: Select auto login,Only one user can choose to log in automatically.
-*        
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
 static void SwitchState (GtkSwitch *switch_login,
                          gboolean   state,
                          UserBase  *base)
@@ -120,15 +108,15 @@ static void user_password_set_done (UserPassword *dialog, GtkButton *button)
     gtk_button_set_label (button, label);
 }
 
-static void ChangePass (GtkButton *button, UserBase *base)
+static void changed_password_cb (GtkButton *button, UserBase *base)
 {
     UserPassword *dialog;
 
     dialog = user_password_new (base->priv->user);
     g_signal_connect (G_OBJECT(dialog),
-                    "changed",
-                     G_CALLBACK(user_password_set_done),
-                     button);
+                     "changed",
+                      G_CALLBACK (user_password_set_done),
+                      button);
 
     gtk_widget_show_all (GTK_WIDGET (dialog));
     gtk_dialog_run (GTK_DIALOG (dialog));
@@ -218,7 +206,7 @@ void user_base_update_user_info (UserBase *base, ActUser *user)
         g_free (lang);
     }
 
-    label = GetPasswordModeText(user, &PasswordType);
+    label = GetPasswordModeText (user, &PasswordType);
     gtk_button_set_label (GTK_BUTTON (base->priv->button_password), label);
 
     gtk_switch_set_state (GTK_SWITCH (base->priv->switch_login), GetUserAutoLogin (user));
@@ -267,7 +255,7 @@ user_base_fill (UserBase *base)
     base->priv->button_password = gtk_button_new ();
     g_signal_connect (base->priv->button_password,
                      "clicked",
-                      G_CALLBACK (ChangePass),
+                      G_CALLBACK (changed_password_cb),
                       base);
     gtk_grid_attach (GTK_GRID (base), base->priv->button_password, 1, 2, 2, 1);
 
@@ -278,6 +266,7 @@ user_base_fill (UserBase *base)
 
     base->priv->switch_login = gtk_switch_new ();
     gtk_grid_attach (GTK_GRID (base), base->priv->switch_login, 1, 3, 1, 1);
+    gtk_widget_set_halign (GTK_WIDGET (base->priv->switch_login), GTK_ALIGN_START);
     g_signal_connect (base->priv->switch_login,
                      "state-set",
                       G_CALLBACK (SwitchState),
@@ -384,7 +373,6 @@ void user_base_set_user (UserBase *base, ActUser *user)
 void user_base_set_public_sensitive (UserBase *base,
                                      gboolean  sensitive)
 {
-
     gtk_widget_set_sensitive (base->priv->combox, sensitive);
     gtk_widget_set_sensitive (base->priv->button_lang, sensitive);
     gtk_widget_set_sensitive (base->priv->button_password, sensitive);

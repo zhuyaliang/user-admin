@@ -710,7 +710,7 @@ static void next_login_set_password (GtkRadioButton *button, gpointer data)
     gtk_entry_set_text (GTK_ENTRY (dialog->priv->password_entry), "");
     gtk_level_bar_set_value (GTK_LEVEL_BAR (dialog->priv->level_bar), 0);
 
-    if(dialog->priv->password_time_id > 0)                //因为不需要检查密码所以移除定时器
+    if(dialog->priv->password_time_id > 0)
     {
         g_source_remove (dialog->priv->password_time_id);
         dialog->priv->password_time_id = 0;
@@ -718,17 +718,6 @@ static void next_login_set_password (GtkRadioButton *button, gpointer data)
     dialog->priv->password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
     dialog->priv->success = TRUE;
 }
-/******************************************************************************
-* Function:            NowSetNewUserPass 
-*        
-* Explain: Now set the password,Whether the timer is legitimate to check the password
-*        
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
 static void now_set_password (GtkRadioButton *button, gpointer data)
 {
     UserManager *dialog = USER_MANAGER (data);
@@ -741,17 +730,7 @@ static void now_set_password (GtkRadioButton *button, gpointer data)
     dialog->priv->password_time_id = g_timeout_add (CHECK_TIME_OUT, (GSourceFunc) start_check_entry, dialog);
     dialog->priv->password_mode = ACT_USER_PASSWORD_MODE_REGULAR;
 }
-/******************************************************************************
-* Function:              GetNewUserPass 
-*        
-* Explain: Set new user password
-*        
-* Input:         
-*        
-* Output: 
-*        
-* Author:  zhuyaliang  09/05/2018
-******************************************************************************/
+
 static void SetNewUserPass (GtkWidget *Vbox, UserManager *dialog)
 {
     GtkWidget *Table;
@@ -768,7 +747,6 @@ static void SetNewUserPass (GtkWidget *Vbox, UserManager *dialog)
     LabelTitle = gtk_label_new (_("Password"));
     gtk_grid_attach (GTK_GRID (Table), LabelTitle, 0, 0, 1, 1);
 
-    //新建两个单选按钮
     radio_button = gtk_radio_button_new_with_label (NULL, _("Set up next time"));
     RadioGroup = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio_button));
     gtk_grid_attach (GTK_GRID (Table), radio_button, 0, 1, 5, 1);
@@ -786,9 +764,9 @@ static void SetNewUserPass (GtkWidget *Vbox, UserManager *dialog)
 
     LabelPass = gtk_label_new (NULL);
     SetLableFontType (LabelPass, "gray", 11, _("Password"), TRUE);
-    gtk_grid_attach(GTK_GRID(Table), LabelPass, 0, 3, 1, 1);
+    gtk_grid_attach (GTK_GRID(Table), LabelPass, 0, 3, 1, 1);
 
-    dialog->priv->password_entry = gtk_entry_new();
+    dialog->priv->password_entry = gtk_entry_new ();
     gtk_entry_set_visibility (GTK_ENTRY (dialog->priv->password_entry), FALSE);
     gtk_entry_set_icon_from_icon_name(GTK_ENTRY (dialog->priv->password_entry),
                                       GTK_ENTRY_ICON_SECONDARY,
@@ -811,10 +789,10 @@ static void SetNewUserPass (GtkWidget *Vbox, UserManager *dialog)
 
     LabelConfirm = gtk_label_new (NULL);
     SetLableFontType (LabelConfirm, "gray", 11, _("Confirm"), TRUE);
-    gtk_grid_attach(GTK_GRID(Table) ,LabelConfirm , 0, 6, 1, 1);
+    gtk_grid_attach (GTK_GRID(Table) ,LabelConfirm , 0, 6, 1, 1);
 
     dialog->priv->check_entry = gtk_entry_new ();
-    gtk_entry_set_max_length (GTK_ENTRY (dialog->priv->check_entry),24);
+    gtk_entry_set_max_length (GTK_ENTRY (dialog->priv->check_entry), 24);
     gtk_entry_set_visibility (GTK_ENTRY (dialog->priv->check_entry), FALSE);
     gtk_grid_attach (GTK_GRID (Table) ,dialog->priv->check_entry, 1, 6, 4, 1);
     g_signal_connect (G_OBJECT (dialog->priv->password_entry),
@@ -882,7 +860,6 @@ user_manager_response (GtkDialog *dia,
         default:
             break;
     }
-
 }
 
 static void
@@ -922,8 +899,8 @@ static void
 user_manager_init (UserManager *dialog)
 {
     GtkWidget *vbox;
-    GtkWidget *Vbox1;
-    GtkWidget *Vbox2;
+    GtkWidget *vbox1;
+    GtkWidget *vbox2;
     gboolean   ret;
 
     dialog->priv = user_manager_get_instance_private (dialog);
@@ -958,15 +935,15 @@ user_manager_init (UserManager *dialog)
                         TRUE,
                         8);
 
-    Vbox1 =  gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start (GTK_BOX (vbox), Vbox1, TRUE, TRUE, 0);
+    vbox1 =  gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), vbox1, TRUE, TRUE, 0);
 
-    Vbox2 =  gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start (GTK_BOX (vbox), Vbox2, TRUE, TRUE, 0);
+    vbox2 =  gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), vbox2, TRUE, TRUE, 0);
 
     ret = user_manager_get_new_user_config (dialog);
-    SetNewUserInfo (Vbox1, dialog, ret);
-    SetNewUserPass (Vbox2, dialog);
+    SetNewUserInfo (vbox1, dialog, ret);
+    SetNewUserPass (vbox2, dialog);
 }
 
 static void
@@ -1011,7 +988,7 @@ user_manager_class_init (UserManagerClass *klass)
 {
     GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-    GObjectClass *gobject_class;
+    GObjectClass   *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->set_property = user_manager_set_property;
@@ -1040,7 +1017,7 @@ UserManager *user_manager_new (void)
     return dialog;
 }
 
-void AddNewUser(GtkWidget *widget, gpointer data)
+void AddNewUser (GtkWidget *widget, gpointer data)
 {
     UserManager *dialog;
 

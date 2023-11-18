@@ -298,7 +298,7 @@ msgid "Create New Group"
 msgstr "Направите нову групу"
 
 #: src/user-group-window.c:192
-msgid "Create New Group Faild"
+msgid "Create New Group Failed"
 msgstr "Није успело стварање нове групе"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241

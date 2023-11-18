@@ -297,7 +297,7 @@ msgid "Create New Group"
 msgstr "Cipta Kumpulan Baharu"
 
 #: src/user-group-window.c:192
-msgid "Create New Group Faild"
+msgid "Create New Group Failed"
 msgstr "Penciptaan Kumpulan Baharu Gagal"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241

@@ -203,12 +203,12 @@ GSList *get_user_info_list (ActUserManager *manager)
     if (user_count <= 0)
     {
         g_slist_free (list);
-        mate_uesr_admin_log ("Error","mate-user-admin No available users");
+        mate_user_admin_log ("Error","mate-user-admin No available users");
         MessageReport (_("Get User Info"), _("user count is 0"), ERROR);
 
         return NULL;
     }
-    mate_uesr_admin_log ("Info","mate-user-admin user %d", user_count);
+    mate_user_admin_log ("Info","mate-user-admin user %d", user_count);
 
     /*user sort */
     list = g_slist_sort (list, (GCompareFunc)SortUsers);

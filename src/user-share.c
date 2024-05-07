@@ -73,7 +73,7 @@ GdkPixbuf *GetRoundPixbuf (GdkPixbuf *Spixbuf)
     return Dpixbuf;
 }
 /*Record error information to log file*/
-void mate_uesr_admin_log(const char *level,const char *message,...)
+void mate_user_admin_log(const char *level,const char *message,...)
 {
     int     fd;
     va_list args;

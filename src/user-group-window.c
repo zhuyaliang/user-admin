@@ -892,7 +892,7 @@ void user_group_window_init (UserGroupWindow *group_window)
     group_window->priv->NewGroupUsers = NULL;
     if (group_window->priv->permission == NULL)
     {
-        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_GROUP_PERMISSION, error->message);
+        mate_user_admin_log ("Warning","Cannot create '%s' permission: %s", USER_GROUP_PERMISSION, error->message);
         g_error_free (error);
     }
     button_lock = gtk_lock_button_new (group_window->priv->permission);

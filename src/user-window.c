@@ -64,7 +64,7 @@ static void user_window_update (UserWindow *win,
     user_face_update (win->priv->face, GetUserIcon (user), GetRealName (user));
     user_base_update_user_info (win->priv->base, user);
 
-    mate_uesr_admin_log("Info","mate-user-admin Current user name %s",GetRealName(user));
+    mate_user_admin_log("Info","mate-user-admin Current user name %s",GetRealName(user));
 
     if(self_selected == 0)
     {
@@ -163,7 +163,7 @@ static void user_window_set_permission (UserWindow *win)
     }
     else
     {
-        mate_uesr_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
+        mate_user_admin_log ("Warning","Cannot create '%s' permission: %s", USER_ADMIN_PERMISSION, error->message);
         g_error_free (error);
     }
 }

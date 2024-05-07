@@ -507,7 +507,7 @@ add_all_languages (UserLanguage *chooser)
 
     locale_ids = mate_get_all_locales ();
     if(g_strv_length(locale_ids) == 0)
-        mate_uesr_admin_log("Warning","mate-user-admin get_all_locales ->0 No available language");
+        mate_user_admin_log("Warning","mate-user-admin get_all_locales ->0 No available language");
     initial = create_language_hash_table ();
 
     add_languages (chooser, locale_ids, initial);

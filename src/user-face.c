@@ -199,7 +199,7 @@ void user_face_fill (UserFace *face, ActUser *user)
     pb = gdk_pixbuf_new_from_file (GetUserIcon (user), &error);
     if (pb == NULL)
     {
-        mate_uesr_admin_log ("Warning","mate-user-admin user icon %s", error->message);
+        mate_user_admin_log ("Warning","mate-user-admin user icon %s", error->message);
         g_error_free (error);
     }
     pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);

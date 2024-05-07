@@ -485,7 +485,7 @@ create_avatar_menus (UserAvatar *avatar)
     ret = add_list_faces_file (avatar->priv->faces);
     if(!ret)
     {
-        mate_uesr_admin_log("Warning","mate-user-admin There is no address to store photos");
+        mate_user_admin_log("Warning","mate-user-admin There is no address to store photos");
         MessageReport(_("Avatar list"),
                       _("There is no address to store photos"),
                       WARING);

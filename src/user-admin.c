@@ -86,34 +86,34 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     Kconfig = g_key_file_new ();
     if (Kconfig == NULL)
     {
-        mate_uesr_admin_log ("Warning","g_key_file_new fail");
+        mate_user_admin_log ("Warning","g_key_file_new fail");
         return FALSE;
     }
     if (!g_key_file_load_from_file (Kconfig, NUCONFIG, G_KEY_FILE_NONE, &error))
     {
-        mate_uesr_admin_log ("Warning","Error loading key file: %s", error->message);
+        mate_user_admin_log ("Warning","Error loading key file: %s", error->message);
         goto EXIT;
     }
     ConfigGroups = g_key_file_get_groups (Kconfig, &Length);
     if (g_strv_length (ConfigGroups) <= 0)
     {
-        mate_uesr_admin_log ("Warning","key file format errors are not grouped");
+        mate_user_admin_log ("Warning","key file format errors are not grouped");
         goto EXIT;
     }
     if (g_key_file_has_key (Kconfig, KEYGROUPNAME, LANGKEY,&error) == FALSE)
     {
-        mate_uesr_admin_log ("Warning", "key file format errors %s", error->message);
+        mate_user_admin_log ("Warning", "key file format errors %s", error->message);
         goto EXIT;
     }
     Value = g_key_file_get_string(Kconfig,KEYGROUPNAME,LANGKEY,&error);
     if(Value == NULL)
     {
-        mate_uesr_admin_log ("Warning","key file format errors %s",error->message);
+        mate_user_admin_log ("Warning","key file format errors %s",error->message);
         goto EXIT;
     }
     if(mate_get_language_from_locale(Value,NULL) == NULL)
     {
-        mate_uesr_admin_log ("Warning", "key file language format errors Language unavailability");
+        mate_user_admin_log ("Warning", "key file language format errors Language unavailability");
         goto EXIT;
     }
     dialog->priv->user_lang = g_strdup (Value);
@@ -121,7 +121,7 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     Type = g_key_file_get_boolean (Kconfig, KEYGROUPNAME, TYPEKEY, &error);
     if(Type == FALSE && error != NULL)
     {
-        mate_uesr_admin_log ("Warning", "key file user type format errors %s", error->message);
+        mate_user_admin_log ("Warning", "key file user type format errors %s", error->message);
         goto EXIT;
     }
     dialog->priv->user_type = Type;
@@ -129,7 +129,7 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     admin_groups = g_key_file_get_string_list (Kconfig, KEYGROUPNAME, ADMINGROUPKEY, &Length, &error);
     if (admin_groups == NULL)
     {
-        mate_uesr_admin_log ("Info", "key file No default add group is set for admin new users");
+        mate_user_admin_log ("Info", "key file No default add group is set for admin new users");
         g_key_file_free (Kconfig);
         return TRUE;
     }
@@ -138,7 +138,7 @@ static gboolean user_manager_get_new_user_config (UserManager *dialog)
     stand_groups = g_key_file_get_string_list (Kconfig, KEYGROUPNAME, STANDGROUPKEY, &Length, &error);
     if (stand_groups == NULL)
     {
-        mate_uesr_admin_log ("Info", "key file No default add group is set for stand new users");
+        mate_user_admin_log ("Info", "key file No default add group is set for stand new users");
         g_key_file_free (Kconfig);
         return TRUE;
     }
@@ -409,7 +409,7 @@ static const gchar *GetNewUserLang (UserManager *dialog)
 {
     if(dialog->priv->user_lang != NULL)
     {
-        mate_uesr_admin_log ("Debug","nuLang = %s", dialog->priv->user_lang);
+        mate_user_admin_log ("Debug","nuLang = %s", dialog->priv->user_lang);
         return dialog->priv->user_lang;
     }
     return "en_US.utf8";
@@ -432,18 +432,18 @@ static void add_user_to_group (const char *name, char **groups)
             {
                 if (g_utf8_strchr (groups[i],-1,' ') != NULL)
                 {
-                    mate_uesr_admin_log ("Warning","Configuration file error,Please delete the extra space keys");
+                    mate_user_admin_log ("Warning","Configuration file error,Please delete the extra space keys");
                 }
-                mate_uesr_admin_log ("Warning","Configuration file error, no group %s",groups[i]);
+                mate_user_admin_log ("Warning","Configuration file error, no group %s",groups[i]);
                 continue;
             }
             gas = gas_group_manager_get_group (manage,groups[i]);
             if(gas == NULL)
             {
-                mate_uesr_admin_log ("Warning","Configuration file error, no group %s",groups[i]);
+                mate_user_admin_log ("Warning","Configuration file error, no group %s",groups[i]);
                 continue;
             }
-            mate_uesr_admin_log ("Debug","group name %s",groups[i]);
+            mate_user_admin_log ("Debug","group name %s",groups[i]);
             gas_group_add_user_group (gas, name);
         }
 
@@ -478,7 +478,7 @@ static void set_new_user_base_info (ActUser         *user,
         act_user_set_password (user,Password, "");
     }
     un = gtk_entry_get_text (GTK_ENTRY (dialog->priv->name_entry));
-    mate_uesr_admin_log ("Debug","New user: %s lang %s", act_user_get_user_name (user), NewUserLang);
+    mate_user_admin_log ("Debug","New user: %s lang %s", act_user_get_user_name (user), NewUserLang);
 
     if (dialog->priv->user_type == 0)
         add_user_to_group (un, dialog->priv->stand_user_groups);
@@ -503,7 +503,7 @@ static void CreateUserDone (ActUserManager  *Manager,
         close_dialog (GTK_WIDGET (dialog));
         return;
     }
-    mate_uesr_admin_log ("Debug","Created user: %s success", act_user_get_user_name (user));
+    mate_user_admin_log ("Debug","Created user: %s success", act_user_get_user_name (user));
     if (act_user_is_loaded (user))
         set_new_user_base_info (user, NULL, dialog);
     else
@@ -542,7 +542,7 @@ static void CreateLocalNewUser(UserManager *dialog)
         dialog->priv->name_time_id = 0;
     }
     Manager = act_user_manager_get_default ();
-    mate_uesr_admin_log ("Debug","username %s realname %s",
+    mate_user_admin_log ("Debug","username %s realname %s",
                          un, rn);
     act_user_manager_create_user_async (Manager,
                                         un,
@@ -825,7 +825,7 @@ static void GetPermission (GObject      *source_object,
     }
     else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-        mate_uesr_admin_log ("Warning","Failed to acquire permission: %s", error->message);
+        mate_user_admin_log ("Warning","Failed to acquire permission: %s", error->message);
     }
 
     g_clear_error (&error);

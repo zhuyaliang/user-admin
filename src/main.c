@@ -149,13 +149,13 @@ int main(int argc, char **argv)
 
     gtk_init (&argc, &argv);
 
-    mate_uesr_admin_log ("Info","mate-user-admin Version:%s",VERSION );
+    mate_user_admin_log ("Info","mate-user-admin Version:%s",VERSION );
     /* Program exit processing */
     atexit(ExitHook);
     /* Check whether the process has been started */
     if (ProcessRuning() == TRUE)
     {
-        mate_uesr_admin_log ("Info","The mate-user-admin process already exists");
+        mate_user_admin_log ("Info","The mate-user-admin process already exists");
         exit (0);
     }
 

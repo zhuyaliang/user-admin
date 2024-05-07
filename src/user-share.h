@@ -48,7 +48,7 @@
 #define  ADMIN     1
 
 
-void         mate_uesr_admin_log   (const char  *level,
+void         mate_user_admin_log   (const char  *level,
                                     const char  *message,
                                     ...);
 

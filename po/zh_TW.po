@@ -293,7 +293,7 @@ msgid "Create New Group"
 msgstr "建立新群組"
 
 #: src/user-group-window.c:192
-msgid "Create New Group Faild"
+msgid "Create New Group Failed"
 msgstr "建立新群組失敗"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241

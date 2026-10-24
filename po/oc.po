@@ -1,27 +1,28 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-# Translators:
 # Cédric Valmary <cvalmary@yahoo.fr>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
 # Quentin PAGÈS, 2021
-# 
-#, fuzzy
+# Quentin PAGÈS <quentinantonin@free.fr>, 2026.
+#
+# Translators:
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-02 15:19+0800\n"
-"PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Quentin PAGÈS, 2021\n"
-"Language-Team: Occitan (post 1500) (https://www.transifex.com/mate/teams/13566/oc/)\n"
+"PO-Revision-Date: 2026-10-24 17:18+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://translate.fedoraproject.org/projects/mate-"
+"desktop/applications/user-admin/oc/>\n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: oc\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
@@ -37,7 +38,7 @@ msgstr "Gestionari MATE"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Gestion dels utilizaires e dels grops locals de Linux"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -47,6 +48,13 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Lo gestionari de Mate es una aplicacion grafica que permet de gerir los "
+"utilizaires e los grops locals. Permet d’apondre e de suprimir d’utilizaires "
+"locals, de modificar lor nom, lor tipe, lor lenga, lor senhal e lor "
+"connexion automatica. Se pòt consultar l’istoric de connexion de "
+"l’utilizaire. En collaboracion amb lo servici dels grops, permet de gerir "
+"los grops d’utilizaires, per exemple en apondent o en suprimissent de grops "
+"existents e en creant o en suprimissent de grops novèls."
 
 #: src/main.c:38 src/main.c:81
 msgid "open file"
@@ -79,7 +87,7 @@ msgstr "Fracàs de la lectura del fichièr pid"
 #: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
 #: src/user-window.c:280
 msgid "Remove User"
-msgstr ""
+msgstr "Suprimir l’utilizaire"
 
 #: src/user-admin.c:185
 msgid "You cannot delete your own account."
@@ -87,42 +95,45 @@ msgstr "Podètz pas suprimir vòstre pròpri compte."
 
 #: src/user-admin.c:193
 msgid "user is still logged in"
-msgstr ""
+msgstr "l’utilizaire es encara connectat"
 
 #: src/user-admin.c:197
 #, c-format
 msgid "Remove '%s' user"
-msgstr ""
+msgstr "Suprimir l’utilizaire «%s »"
 
 #: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "Indica se cal suprimir lo repertòri personal de l’utilizaire"
 
 #: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "Repeticion de nom d’utilizaire. Ensajatz-ne un autre"
 
 #: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Repeticion de nom de repertòri personal. Ensajatz-ne un autre"
 
 #: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Lo nom d’utilizaire pòt pas començar per un -."
 
 #: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Lo nom d’utilizaire deu conténer sonque de letras majusculas\n"
+"e minusculas de a a z, de chifras e los caractèrs seguents : . - _"
 
 #: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
 msgstr ""
+"Aquò servirà a nomenar vòstre repertòri personal e poirà pas èsser cambiat"
 
 #: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "Creacion de l’utilizaire"
 
 #: src/user-admin.c:570
 msgid "User Name"
@@ -147,7 +158,7 @@ msgstr "Administrators"
 
 #: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr "Los senhals picats dos còps correspondon pas."
+msgstr "Los senhals picats dos còps son diferents"
 
 #: src/user-admin.c:644
 msgid "Mixed passwords improve security"
@@ -189,11 +200,11 @@ msgstr "Crear un utilizaire novèl"
 
 #: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr ""
+msgstr "Crear un fichièr de troncadura"
 
 #: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "Impossible de crear un fichièr temporari per las donadas de l’imatge"
 
 #: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
@@ -226,7 +237,7 @@ msgstr "Lista d’avatars"
 
 #: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "I a pas cap d’adreça per enregistrar de fòtos"
 
 #: src/user-base.c:212
 msgid "No Settings"
@@ -250,7 +261,7 @@ msgstr "Gestion dels grops"
 
 #: src/user-base.c:303
 msgid "Setting Groups"
-msgstr ""
+msgstr "Parametratges dels grops"
 
 #: src/user-face.c:120
 msgid "Change Name"
@@ -258,15 +269,15 @@ msgstr "Modificar lo nom"
 
 #: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Picatz un caractèr valid"
 
 #: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Utilizatz la tòca Retorn per enregistrar las modificacions"
 
 #: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Repeticion del nom de grop. Ensajatz-ne un autre"
 
 #: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
@@ -274,53 +285,59 @@ msgstr "Lo nom de grop pòt pas començar per « - »."
 
 #: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Lo nom del grop deu començar per una letra"
 
 #: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Lo nom del grop deu èsser compausat unicament de letras majusculas\n"
+"e minusculas de a a z, de chifras e dels caractèrs seguents : . - _"
 
 #: src/user-group-window.c:185
 msgid "Create New Group"
-msgstr ""
+msgstr "Crear un grop nòu"
 
 #: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "La creacion del grop a abocat"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "Suprimir lo grop"
 
 #: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Indica se cal suprimir lo grop seleccionat"
 
 #: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Inicializacion de la gestion de grops"
 
 #: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"L’inicializacion a fracassat, consultatz la\n"
+"foncion de l’interfàcia del servici de gestion de grops"
 
 #: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Fracàs de la comunicacion amb « group-service »"
 
 #: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Asseguratz-vos que lo servici de grop siá installat e activat.\n"
+" url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Clicar lo boton de desverrolhar a la pagina « Escambiar de grop »"
 
 #: src/user-group-window.c:583 src/user-group-window.c:707
 msgid "Group Name"
@@ -336,7 +353,7 @@ msgstr "Nom del grop novèl"
 
 #: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Seleccionatz l'utilizaire d’apondre al grop nòu"
 
 #: src/user-group-window.c:648
 msgid "Username"
@@ -352,17 +369,19 @@ msgstr "Suprimir"
 
 #: src/user-group-window.c:708
 msgid "Group id"
-msgstr "ID grop"
+msgstr "Id del grop"
 
 #: src/user-group-window.c:793
 msgid "Create User Group"
-msgstr ""
+msgstr "Crear un grop utilizaire"
 
 #: src/user-group-window.c:794
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
 msgstr ""
+"Crear lo grop d’utilizaires amb succès, consultatz la fin de la lista dels "
+"cambiaments de gropes."
 
 #: src/user-group-window.c:886
 msgid "Switch Groups"
@@ -557,4 +576,4 @@ msgstr "Apondre un utilizaire"
 
 #: src/user-window.c:427
 msgid "Mate User Manager"
-msgstr "Gestionari d’utilizaire MATE"
+msgstr "Gestionari d’utilizaire Mate"

@@ -1,42 +1,42 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-# Translators:
-# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2019
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2019, 2026.
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# 
-#, fuzzy
+#
+# Translators:
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-02 15:19+0800\n"
-"PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Kazakh (https://www.transifex.com/mate/teams/13566/kk/)\n"
+"PO-Revision-Date: 2026-08-30 04:18+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://translate.fedoraproject.org/projects/mate-"
+"desktop/applications/user-admin/kk/>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: kk\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
-msgstr ""
+msgstr "Пайдаланушы тіркелгілерін басқару"
 
 #: data/org.mate.user.admin.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr ""
+msgstr "Пайдаланушы деректерін өзгерту үшін аутентификация қажет"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "MATE басқарушысы"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Linux жергілікті пайдаланушылары мен топтарын басқару"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -46,86 +46,95 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Mate басқарушысы — жергілікті пайдаланушылар мен топтарды басқаратын "
+"графикалық қолданба. Ол жергілікті пайдаланушыларды қоса және өшіре алады, "
+"пайдаланушы атын, пайдаланушы түрін, пайдаланушы тілін, пайдаланушы паролін, "
+"автоматты түрде кіруді өзгерте алады. Пайдаланушының кіру жазбасын көруге "
+"болады. Топтық қызметпен жұмыс істеу арқылы пайдаланушылар топтарын "
+"басқаруға болады, мысалы, бар топтарды қосу/өшіру және жаңа топтарды жасау/"
+"өшіру."
 
 #: src/main.c:38 src/main.c:81
 msgid "open file"
-msgstr ""
+msgstr "файлды ашу"
 
 #: src/main.c:38
 msgid "Create pid file failed"
-msgstr ""
+msgstr "PID файлын жасау сәтсіз аяқталды"
 
 #: src/main.c:48
 msgid "write file"
-msgstr ""
+msgstr "файлға жазу"
 
 #: src/main.c:48
 msgid "write pid file failed"
-msgstr ""
+msgstr "pid файлына жазу сәтсіз аяқталды"
 
 #: src/main.c:81
 msgid "open pid file failed"
-msgstr ""
+msgstr "pid файлын ашу сәтсіз аяқталды"
 
 #: src/main.c:86
 msgid "read file"
-msgstr ""
+msgstr "файлды оқу"
 
 #: src/main.c:86
 msgid "read pid file failed"
-msgstr ""
+msgstr "pid файлын оқу сәтсіз аяқталды"
 
 #: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
 #: src/user-window.c:280
 msgid "Remove User"
-msgstr ""
+msgstr "Пайдаланушыны өшіру"
 
 #: src/user-admin.c:185
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Өз тіркелгіңізді өшіре алмайсыз."
 
 #: src/user-admin.c:193
 msgid "user is still logged in"
-msgstr ""
+msgstr "пайдаланушы әлі де кіріп тұр"
 
 #: src/user-admin.c:197
 #, c-format
 msgid "Remove '%s' user"
-msgstr ""
+msgstr "«%s» пайдаланушысын өшіру"
 
 #: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "Пайдаланушының үй бумасын өшіру керек пе"
 
 #: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "Пайдаланушы аты қайталанып тұр. Басқасын көріңіз"
 
 #: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Пайдаланушы үй бумасының аты қайталанып тұр. Басқасын көріңіз"
 
 #: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Пайдаланушы аты - таңбасынан басталмауы керек."
 
 #: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Пайдаланушы аты тек a-z дейінгі жоғарғы және төменгі\n"
+"регистрдегі әріптерден, цифрлардан және келесі таңбалардан тұруы керек: . - _"
 
 #: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
-msgstr ""
+msgstr "Бұл үй бумаңызды атау үшін пайдаланылады және оны өзгерту мүмкін емес"
 
 #: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "Пайдаланушы жасалуда"
 
 #: src/user-admin.c:570
 msgid "User Name"
-msgstr ""
+msgstr "Пайдаланушы аты"
 
 #: src/user-admin.c:583
 msgid "Full Name"
@@ -133,7 +142,7 @@ msgstr "Толық аты"
 
 #: src/user-admin.c:591 src/user-base.c:239
 msgid "Account Type"
-msgstr ""
+msgstr "Тіркелгі түрі"
 
 #. drop-down select boxes
 #: src/user-admin.c:594 src/user-base.c:243
@@ -142,15 +151,15 @@ msgstr "Қалыпты"
 
 #: src/user-admin.c:594 src/user-base.c:243
 msgid "Administrators"
-msgstr ""
+msgstr "Әкімшілер"
 
 #: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "Екі рет енгізілген парольдер әртүрлі"
 
 #: src/user-admin.c:644
 msgid "Mixed passwords improve security"
-msgstr ""
+msgstr "Аралас парольдер қауіпсіздікті күшейтеді"
 
 #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
 #: src/user-password.c:271
@@ -161,15 +170,15 @@ msgstr "пароль"
 #: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
 #: src/user-password.c:274
 msgid "Set up next time"
-msgstr ""
+msgstr "Келесі жолы орнату"
 
 #: src/user-admin.c:764
 msgid "Now set the password"
-msgstr ""
+msgstr "Енді парольді орнатыңыз"
 
 #: src/user-admin.c:785 src/user-password.c:302
 msgid "generation password"
-msgstr ""
+msgstr "пароль генерациясы"
 
 #: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
 #: src/user-password.c:257 src/user-password.c:316
@@ -184,15 +193,15 @@ msgstr "Жабу"
 
 #: src/user-admin.c:931
 msgid "Create New User"
-msgstr ""
+msgstr "Жаңа пайдаланушы жасау"
 
 #: src/user-avatar.c:120 src/user-avatar.c:131
 msgid "Create Crop File"
-msgstr ""
+msgstr "Қиып жіберу файлын жасау"
 
 #: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "сурет деректері үшін уақытша файлды жасау сәтсіз аяқталды"
 
 #: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
@@ -205,11 +214,11 @@ msgstr "Таңдау"
 
 #: src/user-avatar.c:226
 msgid "Load Local Picture"
-msgstr ""
+msgstr "Жергілікті суретті жүктеу"
 
 #: src/user-avatar.c:249
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "Көбірек суреттерді шолу"
 
 #: src/user-avatar.c:253
 msgid "_Open"
@@ -217,19 +226,19 @@ msgstr "А_шу"
 
 #: src/user-avatar.c:323
 msgid "Local Picture"
-msgstr ""
+msgstr "Жергілікті сурет"
 
 #: src/user-avatar.c:489
 msgid "Avatar list"
-msgstr ""
+msgstr "Аватар тізімі"
 
 #: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "Фотоларды сақтау үшін адрес жоқ"
 
 #: src/user-base.c:212
 msgid "No Settings"
-msgstr ""
+msgstr "Баптаулар жоқ"
 
 #: src/user-base.c:252
 msgid "Language"
@@ -237,113 +246,119 @@ msgstr "Тіл"
 
 #: src/user-base.c:276
 msgid "Automatic logon"
-msgstr ""
+msgstr "Автоматты түрде кіру"
 
 #: src/user-base.c:288
 msgid "Login time"
-msgstr ""
+msgstr "Кіру уақыты"
 
 #: src/user-base.c:300
 msgid "Group Manage"
-msgstr ""
+msgstr "Топты басқару"
 
 #: src/user-base.c:303
 msgid "Setting Groups"
-msgstr ""
+msgstr "Топтарды баптау"
 
 #: src/user-face.c:120
 msgid "Change Name"
-msgstr ""
+msgstr "Атын өзгерту"
 
 #: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Жарамды таңба енгізіңіз"
 
 #: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Өзгертулерді сақтау үшін Enter пернесін пайдаланыңыз"
 
 #: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Топ аты қайталанып тұр. Басқасын көріңіз"
 
 #: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "Топ аты - таңбасынан басталмауы керек."
 
 #: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Топ атының бірінші таңбасы үшін әріп қажет етеді"
 
 #: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Топ аты тек a-z дейінгі жоғарғы және төменгі\n"
+"регистрдегі әріптерден, цифрлардан және келесі таңбалардан тұруы керек: . - _"
 
 #: src/user-group-window.c:185
 msgid "Create New Group"
-msgstr ""
+msgstr "Жаңа топ жасау"
 
 #: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "Жаңа топ жасау сәтсіз аяқталды"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
-msgstr ""
+msgstr "Топты өшіру"
 
 #: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Таңдалған топты өшіру керек пе?"
 
 #: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Топты басқаруды инициализациялау"
 
 #: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Инициализация сәтсіз аяқталды, топты басқару қызметінің интерфейс функциясын "
+"қараңыз"
 
 #: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Топтық қызметке байланысу сәтсіз аяқталды"
 
 #: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Топтық қызметтің орнатылғанына және іске қосылғанына көз жеткізіңіз.\n"
+"url: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "«swith-group» бетіндегі құлпын ашу батырмасын шертіңіз"
 
 #: src/user-group-window.c:583 src/user-group-window.c:707
 msgid "Group Name"
-msgstr ""
+msgstr "Топ аты"
 
 #: src/user-group-window.c:584
 msgid "Group ID"
-msgstr ""
+msgstr "Топ идентификаторы"
 
 #: src/user-group-window.c:620
 msgid "New Group Name"
-msgstr ""
+msgstr "Жаңа топ аты"
 
 #: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Жаңа топқа қосу үшін пайдаланушыны таңдаңыз"
 
 #: src/user-group-window.c:648
 msgid "Username"
-msgstr ""
+msgstr "Пайдаланушы аты"
 
 #: src/user-group-window.c:649
 msgid "User ID"
-msgstr ""
+msgstr "Пайдаланушы идентификаторы"
 
 #: src/user-group-window.c:706 src/user-group-window.c:719
 msgid "Remove"
@@ -351,42 +366,43 @@ msgstr "Өшіру"
 
 #: src/user-group-window.c:708
 msgid "Group id"
-msgstr ""
+msgstr "Топ идентификаторы"
 
 #: src/user-group-window.c:793
 msgid "Create User Group"
-msgstr ""
+msgstr "Пайдаланушы тобын жасау"
 
 #: src/user-group-window.c:794
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
 msgstr ""
+"Пайдаланушы тобы сәтті жасалды, топтарды ауыстыру тізімінің соңын қараңыз."
 
 #: src/user-group-window.c:886
 msgid "Switch Groups"
-msgstr ""
+msgstr "Топтарды ауыстыру"
 
 #: src/user-group-window.c:890
 msgid "Create Groups"
-msgstr ""
+msgstr "Топтарды жасау"
 
 #: src/user-group-window.c:894
 msgid "Remove Groups"
-msgstr ""
+msgstr "Топтарды өшіру"
 
 #: src/user-group-window.c:905 src/user-language.c:739
 #, c-format
 msgid "Current User - %s"
-msgstr ""
+msgstr "Ағымдағы пайдаланушы - %s"
 
 #: src/user-history.c:40
 msgid "This Week"
-msgstr ""
+msgstr "Осы аптада"
 
 #: src/user-history.c:44
 msgid "Last Week"
-msgstr ""
+msgstr "Өткен аптада"
 
 #: src/user-history.c:146
 msgid "Today"
@@ -394,56 +410,56 @@ msgstr "Бүгін"
 
 #: src/user-history.c:150
 msgid "Yesterday"
-msgstr ""
+msgstr "Кеше"
 
 #: src/user-history.c:156
 msgid "%b %e"
-msgstr ""
+msgstr "%b %e"
 
 #: src/user-history.c:160
 msgid "%b %e, %Y"
-msgstr ""
+msgstr "%b %e, %Y"
 
 #: src/user-history.c:243
 msgid "Session Ended"
-msgstr ""
+msgstr "Сеанс аяқталды"
 
 #: src/user-history.c:250
 msgid "Session Started"
-msgstr ""
+msgstr "Сеанс басталды"
 
 #: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s — Тіркелгі әрекеті"
 
 #: src/user-history.c:397
 msgid "previous"
-msgstr ""
+msgstr "алдыңғы"
 
 #: src/user-history.c:402
 msgid "next"
-msgstr ""
+msgstr "келесі"
 
 #: src/user-info.c:39
 msgid "Account is disable"
-msgstr ""
+msgstr "Тіркелгі сөндірулі"
 
 #: src/user-info.c:207
 msgid "Get User Info"
-msgstr ""
+msgstr "Пайдаланушы ақпаратын алу"
 
 #: src/user-info.c:207
 msgid "user count is 0"
-msgstr ""
+msgstr "пайдаланушы саны 0"
 
 #: src/user-language.c:195
 msgid "More…"
-msgstr ""
+msgstr "Көбірек…"
 
 #: src/user-language.c:225
 msgid "No languages found"
-msgstr ""
+msgstr "Тілдер табылмады"
 
 #: src/user-language.c:667
 msgid "Cancel"
@@ -455,19 +471,19 @@ msgstr "Дайын"
 
 #: src/user-password.c:131
 msgid "The passwords do not match."
-msgstr ""
+msgstr "Парольдер сәйкес келмейді."
 
 #: src/user-password.c:282
 msgid "Now set up"
-msgstr ""
+msgstr "Енді орнату"
 
 #: src/user-password.c:292
 msgid "User Password"
-msgstr ""
+msgstr "Пайдаланушы паролі"
 
 #: src/user-share.c:170
 msgid "_Return"
-msgstr ""
+msgstr "Қа_йту"
 
 #: src/user-share.c:190
 msgid "Message"
@@ -475,82 +491,85 @@ msgstr "Хабарлама"
 
 #: src/user-share.c:299
 msgid "The new password needs to be different from the old one"
-msgstr ""
+msgstr "Жаңа пароль ескісінен басқаша болуы қажет"
 
 #: src/user-share.c:301
 msgid "Try changing some letters and numbers"
-msgstr ""
+msgstr "Кейбір әріптер мен сандарды өзгертіп көріңіз"
 
 #: src/user-share.c:303 src/user-share.c:311
 msgid "Try changing the password a bit more"
-msgstr ""
+msgstr "Парольді тағы біраз өзгертіп көріңіз"
 
 #: src/user-share.c:305
 msgid "A password without your user name would be stronger"
-msgstr ""
+msgstr "Пайдаланушы атынсыз пароль күштірек болар еді"
 
 #: src/user-share.c:307
 msgid "Try to avoid using your name in the password"
-msgstr ""
+msgstr "Парольде атыңызды пайдаланудан болдырмауға тырысыңыз"
 
 #: src/user-share.c:309
 msgid "Try to avoid some of the words included in the password"
-msgstr ""
+msgstr "Парольге кіретін кейбір сөздерден болдырмауға тырысыңыз"
 
 #: src/user-share.c:313
 msgid "Try to avoid common words"
-msgstr ""
+msgstr "Жиі кездесетін сөздерден болдырмауға тырысыңыз"
 
 #: src/user-share.c:315
 msgid "Try to avoid reordering existing words"
-msgstr ""
+msgstr "Бар сөздердің ретін өзгертуден болдырмауға тырысыңыз"
 
 #: src/user-share.c:317
 msgid "Try to use more numbers"
-msgstr ""
+msgstr "Көбірек сандарды пайдалануға тырысыңыз"
 
 #: src/user-share.c:319
 msgid "Try to use more uppercase letters"
-msgstr ""
+msgstr "Көбірек бас әріптерді пайдалануға тырысыңыз"
 
 #: src/user-share.c:321
 msgid "Try to use more lowercase letters"
-msgstr ""
+msgstr "Көбірек кіші әріптерді пайдалануға тырысыңыз"
 
 #: src/user-share.c:323
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
+msgstr "Тыныс белгілері сияқты көбірек арнайы таңбаларды пайдалануға тырысыңыз"
 
 #: src/user-share.c:325
 msgid "Try to use a mixture of letters, numbers and punctuation"
 msgstr ""
+"Әріптердің, сандардың және тыныс белгілерінің қоспасын пайдалануға тырысыңыз"
 
 #: src/user-share.c:327
 msgid "Try to avoid repeating the same character"
-msgstr ""
+msgstr "Бір таңбаны қайталаудан болдырмауға тырысыңыз"
 
 #: src/user-share.c:329
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
+"Бірдей түрдегі таңбаны қайталаудан болдырмауға тырысыңыз: әріптерді, "
+"сандарды және тыныс белгілерін араластыруыңыз керек."
 
 #: src/user-share.c:331
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
+msgstr "1234 немесе abcd сияқты тізбектерден болдырмауға тырысыңыз"
 
 #: src/user-share.c:333
 msgid "Password length needs more than 8 characters"
-msgstr ""
+msgstr "Пароль ұзындығы 8 таңбадан артық болуы қажет"
 
 #: src/user-window.c:94
 msgid "Some settings must be unlocked before they can be changed"
-msgstr ""
+msgstr "Кейбір баптауларды өзгертпес бұрын олардың құлпын ашу керек"
 
 #: src/user-window.c:277
 msgid "Add User"
-msgstr ""
+msgstr "Пайдаланушыны қосу"
 
 #: src/user-window.c:427
 msgid "Mate User Manager"
-msgstr ""
+msgstr "Mate пайдаланушы басқарушысы"

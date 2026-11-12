@@ -1,27 +1,28 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mate-user-admin package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-# Translators:
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
 # 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2021
-# 
-#, fuzzy
+# 김인수 <simmon@nplob.com>, 2026.
+#
+# Translators:
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-02 15:19+0800\n"
-"PO-Revision-Date: 2019-05-07 07:46+0000\n"
-"Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2021\n"
-"Language-Team: Korean (https://www.transifex.com/mate/teams/13566/ko/)\n"
+"PO-Revision-Date: 2026-06-16 08:10+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"Language-Team: Korean <https://translate.fedoraproject.org/projects/mate-"
+"desktop/user-admin/ko/>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
@@ -33,11 +34,11 @@ msgstr "사용자 데이터를 바꾸시려면 승인이 필요합니다"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "MATE 관리자"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "리눅스 로컬 사용자 및 그룹 관리하기"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -47,6 +48,11 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"Mate 관리자는 로컬 사용자 및 그룹을 관리하는 그래픽 응용프로그램입니다. 로컬 "
+"사용자, 사용자 이름, 사용자 유형, 사용자 언어, 사용자 비밀번호, 자동 "
+"로그인을 추가하거나 삭제 할 수 있습니다. 당신은 사용자 로그인 기록을 볼 수 "
+"있습니다. 그룹-서비스, 사용자 그룹과 함께 동작하여 기존 그룹을 추가/제거하고 "
+"신규 그룹을 생성/제거뿐만 아니라 관리 할 수 있습니다."
 
 #: src/main.c:38 src/main.c:81
 msgid "open file"
@@ -87,12 +93,12 @@ msgstr "본인 계정은 지울 수 없습니다."
 
 #: src/user-admin.c:193
 msgid "user is still logged in"
-msgstr ""
+msgstr "사용자는 여전히 로그인 되어 있습니다"
 
 #: src/user-admin.c:197
 #, c-format
 msgid "Remove '%s' user"
-msgstr ""
+msgstr "'%s' 사용자 제거"
 
 #: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
@@ -120,7 +126,7 @@ msgstr ""
 
 #: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
-msgstr "이 이름은 홈 폴더 이름으로 사용되며 바꿀 수 없습니다."
+msgstr "이는 자신의 홈 폴더 이름 짓는 데 사용되며 변경 할 수 없습니다"
 
 #: src/user-admin.c:485
 msgid "Creating User"
@@ -153,12 +159,12 @@ msgstr "두 번 입력한 비밀번호가 다릅니다"
 
 #: src/user-admin.c:644
 msgid "Mixed passwords improve security"
-msgstr ""
+msgstr "혼합된 비밀번호는 보안을 향상합니다"
 
 #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
 #: src/user-password.c:271
 msgid "Password"
-msgstr "암호"
+msgstr "비밀번호"
 
 #. 新建两个单选按钮
 #: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
@@ -348,7 +354,7 @@ msgstr "새 그룹에 추가할 사용자를 선택해주세요"
 
 #: src/user-group-window.c:648
 msgid "Username"
-msgstr ""
+msgstr "사용자이름"
 
 #: src/user-group-window.c:649
 msgid "User ID"
@@ -360,7 +366,7 @@ msgstr "제거"
 
 #: src/user-group-window.c:708
 msgid "Group id"
-msgstr ""
+msgstr "그룹 id"
 
 #: src/user-group-window.c:793
 msgid "Create User Group"
@@ -464,7 +470,7 @@ msgstr "완료"
 
 #: src/user-password.c:131
 msgid "The passwords do not match."
-msgstr ""
+msgstr "비밀번호가 일치하지 않습니다."
 
 #: src/user-password.c:282
 msgid "Now set up"
@@ -554,7 +560,7 @@ msgstr "비밀번호는 8 글자 이상이어야 합니다"
 
 #: src/user-window.c:94
 msgid "Some settings must be unlocked before they can be changed"
-msgstr ""
+msgstr "일부 설정은 이들이 변경되기 전에 잠금 해제가 되어야 합니다"
 
 #: src/user-window.c:277
 msgid "Add User"
@@ -562,4 +568,4 @@ msgstr "사용자 더하기"
 
 #: src/user-window.c:427
 msgid "Mate User Manager"
-msgstr ""
+msgstr "Mate 사용자 관리자"

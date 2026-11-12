@@ -6,6 +6,7 @@
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
 # Luna Jernberg <bittin@cafe8bitar.se>, 2021
 # Luna Jernberg <droidbittin@gmail.com>, 2026.
+# Daniel Nylander <po@danielnylander.se>, 2026.
 #
 # Translators:
 #
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: mate-user-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-02 15:19+0800\n"
-"PO-Revision-Date: 2026-06-20 11:10+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"PO-Revision-Date: 2026-10-11 11:35+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/mate-"
 "desktop/applications/user-admin/sv/>\n"
 "Language: sv\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 #: data/org.mate.user.admin.policy.in:11
 msgid "Manage user accounts"
@@ -35,11 +36,11 @@ msgstr "Autentisering krävs för att ändra användardata"
 
 #: data/mate-user-admin.appdata.xml.in:6
 msgid "MATE Manager"
-msgstr ""
+msgstr "MATE-hanterare"
 
 #: data/mate-user-admin.appdata.xml.in:7
 msgid "Managing Linux Local Users and Groups"
-msgstr ""
+msgstr "Hantera lokala Linux-användare och -grupper"
 
 #: data/mate-user-admin.appdata.xml.in:9
 msgid ""
@@ -49,6 +50,12 @@ msgid ""
 "record. By working with group-service, groups of users can be managed, such "
 "as adding/removing existing groups and creating/deleting new groups."
 msgstr ""
+"MATE-hanteraren är ett grafiskt program för att hantera lokala användare och "
+"grupper. Det kan lägga till och ta bort lokala användare, ändra "
+"användarnamn, användartyp, språk, lösenord och automatisk inloggning. Du kan "
+"visa användarens inloggningshistorik. Genom group-service kan "
+"användargrupper hanteras, exempelvis genom att lägga till eller ta bort "
+"befintliga grupper och skapa eller ta bort nya grupper."
 
 #: src/main.c:38 src/main.c:81
 msgid "open file"
@@ -56,7 +63,7 @@ msgstr "öppna fil"
 
 #: src/main.c:38
 msgid "Create pid file failed"
-msgstr ""
+msgstr "Det gick inte att skapa pid-filen"
 
 #: src/main.c:48
 msgid "write file"
@@ -64,11 +71,11 @@ msgstr "skriv fil"
 
 #: src/main.c:48
 msgid "write pid file failed"
-msgstr ""
+msgstr "Det gick inte att skriva pid-filen"
 
 #: src/main.c:81
 msgid "open pid file failed"
-msgstr ""
+msgstr "Det gick inte att öppna pid-filen"
 
 #: src/main.c:86
 msgid "read file"
@@ -76,7 +83,7 @@ msgstr "läs fil"
 
 #: src/main.c:86
 msgid "read pid file failed"
-msgstr ""
+msgstr "Det gick inte att läsa pid-filen"
 
 #: src/user-admin.c:154 src/user-admin.c:184 src/user-admin.c:192
 #: src/user-window.c:280
@@ -85,11 +92,11 @@ msgstr "Ta bort användare"
 
 #: src/user-admin.c:185
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Du kan inte ta bort ditt eget konto."
 
 #: src/user-admin.c:193
 msgid "user is still logged in"
-msgstr ""
+msgstr "användaren är fortfarande inloggad"
 
 #: src/user-admin.c:197
 #, c-format
@@ -98,33 +105,35 @@ msgstr "Ta bort '%s' användare"
 
 #: src/user-admin.c:199
 msgid "Whether to remove the user's home directory"
-msgstr ""
+msgstr "Huruvida användarens hemkatalog ska tas bort"
 
 #: src/user-admin.c:292
 msgid "Repeat of user name.Please try another"
-msgstr ""
+msgstr "Användarnamnet finns redan. Försök med ett annat."
 
 #: src/user-admin.c:296
 msgid "Repeat of user home name.Please try another"
-msgstr ""
+msgstr "Namnet på användarens hemkatalog finns redan. Försök med ett annat"
 
 #: src/user-admin.c:300
 msgid "The username cannot start with a - ."
-msgstr ""
+msgstr "Användarnamnet kan inte börja med - eller ."
 
 #: src/user-admin.c:304
 msgid ""
 "The username should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Användarnamnet får endast bestå av stora och små\n"
+"bokstäver från a till z, siffror och följande tecken: . - _"
 
 #: src/user-admin.c:328 src/user-admin.c:563
 msgid "This will be used to name your home folder and can't be changed"
-msgstr ""
+msgstr "Detta används som namn på din hemkatalog och kan inte ändras"
 
 #: src/user-admin.c:485
 msgid "Creating User"
-msgstr ""
+msgstr "Skapar användare"
 
 #: src/user-admin.c:570
 msgid "User Name"
@@ -149,11 +158,11 @@ msgstr "Administratörer"
 
 #: src/user-admin.c:606
 msgid "The passwords entered twice are different"
-msgstr ""
+msgstr "De två angivna lösenorden skiljer sig åt"
 
 #: src/user-admin.c:644
 msgid "Mixed passwords improve security"
-msgstr ""
+msgstr "Blandade lösenord förbättrar säkerheten"
 
 #: src/user-admin.c:752 src/user-admin.c:772 src/user-base.c:264
 #: src/user-password.c:271
@@ -164,15 +173,15 @@ msgstr "Lösenord"
 #: src/user-admin.c:756 src/user-info.c:51 src/user-password.c:199
 #: src/user-password.c:274
 msgid "Set up next time"
-msgstr ""
+msgstr "Ställ in senare"
 
 #: src/user-admin.c:764
 msgid "Now set the password"
-msgstr ""
+msgstr "Ange lösenordet nu"
 
 #: src/user-admin.c:785 src/user-password.c:302
 msgid "generation password"
-msgstr ""
+msgstr "generera lösenord"
 
 #: src/user-admin.c:797 src/user-admin.c:924 src/user-group-window.c:665
 #: src/user-password.c:257 src/user-password.c:316
@@ -195,7 +204,7 @@ msgstr "Skapa Crop fil"
 
 #: src/user-avatar.c:121
 msgid "failed to create temporary file for image data"
-msgstr ""
+msgstr "det gick inte att skapa en temporär fil för bilddata"
 
 #: src/user-avatar.c:177 src/user-avatar.c:252
 msgid "_Cancel"
@@ -216,23 +225,23 @@ msgstr "Bläddra efter mer bilder"
 
 #: src/user-avatar.c:253
 msgid "_Open"
-msgstr "_Öppna"
+msgstr "Ö_ppna"
 
 #: src/user-avatar.c:323
 msgid "Local Picture"
-msgstr ""
+msgstr "Lokal bild"
 
 #: src/user-avatar.c:489
 msgid "Avatar list"
-msgstr ""
+msgstr "Avatarlista"
 
 #: src/user-avatar.c:490
 msgid "There is no address to store photos"
-msgstr ""
+msgstr "Det finns ingen plats för att lagra bilder"
 
 #: src/user-base.c:212
 msgid "No Settings"
-msgstr ""
+msgstr "Inga inställningar"
 
 #: src/user-base.c:252
 msgid "Language"
@@ -244,15 +253,15 @@ msgstr "Automatisk inloggning"
 
 #: src/user-base.c:288
 msgid "Login time"
-msgstr ""
+msgstr "Inloggningstid"
 
 #: src/user-base.c:300
 msgid "Group Manage"
-msgstr ""
+msgstr "Grupphantering"
 
 #: src/user-base.c:303
 msgid "Setting Groups"
-msgstr ""
+msgstr "Ställa in grupper"
 
 #: src/user-face.c:120
 msgid "Change Name"
@@ -260,29 +269,31 @@ msgstr "Ändra namn"
 
 #: src/user-face.c:120
 msgid "Please enter a valid character"
-msgstr ""
+msgstr "Ange ett giltigt tecken"
 
 #: src/user-face.c:181
 msgid "Use Enter Key to Save Modifications"
-msgstr ""
+msgstr "Tryck på Retur för att spara ändringarna"
 
 #: src/user-group-window.c:120
 msgid "Repeat of group name.Please try another"
-msgstr ""
+msgstr "Gruppnamnet finns redan. Försök med ett annat"
 
 #: src/user-group-window.c:124
 msgid "The groupname cannot start with a - ."
-msgstr ""
+msgstr "Gruppnamnet kan inte börja med - eller ."
 
 #: src/user-group-window.c:128
 msgid "The first character of the group name needs use letter"
-msgstr ""
+msgstr "Det första tecknet i gruppnamnet måste vara en bokstav"
 
 #: src/user-group-window.c:132
 msgid ""
 "The groupname should only consist of upper and lower case \n"
 "letters from a-z,digits and the following characters: . - _"
 msgstr ""
+"Gruppnamnet får endast bestå av stora och små\n"
+"bokstäver från a–z, siffror och följande tecken: . - _"
 
 #: src/user-group-window.c:185
 msgid "Create New Group"
@@ -290,7 +301,7 @@ msgstr "Skapa ny grupp"
 
 #: src/user-group-window.c:192
 msgid "Create New Group Faild"
-msgstr ""
+msgstr "Det gick inte att skapa ny grupp"
 
 #: src/user-group-window.c:229 src/user-group-window.c:241
 msgid "Remove Group"
@@ -298,31 +309,35 @@ msgstr "Ta bort grupp"
 
 #: src/user-group-window.c:230
 msgid "Whether to remove the selected group"
-msgstr ""
+msgstr "Huruvida den valda gruppen ska tas bort"
 
 #: src/user-group-window.c:458
 msgid "Initialization group management"
-msgstr ""
+msgstr "Initierar grupphantering"
 
 #: src/user-group-window.c:459
 msgid ""
 "Initialization failed, please see Group \n"
 " Management Service Interface function"
 msgstr ""
+"Initieringen misslyckades, se funktionen för\n"
+"grupphanteringstjänstens gränssnitt"
 
 #: src/user-group-window.c:465
 msgid "Failed to contact the group service"
-msgstr ""
+msgstr "Det gick inte att kontakta grupptjänsten"
 
 #: src/user-group-window.c:466
 msgid ""
 "Please make sure that the group-service is installed and enabled.\n"
 " url: https://github.com/zhuyaliang/group-service"
 msgstr ""
+"Kontrollera att group-service är installerad och aktiverad.\n"
+"URL: https://github.com/zhuyaliang/group-service"
 
 #: src/user-group-window.c:479
 msgid "Click the unlock button on the \"swith-group\" page"
-msgstr ""
+msgstr "Klicka på upplåsningsknappen på sidan ”swith-group”"
 
 #: src/user-group-window.c:583 src/user-group-window.c:707
 msgid "Group Name"
@@ -338,7 +353,7 @@ msgstr "Nytt Gruppnamn"
 
 #: src/user-group-window.c:631
 msgid "Please select the user to add to the new group"
-msgstr ""
+msgstr "Välj användaren som ska läggas till i den nya gruppen"
 
 #: src/user-group-window.c:648
 msgid "Username"
@@ -358,13 +373,13 @@ msgstr "Grupp ID"
 
 #: src/user-group-window.c:793
 msgid "Create User Group"
-msgstr ""
+msgstr "Skapa användargrupp"
 
 #: src/user-group-window.c:794
 msgid ""
 "Create User Group Successfully,Please view the end of the switch-groups "
 "list."
-msgstr ""
+msgstr "Användargruppen skapades. Se slutet av listan switch-groups."
 
 #: src/user-group-window.c:886
 msgid "Switch Groups"
@@ -381,11 +396,11 @@ msgstr "Ta bort grupper"
 #: src/user-group-window.c:905 src/user-language.c:739
 #, c-format
 msgid "Current User - %s"
-msgstr ""
+msgstr "Aktuell användare: %s"
 
 #: src/user-history.c:40
 msgid "This Week"
-msgstr ""
+msgstr "Den här veckan"
 
 #: src/user-history.c:44
 msgid "Last Week"
@@ -409,16 +424,16 @@ msgstr "%b %e, %Y"
 
 #: src/user-history.c:243
 msgid "Session Ended"
-msgstr ""
+msgstr "Sessionen avslutades"
 
 #: src/user-history.c:250
 msgid "Session Started"
-msgstr ""
+msgstr "Sessionen startade"
 
 #: src/user-history.c:288
 #, c-format
 msgid "%s — Account Activity"
-msgstr ""
+msgstr "%s: Kontoaktivitet"
 
 #: src/user-history.c:397
 msgid "previous"
@@ -430,15 +445,15 @@ msgstr "nästa"
 
 #: src/user-info.c:39
 msgid "Account is disable"
-msgstr ""
+msgstr "Kontot är inaktiverat"
 
 #: src/user-info.c:207
 msgid "Get User Info"
-msgstr ""
+msgstr "Hämta användarinformation"
 
 #: src/user-info.c:207
 msgid "user count is 0"
-msgstr ""
+msgstr "antal användare är 0"
 
 #: src/user-language.c:195
 msgid "More…"
@@ -458,11 +473,11 @@ msgstr "Färdig"
 
 #: src/user-password.c:131
 msgid "The passwords do not match."
-msgstr "Lösenorden stämmer inte överens"
+msgstr "Lösenorden stämmer inte överens."
 
 #: src/user-password.c:282
 msgid "Now set up"
-msgstr ""
+msgstr "Ställ in nu"
 
 #: src/user-password.c:292
 msgid "User Password"
@@ -478,77 +493,79 @@ msgstr "Meddelande"
 
 #: src/user-share.c:299
 msgid "The new password needs to be different from the old one"
-msgstr ""
+msgstr "Det nya lösenordet måste skilja sig från det gamla"
 
 #: src/user-share.c:301
 msgid "Try changing some letters and numbers"
-msgstr ""
+msgstr "Försök att ändra några bokstäver och siffror"
 
 #: src/user-share.c:303 src/user-share.c:311
 msgid "Try changing the password a bit more"
-msgstr ""
+msgstr "Försök att ändra lösenordet lite mer"
 
 #: src/user-share.c:305
 msgid "A password without your user name would be stronger"
-msgstr ""
+msgstr "Ett lösenord utan ditt användarnamn skulle vara starkare"
 
 #: src/user-share.c:307
 msgid "Try to avoid using your name in the password"
-msgstr ""
+msgstr "Undvik att använda ditt namn i lösenordet"
 
 #: src/user-share.c:309
 msgid "Try to avoid some of the words included in the password"
-msgstr ""
+msgstr "Undvik några av orden som ingår i lösenordet"
 
 #: src/user-share.c:313
 msgid "Try to avoid common words"
-msgstr ""
+msgstr "Undvik vanliga ord"
 
 #: src/user-share.c:315
 msgid "Try to avoid reordering existing words"
-msgstr ""
+msgstr "Undvik att kasta om befintliga ord"
 
 #: src/user-share.c:317
 msgid "Try to use more numbers"
-msgstr ""
+msgstr "Försök att använda fler siffror"
 
 #: src/user-share.c:319
 msgid "Try to use more uppercase letters"
-msgstr ""
+msgstr "Försök att använda fler stora bokstäver"
 
 #: src/user-share.c:321
 msgid "Try to use more lowercase letters"
-msgstr ""
+msgstr "Försök att använda fler små bokstäver"
 
 #: src/user-share.c:323
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
+msgstr "Försök att använda fler specialtecken, som skiljetecken"
 
 #: src/user-share.c:325
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
+msgstr "Försök att använda en blandning av bokstäver, siffror och skiljetecken"
 
 #: src/user-share.c:327
 msgid "Try to avoid repeating the same character"
-msgstr ""
+msgstr "Undvik att upprepa samma tecken"
 
 #: src/user-share.c:329
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation."
 msgstr ""
+"Undvik att upprepa samma typ av tecken: du måste blanda bokstäver, siffror "
+"och skiljetecken."
 
 #: src/user-share.c:331
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr ""
+msgstr "Undvik sekvenser som 1234 eller abcd"
 
 #: src/user-share.c:333
 msgid "Password length needs more than 8 characters"
-msgstr ""
+msgstr "Lösenordet måste vara längre än 8 tecken"
 
 #: src/user-window.c:94
 msgid "Some settings must be unlocked before they can be changed"
-msgstr ""
+msgstr "Vissa inställningar måste låsas upp innan de kan ändras"
 
 #: src/user-window.c:277
 msgid "Add User"
@@ -556,4 +573,4 @@ msgstr "Lägg till användare"
 
 #: src/user-window.c:427
 msgid "Mate User Manager"
-msgstr ""
+msgstr "MATE-användarhanterare"
